@@ -1,0 +1,156 @@
+{
+  "name": "Cell Saga - Physical Attack Table",
+  "placeholder": false,
+  "special": {
+    "zResult": 2
+  },
+  "provenance": "Transcribed from the Cell Saga scouter card (TTS mod image CellPysicalattacktab.jpg). Bottom-left corner prints 8, not the staircase 9.",
+  "brackets": [
+    {
+      "letter": "A",
+      "minRating": 0,
+      "maxRating": 99
+    },
+    {
+      "letter": "B",
+      "minRating": 100,
+      "maxRating": 9999
+    },
+    {
+      "letter": "C",
+      "minRating": 10000,
+      "maxRating": 299999
+    },
+    {
+      "letter": "D",
+      "minRating": 300000,
+      "maxRating": 699999
+    },
+    {
+      "letter": "E",
+      "minRating": 700000,
+      "maxRating": 999999
+    },
+    {
+      "letter": "F",
+      "minRating": 1000000,
+      "maxRating": 1999999
+    },
+    {
+      "letter": "G",
+      "minRating": 2000000,
+      "maxRating": 2999999
+    },
+    {
+      "letter": "H",
+      "minRating": 3000000,
+      "maxRating": 3999999
+    },
+    {
+      "letter": "I",
+      "minRating": 4000000,
+      "maxRating": 999999999
+    }
+  ],
+  "damage": [
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      3,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      4,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      5,
+      4,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0,
+      0
+    ],
+    [
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0
+    ],
+    [
+      8,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1
+    ]
+  ]
+}

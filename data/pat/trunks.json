@@ -1,0 +1,132 @@
+{
+  "name": "Trunks Saga - Physical Attack Table",
+  "placeholder": false,
+  "special": {
+    "zResult": 2
+  },
+  "provenance": "Transcribed from the Trunks Saga scouter card (TTS mod image Trunkssagapac.jpg). Bottom-left corner prints 7, not the staircase 8.",
+  "brackets": [
+    {
+      "letter": "A",
+      "minRating": 0,
+      "maxRating": 99
+    },
+    {
+      "letter": "B",
+      "minRating": 100,
+      "maxRating": 6999
+    },
+    {
+      "letter": "C",
+      "minRating": 7000,
+      "maxRating": 99999
+    },
+    {
+      "letter": "D",
+      "minRating": 100000,
+      "maxRating": 399999
+    },
+    {
+      "letter": "E",
+      "minRating": 400000,
+      "maxRating": 699999
+    },
+    {
+      "letter": "F",
+      "minRating": 700000,
+      "maxRating": 999999
+    },
+    {
+      "letter": "G",
+      "minRating": 1000000,
+      "maxRating": 1299999
+    },
+    {
+      "letter": "H",
+      "minRating": 1300000,
+      "maxRating": 999999999
+    }
+  ],
+  "damage": [
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      3,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      4,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      5,
+      4,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0,
+      0
+    ],
+    [
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0
+    ],
+    [
+      7,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1
+    ]
+  ]
+}

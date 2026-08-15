@@ -1,0 +1,132 @@
+{
+  "name": "Saiyan Saga - Physical Attack Table",
+  "placeholder": false,
+  "special": {
+    "zResult": 2
+  },
+  "provenance": "Transcribed from the Saiyan Saga scouter card (TTS mod image Pacsaiyan.jpg). Printed ranges are normalized to contiguous inclusive ranges.",
+  "brackets": [
+    {
+      "letter": "A",
+      "minRating": 0,
+      "maxRating": 99
+    },
+    {
+      "letter": "B",
+      "minRating": 100,
+      "maxRating": 599
+    },
+    {
+      "letter": "C",
+      "minRating": 600,
+      "maxRating": 999
+    },
+    {
+      "letter": "D",
+      "minRating": 1000,
+      "maxRating": 2999
+    },
+    {
+      "letter": "E",
+      "minRating": 3000,
+      "maxRating": 9999
+    },
+    {
+      "letter": "F",
+      "minRating": 10000,
+      "maxRating": 14999
+    },
+    {
+      "letter": "G",
+      "minRating": 15000,
+      "maxRating": 24999
+    },
+    {
+      "letter": "H",
+      "minRating": 25000,
+      "maxRating": 999999999
+    }
+  ],
+  "damage": [
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      3,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      4,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      5,
+      4,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0,
+      0
+    ],
+    [
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0
+    ],
+    [
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1
+    ]
+  ]
+}

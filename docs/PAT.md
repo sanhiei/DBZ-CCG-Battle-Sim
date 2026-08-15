@@ -1,5 +1,21 @@
 # Filling in the Physical Attack Table (PAT)
 
+> **Update — real printings recovered.** The "All Sagas" TTS mod ships scans of
+> three actual scouter cards, now transcribed into `data/pat/{saiyan,trunks,cell}.json`
+> (with provenance notes). Findings:
+>
+> - **Every saga reprinted the PAT with different bracket ranges** — power creep
+>   moved the brackets (Saiyan tops out at 25,000+; Cell at 4,000,000+).
+> - The damage grid is always the staircase `attacker − defender + 1` (min 0),
+>   **except** that Trunks and Cell cap the bottom-left corner one below the
+>   staircase value (7 and 8 respectively). Saiyan does not cap.
+> - `data/pat.json` (the active table) is the Fusion-era reconstruction: 9
+>   brackets, uncapped staircase. That shape is consistent with the recovered
+>   printings; its exact bracket ranges remain unverified against a Fusion scan.
+>
+> Per the CRD's Most Recent Printing rule the sim uses ONE table (`data/pat.json`).
+> The per-saga files are reference/provenance, not loaded by the engine.
+
 The PAT is the grid printed on a **scouter**. For a physical attack, you compare the **attacker's** current power rating and the **defender's** current power rating and read the cell where they meet — that cell is the **Base Damage in power stages** (CRD §12, ~L426).
 
 The numeric grid is an image in the CRD, so it isn't in `CRD.txt`. You're reconstructing it; drop the result into **`data/pat.json`** (copy `data/pat.template.json`) and the engine + server will use it. Until then the engine uses a clearly-marked placeholder (`isPlaceholderPat()` returns true) so combat is exercisable.
