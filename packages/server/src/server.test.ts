@@ -82,6 +82,12 @@ test('catalog loads enriched cards', () => {
   assert.ok(db.levelsOf('Goku').length >= 3);
 });
 
+test('gallery-covered sagas contain no duplicate TTS copies', () => {
+  const gallerySagas = new Set(catalog.cards.filter((c) => !c.id.startsWith('tts-')).map((c) => c.saga));
+  const ttsInGallerySaga = catalog.cards.filter((c) => c.id.startsWith('tts-') && gallerySagas.has(c.saga));
+  assert.equal(ttsInGallerySaga.length, 0, ttsInGallerySaga.slice(0, 3).map((c) => `${c.name} [${c.saga}]`).join(', '));
+});
+
 /* ---------- PAT ---------- */
 
 test('PAT table', async (t) => {

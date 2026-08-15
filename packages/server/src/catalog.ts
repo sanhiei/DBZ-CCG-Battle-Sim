@@ -45,6 +45,14 @@ export function loadCatalog(dataDir: string = findDataDir()): Catalog {
     for (const card of list) if (card?.id) byId.set(card.id, card);
   }
 
-  const cards = [...byId.values()];
+  // The gallery catalogs (hand-reviewed; ids like `saiyan-saga-*`) and the TTS
+  // import (`tts-*`) both cover the Saiyan Saga, as the same physical cards
+  // under different ids. Where a saga has gallery coverage, the gallery wins
+  // and the TTS copies are dropped — otherwise every Saiyan card would appear
+  // twice in the browser and deck ids would be ambiguous.
+  const gallerySagas = new Set(
+    [...byId.values()].filter((c) => !c.id.startsWith('tts-')).map((c) => c.saga),
+  );
+  const cards = [...byId.values()].filter((c) => !(c.id.startsWith('tts-') && gallerySagas.has(c.saga)));
   return { db: new CardDb(cards), cards, sources };
 }
