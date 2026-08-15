@@ -69,9 +69,12 @@ async function processCard(entry: IndexEntry, text: Scheduler, digits: Scheduler
     // TTS gives us no level, so read the corner badge.
     const levelR = await run(chars, await regionBuffer(path, REGIONS.level, w, h, { mode: 'text' }));
     const lvl = Number((levelR.text.match(/[1-5]/) ?? [''])[0]);
-    rec.level = Number.isFinite(lvl) && lvl >= 1 ? lvl : 1;
+    const readLevel = Number.isFinite(lvl) && lvl >= 1;
+    // Leave it unset rather than defaulting to 1. Defaulting made 437 failed
+    // reads indistinguishable from genuine level-1 cards in the output.
+    if (readLevel) rec.level = lvl;
     rec.confidence.level = levelR.conf;
-    if (!Number.isFinite(lvl) || lvl < 1) rec.needsReview.push('level');
+    if (!readLevel) rec.needsReview.push('level');
 
     const purR = await run(chars, await regionBuffer(path, REGIONS.pur, w, h, { mode: 'text' }));
     const purNum = Number((purR.text.match(/\d+/) ?? [''])[0]);
