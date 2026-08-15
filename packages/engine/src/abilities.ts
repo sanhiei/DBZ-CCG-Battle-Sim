@@ -116,6 +116,18 @@ function parseRestriction(t: string): Ability['restriction'] | undefined {
 function stripLead(t: string): string {
   return t.replace(/^\s*(villains?[^.]*only|heroes only|namekian[^.]*only|saiyan[^.]*only)[.,]?\s*/i, '').trim();
 }
+/**
+ * OCR of the rules panel often captures the embossed type plate above it, so
+ * text arrives as "physical combat physical attack doing ..." — and when the
+ * plate row merges with the first sentence, the sentence's own qualifier can
+ * vanish entirely ("physical combat attack doing +4 ..."). Strip the plate;
+ * the caller falls back to the card's declared type for the attack kind.
+ * "(non-)combat cards ..." is real rules text and is left alone.
+ */
+function stripTypePlate(t: string): string {
+  const s = t.replace(/^[^a-z0-9]+/, '');
+  return s.replace(/^(?:(?:physical|energy|non)\b[^a-z0-9]*)?combat\b(?!\s*cards?)[^a-z0-9]*/, '').trim();
+}
 function parseCost(t: string): Ability['cost'] | undefined {
   const m = t.match(/cost\w*\s*([0-9b]+)\s*(?:power\s*)?stage/) || t.match(/([0-9b]+)\s*stages?\s*of\s*power\s*(?:drain\s*)?to\s*perform/);
   return m ? { powerStages: toNum(m[1]) } : undefined;
@@ -213,14 +225,20 @@ const removesAfterUse = (t: string) => /remov\w*[^.]{0,30}game[^.]{0,20}after\s*
 /** "If this attack is performed by <name>" — a condition the engine can't check yet. */
 const hasPerformerCondition = (t: string) => /if\s+this\s+attack\s+is\s+performed\s+by/.test(t);
 
-export function parseAbility(rawText: string, _type: string): Ability | null {
+export function parseAbility(rawText: string, type: string): Ability | null {
   const t = rawText.toLowerCase().replace(/\s+/g, ' ').trim();
   const restriction = parseRestriction(t);
-  const body = stripLead(t);
+  const body = stripTypePlate(stripLead(t));
   const needsReview: string[] = [];
 
-  const startsPhysical = /^(a\s+)?phys\w*\s+attack/.test(body);
-  const startsEnergy = /^(a\s+)?energy\s+attack/.test(body) || /^(does|do|doing)\s+[0-9b]+\s*life\s*cards?\s*draws?\s*of\s*damage/.test(body);
+  // A bare "attack ..." opener after the plate was stripped means the plate
+  // swallowed the qualifier; the card's declared type says which kind it was.
+  const bareAttack = /^(a\s+)?attack[\s.,]/.test(body);
+  const startsPhysical = /^(a\s+)?phys\w*\s+attack/.test(body) || (bareAttack && type === 'Physical Combat');
+  const startsEnergy =
+    /^(a\s+)?energy\s+attack/.test(body) ||
+    /^(does|do|doing)\s+[0-9b]+\s*life\s*cards?\s*draws?\s*of\s*damage/.test(body) ||
+    (bareAttack && type === 'Energy Combat');
   const defenseEffects = parseDefensiveEffects(t);
   const startsDefense =
     /^(stops?|prevent\w*|no\s+(physical|energy)|the\s+first\s+successful|defensive|allows|when\s+\w+\s+is\s+forced)/.test(body) ||
@@ -238,7 +256,7 @@ export function parseAbility(rawText: string, _type: string): Ability | null {
     }
     // "+N stages of damage" modifier (only for PAT-based physical, i.e. no fixed damage)
     if (dmg.lifeCards === undefined && dmg.powerStages === undefined) {
-      const md = body.match(/([+\-])\s?(\d+)[\s|\\]*stages?\s*of\s*damage/);
+      const md = body.match(/([+\-])\s?(\d+)[\s|\\]*(?:power\s*)?stages?\s*of\s*damage/);
       if (md) effects.push({ kind: 'damageStages', stages: toNum(md[2]) * (md[1] === '-' ? -1 : 1), ...(ifSucc(body) ? { ifSuccessful: true } : {}) });
     }
     pushAnger(effects, body);
@@ -257,6 +275,7 @@ export function parseAbility(rawText: string, _type: string): Ability | null {
     // Riders gated on who performs the attack can't be honoured yet; keep the
     // attack but flag it so the card stays out of 'full' coverage.
     if (hasPerformerCondition(body)) needsReview.push('performerCondition');
+    if (bareAttack) needsReview.push('attackKindFromType');
     if (needsReview.length) ability.needsReview = needsReview;
     return ability;
   }
@@ -277,7 +296,7 @@ export function parseAbility(rawText: string, _type: string): Ability | null {
   // ---- NON-COMBAT / utility card ("Use when needed. ...") ----
   // Only claim it when at least one concrete effect parses; a bare "use when
   // needed" with unmodelled effects must stay manual.
-  if (/^use\s+(when\s+needed|once|at\s+any\s+time|during)/.test(body) || _type === 'Non-Combat') {
+  if (/^use\s+(when\s+needed|once|at\s+any\s+time|during)/.test(body) || type === 'Non-Combat') {
     const effects: Effect[] = [];
     pushAnger(effects, body);
     pushMoveStage(effects, body);

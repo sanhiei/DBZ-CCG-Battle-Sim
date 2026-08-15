@@ -70,6 +70,26 @@ test('villains-only drill removal is not claimed as an attack', () => {
   assert.equal(a, null);
 });
 
+test('type-plate prefix is stripped before anchoring', () => {
+  // OCR of the rules panel captures the embossed plate above it.
+  const a = parseAbility('Physical Combat | Physical attack doing 3 power stages of damage.', 'Physical Combat')!;
+  assert.equal(a.trigger, 'attack');
+  const atk = a.effects.find((e) => e.kind === 'physicalAttack') as Extract<Effect, { kind: 'physicalAttack' }>;
+  assert.equal(atk.powerStages, 3);
+});
+
+test('plate that swallowed the qualifier falls back to the declared type', () => {
+  const a = parseAbility('Physical Combat | attack doing +4 power stages of damage if successful.', 'Physical Combat')!;
+  assert.equal(a.trigger, 'attack');
+  assert.ok(kinds(a.effects).includes('physicalAttack'));
+  assert.ok(a.needsReview?.includes('attackKindFromType'), 'inference must be flagged');
+});
+
+test('"Non-Combat cards cannot be used" is not eaten by the plate stripper', () => {
+  const a = parseAbility('Non-Combat cards cannot be used for the remainder of Combat.', 'Combat');
+  assert.equal(a, null, 'must stay manual, not become a mangled parse');
+});
+
 test('energy attack keeps default life cards and flags nothing extra', () => {
   const a = parseAbility('Energy attack. Raise your anger 1 level.', 'Energy Combat')!;
   assert.equal(a.trigger, 'attack');

@@ -49,8 +49,13 @@ export const AREAS = {
    * to "l Combat" and "on-Combat", which read as plain Combat.
    */
   typeBanner: { x0: 0.08, y0: 0.462, x1: 1.0, y1: 0.578 } satisfies Rect,
-  /** Everything below the art, wide enough for every text-panel position. */
-  rules: { x0: 0.06, y0: 0.5, x1: 0.99, y1: 0.93 } satisfies Rect,
+  /**
+   * Everything below the type plate. y0 was 0.5, which overlapped the plate —
+   * 903 cards' text arrived prefixed "Physical Combat | ..." and merged rows
+   * sometimes ate the first sentence's qualifier. The parser now tolerates
+   * that, but the next full OCR run should not produce it at all.
+   */
+  rules: { x0: 0.06, y0: 0.585, x1: 0.99, y1: 0.93 } satisfies Rect,
 };
 
 /** Minimum glyph height (fraction of card) for a PUR badge digit. */
