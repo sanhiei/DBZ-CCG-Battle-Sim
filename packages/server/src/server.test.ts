@@ -2,14 +2,14 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { Action, ActionWithMeta, DeckList, GameState, LobbyView, ServerMessage } from '@dbz/shared';
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { getPatTable, PLACEHOLDER_PAT, type EngineCard } from '@dbz/engine';
+import { getPatTable, PLACEHOLDER_PAT, type EngineCard, type PatTable } from '@dbz/engine';
 import { WebSocket } from 'ws';
 import { startServer } from './index.js';
-import { loadCatalog } from './catalog.js';
-import { loadPatTable } from './pat.js';
+import { findDataDir, loadCatalog } from './catalog.js';
+import { loadPatTable, validatePatTable } from './pat.js';
 import { Hub, normalizeCode } from './hub.js';
 import { Room, type RoomClient } from './room.js';
 import { MIN_DECK_SIZE, validateDeck } from './decks.js';
@@ -103,6 +103,21 @@ test('PAT table', async (t) => {
     assert.equal(result.loaded, false);
     assert.match(result.warning ?? '', /damage has 0 rows/);
     rmSync(dir, { recursive: true, force: true });
+  });
+
+  await t.test('every recovered historical printing in data/pat/ is a valid table', async (t2) => {
+    const patDir = join(findDataDir(), 'pat');
+    const files = readdirSync(patDir).filter((f) => f.endsWith('.json'));
+    assert.ok(files.length >= 3, 'saiyan, trunks, cell transcriptions expected');
+    for (const file of files) {
+      const table = JSON.parse(readFileSync(join(patDir, file), 'utf8')) as PatTable;
+      assert.equal(validatePatTable(table), undefined, `${file} failed validation`);
+      assert.notEqual(table.placeholder, true, `${file} must not be a placeholder`);
+      // Row 0 of every real printing: A-vs-A deals 1, everything else 0.
+      assert.equal(table.damage[0]![0], 1, `${file}: A vs A must be 1`);
+      assert.ok(table.damage[0]!.slice(1).every((d) => d === 0), `${file}: A vs higher must be 0`);
+    }
+    void t2;
   });
 
   await t.test('reports a missing table rather than failing silently', () => {

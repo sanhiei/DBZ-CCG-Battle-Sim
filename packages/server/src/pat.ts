@@ -19,6 +19,10 @@ export interface PatLoadResult {
 }
 
 /** Reject a table that would silently produce wrong damage. */
+export function validatePatTable(table: PatTable): string | undefined {
+  return validate(table);
+}
+
 function validate(table: PatTable): string | undefined {
   if (!Array.isArray(table.brackets) || table.brackets.length === 0) return 'no brackets';
   if (!Array.isArray(table.damage)) return 'no damage matrix';
