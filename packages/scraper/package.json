@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "scrape": "node --experimental-strip-types src/scrape.ts",
-    "build": "tsc -b"
+    "build": "tsc -b",
+    "enrich:tts": "node --experimental-strip-types src/enrich-tts.ts"
   }
 }

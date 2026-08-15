@@ -1,0 +1,22 @@
+{
+  "_comment": "Hand-read from the card faces in data/images-tts/. Keyed by name + saga. Used by check-ocr.ts to measure extraction accuracy against known-correct values rather than against a previous run. Add rows as more cards are verified by eye.",
+  "cards": [
+    { "name": "Blue Body Drop Throw", "saga": "Saiyan", "isPersonality": false, "type": "Physical Combat" },
+    { "name": "Ally Wins!", "saga": "Saiyan", "isPersonality": false, "type": "Combat" },
+    { "name": "A Hospital Stay", "saga": "Frieza", "isPersonality": false, "type": "Non-Combat" },
+    { "name": "A Hero's Heart Is Strong", "saga": "Trunks", "isPersonality": false, "type": "Non-Combat" },
+    { "name": "A Burst of Energy", "saga": "Android", "isPersonality": false, "type": "Non-Combat" },
+    { "name": "Android 16 Detects", "saga": "Cell", "isPersonality": false, "type": "Physical Combat" },
+    { "name": "A Father Struggles", "saga": "Cell Games", "isPersonality": false, "type": "Combat" },
+    { "name": "Body Slam", "saga": "Cell Games", "isPersonality": false, "type": "Physical Combat" },
+    { "name": "Black Back Breaker", "saga": "World Games", "isPersonality": false, "type": "Physical Combat" },
+
+    { "name": "Bulma", "saga": "Frieza", "isPersonality": true, "level": 2, "pur": 2, "topRating": 1400, "stages": 11 },
+    { "name": "Captain Ginyu", "saga": "Trunks", "isPersonality": true, "level": 1, "topRating": 100000, "stages": 11 },
+    { "name": "Android 16", "saga": "Android", "isPersonality": true, "level": 1, "pur": 1, "topRating": 1699000 },
+    { "name": "Android 16", "saga": "Cell", "isPersonality": true, "level": 1, "topRating": 1900000 },
+    { "name": "Arqua, the Agile", "saga": "World Games", "isPersonality": true, "level": 2, "pur": 2, "topRating": 1000000 },
+    { "name": "Broly, Super Saiyan", "saga": "Buu", "isPersonality": true, "level": 3, "pur": 4, "topRating": 4100000 },
+    { "name": "Android 13", "saga": "Babidi", "isPersonality": true, "level": 2, "pur": 3, "topRating": 2000000 }
+  ]
+}

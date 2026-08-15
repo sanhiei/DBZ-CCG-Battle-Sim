@@ -7,12 +7,13 @@
     "isPersonality": false,
     "type": "Non-Combat",
     "confidence": {
-      "typeLine": 27,
-      "text": 94
+      "ladderReason": 0,
+      "text": 55,
+      "typeLine": 18
     },
     "needsReview": [],
-    "typeLineRaw": "J: iL — GE. © J *% py Non-Combat",
-    "text": "Use when needed. Raise all of\nyour personalities to their highest\nstage. Remove from the game\nafter use."
+    "typeLineRaw": "\\ 2 UNSERE \\ A} 9) Non-Combat",
+    "text": "Non-Combat\nUse when needed. Raise all of\npersonalities to their highest\nstage. Remove from the game\nuse.\nNAN laying yr in bed while\nI olf 2 A rit Far"
   },
   {
     "id": "tts-49d99703-44",
@@ -23,14 +24,12 @@
     "type": "Personality",
     "confidence": {
       "powerColumn": 0,
-      "ladderDropped": 2,
-      "level": 0,
+      "level": 43,
       "pur": 0,
-      "text": 62
+      "text": 60
     },
     "needsReview": [
       "powerRatings",
-      "level",
       "pur"
     ],
     "personalityName": "Android 16",
@@ -40,14 +39,16 @@
       399000,
       699000,
       999000,
+      1199000,
       1299000,
       1399000,
-      1533000,
+      1499000,
+      1598000,
       1699000
     ],
     "level": 1,
-    "pur": 0,
-    "text": "Lonstant Lombat Power:\nEvery successful energy\nattack performed against §*\nAndroid 16\" lowers your\nopponent's anger | [evel |"
+    "pur": null,
+    "text": "999,000\n699,000\nLonstant Power:\n1 Every successful energy 399.000\n1 attack performed against\n| Android 16\" lowers your 293.000\nopponent's anger | level\n00.000\nOrn { Do not disturb the little\n, Creatures,"
   },
   {
     "id": "tts-0d2c3416-1",
@@ -2486,14 +2487,15 @@
     "isPersonality": false,
     "type": null,
     "confidence": {
-      "typeLine": 42,
-      "text": 61
+      "ladderReason": 0,
+      "text": 64,
+      "typeLine": 36
     },
     "needsReview": [
       "type"
     ],
-    "typeLineRaw": "v ) wn. | B= 1.950.000 S A as Fit aar :",
-    "text": "i Nothing can raise your anger >\n8 except this Constant Combat :\nPower. If Android 13 is your Main v\nPersonality. you may remove 2 id\n: Allies you control with \"Android”\n\"In the title from the game to J\nadvance a personality level."
+    "typeLineRaw": "— | 4 950,000 ~ ~ AE .— . pRvAaL Vine x ' e—— 3 S| «1 19490000 ¥ = Jame; y J Bt oe | PONA TN Ww",
+    "text": "Nothing can raise Lowr anger »\nexcept this Constant Combat\na Power. If Android 13 is your Main .\nPersonality. you mai remove 2\nAllies you control with\n\"In the title from the game to J\nadvance a personality level.\n| All of your physical attacks\ndo +3 power stages of\ndamage. Ep"
   },
   {
     "id": "tts-30fb99ff-0",
@@ -2501,16 +2503,16 @@
     "name": "Android 13",
     "saga": "Babidi",
     "isPersonality": false,
-    "type": null,
+    "type": "Physical Combat",
     "confidence": {
-      "typeLine": 39,
-      "text": 64
+      "ladderReason": 0,
+      "text": 55,
+      "typeLine": 28,
+      "typeInferred": 1
     },
-    "needsReview": [
-      "type"
-    ],
-    "typeLineRaw": "A) \\ | | 1.550.000 A | > N h | E,  i 1.540.000",
-    "text": "Le” Power: ooo\nPhysical attack AO PE\n« doing +3 power stages of cog\ndamage. If you have at is\nleast 2 other Allies in play p\n\\ with \"Android\" in the title. FI\n_ this attack does +4 life a"
+    "needsReview": [],
+    "typeLineRaw": "=. ) - -T h oT . ’ fa EEE ee — [ IN 2% A -, \\ [4 LC ] v ‘ ’ + oo wn my op []",
+    "text": "1.540.000\nwm ‘Physical attack\n© doing +3 power stages of\n<a, damage. If you have at ooo\n2 other Allies in play\nwith \"Android® in the title.\nthis attack does +4 life\nCards of damage\nand you raise\ni rN your anger 1 level. ="
   },
   {
     "id": "tts-30fb99ff-9",
@@ -6267,30 +6269,30 @@
     "isPersonality": true,
     "type": "Personality",
     "confidence": {
-      "powerColumn": 8,
-      "ladderDropped": 4,
-      "level": 0,
-      "pur": 0,
-      "text": 62
+      "powerColumn": 0,
+      "level": 53,
+      "pur": 14,
+      "text": 48
     },
     "needsReview": [
-      "powerRatings",
-      "pur"
+      "powerRatings"
     ],
     "personalityName": "Broly, Super Saiyan",
     "powerRatings": [
-      3,
-      4,
+      0,
+      3520000,
       3940000,
       3950000,
-      3980000,
       4000000,
+      4020000,
+      4040000,
       4060000,
+      4080000,
       4100000
     ],
     "level": 3,
-    "pur": 0,
-    "text": "ges of damage. If the top |\nIrst time you perform\n1 Combat. then this\nacl a second time\n= tta CKS Lou"
+    "pur": 4,
+    "text": "POWER ( 3,940,000)\n2 attack doing ~ +4 —\nI damage. If the top C a\nme you perform\nnbat. then this :\na second time\ntacks you 4\n& Broly"
   },
   {
     "id": "tts-6a69cdcc-2",
@@ -10432,28 +10434,28 @@
     "isPersonality": true,
     "type": "Personality",
     "confidence": {
-      "powerColumn": 7,
-      "ladderDropped": 3,
-      "level": 4,
+      "powerColumn": 0,
+      "level": 0,
       "pur": 0,
-      "text": 70
+      "text": 65
     },
     "needsReview": [
       "powerRatings",
-      "pur"
+      "level"
     ],
     "personalityName": "Android 16",
     "powerRatings": [
       0,
-      172000,
-      775000,
-      825000,
-      850000,
-      900000
+      1675000,
+      1700000,
+      1725000,
+      1750000,
+      1800000,
+      1850000,
+      1875000
     ],
-    "level": 2,
-    "pur": 0,
-    "text": "Constant Combat Power: ©\nDuring your turn, if you skip\nthe Combat Step during your"
+    "pur": 4,
+    "text": "| 750.\n1.700.000 %\n| Constant Combat Power: * 1.675.000 »\nDuring your turn, if you skip §\nthe Combat Step during your -\nRejuvenation Step lower your\ni opponent's anger 2 levels.\nJ (Main Personality Only)"
   },
   {
     "id": "tts-76cb49e3-37",
@@ -10463,16 +10465,14 @@
     "isPersonality": true,
     "type": "Personality",
     "confidence": {
-      "powerColumn": 1,
-      "ladderDropped": 1,
+      "powerColumn": 8,
       "level": 0,
-      "pur": 0,
-      "text": 34
+      "pur": 4,
+      "text": 44
     },
     "needsReview": [
       "powerRatings",
-      "pur",
-      "text"
+      "level"
     ],
     "personalityName": "Android 16",
     "powerRatings": [
@@ -10480,16 +10480,16 @@
       1675000,
       1700000,
       1725000,
+      1750000,
       1775000,
       1800000,
       1825000,
       1850000,
       1875000,
-      19500000
+      1900000
     ],
-    "level": 1,
-    "pur": 0,
-    "text": "_ormbat as the attacker.\nless card."
+    "pur": 4,
+    "text": "(=H 1.725,000\nin l.700.000\nless carcl.\nBY el S houl now,"
   },
   {
     "id": "tts-3ae57df1-36",
@@ -10499,12 +10499,13 @@
     "isPersonality": false,
     "type": "Physical Combat",
     "confidence": {
-      "typeLine": 57,
-      "text": 67
+      "ladderReason": 0,
+      "text": 60,
+      "typeLine": 48
     },
     "needsReview": [],
-    "typeLineRaw": "e¥%%y Physical Combat [Fiera",
-    "text": "Jhysical attack or remove all\nff the Combat cards in your\n)pponent's discard pile from |\nhe game."
+    "typeLineRaw": "vO Y Physical Combat (3) ld",
+    "text": "Physical Combai\nPhysical attack or remove all\nof the Combat cards in your\nopponent's discard pile from\ngame.\n| don't recognize either of a!"
   },
   {
     "id": "tts-76cb49e3-39",
@@ -15726,14 +15727,15 @@
     "isPersonality": false,
     "type": null,
     "confidence": {
-      "typeLine": 29,
-      "text": 60
+      "ladderReason": 0,
+      "text": 65,
+      "typeLine": 35
     },
     "needsReview": [
       "type"
     ],
-    "typeLineRaw": "y ay D4 7 Rai eo ko 22 RN , ~~ HG 7 : ; 4 = a , | Da",
-    "text": "on-Combat cards cannot be use\nor the remainder of Combat. -\nearch your Life Deck for a\nreestyle Orill and place it in play."
+    "typeLineRaw": "Bate, “NY Fa CU é . i 4 # ’ . ’ A ™ X Tay . f- Fa, oat A) p .",
+    "text": "la R\n‘Non-Combat cards cannot be used\nfor the remainder of Combat. Aq\nSearch your Life Deck for a |\nFreestyle Orill and place it in play."
   },
   {
     "id": "tts-40b278df-66",
@@ -16222,32 +16224,17 @@
     "number": null,
     "name": "Body Slam",
     "saga": "Cell Games",
-    "isPersonality": true,
-    "type": "Personality",
+    "isPersonality": false,
+    "type": "Physical Combat",
     "confidence": {
-      "powerColumn": 3,
-      "ladderDropped": 7,
-      "level": 0,
-      "pur": 0,
-      "text": 70
+      "ladderReason": 0,
+      "text": 55,
+      "typeLine": 25,
+      "typeInferred": 1
     },
-    "needsReview": [
-      "powerRatings",
-      "level",
-      "pur"
-    ],
-    "personalityName": "Body Slam",
-    "powerRatings": [
-      0,
-      1,
-      2,
-      4,
-      5,
-      88
-    ],
-    "level": 1,
-    "pur": 0,
-    "text": "sical attack doing -5 power sta\nage. IF successful for the rema\nDAL. Your opponent must discarl"
+    "needsReview": [],
+    "typeLineRaw": "So A oxnuallS A Ng \\V4 & a SRG) Mb N._: uz BE dl — : ANY -a8s da g— “ie ~3 i = on “rr 3 -— Jr /eeen oo |",
+    "text": "TER, ww J\nattack doing -5 power stages of\ndamage. If successful for the remainder\nCombat. your opponent must discard 1 card §\n: from his hand before each physical attack |\nperforms. Your Main Personality E\n(A: 84 g 4 power stages."
   },
   {
     "id": "tts-930d6a1e-49",
@@ -18436,12 +18423,13 @@
     "isPersonality": false,
     "type": "Non-Combat",
     "confidence": {
-      "typeLine": 58,
-      "text": 75
+      "ladderReason": 0,
+      "text": 75,
+      "typeLine": 34
     },
     "needsReview": [],
-    "typeLineRaw": "/ Fl aaa / / | a Non-Combat]",
-    "text": "Power up your main personality\nto its highest stage. Raise your\n~\\ anger 1 level. Remove from the\n= game after use. Limit 1 per\ndeck."
+    "typeLineRaw": "v gio i} | Neem / Via | J i. Non-combat |i",
+    "text": "Power up your main personality\nto its highest stage. Raise your\nBN cnger 1 level Remove from the\ngame after use. Limit 1 per\n/ A deck.\n= 3 Those Senzu Beans sure"
   },
   {
     "id": "tts-4caf6df6-6",
@@ -18660,28 +18648,30 @@
     "isPersonality": true,
     "type": "Personality",
     "confidence": {
-      "powerColumn": 38,
-      "ladderDropped": 6,
+      "powerColumn": 26,
       "level": 0,
       "pur": 0,
-      "text": 93
+      "text": 64
     },
     "needsReview": [
       "powerRatings",
-      "pur"
+      "level"
     ],
     "personalityName": "Bulma",
     "powerRatings": [
       0,
-      7,
-      40,
-      100,
+      500,
+      600,
+      700,
+      900,
+      1000,
+      1100,
       1200,
-      1300
+      1300,
+      1400
     ],
-    "level": 1,
-    "pur": 0,
-    "text": "Power:\nBulma may capture a dragon"
+    "pur": 2,
+    "text": "700\nPower:\nBulma mau capture a dragon\nball from her opponent if\nenergy attack\nI wasn't such a genius and | didn't i\nAN have such a positive personality, this"
   },
   {
     "id": "tts-4e98bbdb-3",
@@ -21101,34 +21091,17 @@
     "number": null,
     "name": "A Hero's Heart is Strong",
     "saga": "Fusion",
-    "isPersonality": true,
-    "type": "Personality",
+    "isPersonality": false,
+    "type": "Sensei",
     "confidence": {
-      "powerColumn": 3,
-      "ladderDropped": 19,
-      "level": 0,
-      "pur": 0,
-      "text": 73
+      "ladderReason": 0,
+      "text": 74,
+      "typeLine": 29,
+      "typeInferred": 1
     },
-    "needsReview": [
-      "powerRatings",
-      "level",
-      "pur"
-    ],
-    "personalityName": "A Hero's Heart is Strong",
-    "powerRatings": [
-      "Z",
-      0,
-      2,
-      3,
-      4,
-      9,
-      22,
-      88
-    ],
-    "level": 1,
-    "pur": 0,
-    "text": ">i Deck. Remove all cards in all\nfrom the game. Remove frormr\n2 after use."
+    "needsReview": [],
+    "typeLineRaw": "Ret === —_— oT ——————— / - <1 IEEE oo POY 1 | pm pe tpt DAE",
+    "text": "Power:\nSensei Deck. Remove all cards in all discard\npiles from the game. Remove from the\ngame after use."
   },
   {
     "id": "tts-2b332fa4-31",
@@ -28896,14 +28869,15 @@
     "isPersonality": false,
     "type": null,
     "confidence": {
-      "typeLine": 31,
-      "text": 91
+      "ladderReason": 0,
+      "text": 66,
+      "typeLine": 40
     },
     "needsReview": [
       "type"
     ],
-    "typeLineRaw": "Phat",
-    "text": "Your opponent discards one life\ncard for every ally you have in\n‘A \\ play. Remove from the game\n| after use."
+    "typeLineRaw": "A // A | SE d cos",
+    "text": "LombDat\nYour opponent discards one life\ncard for every ally you have in\nplay. Remove from the game\nafter use.\nBot it! do heat]"
   },
   {
     "id": "tts-f1189c19-17",
@@ -29307,33 +29281,16 @@
     "number": null,
     "name": "Blue Body Drop Throw",
     "saga": "Saiyan",
-    "isPersonality": true,
-    "type": "Personality",
+    "isPersonality": false,
+    "type": "Physical Combat",
     "confidence": {
-      "powerColumn": 11,
-      "ladderDropped": 9,
-      "level": 0,
-      "pur": 0,
-      "text": 60
+      "ladderReason": 0,
+      "text": 56,
+      "typeLine": 87
     },
-    "needsReview": [
-      "powerRatings",
-      "level",
-      "pur"
-    ],
-    "personalityName": "Blue Body Drop Throw",
-    "powerRatings": [
-      "Z",
-      0,
-      1,
-      2,
-      4,
-      5,
-      54
-    ],
-    "level": 1,
-    "pur": 0,
-    "text": "Stops a physical attack.\ni opponent's anger :"
+    "needsReview": [],
+    "typeLineRaw": "Physical Combat |",
+    "text": "Stops a physical attack. Lower\n\\ your opponent's anger 1 level.\n== \\ Cmo Vegetal Give me"
   },
   {
     "id": "tts-f1189c19-6",
@@ -29599,14 +29556,12 @@
     "isPersonality": true,
     "type": "Personality",
     "confidence": {
-      "powerColumn": 63,
-      "level": 0,
+      "powerColumn": 68,
+      "level": 7,
       "pur": 0,
-      "text": 86
+      "text": 61
     },
     "needsReview": [
-      "powerRatings",
-      "level",
       "pur"
     ],
     "personalityName": "Bulma",
@@ -29618,11 +29573,12 @@
       500,
       600,
       700,
-      800
+      800,
+      1000
     ],
-    "level": 1,
-    "pur": 0,
-    "text": "Power:\nPrevent 2 life cards of damage\nfrom an energy attack."
+    "level": 4,
+    "pur": null,
+    "text": "Prevent 2 life cards of damage\nfrom an energy attack. | 100\nOc Well it's what I'm good As a matter L\nof went to be the first woman in\n— ll ad TP"
   },
   {
     "id": "tts-aa1b8542-14",
@@ -34095,14 +34051,15 @@
     "isPersonality": false,
     "type": null,
     "confidence": {
-      "typeLine": 30,
-      "text": 84
+      "ladderReason": 0,
+      "text": 75,
+      "typeLine": 36
     },
     "needsReview": [
       "type"
     ],
-    "typeLineRaw": "TN 74 EE",
-    "text": "All players remove all cards in\n\\ their discard pile from the\ngame. Remove from the game\nBA ofter use."
+    "typeLineRaw": "wosenmbatl 4",
+    "text": "Non-Lombat\nAll players all cards in\ntheir discard pile from the\n- game. Remove from the game\nafter use.\non What hit me?"
   },
   {
     "id": "tts-94ce7717-52",
@@ -34569,31 +34526,28 @@
     "isPersonality": true,
     "type": "Personality",
     "confidence": {
-      "powerColumn": 12,
-      "ladderDropped": 5,
+      "powerColumn": 0,
       "level": 0,
-      "pur": 56,
-      "text": 41
+      "pur": 0,
+      "text": 55
     },
     "needsReview": [
-      "powerRatings",
-      "level",
-      "pur",
-      "text"
+      "powerRatings"
     ],
     "personalityName": "Captain Ginyu",
     "powerRatings": [
       0,
-      7,
-      8200,
+      82000,
+      84000,
+      86000,
+      88000,
       94000,
       96000,
-      98000,
       100000
     ],
     "level": 1,
-    "pur": 7,
-    "text": "{ Palate"
+    "pur": 2,
+    "text": "-. i 88.000\n849.000\nA — 3 82.000\nPhysical attack doing 6 life\ncards of damage.\nMain Personality Only)"
   },
   {
     "id": "tts-94ce7717-36",
@@ -34604,15 +34558,12 @@
     "type": "Personality",
     "confidence": {
       "powerColumn": 1,
-      "ladderDropped": 2,
-      "level": 0,
-      "pur": 0,
-      "text": 89
+      "level": 16,
+      "pur": 49,
+      "text": 60
     },
     "needsReview": [
-      "powerRatings",
-      "level",
-      "pur"
+      "powerRatings"
     ],
     "personalityName": "Captain Ginyu",
     "powerRatings": [
@@ -34624,11 +34575,12 @@
       92000,
       93000,
       96000,
-      98000
+      98000,
+      100000
     ],
     "level": 1,
-    "pur": 0,
-    "text": "Power:\nDefense Shield: Stops the\nfirst unstopped energy\nattack in Combat."
+    "pur": 3,
+    "text": "| 88.000\n86.000 |\nPower:\nDefense Shield: Stops the\n1 first unstopped energy\nattack in Combat.\noooo\n(2 Of course he's hiding his\ntrue power level That's"
   },
   {
     "id": "tts-94ce7717-37",
@@ -38785,12 +38737,13 @@
     "isPersonality": false,
     "type": "Combat",
     "confidence": {
-      "typeLine": 41,
-      "text": 91
+      "ladderReason": 0,
+      "text": 63,
+      "typeLine": 35
     },
     "needsReview": [],
-    "typeLineRaw": "- : 4 ere » v by Combat",
-    "text": "Your opponent discards one life L\ncard for every ally you have in\nplay. Remove from the game\nafter use."
+    "typeLineRaw": "( Combat",
+    "text": "APO\\/ER OTF\nYour opponent discards one life\n\\ card for every ally you have in\nplay. Remove from the game\nafter use.\nGot it do eet]"
   },
   {
     "id": "tts-5577c6fb-17",
@@ -39899,12 +39852,13 @@
     "isPersonality": false,
     "type": "Physical Combat",
     "confidence": {
-      "typeLine": 66,
-      "text": 89
+      "ladderReason": 0,
+      "text": 68,
+      "typeLine": 63
     },
     "needsReview": [],
-    "typeLineRaw": "hos : Physical Combat |",
-    "text": "Stops a physical attack. Lower |\nyour opponent's anger 1 level."
+    "typeLineRaw": "| 3 Physical Combat f 2 eu",
+    "text": "\\PO\\/ER #\nStops a physical attack. Lower\n\\ your opponent's anger 1 level."
   },
   {
     "id": "tts-5577c6fb-6",
@@ -40365,33 +40319,18 @@
     "number": null,
     "name": "Broly, Super Saiyan",
     "saga": "Unknown",
-    "isPersonality": true,
-    "type": "Personality",
+    "isPersonality": false,
+    "type": null,
     "confidence": {
-      "powerColumn": 6,
-      "ladderDropped": 3,
-      "level": 14,
-      "pur": 0,
-      "text": 31
+      "ladderReason": 0,
+      "text": 31,
+      "typeLine": 22
     },
     "needsReview": [
-      "powerRatings",
-      "pur",
-      "text"
+      "type"
     ],
-    "personalityName": "Broly, Super Saiyan",
-    "powerRatings": [
-      42,
-      55,
-      123,
-      1000,
-      2650000,
-      2700000,
-      2750000
-    ],
-    "level": 2,
-    "pur": 0,
-    "text": "er stages of darma\nur anger 1 level. For the\nof Combat. all your"
+    "typeLineRaw": "-r - CT -_ ~¥ wa I= .C Ig y 7] ¢ SEIS ay RAE . | ees ~ et SE, A E ny, 'y Fi ! Yi 4 ry RRS [OSsir RE ane, ~ | F111; - i fe Rg (3 ca ROS TAT A ros \\ S 3 Ge TE a fh u",
+    "text": "fe ian Va -\n24000008\n* _ 25 ~ \\ / AN | Moe 4\n“ Physical atta doing % 2 35 0 ooo\n4 JW Stages ol dan age. ik\nor e 0.000\nof Combat. all your\nfor) AN 2\n- Movie H Promo ry f - J"
   },
   {
     "id": "tts-be34bddc-1",
@@ -40541,31 +40480,17 @@
     "number": null,
     "name": "Bulma",
     "saga": "Unknown",
-    "isPersonality": true,
-    "type": "Personality",
+    "isPersonality": false,
+    "type": "Energy Combat",
     "confidence": {
-      "powerColumn": 55,
-      "ladderDropped": 1,
-      "level": 0,
-      "pur": 0,
-      "text": 71
+      "ladderReason": 0,
+      "text": 65,
+      "typeLine": 32,
+      "typeInferred": 1
     },
-    "needsReview": [
-      "powerRatings",
-      "level",
-      "pur"
-    ],
-    "personalityName": "Bulma",
-    "powerRatings": [
-      0,
-      100,
-      200,
-      500,
-      959
-    ],
-    "level": 1,
-    "pur": 0,
-    "text": "ECR acid Sg [TT\nPower:\nPrevent 2 life cards of damage\nfrom an energy attack. ~~"
+    "needsReview": [],
+    "typeLineRaw": "Cam [TM",
+    "text": "Prevent 2 life cards of damage\n| from an energy attack. | 100\nCle Well it's what I'm good at. As a matter |\nyg of fact..] want to be the first woman in"
   },
   {
     "id": "tts-9f900382-60",
@@ -50467,28 +50392,30 @@
     "isPersonality": true,
     "type": "Personality",
     "confidence": {
-      "powerColumn": 10,
-      "ladderDropped": 5,
-      "level": 29,
+      "powerColumn": 0,
+      "level": 0,
       "pur": 0,
-      "text": 29
+      "text": 41
     },
     "needsReview": [
       "powerRatings",
-      "pur",
-      "text"
+      "level",
+      "pur"
     ],
     "personalityName": "Arqua, the Agile",
     "powerRatings": [
-      4,
-      13,
-      80000,
-      350000,
+      0,
+      600000,
+      650000,
+      700000,
+      750000,
+      800000,
+      850000,
+      900000,
       1000000
     ],
-    "level": 2,
-    "pur": 0,
-    "text": ""
+    "pur": null,
+    "text": "\\ 600,000\nIf As 1 oo\nDOWE | | DE )"
   },
   {
     "id": "tts-0e3b7819-14",
@@ -50579,14 +50506,18 @@
     "name": "Black Back Breaker",
     "saga": "World Games",
     "isPersonality": false,
-    "type": "Physical Combat",
+    "type": null,
     "confidence": {
-      "typeLine": 42,
-      "text": 74
+      "ladderReason": 0,
+      "text": 32,
+      "typeLine": 35
     },
-    "needsReview": [],
-    "typeLineRaw": "- _— a <<. 3 | | Pa a Ga Physical Combat: (ON) a",
-    "text": "+, Sensei Deck. Physical attack\nlnoing +2 power stages of damage\nor each Non-Combat card your\npponent has in play. Lower your\npponents anger | level"
+    "needsReview": [
+      "text",
+      "type"
+    ],
+    "typeLineRaw": "ea — Ex - | =i SR =>] | ysical Lombat oS — AY \\Wido",
+    "text": ""
   },
   {
     "id": "tts-570381d6-0",

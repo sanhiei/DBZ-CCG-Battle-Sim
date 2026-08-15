@@ -170,7 +170,12 @@ function parseDefensiveEffects(t: string): Effect[] {
 }
 
 function pushAnger(effects: Effect[], t: string): void {
-  if (/rais\w*[^.]*anger|gain\w*[^.]*anger[^.]*level|anger\s*level\s*\d/.test(t) && /(user|card user|gains?|self)/.test(t.replace(/foe|opponent/g, ''))) {
+  // Strip foe-possessives as UNITS first, so "raise your opponent's anger"
+  // cannot leave a bare "your" behind and read as user-anger. The errata'd TTS
+  // text says "Raise your anger 1 level" where 2001-era scans said "Raise card
+  // user's anger level 1" — both must parse.
+  const selfOnly = t.replace(/your\s+opponent'?s?|the\s+opponent'?s?|foe'?s?|opponent'?s?/g, '');
+  if (/rais\w*[^.]*anger|gain\w*[^.]*anger[^.]*level|anger\s*level\s*\d/.test(t) && /(card\s*)?user|your|gains?|self/.test(selfOnly)) {
     const n = t.match(/anger[^0-9]*level\s*(\d)/) ?? t.match(/anger[^0-9]{0,8}(\d)/);
     // Only user-anger here; foe handled below.
     if (!/low\w*[^.]*(foe|opponent)[^.]*anger/.test(t)) effects.push({ kind: 'changeAnger', target: 'user', delta: toNum(n?.[1], 1) });
@@ -192,6 +197,21 @@ function pushDraw(effects: Effect[], t: string): void {
   const m = t.match(/draw\s+([0-9b]+|a)\s*cards?\b/);
   if (m) effects.push({ kind: 'drawCards', count: m[1] === 'a' ? 1 : toNum(m[1]) });
 }
+function pushStun(effects: Effect[], t: string): void {
+  if (/(foe|opponent)[^.]{0,60}skip\w*[^.]{0,40}attack\s*phase|skip\w*\s+(his|her|their)\s+next\s+attack\s*phase/.test(t)) {
+    effects.push({ kind: 'stunSkipNextPhase' });
+  }
+}
+function pushMoveStage(effects: Effect[], t: string): void {
+  if (/rais\w*[^.]{0,60}(all of your personalities|your personality|your mp)[^.]{0,40}highest\s*stage/.test(t)) {
+    effects.push({ kind: 'movePowerStage', target: 'user', to: 'highest' });
+  } else if (/low\w*[^.]{0,60}(foe|opponent)[^.]{0,50}lowest\s*stage/.test(t)) {
+    effects.push({ kind: 'movePowerStage', target: 'foe', to: 'lowest' });
+  }
+}
+const removesAfterUse = (t: string) => /remov\w*[^.]{0,30}game[^.]{0,20}after\s*use/.test(t);
+/** "If this attack is performed by <name>" — a condition the engine can't check yet. */
+const hasPerformerCondition = (t: string) => /if\s+this\s+attack\s+is\s+performed\s+by/.test(t);
 
 export function parseAbility(rawText: string, _type: string): Ability | null {
   const t = rawText.toLowerCase().replace(/\s+/g, ' ').trim();
@@ -224,6 +244,8 @@ export function parseAbility(rawText: string, _type: string): Ability | null {
     pushAnger(effects, body);
     pushSelfPowerLoss(effects, body);
     pushDraw(effects, body);
+    pushStun(effects, body);
+    if (removesAfterUse(body)) effects.push({ kind: 'removeFromGameAfterUse' });
     // stop riders ("plus it stops...", "if successful ... stops ... next phase")
     for (const s of defenseEffects) if (s.kind === 'stopAttack') effects.push({ ...s, window: s.window ?? 'nextPhase' });
 
@@ -232,6 +254,9 @@ export function parseAbility(rawText: string, _type: string): Ability | null {
     if (cost) ability.cost = cost;
     if (restriction) ability.restriction = restriction;
     if (isEnergy && dmg.lifeCards === undefined && dmg.powerStages === undefined) needsReview.push('energyLifeCards');
+    // Riders gated on who performs the attack can't be honoured yet; keep the
+    // attack but flag it so the card stays out of 'full' coverage.
+    if (hasPerformerCondition(body)) needsReview.push('performerCondition');
     if (needsReview.length) ability.needsReview = needsReview;
     return ability;
   }
@@ -242,9 +267,26 @@ export function parseAbility(rawText: string, _type: string): Ability | null {
     pushAnger(effects, t);
     pushRaiseOwnPower(effects, t);
     pushDraw(effects, t);
-    if (/remov\w*[^.]*game[^.]*after use/.test(t)) effects.push({ kind: 'removeFromGameAfterUse' });
+    if (removesAfterUse(t)) effects.push({ kind: 'removeFromGameAfterUse' });
     if (!effects.length) return null;
     const ability: Ability = { trigger: 'defense', effects, source: 'parsed' };
+    if (restriction) ability.restriction = restriction;
+    return ability;
+  }
+
+  // ---- NON-COMBAT / utility card ("Use when needed. ...") ----
+  // Only claim it when at least one concrete effect parses; a bare "use when
+  // needed" with unmodelled effects must stay manual.
+  if (/^use\s+(when\s+needed|once|at\s+any\s+time|during)/.test(body) || _type === 'Non-Combat') {
+    const effects: Effect[] = [];
+    pushAnger(effects, body);
+    pushMoveStage(effects, body);
+    pushRaiseOwnPower(effects, body);
+    pushDraw(effects, body);
+    pushStun(effects, body);
+    if (effects.length === 0) return null;
+    if (removesAfterUse(body)) effects.push({ kind: 'removeFromGameAfterUse' });
+    const ability: Ability = { trigger: 'onPlay', effects, source: 'parsed' };
     if (restriction) ability.restriction = restriction;
     return ability;
   }
