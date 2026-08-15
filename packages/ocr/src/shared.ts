@@ -46,6 +46,13 @@ const CORRECTIONS: Array<[RegExp, string]> = [
   [/\battock\b/gi, 'attack'],
   [/\bstoge\b/gi, 'stage'],
   [/\brotinq\b/gi, 'rating'],
+  // Corpus-mined confusions (each surfaced as a repeated bad template by
+  // mine-phrases.ts before being fixed here):
+  [/\bdedared\b/gi, 'declared'],
+  [/\bfnysical\b/gi, 'Physical'],
+  [/(anger\s*)\|(?=\s*levels?)/gi, '$11'], // "anger | level" -> "anger 1 level"
+  [/(limit\s*)\|(?=\s*per\b)/gi, '$11'], // "Limit | per deck"
+  [/\b(empower|endurance)\s*\|/gi, '$1 1'],
   [/[ \t]+\n/g, '\n'],
   [/\n{3,}/g, '\n\n'],
   [/[ \t]{2,}/g, ' '],
@@ -207,6 +214,10 @@ export interface OcrRecord {
   number: number | null;
   name: string;
   saga?: string;
+  /** Raw unfiltered OCR of the rules area (input to offline correction). */
+  textRaw?: string;
+  /** Per-word text/confidence/row for offline threshold tuning. */
+  words?: Array<{ t: string; c: number; y: number }>;
   isPersonality: boolean;
   personalityName?: string;
   level?: number;

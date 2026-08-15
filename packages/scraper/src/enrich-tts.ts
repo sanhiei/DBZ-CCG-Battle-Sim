@@ -14,10 +14,15 @@
  * from the face; every field that failed to read stays absent and is listed in
  * rules.needsReview rather than being guessed.
  */
+import { existsSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseAbility } from '@dbz/engine';
+// Reaching into the OCR package's source is deliberate: the corrector operates
+// on OCR output and lives with the OCR calibration tooling.
+import { correctText, type Template } from '../../ocr/src/phrases.ts';
+import { correct } from '../../ocr/src/shared.ts';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const dataDir = join(here, '..', '..', '..', 'data');
@@ -50,6 +55,24 @@ async function main(): Promise<void> {
   const ocr = JSON.parse(await readFile(join(dataDir, 'ocr.tts.json'), 'utf8')) as OcrRec[];
   const ocrById = new Map(ocr.map((r) => [r.id, r]));
 
+  // Corpus templates (run mine-phrases.ts to refresh after an OCR pass).
+  const phrasesPath = join(dataDir, 'phrases.tts.json');
+  const templates: Template[] = existsSync(phrasesPath)
+    ? (JSON.parse(await readFile(phrasesPath, 'utf8')) as { templates: Template[] }).templates
+    : [];
+  let snappedTotal = 0;
+  let cardsSnapped = 0;
+  const fixText = (raw: string): string => {
+    const cleaned = correct(raw);
+    if (!templates.length) return cleaned;
+    const { text, snappedCount } = correctText(cleaned, templates);
+    if (snappedCount > 0) {
+      snappedTotal += snappedCount;
+      cardsSnapped++;
+    }
+    return text;
+  };
+
   let personalities = 0;
   let withAbilities = 0;
   const coverage: Record<string, number> = {};
@@ -61,7 +84,7 @@ async function main(): Promise<void> {
     const type = rec?.isPersonality ? 'Personality' : rec?.type ?? 'Unknown';
 
     const rules: Record<string, unknown> = { type, coverage: 'unknown', needsReview };
-    if (rec?.text) rules.text = rec.text;
+    if (rec?.text) rules.text = fixText(rec.text);
     if (c.errata) rules.errata = c.errata;
 
     if (rec?.isPersonality) {
@@ -85,7 +108,7 @@ async function main(): Promise<void> {
     // Parse abilities off the rules text. The parser is conservative: cards it
     // cannot confidently read stay manual.
     if (rec?.text && type !== 'Personality') {
-      const ability = parseAbility(rec.text, type);
+      const ability = parseAbility((rules.text as string | undefined) ?? rec.text, type);
       if (ability) {
         rules.abilities = [ability];
         withAbilities++;
@@ -120,6 +143,7 @@ async function main(): Promise<void> {
   console.log(`[enrich-tts] personalities: ${personalities}, with parsed abilities: ${withAbilities}`);
   console.log(`[enrich-tts] coverage: ${JSON.stringify(coverage)}`);
   console.log(`[enrich-tts] effect kinds: ${JSON.stringify(effectKinds)}`);
+  console.log(`[enrich-tts] template snaps: ${snappedTotal} sentences on ${cardsSnapped} cards (${templates.length} templates)`);
 }
 
 main().catch((e: unknown) => {

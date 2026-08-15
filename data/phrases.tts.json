@@ -1,0 +1,240 @@
+{
+  "minCount": 8,
+  "templates": [
+    {
+      "key": "remove from the game after use",
+      "canonical": "Remove from the game after use.",
+      "count": 269
+    },
+    {
+      "key": "limit # per deck",
+      "canonical": "Limit 1 per deck.",
+      "count": 123
+    },
+    {
+      "key": "raise your anger # level",
+      "canonical": "Raise your anger 1 level.",
+      "count": 98
+    },
+    {
+      "key": "if successful",
+      "canonical": "If successful.",
+      "count": 89
+    },
+    {
+      "key": "empower #",
+      "canonical": "Empower 2.",
+      "count": 60
+    },
+    {
+      "key": "physical attack doing +# power stages of damage",
+      "canonical": "Physical attack doing +3 power stages of damage.",
+      "count": 48
+    },
+    {
+      "key": "for the remainder of combat",
+      "canonical": "For the remainder of Combat.",
+      "count": 44
+    },
+    {
+      "key": "costs # power stages to perform",
+      "canonical": "Costs 3 power stages to perform.",
+      "count": 42
+    },
+    {
+      "key": "energy attack",
+      "canonical": "Energy attack.",
+      "count": 38
+    },
+    {
+      "key": "energy attack doing # life cards of damage",
+      "canonical": "Energy attack doing 5 life cards of damage.",
+      "count": 33
+    },
+    {
+      "key": "lower your opponent s anger # level",
+      "canonical": "Lower your opponent's anger 1 level.",
+      "count": 31
+    },
+    {
+      "key": "gain # power stages",
+      "canonical": "Gain 5 power stages.",
+      "count": 23
+    },
+    {
+      "key": "stops a physical attack",
+      "canonical": "Stops a physical attack.",
+      "count": 22
+    },
+    {
+      "key": "physical attack",
+      "canonical": "Physical attack.",
+      "count": 22
+    },
+    {
+      "key": "raise your anger # levels",
+      "canonical": "Raise your anger 2 levels.",
+      "count": 22
+    },
+    {
+      "key": "endurance #",
+      "canonical": "Endurance 3.",
+      "count": 22
+    },
+    {
+      "key": "lower your opponent s anger # levels",
+      "canonical": "Lower your opponent's anger 2 levels.",
+      "count": 20
+    },
+    {
+      "key": "heroes only",
+      "canonical": "Heroes only.",
+      "count": 18
+    },
+    {
+      "key": "physical combat",
+      "canonical": "Physical Combat",
+      "count": 17
+    },
+    {
+      "key": "draw a card",
+      "canonical": "Draw a card.",
+      "count": 16
+    },
+    {
+      "key": "if you declared a tokui-waza",
+      "canonical": "If you declared a Tokui-Waza.",
+      "count": 16
+    },
+    {
+      "key": "physical combat physical attack doing +# power stages of damage",
+      "canonical": "Physical Combat Physical attack doing +3 power stages of damage.",
+      "count": 15
+    },
+    {
+      "key": "main personality only",
+      "canonical": "| (Main Personality Only)",
+      "count": 15
+    },
+    {
+      "key": "raise your anger level",
+      "canonical": "Raise your anger | level.",
+      "count": 14
+    },
+    {
+      "key": "energy combat energy attack",
+      "canonical": "Energy Combat Energy attack.",
+      "count": 14
+    },
+    {
+      "key": "from the game after use",
+      "canonical": "from the game after use.",
+      "count": 13
+    },
+    {
+      "key": "raise your main personality to its highest power stage",
+      "canonical": "Raise your main personality to its highest power stage.",
+      "count": 13
+    },
+    {
+      "key": "if you do",
+      "canonical": "If you do.",
+      "count": 12
+    },
+    {
+      "key": "stops an energy attack",
+      "canonical": "Stops an energy attack.",
+      "count": 12
+    },
+    {
+      "key": "fnysical combat stops a physical attack",
+      "canonical": "Fnysical Combat Stops a physical attack.",
+      "count": 11
+    },
+    {
+      "key": "villains only",
+      "canonical": "Villains only.",
+      "count": 10
+    },
+    {
+      "key": "physical combat physical attack",
+      "canonical": "Physical Combat Physical attack.",
+      "count": 10
+    },
+    {
+      "key": "lower your anger # levels",
+      "canonical": "Lower your anger 2 levels.",
+      "count": 10
+    },
+    {
+      "key": "if you dedared tokui-waza",
+      "canonical": "If you dedared Tokui-Waza.",
+      "count": 10
+    },
+    {
+      "key": "limit per deck",
+      "canonical": "Limit | per deck.",
+      "count": 10
+    },
+    {
+      "key": "physical doing +# power stages of damage",
+      "canonical": "Physical doing +4 power stages of damage.",
+      "count": 10
+    },
+    {
+      "key": "energy combat",
+      "canonical": "Energy Combat",
+      "count": 10
+    },
+    {
+      "key": "attack doing +# power stages of damage",
+      "canonical": "attack doing +3 power stages of damage.",
+      "count": 10
+    },
+    {
+      "key": "physical combat endurance #",
+      "canonical": "Physical Combat Endurance 2.",
+      "count": 10
+    },
+    {
+      "key": "energy combat stops an energy attack",
+      "canonical": "Energy Combat Stops an energy attack.",
+      "count": 9
+    },
+    {
+      "key": "costs # power stage to perform",
+      "canonical": "Costs 1 power stage to perform.",
+      "count": 9
+    },
+    {
+      "key": "when entering combat",
+      "canonical": "When entering Combat.",
+      "count": 9
+    },
+    {
+      "key": "physical combat stops a physical attack",
+      "canonical": "Physical Combat Stops a physical attack.",
+      "count": 8
+    },
+    {
+      "key": "stops a physical or energy attack",
+      "canonical": "Stops a physical or energy attack.",
+      "count": 8
+    },
+    {
+      "key": "saiyan heritage only",
+      "canonical": "Saiyan Heritage only.",
+      "count": 8
+    },
+    {
+      "key": "use when entering combat as the defender",
+      "canonical": "Use when entering combat as the defender.",
+      "count": 8
+    },
+    {
+      "key": "combat saiyan heritage only",
+      "canonical": "Combat Saiyan Heritage only.",
+      "count": 8
+    }
+  ]
+}

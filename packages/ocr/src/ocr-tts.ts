@@ -119,6 +119,10 @@ async function processCard(entry: IndexEntry, s: Schedulers): Promise<OcrRecord>
   // ---- Rules text (all card kinds) ----
   const rules = await ocrArea(s.text, path, AREAS.rules, w, h, 'text');
   rec.text = correct(textFromWords(rules.words));
+  // Raw, unfiltered reading + per-word data. The phrase corrector and any
+  // future confidence-threshold tuning work off this without re-OCRing.
+  rec.textRaw = rules.text;
+  rec.words = rules.words.map((x) => ({ t: x.text, c: Math.round(x.conf), y: Number(x.y0.toFixed(3)) }));
   rec.confidence.text = Math.round(rules.conf);
   if (!rec.text || rec.text.length < 12) rec.needsReview.push('text');
 

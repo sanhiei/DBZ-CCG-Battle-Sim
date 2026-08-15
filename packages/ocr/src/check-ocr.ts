@@ -24,6 +24,33 @@ interface Truth {
   pur?: number;
   topRating?: number;
   stages?: number;
+  /** Hand-transcribed rules text (logical words; line-break hyphens joined). */
+  text?: string;
+}
+
+/**
+ * Normalization for character-error-rate: case, whitespace, trademark glyphs
+ * and line-break hyphenation are presentation, not content.
+ */
+function cerNormalize(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/[™®"“”]/g, '')
+    .replace(/([a-z])-\s+([a-z])/g, '$1$2')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function levenshtein(a: string, b: string): number {
+  let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i, ...new Array<number>(b.length).fill(0)];
+    for (let j = 1; j <= b.length; j++) {
+      cur[j] = Math.min(prev[j]! + 1, cur[j - 1]! + 1, prev[j - 1]! + (a[i - 1] === b[j - 1] ? 0 : 1));
+    }
+    prev = cur;
+  }
+  return prev[b.length]!;
 }
 
 interface Tally { pass: number; fail: number; missing: number }
@@ -51,11 +78,29 @@ async function main(): Promise<void> {
   const byKey = new Map<string, OcrRecord>();
   for (const r of records) byKey.set(`${r.name.toLowerCase()}|${r.saga ?? ''}`, r);
 
+  // Text CER is scored against the ENRICHED text (post char-fixes and template
+  // snapping) when available — that is what the ability parser consumes.
+  const enrichedPath = join(root, 'data', 'cards.tts.enriched.json');
+  const enrichedText = new Map<string, string>();
+  try {
+    const enriched = JSON.parse(await readFile(enrichedPath, 'utf8')) as Array<{
+      name: string;
+      saga: string;
+      rules?: { text?: string };
+    }>;
+    for (const c of enriched) {
+      if (c.rules?.text) enrichedText.set(`${c.name.toLowerCase()}|${c.saga}`, c.rules.text);
+    }
+  } catch {
+    /* enrichment not run yet — fall back to raw OCR text */
+  }
+
   const classify = tally();
   const type = tally();
   const level = tally();
   const pur = tally();
   const top = tally();
+  const cers: Array<{ name: string; cer: number }> = [];
   let notFound = 0;
 
   for (const truth of fixture.cards) {
@@ -75,6 +120,13 @@ async function main(): Promise<void> {
     } else {
       score(type, truth.type, rec.type, 'type', notes);
     }
+    if (truth.text) {
+      const got = enrichedText.get(`${truth.name.toLowerCase()}|${truth.saga}`) ?? rec.text ?? '';
+      const want = cerNormalize(truth.text);
+      const cer = levenshtein(cerNormalize(got), want) / Math.max(1, want.length);
+      cers.push({ name: truth.name, cer });
+      if (cer > 0.05) notes.push(`CER ${(cer * 100).toFixed(1)}%`);
+    }
     const mark = notes.length === 0 ? 'OK ' : '   ';
     console.log(`${mark}${truth.name} [${truth.saga}]${notes.length ? ' — ' + notes.join('; ') : ''}`);
   }
@@ -91,6 +143,11 @@ async function main(): Promise<void> {
   line('level', level);
   line('pur', pur);
   line('top rating', top);
+  if (cers.length) {
+    const avg = cers.reduce((s, c) => s + c.cer, 0) / cers.length;
+    const worst = cers.reduce((a, b) => (b.cer > a.cer ? b : a));
+    console.log(`  text CER      avg ${(avg * 100).toFixed(1)}% over ${cers.length} cards  (worst: ${worst.name} ${(worst.cer * 100).toFixed(1)}%)`);
+  }
   if (notFound) console.log(`  ${notFound} fixture card(s) had no record`);
 }
 

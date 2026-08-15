@@ -8,12 +8,230 @@
     "type": "Non-Combat",
     "confidence": {
       "ladderReason": 0,
-      "text": 55,
+      "text": 57,
       "typeLine": 18
     },
     "needsReview": [],
     "typeLineRaw": "\\ 2 UNSERE \\ A} 9) Non-Combat",
-    "text": "Non-Combat\nUse when needed. Raise all of\npersonalities to their highest\nstage. Remove from the game\nuse.\nNAN laying yr in bed while\nI olf 2 A rit Far"
+    "text": "Use when needed. Raise all of\npersonalities to their highest\nstage. Remove from the game\nuse.\nA NAN TT NOL laying In Ded ee\nI olf 2 A rit Far",
+    "textRaw": "TOWER \\\nUse when needed. Raise all of\nyour personalities to their highest\nstage. Remove from the game\nafter use.\nA gr e—\nMd NAN TT NOL laying In Ded wine ee\nI olf 2 A rit Frame Flalar Far rye l EEE",
+    "words": [
+      {
+        "t": "TOWER",
+        "c": 30,
+        "y": 0.585
+      },
+      {
+        "t": "\\",
+        "c": 81,
+        "y": 0.597
+      },
+      {
+        "t": "Use",
+        "c": 95,
+        "y": 0.626
+      },
+      {
+        "t": "when",
+        "c": 96,
+        "y": 0.626
+      },
+      {
+        "t": "needed.",
+        "c": 96,
+        "y": 0.626
+      },
+      {
+        "t": "Raise",
+        "c": 95,
+        "y": 0.626
+      },
+      {
+        "t": "all",
+        "c": 95,
+        "y": 0.626
+      },
+      {
+        "t": "of",
+        "c": 51,
+        "y": 0.626
+      },
+      {
+        "t": "your",
+        "c": 19,
+        "y": 0.664
+      },
+      {
+        "t": "personalities",
+        "c": 94,
+        "y": 0.658
+      },
+      {
+        "t": "to",
+        "c": 94,
+        "y": 0.66
+      },
+      {
+        "t": "their",
+        "c": 96,
+        "y": 0.658
+      },
+      {
+        "t": "highest",
+        "c": 95,
+        "y": 0.658
+      },
+      {
+        "t": "stage.",
+        "c": 95,
+        "y": 0.691
+      },
+      {
+        "t": "Remove",
+        "c": 93,
+        "y": 0.689
+      },
+      {
+        "t": "from",
+        "c": 95,
+        "y": 0.689
+      },
+      {
+        "t": "the",
+        "c": 94,
+        "y": 0.688
+      },
+      {
+        "t": "game",
+        "c": 75,
+        "y": 0.694
+      },
+      {
+        "t": "after",
+        "c": 2,
+        "y": 0.722
+      },
+      {
+        "t": "use.",
+        "c": 95,
+        "y": 0.727
+      },
+      {
+        "t": "A",
+        "c": 45,
+        "y": 0.864
+      },
+      {
+        "t": "gr",
+        "c": 4,
+        "y": 0.87
+      },
+      {
+        "t": "e—",
+        "c": 0,
+        "y": 0.87
+      },
+      {
+        "t": "Md",
+        "c": 10,
+        "y": 0.896
+      },
+      {
+        "t": "NAN",
+        "c": 55,
+        "y": 0.888
+      },
+      {
+        "t": "TT",
+        "c": 48,
+        "y": 0.891
+      },
+      {
+        "t": "NOL",
+        "c": 75,
+        "y": 0.888
+      },
+      {
+        "t": "laying",
+        "c": 53,
+        "y": 0.888
+      },
+      {
+        "t": "In",
+        "c": 78,
+        "y": 0.888
+      },
+      {
+        "t": "Ded",
+        "c": 78,
+        "y": 0.891
+      },
+      {
+        "t": "wine",
+        "c": 0,
+        "y": 0.89
+      },
+      {
+        "t": "ee",
+        "c": 42,
+        "y": 0.893
+      },
+      {
+        "t": "I",
+        "c": 68,
+        "y": 0.917
+      },
+      {
+        "t": "olf",
+        "c": 70,
+        "y": 0.917
+      },
+      {
+        "t": "2",
+        "c": 94,
+        "y": 0.916
+      },
+      {
+        "t": "A",
+        "c": 46,
+        "y": 0.921
+      },
+      {
+        "t": "rit",
+        "c": 57,
+        "y": 0.924
+      },
+      {
+        "t": "Frame",
+        "c": 24,
+        "y": 0.92
+      },
+      {
+        "t": "Flalar",
+        "c": 0,
+        "y": 0.92
+      },
+      {
+        "t": "Far",
+        "c": 47,
+        "y": 0.92
+      },
+      {
+        "t": "rye",
+        "c": 0,
+        "y": 0.92
+      },
+      {
+        "t": "l",
+        "c": 0,
+        "y": 0.919
+      },
+      {
+        "t": "EEE",
+        "c": 33,
+        "y": 0.906
+      }
+    ]
   },
   {
     "id": "tts-49d99703-44",
@@ -48,7 +266,245 @@
     ],
     "level": 1,
     "pur": null,
-    "text": "999,000\n699,000\nLonstant Power:\n1 Every successful energy 399.000\n1 attack performed against\n| Android 16\" lowers your 293.000\nopponent's anger | level\n00.000\nOrn { Do not disturb the little\n, Creatures,"
+    "text": "593.000\n« [onstant Power:\n| Every successful energy 399.000\n1 attack performed against\n| J Android lowers your 295,000\nopponent's anger | level\n00.000\nR RP Do not disturb the litte Sy\n4 Creatures.",
+    "textRaw": "ANN WSS dR 593.000\n« [onstant [Combat Power:\n| Every successful energy 399.000\n1 attack performed against\n| J Android 16\" lowers your 295,000\nopponent's anger | level\nNR ——. 00.000\nR RP 71} Do not disturb the litte Sy\n4 : 1 of J. , Creatures.",
+    "words": [
+      {
+        "t": "ANN",
+        "c": 23,
+        "y": 0.585
+      },
+      {
+        "t": "WSS",
+        "c": 17,
+        "y": 0.585
+      },
+      {
+        "t": "dR",
+        "c": 0,
+        "y": 0.585
+      },
+      {
+        "t": "593.000",
+        "c": 57,
+        "y": 0.593
+      },
+      {
+        "t": "«",
+        "c": 42,
+        "y": 0.66
+      },
+      {
+        "t": "[onstant",
+        "c": 65,
+        "y": 0.638
+      },
+      {
+        "t": "[Combat",
+        "c": 32,
+        "y": 0.638
+      },
+      {
+        "t": "Power:",
+        "c": 88,
+        "y": 0.638
+      },
+      {
+        "t": "|",
+        "c": 71,
+        "y": 0.668
+      },
+      {
+        "t": "Every",
+        "c": 97,
+        "y": 0.668
+      },
+      {
+        "t": "successful",
+        "c": 94,
+        "y": 0.667
+      },
+      {
+        "t": "energy",
+        "c": 97,
+        "y": 0.673
+      },
+      {
+        "t": "399.000",
+        "c": 52,
+        "y": 0.659
+      },
+      {
+        "t": "1",
+        "c": 86,
+        "y": 0.702
+      },
+      {
+        "t": "attack",
+        "c": 96,
+        "y": 0.7
+      },
+      {
+        "t": "performed",
+        "c": 92,
+        "y": 0.699
+      },
+      {
+        "t": "against",
+        "c": 83,
+        "y": 0.701
+      },
+      {
+        "t": "|",
+        "c": 57,
+        "y": 0.712
+      },
+      {
+        "t": "J",
+        "c": 40,
+        "y": 0.747
+      },
+      {
+        "t": "Android",
+        "c": 62,
+        "y": 0.731
+      },
+      {
+        "t": "16\"",
+        "c": 10,
+        "y": 0.731
+      },
+      {
+        "t": "lowers",
+        "c": 94,
+        "y": 0.732
+      },
+      {
+        "t": "your",
+        "c": 93,
+        "y": 0.737
+      },
+      {
+        "t": "295,000",
+        "c": 77,
+        "y": 0.722
+      },
+      {
+        "t": "opponent's",
+        "c": 54,
+        "y": 0.763
+      },
+      {
+        "t": "anger",
+        "c": 95,
+        "y": 0.768
+      },
+      {
+        "t": "|",
+        "c": 79,
+        "y": 0.763
+      },
+      {
+        "t": "level",
+        "c": 60,
+        "y": 0.763
+      },
+      {
+        "t": "NR",
+        "c": 0,
+        "y": 0.806
+      },
+      {
+        "t": "——.",
+        "c": 0,
+        "y": 0.801
+      },
+      {
+        "t": "00.000",
+        "c": 83,
+        "y": 0.794
+      },
+      {
+        "t": "R",
+        "c": 92,
+        "y": 0.872
+      },
+      {
+        "t": "RP",
+        "c": 54,
+        "y": 0.866
+      },
+      {
+        "t": "71}",
+        "c": 39,
+        "y": 0.863
+      },
+      {
+        "t": "Do",
+        "c": 96,
+        "y": 0.865
+      },
+      {
+        "t": "not",
+        "c": 97,
+        "y": 0.867
+      },
+      {
+        "t": "disturb",
+        "c": 91,
+        "y": 0.865
+      },
+      {
+        "t": "the",
+        "c": 91,
+        "y": 0.865
+      },
+      {
+        "t": "litte",
+        "c": 71,
+        "y": 0.865
+      },
+      {
+        "t": "Sy",
+        "c": 62,
+        "y": 0.883
+      },
+      {
+        "t": "4",
+        "c": 49,
+        "y": 0.891
+      },
+      {
+        "t": ":",
+        "c": 39,
+        "y": 0.926
+      },
+      {
+        "t": "1",
+        "c": 25,
+        "y": 0.893
+      },
+      {
+        "t": "of",
+        "c": 39,
+        "y": 0.896
+      },
+      {
+        "t": "J.",
+        "c": 33,
+        "y": 0.894
+      },
+      {
+        "t": ",",
+        "c": 0,
+        "y": 0.912
+      },
+      {
+        "t": "Creatures.",
+        "c": 92,
+        "y": 0.901
+      }
+    ]
   },
   {
     "id": "tts-0d2c3416-1",
@@ -59,12 +515,325 @@
     "type": "Combat",
     "confidence": {
       "ladderReason": 0,
-      "text": 69,
+      "text": 73,
       "typeLine": 50
     },
     "needsReview": [],
     "typeLineRaw": "© y NZ WM A =} @) Combat |",
-    "text": "Combat\nStops a physical attack. If the\ndefending personality has \"Android\"\nthe card title. search your discard\nplle for | card with \"Android\" in the\ntitle and place it In your hand. |\nRemove from the game after use.\nAN IAN, A | ike all of these little | ="
+    "text": "Stops a physical attack. If the\ndefending personality has \"Android\"\nIn the card title. search your discard\nplle for | card with \"Android\" in the\ncard title and place it In your hand. |\nRemove from the game after use.\nA IL all of these Ittle = Ie",
+    "textRaw": "EY VW RN ||\nStops a physical attack. If the\ndefending personality has \"Android\"\nIn the card title. search your discard\nplle for | card with \"Android\" in the\ncard title and place it In your hand. |\nRemove from the game after use.\n®\nA i IL \\ like all of these Ittle ug Ie\nRCT EET EE = Sah Lf",
+    "words": [
+      {
+        "t": "EY",
+        "c": 20,
+        "y": 0.585
+      },
+      {
+        "t": "VW",
+        "c": 23,
+        "y": 0.585
+      },
+      {
+        "t": "RN",
+        "c": 36,
+        "y": 0.585
+      },
+      {
+        "t": "||",
+        "c": 35,
+        "y": 0.585
+      },
+      {
+        "t": "Stops",
+        "c": 96,
+        "y": 0.628
+      },
+      {
+        "t": "a",
+        "c": 96,
+        "y": 0.633
+      },
+      {
+        "t": "physical",
+        "c": 88,
+        "y": 0.628
+      },
+      {
+        "t": "attack.",
+        "c": 96,
+        "y": 0.628
+      },
+      {
+        "t": "If",
+        "c": 95,
+        "y": 0.628
+      },
+      {
+        "t": "the",
+        "c": 96,
+        "y": 0.627
+      },
+      {
+        "t": "defending",
+        "c": 94,
+        "y": 0.657
+      },
+      {
+        "t": "personality",
+        "c": 96,
+        "y": 0.657
+      },
+      {
+        "t": "has",
+        "c": 96,
+        "y": 0.657
+      },
+      {
+        "t": "\"Android\"",
+        "c": 73,
+        "y": 0.656
+      },
+      {
+        "t": "In",
+        "c": 86,
+        "y": 0.687
+      },
+      {
+        "t": "the",
+        "c": 96,
+        "y": 0.686
+      },
+      {
+        "t": "card",
+        "c": 95,
+        "y": 0.686
+      },
+      {
+        "t": "title.",
+        "c": 90,
+        "y": 0.686
+      },
+      {
+        "t": "search",
+        "c": 95,
+        "y": 0.686
+      },
+      {
+        "t": "your",
+        "c": 96,
+        "y": 0.691
+      },
+      {
+        "t": "discard",
+        "c": 90,
+        "y": 0.686
+      },
+      {
+        "t": "plle",
+        "c": 86,
+        "y": 0.715
+      },
+      {
+        "t": "for",
+        "c": 96,
+        "y": 0.715
+      },
+      {
+        "t": "|",
+        "c": 84,
+        "y": 0.716
+      },
+      {
+        "t": "card",
+        "c": 96,
+        "y": 0.715
+      },
+      {
+        "t": "with",
+        "c": 96,
+        "y": 0.715
+      },
+      {
+        "t": "\"Android\"",
+        "c": 65,
+        "y": 0.715
+      },
+      {
+        "t": "in",
+        "c": 88,
+        "y": 0.716
+      },
+      {
+        "t": "the",
+        "c": 96,
+        "y": 0.715
+      },
+      {
+        "t": "card",
+        "c": 95,
+        "y": 0.744
+      },
+      {
+        "t": "title",
+        "c": 96,
+        "y": 0.744
+      },
+      {
+        "t": "and",
+        "c": 96,
+        "y": 0.744
+      },
+      {
+        "t": "place",
+        "c": 95,
+        "y": 0.744
+      },
+      {
+        "t": "it",
+        "c": 94,
+        "y": 0.745
+      },
+      {
+        "t": "In",
+        "c": 90,
+        "y": 0.745
+      },
+      {
+        "t": "your",
+        "c": 96,
+        "y": 0.749
+      },
+      {
+        "t": "hand.",
+        "c": 96,
+        "y": 0.744
+      },
+      {
+        "t": "|",
+        "c": 84,
+        "y": 0.746
+      },
+      {
+        "t": "Remove",
+        "c": 91,
+        "y": 0.773
+      },
+      {
+        "t": "from",
+        "c": 94,
+        "y": 0.774
+      },
+      {
+        "t": "the",
+        "c": 96,
+        "y": 0.773
+      },
+      {
+        "t": "game",
+        "c": 95,
+        "y": 0.778
+      },
+      {
+        "t": "after",
+        "c": 96,
+        "y": 0.774
+      },
+      {
+        "t": "use.",
+        "c": 95,
+        "y": 0.778
+      },
+      {
+        "t": "®",
+        "c": 0,
+        "y": 0.802
+      },
+      {
+        "t": "A",
+        "c": 92,
+        "y": 0.89
+      },
+      {
+        "t": "i",
+        "c": 24,
+        "y": 0.878
+      },
+      {
+        "t": "IL",
+        "c": 49,
+        "y": 0.887
+      },
+      {
+        "t": "\\",
+        "c": 11,
+        "y": 0.907
+      },
+      {
+        "t": "like",
+        "c": 29,
+        "y": 0.884
+      },
+      {
+        "t": "all",
+        "c": 93,
+        "y": 0.885
+      },
+      {
+        "t": "of",
+        "c": 95,
+        "y": 0.885
+      },
+      {
+        "t": "these",
+        "c": 95,
+        "y": 0.885
+      },
+      {
+        "t": "Ittle",
+        "c": 48,
+        "y": 0.875
+      },
+      {
+        "t": "ug",
+        "c": 0,
+        "y": 0.893
+      },
+      {
+        "t": "Ie",
+        "c": 45,
+        "y": 0.902
+      },
+      {
+        "t": "RCT",
+        "c": 22,
+        "y": 0.915
+      },
+      {
+        "t": "EET",
+        "c": 50,
+        "y": 0.93
+      },
+      {
+        "t": "EE",
+        "c": 41,
+        "y": 0.921
+      },
+      {
+        "t": "=",
+        "c": 46,
+        "y": 0.908
+      },
+      {
+        "t": "Sah",
+        "c": 22,
+        "y": 0.904
+      },
+      {
+        "t": "Lf",
+        "c": 35,
+        "y": 0.906
+      }
+    ]
   },
   {
     "id": "tts-49d99703-45",

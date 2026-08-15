@@ -6,7 +6,8 @@
   "scripts": {
     "ocr": "node --experimental-strip-types src/ocr.ts",
     "proof": "node --experimental-strip-types src/proof.ts",
-    "ocr:tts": "node --experimental-strip-types src/ocr-tts.ts"
+    "ocr:tts": "node --experimental-strip-types src/ocr-tts.ts",
+    "test": "node --experimental-strip-types --test src/phrases.test.ts"
   },
   "dependencies": {
     "sharp": "^0.33.5",
