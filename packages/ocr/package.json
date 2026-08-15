@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "ocr": "node --experimental-strip-types src/ocr.ts",
-    "proof": "node --experimental-strip-types src/proof.ts"
+    "proof": "node --experimental-strip-types src/proof.ts",
+    "ocr:tts": "node --experimental-strip-types src/ocr-tts.ts"
   },
   "dependencies": {
     "sharp": "^0.33.5",

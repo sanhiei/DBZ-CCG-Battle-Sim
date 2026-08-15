@@ -14,3 +14,9 @@ eng.traineddata
 **/eng.traineddata
 coverage/
 *.log
+
+# Downloaded TTS atlases (large, transient)
+data/atlas-cache/
+
+# Per-card OCR records from the TTS pass (regenerable; merged file is committed)
+data/ocr-tts/

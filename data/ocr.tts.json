@@ -1,0 +1,323 @@
+[
+  {
+    "id": "tts-49d99703-66",
+    "number": null,
+    "name": "A Burst of Energy",
+    "saga": "Android",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 27,
+      "text": 94
+    },
+    "needsReview": [],
+    "typeLineRaw": "J: iL — GE. © J *% py Non-Combat",
+    "text": "Use when needed. Raise all of\nyour personalities to their highest\nstage. Remove from the game\nafter use."
+  },
+  {
+    "id": "tts-49d99703-44",
+    "number": null,
+    "name": "Android 16",
+    "saga": "Android",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 0,
+      "ladderDropped": 2,
+      "level": 0,
+      "pur": 0,
+      "text": 62
+    },
+    "needsReview": [
+      "powerRatings",
+      "level",
+      "pur"
+    ],
+    "personalityName": "Android 16",
+    "powerRatings": [
+      0,
+      298000,
+      399000,
+      699000,
+      999000,
+      1299000,
+      1399000,
+      1533000,
+      1699000
+    ],
+    "level": 1,
+    "pur": 0,
+    "text": "Lonstant Lombat Power:\nEvery successful energy\nattack performed against §*\nAndroid 16\" lowers your\nopponent's anger | [evel |"
+  },
+  {
+    "id": "tts-0d2c3416-1",
+    "number": null,
+    "name": "Android 16 Smiles",
+    "saga": "Android",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 30,
+      "text": 87
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "A > Uy Ss A ETT S——",
+    "text": "Stops a physical attack. If the\ndefending personality has \"Android\"\nIN the card title. search your discard\npile for 1 card with \"Android\" in the\ncard title and place it In your hand. |\nRemove from the game after use. |"
+  },
+  {
+    "id": "tts-49d99703-45",
+    "number": null,
+    "name": "Android 17",
+    "saga": "Android",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 0,
+      "level": 0,
+      "pur": 0,
+      "text": 66
+    },
+    "needsReview": [
+      "powerRatings",
+      "level",
+      "pur"
+    ],
+    "personalityName": "Android 17",
+    "powerRatings": [
+      0,
+      299000,
+      399000,
+      699000,
+      899000,
+      1000000,
+      1200000,
+      1275000,
+      1350000,
+      1425000,
+      15000400
+    ],
+    "level": 1,
+    "pur": 0,
+    "text": "Constant Combat Power:\nYour anger level cannot\nbe lowered,"
+  },
+  {
+    "id": "tts-49d99703-19",
+    "number": null,
+    "name": "Android 17 Smirks",
+    "saga": "Android",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 38,
+      "text": 87
+    },
+    "needsReview": [],
+    "typeLineRaw": "Pa. es 9 (9) Combat - oi LB SCPEPIIE IE Ry 4",
+    "text": "Villains only. Choose | oppo- |\nnent and remove all of his Orills\nin play from the game. Limit 1 per\ndeck. Remove from the game\nafter use."
+  },
+  {
+    "id": "tts-514f40cb-36",
+    "number": null,
+    "name": "Android 17's Back Bash",
+    "saga": "Android",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 49,
+      "text": 79
+    },
+    "needsReview": [],
+    "typeLineRaw": "| & ERY Ae > Physical Combat",
+    "text": "Physical attack doing 5 power\nstages of damage. If this attack\njour opponent must skip his\nnext attack phase."
+  },
+  {
+    "id": "tts-514f40cb-37",
+    "number": null,
+    "name": "Android 17's Haymaker",
+    "saga": "Android",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 40,
+      "text": 82
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "QJ Pr PLoS Cas Con | 8",
+    "text": "Physical attack doing 9 power stages of %\ndamage. IF this attack is performed by\nAndroid 17\". this attack does 7 power\nstages of damage instead. Remove\nfrom the game after use. |"
+  },
+  {
+    "id": "tts-514f40cb-0",
+    "number": null,
+    "name": "Android 17's Neck Hold",
+    "saga": "Android",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 78,
+      "text": 74
+    },
+    "needsReview": [],
+    "typeLineRaw": "® Physical Combat",
+    "text": "Physical attack. If successful,\nlower your opponent's anger 3\nlevels."
+  },
+  {
+    "id": "tts-49d99703-47",
+    "number": null,
+    "name": "Android 18",
+    "saga": "Android",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 0,
+      "level": 0,
+      "pur": 0,
+      "text": 73
+    },
+    "needsReview": [
+      "powerRatings",
+      "level",
+      "pur"
+    ],
+    "personalityName": "Android 18",
+    "powerRatings": [
+      0,
+      299000,
+      399000,
+      699000,
+      799000,
+      899000,
+      999000,
+      1199000,
+      1299000,
+      1333000,
+      1499000
+    ],
+    "level": 1,
+    "pur": 0,
+    "text": "Power: Defense Shield:\nStops the first unstopped\nattack performed against §#\nyou this Combat"
+  },
+  {
+    "id": "tts-49d99703-46",
+    "number": null,
+    "name": "Android 18",
+    "saga": "Android",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 0,
+      "ladderDropped": 1,
+      "level": 0,
+      "pur": 0,
+      "text": 68
+    },
+    "needsReview": [
+      "powerRatings",
+      "level",
+      "pur"
+    ],
+    "personalityName": "Android 18",
+    "powerRatings": [
+      0,
+      299000,
+      398000,
+      699000,
+      799000,
+      899000,
+      999000,
+      1199000,
+      1299000,
+      1399000,
+      1499000
+    ],
+    "level": 1,
+    "pur": 0,
+    "text": "Power: Oefen hield: ge\nStops the first unstopped\nattack performed against\nyou this Combat."
+  },
+  {
+    "id": "tts-514f40cb-1",
+    "number": null,
+    "name": "Android 18's Low Blow",
+    "saga": "Android",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 35,
+      "text": 67
+    },
+    "needsReview": [],
+    "typeLineRaw": "Lg. CE y\\ \\ Si ) 0) Physical Combat CO aN a 4 2 I a Ba Wl fl",
+    "text": "Villains only. Physical attack. If\nthis attack is stopped. your oppo-\nnents Main Personality loses 2"
+  },
+  {
+    "id": "tts-49d99703-20",
+    "number": null,
+    "name": "Android 18's Stare Down",
+    "saga": "Android",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 26,
+      "text": 75
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "Be a—— 3 SAW, WW [5 (@) compar",
+    "text": "Villains only. Look at your %\nopponent's hand and choose a\ncard. Your opponent discards\nthat card. This card can affect\nDragon Balls."
+  },
+  {
+    "id": "tts-49d99703-48",
+    "number": null,
+    "name": "Android 19",
+    "saga": "Android",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 0,
+      "level": 0,
+      "pur": 0,
+      "text": 93
+    },
+    "needsReview": [
+      "powerRatings",
+      "level",
+      "pur"
+    ],
+    "personalityName": "Android 19",
+    "powerRatings": [
+      0,
+      299000,
+      399000,
+      499000,
+      599000,
+      699000,
+      799000,
+      899000,
+      999000,
+      1199000,
+      1298000
+    ],
+    "level": 1,
+    "pur": 0,
+    "text": "Power: Any 1 of your\nAllies loses any number of\npower stages you chose\nAndroid 19's power stages\nby that same number."
+  },
+  {
+    "id": "tts-49d99703-68",
+    "number": null,
+    "name": "Android 19 is Stoic",
+    "saga": "Android",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 39,
+      "text": 86
+    },
+    "needsReview": [],
+    "typeLineRaw": "\"4 \\ 4 I ov | | y Tp — - @F combar Or ST Te TL. NT I—",
+    "text": "Stops a physical or energy attack.\nYou may choose to discard a card\nfrom your hand. If you do. your\nopponent's Malin Personality loses\n2 power stages. Remove from the\ngame after use. |"
+  }
+]

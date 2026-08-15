@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc -b",
     "extract": "tsc -b && node dist/cli.js",
-    "test": "tsc -b && node --test dist/tts.test.js"
+    "test": "tsc -b && node --test dist/tts.test.js",
+    "slice": "tsc -b && node --max-old-space-size=8192 dist/slice-cli.js"
   },
   "dependencies": {
     "@dbz/shared": "*",
