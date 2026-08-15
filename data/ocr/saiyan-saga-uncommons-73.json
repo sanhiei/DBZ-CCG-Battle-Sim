@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-73",
+  "number": 73,
+  "name": "Rear Spin Kick",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 47,
+    "text": 92
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "BR eT",
+  "text": "Stops a foe's energy\nattack. Raise card user's\nanger level 1."
+}

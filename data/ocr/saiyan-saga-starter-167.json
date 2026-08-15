@@ -1,0 +1,30 @@
+{
+  "id": "saiyan-saga-starter-167",
+  "number": 167,
+  "name": "Krillin LV1",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 64,
+    "pur": 0,
+    "text": 54
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur",
+    "text"
+  ],
+  "personalityName": "Krillin",
+  "level": 1,
+  "powerRatings": [
+    0,
+    0,
+    400,
+    500,
+    600,
+    700,
+    800
+  ],
+  "pur": 0,
+  "text": "\"\n\nPower: »\"\nPower Ball Energy Attack\n\n| inflicts 2 life card draws |g\n\nof damage. in oN\n\n[eres =NEil Im"
+}

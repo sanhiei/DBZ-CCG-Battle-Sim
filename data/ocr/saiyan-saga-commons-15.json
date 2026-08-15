@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-15",
+  "number": 15,
+  "name": "Earth Dragon Ball 1",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 27,
+    "text": 87
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "sea AS J BR  )",
+  "text": "Instantly power up to full\n\\ \\ and draw a card."
+}

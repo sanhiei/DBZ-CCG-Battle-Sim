@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-31",
+  "number": 31,
+  "name": "Fortify Your Spirit",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 79
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "",
+  "text": "The first successful enerc\n\n~_\\ | attack on you is stopped\nod Discard this card from tk\ngame after use. #"
+}

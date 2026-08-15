@@ -1,0 +1,35 @@
+{
+  "id": "saiyan-saga-starter-185",
+  "number": 185,
+  "name": "Nappa LV1 HT",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 39,
+    "pur": 0,
+    "text": 33
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur",
+    "text"
+  ],
+  "personalityName": "Nappa",
+  "level": 1,
+  "variant": "HT",
+  "powerRatings": [
+    2000,
+    217,
+    2400,
+    11,
+    2800,
+    3000,
+    3200,
+    3400,
+    3600,
+    3800,
+    7
+  ],
+  "pur": 0,
+  "text": "of\n- ~\ny\nTA,\nTa:\noe\nCoe\npr 3\nLy ny ~~ :\n, SE J :\n0 oi \\ i\nEe\nfhe\n1"
+}

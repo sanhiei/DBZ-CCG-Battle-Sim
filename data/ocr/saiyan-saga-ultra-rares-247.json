@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-ultra-rares-247",
+  "number": 247,
+  "name": "Goku’s Truce",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 29,
+    "text": 78
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "1 EEE",
+  "text": "Stops a successful energ\n\\ or physical attack.\n& E>"
+}

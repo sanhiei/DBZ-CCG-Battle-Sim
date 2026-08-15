@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-41",
+  "number": 41,
+  "name": "Straining Head Lock Move",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 46,
+    "text": 89
+  },
+  "needsReview": [],
+  "typeLineRaw": "J Physical Combat ry CEET————",
+  "text": "Stops a physical attack,\nbut you have to discard\nanother card to use\nthis one. Pe"
+}

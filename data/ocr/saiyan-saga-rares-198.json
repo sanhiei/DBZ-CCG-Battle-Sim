@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-198",
+  "number": 198,
+  "name": "Appraisal Maneuver",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 28,
+    "text": 85
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "mm",
+  "text": "Name a Non-Combat card and\nfoes with any in their decks mi\ndiscard them from the game.\nDiscard this card from the\ngame after use. #5\nNy : —"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-5",
+  "number": 5,
+  "name": "Arm Bar",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 70
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "",
+  "text": "Physical Attack doing +3\nstages of damage if\n| successful. Raise card\nuser's anger level 1. i\n\\g Ane GEER — fiers. q"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-236",
+  "number": 236,
+  "name": "Power Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 30,
+    "text": 90
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "Eat",
+  "text": "In all physical attacks the\n\ncard owner does an extre\nstages of power draining\ndamage. Pe"
+}

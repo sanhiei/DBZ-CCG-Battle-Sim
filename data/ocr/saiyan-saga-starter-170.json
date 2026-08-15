@@ -1,0 +1,34 @@
+{
+  "id": "saiyan-saga-starter-170",
+  "number": 170,
+  "name": "Raditz LV1",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 72,
+    "pur": 0,
+    "text": 69
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Raditz",
+  "level": 1,
+  "powerRatings": [
+    2,
+    0,
+    1100,
+    1200,
+    1300,
+    1400,
+    1500,
+    1600,
+    1700,
+    1800,
+    1900,
+    2000
+  ],
+  "pur": 0,
+  "text": "or | =x\n- Va\nPower:\nSaiyan Energy Deflection forces\nonly two discards from a\n[matter how powerius."
+}

@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-101",
+  "number": 101,
+  "name": "Goku Honor Duel!",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 23,
+    "text": 81
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "ARMRIRL OF Gr C—",
+  "text": "Boku uses the bottom 3 cards of the discard ¢\n\n: for the next combat instead of the cards fron\n\nBN fife deck. If there are not enough cards, dan\nuse this ahility. Discard from the\n\ngame after use, #7"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-64",
+  "number": 64,
+  "name": "Ground Holding",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 53,
+    "text": 82
+  },
+  "needsReview": [],
+  "typeLineRaw": "Lo fae WY Physical Combat",
+  "text": "Stops a physical attack.\nLowers foe's anger level bu\n< MN"
+}

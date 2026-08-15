@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-211",
+  "number": 211,
+  "name": "Tien Mind Reading Trick",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 34,
+    "text": 88
+  },
+  "needsReview": [],
+  "typeLineRaw": "v ‘Non-Combat",
+  "text": "This card stays on the\ntable. If Tien is in play, all\ni villains must show their\nhands face up at all\ntimes. AR"
+}

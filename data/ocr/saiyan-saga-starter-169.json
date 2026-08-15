@@ -1,0 +1,32 @@
+{
+  "id": "saiyan-saga-starter-169",
+  "number": 169,
+  "name": "Krillin LV3",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 76,
+    "pur": 0,
+    "text": 50
+  },
+  "needsReview": [
+    "pur",
+    "text"
+  ],
+  "personalityName": "Krillin",
+  "level": 3,
+  "powerRatings": [
+    0,
+    1500,
+    1700,
+    1900,
+    2100,
+    2300,
+    2500,
+    2700,
+    2900,
+    3100
+  ],
+  "pur": 0,
+  "text": "ar\nEN\nPower: »\nTake | card from the\nat the bottom of your 1\n— S— ETI pe pe—"
+}

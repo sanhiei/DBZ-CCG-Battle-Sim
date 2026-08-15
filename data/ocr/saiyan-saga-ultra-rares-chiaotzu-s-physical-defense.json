@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-ultra-rares-chiaotzu-s-physical-defense",
+  "number": null,
+  "name": "Chiaotzu’s Physical Defense",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 34,
+    "text": 65
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "£9 9 _— | 4 Tl Bl Ty osm",
+  "text": "Stops all heroes from losing 1 life\n\\ card for this entire combat. Multipl\nta of this card cannot be used toget\n: Remove from the game\nafter use. bis\nY- REE BR Aaa 1s oe || a eo]"
+}

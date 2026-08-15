@@ -1,0 +1,26 @@
+{
+  "id": "saiyan-saga-starter-166",
+  "number": 166,
+  "name": "Gohan LV3",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 38,
+    "pur": 0,
+    "text": 75
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Gohan",
+  "level": 3,
+  "powerRatings": [
+    1700,
+    1900,
+    2700,
+    3100
+  ],
+  "pur": 0,
+  "text": "a WE v =3\nPower:\nKamehameha Energy\n3 Attack does 3 life card\ndraws and only costs |"
+}

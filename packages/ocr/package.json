@@ -1,0 +1,14 @@
+{
+  "name": "@dbz/ocr",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ocr": "node --experimental-strip-types src/ocr.ts",
+    "proof": "node --experimental-strip-types src/proof.ts"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5",
+    "tesseract.js": "^5.1.1"
+  }
+}

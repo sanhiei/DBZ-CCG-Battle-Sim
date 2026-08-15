@@ -1,0 +1,32 @@
+{
+  "id": "saiyan-saga-starter-179",
+  "number": 179,
+  "name": "Goku LV1 HT",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 57,
+    "pur": 0,
+    "text": 38
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur",
+    "text"
+  ],
+  "personalityName": "Goku",
+  "level": 1,
+  "variant": "HT",
+  "powerRatings": [
+    5,
+    11,
+    800,
+    300,
+    1100,
+    1200,
+    1300,
+    14900
+  ],
+  "pur": 0,
+  "text": "\\s Af he\nJ i» 8 rs pas\n, z\n| =”\n>- x &\n& sical A track: Ton 1 pe"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-116",
+  "number": 116,
+  "name": "Yamcha’s Physical Defense",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 45,
+    "text": 75
+  },
+  "needsReview": [],
+  "typeLineRaw": "WB Physical Combat WER commie",
+  "text": "Prevents 3 life cards frarr\nbeing taken in a success\nphysical attack."
+}

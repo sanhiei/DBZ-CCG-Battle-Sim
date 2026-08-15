@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-122",
+  "number": 122,
+  "name": "Yajirobe’s Energy Attack",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 46,
+    "text": 85
+  },
+  "needsReview": [],
+  "typeLineRaw": "ke. arr, ort | Energy-Combat —t EE",
+  "text": "Energy attack forcing 1\ndraw from the life deck if\nnot stopped. Remove fit\n\ngame after use. #*"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-97",
+  "number": 97,
+  "name": "Power Up More!",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 76
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "",
+  "text": "Powers up 6 stages for a\n_\\ \\ personality. going no higk\nA than maximum stage."
+}

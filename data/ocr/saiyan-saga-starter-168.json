@@ -1,0 +1,32 @@
+{
+  "id": "saiyan-saga-starter-168",
+  "number": 168,
+  "name": "Krillin LV2",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 84,
+    "pur": 0,
+    "text": 50
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur",
+    "text"
+  ],
+  "personalityName": "Krillin",
+  "level": 2,
+  "powerRatings": [
+    500,
+    600,
+    700,
+    800,
+    1000,
+    110,
+    1200,
+    1300,
+    1900
+  ],
+  "pur": 0,
+  "text": "LL\nPower: \"\nDestructo-Uisk Energy |\nre NTE TIE | ey op"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-uncommons-85",
+  "number": 85,
+  "name": "Yamcha LV2",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 79,
+    "pur": 0,
+    "text": 84
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Yamcha",
+  "level": 2,
+  "powerRatings": [
+    0,
+    500,
+    600,
+    700,
+    800,
+    800,
+    1000,
+    1100,
+    1200,
+    1300,
+    1400
+  ],
+  "pur": 0,
+  "text": "Power: |\nSolar Flare Energy Attack. If\nit is not. blocked, it stuns the fd"
+}

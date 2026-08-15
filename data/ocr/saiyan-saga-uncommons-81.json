@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-81",
+  "number": 81,
+  "name": "Armor",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 54,
+    "text": 80
+  },
+  "needsReview": [],
+  "typeLineRaw": "MEE Non-Combat | 1 = Eu",
+  "text": "Armor prevents 1 life card discar\nfrom any successful energy\nattack that would have normal\n\nforced 1 or more discards.\nLimit one per deck. #7\ngn | don't mand thic etinleimm py"
+}

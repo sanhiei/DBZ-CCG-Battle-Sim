@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-131",
+  "number": 131,
+  "name": "Bear Hug Drill",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 52,
+    "text": 69
+  },
+  "needsReview": [],
+  "typeLineRaw": "| Von-Combat al CE",
+  "text": "Creates a +2 stage drain wi\neach successful physical\nattack made by this card's\n\nattacker.\n&\nTheo ET r——— 2 Bem =a feperemet ENE"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-133",
+  "number": 133,
+  "name": "Reversal Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 24,
+    "text": 75
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "er AA. AZ py CEE",
+  "text": "Uo the exact same physics\nattack you defended agair\nll during your defending\nround of combat,\nonce per combat. #\na ea -"
+}

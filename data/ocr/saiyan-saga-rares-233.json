@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-233",
+  "number": 233,
+  "name": "Life Defense Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 21,
+    "text": 80
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "SE RC en, TT Y c—",
+  "text": "Drill prevents 1 life card of\n\\ \\ damage from being taker\n: whenever a successful\nattack happens on\nrr the card owner. +\n4\n® ="
+}

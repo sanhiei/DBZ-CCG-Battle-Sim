@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-195",
+  "number": 195,
+  "name": "Hero Advantage",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 34,
+    "text": 82
+  },
+  "needsReview": [],
+  "typeLineRaw": "I | ian Von-Combat mmm]",
+  "text": "Allows a hero to draw his cards from t\n\ntop of the discard deck in the next ct\n\nBR Dat. If there are nat enough cards, t\ndrill does not work. Discard\n\nfrom the game after use. #\n\nNN @ 8 : ."
+}

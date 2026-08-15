@@ -1,0 +1,4735 @@
+[
+  {
+    "id": "saiyan-saga-commons-1",
+    "number": 1,
+    "name": "Standing Fist Punch",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 48,
+      "text": 69
+    },
+    "needsReview": [],
+    "typeLineRaw": "Physical Combat",
+    "text": "Physical Attack. Raise car\n\\ | user's anger level 1.\na \\e Ser rhe S—— Iroc mre theses"
+  },
+  {
+    "id": "saiyan-saga-commons-2",
+    "number": 2,
+    "name": "One Knuckle Punch",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 72,
+      "text": 84
+    },
+    "needsReview": [],
+    "typeLineRaw": "WB Physical Combat",
+    "text": "Physical Attack doing +1\nstage of damage if\n: successful. Raise card\n\" users anger level 1. i"
+  },
+  {
+    "id": "saiyan-saga-commons-3",
+    "number": 3,
+    "name": "Two Knuckle Punch",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 57,
+      "text": 70
+    },
+    "needsReview": [],
+    "typeLineRaw": "a Physical Combat J Ne",
+    "text": "Physical Attack doing +1\n| stage of damage if suc-\ncessful. Raise card user's\nanger level 1. i\n= “\\e Lan tell vir re nat fren this wy"
+  },
+  {
+    "id": "saiyan-saga-commons-4",
+    "number": 4,
+    "name": "Leg Sweep",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 28,
+      "text": 92
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "y",
+    "text": "Physical Attack. Raise cal\nuser's anger level 1."
+  },
+  {
+    "id": "saiyan-saga-commons-5",
+    "number": 5,
+    "name": "Arm Bar",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 70
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "Physical Attack doing +3\nstages of damage if\n| successful. Raise card\nuser's anger level 1. i\n\\g Ane GEER — fiers. q"
+  },
+  {
+    "id": "saiyan-saga-commons-6",
+    "number": 6,
+    "name": "Lunge Punch",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 39,
+      "text": 66
+    },
+    "needsReview": [],
+    "typeLineRaw": "MBB Physical Combat ry SS ——",
+    "text": "Physical attack. Raise car\nusers anger level 1.\nEh 32\" Did 1 lidents Ta"
+  },
+  {
+    "id": "saiyan-saga-commons-7",
+    "number": 7,
+    "name": "Reverse Punch",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 53,
+      "text": 72
+    },
+    "needsReview": [],
+    "typeLineRaw": "Physical Combat 1 C——",
+    "text": "Physical Attack doing +3\nstages of damage if suc-\ncessful. Raise card user\n\nanger level 1. &\nNy Ny Narr Bien Hey a rater Re"
+  },
+  {
+    "id": "saiyan-saga-commons-8",
+    "number": 8,
+    "name": "Knife Hand",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 41,
+      "text": 67
+    },
+    "needsReview": [],
+    "typeLineRaw": "BN Physical Combat —y |",
+    "text": "Physical Attack doing +3\nstages of damage if suc-\na cessful. Raise card user’\nanger level 1. #\n0 Sat thinly ahve dr i Aoarvvs IP (ANS saint"
+  },
+  {
+    "id": "saiyan-saga-commons-9",
+    "number": 9,
+    "name": "Palm Heel Strike",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 69,
+      "text": 71
+    },
+    "needsReview": [],
+    "typeLineRaw": "a; Physical Combat",
+    "text": "Physical Attack doing +3\nstages of damage if suc-\ncessful. Raise card user\nanger level 1. #*\n3 4 MN thew 0 icles cn 1 rears"
+  },
+  {
+    "id": "saiyan-saga-commons-10",
+    "number": 10,
+    "name": "Elbow Strike",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 26,
+      "text": 81
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "———— | SN SEER Y | se ——",
+    "text": "Physical attack. Raise car\n\\ \\ users anger level 1."
+  },
+  {
+    "id": "saiyan-saga-commons-11",
+    "number": 11,
+    "name": "Forward Foot Sweep",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 40,
+      "text": 85
+    },
+    "needsReview": [],
+    "typeLineRaw": "— 00 Em CT EER J \"hysical Combat",
+    "text": "Physical Attack doing +4 stages o\n\ndamage. If successful, this attac\n\nll stops any energy attack from ar\nopponent in his next phase.\n\nLower foe's anger level 1. +"
+  },
+  {
+    "id": "saiyan-saga-commons-12",
+    "number": 12,
+    "name": "Hip Spring Throw",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 34,
+      "text": 74
+    },
+    "needsReview": [],
+    "typeLineRaw": "Physical Combat —y AE",
+    "text": "Physical Attack doing +2 stag\nof damage if successful. Stc\na foe's physical attack on th\nnext round. Lower foe's\nanger level by 1. +\n~~ in earl sr barernsdl 1 bernemsnesl SEE ="
+  },
+  {
+    "id": "saiyan-saga-commons-13",
+    "number": 13,
+    "name": "Round Throw",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 17,
+      "text": 87
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "I ee",
+    "text": "Physical Attack doing +5\nstages of damage if suc-\ncessful or stops an ener\n\nattack. Lower foe's\nanger level by 1. +"
+  },
+  {
+    "id": "saiyan-saga-commons-14",
+    "number": 14,
+    "name": "Shoulder Wheel",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 94,
+      "text": 74
+    },
+    "needsReview": [],
+    "typeLineRaw": "Physical Combat",
+    "text": "Physical Attack doing +1\n_\\ \\ stage of damage if succe\nor ful. Raises your anger le\nby 1 and lowers foe's\nanger level by 1. A\nCae BS rare seta trae Foes ae"
+  },
+  {
+    "id": "saiyan-saga-commons-15",
+    "number": 15,
+    "name": "Earth Dragon Ball 1",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 27,
+      "text": 87
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "sea AS J BR  )",
+    "text": "Instantly power up to full\n\\ \\ and draw a card."
+  },
+  {
+    "id": "saiyan-saga-commons-16",
+    "number": 16,
+    "name": "Earth Dragon Ball 2",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 25,
+      "text": 74
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "BR ee |",
+    "text": "All foes have their power\n\\ ratings changed to 2\nstages higher than 0.\nPlr=rirare r=acrd=1r saree pe"
+  },
+  {
+    "id": "saiyan-saga-commons-17",
+    "number": 17,
+    "name": "Hidden Power Level",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 73,
+      "text": 77
+    },
+    "needsReview": [],
+    "typeLineRaw": "MB Physical Combat",
+    "text": "Physical attack. Before physical damag\n? assessed, change the power stage to\na personality’s maximum. They've been\nhiding their true level for just\nthis attack. 4\nNf w—"
+  },
+  {
+    "id": "saiyan-saga-commons-18",
+    "number": 18,
+    "name": "Arm Throw",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 72,
+      "text": 87
+    },
+    "needsReview": [],
+    "typeLineRaw": "| Physical Combat",
+    "text": "Villains, Goku, and Gohan oni\nPhysical attack. plus it stop:\nsingle named foe from maki\n\na physical attack on\nhis next phase. #5"
+  },
+  {
+    "id": "saiyan-saga-commons-19",
+    "number": 19,
+    "name": "Full Spin Kick",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 12,
+      "text": 74
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "oY | ERTCRRE",
+    "text": "Villains. Boku, and Gohan onl\nPhysical attack. plus it stop:\nA single named foe from mak\nan energy attack on\nml his next phase. #5\n», —s\nPE —"
+  },
+  {
+    "id": "saiyan-saga-commons-20",
+    "number": 20,
+    "name": "Pressure Punch",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 6,
+      "text": 69
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "ey “Se Wer",
+    "text": "Villains, Boku, and Bohan\n\\ | only. Physical attack doing\n; +3 stages of physical\ndamage if successful. re\n7 ."
+  },
+  {
+    "id": "saiyan-saga-commons-21",
+    "number": 21,
+    "name": "Neck Hold",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 57,
+      "text": 85
+    },
+    "needsReview": [],
+    "typeLineRaw": "= MAY dada” — - Bl Physical Combat",
+    "text": "Villains, Boku, and Bohan only. Phusi\n\nattack. plus it stops a single named\n\nBN foe from making a physical attack\nhis next phase. It costs 2\n\npower stages to perform. #3"
+  },
+  {
+    "id": "saiyan-saga-commons-22",
+    "number": 22,
+    "name": "Power Up!",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 1,
+      "text": 86
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "THERES RES",
+    "text": "Powers up 5 stages for a personal\n\ngoing no higher than their maxim\n\nMl stage. Take the top discarded car\nand place at the bottom of\n\nyour life deck. +"
+  },
+  {
+    "id": "saiyan-saga-commons-23",
+    "number": 23,
+    "name": "Burning Rage!",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 30,
+      "text": 78
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "et WA) ZN Bl TT",
+    "text": "Increase your anger level by 2. Take\n\" bottom 2 cards from your discard pi\nBE and place them at the bottom of yt\nlife deck. Discard this card\n™\n#; from the game after use, +\ndl of mn a menral nore"
+  },
+  {
+    "id": "saiyan-saga-commons-24",
+    "number": 24,
+    "name": "Goku’s Surprise Attack",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 34,
+      "text": 91
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "| Bl em————",
+    "text": "Physical attack striking ot\nfor 5 stages of physical\ndamage on a selected ft"
+  },
+  {
+    "id": "saiyan-saga-commons-25",
+    "number": 25,
+    "name": "Goku’s Physical Attack",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 36,
+      "text": 89
+    },
+    "needsReview": [],
+    "typeLineRaw": "BR J /; =) ‘Physical Combat eR",
+    "text": "Physical attack. plus draw the botto\n\ncard from the discard pile into your\n\nlA hand. If used by Goku, it stays on\ntable to be used one more\n\ntime in this combat. ES"
+  },
+  {
+    "id": "saiyan-saga-commons-26",
+    "number": 26,
+    "name": "Gohan’s Physical Attack",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 78
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "T—— TWh...",
+    "text": "Physical attack. Gohan\ngains 1 anger level.\nSl Increases Gohan's power\nrating by 5S stages. rs"
+  },
+  {
+    "id": "saiyan-saga-commons-27",
+    "number": 27,
+    "name": "Tien’s Physical Attack",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 73,
+      "text": 69
+    },
+    "needsReview": [],
+    "typeLineRaw": "| : Physical Combat BR ee",
+    "text": "Physical attack doing 5 lif\n| card draws if successful.\n| , ; '"
+  },
+  {
+    "id": "saiyan-saga-commons-28",
+    "number": 28,
+    "name": "Vegeta’s Physical Attack",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 40,
+      "text": 80
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "DEV VA y rey TEETWEAST",
+    "text": "No physical attacks will\nes work against Vegeta this\ni combat. Remove from\n\ngame after use. &"
+  },
+  {
+    "id": "saiyan-saga-commons-29",
+    "number": 29,
+    "name": "Yajirobe’s Physical Attack",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 87
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "Physical attack doing 2\ndraws from the life deck\nA) not stopped. Remove fit\ngame after use. #"
+  },
+  {
+    "id": "saiyan-saga-commons-30",
+    "number": 30,
+    "name": "Fall 7 Times, Get Up 8 Times.",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 53,
+      "text": 59
+    },
+    "needsReview": [],
+    "typeLineRaw": "\\/. ' Non-Combat",
+    "text": "The first successful physi\n\nattack on you is stopped\n\nLl Discard this card from th\n\nW\\ game after use. E\n&g 1 ict oo = ns ora... a"
+  },
+  {
+    "id": "saiyan-saga-commons-31",
+    "number": 31,
+    "name": "Fortify Your Spirit",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 79
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "The first successful enerc\n\n~_\\ | attack on you is stopped\nod Discard this card from tk\ngame after use. #"
+  },
+  {
+    "id": "saiyan-saga-commons-32",
+    "number": 32,
+    "name": "The Untroubled Mind is Focused",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 20,
+      "text": 59
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "TR DZ) NO",
+    "text": "Remove someone else's\n_\\ \\ drill card or ally from the\nLl) game. Discard this card\na from the game after\n. use. A\n2 Vi ‘ LE rill — - — PEMA a co"
+  },
+  {
+    "id": "saiyan-saga-commons-33",
+    "number": 33,
+    "name": "It’s the Little Things That Matter",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 72,
+      "text": 83
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "|",
+    "text": "Stop 1 successful energy\n\\ \\ physical life card draw fre\nMW happening. Discard this\ncard from the game\nafter use. #"
+  },
+  {
+    "id": "saiyan-saga-commons-34",
+    "number": 34,
+    "name": "Straining Off-Balancing Move",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 41,
+      "text": 87
+    },
+    "needsReview": [],
+    "typeLineRaw": "| Physical Combat — er EEE————",
+    "text": "Physical attack forcing th\n\n; defender to lose 1 life car\n\n- and the attacker 3 stage\nof power. Limit 1 per\n\ndeck. +"
+  },
+  {
+    "id": "saiyan-saga-commons-35",
+    "number": 35,
+    "name": "Straining, Penetrating Attack Move",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 41,
+      "text": 92
+    },
+    "needsReview": [],
+    "typeLineRaw": "Am fh, A os oo - a — Vi wA WB Physical Combat",
+    "text": "Physical attack forcing th\ndefender to lose 3 life\ncards and the attacker =\n\nStages of power.\nLimit 1 per deck. +"
+  },
+  {
+    "id": "saiyan-saga-commons-36",
+    "number": 36,
+    "name": "Straining Fake Left Move",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 50,
+      "text": 72
+    },
+    "needsReview": [],
+    "typeLineRaw": "| 22 77 Il | YEE 1 vas: Energy Combat]",
+    "text": "Defensive move preventir\nup to 3 energy life cards\nfrom being discarded anc\n\ndraining the user 4\nstages. #\nDEG RE ar oy S—"
+  },
+  {
+    "id": "saiyan-saga-commons-38",
+    "number": 38,
+    "name": "Straining Arm Drag Move",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 54,
+      "text": 73
+    },
+    "needsReview": [],
+    "typeLineRaw": "— Le CR | Physical Combat",
+    "text": "Physical attack forcing th\ndefender to lose 1 life car\nll and the attack is over fc\nthe attacker. Po\n\nTra 1 tr t Chimes thle otter"
+  },
+  {
+    "id": "saiyan-saga-commons-39",
+    "number": 39,
+    "name": "Straining Ankle Smash Move",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 26,
+      "text": 80
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "NS aE RRR. S—— |",
+    "text": "Play this card right after the attacker pi\na card and pays their energy costs. The\nSN defender does 4 stages of power drain\n“\\ the attacker, no matter what he\ni5 doing to the defender. #\nYeu i'd Bhavio to lac =e"
+  },
+  {
+    "id": "saiyan-saga-commons-40",
+    "number": 40,
+    "name": "Straining Energy Defense Move",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 47,
+      "text": 83
+    },
+    "needsReview": [],
+    "typeLineRaw": "ms \\ Lm \\ nergy Combat",
+    "text": "Stops an energy attack, b\nyou have to discard anott\n\ncard to use this one.\ny #"
+  },
+  {
+    "id": "saiyan-saga-commons-41",
+    "number": 41,
+    "name": "Straining Head Lock Move",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 46,
+      "text": 89
+    },
+    "needsReview": [],
+    "typeLineRaw": "J Physical Combat ry CEET————",
+    "text": "Stops a physical attack,\nbut you have to discard\nanother card to use\nthis one. Pe"
+  },
+  {
+    "id": "saiyan-saga-commons-42",
+    "number": 42,
+    "name": "Straining Rolling Escape Move",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 32,
+      "text": 91
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "— vp SG LAE BR mS",
+    "text": "Stops an energy attack,\nbut the user cannot mak\nany attacks for the rest\n\nthis combat. +"
+  },
+  {
+    "id": "saiyan-saga-commons-43",
+    "number": 43,
+    "name": "Senzu Bean",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 6,
+      "text": 87
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "TY EEE",
+    "text": "This card is played and then is\n; taken out of the game. It\nBl moves the power stage of tf\nmain personality to the\nhighest rating. +"
+  },
+  {
+    "id": "saiyan-saga-commons-44",
+    "number": 44,
+    "name": "Goku Body Throw",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 51,
+      "text": 81
+    },
+    "needsReview": [],
+    "typeLineRaw": "WE Physical Combat Bl eemmm———TTTT",
+    "text": "Physical attack causing 1\n\nlife card in damage. no\n’ matter what Goku's pow\nlevel is. &"
+  },
+  {
+    "id": "saiyan-saga-commons-46",
+    "number": 46,
+    "name": "Goku Anger Attack",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 18,
+      "text": 93
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "BD » Pi | MALORNE AlAs AS pra 2 w= Te EE",
+    "text": "This physical attack does\ndouble the normal damac\nif successful."
+  },
+  {
+    "id": "saiyan-saga-commons-47",
+    "number": 47,
+    "name": "Raditz Total Defense",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 58,
+      "text": 93
+    },
+    "needsReview": [],
+    "typeLineRaw": "vz ‘Physical Combat",
+    "text": "Stops any physical attack\nbut costs 1 power stage |\nperform."
+  },
+  {
+    "id": "saiyan-saga-commons-48",
+    "number": 48,
+    "name": "Goku’s Touch Goku",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 27,
+      "text": 80
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "Eo SRL. | Bl a —",
+    "text": "After a successful physic\nattack. take a foe's Drag\n\n. Ball. Discard this card\nafter use. pe"
+  },
+  {
+    "id": "saiyan-saga-commons-49",
+    "number": 49,
+    "name": "Wrist Flex Takedown",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 54,
+      "text": 70
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "y",
+    "text": "Stops the foes’ physical\n_\\ | attack played this round.\nBl Raise card user's anger\nlevel 1.\nah ¥"
+  },
+  {
+    "id": "saiyan-saga-commons-50",
+    "number": 50,
+    "name": "Shoulder Throw",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 96,
+      "text": 75
+    },
+    "needsReview": [],
+    "typeLineRaw": "Physical Combat",
+    "text": "Stops an opponent's physic\n.\\ | attack this round. Raise ce\nusers anger level 1."
+  },
+  {
+    "id": "saiyan-saga-commons-51",
+    "number": 51,
+    "name": "Hip Throw",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 56,
+      "text": 86
+    },
+    "needsReview": [],
+    "typeLineRaw": "‘Physical Combat",
+    "text": "Physical Attack doing +2\n: stages of damage if\nsuccessful. Raise card\nusers anger level 1. 2"
+  },
+  {
+    "id": "saiyan-saga-commons-52",
+    "number": 52,
+    "name": "Neck Restraints",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 17,
+      "text": 69
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "= Soi ay GR - J | & ' a  - poe ee EE",
+    "text": "Stops an opponent's energ\n- attack. Foe's anger level\nEA decreases by 1.\n» €"
+  },
+  {
+    "id": "saiyan-saga-commons-53",
+    "number": 53,
+    "name": "Holding After Takedown",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 36,
+      "text": 78
+    },
+    "needsReview": [],
+    "typeLineRaw": "SN WR) Fhijsical Combat",
+    "text": "Stops opponent's physica\n_ attack this round. Foe's\nEl anger level decreases bu"
+  },
+  {
+    "id": "saiyan-saga-commons-54",
+    "number": 54,
+    "name": "Knee Strike",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 37,
+      "text": 62
+    },
+    "needsReview": [],
+    "typeLineRaw": "I Physical Combat | al conn ——",
+    "text": "Stops the foe's physical\n\\ \\| attack. Raise card user's\nanger level 1.\n: wy SEE EONS ret reall wv 8 Lares CE"
+  },
+  {
+    "id": "saiyan-saga-commons-55",
+    "number": 55,
+    "name": "Front Kick",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 28,
+      "text": 73
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "— SW SEE RE  E—",
+    "text": "Physical Attack doing +1\nstage of damage if suc-\nEA cessful. Raise card user’\nA anger level 1. #\n“©,"
+  },
+  {
+    "id": "saiyan-saga-commons-56",
+    "number": 56,
+    "name": "Side Kick",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 53,
+      "text": 55
+    },
+    "needsReview": [],
+    "typeLineRaw": "Beet] | 277 1 LLL AA 4 Energy Combat",
+    "text": "Stop foe's energy attack\nthis round.\nNA Ill Bolan [| slirdea't «arm Son GEE"
+  },
+  {
+    "id": "saiyan-saga-commons-57",
+    "number": 57,
+    "name": "Round Kick",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 43,
+      "text": 67
+    },
+    "needsReview": [],
+    "typeLineRaw": "| Physical Combat dh nr E————",
+    "text": "Physical Attack doing +3\nstages of damage if suc-\ncessful. Foe's Anger lew\n\ndecreases by 1. PS\nA. TL od Bit Varrebl ore"
+  },
+  {
+    "id": "saiyan-saga-commons-58",
+    "number": 58,
+    "name": "Back Kick",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 95,
+      "text": 90
+    },
+    "needsReview": [],
+    "typeLineRaw": "Physical Combat",
+    "text": "Physical Attack doing +3 stages\nof damage if successful. Stops\nenergy attacks for the rest of\n\nthis combat. Foe's anger\nlevel decreases by 1. 7"
+  },
+  {
+    "id": "saiyan-saga-commons-59",
+    "number": 59,
+    "name": "Big Outside Drop",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 15,
+      "text": 64
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "1 Ce GEE",
+    "text": "Stops a physical attack.\nRaise card user's anger\nlevel 1.\n\n- I'm ot tirmem tired of vats"
+  },
+  {
+    "id": "saiyan-saga-commons-60",
+    "number": 60,
+    "name": "One-Arm Shoulder Throw",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 79,
+      "text": 56
+    },
+    "needsReview": [],
+    "typeLineRaw": "| ‘Physical Combat",
+    "text": "Stops the foe's physical\n\\ | attack. Lower foe's angel\nLl evel 1.\n\" Ll\nBe. AT Riruar Ic dry Fev ast reed tT"
+  },
+  {
+    "id": "saiyan-saga-uncommons-61",
+    "number": 61,
+    "name": "Body Drop Throw",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 52,
+      "text": 50
+    },
+    "needsReview": [
+      "text"
+    ],
+    "typeLineRaw": "Be LE ea / Physical Combat ee",
+    "text": "Stops a physical attack.\n_\\ \\ Lower foe's anger level bu\np— 4\nLES AE\n~ ~ Tran \\/oOrotal [iy 26 ries fs"
+  },
+  {
+    "id": "saiyan-saga-uncommons-62",
+    "number": 62,
+    "name": "Inner Leg Throw",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 48,
+      "text": 75
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "BR eT",
+    "text": "Stops a physical attack.\n_\\ \\ Lower foe's anger level br"
+  },
+  {
+    "id": "saiyan-saga-uncommons-63",
+    "number": 63,
+    "name": "Big Whirl Throw",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 62,
+      "text": 62
+    },
+    "needsReview": [],
+    "typeLineRaw": "Energy Combat I",
+    "text": "Stops an energy attack.\nLower foe's anger level bu\n\\p Uf corn Fhe Broo rand b= i Feast ates"
+  },
+  {
+    "id": "saiyan-saga-uncommons-64",
+    "number": 64,
+    "name": "Ground Holding",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 53,
+      "text": 82
+    },
+    "needsReview": [],
+    "typeLineRaw": "Lo fae WY Physical Combat",
+    "text": "Stops a physical attack.\nLowers foe's anger level bu\n< MN"
+  },
+  {
+    "id": "saiyan-saga-uncommons-65",
+    "number": 65,
+    "name": "Fore Fist Punch",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 52,
+      "text": 82
+    },
+    "needsReview": [],
+    "typeLineRaw": "ss Energy Combat]",
+    "text": "Energy Attack doing B life\n\\ \\ card draws of damage anc\nLl lowering foe's power 3\nog stages or to 0. which\never happens first. &"
+  },
+  {
+    "id": "saiyan-saga-uncommons-66",
+    "number": 66,
+    "name": "Knife Hand Strike",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 20,
+      "text": 89
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "TR mn tml B— Ye B.C FLT Seen",
+    "text": "Energy Attack doing 4 life\ncard draws of damage or\n\n\" stopping any energy\nattack. ="
+  },
+  {
+    "id": "saiyan-saga-uncommons-67",
+    "number": 67,
+    "name": "Elbow Strike",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 59
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "Stops a foe's physical\n__\\ | attack. Raise card user's\nLA anger level 1.\nId £\ni = oo-1 \""
+  },
+  {
+    "id": "saiyan-saga-uncommons-68",
+    "number": 68,
+    "name": "Front Kick",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 37,
+      "text": 66
+    },
+    "needsReview": [],
+    "typeLineRaw": "EER EES Re ESA +. V Energy Combat",
+    "text": "Energy Attack doing 5 life ce\nci draws in damage and costin\nLl 4 stages of power to per-\n\\ form. Raise card user's\n) anger level 2. 3\nPTR ————\n| a ' MM revel Ver ir rime’ —-"
+  },
+  {
+    "id": "saiyan-saga-uncommons-69",
+    "number": 69,
+    "name": "Side Kick",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 77,
+      "text": 87
+    },
+    "needsReview": [],
+    "typeLineRaw": "JB Physical Combat",
+    "text": "Stops a foe's physical\n_\\ | attack. Raise card user's\n| anger level 2."
+  },
+  {
+    "id": "saiyan-saga-uncommons-70",
+    "number": 70,
+    "name": "Turning Kick",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 67,
+      "text": 79
+    },
+    "needsReview": [],
+    "typeLineRaw": "a Fnergy Combat",
+    "text": "Energy Attack doing 5S life\n_\\ \\ card draws of damage or\n” stops a physical attack.\nRaise card user's\nanger level 1. 2\nTN"
+  },
+  {
+    "id": "saiyan-saga-uncommons-71",
+    "number": 71,
+    "name": "Back Kick",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 8,
+      "text": 84
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "X Bl me ——",
+    "text": "Energy Attack doing b life\ncard draws of damage and\nBA Costing 5 power stages to\nperform. Raise card\nuser's anger level 1. 2"
+  },
+  {
+    "id": "saiyan-saga-uncommons-72",
+    "number": 72,
+    "name": "Axe Heel Kick",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 40,
+      "text": 73
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "WV — ; EE",
+    "text": "Stops a foe's energy\nattack. Raise card users\nanger level 1.\n\n£\nA wise mew cove sEied “The"
+  },
+  {
+    "id": "saiyan-saga-uncommons-73",
+    "number": 73,
+    "name": "Rear Spin Kick",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 47,
+      "text": 92
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "BR eT",
+    "text": "Stops a foe's energy\nattack. Raise card user's\nanger level 1."
+  },
+  {
+    "id": "saiyan-saga-uncommons-74",
+    "number": 74,
+    "name": "Jump Turn Kick",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 94,
+      "text": 87
+    },
+    "needsReview": [],
+    "typeLineRaw": "Energy Combat",
+    "text": "Energy Attack. Raise carc\nuser's anger level 1.\nE"
+  },
+  {
+    "id": "saiyan-saga-uncommons-75",
+    "number": 75,
+    "name": "Earth Dragon Ball 3",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 74,
+      "text": 82
+    },
+    "needsReview": [],
+    "typeLineRaw": "a on-Combat",
+    "text": "Draw three cards if you\nwish, and place the top\ndiscarded card at the\n\nbottom of your life\ndeck. #\neg +e Earth Gila"
+  },
+  {
+    "id": "saiyan-saga-uncommons-76",
+    "number": 76,
+    "name": "Earth Dragon Ball 4",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 31,
+      "text": 81
+    },
+    "needsReview": [],
+    "typeLineRaw": "Non-Combat ca ox a OH",
+    "text": "End the very next combat ue\n\n\\ \\ are forced into before you\n—-\" sustain damage. Your angel\nA level increases 2. +"
+  },
+  {
+    "id": "saiyan-saga-uncommons-77",
+    "number": 77,
+    "name": "Earth Dragon Ball 5",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 86
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "Power up to full. Your anger level\n_\\ \\ shifts up 2. Draw 2 cards if you\nBl Wish and place the top 2 discard\ncards at the bottom of\na :\nyour life deck. +"
+  },
+  {
+    "id": "saiyan-saga-uncommons-78",
+    "number": 78,
+    "name": "Roshi Training",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 30,
+      "text": 66
+    },
+    "needsReview": [],
+    "typeLineRaw": "BEE a —— | \\ Non-Combat CO Wesss————_________ Wiss",
+    "text": "Heroes only. The top 3\n\\ \\ discarded cards are place\nBA at the bottom of your lif\n\\ deck. #\n) nN [ Ho'ce aetroacior farm 1a tr"
+  },
+  {
+    "id": "saiyan-saga-uncommons-79",
+    "number": 79,
+    "name": "King Kai Training",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 28,
+      "text": 61
+    },
+    "needsReview": [],
+    "typeLineRaw": "TTR 2 2900 \" i ee bo \\ Non-Combat",
+    "text": "Heroes only. 2 cards of\n~~ \\\\ your choice are placed at\nll the bottom of your life\nEY) deck. PN\n185 — I'm nlm re les resem Game"
+  },
+  {
+    "id": "saiyan-saga-uncommons-80",
+    "number": 80,
+    "name": "Training",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 86
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "Not useable by heroes excef\n\nfor Goku. 2 discarded cards\n\nBl the user's choice are placec\nat the bottom of the\n\nlife deck. ES:"
+  },
+  {
+    "id": "saiyan-saga-uncommons-81",
+    "number": 81,
+    "name": "Armor",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 54,
+      "text": 80
+    },
+    "needsReview": [],
+    "typeLineRaw": "MEE Non-Combat | 1 = Eu",
+    "text": "Armor prevents 1 life card discar\nfrom any successful energy\nattack that would have normal\n\nforced 1 or more discards.\nLimit one per deck. #7\ngn | don't mand thic etinleimm py"
+  },
+  {
+    "id": "saiyan-saga-uncommons-82",
+    "number": 82,
+    "name": "Tien LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 83,
+      "pur": 0,
+      "text": 66
+    },
+    "needsReview": [
+      "pur"
+    ],
+    "personalityName": "Tien",
+    "level": 1,
+    "powerRatings": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      1000
+    ],
+    "pur": 0,
+    "text": "|\nPower:\nMutti-Farm alows two physical attacks. 1\none after anather, or a defense against |\n§ a physical attack preventing 4 stages l"
+  },
+  {
+    "id": "saiyan-saga-uncommons-83",
+    "number": 83,
+    "name": "Tien LV2",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 59,
+      "pur": 0,
+      "text": 80
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Tien",
+    "level": 2,
+    "powerRatings": [
+      0,
+      500,
+      600,
+      700,
+      800,
+      300,
+      1000,
+      110,
+      1200,
+      1300,
+      1400
+    ],
+    "pur": 0,
+    "text": "Power:\n4 Solar Flare Energy Attack. If i\n4 it is not blocked, it stuns the |,\n3 foe so he must skip his next i"
+  },
+  {
+    "id": "saiyan-saga-uncommons-84",
+    "number": 84,
+    "name": "Yamcha LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 80,
+      "pur": 0,
+      "text": 57
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Yamcha",
+    "level": 1,
+    "powerRatings": [
+      100,
+      200,
+      300,
+      0,
+      500,
+      600,
+      700,
+      800,
+      800
+    ],
+    "pur": 0,
+    "text": "ig 7\nSo) = E\nPower:\nSpirit Ball Energy Attack [\ndoes 2 life card draws of I\nl=\n— ,- wae | rid Re REE A"
+  },
+  {
+    "id": "saiyan-saga-uncommons-85",
+    "number": 85,
+    "name": "Yamcha LV2",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 79,
+      "pur": 0,
+      "text": 84
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Yamcha",
+    "level": 2,
+    "powerRatings": [
+      0,
+      500,
+      600,
+      700,
+      800,
+      800,
+      1000,
+      1100,
+      1200,
+      1300,
+      1400
+    ],
+    "pur": 0,
+    "text": "Power: |\nSolar Flare Energy Attack. If\nit is not. blocked, it stuns the fd"
+  },
+  {
+    "id": "saiyan-saga-uncommons-86",
+    "number": 86,
+    "name": "Chi-Chi LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 67,
+      "pur": 0,
+      "text": 49
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur",
+      "text"
+    ],
+    "personalityName": "Chi-Chi",
+    "level": 1,
+    "powerRatings": [
+      21,
+      100,
+      200,
+      300,
+      0,
+      500,
+      600,
+      700,
+      800,
+      800
+    ],
+    "pur": 0,
+    "text": "mh. Jl\"\n\nPower: »\nMother's Defense. Once per combat,\n\n; = 150 meme"
+  },
+  {
+    "id": "saiyan-saga-uncommons-87",
+    "number": 87,
+    "name": "Bulma LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 70,
+      "pur": 0,
+      "text": 57
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Bulma",
+    "level": 1,
+    "powerRatings": [
+      0,
+      100,
+      200,
+      300,
+      200,
+      500,
+      600,
+      700,
+      800,
+      800,
+      1000
+    ],
+    "pur": 0,
+    "text": "Power:\n\nScientific Defense. :\n\nReduces the damage I!\na RA x. an i ener 7 a gre Ci 3 1)"
+  },
+  {
+    "id": "saiyan-saga-uncommons-88",
+    "number": 88,
+    "name": "King Kai Uniform",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 56
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "The uniform prevents 1 life card\n~\\ \\ card from any successful physic\n8 attack that would have normal\ni forced | or more discards.\na Ti\n\nLimit one per deck. +\n\n. GY. 4 i mr sir \" Rs:\n\nLQ Fo Asatte Ho rFEForomrm Boat aries ="
+  },
+  {
+    "id": "saiyan-saga-uncommons-89",
+    "number": 89,
+    "name": "Dream Chamber Training",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 25,
+      "text": 78
+    },
+    "needsReview": [],
+    "typeLineRaw": "3 | a Nr TY 5K TI a OR ANY NN NEE EE PA, CP op (I FSSA po a A EMT Ents 2 yyy A fr Non-Combat ad fr oe aE",
+    "text": "Heroes only. 2 discards of tk\n\\ \\ user's choice are placed at t\nLl bottom of your life deck.\n\\ Discard from the game\n: after use. #"
+  },
+  {
+    "id": "saiyan-saga-uncommons-90",
+    "number": 90,
+    "name": "Mother’s Touch",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 33,
+      "text": 78
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "| _—y EEE",
+    "text": "This stops the damage\ncaused by a physical or\n-— energy attack. After use\ndiscard this card\nfrom the game. #\n83 : — et"
+  },
+  {
+    "id": "saiyan-saga-uncommons-91",
+    "number": 91,
+    "name": "Energy Throw",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 52,
+      "text": 85
+    },
+    "needsReview": [],
+    "typeLineRaw": "| Energy Combat — ——",
+    "text": "Villains. Boku. and Bohan only. Creat\nan energy attack doing 7 life card\n- draws at a cost of 4 stages of pol\ndrain. Discard from the\ngame after use. ES:"
+  },
+  {
+    "id": "saiyan-saga-uncommons-92",
+    "number": 92,
+    "name": "Energy Defense",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 21,
+      "text": 86
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "Ba ZF ry \\ PENERER PIRI PYRE Y § 250% a Opal nd Si Re a i a a ls Le —y | ge —",
+    "text": "Villains, Goku, and Gohan\no only. Stops an energy\nattack this round."
+  },
+  {
+    "id": "saiyan-saga-uncommons-93",
+    "number": 93,
+    "name": "Mental Energy Attack",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 48,
+      "text": 72
+    },
+    "needsReview": [],
+    "typeLineRaw": "J ‘Energy Combat BR Em",
+    "text": "Villains, Goku, and Gohan\n\\ \\ only. Creates an energy\nattack inflicting B life car\ndraws. 5\n. Meet rn — =r"
+  },
+  {
+    "id": "saiyan-saga-uncommons-94",
+    "number": 94,
+    "name": "Energy Blast",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 94,
+      "text": 91
+    },
+    "needsReview": [],
+    "typeLineRaw": "Energy Combat",
+    "text": "Villains, Boku, and Bohan only. Energ\nattack, plus it stops a single named\nfoe from making a physical attack\n\nhis next phase at a cost of 3\nstages of power drain. ES,"
+  },
+  {
+    "id": "saiyan-saga-uncommons-95",
+    "number": 95,
+    "name": "Energy Aura",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 38,
+      "text": 78
+    },
+    "needsReview": [],
+    "typeLineRaw": "RS NS lS ol Energy Combat CL  — |",
+    "text": "Villains. Goku, and Gohan\nonly. Stops an energy\nattack and stops energy\nattacks in the next\nphase. ES:\nRe La :"
+  },
+  {
+    "id": "saiyan-saga-uncommons-96",
+    "number": 96,
+    "name": "Sweeping Defense",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 95,
+      "text": 84
+    },
+    "needsReview": [],
+    "typeLineRaw": "Physical Combat",
+    "text": "Villains. Boku, and Gohan\nonly. Stops a physical atta\n. and stops physical attack\nin the next phase. &"
+  },
+  {
+    "id": "saiyan-saga-uncommons-97",
+    "number": 97,
+    "name": "Power Up More!",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 76
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "Powers up 6 stages for a\n_\\ \\ personality. going no higk\nA than maximum stage."
+  },
+  {
+    "id": "saiyan-saga-uncommons-98",
+    "number": 98,
+    "name": "Power Up the Most!",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 35,
+      "text": 74
+    },
+    "needsReview": [],
+    "typeLineRaw": "fe J FANN NN Non-Combat  = kit cue",
+    "text": "Powers up to the personality\n: highest stage. Select 2\nLl discarded cards and place\nthem at the bottom of\ni\nyour life deck. #\nBa” J PTE —"
+  },
+  {
+    "id": "saiyan-saga-uncommons-99",
+    "number": 99,
+    "name": "Blazing Anger!",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 51,
+      "text": 80
+    },
+    "needsReview": [],
+    "typeLineRaw": "| Non-Combat ad = ET TT",
+    "text": "Increase your anger level b\n\n2. Take the top 2 cards fit\n\nLl our discard pile and place\n48 them at the bottom\n\n' of your life deck. A"
+  },
+  {
+    "id": "saiyan-saga-uncommons-100",
+    "number": 100,
+    "name": "Vegeta’s Surprise Defense",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 25,
+      "text": 90
+    },
+    "needsReview": [],
+    "typeLineRaw": "NE. sA~SY A ee —— w MY | = ~ TT ESE INCA NATIT LA, Ee Se mY CE v~ 2 Combat , x Tu cann———",
+    "text": "Stop one physical or energ\nattack from doing damage\nDiscard this card from the\n\ngame after one use. 5"
+  },
+  {
+    "id": "saiyan-saga-uncommons-101",
+    "number": 101,
+    "name": "Goku Honor Duel!",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 23,
+      "text": 81
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "ARMRIRL OF Gr C—",
+    "text": "Boku uses the bottom 3 cards of the discard ¢\n\n: for the next combat instead of the cards fron\n\nBN fife deck. If there are not enough cards, dan\nuse this ahility. Discard from the\n\ngame after use, #7"
+  },
+  {
+    "id": "saiyan-saga-uncommons-102",
+    "number": 102,
+    "name": "Raditz Honor Duel!",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 24,
+      "text": 88
+    },
+    "needsReview": [],
+    "typeLineRaw": "pp— er — y. Non-Combat aa",
+    "text": "Raditz uses the bottom 3 cards of the discard\n\ndeck for the next combat instead of the cand\n\nfrom his life deck. If there are not enough G:\ndon't use this ability. Discard from\n\nthe game after use. #1"
+  },
+  {
+    "id": "saiyan-saga-uncommons-103",
+    "number": 103,
+    "name": "Piccolo Honor Duel!",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 19,
+      "text": 85
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "| 1 Sm —",
+    "text": "Piccolo uses the battom 3 cards of the dist\n| deck for the next combat instead of the G\nA from his life deck. If there are not enough\ncards. don't use this ability. Discard\n-\nfrom the game after use. bis\n®"
+  },
+  {
+    "id": "saiyan-saga-uncommons-104",
+    "number": 104,
+    "name": "Chiaotzu LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 73,
+      "pur": 0,
+      "text": 55
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Chiaotzu",
+    "level": 1,
+    "powerRatings": [
+      0,
+      100,
+      200,
+      300,
+      0,
+      500,
+      600,
+      700,
+      800,
+      800,
+      1000
+    ],
+    "pur": 0,
+    "text": "SN =! \"\np —\nPower: »\nPower Blast Energy\nAttack costs power |\nstage to perform. |W\nvin nnd"
+  },
+  {
+    "id": "saiyan-saga-uncommons-105",
+    "number": 105,
+    "name": "Chiaotzu LV2",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 82,
+      "pur": 0,
+      "text": 61
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Chiaotzu",
+    "level": 2,
+    "powerRatings": [
+      0,
+      500,
+      600,
+      700,
+      800,
+      800,
+      1000,
+      1100,
+      1200,
+      1300,
+      1200
+    ],
+    "pur": 0,
+    "text": "Power:\nBlast Energy Attack does\n| 6 life cards of damage, »\n| (a Oves Site zu \""
+  },
+  {
+    "id": "saiyan-saga-uncommons-106",
+    "number": 106,
+    "name": "Yajirobe LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 67,
+      "pur": 0,
+      "text": 45
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur",
+      "text"
+    ],
+    "personalityName": "Yajirobe",
+    "level": 1,
+    "powerRatings": [
+      0,
+      100,
+      200,
+      0,
+      500,
+      600,
+      700,
+      800,
+      1000
+    ],
+    "pur": 0,
+    "text": "Power: |\nPhysical Attack |\n- aid fied a Wy ¥ aid ay oa »\ni ="
+  },
+  {
+    "id": "saiyan-saga-uncommons-107",
+    "number": 107,
+    "name": "Yajirobe LV2",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 87,
+      "pur": 0,
+      "text": 65
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Yajirobe",
+    "level": 2,
+    "powerRatings": [
+      0,
+      500,
+      600,
+      700,
+      800,
+      800,
+      1000,
+      1100,
+      1300,
+      1400
+    ],
+    "pur": 0,
+    "text": ":\nPower:\nEnergy attack needs 3 E\npower stages ta perform.\n\n; i\n\nist: HE il 11113 i"
+  },
+  {
+    "id": "saiyan-saga-uncommons-108",
+    "number": 108,
+    "name": "Goku’s Energy Defense",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 21,
+      "text": 83
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "—y ETT",
+    "text": "Prevents 3 life cards from being\ndiscarded from a successful energy\n- attack. If used by Boku, it stays of\n- the table to be used one\nmare time in this combat. ##\n& T—"
+  },
+  {
+    "id": "saiyan-saga-uncommons-109",
+    "number": 109,
+    "name": "Piccolo’s Energy Attack",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 49,
+      "text": 69
+    },
+    "needsReview": [],
+    "typeLineRaw": "RY AEREm—m——— I Energy Combat",
+    "text": "Does Bb life card draws of\ndamage and costs 5\n- stages of power drain to\n\\ perform. #\n1,5 FEPSCEEI of WORSE PRES"
+  },
+  {
+    "id": "saiyan-saga-uncommons-110",
+    "number": 110,
+    "name": "Piccolo’s Physical Defense",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 12,
+      "text": 64
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "KAT... PWR 00 conwnmms",
+    "text": "Stops a successful physica\nattack from doing damage\nSl and raises Piccolo's power\n\\ rating by 4. up to his\nmaximum stage. AR\nN EE\no Neu 1 l=mrte orl \\W Aides 1 wn tS res"
+  },
+  {
+    "id": "saiyan-saga-uncommons-111",
+    "number": 111,
+    "name": "Gohan’s Energy Defense",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 33,
+      "text": 91
+    },
+    "needsReview": [],
+    "typeLineRaw": "| X/ k Sa — 1 TPT YET TY TE ASTRO Vi Energy Combat",
+    "text": "Prevents an energy attac\nBains Gohan 1 anger level"
+  },
+  {
+    "id": "saiyan-saga-uncommons-112",
+    "number": 112,
+    "name": "Krillin’s Physical Defense",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 23,
+      "text": 90
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "fA I. .- i { eo TW SEE",
+    "text": "When Krillin is forced to discard from his\n\ndeck. he may take that first card into |\n\n- hand. If used by Krillin, this card stays\nthe table to be used one more\n\ntime in this combat. 7"
+  },
+  {
+    "id": "saiyan-saga-uncommons-113",
+    "number": 113,
+    "name": "Krillin’s Energy Attack",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 94,
+      "text": 85
+    },
+    "needsReview": [],
+    "typeLineRaw": "Energy Combat",
+    "text": "Energy attack doing 2 draws from th\nlife card deck if not stopped. If usec\nKrillin, this card stays on the table |\nbe used one more time in\nthis combat. bis\nNS Sp es"
+  },
+  {
+    "id": "saiyan-saga-uncommons-114",
+    "number": 114,
+    "name": "Tien’s Energy Defense",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 59,
+      "text": 60
+    },
+    "needsReview": [],
+    "typeLineRaw": "- LL VER. nbat] Energy Combat",
+    "text": "Prevents a foe's energy\nattack.\n-\n4 ES\n®\npero AV Beccles I''m not srared e"
+  },
+  {
+    "id": "saiyan-saga-uncommons-115",
+    "number": 115,
+    "name": "Yamcha’s Energy Attack",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 93,
+      "text": 82
+    },
+    "needsReview": [],
+    "typeLineRaw": "Energy Combat",
+    "text": "Energy attack doing 2 life\ncard draws of damage,\nBM costs 3 power stages to\nperform. #*\nNY"
+  },
+  {
+    "id": "saiyan-saga-uncommons-116",
+    "number": 116,
+    "name": "Yamcha’s Physical Defense",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 45,
+      "text": 75
+    },
+    "needsReview": [],
+    "typeLineRaw": "WB Physical Combat WER commie",
+    "text": "Prevents 3 life cards frarr\nbeing taken in a success\nphysical attack."
+  },
+  {
+    "id": "saiyan-saga-uncommons-117",
+    "number": 117,
+    "name": "Raditz Energy Wall Rad",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 24,
+      "text": 89
+    },
+    "needsReview": [],
+    "typeLineRaw": "' BESESLES. | AUEES hh EEE EEE Fi F Combat BA —",
+    "text": "Forces a Hero opponent in\n\nthis combat to discard 1 lif\n\n- card from his deck. Discar\nthis card from the\n\ngame after use. FS"
+  },
+  {
+    "id": "saiyan-saga-uncommons-118",
+    "number": 118,
+    "name": "Raditz Physical Defense",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 24,
+      "text": 91
+    },
+    "needsReview": [],
+    "typeLineRaw": "I A , ............. JA. Combat a  ———",
+    "text": "Forces a Hero opponent in\nthis combat to take his\n| anger level down 2. Discar\nthis card from the\ngame after use. ES,"
+  },
+  {
+    "id": "saiyan-saga-uncommons-119",
+    "number": 119,
+    "name": "Vegeta’s Energy Blast",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 47,
+      "text": 82
+    },
+    "needsReview": [],
+    "typeLineRaw": "SE —— — bat | : Combat",
+    "text": "A Saiyan power-up allowing this\n\n\\ | Saiyan to power up to full at th\n\nBl beginning of this combat rou\nDiscard this card from the\n\ngame after use. ES"
+  },
+  {
+    "id": "saiyan-saga-uncommons-120",
+    "number": 120,
+    "name": "Nappa’s Energy Aura",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 32,
+      "text": 89
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "| —1 es",
+    "text": "No energy attacks will wo\nagainst Nappa this combi\nRemove from game afte\n\nuse. pe"
+  },
+  {
+    "id": "saiyan-saga-uncommons-121",
+    "number": 121,
+    "name": "Nappa’s Physical Resistance",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 52,
+      "text": 69
+    },
+    "needsReview": [],
+    "typeLineRaw": "i] w Physical Combat",
+    "text": "No physical attacks will\nwork against Nappa this\ncombat. Remove from\ngame after use. pe\n~N -~ 1 hve thoeo Arkane artim sa"
+  },
+  {
+    "id": "saiyan-saga-uncommons-122",
+    "number": 122,
+    "name": "Yajirobe’s Energy Attack",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 46,
+      "text": 85
+    },
+    "needsReview": [],
+    "typeLineRaw": "ke. arr, ort | Energy-Combat —t EE",
+    "text": "Energy attack forcing 1\ndraw from the life deck if\nnot stopped. Remove fit\n\ngame after use. #*"
+  },
+  {
+    "id": "saiyan-saga-uncommons-123",
+    "number": 123,
+    "name": "Chiaotzu’s Energy Manipulation",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 42,
+      "text": 82
+    },
+    "needsReview": [],
+    "typeLineRaw": "al TONER, sim AEE hy Energy Combat",
+    "text": "Energy attack forcing 3\ndraws from the life deck.\nRemove from the game\n\nafter use. Card limit-\ned to 1 per deck. AR\nMN A a MN ¥"
+  },
+  {
+    "id": "saiyan-saga-uncommons-124",
+    "number": 124,
+    "name": "Penetrating Defense Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 43,
+      "text": 87
+    },
+    "needsReview": [],
+    "typeLineRaw": "IPE Non-Combat BR SSS",
+    "text": "Stops 2 stages of power\nfrom being drained by an\n: i physical attack."
+  },
+  {
+    "id": "saiyan-saga-uncommons-125",
+    "number": 125,
+    "name": "Off-Balancing Opponent Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 35,
+      "text": 62
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "TW =",
+    "text": "Creates +1 stage damage\n| for each successful\nLA) physical attack made\na 8 by this personality. %\nbo\ni 7 pm \\ ” oc\n3 YOUNG Goban's training at the"
+  },
+  {
+    "id": "saiyan-saga-uncommons-126",
+    "number": 126,
+    "name": "Lifting Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 32,
+      "text": 78
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "Nd = — BR Ea",
+    "text": "Sweeps everyone else's\ndrills from the playing\nil table. but not this perso\nality's drills. Limit 1\nper deck. #5"
+  },
+  {
+    "id": "saiyan-saga-uncommons-127",
+    "number": 127,
+    "name": "Takedown Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 31,
+      "text": 67
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "Le : EE Non-Comba BA ee —TT",
+    "text": "Allows the attacker to dre\nA \\ a card into his hand in\nBE every phase he makes a\nattack.\ndd\n. E\nw — = -—"
+  },
+  {
+    "id": "saiyan-saga-uncommons-128",
+    "number": 128,
+    "name": "Knee Pick Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 35,
+      "text": 70
+    },
+    "needsReview": [],
+    "typeLineRaw": "TTT ——————— A . SC eo— sm Non-Combat |",
+    "text": "Allows the attacker to dre\nan extra card at the beg\nLl ning of a combat.\nLp Cr vac woo"
+  },
+  {
+    "id": "saiyan-saga-uncommons-129",
+    "number": 129,
+    "name": "Deceiving Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 50,
+      "text": 79
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "| \"A /on-i Tombat",
+    "text": "At the beginning of every com:\nbat where the personality is th\ndefender, raise the power leve\nthis card owner 3 stages.\nup to the maximum. #4\nAN Brrr Wow! What revere il"
+  },
+  {
+    "id": "saiyan-saga-uncommons-130",
+    "number": 130,
+    "name": "Tripping Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 42,
+      "text": 66
+    },
+    "needsReview": [],
+    "typeLineRaw": "_ h 4 | Em— l Non-Combat | 1 At",
+    "text": "Prevents 1 life card from\n1 | being taken away by any\nsuccessful energy attack\non this card's owner. i\noN MAY =m vas ae Fe rie) Thee"
+  },
+  {
+    "id": "saiyan-saga-uncommons-131",
+    "number": 131,
+    "name": "Bear Hug Drill",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 52,
+      "text": 69
+    },
+    "needsReview": [],
+    "typeLineRaw": "| Von-Combat al CE",
+    "text": "Creates a +2 stage drain wi\neach successful physical\nattack made by this card's\n\nattacker.\n&\nTheo ET r——— 2 Bem =a feperemet ENE"
+  },
+  {
+    "id": "saiyan-saga-uncommons-132",
+    "number": 132,
+    "name": "Rolling Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 26,
+      "text": 78
+    },
+    "needsReview": [],
+    "typeLineRaw": "WEE Non-Combat Sain CC GE————",
+    "text": "Prevents 1 life card draw\nfrom a successful energl\n- attack.\n0 FEY 5"
+  },
+  {
+    "id": "saiyan-saga-uncommons-133",
+    "number": 133,
+    "name": "Reversal Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 24,
+      "text": 75
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "er AA. AZ py CEE",
+    "text": "Uo the exact same physics\nattack you defended agair\nll during your defending\nround of combat,\nonce per combat. #\na ea -"
+  },
+  {
+    "id": "saiyan-saga-uncommons-134",
+    "number": 134,
+    "name": "Off-Balancing Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 14,
+      "text": 88
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "Bl ———",
+    "text": "Stop the first physical\nattack made on you in a\ncombat.\n\nPUTTIN"
+  },
+  {
+    "id": "saiyan-saga-uncommons-135",
+    "number": 135,
+    "name": "Arm Bar Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 27,
+      "text": 84
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "BE se |",
+    "text": "Stops the first energy attack\n\nA \\ made on you in a combat. Ca\n\nbe used with any other Oran\ndrills in play anywhere\n\non the table. &\nNe oa ts"
+  },
+  {
+    "id": "saiyan-saga-uncommons-136",
+    "number": 136,
+    "name": "Free-Style Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 5,
+      "text": 88
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "BR a emmm——TT",
+    "text": "Draw a card from the bottom of your\n\ndiscard pile after receiving a success\n\n- energy attack. Cannot be used with\nany other Black Drill cards in\n\nplay anywhere on the table. ="
+  },
+  {
+    "id": "saiyan-saga-uncommons-137",
+    "number": 137,
+    "name": "Spontaneous Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 18,
+      "text": 76
+    },
+    "needsReview": [],
+    "typeLineRaw": "—mER EEN LN Non-Combat — : Ev",
+    "text": "Oraw a card from the\n\\ \\ bottom of your discard pile\nafter suffering a successf\nphysical attack. i\n- Herd Tl me did roe 1 ever"
+  },
+  {
+    "id": "saiyan-saga-uncommons-138",
+    "number": 138,
+    "name": "Cradle Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 34,
+      "text": 87
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "| BR em———",
+    "text": "For every life card you los\niN combat, your foe loses\n. power stage. down to [0"
+  },
+  {
+    "id": "saiyan-saga-uncommons-139",
+    "number": 139,
+    "name": "Wrist Control Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 22,
+      "text": 76
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "wy cE",
+    "text": "For every 3 stages of\n\\ \\ power you lose. your foe\nae loses 1 power stage. dow\nto (0). #\nad : FEET"
+  },
+  {
+    "id": "saiyan-saga-uncommons-140",
+    "number": 140,
+    "name": "Reading Drill",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 48,
+      "text": 68
+    },
+    "needsReview": [],
+    "typeLineRaw": "a BE Von-Combat ae",
+    "text": "Foreknowledge allows the\npersonality to take 1 less\n2 A life card discard. once fo\nA the entire set of\ni\ncombat rounds. R\nEY Theres HAM ars pp eo"
+  },
+  {
+    "id": "saiyan-saga-uncommons-141",
+    "number": 141,
+    "name": "Enemies Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 81
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "EE  — |",
+    "text": "Allows the personality to defe\n\\ | well against physical attacks\noo and prevents 1 life card disca\nper combat, if the foe\nhas an ally. +#\nNB NC"
+  },
+  {
+    "id": "saiyan-saga-uncommons-142",
+    "number": 142,
+    "name": "Energy Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 29,
+      "text": 72
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "SE WENNN——— mw",
+    "text": "Allows the defender to take |\nless life card discard from eve\new energy attack. Cannot be us\na with other Orange Drills\nin play on the table. kz\na Etre 1 tir i il arar-ir-wrd A"
+  },
+  {
+    "id": "saiyan-saga-uncommons-143",
+    "number": 143,
+    "name": "Physical Drill",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 25,
+      "text": 85
+    },
+    "needsReview": [],
+    "typeLineRaw": "Woe A | Von-Combat — Sas",
+    "text": "Allows the defender to take |\nless life card discard from eve\nphysical attack. Can't be use\nwith other Black drills in\nplay on the table, 48\nWe have mo arbher clerics"
+  },
+  {
+    "id": "saiyan-saga-uncommons-144",
+    "number": 144,
+    "name": "Coordination Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 57,
+      "text": 71
+    },
+    "needsReview": [],
+    "typeLineRaw": "ke = CSOD) \\ SSE Non-Combat",
+    "text": "Allows the defender to\ndraw an extra card at the\n_-— beginning of any combat\nhe desires.\n. - bis\nAN Yeu 1 tree ram't host ree"
+  },
+  {
+    "id": "saiyan-saga-uncommons-145",
+    "number": 145,
+    "name": "Breakfall Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 19,
+      "text": 73
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "WE NE — BR mm",
+    "text": "Allows the defender to\ntake 2 less stages of\npower drain from any\n\nphysical attack. #\nBact Ma uu reaadh + ticle = Fears"
+  },
+  {
+    "id": "saiyan-saga-uncommons-146",
+    "number": 146,
+    "name": "Body Shifting Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 41,
+      "text": 89
+    },
+    "needsReview": [],
+    "typeLineRaw": "Non-Combat Bl mm",
+    "text": "Allows the attacker to pat\n\\ \\ stage instead of 2 on an\nenergy attack."
+  },
+  {
+    "id": "saiyan-saga-uncommons-147",
+    "number": 147,
+    "name": "Striking Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 35,
+      "text": 87
+    },
+    "needsReview": [],
+    "typeLineRaw": "I \\thgeoemss Ss mn\" | Non-Combat ee",
+    "text": "Allows the attacker to do\n\nextra stages of power dai\n\nBA age with every successfi\nphysical attack.\n\n#"
+  },
+  {
+    "id": "saiyan-saga-uncommons-148",
+    "number": 148,
+    "name": "Pressure Point Drill",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 47,
+      "text": 86
+    },
+    "needsReview": [],
+    "typeLineRaw": "on-Combat al CEE",
+    "text": "Allows the attacker to do 1 extra |\n\ncard of damage with every SUCCE\n\n, ful energy attack. Cannot be use\nwith other Red Drills in play\n\non the table. FR"
+  },
+  {
+    "id": "saiyan-saga-uncommons-149",
+    "number": 149,
+    "name": "Meditation Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 46,
+      "text": 90
+    },
+    "needsReview": [],
+    "typeLineRaw": "| 3X Non-Combat | a ee E———",
+    "text": "Allows the player to shuff\ntheir life deck or discards\nJust before any announc\n\ncombat. #"
+  },
+  {
+    "id": "saiyan-saga-uncommons-150",
+    "number": 150,
+    "name": "Neck Restraint Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 32,
+      "text": 84
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "BR RSET",
+    "text": "Allows the attacker to inflict +3\nstages of damage from any suc-\ncessful physical attack. Cannot b\nused with any other Blue\ndrills in play on the table. E-)\nNe t's wrona? Dont tel"
+  },
+  {
+    "id": "saiyan-saga-uncommons-151",
+    "number": 151,
+    "name": "Joint Restraint Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 26,
+      "text": 61
+    },
+    "needsReview": [],
+    "typeLineRaw": "EEE Non-Combat ry Ble SL",
+    "text": "Allows the attacker to\n\\ \\ inflict +4 stages of dama\n\" from any successful\na physical attack. 1\nhd CARIkS { ru 1° 25 osm Seale ieee"
+  },
+  {
+    "id": "saiyan-saga-uncommons-152",
+    "number": 152,
+    "name": "Defender Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 40,
+      "text": 78
+    },
+    "needsReview": [],
+    "typeLineRaw": "\\/ Non-Combat Bl ee",
+    "text": "Allows the defender to ta\n| less life card draw from\ndamage on any success!\n\nWM energy attack.\n£\n<"
+  },
+  {
+    "id": "saiyan-saga-uncommons-153",
+    "number": 153,
+    "name": "Goku Energy Blast!",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 46,
+      "text": 65
+    },
+    "needsReview": [],
+    "typeLineRaw": "Ee ~~ ZS Energy Combat eee",
+    "text": "Energy defense stopping |\n\\ \\ foe's physical attack.\n» Discard from the game\n| “\\ after use. &\n& mbar rie - =f Tier orn"
+  },
+  {
+    "id": "saiyan-saga-uncommons-154",
+    "number": 154,
+    "name": "Piccolo Sidestep!",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 34,
+      "text": 84
+    },
+    "needsReview": [],
+    "typeLineRaw": "NAR. = — / akesd 4 | orca YC SRY EY NE) (A I Energy Combat",
+    "text": "Stop this energy attack.\n\\ \\ Discard from the game\nah 7"
+  },
+  {
+    "id": "saiyan-saga-uncommons-155",
+    "number": 155,
+    "name": "Piccolo Defense Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 72
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "Prevents 1 life card from\nbeing discarded from a\n- successful energy attac\n- bis\n[)\nIW a —"
+  },
+  {
+    "id": "saiyan-saga-uncommons-156",
+    "number": 156,
+    "name": "Ally’s Sacrifice",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 19,
+      "text": 71
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "a | So —",
+    "text": "All the damage you would\nhave taken in this combe\nBl destroys one of your alli\n\\ instead. EE\n\n8 - —"
+  },
+  {
+    "id": "saiyan-saga-uncommons-157",
+    "number": 157,
+    "name": "Eyes of the Dragon",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 78
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "After a successful energy attack, ti\n_\\ \\ card owner can pick a Dragon Ball c\nEl Of his deck and capture a Dragon |\nfrom the damaged foe. Limit\npy\n| per deck. E-)"
+  },
+  {
+    "id": "saiyan-saga-starter-158",
+    "number": 158,
+    "name": "Goku LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 82,
+      "pur": 0,
+      "text": 64
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Goku",
+    "level": 1,
+    "powerRatings": [
+      0,
+      500,
+      600,
+      700,
+      800,
+      800,
+      1000,
+      1100,
+      1200,
+      1300,
+      1200
+    ],
+    "pur": 0,
+    "text": "3 Ly EAN\nPower: »\nKamehameha Energy\n\nAttack does three life card \"\n\nDe a ll’\n\n4 er"
+  },
+  {
+    "id": "saiyan-saga-starter-159",
+    "number": 159,
+    "name": "Goku LV2",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 76,
+      "pur": 0,
+      "text": 57
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Goku",
+    "level": 2,
+    "powerRatings": [
+      0,
+      3200,
+      3700,
+      200,
+      4700,
+      5200,
+      5700,
+      6200,
+      6700,
+      7200,
+      7700
+    ],
+    "pur": 0,
+    "text": "Ee - |\nPower:\nKaio-Ken Power Level Booster. |\nPhysiol adtack craig. 4 Be"
+  },
+  {
+    "id": "saiyan-saga-starter-160",
+    "number": 160,
+    "name": "Goku LV3",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 64,
+      "pur": 0,
+      "text": 57
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Goku",
+    "level": 3,
+    "powerRatings": [
+      8500,
+      8000,
+      9500,
+      0,
+      10500,
+      1,
+      11500,
+      12000,
+      12500
+    ],
+    "pur": 0,
+    "text": "ay\npW | GF\n\nPower:\n\nPrevent 2 life card draws [\n\nfrom being discarded\n\nfrom a successful ~~ |\n\nenergy atte cil: cat a\na ST Sa 2 y"
+  },
+  {
+    "id": "saiyan-saga-starter-161",
+    "number": 161,
+    "name": "Piccolo LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 75,
+      "pur": 0,
+      "text": 41
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur",
+      "text"
+    ],
+    "personalityName": "Piccolo",
+    "level": 1,
+    "powerRatings": [
+      0,
+      500,
+      600,
+      700,
+      800,
+      0,
+      1000,
+      1100,
+      1200,
+      1300,
+      1200
+    ],
+    "pur": 0,
+    "text": "| \"\n! I\nPower: -\nScrew Blast Energy\n\ndraws ar darmoe.. us iW\n\n— ri nommntl"
+  },
+  {
+    "id": "saiyan-saga-starter-162",
+    "number": 162,
+    "name": "Piccolo LV2",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 59,
+      "pur": 0,
+      "text": 63
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Piccolo",
+    "level": 2,
+    "powerRatings": [
+      481,
+      1500,
+      1700,
+      1900,
+      2100,
+      2300,
+      2500,
+      2700,
+      2900,
+      100,
+      3200
+    ],
+    "pur": 0,
+    "text": "= / F Ll\n~J ¢ f\nPower: »\nSpecial Energy Bean Cannon.\n1 This energy blast only takes 1 |\n) power stage to use and does |§\n— —"
+  },
+  {
+    "id": "saiyan-saga-starter-163",
+    "number": 163,
+    "name": "Piccolo LV3",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 63,
+      "pur": 0,
+      "text": 52
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur",
+      "text"
+    ],
+    "personalityName": "Piccolo",
+    "level": 3,
+    "powerRatings": [
+      0,
+      3200,
+      3700,
+      200,
+      700,
+      5200,
+      5700,
+      6200,
+      6700,
+      7200,
+      7700
+    ],
+    "pur": 0,
+    "text": "Power: \"\n\nMutti-Form allows two physical attacks,\nore after othe, or a cefense aganst. |g\n| ap (5 3 tack preventing 4 sta: ,\nTT Tm"
+  },
+  {
+    "id": "saiyan-saga-starter-164",
+    "number": 164,
+    "name": "Gohan LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 67,
+      "pur": 0,
+      "text": 77
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Gohan",
+    "level": 1,
+    "powerRatings": [
+      200,
+      300,
+      0,
+      500,
+      600,
+      0
+    ],
+    "pur": 0,
+    "text": "re Zeer re ~~ Ba\nPower:\nWhen defending and facing i\nan energy attack. he can\nraise his anger level once"
+  },
+  {
+    "id": "saiyan-saga-starter-165",
+    "number": 165,
+    "name": "Gohan LV2",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 89,
+      "pur": 0,
+      "text": 60
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Gohan",
+    "level": 2,
+    "powerRatings": [
+      500,
+      600,
+      700,
+      800,
+      1000,
+      1200,
+      1300,
+      1200
+    ],
+    "pur": 0,
+    "text": "a \\ 9) LG\nPower: »\nOnce during the game, he can |\nturn into Kong Gotan, inflicting |\n\n3 rT Mm"
+  },
+  {
+    "id": "saiyan-saga-starter-166",
+    "number": 166,
+    "name": "Gohan LV3",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 38,
+      "pur": 0,
+      "text": 75
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Gohan",
+    "level": 3,
+    "powerRatings": [
+      1700,
+      1900,
+      2700,
+      3100
+    ],
+    "pur": 0,
+    "text": "a WE v =3\nPower:\nKamehameha Energy\n3 Attack does 3 life card\ndraws and only costs |"
+  },
+  {
+    "id": "saiyan-saga-starter-167",
+    "number": 167,
+    "name": "Krillin LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 64,
+      "pur": 0,
+      "text": 54
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur",
+      "text"
+    ],
+    "personalityName": "Krillin",
+    "level": 1,
+    "powerRatings": [
+      0,
+      0,
+      400,
+      500,
+      600,
+      700,
+      800
+    ],
+    "pur": 0,
+    "text": "\"\n\nPower: »\"\nPower Ball Energy Attack\n\n| inflicts 2 life card draws |g\n\nof damage. in oN\n\n[eres =NEil Im"
+  },
+  {
+    "id": "saiyan-saga-starter-168",
+    "number": 168,
+    "name": "Krillin LV2",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 84,
+      "pur": 0,
+      "text": 50
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur",
+      "text"
+    ],
+    "personalityName": "Krillin",
+    "level": 2,
+    "powerRatings": [
+      500,
+      600,
+      700,
+      800,
+      1000,
+      110,
+      1200,
+      1300,
+      1900
+    ],
+    "pur": 0,
+    "text": "LL\nPower: \"\nDestructo-Uisk Energy |\nre NTE TIE | ey op"
+  },
+  {
+    "id": "saiyan-saga-starter-169",
+    "number": 169,
+    "name": "Krillin LV3",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 76,
+      "pur": 0,
+      "text": 50
+    },
+    "needsReview": [
+      "pur",
+      "text"
+    ],
+    "personalityName": "Krillin",
+    "level": 3,
+    "powerRatings": [
+      0,
+      1500,
+      1700,
+      1900,
+      2100,
+      2300,
+      2500,
+      2700,
+      2900,
+      3100
+    ],
+    "pur": 0,
+    "text": "ar\nEN\nPower: »\nTake | card from the\nat the bottom of your 1\n— S— ETI pe pe—"
+  },
+  {
+    "id": "saiyan-saga-starter-170",
+    "number": 170,
+    "name": "Raditz LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 72,
+      "pur": 0,
+      "text": 69
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Raditz",
+    "level": 1,
+    "powerRatings": [
+      2,
+      0,
+      1100,
+      1200,
+      1300,
+      1400,
+      1500,
+      1600,
+      1700,
+      1800,
+      1900,
+      2000
+    ],
+    "pur": 0,
+    "text": "or | =x\n- Va\nPower:\nSaiyan Energy Deflection forces\nonly two discards from a\n[matter how powerius."
+  },
+  {
+    "id": "saiyan-saga-starter-171",
+    "number": 171,
+    "name": "Raditz LV2",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 81,
+      "pur": 0,
+      "text": 69
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Raditz",
+    "level": 2,
+    "powerRatings": [
+      0,
+      2000,
+      2200,
+      2400,
+      2600,
+      2800,
+      3000,
+      3200,
+      300,
+      3600,
+      3800
+    ],
+    "pur": 0,
+    "text": "RETR a\n) TS\n\\ \\ No” “~~.\nPower:\nSaiyan Energy Blast does 3\n1 life card draws of damage\n8 and costs only 1 power"
+  },
+  {
+    "id": "saiyan-saga-starter-172",
+    "number": 172,
+    "name": "Raditz LV3",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 72,
+      "pur": 0,
+      "text": 60
+    },
+    "needsReview": [
+      "pur"
+    ],
+    "personalityName": "Raditz",
+    "level": 3,
+    "powerRatings": [
+      0,
+      200,
+      700,
+      5200,
+      5700,
+      6200,
+      6700,
+      7200,
+      7700,
+      8200,
+      8700
+    ],
+    "pur": 0,
+    "text": "n\\ JA I A\nPd i N\nPower:\nUse the Saiyan Energy Blast\n1 (from Level 2 Character card]\nar Saiyan. 3 Aoi og flection =i"
+  },
+  {
+    "id": "saiyan-saga-starter-173",
+    "number": 173,
+    "name": "Vegeta LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 80,
+      "pur": 0,
+      "text": 82
+    },
+    "needsReview": [
+      "pur"
+    ],
+    "personalityName": "Vegeta",
+    "level": 1,
+    "powerRatings": [
+      0,
+      2000,
+      2200,
+      2400,
+      2600,
+      2800,
+      3000,
+      3200,
+      3400,
+      3600,
+      3800
+    ],
+    "pur": 0,
+    "text": "Power:\nSaiyan Energy Deflection\n! forces only 2 discards fram\n% a successful energy attack.\nno matter how powerful."
+  },
+  {
+    "id": "saiyan-saga-starter-174",
+    "number": 174,
+    "name": "Vegeta LV2",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 73,
+      "pur": 0,
+      "text": 95
+    },
+    "needsReview": [
+      "pur"
+    ],
+    "personalityName": "Vegeta",
+    "level": 2,
+    "powerRatings": [
+      0,
+      4200,
+      4700,
+      5200,
+      5700,
+      6200,
+      6700,
+      7200,
+      7700,
+      8200,
+      8700
+    ],
+    "pur": 0,
+    "text": "Power:\nSaiyan Energy Blast does 3\nlife card draws of damage"
+  },
+  {
+    "id": "saiyan-saga-starter-175",
+    "number": 175,
+    "name": "Vegeta LV3",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 84,
+      "pur": 0,
+      "text": 80
+    },
+    "needsReview": [
+      "pur"
+    ],
+    "personalityName": "Vegeta",
+    "level": 3,
+    "powerRatings": [
+      0,
+      9000,
+      10000,
+      12000,
+      13000,
+      14000,
+      15000,
+      16000,
+      17000,
+      18000
+    ],
+    "pur": 0,
+    "text": "¢ —\nPower:\nCaptures ane Dragon Bal, once\nper game, after a successful\nenergy attack. This ends the\ncambat step. Lis"
+  },
+  {
+    "id": "saiyan-saga-starter-176",
+    "number": 176,
+    "name": "Nappa LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 75,
+      "pur": 20,
+      "text": 86
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Nappa",
+    "level": 1,
+    "powerRatings": [
+      0,
+      2000,
+      2200,
+      200,
+      2600,
+      2800,
+      3000,
+      2200,
+      3400,
+      3600,
+      3800
+    ],
+    "pur": 3,
+    "text": "Power:\nSaiyan Energy Deflection\n| forces only 2 discards from\na successful energy attack,\nno matter how powerful."
+  },
+  {
+    "id": "saiyan-saga-starter-177",
+    "number": 177,
+    "name": "Nappa LV2",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 66,
+      "pur": 0,
+      "text": 89
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Nappa",
+    "level": 2,
+    "powerRatings": [
+      0,
+      200,
+      700,
+      5200,
+      5700,
+      6200,
+      6700,
+      7200,
+      7700,
+      8200,
+      8700
+    ],
+    "pur": 0,
+    "text": "Power:\nSpecial Physical Attack\n| inflicting & stages of power\ndrain, no matter what the\nfoe's power stage rating is."
+  },
+  {
+    "id": "saiyan-saga-starter-178",
+    "number": 178,
+    "name": "Nappa LV3",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 66,
+      "pur": 0,
+      "text": 71
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Nappa",
+    "level": 3,
+    "powerRatings": [
+      1,
+      0,
+      9000,
+      9500,
+      10000,
+      10500,
+      1100,
+      12000,
+      12500,
+      13000,
+      13500
+    ],
+    "pur": 0,
+    "text": "Power:\nOnly takes 2 stages\nof power drain, no\n: cri physical attack. \" = a"
+  },
+  {
+    "id": "saiyan-saga-starter-179",
+    "number": 179,
+    "name": "Goku LV1 HT",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 57,
+      "pur": 0,
+      "text": 38
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur",
+      "text"
+    ],
+    "personalityName": "Goku",
+    "level": 1,
+    "variant": "HT",
+    "powerRatings": [
+      5,
+      11,
+      800,
+      300,
+      1100,
+      1200,
+      1300,
+      14900
+    ],
+    "pur": 0,
+    "text": "\\s Af he\nJ i» 8 rs pas\n, z\n| =”\n>- x &\n& sical A track: Ton 1 pe"
+  },
+  {
+    "id": "saiyan-saga-starter-180",
+    "number": 180,
+    "name": "Piccolo LV1 HT",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 66,
+      "pur": 0,
+      "text": 29
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur",
+      "text"
+    ],
+    "personalityName": "Piccolo",
+    "level": 1,
+    "variant": "HT",
+    "powerRatings": [
+      0,
+      500,
+      600,
+      700,
+      800,
+      0,
+      100,
+      110,
+      1200,
+      130,
+      1400
+    ],
+    "pur": 0,
+    "text": "FN\ni=\n—\n-\n(Ir ="
+  },
+  {
+    "id": "saiyan-saga-starter-181",
+    "number": 181,
+    "name": "Gohan LV1 HT",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 67,
+      "pur": 0,
+      "text": 0
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur",
+      "text"
+    ],
+    "personalityName": "Gohan",
+    "level": 1,
+    "variant": "HT",
+    "powerRatings": [
+      0,
+      100,
+      200,
+      300,
+      0,
+      500,
+      700,
+      800,
+      3,
+      100,
+      9
+    ],
+    "pur": 0,
+    "text": ""
+  },
+  {
+    "id": "saiyan-saga-starter-182",
+    "number": 182,
+    "name": "Krillin LV1 HT",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 73,
+      "pur": 0,
+      "text": 69
+    },
+    "needsReview": [
+      "pur"
+    ],
+    "personalityName": "Krillin",
+    "level": 1,
+    "variant": "HT",
+    "powerRatings": [
+      0,
+      10,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      1000
+    ],
+    "pur": 0,
+    "text": "|\nA"
+  },
+  {
+    "id": "saiyan-saga-starter-183",
+    "number": 183,
+    "name": "Raditz LV1 HT",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 63,
+      "pur": 0,
+      "text": 36
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur",
+      "text"
+    ],
+    "personalityName": "Raditz",
+    "level": 1,
+    "variant": "HT",
+    "powerRatings": [
+      0,
+      17100,
+      1200,
+      1300,
+      1900,
+      1500,
+      1600,
+      1700,
+      1800,
+      77,
+      0
+    ],
+    "pur": 0,
+    "text": "4 f bh\nBD, Power:"
+  },
+  {
+    "id": "saiyan-saga-starter-184",
+    "number": 184,
+    "name": "Vegeta LV1 HT",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 66,
+      "pur": 0,
+      "text": 0
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur",
+      "text"
+    ],
+    "personalityName": "Vegeta",
+    "level": 1,
+    "variant": "HT",
+    "powerRatings": [
+      0,
+      2000,
+      2200,
+      2400,
+      2600,
+      2800,
+      3000,
+      3200,
+      3400,
+      3600,
+      3800
+    ],
+    "pur": 0,
+    "text": ""
+  },
+  {
+    "id": "saiyan-saga-starter-185",
+    "number": 185,
+    "name": "Nappa LV1 HT",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 39,
+      "pur": 0,
+      "text": 33
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur",
+      "text"
+    ],
+    "personalityName": "Nappa",
+    "level": 1,
+    "variant": "HT",
+    "powerRatings": [
+      2000,
+      217,
+      2400,
+      11,
+      2800,
+      3000,
+      3200,
+      3400,
+      3600,
+      3800,
+      7
+    ],
+    "pur": 0,
+    "text": "of\n- ~\ny\nTA,\nTa:\noe\nCoe\npr 3\nLy ny ~~ :\n, SE J :\n0 oi \\ i\nEe\nfhe\n1"
+  },
+  {
+    "id": "saiyan-saga-rares-186",
+    "number": 186,
+    "name": "Earth Dragon Ball 6",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 26,
+      "text": 85
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "Ln, WRENS PEE uae",
+    "text": "This card ends a combat\nand the user is powered |\nto full. Shift all opponent\n\nanger levels down 2. %\nYE ———"
+  },
+  {
+    "id": "saiyan-saga-rares-187",
+    "number": 187,
+    "name": "Earth Dragon Ball 7",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 29,
+      "text": 85
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "BY Ad wr N/ - § CW Er",
+    "text": "Play this card during combat to end t\n\nbattle. Pick 3 cards out of your disce\n\npile and place them at the top of yt\nlife deck. All opponents’ anger\n\nlevels shift down 2. +\n\nLN rere HP"
+  },
+  {
+    "id": "saiyan-saga-rares-188",
+    "number": 188,
+    "name": "Earth Dragon Ball Capture",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 40,
+      "text": 78
+    },
+    "needsReview": [],
+    "typeLineRaw": "Ce RT Physical Combat",
+    "text": "Capture an opponent's\nso Dragon Ball."
+  },
+  {
+    "id": "saiyan-saga-rares-189",
+    "number": 189,
+    "name": "Earth Dragon Ball Combat",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 42,
+      "text": 68
+    },
+    "needsReview": [],
+    "typeLineRaw": "re Energy Combat",
+    "text": "Energy Attack. After you\n\nmake a successful energ\n\nll attack, capture an Earth\nDragon Ball from\n\nyour opponent. 4\n\nNMrearreys Pmlle: wwiese es ~~ BR a of"
+  },
+  {
+    "id": "saiyan-saga-rares-190",
+    "number": 190,
+    "name": "Enraged!",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 28,
+      "text": 77
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "BR a",
+    "text": "Increase your anger level by 2. Selet\n\ncards from your discard pile and pla\n\nAl them at the bottom of your life de\n°\\ Discard this card from the\n\ngame after one use. A\n\n80) wh 1 N—— Aro Mies RES ET"
+  },
+  {
+    "id": "saiyan-saga-rares-191",
+    "number": 191,
+    "name": "A Beginner’s Heart Is Dedicated",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 7,
+      "text": 86
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "A | See————— 1]",
+    "text": "Increase the anger of a\nlevel 1 or 2 personality bu\n: and discard this card fron\nthe game. Ps"
+  },
+  {
+    "id": "saiyan-saga-rares-192",
+    "number": 192,
+    "name": "Teaching the Untouchable Forces Oberservation",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 83,
+      "text": 75
+    },
+    "needsReview": [],
+    "typeLineRaw": "on-Combat",
+    "text": "Force another player to\n~ \\ \\ skip their combat step.\nLl Discard this from the\nA game after use. 4"
+  },
+  {
+    "id": "saiyan-saga-rares-194",
+    "number": 194,
+    "name": "Unselfish Behavior is Best",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 22,
+      "text": 86
+    },
+    "needsReview": [],
+    "typeLineRaw": "BL —— ____SEJVSEE SS je on-Combat",
+    "text": "The efforts of your allies stop\nthis combat. You must have |\ni ally out on the table to use t\na card. Discard from the\ngame after use. +\n[3"
+  },
+  {
+    "id": "saiyan-saga-rares-195",
+    "number": 195,
+    "name": "Hero Advantage",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 34,
+      "text": 82
+    },
+    "needsReview": [],
+    "typeLineRaw": "I | ian Von-Combat mmm]",
+    "text": "Allows a hero to draw his cards from t\n\ntop of the discard deck in the next ct\n\nBR Dat. If there are nat enough cards, t\ndrill does not work. Discard\n\nfrom the game after use. #\n\nNN @ 8 : ."
+  },
+  {
+    "id": "saiyan-saga-rares-196",
+    "number": 196,
+    "name": "Honor Quest",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 43,
+      "text": 85
+    },
+    "needsReview": [],
+    "typeLineRaw": "ms | V4 ve | Non-Combat",
+    "text": "In the next combat draw cards\nfrom the bottom of the discard\npile instead of the Life Deck.\n\nDiscard after one use. pe\n- — —"
+  },
+  {
+    "id": "saiyan-saga-rares-197",
+    "number": 197,
+    "name": "Battle Terms",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 50,
+      "text": 74
+    },
+    "needsReview": [],
+    "typeLineRaw": "AE N— Non-Combat |",
+    "text": "Remove a Non-Combat Card or |\nfrom in front of another player\nll from the game. Discard this ca\nfrom the game after use. ye\n“Na \\ 1m p— wu ATS are he"
+  },
+  {
+    "id": "saiyan-saga-rares-198",
+    "number": 198,
+    "name": "Appraisal Maneuver",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 28,
+      "text": 85
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "mm",
+    "text": "Name a Non-Combat card and\nfoes with any in their decks mi\ndiscard them from the game.\nDiscard this card from the\ngame after use. #5\nNy : —"
+  },
+  {
+    "id": "saiyan-saga-rares-199",
+    "number": 199,
+    "name": "Dream Fighting",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 7,
+      "text": 66
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "~~ I RRR eee WN b TT",
+    "text": "This combat ends and the defend\n\nplaces the bottom discarded card\n\nback at the bottom of his life de\nDiscard this card from the\n\ngame after use. +\n\nS ° Ne tf wen ewe If t Fewers]l Neh PR alloy 2"
+  },
+  {
+    "id": "saiyan-saga-rares-200",
+    "number": 200,
+    "name": "Cutting the Tail",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 24,
+      "text": 77
+    },
+    "needsReview": [],
+    "typeLineRaw": "Combat ey | ses —",
+    "text": "Reduce the defending me\n\npersonality’s anger level t\n\np— (0). Discard this card frc\n\n| the game after use. &\nNY ."
+  },
+  {
+    "id": "saiyan-saga-rares-201",
+    "number": 201,
+    "name": "The Tail Grows Back",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 65
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "Increase the personality’s\npower stage to its maxim\nA level. Discard this card fro\n\\ the game after use. #\n[)\nCPA Br ——— BPA Yes 3"
+  },
+  {
+    "id": "saiyan-saga-rares-202",
+    "number": 202,
+    "name": "Goku’s Lucky Break",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 19,
+      "text": 85
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "i | ——",
+    "text": "Draw an unused Dragon B\nfrom your life deck and\n\nA place it down. Shuffle thi\n\nlife deck afterwards. %"
+  },
+  {
+    "id": "saiyan-saga-rares-203",
+    "number": 203,
+    "name": "Truce Card",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 26,
+      "text": 83
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "1 i”) - EE . il ee CEEEE———",
+    "text": "Stops this combat. The turn\nends, and the player may hol\nLl all his extra cards until his ne\nturn. Discard from the\ngame after use. FS:\nNY ——"
+  },
+  {
+    "id": "saiyan-saga-rares-204",
+    "number": 204,
+    "name": "Battle Pausing",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 36,
+      "text": 68
+    },
+    "needsReview": [],
+    "typeLineRaw": "ACA NY AN sR x Combat | a",
+    "text": "The attacker draws 2 cart\n\nfrom his discard pile. The\n\nBl defender raises 5 stages\npossible.\n\n| #\n\n& REE Eda A EU hae"
+  },
+  {
+    "id": "saiyan-saga-rares-205",
+    "number": 205,
+    "name": "Grabbing the Tail",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 15,
+      "text": 68
+    },
+    "needsReview": [],
+    "typeLineRaw": "NE. Wea—— ' Combat — EAN —————",
+    "text": "Reduce the foe's power lev\nby 4 stages. or to (0).\nwhichever happens first.\nDiscard this card from\nthe game after use. %\neo BProanear Iovsol ano teu ios y: —"
+  },
+  {
+    "id": "saiyan-saga-rares-206",
+    "number": 206,
+    "name": "Nappa’s Blinding Stare",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 18,
+      "text": 84
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "RLY ARs 1 | es ——",
+    "text": "The attacker is temporaril\nblinded and this combat\n; stops. Discard this card\nfrom the game after\n- use. AR\n:"
+  },
+  {
+    "id": "saiyan-saga-rares-207",
+    "number": 207,
+    "name": "Power Gifting",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 12,
+      "text": 79
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "ys  ¥ SE",
+    "text": "One ally gives your main personality\n2 power on a stage for stage basis.\nid reducing their total and boosting y\nmain personality's. Discard\nfrom the game after use. +4\nNa La ewe Shaded"
+  },
+  {
+    "id": "saiyan-saga-rares-208",
+    "number": 208,
+    "name": "Terrible Wounds",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 25,
+      "text": 73
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "TERS, NW —y — EE",
+    "text": "Place this on a foe's personality card. Reset\n\npersondlity’s anger to (0). It cannot go up u\n\n’ after he forces another player to discard @\ncard. Discard this from the game\n\nafter use. Limit | per deck. #\n\n“ar A ward of svh Aro trys tev ree ies The Sule pam"
+  },
+  {
+    "id": "saiyan-saga-rares-210",
+    "number": 210,
+    "name": "Raditz Flying Kick",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 27,
+      "text": 68
+    },
+    "needsReview": [],
+    "typeLineRaw": "Lay 7 ay’ PAT Eo a yyy Ty [170.4 SE TE EET THIRD RARE) $8 WT Rag +p Mb em Non-Combat ye ee GEEE————",
+    "text": "Physical attack doing tripl\nthe usual damage if\n. successful.\n? \\o"
+  },
+  {
+    "id": "saiyan-saga-rares-211",
+    "number": 211,
+    "name": "Tien Mind Reading Trick",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 34,
+      "text": 88
+    },
+    "needsReview": [],
+    "typeLineRaw": "v ‘Non-Combat",
+    "text": "This card stays on the\ntable. If Tien is in play, all\ni villains must show their\nhands face up at all\ntimes. AR"
+  },
+  {
+    "id": "saiyan-saga-rares-212",
+    "number": 212,
+    "name": "Piccolo’s Flight",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 45,
+      "text": 69
+    },
+    "needsReview": [],
+    "typeLineRaw": "JL Non-Combat ad 3 AERC |",
+    "text": "Stops a successful physic\n_\\ \\ or energy attack.\n-i—"
+  },
+  {
+    "id": "saiyan-saga-rares-214",
+    "number": 214,
+    "name": "Gohan’s Father Save",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 43,
+      "text": 87
+    },
+    "needsReview": [],
+    "typeLineRaw": "- 3 Combat =!",
+    "text": "If Gohan is boku's ally, he\nstops the foe's combat\nA tum. Discard after use."
+  },
+  {
+    "id": "saiyan-saga-rares-215",
+    "number": 215,
+    "name": "Krillin’s Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 93,
+      "text": 82
+    },
+    "needsReview": [],
+    "typeLineRaw": "Non-Combat",
+    "text": "Does an extra life card of\ndamage with each successf\n- attack. More than 1 of thes\ndrills can be out at the\nsame time. HR\n~.7 -"
+  },
+  {
+    "id": "saiyan-saga-rares-216",
+    "number": 216,
+    "name": "Krillin’s Energy Disk",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 31,
+      "text": 93
+    },
+    "needsReview": [],
+    "typeLineRaw": "a ____ _ TH 7 as Energy Combat]",
+    "text": "Energy attack doing 4 life\ncards of damage at a cos\nof 1 stage."
+  },
+  {
+    "id": "saiyan-saga-rares-217",
+    "number": 217,
+    "name": "Ribs Broken",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 37,
+      "text": 82
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "CER",
+    "text": "Discard an ally from the\n1 \\ game to make an energy\nLl attack. The foe takes 5 if\n\" cards of damage. #"
+  },
+  {
+    "id": "saiyan-saga-rares-218",
+    "number": 218,
+    "name": "Unexpected Allies",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 6,
+      "text": 84
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "PE OmDat",
+    "text": "Pull an ally card from the\ndiscards or the life deck.\nLl play it and set its power\nYN Stages at full. *"
+  },
+  {
+    "id": "saiyan-saga-rares-219",
+    "number": 219,
+    "name": "Raditz Energy Burst",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 75
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "Energy attack doing 2\ndraws from the life card\n. deck if not stopped and\ncosting No power\nstages to perform. #3\nNL \\ 8 w—"
+  },
+  {
+    "id": "saiyan-saga-rares-220",
+    "number": 220,
+    "name": "Vegeta’s Stance",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 22,
+      "text": 74
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "| ase",
+    "text": "Prevents all but 1 life card\n\\ \\ draw from a successful\nBN energy attack. Discard\n\\ from the game after\nuse. FS.\nkl p— —"
+  },
+  {
+    "id": "saiyan-saga-rares-221",
+    "number": 221,
+    "name": "Vegeta’s Quickness Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 24,
+      "text": 82
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "TC h-",
+    "text": "At the beginning of each\ncombat, draw 1 card from\n- the bottom of the discar\npile to use. 5"
+  },
+  {
+    "id": "saiyan-saga-rares-222",
+    "number": 222,
+    "name": "Bulma Finds a Dragon Ball",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 29,
+      "text": 86
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "_-— A a ah  CEEEEE—",
+    "text": "When the Bulma ally is in\nplay. use this card to\n’ capture a Dragon Ball.\nDiscard from the\ngame after use. +A"
+  },
+  {
+    "id": "saiyan-saga-rares-223",
+    "number": 223,
+    "name": "Bulma Finds a Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 40,
+      "text": 86
+    },
+    "needsReview": [],
+    "typeLineRaw": "% I ye, orn = os = L TI o | Non-Combat — | a em",
+    "text": "When the Bulma ally is in\nplay. pick a drill from the\n\ni life deck or the discards\nand put it into play. FE"
+  },
+  {
+    "id": "saiyan-saga-rares-224",
+    "number": 224,
+    "name": "Baba Witch Viewing Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 20,
+      "text": 83
+    },
+    "needsReview": [],
+    "typeLineRaw": "ee ——— YL y Non-Combat a BEES",
+    "text": "Forces every Villain oppo-\n\n\\ \\ nent to constantly show\nBl his hand of cards face u\nat all times. +"
+  },
+  {
+    "id": "saiyan-saga-rares-225",
+    "number": 225,
+    "name": "Baba’s Energy Blast",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 33,
+      "text": 86
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "BR eee——— |",
+    "text": "Does 3 life card discards i\n\ndamage at any time to &\n\nA foe. Discard this card fra\nthe game after 1\n\nuse. 4"
+  },
+  {
+    "id": "saiyan-saga-rares-227",
+    "number": 227,
+    "name": "T-Rex Offense",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 15,
+      "text": 87
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "_— Ea",
+    "text": "In every battle where the card\nowner is attacking. it does 1 li\nBA Card in damage per combat\nuntil an energy attack\nKills it. +A"
+  },
+  {
+    "id": "saiyan-saga-rares-228",
+    "number": 228,
+    "name": "Vegeta’s Plans",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 11,
+      "text": 67
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "i Le hy BR ——",
+    "text": "Bet a Dragon Ball card fro\nthe life deck and put it in\nplay. Remove from game\n\nafter one use. re\nNy '\\ 3 MTN 2030 “i wees ree=. ;"
+  },
+  {
+    "id": "saiyan-saga-rares-229",
+    "number": 229,
+    "name": "Ally Wins!",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 23,
+      "text": 79
+    },
+    "needsReview": [],
+    "typeLineRaw": "en SUSIE. — or Combat - 3 al LCE ———",
+    "text": "This card does 1 life card i\ndamage to a foe for ever\n\" ally the card user has.\nDiscard from the\ngame after use. +\nAN ] HUT Ye"
+  },
+  {
+    "id": "saiyan-saga-rares-230",
+    "number": 230,
+    "name": "Chiaotzu’s Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 31,
+      "text": 77
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "3 4 y p pos Mr GTN IK gs EE ossm——",
+    "text": "Allows the user to duck al\nmiss the first stage of\ndamage in a physical\n\nattack. #\na 8 A oo -."
+  },
+  {
+    "id": "saiyan-saga-rares-231",
+    "number": 231,
+    "name": "Goku’s Mixing Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 3,
+      "text": 93
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "———— EE I ee——",
+    "text": "Allows multiple colors of\n\\ drills to be used at the\nsame time."
+  },
+  {
+    "id": "saiyan-saga-rares-232",
+    "number": 232,
+    "name": "Life Attack Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 14,
+      "text": 89
+    },
+    "needsReview": [],
+    "typeLineRaw": "L(V Non-Combat —y | SE",
+    "text": "Drill does an extra life card of\ndamage whenever successful\ndamage is done."
+  },
+  {
+    "id": "saiyan-saga-rares-233",
+    "number": 233,
+    "name": "Life Defense Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 21,
+      "text": 80
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "SE RC en, TT Y c—",
+    "text": "Drill prevents 1 life card of\n\\ \\ damage from being taker\n: whenever a successful\nattack happens on\nrr the card owner. +\n4\n® ="
+  },
+  {
+    "id": "saiyan-saga-rares-234",
+    "number": 234,
+    "name": "Focusing Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 32,
+      "text": 87
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "| _Ay &F Wm Ta | - J Fo n= LD / { oD» = { > EE",
+    "text": "Prevents anything from\nhappening to a personality\ndrills until he advances to\n\nhis next level. je"
+  },
+  {
+    "id": "saiyan-saga-rares-235",
+    "number": 235,
+    "name": "Shadow Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 53,
+      "text": 69
+    },
+    "needsReview": [],
+    "typeLineRaw": "4 Non-Combat TEENS eas",
+    "text": "Allows the card owner to\n\\ | take 2 less stages of pow\nBl drain from a successful\n\\ physical attack.\nZ\n® —-"
+  },
+  {
+    "id": "saiyan-saga-rares-236",
+    "number": 236,
+    "name": "Power Drill",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 30,
+      "text": 90
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "Eat",
+    "text": "In all physical attacks the\n\ncard owner does an extre\nstages of power draining\ndamage. Pe"
+  },
+  {
+    "id": "saiyan-saga-rares-237",
+    "number": 237,
+    "name": "Goku’s Capturing Drill",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 31,
+      "text": 85
+    },
+    "needsReview": [],
+    "typeLineRaw": "re USA No m— 0 | Non-Combat pe = eR",
+    "text": "Prevents any Dragon Ball\nfrom being captured fron\na this drill user."
+  },
+  {
+    "id": "saiyan-saga-rares-238",
+    "number": 238,
+    "name": "King Kai’s Calming",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 30,
+      "text": 76
+    },
+    "needsReview": [],
+    "typeLineRaw": "Non-Combat 1 Em — LE |",
+    "text": "Played at the end of a\ntum. it forces a foe back\n\ngid from level 3 to level 2.\n°\\ Limit 1 per deck. #\nre oo-% . -"
+  },
+  {
+    "id": "saiyan-saga-rares-239",
+    "number": 239,
+    "name": "Roshi’s Calming",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 35,
+      "text": 83
+    },
+    "needsReview": [],
+    "typeLineRaw": "J aE ANY JARs Non-Combat BR",
+    "text": "Played at the end of a\nturn, it forces a foe back\nll from level 2 to level 1.\n\\ Limit 1 per deck. #\n©."
+  },
+  {
+    "id": "saiyan-saga-rares-241",
+    "number": 241,
+    "name": "Vegeta’s Dragon Ball Capture",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 9,
+      "text": 71
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "8 EAC BR emmm——T",
+    "text": "Capture 2 of a foe's Drage\nBalls and place them at\nBA the bottom of his life\ndeck. Limit | per\ndeck. ES\n£m Hot Leied — 1 wm eres 2 Te"
+  },
+  {
+    "id": "saiyan-saga-rares-243",
+    "number": 243,
+    "name": "Saibaimen LV1",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 76,
+      "pur": 0,
+      "text": 87
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Saibaimen",
+    "level": 1,
+    "powerRatings": [
+      4,
+      0,
+      11700,
+      1200,
+      1300,
+      1400,
+      1500,
+      1600,
+      1700,
+      1800,
+      1900,
+      2000
+    ],
+    "pur": 0,
+    "text": "E—ANNNNY\nPower:\nSaiyan Energy Deflection\nforces only 2 discards from\na successful energy attack."
+  },
+  {
+    "id": "saiyan-saga-rares-244",
+    "number": 244,
+    "name": "Saibaimen LV2",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 81,
+      "pur": 0,
+      "text": 89
+    },
+    "needsReview": [
+      "pur"
+    ],
+    "personalityName": "Saibaimen",
+    "level": 2,
+    "powerRatings": [
+      0,
+      2000,
+      2200,
+      2400,
+      2600,
+      2800,
+      3000,
+      3200,
+      3400,
+      3600,
+      3800
+    ],
+    "pur": 0,
+    "text": "TO\nPower:\nSaiyan Energy Deflection\nforces only 2 discards from\na successful energy attack."
+  },
+  {
+    "id": "saiyan-saga-rares-245",
+    "number": 245,
+    "name": "Saibaimen LV3",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 66,
+      "pur": 0,
+      "text": 88
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Saibaimen",
+    "level": 3,
+    "powerRatings": [
+      0,
+      200,
+      700,
+      5200,
+      5700,
+      6200,
+      6700,
+      7200,
+      7700,
+      8200,
+      8700
+    ],
+    "pur": 0,
+    "text": "Power:\n\nSaiyan Energy Deflection -\nforces only 2 discards from\na successful energy attack."
+  },
+  {
+    "id": "saiyan-saga-rares-246",
+    "number": 246,
+    "name": "Saibaimen LV4",
+    "isPersonality": true,
+    "type": "Personality",
+    "confidence": {
+      "powerColumn": 75,
+      "pur": 0,
+      "text": 73
+    },
+    "needsReview": [
+      "powerRatings",
+      "pur"
+    ],
+    "personalityName": "Saibaimen",
+    "level": 4,
+    "powerRatings": [
+      0,
+      0,
+      10000,
+      1,
+      12000,
+      13000,
+      14000,
+      15000,
+      16000,
+      17000,
+      18000
+    ],
+    "pur": 1,
+    "text": "Sg = =\nPower:\nIf there is more than one\nSaibaimen in play, this one can\ninflicts 5 life can is damage. i"
+  },
+  {
+    "id": "saiyan-saga-ultra-rares-247",
+    "number": 247,
+    "name": "Goku’s Truce",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 29,
+      "text": 78
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "1 EEE",
+    "text": "Stops a successful energ\n\\ or physical attack.\n& E>"
+  },
+  {
+    "id": "saiyan-saga-ultra-rares-248",
+    "number": 248,
+    "name": "Goku’s Plan",
+    "isPersonality": false,
+    "type": "Energy Combat",
+    "confidence": {
+      "typeLine": 53,
+      "text": 74
+    },
+    "needsReview": [],
+    "typeLineRaw": "fe AR CONG | Energy Combat",
+    "text": "Energy attack doing 5 life\n\\ cards of damage for no\nSL power cost.\nad %"
+  },
+  {
+    "id": "saiyan-saga-ultra-rares-249",
+    "number": 249,
+    "name": "Medic Kit",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 32,
+      "text": 82
+    },
+    "needsReview": [],
+    "typeLineRaw": "J = \" Non-Combat !",
+    "text": "Place the top 3 discard\n\\ cards at the bottom of t\npA: life card deck. Limit 1 pe\n\\ deck. r"
+  },
+  {
+    "id": "saiyan-saga-commons-city-destruction",
+    "number": null,
+    "name": "City Destruction",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 45,
+      "text": 88
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "AS Ae a 3 A El Vor-Comb: n- ’ omb",
+    "text": "One villain opts to destroy a city inste\no of combat on his next tum and places\nthe top 2 cards of the discard pile at\nbottom of the life deck. Discard\nfrom the game after use. #5"
+  },
+  {
+    "id": "saiyan-saga-commons-straining-tipping-move",
+    "number": null,
+    "name": "Straining Tipping Move",
+    "isPersonality": false,
+    "type": "Physical Combat",
+    "confidence": {
+      "typeLine": 23,
+      "text": 86
+    },
+    "needsReview": [],
+    "typeLineRaw": "| ___s. © E . o ‘Physical Combar — EEE",
+    "text": "Physical attack forcing th\ndefender to lose 2 life\nBN cards and the attacker <\nstages of power.\nLimit 1 per deck. +4"
+  },
+  {
+    "id": "saiyan-saga-rares-dream-machine-battle",
+    "number": null,
+    "name": "Dream Machine Battle",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 75
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "",
+    "text": "This battle never happened\nStart all over with new can\nll and reset all damage to\nbeginning levels. Limit\n1 per deck. #\n, NE 7. SF TR <"
+  },
+  {
+    "id": "saiyan-saga-rares-vegeta-s-trick",
+    "number": null,
+    "name": "Vegeta’s Trick",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 46,
+      "text": 89
+    },
+    "needsReview": [],
+    "typeLineRaw": "7 Tine Non-Combat CW",
+    "text": "Find the foe's first Dragor\nBall in his life deck and\nBl place it at the bottom of\nhis deck. Limit 1 per\ndeck. +"
+  },
+  {
+    "id": "saiyan-saga-rares-t-rex-defense",
+    "number": null,
+    "name": "T-Rex Defense",
+    "isPersonality": false,
+    "type": "Combat",
+    "confidence": {
+      "typeLine": 37,
+      "text": 83
+    },
+    "needsReview": [],
+    "typeLineRaw": "Von-Combat al CC CEE",
+    "text": "The beast takes all damage fror\n\nA | physical attacks for the card ue\n\nll but the first energy attack Kills\nit. Discard from the game\n\nafter 1 use. 4"
+  },
+  {
+    "id": "saiyan-saga-rares-plant-two-saibaimen",
+    "number": null,
+    "name": "Plant Two Saibaimen",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 32,
+      "text": 69
+    },
+    "needsReview": [],
+    "typeLineRaw": "? bd ae Ew NESE | Non-Combat  -Y —— GEE",
+    "text": "A villain may plant this card instead of\ncombat. On his next tum, he takes his\n” highest level Saibaimen and puts it inl\n\\ play as an ally. Discard this card\n: from the game after use. A\n: he 3)\nh™ - 5 Qa 1 =irTee — cod Froat roc: 2"
+  },
+  {
+    "id": "saiyan-saga-rares-broken-scouter",
+    "number": null,
+    "name": "Broken Scouter",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 28,
+      "text": 88
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "CN NS Aa sc BR  _eemmmm—————T",
+    "text": "Your power level was mis-\ncounted. Raise it ta full\n\n: power. Discard this from\n\nthe game after use. #"
+  },
+  {
+    "id": "saiyan-saga-rares-respect-the-spirit",
+    "number": null,
+    "name": "Respect the Spirit",
+    "isPersonality": false,
+    "type": "Non-Combat",
+    "confidence": {
+      "typeLine": 42,
+      "text": 85
+    },
+    "needsReview": [],
+    "typeLineRaw": "A OZ A OJ | / Non-Combat 1A ERIE",
+    "text": "The spirit of the Earth heals\nyou. Place 2 discarded cards\nBl at the bottom of your life\ndeck. Discard from the\n: game after use. +"
+  },
+  {
+    "id": "saiyan-saga-ultra-rares-chiaotzu-s-physical-defense",
+    "number": null,
+    "name": "Chiaotzu’s Physical Defense",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 34,
+      "text": 65
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "£9 9 _— | 4 Tl Bl Ty osm",
+    "text": "Stops all heroes from losing 1 life\n\\ card for this entire combat. Multipl\nta of this card cannot be used toget\n: Remove from the game\nafter use. bis\nY- REE BR Aaa 1s oe || a eo]"
+  },
+  {
+    "id": "saiyan-saga-promos-p1-goku-level-4-8211-in-power-magazine-3",
+    "number": null,
+    "name": "P1 Goku Level 4 &#8211; In Power Magazine #3",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 43,
+      "text": 55
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "| Whe | i i 20 ¥ ne;",
+    "text": "Power:\nPR Son sors erry | WEE\n<3 attack. costs |\nLW stage to do. »\nMan 'm tee! IF wos sue t >"
+  },
+  {
+    "id": "saiyan-saga-promos-p2-piccolo-level-4",
+    "number": null,
+    "name": "P2 Piccolo Level 4",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 30,
+      "text": 66
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "AN ==",
+    "text": "Power:\n<3 Cannan or Multi-Form\nin a combat round.\nt's 2d 1 rw well a"
+  },
+  {
+    "id": "saiyan-saga-promos-p3-vegeta-level-4-8211-inquest-magazine-8211-august-2000",
+    "number": null,
+    "name": "P3 Vegeta Level 4 &#8211; Inquest Magazine &#8211; August 2000",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 26,
+      "text": 54
+    },
+    "needsReview": [
+      "type",
+      "text"
+    ],
+    "typeLineRaw": "- Y EEIIRIRS",
+    "text": "Power:\nMpmos laugh reduces\n£31 a foe's power rating by\n» | 1 ar to Ll which ever\nE happens first,\nYui ro ch vl ni witha or"
+  },
+  {
+    "id": "saiyan-saga-promos-p4-raditz-level-4-8211-scrye-magazine-8211-september-2000",
+    "number": null,
+    "name": "P4 Raditz Level 4 &#8211; Scrye Magazine &#8211; September 2000",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 47,
+      "text": 64
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "¢ y am p A poe",
+    "text": "Power:\nq Saiyan Throat Strike\nSa does five stages of\nWo physical damage.\nNy Ha ha ha ue id Bae"
+  },
+  {
+    "id": "saiyan-saga-promos-p5-gohan-level-4-8211-wizard-magazine-8211-october-2000",
+    "number": null,
+    "name": "P5 Gohan Level 4 &#8211; Wizard Magazine &#8211; October 2000",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 71,
+      "text": 60
+    },
+    "needsReview": [
+      "type"
+    ],
+    "typeLineRaw": "| (|",
+    "text": "Power: -\n\nOraws an extra card WE\n\nfrom the bottom of |\n\nthe ctscard pie for | IE\nMM reves It wose =o"
+  },
+  {
+    "id": "saiyan-saga-promos-p6-krillin-level-4-8211-toyfare-issue-37-8211-september-2000",
+    "number": null,
+    "name": "P6 Krillin Level 4 &#8211; Toyfare Issue 37 &#8211; September 2000",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 43,
+      "text": 49
+    },
+    "needsReview": [
+      "type",
+      "text"
+    ],
+    "typeLineRaw": "1 | ~eeA Ny & = 3700",
+    "text": "Power: h--\n» Draws the bottom WE\now discard pile to use\nin ths combat.\n[on Youre stl cre a"
+  },
+  {
+    "id": "saiyan-saga-promos-p7-nappa-level-4-8211-scrye-magazine-8211-july-2000",
+    "number": null,
+    "name": "P7 Nappa Level 4 &#8211; Scrye Magazine &#8211; July 2000",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 20,
+      "text": 52
+    },
+    "needsReview": [
+      "type",
+      "text"
+    ],
+    "typeLineRaw": "YW",
+    "text": "Power: ga\n\n|\nNegate a foe's\n\n<} energy artack |\n; =. JRL :"
+  },
+  {
+    "id": "saiyan-saga-promos-p1-goku-level-4-silver",
+    "number": null,
+    "name": "P1 Goku Level 4 Silver",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 13,
+      "text": 41
+    },
+    "needsReview": [
+      "type",
+      "text"
+    ],
+    "typeLineRaw": "read fences bo Amr) 9 °%",
+    "text": "/ Power: re\n! Spirit bomb energy Mh rm:\n\n&}i attack, costs | 1200\n\nbE\n\n: stage todo.\n\n: CE ar\n\ni — ooo\n\nUT a AtEm\n\n0 &, (| Menimured If Iwasany zze7R\naan 2x. era wired IH be Fiber Sees"
+  },
+  {
+    "id": "saiyan-saga-promos-p2-piccolo-level-4-silver",
+    "number": null,
+    "name": "P2 Piccolo Level 4 Silver",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 26,
+      "text": 41
+    },
+    "needsReview": [
+      "type",
+      "text"
+    ],
+    "typeLineRaw": "12) In Ay é | dl __1ooog 7  “2 LP AAs A 7 a - i) JE Bu",
+    "text": "Power: rs\n=. - = 2\n4 4 Use Special Bean a\n~~ inacombat round. —\na 5 ‘ § 5 Le ae\nCE TE FT ages\n7 ng (81 ¢ fl 14 iid\n0 & i It's all yours! e"
+  },
+  {
+    "id": "saiyan-saga-promos-p3-vegeta-level-4-silver",
+    "number": null,
+    "name": "P3 Vegeta Level 4 Silver",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 56,
+      "text": 33
+    },
+    "needsReview": [
+      "type",
+      "text"
+    ],
+    "typeLineRaw": "ih : v Ww coun i L 4 v | 26000",
+    "text": "7 Power: 3 ——\nrr j 2200\ni { Vegeta laugh reduces\n\n> £47 a foes power rating by fin\n= Jor to 0 whichever. EE\n\n& f i di. HE a 0 aeons\noe TEE I a RAY\nie M *% You're not dealing with your prom\n2, SPE common Saiuans herel ="
+  },
+  {
+    "id": "saiyan-saga-promos-p4-raditz-level-4-silver",
+    "number": null,
+    "name": "P4 Raditz Level 4 Silver",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 24,
+      "text": 42
+    },
+    "needsReview": [
+      "type",
+      "text"
+    ],
+    "typeLineRaw": "LC ESP, mame 13000",
+    "text": ": Power: 7 ;\nCe LSE 475115\n4 | Saiyan Throat Strike doi\nCll does five stages of BET\nEg } if 3 2 4 z\n\n7 physical damage. «|\n\nla to psa Ta we aml SE 77 7)\ngl Sot or 7 JW re d\n8 y \"e/ Ha. ha ha, youd lke Fo\n-&N that wouldn't uou.. aL"
+  },
+  {
+    "id": "saiyan-saga-promos-p5-gohan-level-4-silver",
+    "number": null,
+    "name": "P5 Gohan Level 4 Silver",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 0,
+      "text": 41
+    },
+    "needsReview": [
+      "type",
+      "text"
+    ],
+    "typeLineRaw": "",
+    "text": "/ Power: +I\nCP § rr §\n1 Oraws an extra card Wei:\n+ hy from the Bottom ar. | wes\n7 ER discard pile for. |\nCla EER dW 7G\nEg | ET Loo\n7 YW Ed A\n\nah 0 © Oh man.Jt was ma\nae MERE ooo Hepa Ee"
+  },
+  {
+    "id": "saiyan-saga-promos-p6-krillin-level-4-silver",
+    "number": null,
+    "name": "P6 Krillin Level 4 Silver",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 17,
+      "text": 47
+    },
+    "needsReview": [
+      "type",
+      "text"
+    ],
+    "typeLineRaw": "4 oak ron i FOR PC ry oA",
+    "text": "A Power: \\ Roa a\n7} Draws the bottom LP\nhi two cards from the Gu pd\npn HIS EDEL A\nrN EEE 1 EH ca\ni AD © Youre still one ==\nCa ha bad dude. Gokul “aa"
+  },
+  {
+    "id": "saiyan-saga-promos-p7-nappa-level-4-silver",
+    "number": null,
+    "name": "P7 Nappa Level 4 Silver",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 41,
+      "text": 36
+    },
+    "needsReview": [
+      "type",
+      "text"
+    ],
+    "typeLineRaw": "§ 3 >) \\ \\ 18000 8 W; -  s \\{ 17000 &l",
+    "text": "i Power:\nra 1500\ni a { Negatea foes 4\ni 5 -- ERR\nOm energy attark RE 1300\nI a ¥ Le a A oe x Bool\n& ir : S a or i ¥ g =\n= % i 3 THis is ridicul Lr"
+  },
+  {
+    "id": "saiyan-saga-promos-p4-goku-level-4-error-dupe",
+    "number": null,
+    "name": "P4 Goku Level 4 Error Dupe",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 21,
+      "text": 25
+    },
+    "needsReview": [
+      "type",
+      "text"
+    ],
+    "typeLineRaw": "My BR UT 10000 Be NEILL TiiIen iis GIR SE RE. He / 7 wa rn",
+    "text": "’ RTT hy NE\n% Power: i hsn\n —— i 1\nIE Spirit bomb energy esses\nbald Gttack COStS ds\n0 Acroupstodn |S\na Ted PE Lr LT 1) 8\na i oo\nARR A a 1 441 A {i FE\nVT rd Gok... Man I'm tired. If | was\nHE a ;\n\nP= IRAE —— eee whinped I'd be butter"
+  },
+  {
+    "id": "saiyan-saga-promos-p115-nappa-level-4-error-dupe",
+    "number": null,
+    "name": "P115 Nappa Level 4 Error Dupe",
+    "isPersonality": false,
+    "type": null,
+    "confidence": {
+      "typeLine": 43,
+      "text": 34
+    },
+    "needsReview": [
+      "type",
+      "text"
+    ],
+    "typeLineRaw": "1 C7 27 \\ 28000 W)",
+    "text": "Power:\n\nZL La a = = {7} []\n# 4 Negate a foe's\n\n% = energy attack © Ser\nBEEN\nyy FT FE ooo\n\nOTN A 2 Ce\nPhra br Nappa... This |S ridicilious. 0s\nCAR CL a I A A ES A RAE I XK ALIT"
+  }
+]

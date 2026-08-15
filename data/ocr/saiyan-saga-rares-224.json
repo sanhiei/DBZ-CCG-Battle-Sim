@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-224",
+  "number": 224,
+  "name": "Baba Witch Viewing Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 20,
+    "text": 83
+  },
+  "needsReview": [],
+  "typeLineRaw": "ee ——— YL y Non-Combat a BEES",
+  "text": "Forces every Villain oppo-\n\n\\ \\ nent to constantly show\nBl his hand of cards face u\nat all times. +"
+}

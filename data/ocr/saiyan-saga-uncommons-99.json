@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-99",
+  "number": 99,
+  "name": "Blazing Anger!",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 51,
+    "text": 80
+  },
+  "needsReview": [],
+  "typeLineRaw": "| Non-Combat ad = ET TT",
+  "text": "Increase your anger level b\n\n2. Take the top 2 cards fit\n\nLl our discard pile and place\n48 them at the bottom\n\n' of your life deck. A"
+}

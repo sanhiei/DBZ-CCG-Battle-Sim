@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-146",
+  "number": 146,
+  "name": "Body Shifting Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 41,
+    "text": 89
+  },
+  "needsReview": [],
+  "typeLineRaw": "Non-Combat Bl mm",
+  "text": "Allows the attacker to pat\n\\ \\ stage instead of 2 on an\nenergy attack."
+}

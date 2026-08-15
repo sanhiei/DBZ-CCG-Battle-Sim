@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-126",
+  "number": 126,
+  "name": "Lifting Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 32,
+    "text": 78
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "Nd = — BR Ea",
+  "text": "Sweeps everyone else's\ndrills from the playing\nil table. but not this perso\nality's drills. Limit 1\nper deck. #5"
+}

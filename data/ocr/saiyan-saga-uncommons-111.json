@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-111",
+  "number": 111,
+  "name": "Gohan’s Energy Defense",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 33,
+    "text": 91
+  },
+  "needsReview": [],
+  "typeLineRaw": "| X/ k Sa — 1 TPT YET TY TE ASTRO Vi Energy Combat",
+  "text": "Prevents an energy attac\nBains Gohan 1 anger level"
+}

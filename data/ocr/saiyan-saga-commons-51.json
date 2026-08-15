@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-51",
+  "number": 51,
+  "name": "Hip Throw",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 56,
+    "text": 86
+  },
+  "needsReview": [],
+  "typeLineRaw": "‘Physical Combat",
+  "text": "Physical Attack doing +2\n: stages of damage if\nsuccessful. Raise card\nusers anger level 1. 2"
+}

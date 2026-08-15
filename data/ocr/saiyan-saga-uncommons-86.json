@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-uncommons-86",
+  "number": 86,
+  "name": "Chi-Chi LV1",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 67,
+    "pur": 0,
+    "text": 49
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur",
+    "text"
+  ],
+  "personalityName": "Chi-Chi",
+  "level": 1,
+  "powerRatings": [
+    21,
+    100,
+    200,
+    300,
+    0,
+    500,
+    600,
+    700,
+    800,
+    800
+  ],
+  "pur": 0,
+  "text": "mh. Jl\"\n\nPower: »\nMother's Defense. Once per combat,\n\n; = 150 meme"
+}

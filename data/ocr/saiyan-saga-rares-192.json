@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-192",
+  "number": 192,
+  "name": "Teaching the Untouchable Forces Oberservation",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 83,
+    "text": 75
+  },
+  "needsReview": [],
+  "typeLineRaw": "on-Combat",
+  "text": "Force another player to\n~ \\ \\ skip their combat step.\nLl Discard this from the\nA game after use. 4"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-starter-176",
+  "number": 176,
+  "name": "Nappa LV1",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 75,
+    "pur": 20,
+    "text": 86
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Nappa",
+  "level": 1,
+  "powerRatings": [
+    0,
+    2000,
+    2200,
+    200,
+    2600,
+    2800,
+    3000,
+    2200,
+    3400,
+    3600,
+    3800
+  ],
+  "pur": 3,
+  "text": "Power:\nSaiyan Energy Deflection\n| forces only 2 discards from\na successful energy attack,\nno matter how powerful."
+}

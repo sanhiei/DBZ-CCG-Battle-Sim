@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-48",
+  "number": 48,
+  "name": "Goku’s Touch Goku",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 27,
+    "text": 80
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "Eo SRL. | Bl a —",
+  "text": "After a successful physic\nattack. take a foe's Drag\n\n. Ball. Discard this card\nafter use. pe"
+}

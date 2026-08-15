@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-98",
+  "number": 98,
+  "name": "Power Up the Most!",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 35,
+    "text": 74
+  },
+  "needsReview": [],
+  "typeLineRaw": "fe J FANN NN Non-Combat  = kit cue",
+  "text": "Powers up to the personality\n: highest stage. Select 2\nLl discarded cards and place\nthem at the bottom of\ni\nyour life deck. #\nBa” J PTE —"
+}

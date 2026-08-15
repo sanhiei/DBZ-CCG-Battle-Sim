@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-127",
+  "number": 127,
+  "name": "Takedown Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 31,
+    "text": 67
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "Le : EE Non-Comba BA ee —TT",
+  "text": "Allows the attacker to dre\nA \\ a card into his hand in\nBE every phase he makes a\nattack.\ndd\n. E\nw — = -—"
+}

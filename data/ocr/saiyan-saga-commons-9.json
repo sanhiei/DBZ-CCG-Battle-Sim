@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-9",
+  "number": 9,
+  "name": "Palm Heel Strike",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 69,
+    "text": 71
+  },
+  "needsReview": [],
+  "typeLineRaw": "a; Physical Combat",
+  "text": "Physical Attack doing +3\nstages of damage if suc-\ncessful. Raise card user\nanger level 1. #*\n3 4 MN thew 0 icles cn 1 rears"
+}

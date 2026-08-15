@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-117",
+  "number": 117,
+  "name": "Raditz Energy Wall Rad",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 24,
+    "text": 89
+  },
+  "needsReview": [],
+  "typeLineRaw": "' BESESLES. | AUEES hh EEE EEE Fi F Combat BA —",
+  "text": "Forces a Hero opponent in\n\nthis combat to discard 1 lif\n\n- card from his deck. Discar\nthis card from the\n\ngame after use. FS"
+}

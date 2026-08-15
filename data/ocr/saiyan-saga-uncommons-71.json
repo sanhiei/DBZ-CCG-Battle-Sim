@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-71",
+  "number": 71,
+  "name": "Back Kick",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 8,
+    "text": 84
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "X Bl me ——",
+  "text": "Energy Attack doing b life\ncard draws of damage and\nBA Costing 5 power stages to\nperform. Raise card\nuser's anger level 1. 2"
+}

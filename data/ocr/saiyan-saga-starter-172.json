@@ -1,0 +1,32 @@
+{
+  "id": "saiyan-saga-starter-172",
+  "number": 172,
+  "name": "Raditz LV3",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 72,
+    "pur": 0,
+    "text": 60
+  },
+  "needsReview": [
+    "pur"
+  ],
+  "personalityName": "Raditz",
+  "level": 3,
+  "powerRatings": [
+    0,
+    200,
+    700,
+    5200,
+    5700,
+    6200,
+    6700,
+    7200,
+    7700,
+    8200,
+    8700
+  ],
+  "pur": 0,
+  "text": "n\\ JA I A\nPd i N\nPower:\nUse the Saiyan Energy Blast\n1 (from Level 2 Character card]\nar Saiyan. 3 Aoi og flection =i"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-130",
+  "number": 130,
+  "name": "Tripping Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 42,
+    "text": 66
+  },
+  "needsReview": [],
+  "typeLineRaw": "_ h 4 | Em— l Non-Combat | 1 At",
+  "text": "Prevents 1 life card from\n1 | being taken away by any\nsuccessful energy attack\non this card's owner. i\noN MAY =m vas ae Fe rie) Thee"
+}

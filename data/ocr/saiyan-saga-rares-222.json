@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-222",
+  "number": 222,
+  "name": "Bulma Finds a Dragon Ball",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 29,
+    "text": 86
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "_-— A a ah  CEEEEE—",
+  "text": "When the Bulma ally is in\nplay. use this card to\n’ capture a Dragon Ball.\nDiscard from the\ngame after use. +A"
+}

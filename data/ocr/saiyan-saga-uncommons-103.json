@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-103",
+  "number": 103,
+  "name": "Piccolo Honor Duel!",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 19,
+    "text": 85
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "| 1 Sm —",
+  "text": "Piccolo uses the battom 3 cards of the dist\n| deck for the next combat instead of the G\nA from his life deck. If there are not enough\ncards. don't use this ability. Discard\n-\nfrom the game after use. bis\n®"
+}

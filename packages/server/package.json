@@ -1,0 +1,22 @@
+{
+  "name": "@dbz/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b && node --watch dist/index.js",
+    "watch": "tsc -b --watch",
+    "start": "node dist/index.js",
+    "test": "tsc -b && node --test dist/server.test.js"
+  },
+  "dependencies": {
+    "@dbz/engine": "*",
+    "@dbz/shared": "*",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.13"
+  }
+}

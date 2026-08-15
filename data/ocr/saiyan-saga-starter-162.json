@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-starter-162",
+  "number": 162,
+  "name": "Piccolo LV2",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 59,
+    "pur": 0,
+    "text": 63
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Piccolo",
+  "level": 2,
+  "powerRatings": [
+    481,
+    1500,
+    1700,
+    1900,
+    2100,
+    2300,
+    2500,
+    2700,
+    2900,
+    100,
+    3200
+  ],
+  "pur": 0,
+  "text": "= / F Ll\n~J ¢ f\nPower: »\nSpecial Energy Bean Cannon.\n1 This energy blast only takes 1 |\n) power stage to use and does |§\n— —"
+}

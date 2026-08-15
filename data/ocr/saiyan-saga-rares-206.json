@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-206",
+  "number": 206,
+  "name": "Nappa’s Blinding Stare",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 18,
+    "text": 84
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "RLY ARs 1 | es ——",
+  "text": "The attacker is temporaril\nblinded and this combat\n; stops. Discard this card\nfrom the game after\n- use. AR\n:"
+}

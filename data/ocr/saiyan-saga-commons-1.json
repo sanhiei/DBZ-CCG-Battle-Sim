@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-1",
+  "number": 1,
+  "name": "Standing Fist Punch",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 48,
+    "text": 69
+  },
+  "needsReview": [],
+  "typeLineRaw": "Physical Combat",
+  "text": "Physical Attack. Raise car\n\\ | user's anger level 1.\na \\e Ser rhe S—— Iroc mre theses"
+}

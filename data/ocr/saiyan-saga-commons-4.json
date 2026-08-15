@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-4",
+  "number": 4,
+  "name": "Leg Sweep",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 28,
+    "text": 92
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "y",
+  "text": "Physical Attack. Raise cal\nuser's anger level 1."
+}

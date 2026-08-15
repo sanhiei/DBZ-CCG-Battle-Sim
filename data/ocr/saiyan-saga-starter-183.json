@@ -1,0 +1,35 @@
+{
+  "id": "saiyan-saga-starter-183",
+  "number": 183,
+  "name": "Raditz LV1 HT",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 63,
+    "pur": 0,
+    "text": 36
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur",
+    "text"
+  ],
+  "personalityName": "Raditz",
+  "level": 1,
+  "variant": "HT",
+  "powerRatings": [
+    0,
+    17100,
+    1200,
+    1300,
+    1900,
+    1500,
+    1600,
+    1700,
+    1800,
+    77,
+    0
+  ],
+  "pur": 0,
+  "text": "4 f bh\nBD, Power:"
+}

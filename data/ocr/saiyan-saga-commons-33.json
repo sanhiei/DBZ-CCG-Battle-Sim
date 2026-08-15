@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-33",
+  "number": 33,
+  "name": "It’s the Little Things That Matter",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 72,
+    "text": 83
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "|",
+  "text": "Stop 1 successful energy\n\\ \\ physical life card draw fre\nMW happening. Discard this\ncard from the game\nafter use. #"
+}

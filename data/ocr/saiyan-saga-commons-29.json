@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-29",
+  "number": 29,
+  "name": "Yajirobe’s Physical Attack",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 87
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "",
+  "text": "Physical attack doing 2\ndraws from the life deck\nA) not stopped. Remove fit\ngame after use. #"
+}

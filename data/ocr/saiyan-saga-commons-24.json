@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-24",
+  "number": 24,
+  "name": "Goku’s Surprise Attack",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 34,
+    "text": 91
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "| Bl em————",
+  "text": "Physical attack striking ot\nfor 5 stages of physical\ndamage on a selected ft"
+}

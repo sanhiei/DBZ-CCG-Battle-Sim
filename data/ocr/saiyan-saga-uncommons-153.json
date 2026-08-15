@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-153",
+  "number": 153,
+  "name": "Goku Energy Blast!",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 46,
+    "text": 65
+  },
+  "needsReview": [],
+  "typeLineRaw": "Ee ~~ ZS Energy Combat eee",
+  "text": "Energy defense stopping |\n\\ \\ foe's physical attack.\n» Discard from the game\n| “\\ after use. &\n& mbar rie - =f Tier orn"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-149",
+  "number": 149,
+  "name": "Meditation Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 46,
+    "text": 90
+  },
+  "needsReview": [],
+  "typeLineRaw": "| 3X Non-Combat | a ee E———",
+  "text": "Allows the player to shuff\ntheir life deck or discards\nJust before any announc\n\ncombat. #"
+}

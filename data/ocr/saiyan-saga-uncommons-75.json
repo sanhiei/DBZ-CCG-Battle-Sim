@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-75",
+  "number": 75,
+  "name": "Earth Dragon Ball 3",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 74,
+    "text": 82
+  },
+  "needsReview": [],
+  "typeLineRaw": "a on-Combat",
+  "text": "Draw three cards if you\nwish, and place the top\ndiscarded card at the\n\nbottom of your life\ndeck. #\neg +e Earth Gila"
+}

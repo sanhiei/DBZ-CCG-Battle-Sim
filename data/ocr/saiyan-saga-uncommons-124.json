@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-124",
+  "number": 124,
+  "name": "Penetrating Defense Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 43,
+    "text": 87
+  },
+  "needsReview": [],
+  "typeLineRaw": "IPE Non-Combat BR SSS",
+  "text": "Stops 2 stages of power\nfrom being drained by an\n: i physical attack."
+}

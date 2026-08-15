@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-7",
+  "number": 7,
+  "name": "Reverse Punch",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 53,
+    "text": 72
+  },
+  "needsReview": [],
+  "typeLineRaw": "Physical Combat 1 C——",
+  "text": "Physical Attack doing +3\nstages of damage if suc-\ncessful. Raise card user\n\nanger level 1. &\nNy Ny Narr Bien Hey a rater Re"
+}

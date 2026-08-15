@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-ultra-rares-248",
+  "number": 248,
+  "name": "Goku’s Plan",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 53,
+    "text": 74
+  },
+  "needsReview": [],
+  "typeLineRaw": "fe AR CONG | Energy Combat",
+  "text": "Energy attack doing 5 life\n\\ cards of damage for no\nSL power cost.\nad %"
+}

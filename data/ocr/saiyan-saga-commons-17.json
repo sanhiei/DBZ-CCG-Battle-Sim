@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-17",
+  "number": 17,
+  "name": "Hidden Power Level",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 73,
+    "text": 77
+  },
+  "needsReview": [],
+  "typeLineRaw": "MB Physical Combat",
+  "text": "Physical attack. Before physical damag\n? assessed, change the power stage to\na personality’s maximum. They've been\nhiding their true level for just\nthis attack. 4\nNf w—"
+}

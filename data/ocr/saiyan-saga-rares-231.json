@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-231",
+  "number": 231,
+  "name": "Goku’s Mixing Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 3,
+    "text": 93
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "———— EE I ee——",
+  "text": "Allows multiple colors of\n\\ drills to be used at the\nsame time."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-6",
+  "number": 6,
+  "name": "Lunge Punch",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 39,
+    "text": 66
+  },
+  "needsReview": [],
+  "typeLineRaw": "MBB Physical Combat ry SS ——",
+  "text": "Physical attack. Raise car\nusers anger level 1.\nEh 32\" Did 1 lidents Ta"
+}

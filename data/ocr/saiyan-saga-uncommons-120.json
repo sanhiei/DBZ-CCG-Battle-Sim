@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-120",
+  "number": 120,
+  "name": "Nappa’s Energy Aura",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 32,
+    "text": 89
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "| —1 es",
+  "text": "No energy attacks will wo\nagainst Nappa this combi\nRemove from game afte\n\nuse. pe"
+}

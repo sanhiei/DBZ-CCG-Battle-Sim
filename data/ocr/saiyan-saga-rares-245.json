@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-rares-245",
+  "number": 245,
+  "name": "Saibaimen LV3",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 66,
+    "pur": 0,
+    "text": 88
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Saibaimen",
+  "level": 3,
+  "powerRatings": [
+    0,
+    200,
+    700,
+    5200,
+    5700,
+    6200,
+    6700,
+    7200,
+    7700,
+    8200,
+    8700
+  ],
+  "pur": 0,
+  "text": "Power:\n\nSaiyan Energy Deflection -\nforces only 2 discards from\na successful energy attack."
+}

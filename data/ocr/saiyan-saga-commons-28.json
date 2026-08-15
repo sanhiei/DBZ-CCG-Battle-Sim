@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-28",
+  "number": 28,
+  "name": "Vegeta’s Physical Attack",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 40,
+    "text": 80
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "DEV VA y rey TEETWEAST",
+  "text": "No physical attacks will\nes work against Vegeta this\ni combat. Remove from\n\ngame after use. &"
+}

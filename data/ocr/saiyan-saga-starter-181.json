@@ -1,0 +1,35 @@
+{
+  "id": "saiyan-saga-starter-181",
+  "number": 181,
+  "name": "Gohan LV1 HT",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 67,
+    "pur": 0,
+    "text": 0
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur",
+    "text"
+  ],
+  "personalityName": "Gohan",
+  "level": 1,
+  "variant": "HT",
+  "powerRatings": [
+    0,
+    100,
+    200,
+    300,
+    0,
+    500,
+    700,
+    800,
+    3,
+    100,
+    9
+  ],
+  "pur": 0,
+  "text": ""
+}

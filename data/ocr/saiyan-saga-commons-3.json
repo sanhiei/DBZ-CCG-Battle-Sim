@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-3",
+  "number": 3,
+  "name": "Two Knuckle Punch",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 57,
+    "text": 70
+  },
+  "needsReview": [],
+  "typeLineRaw": "a Physical Combat J Ne",
+  "text": "Physical Attack doing +1\n| stage of damage if suc-\ncessful. Raise card user's\nanger level 1. i\n= “\\e Lan tell vir re nat fren this wy"
+}

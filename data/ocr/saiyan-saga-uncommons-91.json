@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-91",
+  "number": 91,
+  "name": "Energy Throw",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 52,
+    "text": 85
+  },
+  "needsReview": [],
+  "typeLineRaw": "| Energy Combat — ——",
+  "text": "Villains. Boku. and Bohan only. Creat\nan energy attack doing 7 life card\n- draws at a cost of 4 stages of pol\ndrain. Discard from the\ngame after use. ES:"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-city-destruction",
+  "number": null,
+  "name": "City Destruction",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 45,
+    "text": 88
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "AS Ae a 3 A El Vor-Comb: n- ’ omb",
+  "text": "One villain opts to destroy a city inste\no of combat on his next tum and places\nthe top 2 cards of the discard pile at\nbottom of the life deck. Discard\nfrom the game after use. #5"
+}

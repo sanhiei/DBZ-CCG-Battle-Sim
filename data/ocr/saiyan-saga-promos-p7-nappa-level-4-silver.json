@@ -1,0 +1,17 @@
+{
+  "id": "saiyan-saga-promos-p7-nappa-level-4-silver",
+  "number": null,
+  "name": "P7 Nappa Level 4 Silver",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 41,
+    "text": 36
+  },
+  "needsReview": [
+    "type",
+    "text"
+  ],
+  "typeLineRaw": "§ 3 >) \\ \\ 18000 8 W; -  s \\{ 17000 &l",
+  "text": "i Power:\nra 1500\ni a { Negatea foes 4\ni 5 -- ERR\nOm energy attark RE 1300\nI a ¥ Le a A oe x Bool\n& ir : S a or i ¥ g =\n= % i 3 THis is ridicul Lr"
+}

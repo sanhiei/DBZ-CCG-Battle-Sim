@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-201",
+  "number": 201,
+  "name": "The Tail Grows Back",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 65
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "",
+  "text": "Increase the personality’s\npower stage to its maxim\nA level. Discard this card fro\n\\ the game after use. #\n[)\nCPA Br ——— BPA Yes 3"
+}

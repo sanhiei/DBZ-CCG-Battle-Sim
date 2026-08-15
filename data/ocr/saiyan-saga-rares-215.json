@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-215",
+  "number": 215,
+  "name": "Krillin’s Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 93,
+    "text": 82
+  },
+  "needsReview": [],
+  "typeLineRaw": "Non-Combat",
+  "text": "Does an extra life card of\ndamage with each successf\n- attack. More than 1 of thes\ndrills can be out at the\nsame time. HR\n~.7 -"
+}

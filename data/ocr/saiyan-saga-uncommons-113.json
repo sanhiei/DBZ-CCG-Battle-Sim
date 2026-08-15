@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-113",
+  "number": 113,
+  "name": "Krillin’s Energy Attack",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 94,
+    "text": 85
+  },
+  "needsReview": [],
+  "typeLineRaw": "Energy Combat",
+  "text": "Energy attack doing 2 draws from th\nlife card deck if not stopped. If usec\nKrillin, this card stays on the table |\nbe used one more time in\nthis combat. bis\nNS Sp es"
+}

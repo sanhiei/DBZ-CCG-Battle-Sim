@@ -1,0 +1,32 @@
+{
+  "id": "saiyan-saga-starter-173",
+  "number": 173,
+  "name": "Vegeta LV1",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 80,
+    "pur": 0,
+    "text": 82
+  },
+  "needsReview": [
+    "pur"
+  ],
+  "personalityName": "Vegeta",
+  "level": 1,
+  "powerRatings": [
+    0,
+    2000,
+    2200,
+    2400,
+    2600,
+    2800,
+    3000,
+    3200,
+    3400,
+    3600,
+    3800
+  ],
+  "pur": 0,
+  "text": "Power:\nSaiyan Energy Deflection\n! forces only 2 discards fram\n% a successful energy attack.\nno matter how powerful."
+}

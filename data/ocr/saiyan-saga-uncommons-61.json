@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-61",
+  "number": 61,
+  "name": "Body Drop Throw",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 52,
+    "text": 50
+  },
+  "needsReview": [
+    "text"
+  ],
+  "typeLineRaw": "Be LE ea / Physical Combat ee",
+  "text": "Stops a physical attack.\n_\\ \\ Lower foe's anger level bu\np— 4\nLES AE\n~ ~ Tran \\/oOrotal [iy 26 ries fs"
+}

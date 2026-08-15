@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-132",
+  "number": 132,
+  "name": "Rolling Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 26,
+    "text": 78
+  },
+  "needsReview": [],
+  "typeLineRaw": "WEE Non-Combat Sain CC GE————",
+  "text": "Prevents 1 life card draw\nfrom a successful energl\n- attack.\n0 FEY 5"
+}

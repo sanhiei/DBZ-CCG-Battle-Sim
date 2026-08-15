@@ -1,0 +1,2580 @@
+﻿Dragon Ball Z
+Collectible Card Game CRD
+Dragon Ball Z Collectible Card Game CRD Contents
+Updated 8/19/2014
+Most recent updates in red
+
+
+1) General Guidelines
+2) Deck Building
+3) Game Play Basics
+4) Card Types and Card Type Clarifications
+5) General Gameplay Clarifications
+6) Personality Relevant Rules
+7) Keywords
+8) Banned / Restricted List
+9) Specific Card Clarifications / Errata / Rulings
+10) Power Level Errata
+11) Glossary
+12) Physical Attack Tables
+
+
+1. General Guidelines
+
+
+The Golden Rule
+The rules text of a card always overrides the rules printed in the latest version of the DBZ CCG rulebook.
+
+
+What is a ‘deck’?
+The use of the word ‘deck’ throughout this document applies to both your Life Deck and Sensei Deck combined.
+
+
+Most Recent Printing Rule
+If two or more cards share the same title, the text, the numbers, and all other symbols of that card are to read as they appear on the most recent printing (MRP) of that card with that title.  This does not apply to personality or Mastery cards (unless otherwise stated on the card).
+
+
+Tournament Game Tie-Breaker Rules
+50 Minute rounds – If time is reached in a round the players will receive five additional turns.  If no player has won the game at the end of the fifth turn the game will be counted as a draw.
+
+
+2. Deck Building
+
+
+Deck Size
+Decks must contain a minimum of 50 cards. No Deck may contain more than 85 cards.  If you declare a Namekian Tokui-Waza, you may have up to 90 cards in your deck.
+
+
+Maximum Number of Card Copies per Deck
+- Mastery cards, Main Personality levels, Sensei card and Dragon Balls are all Limit 1 per deck and do count towards the maximum and minimum deck sizes.
+- You may have multiple cards of an Ally Personality in your deck, but each personality card is limited to 1 per deck.
+- All Combat, Physical Combat, Energy Combat, Non-Combat, Battleground and Location cards are limited to 3 copies per deck unless they are named cards or say otherwise in the rules text.
+- All named cards are limit 4 per deck if the name in the card title matches the name of
+your Main Personality unless the card says otherwise in the rules text.
+
+
+Dragon Balls
+All Dragon Balls in a deck must belong to the same set.
+
+
+Dragon Balls with “Alt.” in the title can be mixed with Dragon Balls of the same set without “Alt.” in the title.
+
+
+Main Personalities
+Each Life Deck must contain at least 3 consecutive levels of Personality cards of the same Personality, starting at level 1. These cards make up your Main Personality for the game and count towards your Life Deck minimums and maximums. You may add additional card levels of your Main Personality up to level 5. No levels can be skipped.
+
+
+Mastery Cards
+All Mastery cards are limit 1 per deck. This card counts towards Life Deck minimum and maximums, even though it starts the game on the table. Mastery cards offer advantages that last throughout the game, and they are placed in play before the game begins. To play a Mastery card, you must declare a Tokui-Waza.
+
+
+Tokui-Waza
+To declare a Tokui-Waza, your Life Deck must have a Mastery card, and have only Styled cards that match the style of your Mastery card. You must have at least one Martial Arts Styled card (besides the Mastery card) in your Life Deck. You can still use Freestyle cards in a Tokui-Waza deck.
+
+
+When you declare a Tokui-Waza at the beginning of the game, your Main Personality gets +1 PUR for the remainder of the game.
+
+
+To declare a Saiyan Tokui-Waza, your Main Personality must have Saiyan Heritage. For Saiyan Heritage personalities see Section 6.
+
+
+To declare a Namekian Tokui-Waza, your Main Personality must have Namekian Heritage. For Namekian Heritage personalities see Section 6.
+
+
+To declare a Freestyle Tokui-Waza, you must have zero Styled cards in your deck.
+
+
+Sensei Cards
+All Sensei cards are limit 1 per deck. This card counts towards Life Deck minimum and maximums, even though it starts the game on the table. The Sensei card states the deck size of your Sensei Deck. This is a maximum limit, you can choose to have zero cards in your Sensei Deck.
+
+
+If you declared a Tokui-Waza, all Styled cards in your Sensei Deck must match the Style of your Tokui-Waza.
+
+
+The cards in your Sensei Deck DO NOT count toward the total minimum or maximum Life Deck sizes.
+
+
+Cards in your Sensei Deck DO count toward the maximum number of card copies you can have in your Deck.
+
+
+Any card that is allowed in your Life Deck is allowed in your Sensei Deck.  Cards that say “Sensei Deck” may start the game in either your Life Deck or Sensei Deck.
+
+
+To use your Sensei Deck, at Step 5 of the game set up (see below), you choose any number of cards in your Sensei Deck, and show them to all players. You then take that many cards at random from the top of your Life Deck. You put those cards into your Sensei Deck without showing your opponents, and you shuffle the chosen cards from your Sensei Deck into your Life Deck. You may look at any cards put into your Sensei Deck from your Life Deck.
+
+
+“Sensei Deck only” cards must start the game in your Sensei Deck. If you are found to have Sensei Deck only cards in your Life Deck without Sensei-ing them into your Life Deck at the start of the game, you will receive a game loss.
+
+
+Allies
+All Personality cards are limit 1 per deck.
+
+
+Allies must be at least 2 levels lower than your Main Personalities highest Personality level.
+
+
+All Hero Main Personalities may only include Hero Allies in their deck and may only use Hero Allies. All Villain Main Personalities may only include Villain Allies in their deck and may only use Villain Allies.
+
+
+You cannot have Allies in your Life Deck that is the same character as your Main Personality.
+
+
+You may play and use Allies that match your opponent’s Main Personality or an Ally that your opponent has in play.
+
+
+You cannot use High-Tech personality cards as Allies.
+
+
+Majin Allies can only be used by a Majin Main Personality.  Majin Main Personalities may only use Majin Allies.  Only Majin Main Personalities may include Majin Allies in their Life Deck.
+
+
+Cell Jr. Allies can only be used if Cell is your Main Personality.
+
+
+Proxies
+Players are allowed to use proxies in all Retro DBZ CCG tournaments.  The proxies must be printed copies of the cards.  No hand written proxies are allowed.  For instructions on how to print excellent proxies, please visit: 
+http://retrodbzccgcom.fatcow.com/2012/06/25/orange-star-high-school-proxy-cards-101/
+
+
+
+
+3. Gameplay Basics
+
+
+How To Win
+
+
+1) Survival Victory
+You win the instant your opponent has no life cards in his Life Deck. Cards are taken from the Life Deck by:
+
+
+*Discarding and drawing cards in the course of play.
+
+
+*Dealing Life Cards of Damage. Your opponent discards one card from his Life Deck for each Life Card of damage.
+
+
+*Dealing Power Stages of Damage. Your opponent discards one card from his Life Deck for each power stage of damage taken by a Personality when that Personality is at their lowest power stage.
+
+
+*Card Effects. Some cards have effects that result in cards being discarded from your opponent’s Life Deck. Such effects are not considered to be damage even though life cards get discarded.
+
+
+2) Dragon Ball Victory
+You win the game the moment you control all 7 Dragon Balls of the same set. The challenge is keeping them under your control, because they can be captured in various ways.
+
+
+However, if you control 6 Dragon Balls and your opponent controls the last Dragon Ball in the set, if you capture that Dragon Ball from your opponent, you do not win the game until the start of your next turn.
+
+
+3) Most Powerful Personality Victory
+When your Main Personality reaches the highest level possible out of all personalities in the current game, if you reach that level by Anger without having a card effect used against you  to postpone your victory or a rule preventing you winning the game, you win thegame. If a  card is used against you to postpone your victory, when that card effect ends if you are still at the highest personality level possible still, you win the game.
+
+
+Beginning a New Game
+
+
+First you need a Main Personality
+A Main Personality (MP) is a character that is represented by 3 to 5 stacked cards. You start off with your Level 1 MP, and then you can advance to other levels during the game. An MP must have at least 3 consecutive personality levels starting with a level 1 and going up to level 5. No MP may have 2 cards of the same level.
+
+
+Now you need a Life Deck.
+You can construct a Life Deck with cards that you have.
+
+
+How to Set Up a Game Step-by-Step
+1) Both players place their MP’s cards face-up in front of them in numerical order with the lowest-numbered card on top. If the character you’re playing is a Rogue Personality, you must declare if they are a hero or a villain.
+
+
+2) If any player is declaring a Tokui-Waza, it must be declared, and a Mastery card of that Martial Arts Style must be played at this time.
+
+
+3) Both players set their scouters at 5 power stages above the 0 power stage on their starting MP card.
+
+
+4) If either player’s MP card at 5 power stages above 0 is in the D bracket or higher of the Physical Attack Table and the other player is not, the player in the lower bracket goes first.  When a player’s MP card 5 power stages above 0 is in the D bracket and the other players MP has Z power stages both players start at 5 power stages above 0.  The who goes first is then randomly chosen.
+
+
+5) Both players shuffle their Life Decks and offer each other the chance to cut.
+
+
+6) Players now may swap cards from their Sensei Deck into their Life Deck.
+
+
+7) Begin the game.
+
+
+The Sequence of Play for One Complete Turn
+
+
+The Attacker for the Turn
+If you are the Attacker, you go through all 5 steps of a turn and can choose whether or not to declare Combat. The Defender is the player responding to the Attacker for the turn. The Defender plays only during the Combat Step and the Rejuvenation Step.
+
+
+1) Draw Step
+If you are the Attacker, draw 3 cards from the top of your Life Deck and put them in your hand.
+
+
+2) Non-Combat Step
+If you are the Attacker, you may now play Allies, Non-Combats, Locations, Battlegrounds and Dragon Balls from your hand during this step. To do this, just place them face-up on your playmate where indicated. If you play a Dragon Ball, you do what it tells you to right after you play it
+
+
+If you play any Allies in this step, you set them at 3 power stages above the 0 power stage.
+
+
+Just remember: Main Personalities start the game at 5 power stages above 0, and Allies enter play at 3 power stages above 0.
+
+
+3) Power-Up Step
+If you are the attacker, yout Main Personality powers up by moving his Scouter up a number of power stages equal to his Power Up Rating (PUR).  If you declared a Tokui-Waza, your MP's PUR increases by +1.  A personality cannot go above his highest power stage.  All of your Allies also power up in this step, but only by 1 power stage regardless of any Ally's PUR.
+
+
+4) Declare Step:
+In this ste you declare if you are going to enter Combat with your opponent.  If you choose not to declare Combat skip the Combat Step and go to the Discard Step.  If you place a Battleground or Location into play in the Non-Combat Step, you must skip the Combat Step for this turn.
+
+
+5) Combat Step:
+If you are the attacker, you can declare an attack on your opponent and attempt to reduce your opponent's Life Deck, power stages, and anger.  Just remember, he gets to attack you later in this step.  This step is detailed in full in the next section.
+
+
+6) Discard Step:
+If you are the attacker and you have more than 1 card in your hand during this step, place all but 1 of your cards into the discard pile.  You may discard all of your cards if you want, but you may have no more than 1 card in your hand at the end of this step.  Your opponent does the same, right after you discard.
+
+
+7) Rejuvenation Step
+If you are the attacker and you did not declare Combat in the Declare Step, you may take the top card of your discard pile and place it facedown at the bottom of your Life Deck.
+
+
+The Rejuvenation Step itself is not optional, and you must go through the Rejuvenation Step during each of your turns. But remember, you only get to put the top card of your discard pile on the bottom of your Life Deck if you skipped Combat. Any other effects that occur during the Rejuvenation Step still happen, even if you did go into Combat during your turn.
+
+
+When you have completed the Sequence of Play, your turn ends.  It's now your opponent's turn as the attacker.
+
+
+The Combat Step In Detail
+
+
+Phase 1: The Prepare Phase
+
+
+The Attacker’s Half of the Prepare Phase
+As the Attacker, you prepare for the fight by using all your effects that happen “When entering Combat.” Just check the cards you have in play and in your hand for the phrase “When entering Combat.” If you see it and can use it, do what it says! If not, move on. Now the Defender Prepares…
+
+
+The Defender’s Half of the Prepare Phase. The Defender now does these 2 things in this order.
+
+
+1. Use any “When entering Combat” effects on his cards in play. The Defender may do this multiple times during the Prepare Phase, but each effect may only be used once.
+
+
+2. Draw 3 cards from the top of his Life Deck and put them into his hand.
+
+
+Phase 2: The Attack Phases
+
+
+What’s an Attack Phase? In an Attack Phase, a player may attack, use a card instead of attacking, or pass.
+
+
+The Attacker gets the first Attack Phase. After his Attack Phase is over, the Defender gets his own Attack Phase. Then, the Attacker gets another Attack Phase. This continues until both the Attacker and Defender choose to pass in back-to-back Attack Phases. When that happens – the Combat Step ends.
+
+
+What to do in an Attack Phase.
+You can do one of the following things in an Attack Phase:
+
+
+1. Play a card that can perform an attack from your hand and use it to attack your opponent with a physical or energy attack.
+2. Use a card you have in play that can perform an attack to attack your opponent.
+3. Use a Non-Combat card for its effects and then discard it after use.
+4. Play a card, use its effects and then discard it.
+5. Use a Personality power. If a personality has a power that you can use during your Attack Phase, you may use it.
+6. Perform a Final Physical Attack.
+7. Pass.
+
+
+Defending: The Second Part of an Attack Phase
+
+
+When you are getting attacked, you can defend with a card during your opponent’s Attack Phase. The card you are defending with must defend against the type of attack your opponent is performing.
+
+
+If he doesn’t attack, and uses his Attack Phase for something else, you do NOT defend in his Attack Phase. What can you do to defend? There are 5 things:
+
+
+1. Play a card that has a starburst on it from your hand.
+2. Use one of your Non-Combat cards in play if that card has a starburst on it.
+3. Use an effect from your Main Personality that stops an attack or prevents damage from an attack.
+4. Use an effect from an Ally that has taken control of Combat for your MP if that effect stops an attack or prevents damage from an attack.
+5. Take the damage. If you can’t or don’t want to use a card that can defend, you may take the damage (if any) that is dealt.
+
+
+How To Use Attacks
+Use the Battle Sequence! If you want to see a Step-By-Step blueprint on generally how an attack works, see the list below. The Battle Sequencer is there to give you everything you need to know to understand how to attack.
+
+
+Battle Sequence
+1) The attacker uses a Non-Combat card or personality power, or plays a Physical Combat, Energy Combat, or Combat card from his hand, or passes (if the attacker passes, proceed to the next Attack Phase).
+
+
+2) The attacker pays costs, if any, associated with that card or power and announces if he is using any Empower effect on the card to boost its damage.
+
+
+3) Resolve all secondary effects on the card or power (secondary effects are those effects not directly associated with an attack. This does not include effects within the same sentence as the attack and effects with the clause “If successful” attached to it. An effect in the same sentence as an attack is considered an “If successful” effect.).
+
+
+If a card that does not have an attack was used in place of an attack, all of the effects on that card are considered secondary effects.
+
+
+4) If an Ally can take over Combat for the Main Personality, the Defender must announce which personality is in Control of Combat until this attack is resolved.
+
+
+5) The defender plays a card from his hand or uses a Non-Combat card or personality power to defend against that attack.
+
+
+6) Resolve all secondary effects from the defender’s card or personality power.
+
+
+7) If the attack was not stopped, the defender must now activate any Defense Shields from his cards in play.
+
+
+8) If the attack is not stopped at this time, the attack is considered successful (an attack is considered successful even if it deals no damage).
+
+
+9) Determine the Base Damage, if any, from the attack (Base Damage is damage that is calculated by consulting the Physical Attack Table for physical attacks, unless it is already stated on the physical attack; or Base Damage is the amount of damage an energy attack would do as stated on the card; all of which do not include modifiers from the attack or other effects generated by Drills or any other cards).  If an energy attack does not state the amount of damage it does, the Base Damage is 4 life cards.
+
+
+10) Add and/or subtract any modifiers, from the attack, Drills, personality powers, etc., to the Base Damage.
+
+
+11) Determine if the Ally currently in control of Combat can capture a Dragon Ball by using the Personality Captures rule and decide if that Ally will either deal damage or capture a Dragon Ball.
+
+
+12) Any power stages of damage from the attack are dealt.
+
+
+13) Any life cards of damage from the attack are dealt and the defender can use Endurance at this time.
+
+
+14) If the attack does 5 or more life cards of damage, the attacker may capture an opponent’s Dragon Ball.
+
+
+15) Any “If successful” effects that the attacker has are resolved. If there are multiple “If successful” effects, the attacker gets to decide the order in which those effects happen.
+
+
+16) The card used to perform the attack is now discarded unless the attack says otherwise.
+
+
+How Different Cards Attack
+
+
+NOTE: This section will describe things in a broad sense for a more accurate description of how to use attacks use the Battle Sequence above.
+
+
+Using Personality Powers to attack
+If an attack is on a Personality card power, you don’t physically do anything to the card itself to use its attack. Simply state you are using your Personality Power to perform an attack, you pay any costs, do all the secondary effects of that personality power, then leave the personality in play after use. Personalities can only attack if they are in control of Combat.
+
+
+
+
+Using Cards to attack
+Physical or Energy Combat cards usually perform or stop an attack. If you use a card from your hand to attack, you play it on the table from your hand, use the effects of the attack, and then discard it. Base Damage for Physical attacks is calculated by comparing the power stages of the opposing characters on the Physical Attack Table to get the value of Base Damage.
+
+
+Game Effects From Attacks
+
+
+Secondary Effects
+The effects of a card appear in the card power as text. When you perform an attack on a card, you use all the secondary effects of the card before dealing damage. Some of these effects may make your opponent lose life cards or power stages. These effects are not defined as “Damage” unless they modify an attack. If the attack is stopped, the effects are NOT stopped. Secondary effects occur regardless of if an attack is stopped or not.
+
+
+When a card effect causes you to lose power stages, not to a minimum of 0, if you go below 0, you must discard the top card of your life deck for every power stage left over.
+
+
+When you place a card from your discard pile into your Life Deck you must show your opponent(s) those cards. When you place a card from your discard pile into your Life Deck, you must place it into your Life Deck face down.
+
+
+Card Costs
+A cost exists on a card only if the word “cost” (or the terms “costs” and/or ”costing”) appears on the card itself. Energy attacks that don’t tell you the basic cost on the card gain “Costs 2 power stages to perform” after the sentence describing the energy attack.
+
+
+Floating Effects
+Floating effects are a type of effect that continues after a card is used. Floating effects have a clause that tells you when the effect will finish. Most floating effects last until the end of Combat. Floating effects can be created by any sort of card.
+
+
+“If Successful” Effects
+These effects are in the card power also, and they start with the words “If successful.” They are only used if an attack isn’t stopped by a card effect or rule.
+
+
+Final Physical Attacks
+As a last ditch desperation move, you may discard any card in your hand as a cost to perform a Final Physical Attack. First you declare that you are going to perform a Final Physical Attack during your Attack Phase, and then you discard one card from your hand to pay for the attack. You then perform a physical attack doing PAT power stages of damage.
+
+
+Here’s the Catch – For the rest of Combat, you must pass in all of your Attack Phases, and you cannot defend against your opponent’s attacks. Floating Effects can still be used after you perform a Final Physical Attack, but other than that you are completely at your opponent’s mercy. Both you and your opponent can perform a Final Physical Attack once per Combat Step.
+
+
+Dealing Damage
+You’ve attacked in your Attack Phase! It got through! So how hard did it hit? Attacks will always deal what is called “Base Damage.” There are 2 types of Base Damage in the game: life cards and power stages.
+
+
+Life cards of damage are discarded from the top of your Life Deck. You discard one life card off of your Life Deck for each life card of damage dealt to one of your personalities. Note: When life cards of damage are taken, they must be reviewed to prevent the improper discarding of a Dragon Ball card.
+
+
+Power stages of damage are dealt by lowering your opponent’s power stage on his personality card down for each power stage of damage dealt from the attack. What happens when that personality runs out of power stages? The remaining power stages are converted to life cards of damage.
+
+
+What Does “PAT” mean?
+“PAT” stands for “Physical Attack Table” and is the number that is found when you compare the power ratings of personalities. PAT is the Base Damage for physical attacks.
+
+
+Sometimes the PAT symbol appears in card’s text. When it appears in the card’s text, it is referencing the number that you get when you use the Physical Attack Table.
+
+
+Modified Damage
+If an effect inside a card power modifies the damage from an attack, it is always added on top of the Base Damage of the attack, even if the attack doesn’t deal the kind of damage that is being modified.
+
+
+When a personality is at 0 and is dealt power stages of damage, those power stages of damage are converted into life cards of damage, and is considered both types of damage.
+
+
+Multiplying Base Damage from Multiple Cards
+
+
+When you have multiple card effects that would increase the base damage of an attack by a multiple amount (Double the base damage, triple the base damage, quadruple the base damage, etc. etc.), only one multiplier is used on the Base Damage, and the other card effects that multiply the damage are ignored.
+
+
+A Note about Damage Prevention
+Preventing damage from the attack is not counted as modifying damage from the attack.
+
+
+There are 2 kinds of attacks: physical attacks and energy attacks. Physical attacks use the Physical Attack Table and deal power stages of damage equal to the number found by comparing power ratings on the Physical Attack Table. Energy attacks cost 2 power stages to perform and deal 4 life cards of damage and this damage is dealt by flipping cards from the top of your Life Deck into your discard pile.
+
+
+Energy attacks that don’t have their cost listed always cost 2 power stages.
+
+
+Cards that state damage: Some Physical and energy attacks state what damage is. When that happens, the damage from the attack is what is stated on the card itself.
+
+
+4. Card Types and Card Type Clarifications
+
+
+Styled Cards
+If a card belongs to a Martial Arts Style, the first word of the card’s title will be the Style that it belongs to. The card will also show the kanji symbol of that style somewhere on the card. The 6 Martial Arts Styles are listed below.
+
+
+Red Style
+Blue Style
+Black Style
+Orange Style
+Saiyan Style
+Namekian Style
+
+
+Freestyle cards
+These cards do not have a Martial Arts style in their card name and have no Kanji. Freestyle cards can legally go in any deck.
+
+
+Named cards
+These cards have the name of a specific Dragon Ball personality in the title, and they can be Styled or Freestyle cards depending on the first word of the cards title.
+
+
+Personality Cards
+Personality cards represent the characters in the Dragon Ball universe and they are either played as Allies or Main Personalities. Your Main Personality is made up of 3 or more consecutive personality cards starting with level 1, some personalities can have up to 5 personality levels. Your MP always starts with his level 1 Personality card. Personality cards can be played as Allies that can assist your Main Personality in battle, Allies are played during the Non-Combat Step.
+
+
+Power stages are a Personality’s strength. A Power stage is the space that holds a power rating. A power rating is the numerical value of a power stage. If a personality is at his highest power stage, he cannot go any higher, nor can he store any power stages from card effects to gain them later.
+
+
+Power-Up Rating (PUR)
+A Power-Up Rating will appear on the left side of a personality card. The PUR is the number of power stages you gain during your Power-Up Step.
+
+
+Personality Powers are the effects in a personality’s power box. A Personality Power can only be used during the Combat Step and is only used once per turn (unless the personality power says it can be used multiple times or used at a special time), unless the character advances or loses a Personality level. When this happens you get to use the card effect again even if you used it earlier this turn. You cannot use your MP’s power when an Ally is in control of Combat and vice-versa.
+
+
+Constant Combat Powers have the words “Constant Combat Power” as a header in the power box. These powers are constantly active and must be used whenever possible. You cannot use your MP’s Constant Combat Power when an Ally is in control of Combat and vice-versa, unless the effect states otherwise.
+
+
+Personaltiy Powers, Powers, and Constant Combat Powers
+Cards from the Saiyan Saga, Frieza Saga, Trunks Saga, Androids Saga, and World Games Saga that reference personality powers are considered to reference both Personality Powers and Constant Combat Powers.
+
+
+Cards from the Frieza Saga, Cell Saga, Cell Games Saga, Fusion Saga, Irwin Toy, and Capsule Corp Power Packs that reference powers (for personalities, Main Personalities, or Allies) are considered to reference both Personality Powers and Constant Combat Powers.
+
+
+Cards from the Majin Buu Saga and Bojack Unbound Subset that reference powers (for personalities, Main Personalities, or Allies) are considered to reference Personality Powers.
+
+
+If a Personaltiy Power references “this power”, it is considered to reference “this Personality Power”.
+
+
+Turning off Personality Powers
+Whenever you use a card effect to keep your opponent from using his personality powers and/or Constant Combat Powers, the card affects all of the Personality Powers and/or Constant Combat Powers on that personality if he has more than 1.
+
+
+Advancing your Main Personality
+This section explains how MPs advance (or lose) Personality levels. Higher levels of personalities mean higher power. Here’s how you can do it:
+
+
+Anger
+Whenever a player has 5 or more anger, that player’s Main Personality immediately advances a personality level, if possible. Card effects raise a player’s anger a certain amount.
+
+
+Anger from a single effect never carries over.
+
+
+If you lose a personality level or advance a personality level in some other way than reaching 5 or more anger, your anger level is not changed.
+
+
+If you are at your highest personality level and you have 5 or more anger, raise your MP to your highest power stage and set your anger to 0.
+
+
+Taking Them Down A Notch
+Your MP can only lose a personality level from card effects. Whenever an MP loses a level, the player sets their power stages to 5 above 0, on the lower level, no matter what power stage they were before. Any Drills you have in play get discarded as well.
+
+
+Allies
+
+
+What do Allies do?
+Allies are Personality cards that help your Main Personality. You can redirect power stages of damage to your Allies, and you can have your Allies attack and use their card powers when your Main Personality is set on one of the bottom 2 power stages (including 0).
+
+
+Putting Allies into Play
+Allies are placed into play during the Non-Combat Step by the Attacker for the turn, they are initially set at 3 power stages above 0. When you place Allies into play, they must be the same  personality level as your Main Personality or lower. If your Main Personality is level 1, you can  only play level 1 Allies. If your Main Personality is level 2, you can play level 1 or level 2 allies.
+
+
+Majin personalities cannot be played as Allies unless the MP playing them is also a Majin.  Majin MPs can only play Majin allies. 
+
+
+Cell Jr. personalities cannot be played as Allies unless the MP playing them is Cell.
+
+
+Overlaying Allies
+After the Ally is in play, you can play that Allies next level Personality card on top of him. This is called “Overlaying”. When you overlay, you set the Ally to his highest power stage on his next level. It is okay to have an Ally’s overlaid level exceed your Main Personality’s level. Card effects that place Allies into play can be used to overlay Allies.
+
+
+If a card discards an Ally with 2 levels because of overlaying, both levels of the Ally are discarded, and the owner gets to choose in which order all of that Ally’s levels go to the discard pile.
+
+
+Powering Up Allies
+Allies always Power-Up by 1 during your Power-Up Step no matter what an Ally's Power Up Rating is.
+
+
+Saibaimen / Cell Jr. Rule
+
+
+Saibaimen
+Because Saibaimen are seedlings, they can be used as multiple Allies.  All of the Ally rules apply to Saibaimen except that both you and your opponent can use Saibaimen as a multiple Ally.  You can have up to 3 of each copy of Saibaimen in your deck.  The limit for the whole field of play is 9 Saibaimen (3 of level 1, 3 of level 2 and 3 of level 3.)  If a player uses Saibaimen as an MP, then that player is not allowed to not use Saibaimen as Allies.
+
+
+Cell Jrs.
+Cell Jrs. can only be Allies for Cell when he is a Main Personality and, like Saibaimen, duplicates are allowed in play.  There are 3 different Cell Jr. personality cards: Cell Jr. 1 level 1, Cell Jr. 1 level 2 and lastly Cell Jr. 2 level 1.  The Cell Jr. 1 level 2 will only overlay on its matching Cell Jr. 1 level 1, but can play to its level 2 when Cell is at his level 2 personality level or above.  The entire field of play can have 9 Cell Jrs. in play at once.
+
+
+Allies and Damage
+When one of your opponent’s attacks becomes successful, you may choose to redirect any power stages of damage the attack would deal to one of your personalities not in control of Combat. If your opponent has to use the Physical Attack Table, he still uses the power rating of the personality in control of Combat.
+
+
+The personality taking the power stages of damage must take all of the damage of that one attack. In other words, if your opponent does 5 power stages of damage with an attack, you cannot deal 2 power stages to one ally and 3 to another. Any power stages of damage converted into life cards of damage are still discarded from your Life Deck.
+
+
+Allies Taking Over Combat
+If your MP is at 0 or 1 power stage above 0, you may choose for one of your Allies to take control of Combat for your MP. When this happens, your Ally acts just like your MP and can perform attacks, and use its personality powers. You also use the Ally’s power rating when the Physical Attack Table is used.
+
+
+The Ally does not have to be at 0 or 1 power stage above 0 to allow the MP or another Ally to take over Combat.  You may choose to keep the current Ally in control of Combat, or have another personality take control of Combat.  If an Ally performs an attack, no other personality of the same player may take control of Combat until the attack resolves.  Whenever you enter the Defender Defends phase, you must choose which personality is in control of Combat.  That personality must stay in control of Combat until the attack is resolved.
+
+
+Allies cannot use their Personality Powers or Constant Combat Powers unless they are in control of Combat. When your Ally takes control of Combat from your MP, it remains in control as long as your MP is still at its bottom 2 power stages or until you have another personality take control of Combat.
+
+
+Once an Ally has taken control of Combat, it can use its card power even if the MP already used its card power during the same Combat Step.
+
+
+Damage can still be redirected from the Ally taking over Combat to other Allies or the MP.
+
+
+Allies cannot use “When Entering Combat” effects since they cannot be in control of Combat during the Prepare Phase.
+
+
+If an Ally has taken control of Combat, and then it leaves play or your opponent gains control of the Ally, the MP immediately takes control of Combat again.
+
+
+The control of Combat always returns to the MP at the end of Combat.
+
+
+Energy Combat, Physical Combat and Combat Cards
+These cards either will use up your Attack Phase or defend during your opponent’s Attack Phase. The 3 kinds of cards all share some common rules. The first rule is that you normally play them from your hand during an Attack Phase.
+
+
+How do you play a Energy Combat, Physical Combat or Combat card?
+First, you play the card from your hand and place it on the table, and then you use it. After the effects on the card are used, the card is discarded unless the card says otherwise.
+
+
+Energy Combat Cards
+These cards generally perform or defend against an energy attack.
+
+
+Physical Combat Cards
+These cards generally perform or defend against a physical attack.
+
+
+Combat Cards
+Generally Combat cards either stop attacks or produce effects that are not an attack.
+
+
+Non-Combat Cards
+Non-Combat cards produce effects that generally are not attacks. They are played in front of you during your Non-Combat Step, and they remain face up on the table until they are used. There are 2 kinds of Non-Combat cards:
+
+
+Non-Combat / Non-Drill Cards
+Generally, you use a this card in your Attack Phase in the Combat Step, then you discard them from play.
+
+
+Drill Cards
+Drills are also played during the Non-Combat Step. You play them face-up and leave them on the table. Drills are constantly in use for their game effects as long as they are in play, and may even create effects multiple times within a turn. You must use a Drill’s ability even if you don’t want to (unless that Drill’s power uses the word “may” in its power). When your MP advances or loses a personality level, all of your Drill cards in play are immediately discarded.
+
+
+Freestyle Drills
+If the first word of a Drill does not reference a Martial Arts Style, then it is a Freestyle Drill and can be played in any deck regardless of the Tokui-Waza declared. You can have multiple copies of a Freestyle Drill in play.
+
+
+Styled Drills
+These drills belong to one of the six Martial Arts Styles. A Styled Drill will have the name of a Style as the first word of its title as well as a Kanji that matches the Style.
+
+
+- If you have a Styled Drill in play, you cannot play another Drill from a different Martial Arts Style.
+
+
+- If you have a Styled Drill in play, you can only have 1 copy of that Drill in play. You can have other Styled Drills in play if they all belong to the same Martial Arts Style and are different from any other Styled Drill you have in play.
+
+
+- Both players may each have a copy of the same Styled Drill in play.
+
+
+- Freestyle Drills can always be in play with Styled Drills.
+
+
+- When a player draws a Drill that cannot be placed in play because it doesn't match the Style of a Drill he already has in play, he may immediately show it to his opponent and shuffle it back into his Life Deck, but he does NOT get to draw a card to replace the unplayable Drill.
+
+
+Dragon Balls
+Dragon Ball cards represent the mystic Dragon Balls in the show. Each has its own unique power in the game, and when you control all 7 Dragon Balls of the same type, you win the game.
+
+
+If you get the last of the 7 Dragon Balls by playing it, you win. But if you acquire the 7th Dragon Ball by capturing it, you must control the 7 Dragon Balls until the beginning of your next turn as the Attacker to win.
+
+
+You gain control of Dragon Balls by playing them from your hand in front of you, and by capturing them from your opponent. When you play a Dragon Ball, you immediately use its effects.
+
+
+Your deck can only have one type of Dragon Balls in it.
+
+
+Dragon Ball Immunity - If a card lets anyone search through Life Decks for a card, Dragon Balls CANNOT be the object of such a search unless the card states that you may search for a Dragon Ball.
+
+
+Capturing Dragon Balls
+You can capture Dragon Balls from your opponent and use their powers. When you capture a Dragon Ball, you must choose to use all or none of its powers when you capture it. There are 2 ways to capture Dragon Balls: card captures and life card captures.
+
+
+Card Captures - Some cards allow for the capture of Dragon Balls.
+
+
+Life Card Capture - If your successful attack forces your opponent to discard 5 life cards of damage or more, then immediately after damage is dealt you can capture any one of your opponent’s Dragon Balls that are currently in play. This means that he must actually discard the cards for damage.
+
+
+Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.
+
+
+Dragon Ball Floating Effects - If a Dragon Ball produces a floating effect and the Dragon Ball is captured, the floating effect is cancelled. If the capturing playing uses its power, then it becomes active again.
+
+
+Discarding Dragon Balls
+When a Dragon Ball goes to the Discard Pile for any reason, check to see if the Dragon Ball is already in play. If so, it is removed from the game. If it is not already in play, then it goes facedown at the bottom of your Life Deck.
+
+
+Discarding Dragon Balls when Taking Life Cards of Damage
+Dragon Ball cards do not count as damage when you discard them from your Life Deck as damage from an attack. You must flip over a different card for damage if you uncover a Dragon Ball.
+
+
+Discarding Dragon balls When Losing Life Cards for Effects
+When you discard life cards that are NOT a result of damage from an attack, the Dragon Balls DO count as cards discarded for that effect.
+
+
+Dragon Ball Loop - When you take life cards of damage and only have Dragon Balls in your Life Deck, you will get stuck in an infinite loop of discarding Dragon Balls because of the rules listed earlier. This is called a Dragon Ball Loop. If you get caught in a Dragon Ball Loop, you lose the game.
+
+
+Battleground and Location Cards
+Battleground and Location cards are places in the Dragon Ball universe where fights may or may not have happened. They have a unique template that is placed sideways on the table. Battleground and Location cards affect all players at all times.
+
+
+Battleground and Location cards are played during your Non-Combat Step just like a Non-Combat card. However, whenever you play a Location card during your Non-Combat step, you must skip the Combat Step of that turn.
+
+
+In general, there can only be one Battleground or Location in play at any time. If a Battleground or Location card is played and there is already one in play, you remove the Battleground or Location card that is already in play from the game and the new one comes into play.
+
+
+You cannot place a Battleground or Location card into play if there is already a Battleground or Location card of the same name in play.
+
+
+________________
+
+
+5. General Gameplay Clarifications
+
+
+Attaching
+
+
+Attaching Cards
+Some cards “attach” to other cards. When a card attaches, it is physically placed under the card is attached to. An attached card stays in play until the card it is attached to leaves play or a condition on the card is made which causes it to detach. When that happens, discard the card that is attached.
+
+
+More Notes on Attaching
+When a Non-Combat card attaches itself to another card in play, you must use the card before it attaches itself to the appropriate card. Any cards that would prevent you from using a Non-Combat card would not affect an “attaching” card after it has already been attached. Cards that remove Non-Combat cards from play may remove attached Non-Combat cards and their effects would be absolved.
+
+
+
+
+Cards that Attack and Block
+Some cards can perform AND stop attacks. Such cards can only be played as either an attack or to stop an attack. They cannot do both when they are used.
+
+
+Conflicting Card Effects
+If 2 cards have conflicting instructions, the card that prohibits the instruction overrides the other card.
+
+
+Do-What-You-Can Rule
+If a card effect tells you to do something that cannot be done (or can only be partially done) in the game, do what you can and continue play. This rule does not apply to the costs of cards and effects.
+
+
+“May” Rule
+When a card effect has the word “may” in it, then there is an effect that you have the choice to do or not. Otherwise you must do what you can on that card.
+
+
+“______ only” Cards
+To use a card that is “_______ only,” your Personality in control of Combat must match the Personality the card identifies. You can put these cards in any deck, but to use them you must have the matching Personality be in control of Combat.
+
+
+- Physical Combat, Energy Combat, and Combat cards
+You must have a personality in control of Combat that fits the “_____ only” requirement in order to play and use the Physical Combat, Energy Combat, or Combat card.
+
+
+- Non-Combat cards
+You may play/place into play a Non-Combat card with _____ only without having that personality in control of Combat. But, you must have a personality in control of Combat that fits the “_______ only” requirement in order to use the Non-Combat card.
+
+
+Ownership
+The owner of a card is the person who brought the card to the game in his deck. All cards revert back to their respective owner after a game ends or when it leaves play.
+
+
+Parentheses Text in Card Powers
+When you see parentheses in a card power with italicized text inside, it is explaining how a card can be used. It is NOT part of the normal timing sequence of the game. Sometimes text in parentheses will explain special rules for the card that would normally break or change a rule.
+
+
+Revealing Cards
+If a card tells you to look at or reveal cards from either your Life Deck or Discard Pile, but does not tell you what to do with them afterward, then the cards must be put back where they came from in the exact same order they were in.
+
+
+Searching for Cards a.k.a “Cherry Picking Rule”
+Whenever you use a card effect to search for a card in your Life Deck, always show your opponent the card you searched for and shuffle your Life Deck and allow him to cut your deck. 
+
+
+Whenever you search your Life Deck for a card and there is no legal card that you can get, you may fail the search. If this occurs, shuffle your Life Deck and proceed with the game. Your opponent does not get the option to look through your Life Deck to make sure that there  are no legal cards for you to get.
+
+
+Remove from the Game
+When a card effect removes a card from the game, it is put into a pile off to the side and cannot be used for the rest of the game, unless another card effect brings it back into play.
+
+
+Stopping Unstoppable Attacks
+If an attack cannot be stopped, a player may try to stop it anyway to gain the benefits of any effects on the card he uses. However, the card must be able to stop that same kind of attack.
+
+
+Timing Conflicts
+If a player has multiple cards or card effects that occur at the same time, that player may choose the order in which the cards are used. If there are multiple cards or card effects that occur at the same time for both players, the Attacker for the turn uses his card effects first.
+
+
+
+
+The Difference Between “Costs” and “Requirements”
+
+
+What is a Cost?
+Costs are compulsory actions required to play a card in the first place. To avoid any confusion on the term “cost” the following definition now is in place: A cost exists on a card only if the word “cost” (or the terms “costs” and/or ”costing”) appears on the card itself. Energy attacks that don’t tell you the basic cost on the card gain “Costs 2 power stages to perform” after the sentence describing the energy attack.
+
+
+What is a Requirement?
+In general, a requirement is an action that may be done to get a bonus effect. Any condition that must be met when playing a card that is not specifically named on the card as a cost. If a card doesn’t specifically use the word “cost” or “costs” (or costing on some older cards), then any requirement that must be met to play such a card cannot be affected by
+cards the influence or are influenced by the cost of cards.
+
+
+Damage Caps
+When a card effect states the “maximum” amount of damage you can take from an attack, it only affects the type of damage stated.
+
+
+Whenever a card puts a “cap” on how much damage you can receive for the attack, the cap is applied when dealing damage.
+
+
+Power stages of damage that convert into Life Cards of damage because the defending personality is at 0 happens as damage is being dealt, and not during damage calculation.
+
+
+Cards Leaving Play
+When a card is discarded from play, it leaves play first before it reaches the discard pile. When a card is removed from the game from play, it leaves play before it is removed from the game.
+
+
+Use When Needed Effects
+The phrase "Use when needed" does NOT interrupt any parts within the Battle Sequencer. You may use "Use when needed" cards in between the parts of the Battle Sequence, but not DURING one of the parts.
+
+
+Outside of the Combat Step, "Use when needed" cards can be used at any time.
+
+
+If a “Use when needed” card affects another “Use when needed” card, then the effect occurs before the use of the previous “Use when needed” card.
+
+
+Cards Preventing Main Personality Power Usage
+If a card effect keeps you from using your Main Personality for any reason, it only keeps you from using that Personality’s Constant Combat Powers and/or Personality Powers.
+
+
+Performing Attacks and preventing their use
+When an opponent keeps you from performing a type of attack, your opponent is keeping you from using the card.
+
+
+Stopping a player from using cards
+Whenever a card specifically does not allow you to use a Combat, Physical Combat, or Energy Combat card, you cannot play that card either.
+
+
+Referencing
+Whenever a card refers to your “opponent”, or “you”, it affects all of that player’s personalities.
+
+
+If a card text contains, "(name here) only", then this card may only be used by that personality. If the card text includes the sentence, " If used by (name here), draw a card", only that specific character may use that specific effect, but any other effects happen for any of the other characters that use this card.
+
+
+Skipping Attack Phases
+When a player skips an Attack Phase because of a card effect, play continues as if the Attack Phase never happened. This means that any card effects that happen at the beginning of the Attack Phase do not work on the skipped Attack Phase, and other card effects that happen “in the next Attack Phase” happens in the next available Attack Phase.
+
+
+Copying Cards
+When a card copies a card that your opponent has played, the “copied” card that you use is an extra card that is created for this effect, which gains all of the text from the card that you are copying. This extra card then disappears when it is finished instead of going to your discard pile or your removed from the game pile.
+
+
+Discarding your own cards for effects
+If you have a card effect that keeps your cards from being discarded, you cannot use your own card effects to discard those cards as well, and you do not get to use any effects that would require you to discard that type of card (because no such card was discarded).
+
+
+Putting Cards into play with card effects
+When you use a card effect to place a card into play, the card you put into play must still be a legal card you could play unless the card effect dictates otherwise.
+
+
+When you place a Drill or Ally into play with a card power, you must still follow the normal rules as if you were putting that Ally or Drill into play.
+
+
+Card effects that affect other cards and multiple use cards.
+Whenever a card power affects your next attack and you use a card or power that is used multiple times in a Combat, it only affects the first use of that card.
+
+
+Randomized Discards of Face-Up Hands
+Whenever you have a card effect that allows you to look at your opponent’s hand and you use another card effect to discard a card at random from his hand, your opponent’s hand is randomized and temporarily placed face down, and a random card is then chosen and then the cards are placed up as before.
+
+
+6. Personality Relevant Rules
+
+
+Rogue Personalities
+The following personalities are considered to be Rogue Personalities. Rogue Personalities can be played as either Heroes or Villains, but cannot be both at the same time.
+
+
+* Piccolo
+* Vegeta
+* Android 16
+* Android 18
+* Majin Vegeta
+* Majin Buu (Majin Buu Saga only)
+* Majin Dabura
+* Bardock
+
+
+At the start of the game, if you have a Rogue Personality as your Main Personality, you must declare if your Main Personality is a Hero or a Villain. Your alignment must be decided as you are building your deck. You cannot have both Hero and Villain allies in your deck and decide at the start of the game which ones you want to use.
+
+
+While all characters can have “Heroes only” and “Villains only” cards in their deck, a Rogue personality can only use one type in any given game. If you declare your Rogue Personality to be a Hero at the start of the game, you still would not be able to use “Villains only” cards.
+
+
+Saiyan Heritage Personalities
+The following personalities have Saiyan Heritage and can be used as a Main Personality in a Saiyan Tokui-Waza deck as well as use cards that say “Saiyan Heritage only".
+
+
+* Goku
+* Den-Goku
+* Hercule-Goku
+* Vegeta
+* Vegito
+* Gohan
+* Future Gohan
+* Trunks
+* Kid Trunks
+* Goten
+* Gotenks
+* Mighty Mask
+* Raditz
+* Nappa
+* Bardock
+* Turles
+* Broly
+* Paragus
+* Cell
+* Cell Jr (1 and 2)
+* Majin Vegeta
+* Pan
+* King Vegeta
+* Tarble
+
+
+Namekian Heritage Personalities
+The following personalities have Namekian Heritage; can be used as a Main Personality in a Namekian Tokui-Waza deck and use “Namekian Heritage only” cards.
+
+
+* Piccolo
+* Nail
+* Dende
+* Den-Goku
+* Lord Slug
+* Cell
+* Cell Jr (1 and 2)
+* Pikkon (Note: Pikkon canot use “Namekian Heritage only” cards but he can declare a Namekian Tokui-Waza.)
+* Kami
+* King Piccolo
+
+
+Celestial Fighters
+Celestial Fighters are fighters who have died and are now in The Other World. Celestial Fighters have a Purple background. Not all Celestial Fighters are still heroes, Some are now Villains. The following personalities are Celestial Fighters:
+
+
+* Pikkon - Hero
+* Olibu - Hero
+* Maraikoh - Hero
+* Arqua - Hero
+* Tapkar -Hero
+* Froug - Hero
+* Chapuchai - Hero
+* Caterpy - Hero
+* Torbie - Hero
+* Fangs - Hero
+* See-Through - Hero
+* Bandages - Hero
+* Spike - Hero
+* Grandpa Gohan - Hero
+* Ghost Usher - Hero
+* Janemba - Villain
+
+
+
+
+Majin Personalities
+Majins are/were villains who were under the control of Babidi; all Majins have Majin in the card title or are turned into Majins by another card effect. Cards that say “Majin only” can only be played or used by Majin personalities. Certain Majins are on the Rogue Personality list and can be played as heroes; this does not stop them from being Majins either.  Majin personalities cannot be played as allies unless the MP playing them is also a Majin.  Majin MPs can only play Majin allies.  The following personalities are Majins:
+
+
+* Majin Babidi
+* Majin Bibidi
+* Majin Buu
+* Majin Dabura
+* Majin Pui-Pui
+* Majin Spopovich
+* Majin Vegeta
+* Majin Yakon
+* Majin Yamu
+* Majin Buu’s Kamikaze Ghost
+
+
+
+
+Special Personality Rules
+
+
+Alternate Personality Rule
+The following personalities are considered to be completely seperate personalities from each other:
+Vegeta and Majin Vegeta and King Vegeta, Gohan and Future Gohan and Grandpa Gohan, Trunks and Kid Trunks, Cooler and Meta-Cooler, Cell and Cell Jr., and Piccolo and King Piccolo.
+
+
+“_____ only” cards cannot be used by both personalities.  For example, Majin Vegeta cannot use “Vegeta only” cards, and Vegeta cannot use “Majin Vegeta only” cards.  Thus, “_____ only” cards must match exactly the name of the personality.  The exception to this is Future Gohan, who can use “Gohan only” cards.
+
+
+These personalities cannot be intermixed to make up a personality stack.  For example, level 1 Future Gohan, level 2 Gohan, and level 3 Future Gohan cannot be a single Main Personality set.
+
+
+Cards that target these personalities will not affect the other.  For example, the card “Stunned”, which affects Trunks, will not affect Kid Trunks.
+
+
+Named cards retain their 3 per deck limit unless the name matches exactly.  For example, Kid Trunks may only run 3 copies of “Trunks Energy Sphere”.  The exception to this is Future Gohan, who may run 4 copies of Gohan named cards, such as “Gohan’s Kick”.
+
+
+“Z Power Stages”
+King Kai, Grand Kai, Supreme Kai, Supreme West Kai, and  Mr. Popo have Zs instead of actual numbers for their power ratings. Whenever comparing power ratings on the Physical Attack Table, if either personality has Z power stages, the result is always 2.
+
+
+Whenever a card compares the power ratings between 2 personalities and 1 or both personalities have “Z” for their power rating, the player who is using the card may choose which affect they want to use.
+
+
+Whenever a card refers to a specific power rating, the player who is using the card may choose any power rating they want to use for that effect.
+
+
+When you compare power stages and one of the personalities has Z for his power rating, you still use the Physical Attack Table, even though the result will always be 2.
+
+
+Bubbles
+Whenever Bubbles performs a physical attack with a “Tuff Enuff only” card, the base damage for that attack is always 3, regardless of what the Physical Attack Table tells you, this includes Z power stages. This does not affect Final Physical Attacks. In every other case, Bubbles’ power ratings work like any other power rating that is an actual number.
+
+
+“Gate-Fold” HT cards
+High-Tech cards from Buu Saga are special in that aside from Piccolo and Majin Dabura, all the High-Tech cards were both a level 1 and a level 2 personality. You had to open the card up to see the level 2. If you use one of these Gate-Fold High-Techs you must use BOTH levels on the card. They still count as 1 card per level however.
+
+
+Ginyu Force
+If you play the Ginyu Force as a Main Personality you are considered to have 4 Allies in play for the purpose of card effects. However you cannot redirect damage to these “Allies” and when the Ginyu Force is played as an Ally, it only counts as 1 personality. These “Allies” cannot pay for attacks and cannot leave play for any reason.
+
+
+
+
+If the Ginyu Force is your Main Personality, you can only have 3 copies of Captain Ginyu, Jeice, Guldo, Recoome or Burter named cards in your deck. The Ginyu Force can use 4 Ginyu Force named cards in their deck though.
+
+
+Mighty Mask
+Mighty Mask cannot use Kid Trunks or Goten personality cards as part of his Main Personality, and vice versa.
+
+
+Mighty Mask can have 4 copies of Goten and Kid Trunks Named cards in his deck.
+
+
+Mighty Mask can use Goten and Kid Trunks only cards.
+
+
+If you play Mighty Mask as your Main Personality, you are considered to have +1 Ally in play for game effects. This “Ally” works just like the “Allies” on the Ginyu Force.
+
+
+Mighty Mask cannot fuse into Gotenks.
+
+
+Pikkon
+Pikkon can declare a Namekian Tokui-Waza but cannot use “Namekian Heritage only” cards.
+
+
+Supreme West Kai
+Supreme West Kai is banned.  Supreme West Kai cannot be played as an Ally.
+
+
+Supreme West Kai cannot play or use cards that can be used to stop or prevent damage from an attack playing or using cards in response to an attack. Floating effects that prevent damage still work when using Supreme West Kai.
+
+
+If Supreme West Kai is your Main Personality, whenever your opponent performs an attack Supreme West Kai cannot be played as an Ally.
+ “Even” or “Odd” and announce it. You remove the top card of your Life Deck from the game and you check the card number. If your opponent guessed correctly the attack is
+successful, if your opponent guessed incorrectly, the attack is stopped. This will stop Focused attacks.
+
+
+The ability of removing the top card of your Life Deck takes up your action in response to an Attack, and you may not use other cards that could be used in response to an attack.
+
+
+Supreme West Kai must use Pure Defense before the opponent declares Even/Odd.
+
+
+Supreme West Kai cannot have cards in her deck that end Combat or use cards that end Combat.
+
+
+
+
+________________
+
+
+7. Keywords
+
+
+Empower
+
+
+What is Empower?
+Empower is a keyword that appears on cards that perform attacks. Empower can appear anywhere in a card’s secondary effect text. Empower allows you to add damage to your attacks at the cost of the rest of the text on the card.
+
+
+What does Empower do?
+Empower always appears as “Empower X” where X is the card’s Empower Number. When you perform an attack with Empower, after you pay any costs for the attack, you may declare to use the Empower. If you do, the attack will do +X life cards, however any text that appears on the card after the Empower is deleted for that attack.
+
+
+More notes about Empower:
+
+
+* Cards can have more than 1 instance of Empower. The card CHARGE! (Kid Buu Saga #46) has 5 instances of Empower. If you use the first Empower on CHARGE!, you would not be able to use any other Empowers on that card.
+
+
+* Empower can prevent a card from being removed from the game after use. If a card has “Remove from the game after use.” printed in its card text and has Empower somewhere before it, then if you use the Empower the card would only be discarded.
+
+
+Endurance
+
+
+What is Endurance?
+Endurance appears on some cards in the card’s power box/rules text appearing at the start of the text in the form of Endurance #, where # is the card’s Endurance value.
+
+
+A card’s Endurance effect can only be used if you declared a Tokui-Waza and you have a Mastery card in play. Cards with Endurance can still be used in no Tokui-Waza decks.
+
+
+What does Endurance do?
+Endurance is used directly from your Life Deck while you are taking damage from an unstopped attack. When you flip over a life card for damage, you check to see if the card has an Endurance value. If so, you may use the Endurance on the card to prevent some of the damage you are taking. To do this, take the card with Endurance and remove it from the
+game and you prevent the next # life cards of damage from the attack. # is the card’s
+
+
+More details about Endurance:
+
+
+* Left Over Endurance disappears if any Endurance remains after all the damage is dealt. You do not get to stockpile up extra Endurance.
+
+
+* Endurance can only be used while you are discarded life cards for Damage. Endurance cannot be used on card effects that would discard or remove cards from your Life Deck as a secondary or “If successful” effect.
+
+
+* The card itself counts as a discard plus whatever is listed as endurance counts for that many more life cards of damage.
+
+
+* Damage must be preventable. Endurance cannot be used when a card effect stops your ability to prevent damage.
+
+
+* Whenever an attack cannot be prevented by a specific card type, then Endurance from cards of that type cannot prevent damage from that attack.
+
+
+* Endurance can prevent a Dragon Ball Capture. If your opponent’s successful attack can deal 5 or more life cards of damage, your opponent can capture one of your opponent’s Dragon Balls. But he or she can only do this after you have manually discarded 5 or more cards from your Life Deck. So, you can use your Endurance to prevent enough damage to stop the capture of a Dragon Ball.
+
+
+* Endurance still works if an effect makes you remove life cards of damage from the game instead of discarding them. If an attack deals life cards of damage, and those life cards of damage are not discarded but rather are removed from the game, you can still use Endurance on a card before it gets removed from the game.
+
+
+* Whenever a card effect keeps you from using a card, you are still allowed to use the Endurance of that card.
+
+
+Focused
+
+
+What is Focused?
+Focused is a special type of attack. A focused attack cannot be stopped or prevented by cards that have the ability to stop or prevent damage from both physical and energy attacks. An attack is focused if the word “Focused.” appears as a keyword in the card’s text. A Focused attack will have “Focused” appear before the card states what type of attack.
+
+
+What does Focused do?
+If a card has the ability to stop or prevent damage from both physical and energy attacks, then that card cannot stop or prevent damage from a focused attack. Your opponent can still play and use cards that stop or prevent damage from both types of attacks to use their secondary effects but the attack will still be successful and deal all its damage.
+
+
+Endurance can still be used to prevent damage from a focused attack.
+
+
+
+
+Fusion
+
+
+What is Fusion?
+Fusion is triggered by 1 of 3 cards (The Fusion Dance, Potara Earrings, Fusion Reborn).  It is the process of taking 2 of your personalities, and replacing them with the appropriate Fusion personality card. This personality is considered to be the fused personality and both of the personalities used to fuse.
+
+
+What does Fusion do?
+If you have 2 fusible personality cards in play at the same personality level, and you use a card that allows them to fuse (The Fusion Dance, Potara Earrings, Fusion Reborn), you may temporarily remove them from play and take the same level Fusion Personality card for those 2 personalities and place it in play directly out of your Sensei Deck. You set the Scouter at the highest power stage and you set your Warrior Sword to 0.
+
+
+If a fusion occurs between 2 Allies, then the fused character is 1 Ally. The 2 personalities that are fused are still in play and the regular Ally rules still apply. If the fusion occurs with a Main Personality, the Fusion Personality card becomes your Main Personality.
+
+
+Fusion personalities in your deck and sensei must be at least 2 levels lower than your Main Personality’s highest personality level.
+
+
+Some Fusions use a Timer to determine how long a Fusion lasts.
+
+
+The Fusion Dance
+At the beginning of each of your turns place the top card of your Life Deck under your Warrior Sword. When your Warrior Sword has 5 or more cards under it, the characters immediately defuse and the Fusion Personality card is removed from the game, the two characters return to play at their highest power stages, and cards under the Warrior Sword are shuffled into your Life Deck.
+
+
+Potara Earrings
+This fusion only lasts while Potara Earrings is attached to the fused personality. Fusion in this way still requires 2 personalities at the same personality level. When a Potara Earrings Fusion ends, the Fusion personality is removed from the game, and the 2 personalities used in the fusion are returned to play at their highest power stages.
+
+
+Fusion Reborn
+This fusion lasts until another card effect, such as Majin Buu’s Stomach, specifically causes the Fusion to end.  When a Fusion Reborn Fusion ends, the Fusion personality is removed from the game, and the 2 personalities used in the fusion are returned to play at their highest power stages.
+
+
+More Details about Fusing:
+
+
+* If a personality used in a Fusion has Saiyan or Namekian Heritage then the fused personality will have that Heritage too.
+
+
+* You can only have 1 copy of a specific Fusion Personality card in your Sensei Deck.
+
+
+* If you have a Fused Character in play and the Fused Character leaves play before the timer runs out, any cards that are being used as a timer (The Fusion Dance) are shuffled into your deck and the timer is stopped.
+
+
+* Any cards that specifically target a personality that is part of a fusion still affect the fused personality.
+
+
+* When you fuse for a Fusion Personality, you cannot use card effects to keep those personalities in play.
+
+
+* While fused, you are still considered to have both personalities used in the Fusion in play; however they do not count as Allies for card effects. While you have a Fusion personality in play, you may not play the either of the 2 Personalities used for the Fusion as an Ally.
+
+
+* Fused personalities can use “____ only” cards for their 2 original personalities.
+
+
+* If a Fusion Personality is your Main Personality, any cards with that Fusion Personality’s name in the title are Named Cards for your Main Personality while you are Fused.
+
+
+* When your Main Personality is a Fusion personality and you reach 5 anger or use a card effect to advance a personality level, then you raise your Main Personality to its highest power stage. If you reached 5 or more anger, your anger is reset to 0. You do NOT get to advance to the next level of your Fusion Personality.
+
+
+* If a card effect would lower your Main Personality while you have a Fusion Personality as your Main Personality, nothing happens.
+
+
+Piccolo and Nail only
+Cards that state “Piccolo and Nail only” are considered to be “Namekian Heritage only” cards.
+
+
+Villains, Goku, and Gohan only
+Cards that state “Villains, Goku, and Gohan only” are considered to be “Saiyan Heritage only” cards.
+
+
+
+
+________________
+
+
+8. Banned / Restricted List
+
+
+The following cards have been placed on the Banned or Restricted list in order to keep the play environment fun and challenging for everyone in tournaments.
+
+
+Banned List
+The following cards are banned in all DBZ CCG Tournaments:
+
+
+Chiaotzu’s Psychic Halt
+Cosmic Backlash
+Dragon’s Glare
+Dream Machine Battle
+Feeding Frenzy
+Supreme West Kai (Levels 1, 2, and 3)
+The Talking Ends Here
+This Too Shall Pass
+
+
+Restricted List
+The following cards are classified as Restricted and have been given the text “Limit 1 per deck” after their original printing. Cards that are printed as being Limit 1 per deck do not appear on this list.
+
+
+Battle Pausing
+Blue Terror
+Cell’s Backslap
+Energy Lob
+Expectant Trunks
+Frieza’s Force Bubble
+Goku’s Lucky Break
+Initiative
+Injured Circuits
+Krillin’s Search
+Nappa’s Energy Aura
+Nappa’s Physical Resistance
+Namekian Energy Focus
+Orange Reflex
+Orange Uppercut
+Pure Defense
+Releasing the Sword
+Risky Maneuver
+Saiyan Headshot
+Saiyan Power Block
+Saiyan Truce Card
+Straining Destruction Move
+Super Saiyan Effect
+Teaching the Unteachable Forces Observation
+Trunks Effortless Drill
+Trunks Thinking
+Vegeta’s Physical Stance
+Vegeta’s Plans
+Vegeta's Quickness Drill
+Vegeta’s Smirk
+You’re Invited
+
+
+Semi-Restricted List
+The following cards are classified as Semi-Restricted and have been given the text “Limit 2 per deck” after their original printing. Cards that are printed as being Limit 2 per deck do not appear on this list.
+
+
+Caught Off Guard Drill
+Goku’s Physical Attack
+
+
+
+
+________________
+
+
+9. Specific Card Clarifications/Errata/Rulings
+
+
+Ally’s Sacrifice (Saiyan Saga - #156) - Treat this card as if it read, “Stops all of your opponent’s physical and energy attacks for the remainder of Combat. Remove one of your Allies in play from the game to use this card”.
+
+
+Ally Wins! (Saiyan Saga - #229) - Treat this card as if it read, “Your opponent discards one life card for every Ally you have in play. Remove from the game after use.”
+
+
+Android 13 Lv.2 (Movie 7 - #M2) – Android 13’s ability to remove your Android Allies from the game to advance a personality level must be done during one of your “Attacker Attacks” phases.
+
+
+Android 14 Lv.1 (Movie 7 - #M7) – Android 14 can take control of Combat with his Constant Combat Power and perform other attacks/do other things than just discarding a card from his hand to perform a physical attack doing +2 life cards of damage.
+
+
+Android 14’s ability to discard a card to do a physical attack doing +2 life cards of damage can be used multiple times each turn.
+
+
+Android 18 Lv.1 (Cell Saga - #182) – Treat her power as if it read, “When entering Combat as the attacker, look at the top 6 cards from your Life Deck and place them back on top in any order, then draw a card.”
+
+
+Android 18 Lv.1 HT (Cell Saga - #R7) - This power only lasts for the remainder of Combat.
+
+
+Android 18’s Stare Down (Android Saga - #90) - This card can affect Dragon Balls.
+
+
+Android 20 Lv.1 (Android Saga - #118) - Treat his power as if it read, “Lower Android 20 5 power stages to search your Life Deck or discard pile for any 1 personality with “Android” in the card title. Place the chosen personality card in play at 5 power stages above 0.”
+
+
+Android Tag Team (Movie 7 - #M29) – You can only get a personality with “Android” in the title from your removed from the game pile with this card and not your opponent’s removed from the game pile.
+
+
+Anger Management (Capsule Corp Power Pack - #CCPP3) – Treat this card as if it read, “Tuff Enuff only. Whenever you gain anger this Combat, all of your attacks do +1 life cards of damage for each anger level gained to a maximum of 5 for the remainder of Combat. The next attack you perform this Combat gains “Draw a card.” Remove from the game after use.” When you play Anger Management, any anger levels you gained before Anger Management was played do not count towards Anger Management.
+
+
+The addition of the “Draw a card” text only applies to the first time you use the attack. If a card or a power can be used multiple times in a Combat and receives the “Draw a card” text, you only get to draw a card the first time you use the attack.
+
+
+Arqua’s Arena (World Games Saga - #91) – If you place an ally into play while this Battleground is in play, the ally that you are placing into play cannot gain the power stages granted by Arqua’s Arena.
+
+
+Aura Clash (Cell Games Saga - #108) – Treat this card as if it read, “You cannot win by the Most Powerful Personality Victory for the remainder of the game. Raise your anger 6 levels. Raise your opponent’s anger 6 levels.”
+
+
+Baba’s Energy Blast (Saiyan Saga - #225) - Treat this card as if it read, “Use when needed. Your opponent discards 3 cards from his Life Deck. Remove from the game after use.”
+
+
+Battle Pausing (Saiyan Saga - #204) - Treat this card as if it read, "Draw the top 2 cards from your discard pile. Your opponent’s Main Personality gains 5 power stages. Remove from game after use."
+
+
+Black Bear Hug Drill (Saiyan Saga - #131) - Treat this card as if it read, “All of your physical attacks do +2 power stages of damage.”
+
+
+Black Defender Drill (Saiyan Saga - #152) - Treat this card as if it read, “All energy attacks performed against you, do 1 less life card of damage, to a minimum of 0.”
+
+
+Black Disarray Drill (Kid Buu Saga - #96) - Treat this card as if it read, “Sensei Deck only. When your opponent would discard any number of card(s) from his hand because of your card effects, the cards are discarded at random instead.”
+
+
+Black Energy Deflection Drill (Trunks Saga - #74) - Treat this card as if it read, “You may play an energy attack from your hand and pay its costs in order to stop an energy attack, and then your opponent discards 1 life card.” All secondary effects printed on that energy attack are resolved, “If successful” effects are not resolved and the defender takes no life cards or power stages of damage from the attack.
+
+
+Black Energy Stamina Drill (Frieza Saga - #72) - Treat this card as if it read, “All of your energy attacks cost 1 power stage for you to perform (after all modifiers from other cards/effects).”
+
+
+Black Fore Fist Punch (Saiyan Saga - #65) - Treat this card as if it read, “Energy attack doing 6 life cards of damage. If successful, your opponent loses 3 power stages, to a minimum of 0.”
+
+
+Black Free-Style Drill (Saiyan Saga - #136) - Treat this card as if it read, “After receiving damage from an energy attack, you may draw the bottom card of your discard pile. Cannot be used with any other Black Drills in play.” This is not a “Freestyle” Drill.
+
+
+Black Groveling Drill (Kid Buu Saga - #5) – You may not include copies of this card in your deck if you declared a Freestyle Tokui-Waza.
+
+
+Black Personal Smack (Babidi Saga - #4) – This card gains, “Remove from the game after use.”
+
+
+Black Physical Drill (Saiyan Saga - #143) - Treat this card as if it read, “All physical attacks performed against you, do 1 less power stage of damage, to a minimum of 0. Cannot be used with other Black Drills in play.”
+
+
+Black Saving Drill (Cell Games Saga - #38) – This card no longer has “Remove from the game after use.”
+
+
+Black Striking Drill (Saiyan Saga - #147) - Treat this card as if it read, “All of your physical attacks do +2 power stages of damage.”
+
+
+Black Takedown Drill (Saiyan Saga - #127) - Treat this card as if it read, “Once per Combat, you may draw a card after performing a successful attack.”
+
+
+Black Water Confusion Drill (Trunks Saga - #30) - This Drill affects all players.
+
+
+Blue Allies Drill (Frieza Saga - #70) – Treat this card as if it read, “Once per turn, search your….”
+
+
+Blue Backflip (Cell Saga - #65) - This card’s title has been clarified to say “Blue Flip.”
+
+
+Blue Battle Drill (Trunks Saga - #P4) - This Drill affects Dragon Balls (i.e. you cannot place Earth Dragon Ball 7 into play while this Drill is in play). This Drill affects all players.
+
+
+Blue Biting Drill (Kid Buu Saga - #11) – You may not include copies of this card in your deck if you declared a Freestyle Tokui-Waza.
+
+
+Blue Breakfall Drill (Saiyan Saga - #145) - Treat this card as if it read, “All physical attacks performed against you do 2 less power stages of damage, to a minimum of 0.”
+
+
+Blue Cradle Drill (Saiyan Saga - #138) - This works any time you must place a life card from your Life Deck into the Discard Pile, and not just with life cards of damage.
+
+
+Blue Deceiving Drill (Saiyan Saga - #129) - Treat this card as if it read, “When entering Combat as the defender, you may gain up to 3 power stages.”
+
+
+Blue Enemies Drill (Saiyan Saga - #141) - Treat this card as if it read, “Once per Combat, if your opponent has an Ally in play, you may take 1 less life card of damage from any physical attack.”
+
+
+Blue Holding Drill (Android Saga - #55) – Treat this card as if it read, “Your opponents may only place 1 Non-Combat card in play from their hand during their turn.” You can still put Non-Combat cards into play with other card effects, and Non-Combat cards put into play this way do not count towards your “1 Non-Combat a turn” from Blue Holding Drill.
+
+
+Blue Lunge (Fusion Saga - #97) - This card gains, “Remove from the game after use.”(1/15/04)
+
+
+Blue Neck Restraint Drill (Saiyan Saga - #150) - Treat this card as if it read, “All of your physical attacks do +3 power stages of damage. Cannot be used with any other Blue Drills in play.”
+
+
+Blue Off-Balancing Drill (Saiyan Saga - #125) - Treat this card as if it read, “All of your physical attacks do +1 power stages of damage.”
+
+
+Blue Reversal Drill (Saiyan Saga - #133) - Using this Drill’s power takes the place of a player’s attack. A player can only use the most recent physical attack performed against that player this Combat (stopped or unstopped). Copy the entire physical attack, as well as secondary effects and modifiers from the attack.
+
+
+When a card copies a card that your opponent has played (like Trunks Swiftly Moving and Blue Reversal Drill), the “copied” card that you use is an extra card that is created for this effect, which gains all of the text from the card that you are copying. This extra card then disappears when it is finished instead of going to your discard pile or your removed
+from the game pile.
+
+
+Blue Rush (Android Saga - #57) - Treat this card as if it read, “Physical attack. If you declared Tokui-Waza, this attack does 5 power stages of damage instead. If successful, Combat ends after damage, if any, is dealt.”
+
+
+Breakthrough Drill (Trunks Saga - #42) - This Drill affects Dragon Balls (i.e. you cannot place Earth Dragon Ball 7 into play while this Drill is in play). This Drill affects all players.
+
+
+Bulma, the Wife Lv. 1 (Kid Buu Saga - #45) - See Section 10: Power Level Errata.
+
+
+Bulma Finds a Dragon Ball (Saiyan Saga - #222) - This card is not a Dragon Ball.
+
+
+Bulma Finds a Drill (Saiyan Saga - #223) - This card is not a Drill.
+
+
+Captain Ginyu Reversal Drill (Frieza Saga - #74) - Treat this card as if it read, “Villains only. For every 3 power stages of damage you receive, per attack, your opponent loses 1 power stage of damage. Limit 1 per deck.”
+
+
+Caught Off Guard Drill (Cell Games Saga - #111) – This card gains, “Limit 2 per deck.” You cannot name or affect a Personality Card, Dragon Ball, Sensei, or Mastery. If you name Caught Off Guard Drill when you play Caught Off Guard Drill, no more Caught Off Guard Drills may be played or used, and any cards that were being affected by other Caught Off Guard Drills in play are no longer affected. If the Caught Off Guard Drill that is affecting Caught Off Guard Drill leaves play, the other Caught Off Guard Drills return back to normal.
+
+
+Later that turn your opponent makes you discard your Caught Off Guard Drill. Blue Round Throw is now again affected by your opponent’s Caught Off Guard Drill.
+
+
+Cell Jr. 1 Lv.1 (Cell Games Saga - #94) – This personality may search for Cell Jr. 1 or Cell Jr. 2. Using this personality’s power can allow you to overlay an Ally to a higher level than your Main Personality.
+
+
+Cell Smiles (Android Saga - #C1) - Treat this card as if it read, “Choose 1 card at random from your opponent’s hand. Your opponent shuffles that card into his Life Deck.”
+
+
+Cell’s Neck Grab (Lost Villains - #LV6) – Treat this card as if it read, “Cell only. Physical attack doing +3 power stages of damage. If successful, discard one of your opponent’s Allies in play and your opponent’s Main Personality loses 1 power stage for each power stage the Ally was at above 0.” If you do not discard one of your opponent’s Allies in play with Cell’s
+Neck Grab’s If Successful effect, your opponent’s Main Personality loses no power stages from the If Successful effect.
+
+
+Cell’s Style (Cell Saga - #Preview 6) – This card only modifies attacks performed by Cell. This card does not modify attacks performed by the Cell Jr(s) personality card.
+
+
+Chiaotzu Lv.2 (Saiyan Saga - #105) - If Chiaotzu is your Main Personality, and you use his power, Chiaotzu is removed from the game as the cost of the attack, no damage is dealt, and you lose. If Chiaotzu is your Ally, and you use this power, the damage from the attack is dealt, even though Chiaotzu is removed from the game as part of the cost.
+
+
+Chiaotzu’s Drill (Saiyan Saga - #230) - This card is a Non-Combat card, not a Physical Combat card. Treat this card as if it read, “All physical attacks performed against you, do 1 less power stage of damage, to a minimum of 0.”
+
+
+Chiaotzu’s Physical Defense (Saiyan Saga - #250) - Treat this card as if it read, “Stops all heroes from losing 1 life card of damage from every attack for the remainder of Combat. Remove from the game after use.”
+
+
+Chi-Chi Lv.1 (Saiyan Saga - #86) - Chi-Chi’s power can be used once per turn to stop a physical attack performed against Gohan or Goku. Your Main Personality doesn’t have to be at 0 or 1 stage above 0 in order for Chi-Chi to use this power.
+
+
+Chi-Chi, the Grandmother Lv.1 (Kid Buu Saga - #47) - See Section 10: Power Level Errata
+
+
+Concentration Drill (Trunks Saga - #P3) – This card only changes how a card is placed back into your Life Deck, and does not come into effect with Lord Slug Lv.3’s (#CP6 from the Capsule Corp Power Pack). This card allows you to shuffle cards back into your Life Deck instead of placing them somewhere in your Life Deck. This effect does not allow Lord Slug’s Lv.3 Constant Combat Power to shuffle even more cards back into your Life deck.
+
+
+Confrontation (Trunks Saga - #P2) - This card can affect Dragon Balls.
+
+
+Cutting the Tail (Saiyan Saga - #200) - Treat this card as if it read, “Set your opponent’s anger at 0. Remove from the game after use.”
+
+
+Deceptive Moves (Majin Buu Saga - #P4) - You cannot have this card in your Life Deck or Sensei Deck if you are declaring a Red Tokui-Waza.
+
+
+Dende, the Unlikely Hero Lv.1 (Frieza Saga - #48) - Dende must “take control” of Combat, and use his power “in place of an attack.” Then, at the end of Combat, take an Ally from your discard pile and put it into play at 4 power stages above 0. The Ally you bring into play with Dende must be legal. If you bring into play with this power, for instance, Yamcha Lv.2, and you place it on top of Yamcha’s Lv.1, Yamcha does not power up to full, but is placed at 4 power stages above 0.
+
+
+Don’t You Just Hate That (Trunks Saga - #125) - Treat this card as if it read, “Remove up to two of your opponent’s Non-Combat cards in play from the game. Remove from the game after use. Limit 1 per deck.”
+
+
+Double Whammy Treat this card as if it read (If this card discarded from your life deck at the end of the turn you may search your life deck for a level 1 ally and place him into play.)
+
+
+Dr. Willow (Cosmic Anthology - #CA4, #CA5, #CA6) – Dr. Willow cannot win by the Most Powerful Personality Victory.
+
+
+Dragon’s Victory (Cell Games Saga - #123) – You must have 4 anger to be able to play this card. If your opponent uses Where There’s Life, There’s Hope (Trunks Saga #157), you recheck to see if your opponent has 4 anger when its effects end.
+
+
+Dream Fighting (Saiyan Saga - #199) - Treat this card as if it read, “End Combat. Place the bottom card of your discard pile at the bottom of your Life Deck. Remove from the game after use.”
+
+
+Earth Dragon Ball 4 (Saiyan Saga - #76) - When this card is placed in play, increase your Main Personality’s anger 2 levels. The card’s power to skip the next Combat a player is forced into “remains active” until that player’s opponent declares Combat. When Combat is declared this effect skips Combat immediately (do not use “when entering Combat effects,” do not draw cards, do not take damage). The player who controls Earth Dragon Ball 4 controls the ability to skip Combat, so if EDB 4 is captured back and forth between 2 players, the ability to stop Combat does not stack.
+
+
+Earth Dragon Ball 5 (Saiyan Saga - #77) - Treat this card as if it read, “Raise any one of your personalities to his highest power stage. Raise your anger 2 levels. Draw 2 cards. Place the top 2 cards of your discard pile at the bottom of your Life Deck.”
+
+
+Earth Dragon Ball 6 (Saiyan Saga - #186) - When this card is placed in play, all of the controlling player’s opponents’ anger is lowered 2 levels. The power to end Combat “remains active” until the controlling player decides to end Combat. At that time, the player who controls the Dragon Ball raises his Main Personality to its highest power stage. The player
+who controls Earth Dragon Ball 6 controls the ability to end Combat, so if EDB 6 is captured back and forth between 2 players, the ability to end Combat does not stack.
+
+
+Earth Dragon Ball 7 (Saiyan Saga - #187) - When this card is placed in play, all of the controlling player’s opponents’ anger is lowered 2 levels. The controlling player may place this card in play from his hand during Combat, in place of an attack, to end Combat. If this card is placed in play during the controlling player’s Non-Combat step, that player does not get to end Combat.
+
+
+Earth Dragon Ball Combat (Saiyan Saga - #189) – Treat this card as if it read, “Energy attack. If successful, capture a Dragon Ball.”
+
+
+Empowerment! (Frieza Saga - #13) - Treat this card as if it read, “Heroes only. Raise your anger 1 level. If your Main Personality is Piccolo or Nail, raise your anger 2 levels instead. Remove from the game after use.”
+
+
+Energy Empowerment Drill (Babidi Saga - #51) – This card does get around defensive powers that reduce the damage dealt by the attack like the Saiyan Energy Defection powers from Saiyan Saga. This card does NOT get around damage caps (cards that state that you take a maximum of _____ damage from the attack).
+
+
+Excitement (Irwin Toy - #IR9) - Treat this card as if it read, “Show your opponent your hand. Draw a card for each Non-Combat card in your hand.” This card is used during Combat in place of an attack.
+
+
+Eyes of the Dragon (Saiyan Saga - #157) - Treat this card as if it read, “Use when needed. After you perform a successful energy attack, search your Life Deck for a Dragon Ball then place it in play and capture a Dragon Ball from your opponent. Limit 1 per deck.”
+
+
+Fall 7 Times, Get Up 8 Times (Saiyan Saga - #30) - Treat this card as if it read, “Defense Shield: Stops the first unstopped physical attack performed against you this Combat. Remove from the game after use.”
+
+
+Focusing is Everything (Frieza Saga - #122) - Treat this card as if it read, “Heroes only. Remove an opponent’s Non-Combat/non-Dragon Ball card in play from the game. Remove from the game after use.
+
+
+Fond Memories (Kid Buu Saga - #100) - You cannot get a Fusion personality card with Fond Memories. You also cannot get any personality cards used for Fusions with Fond Memories.
+
+
+Foreboding Evidence (Android Saga - #P2) – This card gains “Remove from the game after use.”
+
+
+Fortify Your Spirit (Saiyan Saga - #31) - Treat this card as if it read, “Defense Shield: Stops the first unstopped energy attack performed against you this Combat. Remove from the game after use.”
+
+
+Frieza is Ready (Trunks Saga - #59) - Treat this card as if it read, “Villains only. Use immediately after you take damage from one of your opponent’s attacks. When your Main Personality takes life cards of damage, your opponent discards twice as many life cards. Limit 1 per deck.” This card is not affected by Endurance and does not allow you to Overkill
+your opponent because this card is not dealing damage.
+
+
+Frieza Smiles (Frieza Saga - #49) - Treat this card as if it read, “Play this card as your first card from your hand during Combat. Stops a physical or energy attack. For the remainder of Combat, stops all attacks of the same type this card stopped.”
+
+
+Frieza’s Force Bubble (Frieza Saga - #P5) - Treat this card as if it read, “Stops an energy attack. Stop all energy attacks for the remainder of Combat.”
+
+
+Frieza’s Irritation Grows (Trunks Saga - #57) – This card is supposed to read “…level for every "Frieza's Irritation Grows" in your..”
+
+
+Future Gohan Lv.2 (Capsule Corp Power Pack - #CP11) – If you reveal a Saiyan Style card with your Mastery, you get to draw the additional card along with what the Mastery was originally going to do.
+
+
+Garlic Jr. Lv.1 (Trunks Saga - #176) - Treat this Constant Combat Power as if it read, “All damage from energy attacks performed against Garlic Jr. is reduced by 2 life cards.”
+
+
+Garlic Jr. Lv.2 (Trunks Saga - #177) - Treat this Constant Combat Power as if it read, “All damage from energy attacks performed against Garlic Jr. is reduced by 3 life cards.”
+
+
+Garlic Jr. Lv.3 (Trunks Saga - #178) - Treat this Constant Combat Power as if it read, “All damage from energy attacks performed against Garlic Jr. is reduced to 1 life card.”
+
+
+Garlic Jr.’s Black Water Mist (Trunks Saga - #33) - Ignore the last sentence of this card. This card is not a Black Style card, because “Black” is not the first word in the title of the card.
+
+
+Gathering of Warriors (Cell Games Saga - #Preview 4) – This card cannot be used during the Combat Step.
+
+
+Gohan Lv.1 (Saiyan Saga - #164) - If a successful energy attack is performed against Gohan, he may raise his anger 1 level.
+
+
+Gohan Lv.1 (Majin Buu Saga - #161) – Treat this Constant Combat Power as if it read, “You do not discard cards from your hand from your opponent’s card effects. Once per turn, you do not have to discard cards from your hand for a card effect and you would get to use that card effect without having to discard the card.”
+
+
+When you use a card effect that allows you to discard any amount of cards from your hand for the effect and you use Gohan’s Constant Combat Power with it, the amount of cards considered discarded (but not actually discarded from your hand) cannot be more than the amount of cards in your hand.
+
+
+When you use a card effect that requires something specific about the card being discarded, like it has to be a specific style, a specific card, a specific card type, etc. etc., you must reveal a card in your hand to your opponent that fits that criteria to use Gohan’s Constant Combat Power with it.
+
+
+Gohan Lv.2 (Saiyan Saga - #165) - His power is considered a physical attack.
+
+
+Gohan, the Champion Lv.1 (Cell Saga - #164) - This power is used during an “Attacker Attacks” phase of a Combat that his opponent declared against him.
+
+
+Gohan, the Protector Lv.2 (World Games Saga - #167) - Treat this card as if it read, “Constant Combat Power: Your Allies in play cannot be removed from the game. If Videl is in play as your Ally, your Allies power up 1 extra stage during the Power Up Step.”
+
+
+Gohan’s Energy Defense (Saiyan Saga - #111) - Treat this card as if it read, “Stops an energy attack. Raise your anger 1 level.
+
+
+Gohan’s Hidden Power (Babidi Saga - #P9) – Whenever you use a card where you can pay the cost with any amount of power stages, you cannot discard more life cards from your Life Deck than that personality could pay for the cost.
+
+
+Gohan’s Kick (Cell Games Saga - #8) – Neither player may use cards that end Combat, stop all physical attacks and stop all energy attacks. Playing Gohan’s Kick keeps all 3 types of those cards from being played. If a card is used and has a floating effect that stops all attacks, the floating effect still works even after Gohan’s Kick has been played.
+
+
+Gohan’s Kick’s secondary effects also affect Dragon Balls. So, a player may not use Earth Dragon Ball 6 or Earth Dragon Ball 7 if Gohan’s Kick has been played that Combat.
+
+
+Gohan’s Physical Attack (Saiyan Saga - #26) - Treat this card as if it read, “Physical attack Raise your anger 1. Gain 5 power stages.”
+
+
+Gohan's Stomp (Frieza Saga - #114) - Treat this card as if it read, “Heroes only. Energy attack doing 5 life cards of damage. This attack cannot be stopped, prevented or reduced by Main Personality powers.”
+
+
+Gohan’s Temper (Frieza Saga - #15) - Treat this card as if it read, “Energy attack. If your Main Personality is a Hero, raise your anger 1 level. If “Dragon Ball 6” is in play, raise your anger 2 levels instead.”
+
+
+Goku Lv.1 (Majin Buu Saga - #156) – Treat this card as if it read, “… remove 7 Saiyan Style cards in your discard pile from the game to raise your anger 6 levels…”
+
+
+Goku Anger Attack (Saiyan Saga - #46) - Doubles the base damage (damage from the Physical Attack Table), before you add modifiers from Drills.
+
+
+Goku Body Throw (Saiyan Saga - #44) - Treat this card as if it read, “Physical attack doing 1 life card of damage.”
+
+
+Goku Honor Duel (Saiyan Saga - #101) - Treat this card as if it read, “Use when entering Combat as the defender. Instead of drawing 3 cards from your life deck, draw the bottom 3 cards from your discard pile. Remove from the game after use.”
+
+
+Goku Swiftly Moving (Majin Buu Saga - #66) – Copy the entire energy attack, as well as secondary effects and modifiers from the attack. If the card you copy stays in play to be used one more time this Combat, then you may use the copied attack one more time this Combat. When you stop an energy attack with this card, you only copy the card power when you use the attack during your next Attacker Attacks phase. The floating effect that Goku Swiftly Moving creates does not copy any of the following: Title, Style, Rarity, Card Number, Picture, Card Type, Sword/Starburst, Headshot, kanji, or Quote.
+
+
+If this card is used to stop an attack that normally cannot be stopped by this card, you may still perform a copy of that attack during your next Attacker Attacks phase, but the previous attack is still successful. 
+
+
+If you use Goku Swiftly Moving and another card effect would make you skip your next Attacker Attacks phase, then you do NOT get to use the attack that Goku Swiftly Moving is copying on your next available Attacker Attacks phase.
+
+
+When a card copies a card that your opponent has played (like Goku Swiftly Moving), the “copied” card that you use is an extra card that is created for this effect, which gains all of the text from the card that you are copying. This extra card then disappears when it is finished instead of going to your discard pile or your removed from the game pile. If the text involves attaching itself to another card in play, such as from copying Black Exertion, this extra card is not considered to be finished until it is no longer attached.
+
+
+Goku, Super Saiyan Lv.2 (Majin Buu Saga - #157) - Treat this card as if it read, “… remove 7 Saiyan Style cards in your discard pile from the game to raise your anger 6 levels…”
+
+
+Goku, the Defender Lv.2 (Trunks saga - #165) – You use this power during your “Attacker Attacks” phase during Combat, but you do not use the card effect until Combat has ended. Only life cards of damage dealt to you while you are at your Goku, the Defender personality level counts towards the 5 life cards needed to raise your anger 2 levels.
+
+
+Goku, the Leader Lv.1 (Trunks Saga - #164) – You use this power during your “Attacker Attacks” phase during Combat, but you do not use the card effect until Combat has ended.
+
+
+Goku, the Mighty Lv.1 (Shonen Jump - #SJ1) – This power lasts for the remainder of Combat.
+
+
+Goku, the Protector Lv.3 (Trunks Saga - #166) - Goku’s Defense Shield is separate from his Constant Combat Power.
+
+
+Goku’s Capturing Drill (Saiyan Saga - #237) - Treat this card as if it read, “Dragon Balls you control may not be captured while this Drill is in play.”
+
+
+Goku’s Conquering Stance (Saiyan Saga - #19) - Treat this card as if it read, “Physical attack. If successful, lower all players’ anger levels to 0.”
+
+
+Goku’s Farewell (Cell Games Saga - #99) – Treat this card as if it read, “You cannot win by the Most Powerful Personality victory for the remainder of the game. For the remainder of the game, nothing…”
+
+
+If you reach 5 or more anger while under the effects of Goku’s Farewell, you lose the game. You do not get to reset your anger level to 0 before you lose the game with this card. If you have used multiple Goku’s Farewells in a game, you raise your anger level at the beginning of your turn for each Goku’s Farewell that you have used.
+
+
+If you use Goku’s Farewell while you have a Fusion Personality as your MP, you raise your MP to his highest power stage, but you do not get to use a higher Fusion Personality card, even if you have the higher levels in your Sensei Deck.
+
+
+You do not reset your anger for gaining a personality level if you used Goku’s Farewell.  
+
+
+Goku’s Heart Disease (Android Saga - #100) – This card does not have “Remove from the game after use.”
+
+
+Goku’s Lucky Break (Saiyan Saga - #202) - Treat this card as if it read, “Search your Life Deck for a Dragon Ball and place it into play.  Remove from the game after use”
+
+
+Goku’s Mixing Drill (Saiyan Saga - #231) - If Goku’s Mixing Drill is discarded/removed from play, and you have multiple styles of Drills in play, choose one style of Drill to keep in play, and discard all of the other styles of Drills (with the exception of Named and Freestyle Drills).
+
+
+Goku's Physical Attack (Saiyan Saga - #25) - Treat this card as if it read, “Physical attack. If successful, draw the bottom card from your discard pile. If used by Goku, it stays in play to be used one more time this Combat. Remove from the game after use. Limit 2 per deck.”
+
+
+Goku’s Surprise Attack (Saiyan Saga - #24) - Treat this card as if it read, “Physical attack doing 5 power stages of damage.”
+
+
+Goku’s Touch (Saiyan Saga - #48) - Treat this card as if it read, “Use after you perform a successful physical attack to capture an opponent’s Dragon Ball. Remove from the game after use.”
+
+
+Guldo’s Time Freeze Drill (Frieza Saga - #55) - Treat this card as if it read, “Villains only. Reduce the damage from all attacks performed against you by 1 power stage or 1 life card of damage.”
+
+
+Hercule, the Everlasting World Champ Lv.1 (Kid Buu Saga - #52) - When you name a Personality with Hercule’s power, the named Personality’s Named cards are considered Hercule Named as well as the original Personality’s.
+
+
+See Section 10: Power Level Errata.
+
+
+Hercule’s Close Save (Babidi Saga - #100) – You use this card after you take all of the damage from the attack. You do not use this card as damage is being dealt to you.
+
+
+Hero Advantage (Saiyan Saga - #195) - Treat this card as if it read, “Heroes only. Use when entering Combat as the defender. Instead of drawing 3 cards from your life deck, draw the top 3 cards from your discard pile. If there are not enough cards in the discard pile, this card cannot be used. Remove from the game after use.”
+
+
+Hidden Power Level (Saiyan Saga - #17) - Treat this card as if it read, “Physical attack. Raise your Main Personality to his highest power stage.”
+
+
+Huge Drill (Irwin Toy - #IR5) - Although this Drill affects both players, only the player who controls Huge Drill gets the +1 power stage of damage to his physical attacks.
+
+
+I Want You! (Krillin Season - #L2-7) – Your opponent must declare Combat if you use this card, even if there are other card effects that would make him skip Combat or because he played a Battleground/Location.
+
+
+Against Earth Dragon Ball 4 (Saiyan #76) – If I Want You! Is played and Earth Dragon Ball 4 has not been used for its floating effect yet, then the floating effect would “get used”, but Combat would still be declared and would continue normally. You do not get to reuse Earth Dragon Ball 4’s floating effect again unless you replay or recapture the Dragon Ball.
+
+
+Ingrain in the Membrane (Cosmic Anthology - #CA26) – Ingrain in the Membrane does not keep the Non-Combat card it is attached to from being discarded or removed from the game because the Non-Combat card was used.
+
+
+It’s Just Not Worth It! (Frieza Saga - #P1) - Treat this card as if it read, “Your opponent may not win a Most Powerful Personality Victory or a Dragon Ball Victory until the end of his second turn, starting now. Limit 1 per deck. Remove from the game after use.”
+
+
+It’s The Little Things That Matter (Saiyan Saga - #33) - Treat this card as if it read, “Defense Shield: Stops the first unstopped energy or physical attack performed against you this Combat. Remove from the game after use.”
+
+
+Jeice Lv.1 (Frieza Saga - #37) - His power reads, “Energy attack doing 5 life cards of damage. If this attack is stopped, your opponent discards 2 life cards.”
+
+
+Jeice, the Avenger Lv.1 (Lost Villains - #LV5) – Treat Jeice’s power as if it read, “Stops a physical attack. If Jeice is your Main Personality…”
+
+
+Kami As Your Ally (Frieza Saga - #100) - Treat this card as if it read, “All of your opponents search their discard piles and Life Decks for “Kami Fades” and remove them from the game. Remove from the game after use.”
+
+
+Kami Fades (Frieza Saga - #113) - Treat this card as if it read, “Remove all Earth Dragon Balls in play and in all Life Decks from the game.”
+
+
+Kid Trunks Lv1-Lv.3 (World Games Saga - #178-#180) – Anything that would normally affect Trunks specifically does not affect Kid Trunks, because they are treated as separate personalities.
+
+
+Kid Trunks Lv.2 (Majin Buu Saga - #167) – The discarding a card from your hand for Kid Trunks’ Constant Combat Power is not a part of the cost.
+
+
+Kid Trunks, the Teenager Lv.1 (Kid Buu Saga - #53) - If Kid Trunks is the Level 1 for your Main Personality, your Main Personality is still Kid Trunks even if you use/are at a “Future” Trunks Personality Level.
+
+
+King Cold Lv.1 (Trunks Saga - #188) - Treat his power as if it read, “When entering Combat as the defender, choose 1 card at random from your opponent’s hand and place it at the top of his Life Deck.”
+
+
+King Cold Smiles (Trunks Saga - #37) - Treat this card as if it read, “Use when your opponent’s anger level reaches 5 or more to set their anger level to 3 instead of gaining a personality level. Remove from the game after use.”
+
+
+King Kai Lv.1-Lv.3 (Capsule Corp Power Pack – #CP1-#CP3) Whenever you check for the Double Power rule and at least 1 of the personalities is showing Z in the Scouter, you do not use the Double Power rule.
+
+
+King Kai Training (Saiyan Saga - #79) - Treat this card as if it read, “Heroes only. Choose 2 cards from your discard pile and place them on the bottom of your Life Deck.”
+
+
+King Kai’s Calming (Saiyan Saga - #238) - Treat this card as if it read, “Use at the end of any turn. If your opponent’s Main Personality is at Level 3, lower his Main Personality one personality level. Limit 1 per deck.”
+
+
+Knockout Drill (Android Saga - #101) - This Drill affects all players. This Drill is only active during Combat, and would not affect Non-Combat cards that are used outside of Combat (including “when entering Combat” and those used at the end of Combat)
+
+
+Krillin Lv.1 HT (Saiyan Saga - #182) - His power reads, “Draw a card when entering Combat.”
+
+
+Krillin, Z Warrior Lv.2 (Majin Buu Saga - #72) – Krillin’s energy attack is a Power, not a Constant Combat Power.
+
+
+Krillin’s Drill (Saiyan Saga - #215) - Ignore the last sentence of this card (all Named Drills work like this).
+
+
+Krillin’s Physical Defense (Saiyan Saga - #112) - Treat this card as if it read “Play this card as a defense. If your opponent’s attack does life cards of damage to you, you may take the first life card of damage from that attack and place it in your hand instead of discarding it. If used by Krillin, this card stays in play to be used on more time this Combat.”
+
+
+Krillin’s Power Tap (Frieza Saga - #111) - Treat this card as if it read, “Use when needed. Choose a Drill in play. Krillin's Power Tap creates a floating effect that is a copy of that Drill. This floating effect only works during Attack Phases in the Combat Step of the current turn and lasts until the end of Combat. If "Black Shadow Drill" is in play, place all of your opponent's Allies at the bottom of their owners' Life Decks. Remove from the game after use.”
+
+
+This card cannot be used with “When Entering Combat” Drills. If you choose Caught Off Guard Drill (Cell Games #111), the card that was named when Caught Off Guard Drill entered play still cannot be played or used, and you do not get to choose a new card if you Krillin’s Power Tap a Caught Off Guard Drill.
+
+
+You may use Krillin’s Power Tap outside of Combat, but you only gain the effect of that Drill during the Combat of that turn.
+
+
+Line Up (Krillin Season - #L2) - Treat this card as if it read, “Search your deck for Vegeta, Trunks, Gohan, Piccolo, Krillin, Tien or Yamcha and place him into play at 3 power stages above 0, regardless of the current level of your Main Personality.
+
+
+Lord Slug Lv.1 (Capsule Corp Power Pack - #CP4) – You can use this power if you have more than 3 Dragon Balls in play to advance a personality level.
+
+
+Lord Slug Lv.2 (Capsule Corp Power Pack - #CP5) – If you declared a Namekian Tokui-Waza, you only get to shuffle 1 card back into your Life Deck with his power, regardless of the amount Life Cards of damage dealt with the attack.
+
+
+Lord Slug Lv.3 (Capsule Corp Power Pack - #CP6) – Treat this power as if it read, “… twice as many cards back into your Life Deck instead.” This Constant Combat Power is not affected by Concentration Drill.
+
+
+Losing Battle (Majin Buu Saga - #134) – Treat this card as if it read, “(“Trunks Energy Sphere” cannot be used to stop this card.) Sensei Deck. Any of your opponent’s Non- Personality/Non-Mastery cards with “win” and/or “wins” in the power box cannot be played or used for the remainder of the turn.”
+
+
+Majin Buu Lv.4 (Majin Buu Saga - #114) – The card effect to shuffle 8 cards into your Life Deck is a Power, not a Constant Combat Power.
+
+
+Majin Buu, Evil Buu Lv.1 (Fusion Saga - #10) – Treat this power as if it read, “Physical attack doing +3 power stages of damage. If stopped, draw a card. “
+
+
+Majin Buu’s Childish Taunt (Kraft - #K6) – Treat this card as if it read, “...For the remainder of Combat, your opponent cannot use any cards that let him look at cards in your hand or your life deck...”
+
+
+If you play Majin Buu’s Childish Taunt, your opponent cannot use card effects that allow him to “reveal” or “search” your Life Deck. If you use a card that allows your opponent to look at your Life Deck after you have played Majin Buu’s Childish Taunt, then he is still able to use that effect.
+
+
+Majin Buu’s Fury (Majin Buu Saga - #P3) - During each player’s “Attacker’s Attack” phase that this effect is floating, that player must play or use a card or floating effect that performs an attack or pass.  
+
+
+If you play Majin Buu’s Fury, players cannot play or use cards that have the potential to create a second effect that performs an attack if that card itself does not perform an attack.  An example of such an effect is Hercule’s Amazing Techniques.
+
+
+Majin Buu’s Restoration (Majin Buu Season - #L5-5) - Treat this card as if it read, “For the rest of Combat, you may remove 3 cards in your discard pile from the game during your Attack Phase to play an Ally of any level from your discard pile. Remove from the game after use.”
+
+
+Majin Funny Face (Collectors Club - #CC6) – Treat this card as if it read, “If you declared a Tokui-Waza, for the remainder of Combat any “If successful”…”
+
+
+Majin Thrust (Fusion Saga - #111) - Treat this card as if it read, “…For the remainder of Combat, all "Majin only" cards in your Life Deck without Endurance gain Endurance 1...” (9/24/03)
+
+
+Master Roshi Lv.1-Lv.3 (Capsule Corp Power Pack - #CP7-#CP9) – Any cards with “Roshi” in the title are considered Named Cards for Master Roshi.
+
+
+Master Roshi Lv.1 (Capsule Corp Power Pack - #CP7) – Treat this card as if it read, “Power: When entering Combat, look at the top 6 cards of your Life Deck…”
+
+
+Master Roshi Lv.3 (Capsule Corp Power Pack - #CP9) – Master Roshi’s Constant Combat Power to have your allies do extra damage with their attacks works even if Master Roshi is no longer in control of Combat.
+
+
+Master Roshi Sensei (Majin Buu Saga - #153) – The modifiers of this Sensei are applied during Step 10 of the Battle Sequence.  It does not subtract 1 life card of damage from power stages of damage converted to life cards due to the defending personality being at 0 power stages.
+
+
+Master Roshi’s Island (Android Saga - #44) - This Location affects Dende Dragon Balls.
+
+
+Meditation Drill (Saiyan Saga - 149) - Treat this card as if it read, “When entering Combat, you may shuffle your Life Deck or discard pile.”
+
+
+Mommy’s Coming Dear (Frieza Saga - #119) - You may only use this card in place of a defense. Treat this card as if it read, “Heroes only. Stops a physical or energy attack and stops all attacks for the remainder of Combat. Remove from the game after use. Limit 1 per deck. If a Dragon Ball 7 from any Dragon Ball set is in play, discard this card instead of removing it from the game.”
+
+
+Mother’s Touch (Saiyan Saga - #90) - Treat this card as if it read, “Stops a physical or energy attack. Remove from the game after use.”
+
+
+Nail The Namekian Lv.1 (Frieza Saga - #96) - His power reads, “Energy attack doing 5 life cards of damage. If this attack is stopped, your opponent discards 3 life cards.”
+
+
+Namekian Dodging Technique (Android Saga - #24) - This card only works until the end of Combat.
+
+
+Namekian Energy Drill (Trunks Saga - #61) - Treat this card as if it read, “After every successful energy attack you perform, you may discard a card from your hand and shuffle it into your Life Deck, and then draw a card.
+
+
+Namekian Finishing Effort (Android Saga - #62) – Whenever you take damage from one of your opponent’s attacks, you may place this card directly into play from your hand. You can only use it during your Attacker Attacks phase like a regular Non-Combat card to make your opponent discard the top 3 cards of his Life Deck.
+
+
+Namekian Offense (World Games Saga - #77) – This card can only shuffle a Dragon Ball an opponent controls back into the owner’s Life Deck.
+
+
+Namekian Pikkon’s Defense (World Games Saga - #78) – Treat this card as if it read, “Stops a physical or energy attack. Remove from the game after use.”
+
+
+Namekian Quick Blast (Cell Games Saga - #65) – This card gains “If successful, remove from the game after use.”
+
+
+Namekian Remedy  Drill (Kid Buu Saga - #18) – You may not include copies of this card in your deck if you declared a Freestyle Tokui-Waza.
+
+
+Namekian Teamwork (Android Saga - #103) - Allies may take over Combat ONLY to use their personality powers, and then the Main Personality resumes control of Combat. This card only affects allies that were in play when this card was used. It does not affect allies brought into play later that Combat.
+
+
+Namekian’s Strike (Collectors Club - #CC1) - This is a Namekian Style card. This card gains “Remove from the game after use.”
+
+
+Nappa Lv.1 (Saiyan Saga - #176) - Power: Saiyan Energy Deflection - Treat this power as if it read, “Reduce the damage from an energy attack performed against you to 2 life cards of damage.”
+
+
+Nappa Lv.1 HT (Saiyan Saga - #185) - When entering Combat, your Main Personality gains 2 power stages.
+
+
+Nappa Lv.3 (Saiyan Saga - #178) - His power reads, “Reduce the damage from a physical attack performed against you to 2 power stages of damage.”
+
+
+Nappa’s Energy Aura (Saiyan Saga - #120) - Treat this card as if it read, “Stops an energy attack. Stops all energy attacks performed against you for the remainder of Combat. Remove from the game after use.”
+
+
+Nappa’s Physical Resistance (Saiyan Saga - #121) - Treat this cards as if it read, “Stops a physical attack. Stop all physical attacks performed against you for the remainder of Combat. Remove from the game after use.”
+
+
+No, Really Drill? (Frieza Saga - #Preview 3) - This Drill affects all players. When a Dragon Ball is placed into play while this Drill is in play, the Dragon Ball is considered to have a Blank Text box until it leaves play or until the end of the game (whichever happens first), regardless if No, Really Drill? leaves play later on in the game.
+
+
+Orange Body Shifting Drill (Saiyan Saga - #146) - Treat this card as if it read, “All of your energy attacks that cost 2 power stages to perform, now only cost 1 power stage to perform.”
+
+
+Orange Discharge  Drill (Kid Buu Saga - #20) – You may not include copies of this card in your deck if you declared a Freestyle Tokui-Waza.
+
+
+Orange Energy Discharge (Cell Saga - #52) - If an Energy Combat card was played previously in Combat that stops all energy attacks for the remainder of Combat, it would not stop Orange Energy Discharge.
+
+
+Your opponent can still play an Energy Combat card to “try to stop” this attack in order to gain the secondary effects of the card.
+
+
+Orange Energy Drill (Saiyan Saga - #142) - Treat this card as if it read, “All energy attacks performed against you, do 1 less life card of damage, to a minimum of 0. Cannot be used with other Orange Drills in play.”
+
+
+Orange Energy Phasing Drill (Android Saga - #67) – You declare if you are going to use this Drill with an energy attack when the attack becomes successful, but you do not remove the Non-Combat card until you start using “If Successful” effects.
+
+
+Orange Focusing Drill (Saiyan Saga - #234) - Treat this card as if it read, “Your Drills in play except for "Orange Focusing Drill" cannot be discarded or removed from the game unless you advance or lose a Personality level.”
+
+
+Orange Gambit (Majin Buu Saga - #85) – You do not have to pay costs created by other card effects when Orange Gambit is attached. You still have to pay the original cost of the card that you are using.
+
+
+Orange Haulting Drill (Cell Saga - #147) – This drill does not affect Life Cards of damage from physical attacks that did not come from power stages of damage.
+
+
+Orange Joint Restraint Drill (Saiyan Saga - #151) - Treat this card as if it read, “All of your physical attacks do +4 power stages of damage.”
+
+
+Orange Kamehemeha Attack (Frieza Saga - #2) – Treat this title as if it read “Orange Kamehameha Attack”.
+
+
+Orange Leg Drill (Frieza Saga - #71) - Treat this card as if it read, “All physical attacks performed against you do 2 less power stages of damage, to a minimum of 0. Limit 1 per deck.”
+
+
+Orange Lifting Drill (Saiyan Saga - #126) - Treat this card as if it read, “Once per Combat, in place of an attack, during your turn, discard all of your opponents’ Drills. Limit 1 per deck.”
+
+
+Orange Power Shifting Drill (Trunks Saga - #13) – You choose whether the attack will have all of its Life Cards of damage converted to power stages when you perform the attack, but you do not convert the damage until after you have calculated how many Life Cards of damage the attack would deal (after all other modifiers). This does not create an infinite loop with Energy Empowerment Drill.
+
+
+Orange Power Stance (World Games Saga - #89) – This card can only shuffle a Dragon Ball an opponent controls back into the owner’s Life Deck.
+
+
+Orange Rapid Attack (Babidi Saga - #115) – This card gains, “Remove from the game after use.”
+
+
+Orange Spontaneous Drill (Saiyan Saga - #137) - Treat this card as if it read, “After taking damage from a physical attack, you may draw the bottom card of your discard pile.”
+
+
+Orange Temple Strike (Babidi Saga - #78) – Your opponent discards one his Non-Combat cards at a time until he has the same amount of Non-Combat cards in play as you do. Your opponent cannot discard your Non-Combat cards with this effect if you used Orange Temple Strike.
+
+
+Orange Tripping Drill (Saiyan Saga - #130) - Treat this card as if it read, “All energy attacks performed against you, do 1 less life card of damage, to a minimum of 0.”
+
+
+Pan, Granddaughter of Goku (Kid Buu Saga #66) - See Section 10: Power Level Errata.
+
+
+Paused Pose (Fusion Saga - #16) – When your opponent tries to fuse at the beginning of his next turn because of this card effect and he no longer has one of the personalities in play required for the Fusion, he does not get to fuse.
+
+
+Piccolo Lv.1 (Majin Buu Saga - #176) – Treat this card as if it read, “… at the bottom of your Life Deck.”
+
+
+Piccolo Lv.3 (Saiyan Saga - #163) - “Multi-form allows two physical attacks, one after the other” explained: Multi-form performs two physical attacks. The controlling player performs a physical attack, that player’s opponent defends, the controlling player performs another physical attack, that player’s opponent defends. Then the opponent can attack, and Combat continues as usual.
+
+
+Piccolo and Heroes Gather (Trunks Saga - #129) - Treat this card as if it read, “Discard 2 cards from your hand, then search your Life Deck for 2 Combat cards, show them to your opponent, and place them in your hand.”
+
+
+Piccolo Defense Drill (Saiyan Saga - #155) - Treat this card as if it read, “All energy attacks performed against you, do 1 less life card of damage, to a minimum of 0.”
+
+
+Piccolo Honor Duel (Saiyan Saga - #103) - Treat this card as if it read, “Use when entering Combat as the defender. Instead of drawing 3 cards from your life deck, draw the bottom 3 cards from your discard pile. Remove from the game after use.”
+
+
+Piccolo, the Former Guardian Lv.3 (World Games Saga - #196) – The first time you use this power each Combat you check to see if you have no cards in your discard pile. If you have no cards in your discard pile, this power may be used a second time that Combat.
+
+
+Piccolo, the Trained Lv.1 (Android Saga - #119) – Treat this card as if it read, “Power: Choose one of your opponent’s personalities in play. For the remainder of the turn, that personality cannot use his personality power and Constant Combat Powers on his current personality level.”
+
+
+Piccolo’s Power only affects the current personality level of your opponent. If the personality affected with Piccolo’s Power advances or loses a personality level, the personality may use the new Power/Constant Combat Power.
+
+
+When Piccolo raises a personality level with his Constant Combat Power’s card effect, you still are allowed to choose a personality your opponent has in play to keep him from using his Personality Powers and Constant Combat Powers for that turn.
+
+
+Piccolo’s Physical Defense (Saiyan Saga - #110) - Treat this card as if it read, “Stops a physical attack. Gain 4 power stages.”
+
+
+Piccolo's Stomp (Frieza Saga - #115) - Treat this card as if it read, “Heroes only. Energy attack doing 5 life cards of damage. This attack cannot be stopped, prevented or reduced by Main Personality powers. If “Piccolo's Flight” is in play, this attack does 7 life cards of damage, instead.”
+
+
+Plant Two Saibaimen (Saiyan Saga - #213) - Treat this card as if it read, “Use this card at the end of your Power Up step. Skip Combat this turn. At the beginning of your next turn, search your Life Deck and/or discard pile for your highest level Saibaimen card and place it into play. Remove from the game after use.”
+
+
+Play Fighting (Irwin Toy - #IR3) - If you skip Combat then you may not place 2 cards at the bottom of your Life Deck in the Rejuvenation Step.
+
+
+You may only put the top card back into your Life Deck during your Rejuvenation Step and not during your opponent’s.
+
+
+Pose With Style (Irwin Toy - #IR19) – You cannot use this card for Non-Combat cards that are restricted or Limit 1 per deck.
+
+
+Power (Frieza Saga - #104) - Treat this card as if it read, “Villains only. If your opponent’s Main Personality is a hero, he discards 4 life cards. Limit 1 per deck. Remove from the game after use.”
+
+
+Power Boost (Cell Games Saga - #16) – Using this card does not take up your action during the Attacker Attacks phase.
+
+
+Powerful Followers (Frieza Saga - #19) - This card is NOT used like Teaching the Unteachable… you must use it during Combat, in place of an attack, to either a) end the current Combat, or b) make your opponent skip his next Combat step. If you use multiple Powerful Followers during the same Combat to make your opponent skip his next Combat Step, they do not stack with each other.
+
+
+Provoke Drill (Kid Buu Saga - #69) - If both players have Provoke Drill in play and one player is Piccolo, the Trained Lv.1 (Android Saga #119), Piccolo, the Trained can still use his power on his opponent’s personality, but it does not have an affect. Provoke Drill does not keep Piccolo, the Trained from using his personality power.
+
+
+Raditz Lv.1 HT (Saiyan Saga - #183) - This power may only be used during Combat, and must take the place of an attack.
+
+
+Raditz Lv.1 (Saiyan Saga - #170) Power: Saiyan Energy Deflection - Treat this power as if it read, “Reduce the damage from an energy attack performed against you to 2 life cards of damage.”
+
+
+Raditz Lv.3 (Saiyan Saga - #172) Power: Saiyan Energy Deflection - Treat this power as if it read, “Reduce the damage from an energy attack performed against you to 2 life cards of damage.”
+
+
+Raditz Flying Kick (Saiyan Saga - #210) - This card is a Physical Combat card, not a Non-Combat card. Triple the base damage (damage from the Physical Attack Table) before you add any modifiers from Drills.
+
+
+Raditz Honor Duel (Saiyan Saga - #102) - Treat this card as if it read, “Use when entering Combat as the defender. Instead of drawing 3 cards from your life deck, draw the bottom 3 cards from your discard pile. Remove from the game after use.”
+
+
+Rebellion (Android Saga - #107) - When this card is stopped and copied by another card (i.e. Trunks Swiftly Moving) you cannot perform Rebellion, because you have already played a card.
+
+
+Recoome Boom (Frieza Saga - #8) - This card is a “Saiyan Heritage only” card.
+
+
+Red Aerial Force (Kid Buu Saga - #72) – Cards removed from your opponent’s Sensei Deck due to this card’s effects are removed at random.
+
+
+Red Blazing Aura (Trunks Saga - #22) – This card is played as a Defense. When you play this card, you choose either life cards or power stages to prevent for the remainder of Combat.
+
+
+Red Bullrush Drill (Kid Buu Saga - #24) – Cards removed from your opponent’s Sensei Deck due to this card’s effects are removed at random.
+
+
+Red Clap (Kid Buu Saga - #74) – Cards removed from your opponent’s Sensei Deck due to this card’s effects are removed at random.
+
+
+Red Coordination Drill (Saiyan Saga - #144) - Treat this card as if it read, “When entering Combat as the defender, you may draw a card.”
+
+
+Red Dueling Drill (Android Saga - #73) – Allies may not do anything while this Drill is in play. This means that an ally cannot take control of Combat, cannot pay costs for cards, use their powers, or have damage redirected to them.
+
+
+Red Energy Defense Drill (Frieza Saga - #65) - Treat this card as if it read, “All energy attacks performed against you, do 1 less life card of damage, to a minimum of 0.”
+
+
+Red Energy Drill (Cell Games Saga - #96) – This card title is changed to “Red Energy Gathering Drill”.
+
+
+Red Hunger Drill (Kid Buu Saga - #113) – Cards removed from your opponent’s Sensei Deck due to this card’s effects are removed at random.
+
+
+Red Kaio-Ken  Drill (Kid Buu Saga - #25) – You may not include copies of this card in your deck if you declared a Freestyle Tokui-Waza.
+
+
+Red Knee Pick Drill (Saiyan Saga - #128) - Treat this card as if it read, “When entering Combat as the attacker, you may draw a card.”
+
+
+Red Penetrating Defense Drill (Saiyan Saga - #124) - Treat this card as if it read, “All physical attacks performed against you, do 2 less power stages of damage, to a minimum of zero.”
+
+
+Red Phasing Drill (Frieza Saga - #69) - Treat this card as if it read, “All of your energy attacks performed against a villain do +3 life cards of damage.”
+
+
+Red Power Slam (Kid Buu Saga - #76) - You cannot choose Personality cards out of your opponent’s Sensei Deck with Red Power Slam’s effect.
+
+
+You cannot choose a card that has requirements that you cannot fulfill (You cannot choose cards that are not of your alignment, you cannot choose a card that costs power stages if your personalities in play are all at 0 power stages, etc., etc.)
+
+
+Red Pressure Point Drill (Saiyan Saga - #148) - Treat this card as if it read, “All of your energy attacks do +1 life cards of damage. Cannot be used with other Red Drills in play.”
+
+
+Red Reading Drill (Saiyan Saga - #140) - Treat this card as if it read, “Once per Combat, you may take 1 less life card of damage from any attack.”
+
+
+Red Rolling Drill (Saiyan Saga - #132) - Treat this card as if it read, “All energy attacks performed against you, do 1 less life card of damage, to a minimum of 0.”
+
+
+Red Style Mastery (Trunks Saga - #144) - Treat this card as if it read, “Once per Combat, in place of an attack, you may remove the top card in your discard pile from the game to raise your anger 1 level. If it is a Red Style card raise your anger 2 levels instead.
+
+
+Red Sword Cleave (Kid Buu Saga - #77) - Your Red Style attacks gain "Sword" at the end of their titles. This effectively changes the title of the Red Style attack while it is being played and used. (11/12/03)
+
+
+Red Thunder Clap (Kid Buu Saga - #78) – If this card attaches to a card that increases damage from a floating effect, such as the Red Style Mastery (Cell Saga #131), it only doubles the damage when the effect triggers, rather than as soon as this card attaches.
+
+
+Ex: If this attaches to the Red Style Mastery (Cell Saga #131), it does not double the damage from the Mastery until the following Combat as it has already triggered and created a floating effect.
+
+
+Red Wrist Control Drill (Saiyan Saga - #139) - Treat this card as if it read, “For every 3 power stages you lose your opponent loses 1 power stage, down to 0.” Extra power stages do not carry over from one attack to the next.
+
+
+If you pay for the cost of a card, the power stages that you pay do count towards the 3 power stages you need for this Drill’s effect.
+
+
+Releasing the Sword (Irwin Toy - #IR20) – This card gains, “Limit 1 per deck. Remove from the game after use.”
+
+
+Ribs Broken (Saiyan Saga - #217) - Treat this card as if it read, “Energy attack doing 5 life cards of damage. Costs 0 power stages to perform. You must remove an Ally in play from the game in order to perform this attack. This does not have to be an Ally you control.” If your opponent uses a card effect to keep the Ally in play that you would be removing from the game for the cost of Ribs Broken, Ribs Broken is returned to your hand and it is still your Attacker Attacks phase.
+
+
+Roshi’s Calming (Saiyan Saga - #239) - Treat this card as if it read, “Use at the end of any turn. If your opponent’s Main Personality is at Level 2, lower his Main Personality one personality level. Limit 1 per deck.”
+
+
+Run Away (Cell Saga - #125) - This card may not be used if there isn’t a Battleground in play.
+
+
+Saibaimen Lv.1 (Saiyan Saga - #243) - Power: Saiyan Energy Deflection - Treat this power as if it read, “Reduce the damage from an energy attack performed against you to 2 life cards of damage.”
+
+
+Saibaimen Lv.2 (Saiyan Saga - #244) - Power: Saiyan Energy Deflection - Treat this power as if it read, “Reduce the damage from an energy attack performed against you to 2 life cards of damage.”
+
+
+Saibaimen Lv.3 (Saiyan Saga - #245) - Power: Saiyan Energy Deflection - Treat this power as if it read, “Reduce the damage from an energy attack performed against you to 2 life cards of damage.”
+
+
+Saiyan Aggression  Drill (Kid Buu Saga - #27) – You may not include copies of this card in your deck if you declared a Freestyle Tokui-Waza.
+
+
+Saiyan City Destruction (Saiyan Saga - #45) - Treat this card as if it read, “Villains only. Skip your next Combat step. Place the top 2 cards from your discard pile on the bottom of your Life Deck. Remove from the game after use.”
+
+
+Saiyan Energy Aura (Saiyan Saga - #95) - Treat this card as if it read, “Saiyan Heritage only. Stops an energy attack and stops an energy attack during your opponent’s next Attacker Attacks phase.”
+
+
+Saiyan Energy Blast (Saiyan Saga - #94) - Treat this card as if it read, “Saiyan Heritage only. Energy attack. Costs 3 power stages to perform. If successful, your opponent cannot perform a physical attack during his next Attacker Attacks phase.”
+
+
+Saiyan Energy Defense (Saiyan Saga - #92) - Treat this card as if it read, “Saiyan Heritage only. Stops an energy attack.”
+
+
+Saiyan Energy Focus (Frieza Saga - #12) - Treat this card as if it read, “Any one of your personalities gains 5 power stages.”
+
+
+Saiyan Focusing Power (Frieza Saga - #35) - This is a “Saiyan Heritage only” card.
+
+
+Saiyan Honor Quest (Saiyan Saga - #196) - Treat this card as if it read, “Use when entering Combat as the defender. Instead of drawing 3 cards from your life deck, draw the bottom 3 cards from your discard pile. Remove from the game after use.”
+
+
+Saiyan Hurricane Kick (Majin Buu Saga - #104) – You can only discard a card from your hand to keep Saiyan Hurricane Kick on the table the first time you use the card.
+
+
+Saiyan Knee Block (Irwin Toy - #IR16) – This card is being clarified to be titled “Saiyan Clash.”
+
+
+Saiyan Power Block (Babidi Saga - #29) – This card does not stop the affects of Majin Buu’s Fury (Buu Saga #P4).
+
+
+Saiyan Power Drill (Saiyan Saga - #236) - Treat this card as if it read, “All of your physical attacks do +2 power stages of damage.”
+
+
+Saiyan Pressure Technique (Majin Buu Saga - #145) – You can only remove 2 cards in your Sensei Deck from the game for each Physical Attack.
+
+
+Saiyan Rapid Fire (Cell Saga - #155) - Treat this card as if it read, “Energy attack. If successful, every Ally your opponent has in play loses 4 power stages.”
+
+
+Saiyan Style Mastery (Trunks Saga - #148) - This Mastery only affects your opponent’s Main Personality, and cannot be redirected at Allies.
+
+
+Saiyan Style Mastery (World Games Saga - #148) – This mastery prevents damage from the first attack each Combat.
+
+
+Saiyan Sweeping Defense (Saiyan Saga - #96) - Treat this card as if it read, “Saiyan Heritage only. Stops a physical attack and stops a physical attack during your opponent’s next Attacker Attacks phase.”
+
+
+Saiyan Training (Saiyan Saga - #80) - Treat this card as if it read, “Villains and Goku only. Choose 2 cards from your discard pile and place them on the bottom of your Life Deck.”
+
+
+Saiyan Training (Irwin Toy - #IR6) – This title has been changed to “Saiyan Gravity Training”, and is not an MRP of Saiyan Training (Saiyan Saga #80).
+
+
+Saiyan Truce Card (Saiyan Saga - #203) - The player who used the Saiyan Truce Card may retain all, one, or none of HIS cards from this Combat (and any other cards that they draw until the end of their next turn), but the opponent MUST discard as usual. If you use Saiyan Truce Card and your opponent uses Black Weakness Drill (Buu Saga #49) or another card effect that makes you discard during the Discard Step, you do not have to discard since Saiyan Truce Card allows you to keep your cards during the Discard Step.
+(10/29/03)
+
+
+Scientific Repatching (Vegeta Season - #L6-8) – Treat this card as if it read: “(Use at the end of your turn.) Tuff Enuff only. Play the top 2 Non-Combat cards in your discard pile that are not limit 1 per deck or named “Scientific Repatching”. Remove from the game after use.”
+
+
+Senzu Bean (Saiyan Saga - #43) - Treat this card as if it read, “When you place this card in play, immediately raise your Main Personality to its highest power stage. Remove from the game after use.”
+
+
+Severe Bruises (Android Saga - #112) – This card does not have “Remove from the game after use.”
+
+
+Showdown (Trunks Saga - #P10) - Allies may not do anything while this affect of this card is floating. This means that an ally cannot take control of Combat, cannot pay costs for cards, use their powers, or have damage redirected to them.
+
+
+Speaking With the King Drill (Cell Saga - #100) - This card should read “Once per turn, in place of an attack…” This Drill affects Dragon Balls.
+
+
+Splash Damage Drill (Babidi Saga - #84) – You must discard an Ally in order to draw the card from this Drill.
+
+
+NOTE: This IS a reversal of a previous ruling made on this card. The reversal was made  to keep certain deck archetypes from unbalancing the environment by abuse of this card.
+
+
+Startled (Game Stop - #GS1) - You can play a second Startled if your opponent uses Trunks Energy Sphere (Trunks 84) on your first Startled.
+
+
+Straining Ankle Smash Move (Saiyan Saga - #39) - Treat this card as if it read, “Use immediately after your opponent attacks you (this can be a physical or energy attack) and pays any costs for that attack. Lower your opponent’s Main Personality 4 power stages immediately when played.”
+
+
+Straining Arm Drag Move (Saiyan Saga - #38) - Treat this card as if it read, “Physical attack doing 1 life card of damage. You must pass in all remaining phases of Combat.”
+
+
+Straining Blocking Move (Frieza Saga - #24) - If Black Energy Stamina Drill is in play when you perform Straining Blocking Move, you declare how many life cards you *would* have discarded and then that cost is converted to one power stage. It deals what you declared.
+
+
+Treat this card as if it read, “Energy attack costing X life cards. X must be between 1 – 7. This
+attack does X life cards of damage.”
+
+
+Straining Defense Move (Frieza Saga - #23) – You can only remove an amount of cards from your deck equal to twice the amount of Drills your opponent has in play.
+
+
+Straining Destruction Move (Cell Games Saga - #120) – This card gains “Remove from the game after use. Limit 1 per deck.”
+
+
+Straining Energy Move (Frieza Saga - #22) – Treat this card as if it read, “Energy attack that costs 1 life card to perform. If successful, end Combat. Remove from the game after use.”
+
+
+Stunned (Cell Saga - #116) - Treat this card as if it read, “Krillin, Piccolo, and Trunks may not perform physical or energy attacks, stop attacks performed against them, or use their powers for the remainder of Combat. Remove from the game after use.”
+
+
+You can still use Defense Shields to stop attacks from your opponent if your personality in control of Combat is Stunned.
+
+
+Super Saiyan Goku Lv.1 (Irwin Toy - #IR1) – If Super Saiyan Goku’s Constant Combat Power does not work because of a card effect, you choose 1 Martial Arts Style of Drills to stay in play, and the rest are discarded. This overrides the effects of Orange Focusing Drill (Saiyan Saga #234).
+
+
+Tapkar Lv.1 (World Games Saga - #150) – Treat this card as if it read, “If Tapkar has not used any other personality powers this turn when entering Combat as the defender, remove the top 4 cards of your Life Deck from the game, draw 2 cards, and raise your anger 3 levels.”
+
+
+Tapkar, the Speedy Lv.2 (World Games Saga - #151) – Treat this card as if it read, “If Tapkar has not used any other personality powers this turn when entering Combat as the defender, remove the top 6 cards of your Life Deck from the game, draw 3 cards, and raise your anger 4 levels.”
+
+
+Tapkar, the Fastest Lv.3 (World Games Saga - #152) – Treat this card as if it read, “(You cannot win with the Most Powerful Personality Victory.) Constant Combat Power: If Tapkar has not used any other personality powers this turn when entering Combat as the defender, remove the top 8 cards of your Life Deck from the game, draw 3 cards, and raise your anger
+5 levels.”
+
+
+The Eternal Dragon’s Quest (Majin Buu Saga - #150) – After you use The Eternal Dragon’s Quest the first time in a game; you cannot use any other The Eternal Dragon’s Quests for the remainder of the game.
+
+
+Treat this card as if it read, “…into play. Your card powers cannot end Combat for the remainder of the game.” You can still use cards that end Combat, but the ending of Combat does not happen.
+
+
+The Middle of Nowhere (World Games Saga - #38) – This card does add damage to attacks performed by Personality Powers and/or Constant Combat Powers of personalities with “Majin” in the title. This card does not add damage to attacks performed by Personality Powers and/or Constant Combat Powers of personalities turned into Majins with M (Babidi Saga # 103).
+
+
+The Power of the Dragon (Cell Games Saga - #101) – When you play this card, any Dragon Balls your opponent owns are shuffled back into his Life Deck, regardless who controls them. Any other Dragon Balls, even other Dragon Balls that he controls, are not shuffled back into any Life Deck.
+
+
+Tien Lv.1 (Saiyan Saga - #82) - “Multi-form allows two physical attacks, one after the other” explained: Multi-form performs two physical attacks. The controlling player performs a physical attack; that player’s opponent defends, the controlling player performs another physical attack, that player’s opponent defends. Then the opponent can attack, and Combat continues as usual. Both physical attacks come from Tien’s Multiform Power, and are not any cards played from your hand.
+
+
+Tien lv.2 (Saiyan Saga - #83) - Solar Flare forces your opponent to “skip” his next “Attacker Attacks” phase, meaning you may not pass to end Combat.
+
+
+Tien Mind Reading Trick (Saiyan Saga - #211) - Treat this card as if it read, “Attach this to your opponent’s Main Personality. If Tien is in play, all villain opponents must play with their hands face up on the table.”
+
+
+Tien, the Swift lv.1 HT (Cell Saga - #R1) - If you cannot perform a physical attack (i.e. Tien does not have power stages and there is a card which makes physical attacks cost power stages in play) then you must pass.
+
+
+Tien’s Jolting Aura (Frieza Saga - #16) – Treat this card as if it read, “Heroes only. Energy attack. If performed by Tien, draw a card.”
+
+
+T-Rex Defense (Saiyan Saga - #226) – Treat this card as if it read, “Defense Shield: When defending in Combat, stop the first unstopped attack performed on you. Remove from the game after use.”
+
+
+T-Rex Offense (Saiyan Saga - #227) - Treat this card as if it read, “Use when you perform an energy attack to have that energy attack do an additional +1 life cards of damage. (If a successful energy attack is performed against you while this card in play, this card is discarded.)
+
+
+Trunks Lv.1 (Trunks Saga - #185) - Treat his power as if it read, “Physical attack. This must be your first attack in Combat. Your opponent must play/use 2 cards/effects that stop physical attacks in order to stop this attack.” Your opponent is allowed to play 2 cards from his hand to stop this attack.
+
+
+Trunks Lv.1 HT (Frieza Saga - #P14) - Treat Trunks’ Constant Combat Power as if it read, “You take a maximum of 2 life cards of damage from all energy attacks your opponent performs.”
+
+
+Trunks Effortless Drill (Trunks Saga - #85) – Treat this card as if it read, “Once per Combat, a player may choose to have a Straining Move card he performs unable to be stopped or prevented.” This must be declared immediately when the attack is performed. Since you use this immediately when you perform an attack, you would make this decision before you would get to use any other “When you perform an attack” effects.
+
+
+Trunks Energy Sphere (Trunks Saga - #84) – You must use Trunks Energy Sphere to stop a Combat Card before any of the effects of the Combat card have been used, including any costs of the Combat Card.
+
+
+If you are stopping an attack with a Combat card and your opponent uses Trunks Energy Sphere, you do not get to play or use another card that can stop that attack BUT any floating effects and/or defense shields can still stop the attack.
+
+
+Trunks Prepares (Cell Saga - #77) - This card is used when entering Combat as the Defender.
+
+
+Trunks Swiftly Moving (Trunks Saga - #99) - Copy the entire physical attack, as well as secondary effects and modifiers from the attack. If the card you copy stays in play to be used one more time this Combat, then you may use the copied attack one more time this Combat. When you stop a physical attack with this card, you only copy the card power when you use the attack during your next Attacker Attacks phase. The floating effect that Trunks Swiftly Moving creates does not copy any of the following: Title, Style, Rarity, Card Number, Picture, Card Type, Sword/Starburst, Headshot, kanji, or Quote.
+
+
+If you use Trunks Swiftly Moving and another card effect would make you skip your next Attacker Attacks phase, then you do NOT get to use the attack that Trunks Swiftly Moving is copying on your next available Attacker Attacks phase.
+
+
+When a card copies a card that your opponent has played (like Trunks Swiftly Moving and Blue Reversal Drill), the “copied” card that you use is an extra card that is created for this effect, which gains all of the text from the card that you are copying. This extra card then disappears when it is finished instead of going to your discard pile or your removed from the game pile.
+
+
+Trunks Sword Position 3 (Trunks Saga - #89) – This card gains, “Remove from the game after use.”
+
+
+Trunks, the Hero Lv.4 (Trunks Saga - #150) - Treat his Constant Combat Power as if it read, “During your opponent’s turn, all damage (power stages and life cards) from physical attacks performed against your Trunks, the Hero is reduced to 1 power stage of damage.”
+
+
+Trunks, the Swift lv.1 (Cell Saga - #173) - This card has no clarification to it, and the previous clarification is now invalid. This power is not a defense shield.
+
+
+Ultimate Champion (SEVEN Premire Event - #SZ9) – This card can only be used by Dustin Morabito.
+
+
+Unexpected Allies (Saiyan Saga - #218) - Treat this card as if it read, “Search your Life Deck or discard pile for an Ally and put him into play at his highest power stage.”
+
+
+Unlocked Potential (Fusion Saga - #89) - Unlocked Potential allows you to use a higher level Constant Combat Power if you do not have access to that power already. You cannot use two Unlocked Potential during the same Combat on the same personality level. Unlocked Potential does not stack if you rise up to the chosen level later on in Combat.
+
+
+Vegeta Lv.1 (Saiyan Saga - #173) - Power: Saiyan Energy Deflection - Treat this power as if it read, “Reduce the damage from an energy attack performed against you to 2 life cards of
+damage.”
+
+
+Vegeta Lv.1 HT (Saiyan Saga - #184) - His power reads, “Stop an energy attack.”
+
+
+Vegeta Scans The City (Trunks Saga - #126) - Treat this card as if it read, “You may use this card when your opponent would win by the Most Powerful Personality Victory. Lower any opponent’s Main Personality that is level 2 or higher by 1 personality level. Using this card effect can keep your opponent from winning with the Most Powerful Personality victory.
+Remove from the game after use. Limit 1 per deck.”
+
+
+Vegeta, Saiyan Prince Lv.4 (Trunks Saga - #151) - Treat his Constant Combat Power as if it read, “During your opponent’s turn, all damage (power stages and life cards) from physical attacks performed against your Vegeta, Saiyan Prince is reduced to 1 power stage of damage.”
+
+
+Vegeta, the Celestial Lv.1 (Fusion Saga - #P7) – Treat this card as if it read, “Constant Combat Power: If you declared a Tokui-Waza, any of your Freestyle Physical Combat cards that say "Remove from the game after use" gain the text "Place at the bottom of your Life Deck after use" instead. All of your physical attacks do +1 power stages of damage.”
+
+
+Vegeta's Dragon Ball Capture (Saiyan Saga - #241) - Players may not use a Dragon Ball card’s power if the Dragon Ball card is "captured" using this card power. If you “re-capture” your own Dragon Ball from your opponent in this way, put the Dragon Ball on the bottom of your deck.
+
+
+Vegeta’s Energy Blast (Saiyan Saga - #119) - Treat this card as if it read, “Saiyan Heritage only. Use when needed. This must be your first card played during Combat. Raise your Main Personality to its highest power stage. Remove from the game after use.
+
+
+Vegeta’s Energy Blast (Broly - #36) – This card’s title is “Vegeta’s Energy Detonation”.
+
+
+Vegeta’s Jolting Slash (Frieza Saga - #17) - Treat this card as if it read, “Energy attack. Stop all physical attacks performed against villains for the remainder of Combat. Lower your opponent’s anger 2 levels. Remove from the game after use.”
+
+
+Vegeta’s Physical Stance (Saiyan Saga - #28) - Treat this cards as if it read, “Stops a physical attack. Stops all physical attacks performed against you for the remainder of Combat. Remove from the game after use.”
+
+
+Vegeta's Smirk (Burger King - #BK7) – This card gains “Remove from the game after use.”
+
+
+Vegeta’s Trick (Saiyan Saga - #240) - When you play this card, continue revealing the top cards of your opponent’s deck until you reveal a Dragon Ball. Set that Dragon Ball aside and shuffle your opponent’s deck. Place the Dragon Ball on the bottom of the shuffled deck.
+
+
+Vile Energy (Kid Buu Saga - #123) - Treat this card as if it read, “Energy attack. If your opponent has more Drills in play than you, you may search your Life Deck for a Drill and place it into play until you have the same number of Drills in play as your opponent, or until you have no more Drills in your Life Deck that are playable (whichever happens first). Limit 1
+per deck.”
+
+
+Watching From Afar (Majin Buu Saga - Preview #4) - This card gains “Remove from the game after use.”
+
+
+What Was I Thinking (Trunks Saga - #118) – The ally is immediately in control when it is placed into play with this card, and that ally can use “When Entering Combat” powers.
+
+
+Where There’s Life, There’s Hope (Trunks Saga - #157) – You cannot use this card if a card effect is specifically making you lose the game. You can use this card if your opponent is specifically winning the game.
+
+
+If you run out of cards in your Life Deck by drawing cards from it, you are still allowed to use Where There’s Life There’s Hope to keep your opponent from winning by the survival victory until the beginning of his next turn.
+
+
+If you use this card in a Tuff Enuff event and you still lose the game, you do not lose the game with an Overkill, even if the original attack that made you use Where There’s Life, There’s Hope would have been an Overkill.
+
+
+Who’s Da Man! (Cell Games Saga - #113) – The +4 power stages of damage to all of your physical attacks last for the remainder of Combat.
+
+
+Winter Countryside (Android Saga - #93) – You can only raise your anger 1 level from each card while Winter Countryside is in play. If the card stays on the table to be used multiple times and it raised your anger the first time you used the card, you do not get to raise your anger again from that card.
+
+
+Winter Countryside “resets” at the end of each turn, so you can use Masteries and other cards that stay in play over multiple turns in future turns.
+
+
+Winter Countryside vs. Paragus Lv.1 (Babidi Broly Subset #31) – Because Winter Countryside caps the amount of anger you gain, and not prevent or lower, you would still only raise your anger 1 level from card effects.
+
+
+Yajirobe’s Gifting Drill (Frieza Saga - #63) - Treat this card as if it read, “Reduce the damage from all attacks performed against you by 1 power stage or 1 life card of damage.”
+
+
+Yamcha Lv.1 (Saiyan Saga - #84) – This card is an Uncommon and has a 3-Star Dragon Ball.  Treat this card as if it read, “Energy attack doing 2 life cards of damage.”
+
+
+Yamcha Lv.2 (Saiyan Saga - #85) - Solar Flare forces your opponent to “skip” his next “Attacker Attacks” phase, meaning you may not pass to end Combat.
+
+
+Yamcha’s Good Wishes (Frieza Saga - #108) - Treat this card as if it read, “Stops a physical attack and stops all physical attacks for the remainder of Combat. Remove from the game
+after use.”
+
+
+You’re Invited (Grand Kai Invitational - #GKI1) – When your opponent plays a Battleground or Location card during his Non-Combat Step or uses a card effect that says he must skip or pass Combat that turn (and the next turn in the case of Long Journey), you can still use You’re Invited during their Declare Step to make them “declare”, but the Combat Step is skipped entirely and never happens.
+
+
+Zangya - Any cards that say “Zanya” or have “Zanya” in the title should be treated as if they read “Zangya” instead.
+
+
+
+
+
+
+
+
+
+
+
+
+10. Power Level Errata
+
+
+  
+  
+
+  
+  
+
+
+
+
+
+     
+
+
+             
+________________
+
+
+11. Glossary
+
+
+ - Active Player: The active player is the person who started the current turn and can participate in every step.
+ - Ally: Allies are Personality cards that are played in the Non-Combat Step. Allies do 2 things: they can take over Combat for the Main Personality when the MP’s power stage is at his bottom 2 power stages, and you can redirect power stages of damage for the Main Personality or other Allies.
+ - Anger: Anger in the DBZ universe allows personalities to tap into higher, stronger forms of themselves. Card powers can chance a personality’s anger.
+ - Attaching a Card: Placing a card under another card in play for the purpose of gaining an effect.
+ - Attack: Playing cards or using card powers to reduce an opponent’s power stages, Life Deck, or anger.
+ - Attacker: The player who can attack, play a card in place of an attack, or pass in the Attack Phase.
+ - Banned Cards: These are cards that are not allowed in official tournament play. They can be used when playing for fun if agreed in advance.
+ - Base Damage: On all cards, the base damage is PAT for physical attacks and 4 Life cards for Energy attacks, unless the card states a set amount of damage (EG: Physical attack doing 4 power stages of damage).
+ - Battle Sequencer: This is the actual step-by-step order of Combat that occurs in battle.
+ - Battleground Cards: See Location cards.
+ - Card Power: The instructions on a card containing the benefit of a card if played or used.
+ - CCG: Collectible Card Game
+ - Combat Card: Cards that say “Combat” directly below the picture in the card.  Combat cards do not include Physical Combat cards or Energy Combat cards.  Combat cards are used to either take the place of an attack, or to defend against an attack.  When you use a Combat card in place of an attack, all effects on that card are considered secondary effects.
+ - Constant Combat Power: A continuous effect that some Personality cards create as long as that Personality is in control of Combat.
+ - Controller: The controller is the person that currently has possession of a card. The controller may not always be the owner of the card, as in the case of captured Dragon Balls.  - Cost: A cost exists on a card only if the word “cost” (or the terms “costs” and/or ”costing”) appears on the card itself. Energy attacks that don’t tell you the basic cost on the card gain “Costs 2 power stages to perform” after the sentence describing the energy attack.
+ - Current Rulings Document (CRD): This Document is a CRD and Rulebook. Some cards have raised questions that require official answers. To find these answers, go to
+http://retrodbzccgcom.fatcow.com.
+- D. Power Rule: At the beginning of the game, if one player’s Main Personaltiy at 5 power stages above 0 is in the D Bracket or above on the Physical Attack Table, and the other player is not, the player in the lower bracket goes first. When a player’s MP card 5 power stages above 0 is in the D bracket and the other players MP has Z power stages both players start at 5 power stages above 0.  The who goes first is then randomly chosen.
+- Damage: The loss in power stages or life cards caused by a successful attack. Power stages and life cards lost from effects from a card are NOT “damage”.
+ - Deck Requirements: These are rules and restrictions for creating legal decks.
+ - Deck: Your Life Deck and your Sensei Deck combined.
+ - Defense Shield: A card power that is activated when you do not stop an opponent's attack.  Defense Shields attempt to stop the first unstopped attack.
+ - Discard: To put a card face-up on top of the Discard Pile.
+ - Dragon Ball Loop: An infinite game loop that occurs when you take life cards of damage and only have Dragon Balls left. When this happens, you lose the game.
+ - Drill Card: Drill cards represent the Martial Art abilities of your Personalities. You play them during your Non-Combat Step, and they are discarded when the MP gains or loses a Personality level. Drills are kept in play after use and can be used multiple times throughout your turn.
+ - Effects: These are game instructions that are not directly associated with an attack. When part of an attack, these card effects occur whether or not the attack is successful. They are always finished before the opponent does anything else and are not considered damage.
+ - Energy Attack: 1 of the 2 ways to attack in the game. (The other is a physical attack.) Most energy attacks cost the attacker 2 power stages to perform and cause the defender to take 4 life cards of damage, unless the power text says otherwise.
+ - Energy Combat Card: A card that you play from your hand during an Attack Phase that usually will perform or stop an energy attack.
+ - Final Physical Attack: This is a physical attack for PAT power stages of damage that is performed by discarding any card from your hand as a cost. For the rest of Combat you must pass in every one of your remaining Attack Phases and you cannot defend.
+ - Floating Effects: These are game instructions that are created by card effects that continue to exist in the game even though card that created them is no longer being used.
+ - Freestyle Card: Any card that does not have a Martial Arts Style assigned to it. Freestyle cards can be used in any Life Deck, including decks that qualify for a Tokui-Waza.
+ - Hero: A Personality card that has a blue background.
+ - “If Successful” effects: These effects occur only if an attack is successful.
+ - In play: A card that is face-up on the table but is not in a Life Deck, discard pile, Sensei Deck or removed from the game pile. Also, Personality levels that are not the current level of a personality are not in play.
+ - Keyword: A word appearing on cards that is tied to a specific effect that is defined by the rules of the game or a card.
+ - Life Cards: These are the cards in your Life Deck.
+ - Life Deck: Your Life Deck is the entirety of all cards you bring to the game. It’s the stack of face-down cards next you your Main Personality that you draw and discard from during a game. These cards represent the life force of your MP.
+ - Location Cards: Battleground and Location cards affect battles for both players and are placed in play during the Non-Combat Step by the active player. Once placed in play, a player must then skip the Combat Step. If a Battleground or Location card is in play when a new one is placed in play, the old one is removed from the game.
+ - Main Personality (MP): The character that someone is playing in the game. The player uses his collected Life Deck to take on the persona of that Main Personality. The MP defines the alignment of the Life Deck that is being player (hero or villain) as well as what kind of Allies he can use in play.
+ - Martial Arts Style: One of the 6 fighting styles represented in the game: Red, Blue, Orange, Black, Saiyan or Namekian.
+ - Mastery Card: A card type that is played before the game begins if all the Styled cards of an owner’s Life Deck match the requirements for a Tokui-Waza.
+ - Modifier: A Modifier is an effect that alters how much damage an attack does, usually using a + or a – symbol. Modifiers can be found in the secondary effect text.
+ - MP: An abbreviation for the term “Main Personality.”
+ - Named Card: A card having a personality’s name in its card title.
+ - Namekian Heritage: If a card says “Namekian Heritage only” it means that only Namekian personalities may use these cards.
+ - Non-Combat Card: These cards are classified as either Drills or Non-Combat cards.  All regular Non-Combat cards are placed in play during the Non-Combat Step and are activated during the Combat Step and then discarded.  Drill cards stay in play and are active until the MP of the player controlling the Drill card advances or loses a personality level, and then they are discarded from the play area.
+ - Owner: The owner of a card is the person that brought the card to the table prior to the game starting.
+ - Pass: A choice a player makes to take no action other than say “pass” during an Attack Phase.
+ - Pass Consecutively: When both players pass in back-to-back Attack Phases thus ending the Combat Step.
+ - Physical Attack: One of the 2 types of attacks in the game. Physical attacks generally do power stages of damage and use the Physical Attack Table to calculate the Base Damage, unless the card specifies exactly what damage is done from the attack.
+ - Physical Attack Table: The table on a scouter that compares the power rating of 2 personalities to obtain a numeric value.
+ - Physical Combat Card: A Combat card that you play and use during an Attack Phase that usually performs or stops a physical attack.
+ - Playing a Card: Whenever you take a card and put it in play.
+ - Powering Up: This occurs during the Power Up Step of the Sequence of Play. Players power up their Main Personality’s and Allies power stages by their PUR.
+ - Power Rating: The numeric value inside a power stage that represents a Personality’s current strength.
+ - Power Stages: The spaces on Personality cards that contain numeric values. They are located to the right of the image of a Personality.
+ - Power-Up Rating (PUR): The number in the middle of the left side of a Personality card that determines how many power stages that personality gains in the Power-Up Step.
+ - Put in Play: This occurs when a card tells you to put another card into play. It is considered the same as playing for card effects that say “When you play.”
+ - Remove From Game: To put a card face-up in your Removed-From-The-Game pile. That card cannot be played or used for the rest of the game.
+ - Restricted Cards: These are cards that are limited to one per Deck during official tournament play. Visit http://retrodbzccgcom.fatcow.com for more details.
+ - Revealed Cards: Cards that are face up in play, revealed in searches, or mentioned by name are revealed cards.
+ - Saiyan Heritage: If a card says “Saiyan Heritage Only,” it means that only Saiyan Personalities can use it.
+ - Secondary Effects: Secondary effects are effects not directly associated with an attack. These card effects occur automatically and are always resolved before the opponent does anything else. The following are NOT secondary effects: costs, Endurance, “if successful” effects, attacks, anything that stops an attack, or any text inside parentheses.
+ - Sensei Card: This card qualifies you to play a Sensei Deck.
+ - Sensei Deck: A deck and game mechanic that allows you to swap out cards in your Sensei Decks with cards in your Life Deck after Main Personalities and Masteries have been revealed, but before play actually begins.
+ - Sequence of Play: The 7 steps that make up a complete turn.
+ - Shuffling Your Life Deck: Randomizing a Life Deck to the point where its contents and the order of those contents are unknown to the shuffler and satisfactory to the opponent.  - Starburst: A Starburst tells you that the card is played as a defense in an Attack Phase. This means your opponent must attack and you must use the card as a defense.
+ - Styled Drills: These are Drill cards that have a Martial Arts Style attached to them.
+ - Surname: The second half of some Personality card titles that are not that personality’s name.
+ - TCG: Trading Card Game.
+ - Tokui-Waza: A status a player gains by building a Life Deck composed of only Freestyle cards and cards from one Martial Arts Style as well as a Mastery card from the chosen Style. There are 7 kinds of Tokui-Waza: Red, Saiyan, Namekian, Orange, Blue, Black and Freestyle. Freestyle is different than the rest in that it has no style it belongs to, and must have NO styled cards in its deck.
+ - Tournaments: Official Dragon Ball Z events allow players to compete for prizes, and meet new people who love to play the game. Check http://retrodbzccgcom.fatcow.com for more information about tournaments.
+ - Trading Card Game (TCG): A game that is a mixture of card collecting and game play that allows a player to build customized game decks according to a rules structure that the cards themselves frequently change.
+ - Using a Card: A card is “used” when a player uses its effect. This is different than playing a card (see Playing a Card.) For Combat cards, using the card happens instantly after playing it except for cards with remain.
+ - Villain: A Personality card that has a red background.
+
+
+
+
+________________
+
+
+12. Physical Attack Tables

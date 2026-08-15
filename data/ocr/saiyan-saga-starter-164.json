@@ -1,0 +1,28 @@
+{
+  "id": "saiyan-saga-starter-164",
+  "number": 164,
+  "name": "Gohan LV1",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 67,
+    "pur": 0,
+    "text": 77
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Gohan",
+  "level": 1,
+  "powerRatings": [
+    200,
+    300,
+    0,
+    500,
+    600,
+    0
+  ],
+  "pur": 0,
+  "text": "re Zeer re ~~ Ba\nPower:\nWhen defending and facing i\nan energy attack. he can\nraise his anger level once"
+}

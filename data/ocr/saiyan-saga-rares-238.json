@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-238",
+  "number": 238,
+  "name": "King Kai’s Calming",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 30,
+    "text": 76
+  },
+  "needsReview": [],
+  "typeLineRaw": "Non-Combat 1 Em — LE |",
+  "text": "Played at the end of a\ntum. it forces a foe back\n\ngid from level 3 to level 2.\n°\\ Limit 1 per deck. #\nre oo-% . -"
+}

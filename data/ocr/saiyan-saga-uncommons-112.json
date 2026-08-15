@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-112",
+  "number": 112,
+  "name": "Krillin’s Physical Defense",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 23,
+    "text": 90
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "fA I. .- i { eo TW SEE",
+  "text": "When Krillin is forced to discard from his\n\ndeck. he may take that first card into |\n\n- hand. If used by Krillin, this card stays\nthe table to be used one more\n\ntime in this combat. 7"
+}

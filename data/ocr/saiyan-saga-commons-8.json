@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-8",
+  "number": 8,
+  "name": "Knife Hand",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 41,
+    "text": 67
+  },
+  "needsReview": [],
+  "typeLineRaw": "BN Physical Combat —y |",
+  "text": "Physical Attack doing +3\nstages of damage if suc-\na cessful. Raise card user’\nanger level 1. #\n0 Sat thinly ahve dr i Aoarvvs IP (ANS saint"
+}

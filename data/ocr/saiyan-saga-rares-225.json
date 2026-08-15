@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-225",
+  "number": 225,
+  "name": "Baba’s Energy Blast",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 33,
+    "text": 86
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "BR eee——— |",
+  "text": "Does 3 life card discards i\n\ndamage at any time to &\n\nA foe. Discard this card fra\nthe game after 1\n\nuse. 4"
+}

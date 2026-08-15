@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-53",
+  "number": 53,
+  "name": "Holding After Takedown",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 36,
+    "text": 78
+  },
+  "needsReview": [],
+  "typeLineRaw": "SN WR) Fhijsical Combat",
+  "text": "Stops opponent's physica\n_ attack this round. Foe's\nEl anger level decreases bu"
+}

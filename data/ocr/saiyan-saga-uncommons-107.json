@@ -1,0 +1,32 @@
+{
+  "id": "saiyan-saga-uncommons-107",
+  "number": 107,
+  "name": "Yajirobe LV2",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 87,
+    "pur": 0,
+    "text": 65
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Yajirobe",
+  "level": 2,
+  "powerRatings": [
+    0,
+    500,
+    600,
+    700,
+    800,
+    800,
+    1000,
+    1100,
+    1300,
+    1400
+  ],
+  "pur": 0,
+  "text": ":\nPower:\nEnergy attack needs 3 E\npower stages ta perform.\n\n; i\n\nist: HE il 11113 i"
+}

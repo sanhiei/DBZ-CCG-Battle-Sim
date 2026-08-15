@@ -1,0 +1,16 @@
+{
+  "name": "@dbz/tts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc -b",
+    "extract": "tsc -b && node dist/cli.js",
+    "test": "tsc -b && node --test dist/tts.test.js"
+  },
+  "dependencies": {
+    "@dbz/shared": "*",
+    "sharp": "^0.33.5"
+  }
+}

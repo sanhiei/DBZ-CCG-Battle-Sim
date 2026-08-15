@@ -1,0 +1,35 @@
+{
+  "id": "saiyan-saga-starter-180",
+  "number": 180,
+  "name": "Piccolo LV1 HT",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 66,
+    "pur": 0,
+    "text": 29
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur",
+    "text"
+  ],
+  "personalityName": "Piccolo",
+  "level": 1,
+  "variant": "HT",
+  "powerRatings": [
+    0,
+    500,
+    600,
+    700,
+    800,
+    0,
+    100,
+    110,
+    1200,
+    130,
+    1400
+  ],
+  "pur": 0,
+  "text": "FN\ni=\n—\n-\n(Ir ="
+}

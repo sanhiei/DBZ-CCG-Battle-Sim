@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-227",
+  "number": 227,
+  "name": "T-Rex Offense",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 15,
+    "text": 87
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "_— Ea",
+  "text": "In every battle where the card\nowner is attacking. it does 1 li\nBA Card in damage per combat\nuntil an energy attack\nKills it. +A"
+}

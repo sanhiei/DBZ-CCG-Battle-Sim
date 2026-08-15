@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-220",
+  "number": 220,
+  "name": "Vegeta’s Stance",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 22,
+    "text": 74
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "| ase",
+  "text": "Prevents all but 1 life card\n\\ \\ draw from a successful\nBN energy attack. Discard\n\\ from the game after\nuse. FS.\nkl p— —"
+}

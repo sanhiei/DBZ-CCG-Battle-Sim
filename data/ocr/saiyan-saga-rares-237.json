@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-237",
+  "number": 237,
+  "name": "Goku’s Capturing Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 31,
+    "text": 85
+  },
+  "needsReview": [],
+  "typeLineRaw": "re USA No m— 0 | Non-Combat pe = eR",
+  "text": "Prevents any Dragon Ball\nfrom being captured fron\na this drill user."
+}

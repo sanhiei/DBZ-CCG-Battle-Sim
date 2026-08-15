@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-uncommons-104",
+  "number": 104,
+  "name": "Chiaotzu LV1",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 73,
+    "pur": 0,
+    "text": 55
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Chiaotzu",
+  "level": 1,
+  "powerRatings": [
+    0,
+    100,
+    200,
+    300,
+    0,
+    500,
+    600,
+    700,
+    800,
+    800,
+    1000
+  ],
+  "pur": 0,
+  "text": "SN =! \"\np —\nPower: »\nPower Blast Energy\nAttack costs power |\nstage to perform. |W\nvin nnd"
+}

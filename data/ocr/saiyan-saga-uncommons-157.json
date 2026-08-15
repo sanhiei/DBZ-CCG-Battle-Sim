@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-157",
+  "number": 157,
+  "name": "Eyes of the Dragon",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 78
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "",
+  "text": "After a successful energy attack, ti\n_\\ \\ card owner can pick a Dragon Ball c\nEl Of his deck and capture a Dragon |\nfrom the damaged foe. Limit\npy\n| per deck. E-)"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-139",
+  "number": 139,
+  "name": "Wrist Control Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 22,
+    "text": 76
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "wy cE",
+  "text": "For every 3 stages of\n\\ \\ power you lose. your foe\nae loses 1 power stage. dow\nto (0). #\nad : FEET"
+}

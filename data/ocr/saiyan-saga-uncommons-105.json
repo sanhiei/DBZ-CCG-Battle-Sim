@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-uncommons-105",
+  "number": 105,
+  "name": "Chiaotzu LV2",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 82,
+    "pur": 0,
+    "text": 61
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Chiaotzu",
+  "level": 2,
+  "powerRatings": [
+    0,
+    500,
+    600,
+    700,
+    800,
+    800,
+    1000,
+    1100,
+    1200,
+    1300,
+    1200
+  ],
+  "pur": 0,
+  "text": "Power:\nBlast Energy Attack does\n| 6 life cards of damage, »\n| (a Oves Site zu \""
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-vegeta-s-trick",
+  "number": null,
+  "name": "Vegeta’s Trick",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 46,
+    "text": 89
+  },
+  "needsReview": [],
+  "typeLineRaw": "7 Tine Non-Combat CW",
+  "text": "Find the foe's first Dragor\nBall in his life deck and\nBl place it at the bottom of\nhis deck. Limit 1 per\ndeck. +"
+}

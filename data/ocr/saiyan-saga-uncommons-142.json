@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-142",
+  "number": 142,
+  "name": "Energy Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 29,
+    "text": 72
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "SE WENNN——— mw",
+  "text": "Allows the defender to take |\nless life card discard from eve\new energy attack. Cannot be us\na with other Orange Drills\nin play on the table. kz\na Etre 1 tir i il arar-ir-wrd A"
+}

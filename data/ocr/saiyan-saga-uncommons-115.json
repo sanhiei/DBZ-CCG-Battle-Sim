@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-115",
+  "number": 115,
+  "name": "Yamcha’s Energy Attack",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 93,
+    "text": 82
+  },
+  "needsReview": [],
+  "typeLineRaw": "Energy Combat",
+  "text": "Energy attack doing 2 life\ncard draws of damage,\nBM costs 3 power stages to\nperform. #*\nNY"
+}

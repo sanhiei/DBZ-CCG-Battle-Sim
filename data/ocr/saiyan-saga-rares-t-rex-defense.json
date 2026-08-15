@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-t-rex-defense",
+  "number": null,
+  "name": "T-Rex Defense",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 37,
+    "text": 83
+  },
+  "needsReview": [],
+  "typeLineRaw": "Von-Combat al CC CEE",
+  "text": "The beast takes all damage fror\n\nA | physical attacks for the card ue\n\nll but the first energy attack Kills\nit. Discard from the game\n\nafter 1 use. 4"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-218",
+  "number": 218,
+  "name": "Unexpected Allies",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 6,
+    "text": 84
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "PE OmDat",
+  "text": "Pull an ally card from the\ndiscards or the life deck.\nLl play it and set its power\nYN Stages at full. *"
+}

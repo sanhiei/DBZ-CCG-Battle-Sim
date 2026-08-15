@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-ultra-rares-249",
+  "number": 249,
+  "name": "Medic Kit",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 32,
+    "text": 82
+  },
+  "needsReview": [],
+  "typeLineRaw": "J = \" Non-Combat !",
+  "text": "Place the top 3 discard\n\\ cards at the bottom of t\npA: life card deck. Limit 1 pe\n\\ deck. r"
+}

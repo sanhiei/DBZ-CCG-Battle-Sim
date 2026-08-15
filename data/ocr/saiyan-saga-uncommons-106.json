@@ -1,0 +1,32 @@
+{
+  "id": "saiyan-saga-uncommons-106",
+  "number": 106,
+  "name": "Yajirobe LV1",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 67,
+    "pur": 0,
+    "text": 45
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur",
+    "text"
+  ],
+  "personalityName": "Yajirobe",
+  "level": 1,
+  "powerRatings": [
+    0,
+    100,
+    200,
+    0,
+    500,
+    600,
+    700,
+    800,
+    1000
+  ],
+  "pur": 0,
+  "text": "Power: |\nPhysical Attack |\n- aid fied a Wy ¥ aid ay oa »\ni ="
+}

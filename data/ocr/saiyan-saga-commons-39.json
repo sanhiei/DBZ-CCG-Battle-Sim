@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-39",
+  "number": 39,
+  "name": "Straining Ankle Smash Move",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 26,
+    "text": 80
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "NS aE RRR. S—— |",
+  "text": "Play this card right after the attacker pi\na card and pays their energy costs. The\nSN defender does 4 stages of power drain\n“\\ the attacker, no matter what he\ni5 doing to the defender. #\nYeu i'd Bhavio to lac =e"
+}

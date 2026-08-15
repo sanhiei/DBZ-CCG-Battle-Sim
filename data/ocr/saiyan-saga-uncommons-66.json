@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-66",
+  "number": 66,
+  "name": "Knife Hand Strike",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 20,
+    "text": 89
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "TR mn tml B— Ye B.C FLT Seen",
+  "text": "Energy Attack doing 4 life\ncard draws of damage or\n\n\" stopping any energy\nattack. ="
+}

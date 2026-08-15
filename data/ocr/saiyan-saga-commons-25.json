@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-25",
+  "number": 25,
+  "name": "Goku’s Physical Attack",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 36,
+    "text": 89
+  },
+  "needsReview": [],
+  "typeLineRaw": "BR J /; =) ‘Physical Combat eR",
+  "text": "Physical attack. plus draw the botto\n\ncard from the discard pile into your\n\nlA hand. If used by Goku, it stays on\ntable to be used one more\n\ntime in this combat. ES"
+}

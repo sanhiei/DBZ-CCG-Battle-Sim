@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-starter-171",
+  "number": 171,
+  "name": "Raditz LV2",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 81,
+    "pur": 0,
+    "text": 69
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Raditz",
+  "level": 2,
+  "powerRatings": [
+    0,
+    2000,
+    2200,
+    2400,
+    2600,
+    2800,
+    3000,
+    3200,
+    300,
+    3600,
+    3800
+  ],
+  "pur": 0,
+  "text": "RETR a\n) TS\n\\ \\ No” “~~.\nPower:\nSaiyan Energy Blast does 3\n1 life card draws of damage\n8 and costs only 1 power"
+}

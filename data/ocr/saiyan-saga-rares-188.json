@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-188",
+  "number": 188,
+  "name": "Earth Dragon Ball Capture",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 40,
+    "text": 78
+  },
+  "needsReview": [],
+  "typeLineRaw": "Ce RT Physical Combat",
+  "text": "Capture an opponent's\nso Dragon Ball."
+}

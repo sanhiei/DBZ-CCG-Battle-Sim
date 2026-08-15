@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-110",
+  "number": 110,
+  "name": "Piccolo’s Physical Defense",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 12,
+    "text": 64
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "KAT... PWR 00 conwnmms",
+  "text": "Stops a successful physica\nattack from doing damage\nSl and raises Piccolo's power\n\\ rating by 4. up to his\nmaximum stage. AR\nN EE\no Neu 1 l=mrte orl \\W Aides 1 wn tS res"
+}

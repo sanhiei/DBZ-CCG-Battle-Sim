@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-241",
+  "number": 241,
+  "name": "Vegeta’s Dragon Ball Capture",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 9,
+    "text": 71
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "8 EAC BR emmm——T",
+  "text": "Capture 2 of a foe's Drage\nBalls and place them at\nBA the bottom of his life\ndeck. Limit | per\ndeck. ES\n£m Hot Leied — 1 wm eres 2 Te"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-148",
+  "number": 148,
+  "name": "Pressure Point Drill",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 47,
+    "text": 86
+  },
+  "needsReview": [],
+  "typeLineRaw": "on-Combat al CEE",
+  "text": "Allows the attacker to do 1 extra |\n\ncard of damage with every SUCCE\n\n, ful energy attack. Cannot be use\nwith other Red Drills in play\n\non the table. FR"
+}

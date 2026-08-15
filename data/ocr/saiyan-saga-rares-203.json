@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-203",
+  "number": 203,
+  "name": "Truce Card",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 26,
+    "text": 83
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "1 i”) - EE . il ee CEEEE———",
+  "text": "Stops this combat. The turn\nends, and the player may hol\nLl all his extra cards until his ne\nturn. Discard from the\ngame after use. FS:\nNY ——"
+}

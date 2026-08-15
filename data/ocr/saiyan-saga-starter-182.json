@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-starter-182",
+  "number": 182,
+  "name": "Krillin LV1 HT",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 73,
+    "pur": 0,
+    "text": 69
+  },
+  "needsReview": [
+    "pur"
+  ],
+  "personalityName": "Krillin",
+  "level": 1,
+  "variant": "HT",
+  "powerRatings": [
+    0,
+    10,
+    200,
+    300,
+    400,
+    500,
+    600,
+    700,
+    800,
+    900,
+    1000
+  ],
+  "pur": 0,
+  "text": "|\nA"
+}

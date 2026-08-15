@@ -1,0 +1,31 @@
+{
+  "id": "saiyan-saga-uncommons-84",
+  "number": 84,
+  "name": "Yamcha LV1",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 80,
+    "pur": 0,
+    "text": 57
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Yamcha",
+  "level": 1,
+  "powerRatings": [
+    100,
+    200,
+    300,
+    0,
+    500,
+    600,
+    700,
+    800,
+    800
+  ],
+  "pur": 0,
+  "text": "ig 7\nSo) = E\nPower:\nSpirit Ball Energy Attack [\ndoes 2 life card draws of I\nl=\n— ,- wae | rid Re REE A"
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Fusion Saga - Physical Attack Table (canonical)",
+  "placeholder": false,
+  "special": { "zResult": 2 },
+  "brackets": [
+    { "letter": "A", "minRating": 0, "maxRating": 0 },
+    { "letter": "B", "minRating": 1, "maxRating": 649999 },
+    { "letter": "C", "minRating": 650000, "maxRating": 1899999 },
+    { "letter": "D", "minRating": 1900000, "maxRating": 3799999 },
+    { "letter": "E", "minRating": 3800000, "maxRating": 5699999 },
+    { "letter": "F", "minRating": 5700000, "maxRating": 7999999 },
+    { "letter": "G", "minRating": 8000000, "maxRating": 9799999 },
+    { "letter": "H", "minRating": 9800000, "maxRating": 11599999 },
+    { "letter": "I", "minRating": 11600000, "maxRating": 999999999 }
+  ],
+  "damage": [
+    [1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [2, 1, 0, 0, 0, 0, 0, 0, 0],
+    [3, 2, 1, 0, 0, 0, 0, 0, 0],
+    [4, 3, 2, 1, 0, 0, 0, 0, 0],
+    [5, 4, 3, 2, 1, 0, 0, 0, 0],
+    [6, 5, 4, 3, 2, 1, 0, 0, 0],
+    [7, 6, 5, 4, 3, 2, 1, 0, 0],
+    [8, 7, 6, 5, 4, 3, 2, 1, 0],
+    [9, 8, 7, 6, 5, 4, 3, 2, 1]
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-232",
+  "number": 232,
+  "name": "Life Attack Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 14,
+    "text": 89
+  },
+  "needsReview": [],
+  "typeLineRaw": "L(V Non-Combat —y | SE",
+  "text": "Drill does an extra life card of\ndamage whenever successful\ndamage is done."
+}

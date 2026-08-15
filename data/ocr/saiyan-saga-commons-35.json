@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-35",
+  "number": 35,
+  "name": "Straining, Penetrating Attack Move",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 41,
+    "text": 92
+  },
+  "needsReview": [],
+  "typeLineRaw": "Am fh, A os oo - a — Vi wA WB Physical Combat",
+  "text": "Physical attack forcing th\ndefender to lose 3 life\ncards and the attacker =\n\nStages of power.\nLimit 1 per deck. +"
+}

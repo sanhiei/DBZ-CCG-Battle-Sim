@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-152",
+  "number": 152,
+  "name": "Defender Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 40,
+    "text": 78
+  },
+  "needsReview": [],
+  "typeLineRaw": "\\/ Non-Combat Bl ee",
+  "text": "Allows the defender to ta\n| less life card draw from\ndamage on any success!\n\nWM energy attack.\n£\n<"
+}

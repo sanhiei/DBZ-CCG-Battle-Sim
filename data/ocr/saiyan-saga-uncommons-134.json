@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-134",
+  "number": 134,
+  "name": "Off-Balancing Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 14,
+    "text": 88
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "Bl ———",
+  "text": "Stop the first physical\nattack made on you in a\ncombat.\n\nPUTTIN"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "saiyan-saga-starter-163",
+  "number": 163,
+  "name": "Piccolo LV3",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 63,
+    "pur": 0,
+    "text": 52
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur",
+    "text"
+  ],
+  "personalityName": "Piccolo",
+  "level": 3,
+  "powerRatings": [
+    0,
+    3200,
+    3700,
+    200,
+    700,
+    5200,
+    5700,
+    6200,
+    6700,
+    7200,
+    7700
+  ],
+  "pur": 0,
+  "text": "Power: \"\n\nMutti-Form allows two physical attacks,\nore after othe, or a cefense aganst. |g\n| ap (5 3 tack preventing 4 sta: ,\nTT Tm"
+}

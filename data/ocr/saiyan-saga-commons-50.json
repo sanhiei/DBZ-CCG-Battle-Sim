@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-50",
+  "number": 50,
+  "name": "Shoulder Throw",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 96,
+    "text": 75
+  },
+  "needsReview": [],
+  "typeLineRaw": "Physical Combat",
+  "text": "Stops an opponent's physic\n.\\ | attack this round. Raise ce\nusers anger level 1."
+}

@@ -1,0 +1,17 @@
+{
+  "id": "saiyan-saga-promos-p7-nappa-level-4-8211-scrye-magazine-8211-july-2000",
+  "number": null,
+  "name": "P7 Nappa Level 4 &#8211; Scrye Magazine &#8211; July 2000",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 20,
+    "text": 52
+  },
+  "needsReview": [
+    "type",
+    "text"
+  ],
+  "typeLineRaw": "YW",
+  "text": "Power: ga\n\n|\nNegate a foe's\n\n<} energy artack |\n; =. JRL :"
+}

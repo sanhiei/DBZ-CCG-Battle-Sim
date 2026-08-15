@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-uncommons-87",
+  "number": 87,
+  "name": "Bulma LV1",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 70,
+    "pur": 0,
+    "text": 57
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Bulma",
+  "level": 1,
+  "powerRatings": [
+    0,
+    100,
+    200,
+    300,
+    200,
+    500,
+    600,
+    700,
+    800,
+    800,
+    1000
+  ],
+  "pur": 0,
+  "text": "Power:\n\nScientific Defense. :\n\nReduces the damage I!\na RA x. an i ener 7 a gre Ci 3 1)"
+}

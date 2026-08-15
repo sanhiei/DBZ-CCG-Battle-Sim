@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-54",
+  "number": 54,
+  "name": "Knee Strike",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 37,
+    "text": 62
+  },
+  "needsReview": [],
+  "typeLineRaw": "I Physical Combat | al conn ——",
+  "text": "Stops the foe's physical\n\\ \\| attack. Raise card user's\nanger level 1.\n: wy SEE EONS ret reall wv 8 Lares CE"
+}

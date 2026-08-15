@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-27",
+  "number": 27,
+  "name": "Tien’s Physical Attack",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 73,
+    "text": 69
+  },
+  "needsReview": [],
+  "typeLineRaw": "| : Physical Combat BR ee",
+  "text": "Physical attack doing 5 lif\n| card draws if successful.\n| , ; '"
+}

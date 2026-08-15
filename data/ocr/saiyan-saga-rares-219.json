@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-219",
+  "number": 219,
+  "name": "Raditz Energy Burst",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 75
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "",
+  "text": "Energy attack doing 2\ndraws from the life card\n. deck if not stopped and\ncosting No power\nstages to perform. #3\nNL \\ 8 w—"
+}

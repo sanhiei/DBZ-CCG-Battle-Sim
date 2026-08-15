@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-40",
+  "number": 40,
+  "name": "Straining Energy Defense Move",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 47,
+    "text": 83
+  },
+  "needsReview": [],
+  "typeLineRaw": "ms \\ Lm \\ nergy Combat",
+  "text": "Stops an energy attack, b\nyou have to discard anott\n\ncard to use this one.\ny #"
+}

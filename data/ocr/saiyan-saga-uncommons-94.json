@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-94",
+  "number": 94,
+  "name": "Energy Blast",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 94,
+    "text": 91
+  },
+  "needsReview": [],
+  "typeLineRaw": "Energy Combat",
+  "text": "Villains, Boku, and Bohan only. Energ\nattack, plus it stops a single named\nfoe from making a physical attack\n\nhis next phase at a cost of 3\nstages of power drain. ES,"
+}

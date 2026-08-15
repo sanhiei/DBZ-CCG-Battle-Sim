@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-129",
+  "number": 129,
+  "name": "Deceiving Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 50,
+    "text": 79
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "| \"A /on-i Tombat",
+  "text": "At the beginning of every com:\nbat where the personality is th\ndefender, raise the power leve\nthis card owner 3 stages.\nup to the maximum. #4\nAN Brrr Wow! What revere il"
+}

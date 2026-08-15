@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-108",
+  "number": 108,
+  "name": "Goku’s Energy Defense",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 21,
+    "text": 83
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "—y ETT",
+  "text": "Prevents 3 life cards from being\ndiscarded from a successful energy\n- attack. If used by Boku, it stays of\n- the table to be used one\nmare time in this combat. ##\n& T—"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "saiyan-saga-uncommons-82",
+  "number": 82,
+  "name": "Tien LV1",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 83,
+    "pur": 0,
+    "text": 66
+  },
+  "needsReview": [
+    "pur"
+  ],
+  "personalityName": "Tien",
+  "level": 1,
+  "powerRatings": [
+    100,
+    200,
+    300,
+    400,
+    500,
+    600,
+    700,
+    800,
+    900,
+    1000
+  ],
+  "pur": 0,
+  "text": "|\nPower:\nMutti-Farm alows two physical attacks. 1\none after anather, or a defense against |\n§ a physical attack preventing 4 stages l"
+}

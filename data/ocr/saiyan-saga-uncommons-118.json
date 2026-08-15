@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-118",
+  "number": 118,
+  "name": "Raditz Physical Defense",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 24,
+    "text": 91
+  },
+  "needsReview": [],
+  "typeLineRaw": "I A , ............. JA. Combat a  ———",
+  "text": "Forces a Hero opponent in\nthis combat to take his\n| anger level down 2. Discar\nthis card from the\ngame after use. ES,"
+}

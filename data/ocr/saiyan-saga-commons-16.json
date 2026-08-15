@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-16",
+  "number": 16,
+  "name": "Earth Dragon Ball 2",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 25,
+    "text": 74
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "BR ee |",
+  "text": "All foes have their power\n\\ ratings changed to 2\nstages higher than 0.\nPlr=rirare r=acrd=1r saree pe"
+}

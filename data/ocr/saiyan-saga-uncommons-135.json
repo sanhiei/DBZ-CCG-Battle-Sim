@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-135",
+  "number": 135,
+  "name": "Arm Bar Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 27,
+    "text": 84
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "BE se |",
+  "text": "Stops the first energy attack\n\nA \\ made on you in a combat. Ca\n\nbe used with any other Oran\ndrills in play anywhere\n\non the table. &\nNe oa ts"
+}

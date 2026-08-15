@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-194",
+  "number": 194,
+  "name": "Unselfish Behavior is Best",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 22,
+    "text": 86
+  },
+  "needsReview": [],
+  "typeLineRaw": "BL —— ____SEJVSEE SS je on-Combat",
+  "text": "The efforts of your allies stop\nthis combat. You must have |\ni ally out on the table to use t\na card. Discard from the\ngame after use. +\n[3"
+}

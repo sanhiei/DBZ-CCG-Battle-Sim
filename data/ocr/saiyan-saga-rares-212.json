@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-212",
+  "number": 212,
+  "name": "Piccolo’s Flight",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 45,
+    "text": 69
+  },
+  "needsReview": [],
+  "typeLineRaw": "JL Non-Combat ad 3 AERC |",
+  "text": "Stops a successful physic\n_\\ \\ or energy attack.\n-i—"
+}

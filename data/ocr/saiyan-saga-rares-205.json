@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-205",
+  "number": 205,
+  "name": "Grabbing the Tail",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 15,
+    "text": 68
+  },
+  "needsReview": [],
+  "typeLineRaw": "NE. Wea—— ' Combat — EAN —————",
+  "text": "Reduce the foe's power lev\nby 4 stages. or to (0).\nwhichever happens first.\nDiscard this card from\nthe game after use. %\neo BProanear Iovsol ano teu ios y: —"
+}

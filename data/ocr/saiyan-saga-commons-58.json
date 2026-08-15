@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-58",
+  "number": 58,
+  "name": "Back Kick",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 95,
+    "text": 90
+  },
+  "needsReview": [],
+  "typeLineRaw": "Physical Combat",
+  "text": "Physical Attack doing +3 stages\nof damage if successful. Stops\nenergy attacks for the rest of\n\nthis combat. Foe's anger\nlevel decreases by 1. 7"
+}

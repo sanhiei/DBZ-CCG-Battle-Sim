@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-44",
+  "number": 44,
+  "name": "Goku Body Throw",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 51,
+    "text": 81
+  },
+  "needsReview": [],
+  "typeLineRaw": "WE Physical Combat Bl eemmm———TTTT",
+  "text": "Physical attack causing 1\n\nlife card in damage. no\n’ matter what Goku's pow\nlevel is. &"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-136",
+  "number": 136,
+  "name": "Free-Style Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 5,
+    "text": 88
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "BR a emmm——TT",
+  "text": "Draw a card from the bottom of your\n\ndiscard pile after receiving a success\n\n- energy attack. Cannot be used with\nany other Black Drill cards in\n\nplay anywhere on the table. ="
+}

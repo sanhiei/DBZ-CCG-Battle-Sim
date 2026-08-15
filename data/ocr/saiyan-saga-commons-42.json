@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-42",
+  "number": 42,
+  "name": "Straining Rolling Escape Move",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 32,
+    "text": 91
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "— vp SG LAE BR mS",
+  "text": "Stops an energy attack,\nbut the user cannot mak\nany attacks for the rest\n\nthis combat. +"
+}

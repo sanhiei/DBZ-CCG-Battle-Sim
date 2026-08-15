@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-55",
+  "number": 55,
+  "name": "Front Kick",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 28,
+    "text": 73
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "— SW SEE RE  E—",
+  "text": "Physical Attack doing +1\nstage of damage if suc-\nEA cessful. Raise card user’\nA anger level 1. #\n“©,"
+}

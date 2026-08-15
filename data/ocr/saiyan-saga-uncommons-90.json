@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-90",
+  "number": 90,
+  "name": "Mother’s Touch",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 33,
+    "text": 78
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "| _—y EEE",
+  "text": "This stops the damage\ncaused by a physical or\n-— energy attack. After use\ndiscard this card\nfrom the game. #\n83 : — et"
+}

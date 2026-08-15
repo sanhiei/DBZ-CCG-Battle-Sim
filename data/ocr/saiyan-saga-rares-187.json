@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-187",
+  "number": 187,
+  "name": "Earth Dragon Ball 7",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 29,
+    "text": 85
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "BY Ad wr N/ - § CW Er",
+  "text": "Play this card during combat to end t\n\nbattle. Pick 3 cards out of your disce\n\npile and place them at the top of yt\nlife deck. All opponents’ anger\n\nlevels shift down 2. +\n\nLN rere HP"
+}

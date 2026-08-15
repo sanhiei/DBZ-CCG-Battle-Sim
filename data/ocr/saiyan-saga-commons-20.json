@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-20",
+  "number": 20,
+  "name": "Pressure Punch",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 6,
+    "text": 69
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "ey “Se Wer",
+  "text": "Villains, Boku, and Bohan\n\\ | only. Physical attack doing\n; +3 stages of physical\ndamage if successful. re\n7 ."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-119",
+  "number": 119,
+  "name": "Vegeta’s Energy Blast",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 47,
+    "text": 82
+  },
+  "needsReview": [],
+  "typeLineRaw": "SE —— — bat | : Combat",
+  "text": "A Saiyan power-up allowing this\n\n\\ | Saiyan to power up to full at th\n\nBl beginning of this combat rou\nDiscard this card from the\n\ngame after use. ES"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-70",
+  "number": 70,
+  "name": "Turning Kick",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 67,
+    "text": 79
+  },
+  "needsReview": [],
+  "typeLineRaw": "a Fnergy Combat",
+  "text": "Energy Attack doing 5S life\n_\\ \\ card draws of damage or\n” stops a physical attack.\nRaise card user's\nanger level 1. 2\nTN"
+}

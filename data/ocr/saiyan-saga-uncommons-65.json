@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-65",
+  "number": 65,
+  "name": "Fore Fist Punch",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 52,
+    "text": 82
+  },
+  "needsReview": [],
+  "typeLineRaw": "ss Energy Combat]",
+  "text": "Energy Attack doing B life\n\\ \\ card draws of damage anc\nLl lowering foe's power 3\nog stages or to 0. which\never happens first. &"
+}

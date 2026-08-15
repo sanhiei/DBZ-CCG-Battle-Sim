@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-138",
+  "number": 138,
+  "name": "Cradle Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 34,
+    "text": 87
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "| BR em———",
+  "text": "For every life card you los\niN combat, your foe loses\n. power stage. down to [0"
+}

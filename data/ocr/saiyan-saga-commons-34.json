@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-34",
+  "number": 34,
+  "name": "Straining Off-Balancing Move",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 41,
+    "text": 87
+  },
+  "needsReview": [],
+  "typeLineRaw": "| Physical Combat — er EEE————",
+  "text": "Physical attack forcing th\n\n; defender to lose 1 life car\n\n- and the attacker 3 stage\nof power. Limit 1 per\n\ndeck. +"
+}

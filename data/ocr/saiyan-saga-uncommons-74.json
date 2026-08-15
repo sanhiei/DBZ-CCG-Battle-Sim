@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-74",
+  "number": 74,
+  "name": "Jump Turn Kick",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 94,
+    "text": 87
+  },
+  "needsReview": [],
+  "typeLineRaw": "Energy Combat",
+  "text": "Energy Attack. Raise carc\nuser's anger level 1.\nE"
+}

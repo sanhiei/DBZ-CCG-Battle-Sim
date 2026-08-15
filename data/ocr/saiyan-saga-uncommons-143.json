@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-143",
+  "number": 143,
+  "name": "Physical Drill",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 25,
+    "text": 85
+  },
+  "needsReview": [],
+  "typeLineRaw": "Woe A | Von-Combat — Sas",
+  "text": "Allows the defender to take |\nless life card discard from eve\nphysical attack. Can't be use\nwith other Black drills in\nplay on the table, 48\nWe have mo arbher clerics"
+}

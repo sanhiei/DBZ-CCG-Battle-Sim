@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-155",
+  "number": 155,
+  "name": "Piccolo Defense Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 72
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "",
+  "text": "Prevents 1 life card from\nbeing discarded from a\n- successful energy attac\n- bis\n[)\nIW a —"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "saiyan-saga-starter-160",
+  "number": 160,
+  "name": "Goku LV3",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 64,
+    "pur": 0,
+    "text": 57
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Goku",
+  "level": 3,
+  "powerRatings": [
+    8500,
+    8000,
+    9500,
+    0,
+    10500,
+    1,
+    11500,
+    12000,
+    12500
+  ],
+  "pur": 0,
+  "text": "ay\npW | GF\n\nPower:\n\nPrevent 2 life card draws [\n\nfrom being discarded\n\nfrom a successful ~~ |\n\nenergy atte cil: cat a\na ST Sa 2 y"
+}

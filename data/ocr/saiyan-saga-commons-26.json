@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-26",
+  "number": 26,
+  "name": "Gohan’s Physical Attack",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 78
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "T—— TWh...",
+  "text": "Physical attack. Gohan\ngains 1 anger level.\nSl Increases Gohan's power\nrating by 5S stages. rs"
+}

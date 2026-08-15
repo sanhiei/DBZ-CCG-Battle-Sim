@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-22",
+  "number": 22,
+  "name": "Power Up!",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 1,
+    "text": 86
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "THERES RES",
+  "text": "Powers up 5 stages for a personal\n\ngoing no higher than their maxim\n\nMl stage. Take the top discarded car\nand place at the bottom of\n\nyour life deck. +"
+}

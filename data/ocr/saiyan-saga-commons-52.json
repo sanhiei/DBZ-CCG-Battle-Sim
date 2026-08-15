@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-52",
+  "number": 52,
+  "name": "Neck Restraints",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 17,
+    "text": 69
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "= Soi ay GR - J | & ' a  - poe ee EE",
+  "text": "Stops an opponent's energ\n- attack. Foe's anger level\nEA decreases by 1.\n» €"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-starter-159",
+  "number": 159,
+  "name": "Goku LV2",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 76,
+    "pur": 0,
+    "text": 57
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Goku",
+  "level": 2,
+  "powerRatings": [
+    0,
+    3200,
+    3700,
+    200,
+    4700,
+    5200,
+    5700,
+    6200,
+    6700,
+    7200,
+    7700
+  ],
+  "pur": 0,
+  "text": "Ee - |\nPower:\nKaio-Ken Power Level Booster. |\nPhysiol adtack craig. 4 Be"
+}

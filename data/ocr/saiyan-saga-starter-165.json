@@ -1,0 +1,30 @@
+{
+  "id": "saiyan-saga-starter-165",
+  "number": 165,
+  "name": "Gohan LV2",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 89,
+    "pur": 0,
+    "text": 60
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Gohan",
+  "level": 2,
+  "powerRatings": [
+    500,
+    600,
+    700,
+    800,
+    1000,
+    1200,
+    1300,
+    1200
+  ],
+  "pur": 0,
+  "text": "a \\ 9) LG\nPower: »\nOnce during the game, he can |\nturn into Kong Gotan, inflicting |\n\n3 rT Mm"
+}

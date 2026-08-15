@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-10",
+  "number": 10,
+  "name": "Elbow Strike",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 26,
+    "text": 81
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "———— | SN SEER Y | se ——",
+  "text": "Physical attack. Raise car\n\\ \\ users anger level 1."
+}

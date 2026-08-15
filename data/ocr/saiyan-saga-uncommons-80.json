@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-80",
+  "number": 80,
+  "name": "Training",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 86
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "",
+  "text": "Not useable by heroes excef\n\nfor Goku. 2 discarded cards\n\nBl the user's choice are placec\nat the bottom of the\n\nlife deck. ES:"
+}

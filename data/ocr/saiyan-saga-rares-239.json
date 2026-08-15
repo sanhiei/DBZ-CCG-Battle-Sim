@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-239",
+  "number": 239,
+  "name": "Roshi’s Calming",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 35,
+    "text": 83
+  },
+  "needsReview": [],
+  "typeLineRaw": "J aE ANY JARs Non-Combat BR",
+  "text": "Played at the end of a\nturn, it forces a foe back\nll from level 2 to level 1.\n\\ Limit 1 per deck. #\n©."
+}

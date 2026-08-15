@@ -1,0 +1,35 @@
+{
+  "id": "saiyan-saga-starter-184",
+  "number": 184,
+  "name": "Vegeta LV1 HT",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 66,
+    "pur": 0,
+    "text": 0
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur",
+    "text"
+  ],
+  "personalityName": "Vegeta",
+  "level": 1,
+  "variant": "HT",
+  "powerRatings": [
+    0,
+    2000,
+    2200,
+    2400,
+    2600,
+    2800,
+    3000,
+    3200,
+    3400,
+    3600,
+    3800
+  ],
+  "pur": 0,
+  "text": ""
+}

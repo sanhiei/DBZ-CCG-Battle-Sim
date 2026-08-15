@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-230",
+  "number": 230,
+  "name": "Chiaotzu’s Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 31,
+    "text": 77
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "3 4 y p pos Mr GTN IK gs EE ossm——",
+  "text": "Allows the user to duck al\nmiss the first stage of\ndamage in a physical\n\nattack. #\na 8 A oo -."
+}

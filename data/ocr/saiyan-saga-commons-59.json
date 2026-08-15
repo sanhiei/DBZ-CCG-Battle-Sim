@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-59",
+  "number": 59,
+  "name": "Big Outside Drop",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 15,
+    "text": 64
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "1 Ce GEE",
+  "text": "Stops a physical attack.\nRaise card user's anger\nlevel 1.\n\n- I'm ot tirmem tired of vats"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-102",
+  "number": 102,
+  "name": "Raditz Honor Duel!",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 24,
+    "text": 88
+  },
+  "needsReview": [],
+  "typeLineRaw": "pp— er — y. Non-Combat aa",
+  "text": "Raditz uses the bottom 3 cards of the discard\n\ndeck for the next combat instead of the cand\n\nfrom his life deck. If there are not enough G:\ndon't use this ability. Discard from\n\nthe game after use. #1"
+}

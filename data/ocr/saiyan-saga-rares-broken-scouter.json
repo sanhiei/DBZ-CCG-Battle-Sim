@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-broken-scouter",
+  "number": null,
+  "name": "Broken Scouter",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 28,
+    "text": 88
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "CN NS Aa sc BR  _eemmmm—————T",
+  "text": "Your power level was mis-\ncounted. Raise it ta full\n\n: power. Discard this from\n\nthe game after use. #"
+}

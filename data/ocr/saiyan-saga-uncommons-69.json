@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-69",
+  "number": 69,
+  "name": "Side Kick",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 77,
+    "text": 87
+  },
+  "needsReview": [],
+  "typeLineRaw": "JB Physical Combat",
+  "text": "Stops a foe's physical\n_\\ | attack. Raise card user's\n| anger level 2."
+}

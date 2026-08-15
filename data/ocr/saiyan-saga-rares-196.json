@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-196",
+  "number": 196,
+  "name": "Honor Quest",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 43,
+    "text": 85
+  },
+  "needsReview": [],
+  "typeLineRaw": "ms | V4 ve | Non-Combat",
+  "text": "In the next combat draw cards\nfrom the bottom of the discard\npile instead of the Life Deck.\n\nDiscard after one use. pe\n- — —"
+}

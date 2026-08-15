@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-92",
+  "number": 92,
+  "name": "Energy Defense",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 21,
+    "text": 86
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "Ba ZF ry \\ PENERER PIRI PYRE Y § 250% a Opal nd Si Re a i a a ls Le —y | ge —",
+  "text": "Villains, Goku, and Gohan\no only. Stops an energy\nattack this round."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-respect-the-spirit",
+  "number": null,
+  "name": "Respect the Spirit",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 42,
+    "text": 85
+  },
+  "needsReview": [],
+  "typeLineRaw": "A OZ A OJ | / Non-Combat 1A ERIE",
+  "text": "The spirit of the Earth heals\nyou. Place 2 discarded cards\nBl at the bottom of your life\ndeck. Discard from the\n: game after use. +"
+}

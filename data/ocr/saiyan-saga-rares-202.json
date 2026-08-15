@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-202",
+  "number": 202,
+  "name": "Goku’s Lucky Break",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 19,
+    "text": 85
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "i | ——",
+  "text": "Draw an unused Dragon B\nfrom your life deck and\n\nA place it down. Shuffle thi\n\nlife deck afterwards. %"
+}

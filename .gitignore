@@ -1,0 +1,16 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+.env
+.env.local
+# Scraped image cache (large); catalog JSON in data/ IS committed
+data/images/
+# Card faces sliced out of the TTS atlases (large, and not ours to redistribute)
+data/images-tts/
+
+# Tesseract OCR language model (5MB, downloadable — not source)
+eng.traineddata
+**/eng.traineddata
+coverage/
+*.log

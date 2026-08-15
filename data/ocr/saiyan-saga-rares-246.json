@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-rares-246",
+  "number": 246,
+  "name": "Saibaimen LV4",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 75,
+    "pur": 0,
+    "text": 73
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Saibaimen",
+  "level": 4,
+  "powerRatings": [
+    0,
+    0,
+    10000,
+    1,
+    12000,
+    13000,
+    14000,
+    15000,
+    16000,
+    17000,
+    18000
+  ],
+  "pur": 1,
+  "text": "Sg = =\nPower:\nIf there is more than one\nSaibaimen in play, this one can\ninflicts 5 life can is damage. i"
+}

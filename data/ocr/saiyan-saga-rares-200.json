@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-200",
+  "number": 200,
+  "name": "Cutting the Tail",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 24,
+    "text": 77
+  },
+  "needsReview": [],
+  "typeLineRaw": "Combat ey | ses —",
+  "text": "Reduce the defending me\n\npersonality’s anger level t\n\np— (0). Discard this card frc\n\n| the game after use. &\nNY ."
+}

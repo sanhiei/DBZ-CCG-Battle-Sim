@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-straining-tipping-move",
+  "number": null,
+  "name": "Straining Tipping Move",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 23,
+    "text": 86
+  },
+  "needsReview": [],
+  "typeLineRaw": "| ___s. © E . o ‘Physical Combar — EEE",
+  "text": "Physical attack forcing th\ndefender to lose 2 life\nBN cards and the attacker <\nstages of power.\nLimit 1 per deck. +4"
+}

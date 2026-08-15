@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-100",
+  "number": 100,
+  "name": "Vegeta’s Surprise Defense",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 25,
+    "text": 90
+  },
+  "needsReview": [],
+  "typeLineRaw": "NE. sA~SY A ee —— w MY | = ~ TT ESE INCA NATIT LA, Ee Se mY CE v~ 2 Combat , x Tu cann———",
+  "text": "Stop one physical or energ\nattack from doing damage\nDiscard this card from the\n\ngame after one use. 5"
+}

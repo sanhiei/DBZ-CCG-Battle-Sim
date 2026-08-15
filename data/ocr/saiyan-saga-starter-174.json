@@ -1,0 +1,32 @@
+{
+  "id": "saiyan-saga-starter-174",
+  "number": 174,
+  "name": "Vegeta LV2",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 73,
+    "pur": 0,
+    "text": 95
+  },
+  "needsReview": [
+    "pur"
+  ],
+  "personalityName": "Vegeta",
+  "level": 2,
+  "powerRatings": [
+    0,
+    4200,
+    4700,
+    5200,
+    5700,
+    6200,
+    6700,
+    7200,
+    7700,
+    8200,
+    8700
+  ],
+  "pur": 0,
+  "text": "Power:\nSaiyan Energy Blast does 3\nlife card draws of damage"
+}

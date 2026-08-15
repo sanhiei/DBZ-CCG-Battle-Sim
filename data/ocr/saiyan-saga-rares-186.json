@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-186",
+  "number": 186,
+  "name": "Earth Dragon Ball 6",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 26,
+    "text": 85
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "Ln, WRENS PEE uae",
+  "text": "This card ends a combat\nand the user is powered |\nto full. Shift all opponent\n\nanger levels down 2. %\nYE ———"
+}

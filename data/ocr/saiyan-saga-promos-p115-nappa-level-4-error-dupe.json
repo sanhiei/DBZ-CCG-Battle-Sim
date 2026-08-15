@@ -1,0 +1,17 @@
+{
+  "id": "saiyan-saga-promos-p115-nappa-level-4-error-dupe",
+  "number": null,
+  "name": "P115 Nappa Level 4 Error Dupe",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 43,
+    "text": 34
+  },
+  "needsReview": [
+    "type",
+    "text"
+  ],
+  "typeLineRaw": "1 C7 27 \\ 28000 W)",
+  "text": "Power:\n\nZL La a = = {7} []\n# 4 Negate a foe's\n\n% = energy attack © Ser\nBEEN\nyy FT FE ooo\n\nOTN A 2 Ce\nPhra br Nappa... This |S ridicilious. 0s\nCAR CL a I A A ES A RAE I XK ALIT"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-47",
+  "number": 47,
+  "name": "Raditz Total Defense",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 58,
+    "text": 93
+  },
+  "needsReview": [],
+  "typeLineRaw": "vz ‘Physical Combat",
+  "text": "Stops any physical attack\nbut costs 1 power stage |\nperform."
+}

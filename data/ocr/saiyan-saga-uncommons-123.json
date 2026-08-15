@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-123",
+  "number": 123,
+  "name": "Chiaotzu’s Energy Manipulation",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 42,
+    "text": 82
+  },
+  "needsReview": [],
+  "typeLineRaw": "al TONER, sim AEE hy Energy Combat",
+  "text": "Energy attack forcing 3\ndraws from the life deck.\nRemove from the game\n\nafter use. Card limit-\ned to 1 per deck. AR\nMN A a MN ¥"
+}

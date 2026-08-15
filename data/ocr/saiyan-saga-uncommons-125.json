@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-125",
+  "number": 125,
+  "name": "Off-Balancing Opponent Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 35,
+    "text": 62
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "TW =",
+  "text": "Creates +1 stage damage\n| for each successful\nLA) physical attack made\na 8 by this personality. %\nbo\ni 7 pm \\ ” oc\n3 YOUNG Goban's training at the"
+}

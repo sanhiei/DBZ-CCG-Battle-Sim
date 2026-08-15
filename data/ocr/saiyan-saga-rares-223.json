@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-223",
+  "number": 223,
+  "name": "Bulma Finds a Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 40,
+    "text": 86
+  },
+  "needsReview": [],
+  "typeLineRaw": "% I ye, orn = os = L TI o | Non-Combat — | a em",
+  "text": "When the Bulma ally is in\nplay. pick a drill from the\n\ni life deck or the discards\nand put it into play. FE"
+}

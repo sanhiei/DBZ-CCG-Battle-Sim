@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-235",
+  "number": 235,
+  "name": "Shadow Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 53,
+    "text": 69
+  },
+  "needsReview": [],
+  "typeLineRaw": "4 Non-Combat TEENS eas",
+  "text": "Allows the card owner to\n\\ | take 2 less stages of pow\nBl drain from a successful\n\\ physical attack.\nZ\n® —-"
+}

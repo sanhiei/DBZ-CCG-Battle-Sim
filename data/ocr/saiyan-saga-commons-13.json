@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-13",
+  "number": 13,
+  "name": "Round Throw",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 17,
+    "text": 87
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "I ee",
+  "text": "Physical Attack doing +5\nstages of damage if suc-\ncessful or stops an ener\n\nattack. Lower foe's\nanger level by 1. +"
+}

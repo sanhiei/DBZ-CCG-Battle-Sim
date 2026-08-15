@@ -1,0 +1,32 @@
+{
+  "id": "saiyan-saga-rares-244",
+  "number": 244,
+  "name": "Saibaimen LV2",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 81,
+    "pur": 0,
+    "text": 89
+  },
+  "needsReview": [
+    "pur"
+  ],
+  "personalityName": "Saibaimen",
+  "level": 2,
+  "powerRatings": [
+    0,
+    2000,
+    2200,
+    2400,
+    2600,
+    2800,
+    3000,
+    3200,
+    3400,
+    3600,
+    3800
+  ],
+  "pur": 0,
+  "text": "TO\nPower:\nSaiyan Energy Deflection\nforces only 2 discards from\na successful energy attack."
+}

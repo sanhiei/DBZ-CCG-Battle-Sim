@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-12",
+  "number": 12,
+  "name": "Hip Spring Throw",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 34,
+    "text": 74
+  },
+  "needsReview": [],
+  "typeLineRaw": "Physical Combat —y AE",
+  "text": "Physical Attack doing +2 stag\nof damage if successful. Stc\na foe's physical attack on th\nnext round. Lower foe's\nanger level by 1. +\n~~ in earl sr barernsdl 1 bernemsnesl SEE ="
+}

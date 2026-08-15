@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-216",
+  "number": 216,
+  "name": "Krillin’s Energy Disk",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 31,
+    "text": 93
+  },
+  "needsReview": [],
+  "typeLineRaw": "a ____ _ TH 7 as Energy Combat]",
+  "text": "Energy attack doing 4 life\ncards of damage at a cos\nof 1 stage."
+}

@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-141",
+  "number": 141,
+  "name": "Enemies Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 81
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "EE  — |",
+  "text": "Allows the personality to defe\n\\ | well against physical attacks\noo and prevents 1 life card disca\nper combat, if the foe\nhas an ally. +#\nNB NC"
+}

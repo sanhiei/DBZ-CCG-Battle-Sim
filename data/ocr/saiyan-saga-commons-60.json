@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-60",
+  "number": 60,
+  "name": "One-Arm Shoulder Throw",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 79,
+    "text": 56
+  },
+  "needsReview": [],
+  "typeLineRaw": "| ‘Physical Combat",
+  "text": "Stops the foe's physical\n\\ | attack. Lower foe's angel\nLl evel 1.\n\" Ll\nBe. AT Riruar Ic dry Fev ast reed tT"
+}

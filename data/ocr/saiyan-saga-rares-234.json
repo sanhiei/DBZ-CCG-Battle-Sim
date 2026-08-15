@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-234",
+  "number": 234,
+  "name": "Focusing Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 32,
+    "text": 87
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "| _Ay &F Wm Ta | - J Fo n= LD / { oD» = { > EE",
+  "text": "Prevents anything from\nhappening to a personality\ndrills until he advances to\n\nhis next level. je"
+}

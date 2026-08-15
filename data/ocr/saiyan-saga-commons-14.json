@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-14",
+  "number": 14,
+  "name": "Shoulder Wheel",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 94,
+    "text": 74
+  },
+  "needsReview": [],
+  "typeLineRaw": "Physical Combat",
+  "text": "Physical Attack doing +1\n_\\ \\ stage of damage if succe\nor ful. Raises your anger le\nby 1 and lowers foe's\nanger level by 1. A\nCae BS rare seta trae Foes ae"
+}

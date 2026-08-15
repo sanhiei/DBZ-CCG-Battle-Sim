@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-121",
+  "number": 121,
+  "name": "Nappa’s Physical Resistance",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 52,
+    "text": 69
+  },
+  "needsReview": [],
+  "typeLineRaw": "i] w Physical Combat",
+  "text": "No physical attacks will\nwork against Nappa this\ncombat. Remove from\ngame after use. pe\n~N -~ 1 hve thoeo Arkane artim sa"
+}

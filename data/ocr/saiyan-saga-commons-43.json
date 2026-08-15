@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-43",
+  "number": 43,
+  "name": "Senzu Bean",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 6,
+    "text": 87
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "TY EEE",
+  "text": "This card is played and then is\n; taken out of the game. It\nBl moves the power stage of tf\nmain personality to the\nhighest rating. +"
+}

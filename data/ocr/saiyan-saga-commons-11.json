@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-11",
+  "number": 11,
+  "name": "Forward Foot Sweep",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 40,
+    "text": 85
+  },
+  "needsReview": [],
+  "typeLineRaw": "— 00 Em CT EER J \"hysical Combat",
+  "text": "Physical Attack doing +4 stages o\n\ndamage. If successful, this attac\n\nll stops any energy attack from ar\nopponent in his next phase.\n\nLower foe's anger level 1. +"
+}

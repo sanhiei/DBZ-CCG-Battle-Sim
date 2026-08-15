@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-207",
+  "number": 207,
+  "name": "Power Gifting",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 12,
+    "text": 79
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "ys  ¥ SE",
+  "text": "One ally gives your main personality\n2 power on a stage for stage basis.\nid reducing their total and boosting y\nmain personality's. Discard\nfrom the game after use. +4\nNa La ewe Shaded"
+}

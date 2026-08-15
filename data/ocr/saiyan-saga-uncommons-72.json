@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-72",
+  "number": 72,
+  "name": "Axe Heel Kick",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 40,
+    "text": 73
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "WV — ; EE",
+  "text": "Stops a foe's energy\nattack. Raise card users\nanger level 1.\n\n£\nA wise mew cove sEied “The"
+}

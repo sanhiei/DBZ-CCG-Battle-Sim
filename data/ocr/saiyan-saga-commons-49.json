@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-49",
+  "number": 49,
+  "name": "Wrist Flex Takedown",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 54,
+    "text": 70
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "y",
+  "text": "Stops the foes’ physical\n_\\ | attack played this round.\nBl Raise card user's anger\nlevel 1.\nah ¥"
+}

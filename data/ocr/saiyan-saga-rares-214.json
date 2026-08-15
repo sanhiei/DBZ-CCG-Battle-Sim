@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-214",
+  "number": 214,
+  "name": "Gohan’s Father Save",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 43,
+    "text": 87
+  },
+  "needsReview": [],
+  "typeLineRaw": "- 3 Combat =!",
+  "text": "If Gohan is boku's ally, he\nstops the foe's combat\nA tum. Discard after use."
+}

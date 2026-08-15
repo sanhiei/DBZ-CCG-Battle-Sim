@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-starter-178",
+  "number": 178,
+  "name": "Nappa LV3",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 66,
+    "pur": 0,
+    "text": 71
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Nappa",
+  "level": 3,
+  "powerRatings": [
+    1,
+    0,
+    9000,
+    9500,
+    10000,
+    10500,
+    1100,
+    12000,
+    12500,
+    13000,
+    13500
+  ],
+  "pur": 0,
+  "text": "Power:\nOnly takes 2 stages\nof power drain, no\n: cri physical attack. \" = a"
+}

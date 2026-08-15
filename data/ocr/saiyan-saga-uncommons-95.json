@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-95",
+  "number": 95,
+  "name": "Energy Aura",
+  "isPersonality": false,
+  "type": "Energy Combat",
+  "confidence": {
+    "typeLine": 38,
+    "text": 78
+  },
+  "needsReview": [],
+  "typeLineRaw": "RS NS lS ol Energy Combat CL  — |",
+  "text": "Villains. Goku, and Gohan\nonly. Stops an energy\nattack and stops energy\nattacks in the next\nphase. ES:\nRe La :"
+}

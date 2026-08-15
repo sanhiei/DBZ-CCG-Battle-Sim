@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-promos-p2-piccolo-level-4",
+  "number": null,
+  "name": "P2 Piccolo Level 4",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 30,
+    "text": 66
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "AN ==",
+  "text": "Power:\n<3 Cannan or Multi-Form\nin a combat round.\nt's 2d 1 rw well a"
+}

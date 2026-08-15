@@ -1,0 +1,13 @@
+# Normalize to LF in the repository; Git checks out native line endings on Windows.
+* text=auto eol=lf
+
+# Binary assets — never touch these.
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.pdf binary
+*.traineddata binary
+
+# Generated catalogs are large; keep diffs readable but don't try to merge them.
+data/*.json -diff merge=ours

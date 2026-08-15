@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-57",
+  "number": 57,
+  "name": "Round Kick",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 43,
+    "text": 67
+  },
+  "needsReview": [],
+  "typeLineRaw": "| Physical Combat dh nr E————",
+  "text": "Physical Attack doing +3\nstages of damage if suc-\ncessful. Foe's Anger lew\n\ndecreases by 1. PS\nA. TL od Bit Varrebl ore"
+}

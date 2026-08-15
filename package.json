@@ -1,0 +1,32 @@
+{
+  "name": "dbz-automated-simulator",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Automated online simulator for the SCORE Dragon Ball Z CCG (retro / Panini-era rules per the CRD).",
+  "type": "module",
+  "workspaces": [
+    "packages/shared",
+    "packages/engine",
+    "packages/scraper",
+    "packages/ocr",
+    "packages/tts",
+    "packages/server",
+    "packages/client"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "tsc -b packages/shared packages/engine packages/scraper packages/tts packages/server",
+    "scrape": "npm run scrape -w @dbz/scraper",
+    "dev:server": "npm run dev -w @dbz/server",
+    "dev:client": "npm run dev -w @dbz/client",
+    "test": "npm run test --workspaces --if-present",
+    "extract:tts": "npm run extract -w @dbz/tts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "typescript": "^5.6.3"
+  }
+}

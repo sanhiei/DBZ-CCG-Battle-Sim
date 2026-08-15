@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-rares-204",
+  "number": 204,
+  "name": "Battle Pausing",
+  "isPersonality": false,
+  "type": "Combat",
+  "confidence": {
+    "typeLine": 36,
+    "text": 68
+  },
+  "needsReview": [],
+  "typeLineRaw": "ACA NY AN sR x Combat | a",
+  "text": "The attacker draws 2 cart\n\nfrom his discard pile. The\n\nBl defender raises 5 stages\npossible.\n\n| #\n\n& REE Eda A EU hae"
+}

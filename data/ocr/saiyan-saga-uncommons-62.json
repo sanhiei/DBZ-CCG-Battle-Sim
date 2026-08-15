@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-62",
+  "number": 62,
+  "name": "Inner Leg Throw",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 48,
+    "text": 75
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "BR eT",
+  "text": "Stops a physical attack.\n_\\ \\ Lower foe's anger level br"
+}

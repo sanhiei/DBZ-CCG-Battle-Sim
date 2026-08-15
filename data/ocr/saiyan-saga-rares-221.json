@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-221",
+  "number": 221,
+  "name": "Vegeta’s Quickness Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 24,
+    "text": 82
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "TC h-",
+  "text": "At the beginning of each\ncombat, draw 1 card from\n- the bottom of the discar\npile to use. 5"
+}

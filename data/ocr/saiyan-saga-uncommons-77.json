@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-77",
+  "number": 77,
+  "name": "Earth Dragon Ball 5",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 86
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "",
+  "text": "Power up to full. Your anger level\n_\\ \\ shifts up 2. Draw 2 cards if you\nBl Wish and place the top 2 discard\ncards at the bottom of\na :\nyour life deck. +"
+}

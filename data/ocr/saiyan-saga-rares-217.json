@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-217",
+  "number": 217,
+  "name": "Ribs Broken",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 37,
+    "text": 82
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "CER",
+  "text": "Discard an ally from the\n1 \\ game to make an energy\nLl attack. The foe takes 5 if\n\" cards of damage. #"
+}

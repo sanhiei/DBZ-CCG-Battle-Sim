@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-67",
+  "number": 67,
+  "name": "Elbow Strike",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 59
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "",
+  "text": "Stops a foe's physical\n__\\ | attack. Raise card user's\nLA anger level 1.\nId £\ni = oo-1 \""
+}

@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-156",
+  "number": 156,
+  "name": "Ally’s Sacrifice",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 19,
+    "text": 71
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "a | So —",
+  "text": "All the damage you would\nhave taken in this combe\nBl destroys one of your alli\n\\ instead. EE\n\n8 - —"
+}

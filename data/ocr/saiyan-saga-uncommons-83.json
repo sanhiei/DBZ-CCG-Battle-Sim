@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-uncommons-83",
+  "number": 83,
+  "name": "Tien LV2",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 59,
+    "pur": 0,
+    "text": 80
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Tien",
+  "level": 2,
+  "powerRatings": [
+    0,
+    500,
+    600,
+    700,
+    800,
+    300,
+    1000,
+    110,
+    1200,
+    1300,
+    1400
+  ],
+  "pur": 0,
+  "text": "Power:\n4 Solar Flare Energy Attack. If i\n4 it is not blocked, it stuns the |,\n3 foe so he must skip his next i"
+}

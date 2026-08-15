@@ -1,0 +1,31 @@
+{
+  "id": "saiyan-saga-starter-175",
+  "number": 175,
+  "name": "Vegeta LV3",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 84,
+    "pur": 0,
+    "text": 80
+  },
+  "needsReview": [
+    "pur"
+  ],
+  "personalityName": "Vegeta",
+  "level": 3,
+  "powerRatings": [
+    0,
+    9000,
+    10000,
+    12000,
+    13000,
+    14000,
+    15000,
+    16000,
+    17000,
+    18000
+  ],
+  "pur": 0,
+  "text": "¢ —\nPower:\nCaptures ane Dragon Bal, once\nper game, after a successful\nenergy attack. This ends the\ncambat step. Lis"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-dream-machine-battle",
+  "number": null,
+  "name": "Dream Machine Battle",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 0,
+    "text": 75
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "",
+  "text": "This battle never happened\nStart all over with new can\nll and reset all damage to\nbeginning levels. Limit\n1 per deck. #\n, NE 7. SF TR <"
+}

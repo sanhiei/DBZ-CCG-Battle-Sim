@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-commons-2",
+  "number": 2,
+  "name": "One Knuckle Punch",
+  "isPersonality": false,
+  "type": "Physical Combat",
+  "confidence": {
+    "typeLine": 72,
+    "text": 84
+  },
+  "needsReview": [],
+  "typeLineRaw": "WB Physical Combat",
+  "text": "Physical Attack doing +1\nstage of damage if\n: successful. Raise card\n\" users anger level 1. i"
+}

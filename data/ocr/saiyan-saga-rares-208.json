@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-208",
+  "number": 208,
+  "name": "Terrible Wounds",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 25,
+    "text": 73
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "TERS, NW —y — EE",
+  "text": "Place this on a foe's personality card. Reset\n\npersondlity’s anger to (0). It cannot go up u\n\n’ after he forces another player to discard @\ncard. Discard this from the game\n\nafter use. Limit | per deck. #\n\n“ar A ward of svh Aro trys tev ree ies The Sule pam"
+}

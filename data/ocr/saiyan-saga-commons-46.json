@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-commons-46",
+  "number": 46,
+  "name": "Goku Anger Attack",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 18,
+    "text": 93
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "BD » Pi | MALORNE AlAs AS pra 2 w= Te EE",
+  "text": "This physical attack does\ndouble the normal damac\nif successful."
+}

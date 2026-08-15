@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-145",
+  "number": 145,
+  "name": "Breakfall Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 19,
+    "text": 73
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "WE NE — BR mm",
+  "text": "Allows the defender to\ntake 2 less stages of\npower drain from any\n\nphysical attack. #\nBact Ma uu reaadh + ticle = Fears"
+}

@@ -1,0 +1,17 @@
+{
+  "_comment": "Physical Attack Table. Copy this to data/pat.json and fill in the REAL values from the scouter, then remove _comment and set placeholder=false. See docs/PAT.md. brackets: ordered low->high by power rating; each covers an inclusive rating range. damage[attackerBracketIndex][defenderBracketIndex] = base damage in POWER STAGES. special.zResult is the fixed result when either personality has Z power stages (CRD: always 2).",
+  "placeholder": false,
+  "special": { "zResult": 2 },
+  "brackets": [
+    { "letter": "A", "minRating": 0, "maxRating": 0 },
+    { "letter": "B", "minRating": 0, "maxRating": 0 },
+    { "letter": "C", "minRating": 0, "maxRating": 0 },
+    { "letter": "D", "minRating": 0, "maxRating": 0 }
+  ],
+  "damage": [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+  ]
+}

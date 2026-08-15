@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-uncommons-150",
+  "number": 150,
+  "name": "Neck Restraint Drill",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 32,
+    "text": 84
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "BR RSET",
+  "text": "Allows the attacker to inflict +3\nstages of damage from any suc-\ncessful physical attack. Cannot b\nused with any other Blue\ndrills in play on the table. E-)\nNe t's wrona? Dont tel"
+}

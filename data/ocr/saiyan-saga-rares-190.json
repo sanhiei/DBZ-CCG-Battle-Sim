@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-190",
+  "number": 190,
+  "name": "Enraged!",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 28,
+    "text": 77
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "BR a",
+  "text": "Increase your anger level by 2. Selet\n\ncards from your discard pile and pla\n\nAl them at the bottom of your life de\n°\\ Discard this card from the\n\ngame after one use. A\n\n80) wh 1 N—— Aro Mies RES ET"
+}

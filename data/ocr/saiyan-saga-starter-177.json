@@ -1,0 +1,33 @@
+{
+  "id": "saiyan-saga-starter-177",
+  "number": 177,
+  "name": "Nappa LV2",
+  "isPersonality": true,
+  "type": "Personality",
+  "confidence": {
+    "powerColumn": 66,
+    "pur": 0,
+    "text": 89
+  },
+  "needsReview": [
+    "powerRatings",
+    "pur"
+  ],
+  "personalityName": "Nappa",
+  "level": 2,
+  "powerRatings": [
+    0,
+    200,
+    700,
+    5200,
+    5700,
+    6200,
+    6700,
+    7200,
+    7700,
+    8200,
+    8700
+  ],
+  "pur": 0,
+  "text": "Power:\nSpecial Physical Attack\n| inflicting & stages of power\ndrain, no matter what the\nfoe's power stage rating is."
+}

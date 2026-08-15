@@ -1,0 +1,14 @@
+{
+  "id": "saiyan-saga-uncommons-128",
+  "number": 128,
+  "name": "Knee Pick Drill",
+  "isPersonality": false,
+  "type": "Non-Combat",
+  "confidence": {
+    "typeLine": 35,
+    "text": 70
+  },
+  "needsReview": [],
+  "typeLineRaw": "TTT ——————— A . SC eo— sm Non-Combat |",
+  "text": "Allows the attacker to dre\nan extra card at the beg\nLl ning of a combat.\nLp Cr vac woo"
+}

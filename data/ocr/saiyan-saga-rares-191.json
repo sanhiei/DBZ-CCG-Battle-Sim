@@ -1,0 +1,16 @@
+{
+  "id": "saiyan-saga-rares-191",
+  "number": 191,
+  "name": "A Beginner’s Heart Is Dedicated",
+  "isPersonality": false,
+  "type": null,
+  "confidence": {
+    "typeLine": 7,
+    "text": 86
+  },
+  "needsReview": [
+    "type"
+  ],
+  "typeLineRaw": "A | See————— 1]",
+  "text": "Increase the anger of a\nlevel 1 or 2 personality bu\n: and discard this card fron\nthe game. Ps"
+}
