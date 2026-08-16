@@ -83,14 +83,15 @@ export function App() {
         <Board
           state={game.state}
           seat={game.seat}
-          onAction={(kind) => {
-            if (kind === 'advanceStep') game.send({ type: 'advanceStep' });
-            else if (kind === 'powerUp' && game.seat !== null) game.send({ type: 'powerUp', playerIdx: game.seat });
-            else if (kind === 'pass') game.send({ type: 'pass' });
-          }}
-          onOpenCard={() => {
-            /* card detail panel lands with the deck builder */
-          }}
+          db={game.db}
+          onAdvanceStep={() => game.send({ type: 'advanceStep' })}
+          onPowerUp={() => game.seat !== null && game.send({ type: 'powerUp', playerIdx: game.seat })}
+          onPass={() => game.send({ type: 'pass' })}
+          onAttack={(attackType, cardUid) =>
+            game.send({ type: 'declareAttack', attackType, ...(cardUid ? { cardUid } : {}) })
+          }
+          onAnswer={(promptId, choice) => game.send({ type: 'answerPrompt', promptId, choice })}
+          onConcede={() => game.seat !== null && game.send({ type: 'concede', playerIdx: game.seat })}
         />
       ) : (
         <>
