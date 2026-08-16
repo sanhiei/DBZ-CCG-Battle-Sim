@@ -4759,7 +4759,8 @@
         "number": "M30",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -5319,7 +5320,8 @@
         "number": "F4",
         "rarity": "P",
         "style": "Black"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -5364,7 +5366,8 @@
         "number": "M12",
         "rarity": "P",
         "style": "Blue"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -5806,7 +5809,8 @@
         "number": "M27",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "endurance": 4
     }
   },
   {
@@ -9007,7 +9011,8 @@
         "number": "M19",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -9848,7 +9853,8 @@
         "number": "124",
         "rarity": "R",
         "style": "Black"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -9894,7 +9900,8 @@
         "number": "047",
         "rarity": "U",
         "style": "Black"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -10166,7 +10173,8 @@
         "number": "053",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -10405,7 +10413,8 @@
         "number": "009",
         "rarity": "C",
         "style": "Blue"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -11137,7 +11146,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 3
     }
   },
   {
@@ -11935,7 +11945,8 @@
         "number": "P2",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -13425,7 +13436,8 @@
         "number": "076",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -13945,7 +13957,8 @@
         "rarity": "U",
         "style": "Namekian"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 3
     }
   },
   {
@@ -13967,7 +13980,8 @@
         "rarity": "U",
         "style": "Namekian"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 4
     }
   },
   {
@@ -14135,7 +14149,8 @@
         "rarity": "C",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 2
     }
   },
   {
@@ -14197,7 +14212,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 2
     }
   },
   {
@@ -14238,7 +14254,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 3
     }
   },
   {
@@ -14318,7 +14335,8 @@
         "number": "084",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -14534,7 +14552,8 @@
         "number": "090",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -14921,7 +14940,8 @@
         "number": "027",
         "rarity": "C",
         "style": "Red"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -14961,7 +14981,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 1
     }
   },
   {
@@ -15145,7 +15166,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 1
     }
   },
   {
@@ -15181,7 +15203,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 1
     }
   },
   {
@@ -15598,7 +15621,8 @@
         "number": "035",
         "rarity": "C",
         "style": "Saiyan"
-      }
+      },
+      "endurance": 4
     }
   },
   {
@@ -25495,7 +25519,8 @@
         "number": "033",
         "rarity": "U",
         "style": "Black"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -25516,7 +25541,8 @@
         "number": "034",
         "rarity": "U",
         "style": "Black"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -25537,7 +25563,8 @@
         "number": "001",
         "rarity": "C",
         "style": "Black"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -25581,7 +25608,8 @@
         "number": "002",
         "rarity": "C",
         "style": "Black"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -25602,7 +25630,8 @@
         "number": "035",
         "rarity": "U",
         "style": "Black"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -25691,7 +25720,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 2
     }
   },
   {
@@ -25822,7 +25852,8 @@
         "number": "042",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -25923,7 +25954,8 @@
         "number": "004",
         "rarity": "C",
         "style": "Blue"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -26000,7 +26032,8 @@
         "number": "046",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -26058,7 +26091,8 @@
         "rarity": "C",
         "style": "Blue"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 3
     }
   },
   {
@@ -26081,7 +26115,8 @@
         "number": "049",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -26173,7 +26208,8 @@
         "number": "050",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -26194,7 +26230,8 @@
         "number": "Preview 5",
         "rarity": "R",
         "style": "Colorless"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -26610,7 +26647,8 @@
         "number": "054",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -26763,7 +26801,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 2
     }
   },
   {
@@ -26835,7 +26874,8 @@
         "number": "105",
         "rarity": "R",
         "style": "Colorless"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -26901,7 +26941,8 @@
         "number": "056",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -26922,7 +26963,8 @@
         "number": "057",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -26945,7 +26987,8 @@
         "number": "007",
         "rarity": "C",
         "style": "Colorless"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -27185,7 +27228,8 @@
         "number": "009",
         "rarity": "C",
         "style": "Named"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -27462,7 +27506,8 @@
         "number": "P8",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -27542,7 +27587,8 @@
         "number": "010",
         "rarity": "C",
         "style": "Namekian"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -27673,7 +27719,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 3
     }
   },
   {
@@ -27715,7 +27762,8 @@
         "number": "013",
         "rarity": "C",
         "style": "Namekian"
-      }
+      },
+      "endurance": 4
     }
   },
   {
@@ -27737,7 +27785,8 @@
         "rarity": "U",
         "style": "Namekian"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 2
     }
   },
   {
@@ -27893,7 +27942,8 @@
         "number": "068",
         "rarity": "U",
         "style": "Namekian"
-      }
+      },
+      "endurance": 4
     }
   },
   {
@@ -27935,7 +27985,8 @@
         "number": "069",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -27992,7 +28043,8 @@
         "number": "014",
         "rarity": "C",
         "style": "Orange"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -28015,7 +28067,8 @@
         "number": "071",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -28154,7 +28207,8 @@
         "number": "074",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -28233,7 +28287,8 @@
         "number": "015",
         "rarity": "C",
         "style": "Orange"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -28377,7 +28432,8 @@
         "number": "016",
         "rarity": "C",
         "style": "Colorless"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -28531,7 +28587,8 @@
         "number": "018",
         "rarity": "C",
         "style": "Red"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -28642,7 +28699,8 @@
         "number": "020",
         "rarity": "C",
         "style": "Red"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -28762,7 +28820,8 @@
         "rarity": "U",
         "style": "Red"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 2
     }
   },
   {
@@ -28785,7 +28844,8 @@
         "number": "086",
         "rarity": "U",
         "style": "Red"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -28848,7 +28908,8 @@
         "number": "023",
         "rarity": "C",
         "style": "Saiyan"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -28939,7 +29000,8 @@
         "number": "025",
         "rarity": "C",
         "style": "Saiyan"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -29000,7 +29062,8 @@
         "number": "026",
         "rarity": "C",
         "style": "Saiyan"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -29023,7 +29086,8 @@
         "number": "027",
         "rarity": "C",
         "style": "Saiyan"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -29067,7 +29131,8 @@
         "number": "089",
         "rarity": "U",
         "style": "Saiyan"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -29145,7 +29210,8 @@
         "number": "090",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -29360,7 +29426,8 @@
         "number": "031",
         "rarity": "C",
         "style": "Colorless"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -29539,7 +29606,8 @@
         "number": "113",
         "rarity": "R",
         "style": "Colorless"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -34566,7 +34634,8 @@
         "number": "035",
         "rarity": "U",
         "style": "Black"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -34608,7 +34677,8 @@
         "number": "001",
         "rarity": "C",
         "style": "Black"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -34925,7 +34995,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 2
     }
   },
   {
@@ -34984,7 +35055,8 @@
         "number": "041",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -35180,7 +35252,8 @@
         "number": "045",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -35203,7 +35276,8 @@
         "number": "097",
         "rarity": "R",
         "style": "Blue"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -35285,7 +35359,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 3
     }
   },
   {
@@ -35547,7 +35622,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 2
     }
   },
   {
@@ -35725,7 +35801,8 @@
         "number": "050",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -36053,7 +36130,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 1
     }
   },
   {
@@ -36094,7 +36172,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 1
     }
   },
   {
@@ -36320,7 +36399,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 1
     }
   },
   {
@@ -36793,7 +36873,8 @@
         "number": "CA22",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -36839,7 +36920,8 @@
         "number": "104",
         "rarity": "R",
         "style": "Colorless"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -37128,7 +37210,8 @@
         "number": "060",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -37152,7 +37235,8 @@
         "rarity": "C",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 1
     }
   },
   {
@@ -37547,7 +37631,8 @@
         "number": "112",
         "rarity": "R",
         "style": "Namekian"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -37684,7 +37769,8 @@
         "rarity": "U",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 1
     }
   },
   {
@@ -37707,7 +37793,8 @@
         "number": "065",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -37806,7 +37893,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Endurance 3.\nattack 6 life cards of damage.\nIf successful, search your Life Deck for an Orange Style Drill and place it into play."
+      "text": "Endurance 3.\nattack 6 life cards of damage.\nIf successful, search your Life Deck for an Orange Style Drill and place it into play.",
+      "endurance": 3
     }
   },
   {
@@ -37918,7 +38006,8 @@
         "number": "014",
         "rarity": "C",
         "style": "Orange"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -37942,7 +38031,8 @@
         "rarity": "C",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 2
     }
   },
   {
@@ -37963,7 +38053,8 @@
         "number": "070",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -38027,7 +38118,8 @@
         "number": "CA33",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -38432,7 +38524,8 @@
         "number": "077",
         "rarity": "U",
         "style": "Red"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -38491,7 +38584,8 @@
         "number": "018",
         "rarity": "C",
         "style": "Red"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -38514,7 +38608,8 @@
         "number": "118",
         "rarity": "R",
         "style": "Red"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -38560,7 +38655,8 @@
         "number": "019",
         "rarity": "C",
         "style": "Colorless"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -38725,7 +38821,8 @@
         "number": "083",
         "rarity": "U",
         "style": "Saiyan"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -38746,7 +38843,8 @@
         "number": "084",
         "rarity": "U",
         "style": "Saiyan"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -38924,7 +39022,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 2
     }
   },
   {
@@ -39038,7 +39137,8 @@
         "number": "120",
         "rarity": "R",
         "style": "Colorless"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -39434,7 +39534,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 1
     }
   },
   {
@@ -39479,7 +39580,8 @@
         "number": "027",
         "rarity": "C",
         "style": "Colorless"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -39519,7 +39621,8 @@
         "number": "091",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -40396,7 +40499,8 @@
         "number": "037",
         "rarity": "U",
         "style": "Black"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -40805,7 +40909,8 @@
         "number": "099",
         "rarity": "R",
         "style": "Blue"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -41410,7 +41515,8 @@
         "number": "049",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -42560,7 +42666,8 @@
         "number": "019",
         "rarity": "C",
         "style": "Orange"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -42602,7 +42709,8 @@
         "number": "061",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -42782,7 +42890,8 @@
         "rarity": "R",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 2
     }
   },
   {
@@ -42804,7 +42913,8 @@
         "rarity": "R",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 2
     }
   },
   {
@@ -42884,7 +42994,8 @@
         "number": "065",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -43196,7 +43307,8 @@
         "number": "P3",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -43425,7 +43537,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 2
     }
   },
   {
@@ -43535,7 +43648,8 @@
         "number": "114",
         "rarity": "R",
         "style": "Red"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -43579,7 +43693,8 @@
         "number": "076",
         "rarity": "U",
         "style": "Red"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -43640,7 +43755,8 @@
         "rarity": "U",
         "style": "Red"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 2
     }
   },
   {
@@ -43887,7 +44003,8 @@
         "number": "080",
         "rarity": "U",
         "style": "Saiyan"
-      }
+      },
+      "endurance": 4
     }
   },
   {
@@ -43950,7 +44067,8 @@
         "number": "118",
         "rarity": "R",
         "style": "Saiyan"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -44071,7 +44189,8 @@
         "number": "083",
         "rarity": "U",
         "style": "Saiyan"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -44257,7 +44376,8 @@
         "number": "026",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -44296,7 +44416,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 2
     }
   },
   {
@@ -44529,7 +44650,8 @@
         "number": "P8",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -64577,7 +64699,8 @@
         "rarity": "P",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 1
     }
   },
   {
@@ -65049,7 +65172,8 @@
       "type": "Physical Combat",
       "coverage": "metadata",
       "needsReview": [],
-      "text": "Endurance 1.\nJanemba only.\nFocused physical attack doing +3 power stages of damage.\nIf suc- cessful, choose up to X cards under your Mastery and shuffle them into your Life Deck.\nX = your Main Per- sonality's PUR."
+      "text": "Endurance 1.\nJanemba only.\nFocused physical attack doing +3 power stages of damage.\nIf suc- cessful, choose up to X cards under your Mastery and shuffle them into your Life Deck.\nX = your Main Per- sonality's PUR.",
+      "endurance": 1
     }
   },
   {
@@ -65650,7 +65774,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Endurance 3.\nIf you played 3 attacks § from 3 different cards from your | hand in 3 consecutive “Attacker | Attacks” phases this Combat, § discard the top 39 cards of | ¢ your Life Deck.\n; Dragon Bal 2"
+      "text": "Endurance 3.\nIf you played 3 attacks § from 3 different cards from your | hand in 3 consecutive “Attacker | Attacks” phases this Combat, § discard the top 39 cards of | ¢ your Life Deck.\n; Dragon Bal 2",
+      "endurance": 3
     }
   },
   {
@@ -68052,7 +68177,8 @@
       "type": "Non-Combat",
       "coverage": "metadata",
       "needsReview": [],
-      "text": "Endurance 3.\nUse when your Main Personality is at its highest personality level and you would raise your personal- | ity level.\nIf opponent's Main Person- your ality's highest personality level is exactly 1 level higher than yours.\nyou win the game by the Most Powerful Personal- ity Victory."
+      "text": "Endurance 3.\nUse when your Main Personality is at its highest personality level and you would raise your personal- | ity level.\nIf opponent's Main Person- your ality's highest personality level is exactly 1 level higher than yours.\nyou win the game by the Most Powerful Personal- ity Victory.",
+      "endurance": 3
     }
   },
   {
@@ -68927,7 +69053,8 @@
       "type": "Physical Combat",
       "coverage": "metadata",
       "needsReview": [],
-      "text": "Endurance 1.\nJanemba only.\nPhysical attack doing 7/7 power stages of damage.\n(hoose up to 3 cards not named \"Lightning Shower Rain\" with printed Endurance in your discard pile and put them under your Mastery."
+      "text": "Endurance 1.\nJanemba only.\nPhysical attack doing 7/7 power stages of damage.\n(hoose up to 3 cards not named \"Lightning Shower Rain\" with printed Endurance in your discard pile and put them under your Mastery.",
+      "endurance": 1
     }
   },
   {
@@ -69146,7 +69273,8 @@
         "number": "L5-6",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "endurance": 3
     }
   },
   {
@@ -69908,7 +70036,8 @@
       "type": "Physical Combat",
       "coverage": "metadata",
       "needsReview": [],
-      "text": "Endurance 2.\nPhysical attack doing +3 power stages of damage.\nRaise your anger 1 level.\nYou can have up to B copies of this card in your deck.\nEmpower 2.\nAttach to your Main Personality.\nWhile gttached.\nthe top card of your discard pile is considered to be a Namekian ~ Style card for card effects."
+      "text": "Endurance 2.\nPhysical attack doing +3 power stages of damage.\nRaise your anger 1 level.\nYou can have up to B copies of this card in your deck.\nEmpower 2.\nAttach to your Main Personality.\nWhile gttached.\nthe top card of your discard pile is considered to be a Namekian ~ Style card for card effects.",
+      "endurance": 2
     }
   },
   {
@@ -70053,7 +70182,8 @@
       "type": "Physical Combat",
       "coverage": "metadata",
       "needsReview": [],
-      "text": "Endurance 3.\nPhysical attack doing +3 power stages of damage.\nEmpower 2.\nYou cannot win by the Most Powerful Personality Victory for the remainder of the game.\nAttach this card to your Le// Saga Namekian 5tyle Mastery."
+      "text": "Endurance 3.\nPhysical attack doing +3 power stages of damage.\nEmpower 2.\nYou cannot win by the Most Powerful Personality Victory for the remainder of the game.\nAttach this card to your Le// Saga Namekian 5tyle Mastery.",
+      "endurance": 3
     }
   },
   {
@@ -72015,7 +72145,8 @@
         "number": "CCPP7",
         "rarity": "P",
         "style": "Red"
-      }
+      },
+      "endurance": 4
     }
   },
   {
@@ -73674,7 +73805,8 @@
       "type": "Energy Combat",
       "coverage": "metadata",
       "needsReview": [],
-      "text": "Endurance 3.\nEnergy attack doing 7 life cards of damage.\nCosts 5 power stages to perform.\nFor the remainder of Combat.\nwhen you gain power stages or anger from your Mastery.\ngain twice that amount."
+      "text": "Endurance 3.\nEnergy attack doing 7 life cards of damage.\nCosts 5 power stages to perform.\nFor the remainder of Combat.\nwhen you gain power stages or anger from your Mastery.\ngain twice that amount.",
+      "endurance": 3
     }
   },
   {
@@ -73691,7 +73823,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Endurance 2.\nEnergy attack doing 3 life cards of damage.\nIf you declared s this attack stays on the table to be used 2 more tmeas this Combat."
+      "text": "Endurance 2.\nEnergy attack doing 3 life cards of damage.\nIf you declared s this attack stays on the table to be used 2 more tmeas this Combat.",
+      "endurance": 2
     }
   },
   {
@@ -75098,7 +75231,8 @@
       "type": "Non-Combat",
       "coverage": "metadata",
       "needsReview": [],
-      "text": "Endurance 4.\nWhen entering Combat.\nChoose an Ally or Non- Combat card in a discard pile and place it on top of its owner's Life Deck."
+      "text": "Endurance 4.\nWhen entering Combat.\nChoose an Ally or Non- Combat card in a discard pile and place it on top of its owner's Life Deck.",
+      "endurance": 4
     }
   },
   {
@@ -77594,7 +77728,8 @@
         "number": "006",
         "rarity": "C",
         "style": "Black"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -79672,7 +79807,8 @@
         "number": "039",
         "rarity": "C",
         "style": "Named"
-      }
+      },
+      "endurance": 2
     }
   },
   {
@@ -81405,7 +81541,8 @@
         "rarity": "U",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 2
     }
   },
   {
@@ -82335,7 +82472,8 @@
           ],
           "source": "parsed"
         }
-      ]
+      ],
+      "endurance": 2
     }
   },
   {
@@ -82457,7 +82595,8 @@
         "number": "029",
         "rarity": "C",
         "style": "Red"
-      }
+      },
+      "endurance": 1
     }
   },
   {
@@ -82827,7 +82966,8 @@
         "rarity": "C",
         "style": "Saiyan"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "endurance": 2
     }
   },
   {
@@ -82938,7 +83078,8 @@
         "number": "033",
         "rarity": "C",
         "style": "Saiyan"
-      }
+      },
+      "endurance": 1
     }
   },
   {

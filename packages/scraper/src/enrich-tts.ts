@@ -130,7 +130,22 @@ async function main(): Promise<void> {
     if (out.some((x) => typeof x === 'number' && !Number.isFinite(x))) return null;
     return out;
   };
-  let matched = 0; let verified = 0; let laddersVerified = 0; let visionApplied = 0;
+  let matched = 0; let verified = 0; let laddersVerified = 0; let visionApplied = 0; let enduranceFound = 0;
+  /**
+   * Endurance is printed at the START of a card's rules text as "Endurance #"
+   * (CRD ~L1118). Anchoring to the start avoids picking up prose that merely
+   * mentions the keyword, and the value is capped at a sane range — OCR
+   * occasionally reads "Endurance 2" as 10 or 100.
+   */
+  const enduranceOf = (text: unknown): number | undefined => {
+    if (typeof text !== 'string') return undefined;
+    // Strip leading OCR punctuation noise, then require the keyword first.
+    const head = text.replace(/^[^A-Za-z0-9]+/, '').slice(0, 24);
+    const m = /^endurance[^0-9]{0,3}([0-9]{1,2})/i.exec(head);
+    if (!m) return undefined;
+    const n = Number(m[1]);
+    return Number.isFinite(n) && n >= 1 && n <= 9 ? n : undefined;
+  };
   let snappedTotal = 0;
   let cardsSnapped = 0;
   const fixText = (raw: string): string => {
@@ -264,6 +279,12 @@ async function main(): Promise<void> {
       }
     }
 
+    const endurance = enduranceOf(rules.text as string | undefined);
+    if (endurance !== undefined) {
+      rules.endurance = endurance;
+      enduranceFound++;
+    }
+
     rules.coverage = rules.abilities
       ? 'partial'
       : type !== 'Unknown'
@@ -296,6 +317,7 @@ async function main(): Promise<void> {
   console.log(`[enrich-tts] lackey: ${lackey.length} cards loaded, ${matched} matched, ${verified} text-verified by OCR agreement`);
   console.log(`[enrich-tts] ladders verified (typed vs OCR agreement): ${laddersVerified}`);
   console.log(`[enrich-tts] vision readings applied: ${visionApplied}`);
+  console.log(`[enrich-tts] endurance values parsed: ${enduranceFound}`);
 }
 
 main().catch((e: unknown) => {

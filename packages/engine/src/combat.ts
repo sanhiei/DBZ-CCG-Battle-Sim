@@ -25,9 +25,13 @@ import { computeBaseDamage } from './pat.js';
 import { advanceStep, draw, syncRating } from './turn.js';
 import { applyIfSuccessful, attackKindOf, setupAttackAbility } from './abilities.js';
 import {
+  canUseEndurance,
   capturableBalls,
   captureBall,
   discardForDamage,
+  discardForDamageWithEndurance,
+  spendEndurance,
+  type EnduranceOffer,
   LIFE_CARD_CAPTURE_THRESHOLD,
   type DamageResult,
 } from './damage.js';
@@ -274,28 +278,61 @@ function dealLifeCardsAndFinish(
   db: CardDb,
   events: GameEvent[],
 ): void {
-  const result = takeLifeCards(state, atk.defenderPlayerIdx, n, db);
-  events.push({ type: 'attackResolved', successful: true, powerStages: 0, lifeCards: result.discarded });
+  atk.pendingLifeCardDamage = n;
+  resolveLifeCardDamage(state, atk, db, events);
+}
+
+/**
+ * Deal the life-card damage still owed on `atk`, pausing whenever the defender
+ * is offered Endurance. Re-entered after each Endurance answer until the debt
+ * is paid, the deck cannot pay it, or the attack finishes.
+ */
+function resolveLifeCardDamage(
+  state: GameState,
+  atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>,
+  db: CardDb,
+  events: GameEvent[],
+): void {
+  const owed = atk.pendingLifeCardDamage ?? 0;
+  const result = discardForDamageWithEndurance(state, atk.defenderPlayerIdx, owed, db);
+  atk.pendingLifeCardDamage = owed - result.discarded;
+  atk.lifeCardsDealt = (atk.lifeCardsDealt ?? 0) + result.discarded;
+
   if (result.dragonBallsSkipped > 0) {
     state.log.push(
       `${result.dragonBallsSkipped} Dragon Ball(s) uncovered — they do not count as damage and return to the bottom of the Life Deck.`,
     );
   }
+
+  if (result.offer) {
+    atk.enduranceOffer = result.offer;
+    state.pendingPrompt = newPrompt(
+      atk.defenderPlayerIdx,
+      'endurance',
+      `Use Endurance ${result.offer.value} from ${db.get(result.offer.cardId)?.name ?? 'this card'} to prevent ${result.offer.value} life card(s)?`,
+      { optional: true },
+    );
+    return;
+  }
+
+  delete atk.enduranceOffer;
+  const dealt = atk.lifeCardsDealt ?? 0;
+  events.push({ type: 'attackResolved', successful: true, powerStages: 0, lifeCards: dealt });
   applyIfSuccessful(state, atk.ifSuccessfulEffects, db, events);
+
   if (result.exhausted) {
     endGame(state, atk.attackerPlayerIdx, events);
     return;
   }
 
-  // CRD ~L685: an attack that actually forced 5+ life cards of damage lets the
-  // attacker capture one of the defender's in-play Dragon Balls. "Immediately
-  // after damage is dealt", and only if the defender has one to take.
+  // CRD ~L685: capture is measured against cards ACTUALLY discarded, so
+  // Endurance that holds the total under 5 also prevents the capture (~L1147).
   const balls = capturableBalls(state, atk.defenderPlayerIdx);
-  if (result.discarded >= LIFE_CARD_CAPTURE_THRESHOLD && balls.length > 0) {
+  if (dealt >= LIFE_CARD_CAPTURE_THRESHOLD && balls.length > 0) {
     state.pendingPrompt = newPrompt(
       atk.attackerPlayerIdx,
       'capture',
-      `${result.discarded} life cards of damage — capture one of your opponent's Dragon Balls?`,
+      `${dealt} life cards of damage — capture one of your opponent's Dragon Balls?`,
       {
         optional: true,
         options: balls.map((b) => ({ uid: b.uid, name: db.get(b.cardId)?.name ?? 'Dragon Ball' })),
@@ -307,6 +344,42 @@ function dealLifeCardsAndFinish(
   nextAttackPhase(state, events);
 }
 
+/**
+ * Answer the Endurance prompt. `use` false declines and the card is discarded
+ * as ordinary damage.
+ */
+export function resolveEndurance(
+  state: GameState,
+  use: boolean,
+  ctx: CombatCtx,
+  db: CardDb,
+  events: GameEvent[],
+): string | undefined {
+  const atk = state.combat?.currentAttack;
+  const offer = atk?.enduranceOffer;
+  if (!atk || !offer) return 'no Endurance offered';
+  if (ctx.actingPlayerIdx !== atk.defenderPlayerIdx) return 'only the defender may use Endurance';
+
+  delete state.pendingPrompt;
+  delete atk.enduranceOffer;
+
+  if (use) {
+    atk.pendingLifeCardDamage = spendEndurance(state, atk.defenderPlayerIdx, offer);
+  } else {
+    // Declined: it is just another life card of damage.
+    const player = state.players[atk.defenderPlayerIdx]!;
+    const at = player.zones.lifeDeck.findIndex((c) => c.uid === offer.uid);
+    if (at !== -1) {
+      const [card] = player.zones.lifeDeck.splice(at, 1);
+      player.zones.discard.push({ ...card!, faceDown: false });
+      atk.lifeCardsDealt = (atk.lifeCardsDealt ?? 0) + 1;
+      atk.pendingLifeCardDamage = Math.max(0, offer.remaining - 1);
+    }
+  }
+
+  resolveLifeCardDamage(state, atk, db, events);
+  return undefined;
+}
 /**
  * Answer the Dragon Ball capture prompt. `ballUid` of null declines.
  *

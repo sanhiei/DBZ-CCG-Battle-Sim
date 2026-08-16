@@ -18,6 +18,8 @@ export interface EngineCardRules {
   coverage: string;
   text?: string;
   needsReview?: string[];
+  /** Endurance value printed at the start of the rules text (CRD ~L1118). */
+  endurance?: number;
   personality?: EnginePersonality;
   abilities?: Ability[];
 }

@@ -113,3 +113,98 @@ export function captureBall(state: GameState, fromIdx: number, toIdx: number, ba
   state.log.push(`${to.name} captures a Dragon Ball from ${from.name}.`);
   return true;
 }
+
+/**
+ * Endurance (CRD ~L1114-1147).
+ *
+ * Printed at the start of a card's rules text as "Endurance #". While taking
+ * life cards of DAMAGE, a flipped card with Endurance may be removed from the
+ * game to prevent the next # life cards. The card itself still counts as one
+ * discard, so using it satisfies 1 + # of the damage owed (~L1138).
+ *
+ * Gated on having declared a Tokui-Waza AND a Mastery in play (~L1121), and
+ * usable only against damage — never against effect-driven discards (~L1135).
+ * Leftover Endurance is not stockpiled (~L1132).
+ */
+export function enduranceValue(card: CardInstance, db: CardDb): number | undefined {
+  return db.get(card.cardId)?.rules?.endurance;
+}
+
+/** Whether a player may use Endurance at all right now. */
+export function canUseEndurance(state: GameState, playerIdx: number, db: CardDb): boolean {
+  const p = state.players[playerIdx];
+  if (!p?.tokuiWazaDeclared) return false;
+  return p.zones.inPlay.some((c) => db.get(c.cardId)?.rules?.type === 'Mastery');
+}
+
+/** An Endurance opportunity paused mid-damage, awaiting the defender's call. */
+export interface EnduranceOffer {
+  uid: string;
+  cardId: string;
+  value: number;
+  /** Life cards still owed, including the card being offered. */
+  remaining: number;
+}
+
+/**
+ * Damage discard that stops at the first usable Endurance card instead of
+ * discarding it, so the caller can prompt. Dragon Balls are still skipped.
+ */
+export function discardForDamageWithEndurance(
+  state: GameState,
+  playerIdx: number,
+  n: number,
+  db: CardDb,
+): DamageResult & { offer?: EnduranceOffer } {
+  const player = state.players[playerIdx];
+  if (!player) return { discarded: 0, dragonBallsSkipped: 0, exhausted: true };
+  const eligible = canUseEndurance(state, playerIdx, db);
+
+  const deck = player.zones.lifeDeck;
+  let discarded = 0;
+  let dragonBallsSkipped = 0;
+  let guard = deck.length;
+
+  while (discarded < n && deck.length > 0 && guard-- > 0) {
+    const top = deck[0]!;
+    if (isDragonBall(top, db)) {
+      deck.shift();
+      deck.push({ ...top, faceDown: true });
+      dragonBallsSkipped++;
+      continue;
+    }
+    const value = eligible ? enduranceValue(top, db) : undefined;
+    if (value !== undefined) {
+      // Pause: the defender chooses whether to spend it.
+      return {
+        discarded,
+        dragonBallsSkipped,
+        exhausted: false,
+        offer: { uid: top.uid, cardId: top.cardId, value, remaining: n - discarded },
+      };
+    }
+    deck.shift();
+    player.zones.discard.push({ ...top, faceDown: false });
+    discarded++;
+  }
+
+  return { discarded, dragonBallsSkipped, exhausted: discarded < n };
+}
+
+/**
+ * Spend the offered Endurance card: removed from the game, and it covers
+ * 1 (itself) + its value of the damage owed. Returns the damage still owed.
+ */
+export function spendEndurance(state: GameState, playerIdx: number, offer: EnduranceOffer): number {
+  const player = state.players[playerIdx];
+  if (!player) return 0;
+  const at = player.zones.lifeDeck.findIndex((c) => c.uid === offer.uid);
+  if (at === -1) return offer.remaining;
+  const [card] = player.zones.lifeDeck.splice(at, 1);
+  player.zones.removed.push({ ...card!, faceDown: false });
+  state.log.push(
+    `${player.name} uses Endurance ${offer.value} — preventing ${offer.value} life card(s) of damage.`,
+  );
+  // Leftover Endurance is not stockpiled.
+  return Math.max(0, offer.remaining - 1 - offer.value);
+}

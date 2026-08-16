@@ -118,6 +118,12 @@ export interface AttackInProgress {
   damageLifeCards?: number;
   /** Non-damage "if successful" effects still to run on success. */
   ifSuccessfulEffects?: Effect[];
+  /** Life cards actually dealt so far by this attack (drives capture). */
+  lifeCardsDealt?: number;
+  /** Life-card damage still owed, paused while an Endurance prompt resolves. */
+  pendingLifeCardDamage?: number;
+  /** The Endurance card currently offered to the defender. */
+  enduranceOffer?: { uid: string; cardId: string; value: number; remaining: number };
   /** Power-stage damage awaiting redirect/application (physical). */
   pendingPowerStageDamage?: number;
   /** Which of the 16 battle-sequence steps we are on (1..16). */

@@ -14,6 +14,7 @@ import {
   passPhase,
   redirectDamage,
   resolveCapture,
+  resolveEndurance,
   resolveDefense,
   takeControlOfCombat,
   type CombatCtx,
@@ -155,6 +156,9 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       if (type === 'defend') {
         const c = (typeof choice === 'object' && choice) || {};
         err = resolveDefense(state, c, ctx, db, events);
+      } else if (type === 'endurance') {
+        const use = (choice as unknown) === true || (typeof choice === 'object' && choice !== null && (choice as { use?: boolean }).use === true);
+        err = resolveEndurance(state, use, ctx, db, events);
       } else if (type === 'capture') {
         const uid = typeof choice === 'string' ? choice : (choice as { uid?: string | null })?.uid ?? null;
         err = resolveCapture(state, uid, ctx, db, events);
@@ -183,7 +187,10 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       err = resolveCapture(state, action.ballUid, ctx, db, events);
       break;
     }
-    case 'useEndurance':
+    case 'useEndurance': {
+      err = resolveEndurance(state, true, ctx, db, events);
+      break;
+    }
     case 'loadDeck':
     case 'setReady':
     case 'chooseFirstPlayer':

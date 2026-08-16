@@ -9,6 +9,7 @@
 import type { Prompt } from '@dbz/shared';
 
 export interface PromptChoice {
+  use?: boolean;
   cardUid?: string;
   takeDamage?: boolean;
   uid?: string | null;
@@ -60,6 +61,15 @@ export function PromptPanel({ prompt, seat, canDefendWith, onAnswer }: PromptPan
           </>
         )}
 
+        {prompt.type === 'endurance' && (
+          <>
+            <button onClick={() => onAnswer({ use: true })}>Use Endurance</button>
+            <button className="ghost" onClick={() => onAnswer({ use: false })}>
+              Take the damage instead
+            </button>
+          </>
+        )}
+
         {prompt.type === 'redirect' && (
           <>
             {options(prompt).map((o) => (
@@ -86,7 +96,7 @@ export function PromptPanel({ prompt, seat, canDefendWith, onAnswer }: PromptPan
           </>
         )}
 
-        {!['defend', 'redirect', 'capture'].includes(prompt.type) && (
+        {!['defend', 'redirect', 'capture', 'endurance'].includes(prompt.type) && (
           <span className="muted">
             No UI for prompt type “{prompt.type}” yet — resolve it manually.
           </span>
