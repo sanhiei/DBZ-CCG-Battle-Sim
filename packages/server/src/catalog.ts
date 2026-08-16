@@ -45,14 +45,18 @@ export function loadCatalog(dataDir: string = findDataDir()): Catalog {
     for (const card of list) if (card?.id) byId.set(card.id, card);
   }
 
-  // The gallery catalogs (hand-reviewed; ids like `saiyan-saga-*`) and the TTS
-  // import (`tts-*`) both cover the Saiyan Saga, as the same physical cards
-  // under different ids. Where a saga has gallery coverage, the gallery wins
-  // and the TTS copies are dropped — otherwise every Saiyan card would appear
-  // twice in the browser and deck ids would be ambiguous.
-  const gallerySagas = new Set(
-    [...byId.values()].filter((c) => !c.id.startsWith('tts-')).map((c) => c.saga),
-  );
-  const cards = [...byId.values()].filter((c) => !(c.id.startsWith('tts-') && gallerySagas.has(c.saga)));
+  // The gallery catalogs (`saiyan-saga-*`) and the TTS import (`tts-*`) cover
+  // the same physical cards under different ids, so one must win per saga or
+  // every Saiyan card appears twice and deck ids turn ambiguous.
+  //
+  // TTS wins. Its data is triangulated — typed LackeyCCG values, vision reads
+  // of the card faces, and OCR, cross-checked against each other — while the
+  // gallery block is single-source OCR of 400x550 scans. That gap is not
+  // theoretical: gallery Tien Lv1 lists [100..1000], missing the zero rung
+  // entirely (so every stage reads one rung high), and Lv2 is scrambled
+  // ([...800,300,1000,110,1200...]). The TTS entries for the same cards carry
+  // the correct [0,100..1000] plus PUR and alignment.
+  const ttsSagas = new Set([...byId.values()].filter((c) => c.id.startsWith('tts-')).map((c) => c.saga));
+  const cards = [...byId.values()].filter((c) => !(!c.id.startsWith('tts-') && ttsSagas.has(c.saga)));
   return { db: new CardDb(cards), cards, sources };
 }

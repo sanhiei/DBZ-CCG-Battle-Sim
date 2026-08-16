@@ -82,10 +82,23 @@ test('catalog loads enriched cards', () => {
   assert.ok(db.levelsOf('Goku').length >= 3);
 });
 
-test('gallery-covered sagas contain no duplicate TTS copies', () => {
-  const gallerySagas = new Set(catalog.cards.filter((c) => !c.id.startsWith('tts-')).map((c) => c.saga));
-  const ttsInGallerySaga = catalog.cards.filter((c) => c.id.startsWith('tts-') && gallerySagas.has(c.saga));
-  assert.equal(ttsInGallerySaga.length, 0, ttsInGallerySaga.slice(0, 3).map((c) => `${c.name} [${c.saga}]`).join(', '));
+test('TTS-covered sagas contain no duplicate gallery copies', () => {
+  // TTS data is triangulated (typed + vision + OCR); the gallery block is
+  // single-source OCR and is known to carry corrupt ladders. TTS wins.
+  const ttsSagas = new Set(catalog.cards.filter((c) => c.id.startsWith('tts-')).map((c) => c.saga));
+  const galleryInTtsSaga = catalog.cards.filter((c) => !c.id.startsWith('tts-') && ttsSagas.has(c.saga));
+  assert.equal(galleryInTtsSaga.length, 0, galleryInTtsSaga.slice(0, 3).map((c) => `${c.name} [${c.saga}]`).join(', '));
+});
+
+test('every personality ladder starts at the zero stage', () => {
+  // A scouter's bottom rung is printed 0/00/0000. A ladder that omits it makes
+  // every stage read one rung high — the gallery Saiyan block had exactly this
+  // defect, which is why it is no longer preferred.
+  const bad = catalog.cards.filter((c) => {
+    const r = c.rules?.personality?.powerRatings;
+    return Array.isArray(r) && r.length >= 6 && r[0] !== 0;
+  });
+  assert.equal(bad.length, 0, bad.slice(0, 5).map((c) => `${c.name}: ${JSON.stringify(c.rules?.personality?.powerRatings?.slice(0, 3))}`).join(' | '));
 });
 
 /* ---------- PAT ---------- */

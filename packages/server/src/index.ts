@@ -6,11 +6,14 @@
  *   GET /api/cards        the card catalog, for the client's browser/deck builder
  */
 import { createServer, type IncomingMessage, type Server as HttpServer, type ServerResponse } from 'node:http';
+import { createReadStream, existsSync } from 'node:fs';
+import { basename, join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { WebSocketServer, type WebSocket } from 'ws';
 import type { ClientMessage, ServerMessage } from '@dbz/shared';
-import { loadCatalog, type Catalog } from './catalog.js';
+import { findDataDir, loadCatalog, type Catalog } from './catalog.js';
+import { getPatTable } from '@dbz/engine';
 import { loadPatTable } from './pat.js';
 import { Hub } from './hub.js';
 import type { Room, RoomClient } from './room.js';
@@ -172,7 +175,41 @@ function handleHttp(req: IncomingMessage, res: ServerResponse, catalog: Catalog,
   if (url.pathname === '/api/cards') {
     return json(res, { sources: catalog.sources, cards: catalog.cards });
   }
+  if (url.pathname === '/api/pat') {
+    // The client runs the same engine for optimistic prediction and renders PAT
+    // bracket letters; without this it would fall back to PLACEHOLDER_PAT and
+    // show brackets computed from invented numbers.
+    return json(res, getPatTable());
+  }
+  if (url.pathname.startsWith('/cards/')) {
+    return serveCardImage(url.pathname.slice('/cards/'.length), res);
+  }
   res.writeHead(404, { 'content-type': 'text/plain' }).end('not found');
+}
+
+/**
+ * Serve a sliced card face from data/images-tts/.
+ *
+ * Card art is not ours to redistribute, so these files are gitignored and this
+ * route only ever reads from that one directory — the filename is reduced to a
+ * bare basename so a crafted id cannot escape it.
+ */
+function serveCardImage(rawName: string, res: ServerResponse): void {
+  const safe = basename(decodeURIComponent(rawName)).replace(/[^A-Za-z0-9._-]/g, '');
+  if (!safe || !/\.(jpg|jpeg|png)$/i.test(safe)) {
+    res.writeHead(400).end();
+    return;
+  }
+  const file = join(findDataDir(), 'images-tts', safe);
+  if (!existsSync(file)) {
+    res.writeHead(404).end();
+    return;
+  }
+  res.writeHead(200, {
+    'content-type': safe.toLowerCase().endsWith('.png') ? 'image/png' : 'image/jpeg',
+    'cache-control': 'public, max-age=86400',
+  });
+  createReadStream(file).pipe(res);
 }
 
 function json(res: ServerResponse, body: unknown): void {

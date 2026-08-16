@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist-types",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "types": ["vite/client"],
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "composite": false,
+    // Vite resolves the explicit .ts/.tsx specifiers this app uses.
+    "allowImportingTsExtensions": true
+  },
+  "references": [{ "path": "../shared" }, { "path": "../engine" }],
+  "include": ["src/**/*"]
+}

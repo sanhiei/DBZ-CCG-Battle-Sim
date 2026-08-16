@@ -189,7 +189,15 @@ async function main(): Promise<void> {
     }
     const effType = (rules.type as string) ?? type;
 
-    if (rec?.isPersonality || lk?.isPersonality || vis?.isPersonality) {
+    // Personality classification by source precedence: the face (vision) beats
+    // the typed database, which beats OCR. A veto matters as much as a claim —
+    // OCR's ladder detector reads digits out of card art and has declared
+    // Combat cards to be personalities; a typed "Combat" row overrules it.
+    const isPersonality =
+      vis?.isPersonality !== undefined ? vis.isPersonality
+      : lk ? lk.isPersonality
+      : rec?.isPersonality ?? false;
+    if (isPersonality) {
       personalities++;
       const personality: Record<string, unknown> = {
         personalityName: c.name,

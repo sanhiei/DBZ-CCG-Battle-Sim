@@ -26827,8 +26827,6 @@
       "coverage": "metadata",
       "needsReview": [
         "powerRatings",
-        "level",
-        "alignment",
         "level"
       ],
       "text": "Endurance 2. This card must be used by your Main Personality. All attacks performed by this personality for the remainder of Combat do +1 power stages of damage for each Ally in play.",
@@ -26837,21 +26835,6 @@
         "number": "105",
         "rarity": "R",
         "style": "Colorless"
-      },
-      "personality": {
-        "personalityName": "Double Teaming",
-        "alignment": "Rogue",
-        "powerRatings": [
-          "Z",
-          0,
-          1,
-          4,
-          7,
-          87
-        ],
-        "zeroStageIndex": 0,
-        "pur": 1,
-        "canBeAlly": true
       }
     }
   },
@@ -35538,8 +35521,6 @@
       "coverage": "partial",
       "needsReview": [
         "powerRatings",
-        "level",
-        "alignment",
         "level"
       ],
       "text": "Endurance 2. Stops an energy attack. Raise your anger 1 level. If used by Cooler, search your Life Deck for a Freestyle Drill and place it into play, and your opponent discards X life cards. X = the amount of life cards of damage the stopped attack would have dealt.",
@@ -35548,21 +35529,6 @@
         "number": "CA24",
         "rarity": "P",
         "style": "Named"
-      },
-      "personality": {
-        "personalityName": "Cooler's Surprise Attack",
-        "alignment": "Rogue",
-        "powerRatings": [
-          0,
-          9,
-          14,
-          54,
-          82,
-          240
-        ],
-        "zeroStageIndex": 0,
-        "pur": 2,
-        "canBeAlly": true
       },
       "abilities": [
         {
@@ -35621,9 +35587,7 @@
       "needsReview": [
         "powerRatings",
         "level",
-        "pur",
-        "alignment",
-        "level"
+        "pur"
       ],
       "text": "Physical attack doing +6 power stages of damage. Costs 6 power stages to perform. If successful, discard up to 6 Non-Combat cards in play. Remove from the game after use.",
       "textOriginal": "Physical attack doing +6 power stages of damage. Costs 6 power stages to perform. If successful, discard up to 6 Non-Combat cards in play. Remove from the game after use.",
@@ -35633,24 +35597,6 @@
         "style": "Colorless"
       },
       "textVerified": "vision",
-      "personality": {
-        "personalityName": "DELETED!",
-        "alignment": "Rogue",
-        "powerRatings": [
-          0,
-          3,
-          4,
-          7,
-          42,
-          4291,
-          84403,
-          3888888,
-          5381111
-        ],
-        "zeroStageIndex": 0,
-        "pur": null,
-        "canBeAlly": true
-      },
       "abilities": [
         {
           "trigger": "attack",
@@ -36081,9 +36027,7 @@
       "needsReview": [
         "powerRatings",
         "level",
-        "pur",
-        "alignment",
-        "level"
+        "pur"
       ],
       "text": "Endurance 1. Stops an energy attack. Raise your anger 1 level. If used by Gohan gain 3 power stages and for the remainder of the turn, your Allies cannot be discarded or removed from the game.",
       "textVerified": "vision",
@@ -36091,21 +36035,6 @@
         "number": "CA31",
         "rarity": "P",
         "style": "Named"
-      },
-      "personality": {
-        "personalityName": "Gohan's Energy Deflection",
-        "alignment": "Rogue",
-        "powerRatings": [
-          0,
-          9,
-          24,
-          30,
-          3240,
-          132000
-        ],
-        "zeroStageIndex": 0,
-        "pur": null,
-        "canBeAlly": true
       },
       "abilities": [
         {
@@ -36331,8 +36260,7 @@
       "type": "Physical Combat",
       "coverage": "partial",
       "needsReview": [
-        "powerRatings",
-        "alignment"
+        "powerRatings"
       ],
       "text": "Stops a physical attack. Raise your Main Personality to his highest power stage, and for the remainder of Combat prevent 1 power stage of damage from all of your opponent's attacks.",
       "textVerified": "vision",
@@ -36340,22 +36268,6 @@
         "number": "CA28",
         "rarity": "P",
         "style": "Named"
-      },
-      "personality": {
-        "personalityName": "Goku's Quick Dodge",
-        "alignment": "Rogue",
-        "powerRatings": [
-          0,
-          2,
-          3,
-          4,
-          99,
-          990
-        ],
-        "zeroStageIndex": 0,
-        "pur": 2,
-        "canBeAlly": true,
-        "level": 2
       },
       "abilities": [
         {
@@ -42357,8 +42269,6 @@
       "coverage": "metadata",
       "needsReview": [
         "powerRatings",
-        "level",
-        "alignment",
         "level"
       ],
       "text": "Sensei Deck. If your opponent has a Physical Combat, Energy Combat, or Combat card in play that can be used an additional time(s) this Combat, discard the top 10 cards of your opponent's Life Deck.",
@@ -42367,21 +42277,6 @@
         "number": "1",
         "rarity": "P",
         "style": "Named"
-      },
-      "personality": {
-        "personalityName": "Majin Buu's Loogie",
-        "alignment": "Rogue",
-        "powerRatings": [
-          0,
-          3,
-          4,
-          5,
-          93,
-          48312
-        ],
-        "zeroStageIndex": 0,
-        "pur": 4,
-        "canBeAlly": true
       }
     }
   },
@@ -43193,8 +43088,6 @@
       "coverage": "partial",
       "needsReview": [
         "powerRatings",
-        "level",
-        "alignment",
         "level"
       ],
       "text": "Physical attack doing +4 power stages of damage. Discard the top card of your Life Deck. If the card you discarded has \"Tokui-Waza\" printed in the power box, this attack does an additional +6 power stages of damage. Lower your opponent's anger 2 levels.",
@@ -43203,22 +43096,6 @@
         "number": "068",
         "rarity": "U",
         "style": "Colorless"
-      },
-      "personality": {
-        "personalityName": "Power Headbutt",
-        "alignment": "Rogue",
-        "powerRatings": [
-          0,
-          2,
-          3,
-          4,
-          17,
-          20,
-          68
-        ],
-        "zeroStageIndex": 0,
-        "pur": 3,
-        "canBeAlly": true
       },
       "abilities": [
         {
@@ -44186,8 +44063,6 @@
       "coverage": "metadata",
       "needsReview": [
         "powerRatings",
-        "level",
-        "alignment",
         "level"
       ],
       "text": "Endurance 2. Physical attack doing +4 power stages of damage. Shuffle 3 Saiyan Style cards in your discard pile into your Life Deck. Remove from the game after use.",
@@ -44196,21 +44071,6 @@
         "number": "083",
         "rarity": "U",
         "style": "Saiyan"
-      },
-      "personality": {
-        "personalityName": "Saiyan Youth Bruise",
-        "alignment": "Rogue",
-        "powerRatings": [
-          "Z",
-          0,
-          3,
-          12,
-          23,
-          183
-        ],
-        "zeroStageIndex": 0,
-        "pur": 2,
-        "canBeAlly": true
       }
     }
   },
@@ -47176,9 +47036,7 @@
       "needsReview": [
         "powerRatings",
         "level",
-        "pur",
-        "alignment",
-        "level"
+        "pur"
       ],
       "text": "Lower all villain players' anger level to 0. Remove from the game after use.",
       "textOriginal": "You reduce every hero's anger level to zero. Removethis card from game after use.",
@@ -47187,23 +47045,7 @@
         "rarity": "P",
         "style": "Named"
       },
-      "textVerified": "vision",
-      "personality": {
-        "personalityName": "Frieza's Spirit",
-        "alignment": "Rogue",
-        "powerRatings": [
-          0,
-          3,
-          4,
-          6,
-          77,
-          347,
-          4060
-        ],
-        "zeroStageIndex": 0,
-        "pur": null,
-        "canBeAlly": true
-      }
+      "textVerified": "vision"
     }
   },
   {
@@ -69708,8 +69550,6 @@
       "coverage": "metadata",
       "needsReview": [
         "powerRatings",
-        "level",
-        "alignment",
         "level"
       ],
       "text": "League and Tuff Enuff only. Physical attack doing +3 power stages of damage. Set all players' anger levels to 0. Drills may not be used for the remainder of Combat. Damage from this attack cannot be prevented.",
@@ -69718,21 +69558,6 @@
         "number": "L3-8",
         "rarity": "P",
         "style": "Colorless"
-      },
-      "personality": {
-        "personalityName": "Mean Squeeze",
-        "alignment": "Rogue",
-        "powerRatings": [
-          "Z",
-          0,
-          1,
-          2,
-          8,
-          38
-        ],
-        "zeroStageIndex": 0,
-        "pur": 2,
-        "canBeAlly": true
       }
     }
   },
@@ -75611,30 +75436,10 @@
       "coverage": "metadata",
       "needsReview": [
         "powerRatings",
-        "level",
-        "alignment",
         "level"
       ],
       "text": "(You may use this card when entering Combat.) Tuff Enuff only. Place the top 3 cards of your discard pile on top of your Life Deck. Remove from the game after use.",
-      "textVerified": "vision",
-      "personality": {
-        "personalityName": "Time Traveling",
-        "alignment": "Rogue",
-        "powerRatings": [
-          0,
-          3,
-          23,
-          212,
-          223,
-          1255,
-          11467,
-          49874,
-          4787124
-        ],
-        "zeroStageIndex": 0,
-        "pur": 5,
-        "canBeAlly": true
-      }
+      "textVerified": "vision"
     }
   },
   {
