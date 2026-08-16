@@ -24,6 +24,14 @@ import type { CardDb } from './loader.js';
 import { computeBaseDamage } from './pat.js';
 import { advanceStep, draw, syncRating } from './turn.js';
 import { applyIfSuccessful, attackKindOf, setupAttackAbility } from './abilities.js';
+import {
+  capturableBalls,
+  captureBall,
+  discardForDamage,
+  LIFE_CARD_CAPTURE_THRESHOLD,
+  type DamageResult,
+} from './damage.js';
+import { deferDragonVictory, DRAGON_BALL_SET_SIZE } from './victory.js';
 
 const PREPARE_DRAW = 3;
 const ENERGY_STAGE_COST = 2;
@@ -69,11 +77,13 @@ function loseStages(p: PersonalityInPlay, n: number, db: CardDb, events: GameEve
   }
 }
 
-function takeLifeCards(state: GameState, playerIdx: number, n: number): number {
-  const p = state.players[playerIdx]!;
-  const lost = p.zones.lifeDeck.splice(0, n);
-  p.zones.discard.push(...lost.map((c) => ({ ...c, faceDown: false })));
-  return lost.length;
+/**
+ * Life cards of damage. Dragon Balls in the deck are skipped and cycled to the
+ * bottom (CRD ~L699), so this can come up short even with cards remaining —
+ * that is the Dragon Ball Loop and it loses the game.
+ */
+function takeLifeCards(state: GameState, playerIdx: number, n: number, db: CardDb): DamageResult {
+  return discardForDamage(state, playerIdx, n, db);
 }
 
 function endGame(state: GameState, winnerIdx: number, events: GameEvent[]): void {
@@ -264,14 +274,81 @@ function dealLifeCardsAndFinish(
   db: CardDb,
   events: GameEvent[],
 ): void {
-  const lost = takeLifeCards(state, atk.defenderPlayerIdx, n);
-  events.push({ type: 'attackResolved', successful: true, powerStages: 0, lifeCards: lost });
+  const result = takeLifeCards(state, atk.defenderPlayerIdx, n, db);
+  events.push({ type: 'attackResolved', successful: true, powerStages: 0, lifeCards: result.discarded });
+  if (result.dragonBallsSkipped > 0) {
+    state.log.push(
+      `${result.dragonBallsSkipped} Dragon Ball(s) uncovered — they do not count as damage and return to the bottom of the Life Deck.`,
+    );
+  }
   applyIfSuccessful(state, atk.ifSuccessfulEffects, db, events);
-  if (lost < n) {
+  if (result.exhausted) {
     endGame(state, atk.attackerPlayerIdx, events);
     return;
   }
+
+  // CRD ~L685: an attack that actually forced 5+ life cards of damage lets the
+  // attacker capture one of the defender's in-play Dragon Balls. "Immediately
+  // after damage is dealt", and only if the defender has one to take.
+  const balls = capturableBalls(state, atk.defenderPlayerIdx);
+  if (result.discarded >= LIFE_CARD_CAPTURE_THRESHOLD && balls.length > 0) {
+    state.pendingPrompt = newPrompt(
+      atk.attackerPlayerIdx,
+      'capture',
+      `${result.discarded} life cards of damage — capture one of your opponent's Dragon Balls?`,
+      {
+        optional: true,
+        options: balls.map((b) => ({ uid: b.uid, name: db.get(b.cardId)?.name ?? 'Dragon Ball' })),
+      },
+    );
+    return;
+  }
+
   nextAttackPhase(state, events);
+}
+
+/**
+ * Answer the Dragon Ball capture prompt. `ballUid` of null declines.
+ *
+ * Capturing the 7th ball of a set does NOT win immediately — the CRD makes the
+ * capturer hold it until the start of their next turn, so the claim is deferred.
+ */
+export function resolveCapture(
+  state: GameState,
+  ballUid: string | null,
+  ctx: CombatCtx,
+  db: CardDb,
+  events: GameEvent[],
+): string | undefined {
+  const atk = state.combat?.currentAttack;
+  if (!atk) return 'no attack in progress';
+  if (ctx.actingPlayerIdx !== atk.attackerPlayerIdx) return 'only the attacker may capture';
+
+  if (ballUid) {
+    if (!captureBall(state, atk.defenderPlayerIdx, atk.attackerPlayerIdx, ballUid)) {
+      return 'that Dragon Ball is not available to capture';
+    }
+    const held = state.players[atk.attackerPlayerIdx]!.dragonBalls;
+    const bySet = new Map<string, Set<string>>();
+    for (const b of held) {
+      const card = db.get(b.cardId);
+      if (!card) continue;
+      const set = card.saga || 'unknown';
+      const seen = bySet.get(set) ?? new Set<string>();
+      seen.add(String(card.number ?? card.name));
+      bySet.set(set, seen);
+    }
+    for (const seen of bySet.values()) {
+      if (seen.size >= DRAGON_BALL_SET_SIZE) {
+        deferDragonVictory(state, atk.attackerPlayerIdx);
+        break;
+      }
+    }
+  }
+
+  delete state.pendingPrompt;
+  nextAttackPhase(state, events);
+  return undefined;
 }
 
 /** Answer the redirect prompt: send the pending power-stage damage to a personality. */

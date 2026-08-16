@@ -13,6 +13,7 @@ import {
   declareEmpower,
   passPhase,
   redirectDamage,
+  resolveCapture,
   resolveDefense,
   takeControlOfCombat,
   type CombatCtx,
@@ -154,6 +155,9 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       if (type === 'defend') {
         const c = (typeof choice === 'object' && choice) || {};
         err = resolveDefense(state, c, ctx, db, events);
+      } else if (type === 'capture') {
+        const uid = typeof choice === 'string' ? choice : (choice as { uid?: string | null })?.uid ?? null;
+        err = resolveCapture(state, uid, ctx, db, events);
       } else if (type === 'redirect') {
         const toUid = typeof choice === 'string' ? choice : (choice as { toUid?: string | null })?.toUid ?? null;
         err = redirectDamage(state, toUid, ctx, db, events);
@@ -173,8 +177,13 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
     case 'chat':
       state.log.push(`${state.players[action.playerIdx]?.name ?? '?'}: ${action.text}`);
       break;
+    case 'captureDragonBall': {
+      // Direct capture (card effects). The 5+ life-card capture goes through
+      // the combat prompt instead; both defer a 7th-ball win identically.
+      err = resolveCapture(state, action.ballUid, ctx, db, events);
+      break;
+    }
     case 'useEndurance':
-    case 'captureDragonBall':
     case 'loadDeck':
     case 'setReady':
     case 'chooseFirstPlayer':

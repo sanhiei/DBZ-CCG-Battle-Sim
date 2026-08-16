@@ -5,5 +5,6 @@ export * from './setup.js';
 export * from './turn.js';
 export * from './abilities.js';
 export * from './combat.js';
+export * from './damage.js';
 export * from './victory.js';
 export * from './reducer.js';
