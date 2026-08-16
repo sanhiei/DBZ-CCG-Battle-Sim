@@ -18,6 +18,7 @@ import {
   type CombatCtx,
 } from './combat.js';
 import { firstAttackAbility } from './abilities.js';
+import { checkVictory } from './victory.js';
 
 const clone = <T>(x: T): T => structuredClone(x);
 const START_ALLY_STAGES_ABOVE_ZERO = 3;
@@ -69,6 +70,8 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
   const ctx: CombatCtx = { actingPlayerIdx: actor };
 
   let err: string | undefined;
+  /** Set when this action advanced an MP by anger (Most Powerful check). */
+  let advancedByAnger: string | undefined;
   switch (action.type) {
     case 'advanceStep': {
       advanceStep(state, events);
@@ -87,7 +90,7 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       setStage(state, action.personalityUid, action.stageIndex, db, events);
       break;
     case 'setAnger':
-      setAnger(state, action.personalityUid, action.anger, db, events);
+      advancedByAnger = setAnger(state, action.personalityUid, action.anger, db, events);
       break;
     case 'playAlly': {
       const p = state.players[action.playerIdx];
@@ -183,5 +186,11 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
   }
 
   if (err) return fail(prev, err);
+
+  // Central victory check. Every action funnels through here, so a life card
+  // removed by any route — combat damage, a card effect, a discard — is caught
+  // by the same rule rather than at each damage site.
+  checkVictory(state, db, events, advancedByAnger ? { advancedByAngerUid: advancedByAnger } : {});
+
   return { state, events };
 }

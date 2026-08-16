@@ -157,6 +157,12 @@ export interface GameState {
   pendingPrompt?: Prompt;
   /** Human-readable event log. */
   log: string[];
+  /**
+   * Seat with a Dragon Ball victory pending. Capturing the 7th ball FROM an
+   * opponent does not win until the start of the capturer's next turn
+   * (CRD §"Dragon Ball Victory"), and only if the set is still intact then.
+   */
+  pendingDragonVictory?: number;
   winnerIdx?: number;
   victoryType?: VictoryType;
 }

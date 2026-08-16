@@ -123,18 +123,40 @@ export function advanceLevel(state: GameState, mp: PersonalityInPlay, db: CardDb
   state.log.push(`${mp.personalityName} advances to level ${mp.currentLevel}!`);
 }
 
-/** Set anger; at 5+ the MP immediately advances a level (CRD ~L519). */
-export function setAnger(state: GameState, uid: string, anger: number, db: CardDb, events: GameEvent[]): void {
+/**
+ * Set anger; at 5+ the MP immediately advances a level (CRD ~L519).
+ * Returns the uid when THIS call advanced the MP by anger — the Most Powerful
+ * Personality victory requires the top level to be reached by anger, so the
+ * caller must be able to tell an anger advance from a card-effect one.
+ */
+export function setAnger(
+  state: GameState,
+  uid: string,
+  anger: number,
+  db: CardDb,
+  events: GameEvent[],
+): string | undefined {
   const p = findPersonality(state, uid);
-  if (!p || p.isAlly) return;
+  if (!p || p.isAlly) return undefined;
   const from = p.anger;
   p.anger = Math.max(0, anger);
   if (p.anger !== from) events.push({ type: 'angerChanged', personalityUid: uid, from, to: p.anger });
-  if (p.anger >= ANGER_TO_ADVANCE) advanceLevel(state, p, db, events);
+  if (p.anger >= ANGER_TO_ADVANCE) {
+    const before = p.currentLevel;
+    advanceLevel(state, p, db, events);
+    if (p.currentLevel > before) return uid;
+  }
+  return undefined;
 }
 
-export function addAnger(state: GameState, uid: string, delta: number, db: CardDb, events: GameEvent[]): void {
+export function addAnger(
+  state: GameState,
+  uid: string,
+  delta: number,
+  db: CardDb,
+  events: GameEvent[],
+): string | undefined {
   const p = findPersonality(state, uid);
-  if (!p) return;
-  setAnger(state, uid, p.anger + delta, db, events);
+  if (!p) return undefined;
+  return setAnger(state, uid, p.anger + delta, db, events);
 }
