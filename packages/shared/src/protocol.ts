@@ -93,7 +93,9 @@ export type ClientMessage =
 
 export type ServerMessage =
   | { kind: 'session'; roomCode: string; token: string; playerIdx: number | null; spectate: boolean }
-  | { kind: 'lobby'; lobby: LobbyView }
+  /** `clientActionId` echoes a lobby action (loadDeck/setReady) so the client
+   *  can retire the matching optimistic prediction. */
+  | { kind: 'lobby'; lobby: LobbyView; clientActionId?: string }
   /**
    * Authoritative state, redacted for the recipient. `clientActionId` echoes the
    * action that produced this broadcast so a client can retire the matching

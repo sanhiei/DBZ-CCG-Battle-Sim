@@ -14,7 +14,7 @@
  * Tokui-Waza style matching.
  */
 import type { DeckList } from '@dbz/shared';
-import type { CardDb, EngineCard } from '@dbz/engine';
+import type { CardDb, EngineCard } from './loader.js';
 
 export const MIN_DECK_SIZE = 50;
 export const MAX_DECK_SIZE = 85;

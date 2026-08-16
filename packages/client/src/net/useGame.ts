@@ -131,6 +131,7 @@ export function useGame(): GameSession {
           }
           break;
         case 'lobby':
+          if (msg.clientActionId) retire(msg.clientActionId);
           setLobby(msg.lobby);
           break;
         case 'state': {

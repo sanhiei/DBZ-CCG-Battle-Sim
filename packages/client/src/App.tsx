@@ -8,6 +8,7 @@ import { useMemo, useState } from 'react';
 import { useGame } from './net/useGame.ts';
 import { Board } from './components/Board.tsx';
 import { CardBrowser } from './components/CardBrowser.tsx';
+import { DeckBuilder } from './components/DeckBuilder.tsx';
 
 export function App() {
   const game = useGame();
@@ -16,6 +17,7 @@ export function App() {
   const [tab, setTab] = useState<'game' | 'cards'>('game');
 
   const joined = game.roomCode !== null;
+  const mySeat = game.lobby?.seats.find((s) => s.idx === game.seat);
   const canJoin = game.conn === 'open' && name.trim().length > 0 && code.trim().length > 0;
 
   const status = useMemo(() => {
@@ -91,24 +93,31 @@ export function App() {
           }}
         />
       ) : (
-        <main className="lobby">
-          <h2>Room {game.roomCode}</h2>
-          <ul className="lobby__seats">
-            {(game.lobby?.seats ?? []).map((s) => (
-              <li key={s.idx} className={s.ready ? 'ready' : ''}>
-                <span className={`dot ${s.connected ? 'dot--on' : 'dot--off'}`} />
-                <strong>{s.name}</strong>
-                <span>{s.deckName ? `deck: ${s.deckName}` : 'no deck yet'}</span>
-                <span>{s.ready ? 'ready' : 'not ready'}</span>
-              </li>
-            ))}
-          </ul>
-          {game.lobby && game.lobby.spectators > 0 && <p>{game.lobby.spectators} spectating</p>}
-          <p className="lobby__todo">
-            Deck submission lands with the deck builder — until then, load a deck with the server's
-            <code> loadDeck </code> action.
-          </p>
-        </main>
+        <>
+          <section className="lobby lobby--strip">
+            <h2>Room {game.roomCode}</h2>
+            <ul className="lobby__seats">
+              {(game.lobby?.seats ?? []).map((s) => (
+                <li key={s.idx} className={s.ready ? 'ready' : ''}>
+                  <span className={`dot ${s.connected ? 'dot--on' : 'dot--off'}`} />
+                  <strong>{s.name}</strong>
+                  <span>{s.deckName ? `deck: ${s.deckName}` : 'no deck yet'}</span>
+                  <span>{s.ready ? 'ready' : 'not ready'}</span>
+                </li>
+              ))}
+            </ul>
+            {game.lobby && game.lobby.spectators > 0 && <p>{game.lobby.spectators} spectating</p>}
+          </section>
+          <DeckBuilder
+            cards={game.cards}
+            db={game.db}
+            seat={game.seat}
+            ready={mySeat?.ready ?? false}
+            {...(mySeat?.deckName ? { submittedName: mySeat.deckName } : {})}
+            onSubmit={(deck) => game.seat !== null && game.send({ type: 'loadDeck', playerIdx: game.seat, deck })}
+            onReady={() => game.seat !== null && game.send({ type: 'setReady', playerIdx: game.seat })}
+          />
+        </>
       )}
 
       {game.errors.length > 0 && (

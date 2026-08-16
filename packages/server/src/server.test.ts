@@ -5,14 +5,14 @@ import type { Action, ActionWithMeta, DeckList, GameState, LobbyView, ServerMess
 import { mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { getPatTable, PLACEHOLDER_PAT, type EngineCard, type PatTable } from '@dbz/engine';
+import { getPatTable, MIN_DECK_SIZE, PLACEHOLDER_PAT, validateDeck, type EngineCard, type PatTable } from '@dbz/engine';
 import { WebSocket } from 'ws';
 import { startServer } from './index.js';
 import { findDataDir, loadCatalog } from './catalog.js';
 import { loadPatTable, validatePatTable } from './pat.js';
 import { Hub, normalizeCode } from './hub.js';
 import { Room, type RoomClient } from './room.js';
-import { MIN_DECK_SIZE, validateDeck } from './decks.js';
+
 import { viewFor } from './redact.js';
 
 const catalog = loadCatalog();

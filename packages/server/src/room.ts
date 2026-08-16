@@ -18,9 +18,8 @@ import type {
   LobbyView,
   ServerMessage,
 } from '@dbz/shared';
-import { createGame, reduce, type CardDb } from '@dbz/engine';
+import { createGame, reduce, validateDeck, type CardDb, type DeckValidationOptions } from '@dbz/engine';
 import { viewFor } from './redact.js';
-import { validateDeck, type DeckValidationOptions } from './decks.js';
 
 export const SEAT_COUNT = 2;
 
@@ -164,9 +163,9 @@ export class Room {
     if (!this.started) {
       switch (action.type) {
         case 'loadDeck':
-          return this.loadDeck(seatIdx, action.deck, reject);
+          return this.loadDeck(seatIdx, action.deck, reject, action.clientActionId);
         case 'setReady':
-          return this.setReady(seatIdx, reject);
+          return this.setReady(seatIdx, reject, action.clientActionId);
         default:
           return reject('game has not started');
       }
@@ -183,30 +182,30 @@ export class Room {
     this.broadcast(result.events, action.clientActionId);
   }
 
-  private loadDeck(seatIdx: number, deck: DeckList, reject: (m: string) => void): void {
+  private loadDeck(seatIdx: number, deck: DeckList, reject: (m: string) => void, clientActionId?: string): void {
     const seat = this.seats[seatIdx];
     if (!seat) return reject('no seat');
     const errors = validateDeck(deck, this.db, this.deckRules);
     if (errors.length) return reject(`illegal deck: ${errors.join('; ')}`);
     seat.deck = deck;
     seat.ready = false; // a new deck un-readies you
-    this.broadcast();
+    this.broadcast([], clientActionId);
   }
 
-  private setReady(seatIdx: number, reject: (m: string) => void): void {
+  private setReady(seatIdx: number, reject: (m: string) => void, clientActionId?: string): void {
     const seat = this.seats[seatIdx];
     if (!seat) return reject('no seat');
     if (!seat.deck) return reject('load a deck first');
     seat.ready = true;
-    if (this.seats.every((s) => s?.ready && s.deck)) this.start();
-    else this.broadcast();
+    if (this.seats.every((s) => s?.ready && s.deck)) this.start(clientActionId);
+    else this.broadcast([], clientActionId);
   }
 
-  private start(): void {
+  private start(clientActionId?: string): void {
     const players = this.seats.map((s) => ({ name: s!.name, deck: s!.deck! }));
     this.state = createGame({ seed: this.seed, players }, this.db);
     this.syncConnected();
-    this.broadcast();
+    this.broadcast([], clientActionId);
   }
 
   // ---- outbound ----
@@ -243,7 +242,11 @@ export class Room {
 
   private sendTo(client: RoomClient, seatIdx: number | null, events: GameEvent[], clientActionId?: string): void {
     if (!this.state) {
-      client.send({ kind: 'lobby', lobby: this.lobbyView() });
+      client.send({
+        kind: 'lobby',
+        lobby: this.lobbyView(),
+        ...(clientActionId ? { clientActionId } : {}),
+      });
       return;
     }
     client.send({
