@@ -8,7 +8,7 @@
  */
 import { useMemo, useState } from 'react';
 import type { DeckList } from '@dbz/shared';
-import { CardDb, MAX_DECK_SIZE, MIN_DECK_SIZE, validateDeck, type EngineCard } from '@dbz/engine';
+import { CardDb, checkTokuiWaza, MAX_DECK_SIZE, MIN_DECK_SIZE, validateDeck, type EngineCard } from '@dbz/engine';
 
 export interface DeckBuilderProps {
   cards: EngineCard[];
@@ -56,6 +56,7 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
   const [deckName, setDeckName] = useState('My Deck');
   const [mpKey, setMpKey] = useState('');
   const [mpDepth, setMpDepth] = useState(3);
+  const [masteryId, setMasteryId] = useState('');
   const [lines, setLines] = useState<Line[]>([]);
   const [q, setQ] = useState('');
 
@@ -67,15 +68,24 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
     () => ({
       name: deckName,
       mpLevels: mp ? mp.levels.slice(0, mpDepth).map((c) => c.id) : [],
+      ...(masteryId ? { masteryId } : {}),
       life: lines.filter((l) => l.qty > 0),
     }),
-    [deckName, mp, mpDepth, lines],
+    [deckName, mp, mpDepth, masteryId, lines],
   );
 
   const lifeCount = lines.reduce((n, l) => n + l.qty, 0);
-  const total = deck.mpLevels.length + lifeCount;
+  const total = deck.mpLevels.length + lifeCount + (masteryId ? 1 : 0);
   const errors = useMemo(() => (db ? validateDeck(deck, db) : ['catalog still loading']), [deck, db]);
   const legal = errors.length === 0;
+
+  const masteries = useMemo(() => cards.filter((c) => c.rules?.type === 'Mastery'), [cards]);
+  /** Live Tokui-Waza read-out: declaring one is what grants +1 PUR. */
+  const tokui = useMemo(() => {
+    if (!db || !masteryId) return null;
+    const all = [...deck.mpLevels, ...deck.life.map((l) => l.cardId)];
+    return checkTokuiWaza(masteryId, all, db);
+  }, [db, masteryId, deck]);
 
   const pool = useMemo(() => {
     const needle = q.trim().toLowerCase();
@@ -98,12 +108,17 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
   const autoFill = () => {
     if (!mp) return;
     const chosen = new Map(lines.map((l) => [l.cardId, l.qty]));
-    let need = MIN_DECK_SIZE - deck.mpLevels.length - lifeCount;
+    let need = MIN_DECK_SIZE - deck.mpLevels.length - lifeCount - (masteryId ? 1 : 0);
     for (const c of cards) {
       if (need <= 0) break;
       if (c.rules?.personality) continue;
       if (/dragon ball/i.test(c.name)) continue; // limit 1 each; skip for the quick fill
       if (c.name.toLowerCase().includes(mp.name.toLowerCase())) continue; // named-card limits
+      // Respect the declared Tokui-Waza: off-style cards would make it illegal.
+      if (masteryId && db) {
+        const mStyle = db.get(masteryId)?.style ?? null;
+        if (c.style && c.style !== mStyle) continue;
+      }
       const have = chosen.get(c.id) ?? 0;
       const add = Math.min(3 - have, need);
       if (add <= 0) continue;
@@ -136,6 +151,24 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
             ))}
           </select>
         </label>
+        <label>
+          Mastery (optional — declares a Tokui-Waza, +1 PUR)
+          <select value={masteryId} onChange={(e) => setMasteryId(e.target.value)}>
+            <option value="">— none —</option>
+            {masteries.map((m) => (
+              <option key={m.id} value={m.id}>
+                {m.name} [{m.saga}]{m.style ? ` · ${m.style}` : ' · Freestyle'}
+              </option>
+            ))}
+          </select>
+        </label>
+        {tokui && (
+          <p className={tokui.errors.length ? 'tokui tokui--bad' : 'tokui tokui--ok'}>
+            {tokui.errors.length
+              ? `Tokui-Waza illegal: ${tokui.errors[0]}`
+              : `${tokui.style ?? 'Freestyle'} Tokui-Waza declared — Main Personality gains +1 PUR.`}
+          </p>
+        )}
         {mp && (
           <label>
             Levels ({mpDepth})

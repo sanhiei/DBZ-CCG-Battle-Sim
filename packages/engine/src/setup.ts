@@ -11,6 +11,7 @@ import type {
 import type { CardDb } from './loader.js';
 import { makeRng, shuffle, type Rng } from './rng.js';
 import { bracketOf, isZ } from './pat.js';
+import { checkTokuiWaza } from './mastery.js';
 
 /** Power stages above 0 where scouters start (CRD setup step 3). */
 export const START_STAGES_ABOVE_ZERO = 5;
@@ -77,8 +78,23 @@ function buildPlayer(idx: number, name: string, deck: DeckList, db: CardDb, rng:
     dragonBalls: [],
     ready: true,
   };
-  if (deck.masteryId) player.masteryCardId = deck.masteryId;
-  if (deck.senseiId) player.senseiCardId = deck.senseiId;
+  if (deck.masteryId) {
+    player.masteryCardId = deck.masteryId;
+    // A Mastery is on the table before the game begins (CRD ~L68), and playing
+    // it IS the Tokui-Waza declaration (setup step 2).
+    zones.inPlay.push(instance(deck.masteryId, false));
+    const all = [...deck.mpLevels, ...deck.life.map((l) => l.cardId), ...(deck.senseiDeck ?? []).map((l) => l.cardId)];
+    const tw = checkTokuiWaza(deck.masteryId, all, db);
+    if (tw.errors.length === 0) {
+      // Freestyle Tokui-Waza has no Style; the declaration still stands.
+      if (tw.style) player.tokuiWaza = tw.style;
+      player.tokuiWazaDeclared = true;
+    }
+  }
+  if (deck.senseiId) {
+    player.senseiCardId = deck.senseiId;
+    zones.sensei.push(instance(deck.senseiId, false));
+  }
   return player;
 }
 

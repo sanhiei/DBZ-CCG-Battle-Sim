@@ -71,8 +71,14 @@ export interface PlayerState {
   connected: boolean;
   alignment: Alignment;
   style?: Style;
-  /** Declared Tokui-Waza style, if any. */
+  /** Declared Tokui-Waza style, if any. Absent for a Freestyle Tokui-Waza. */
   tokuiWaza?: Style;
+  /**
+   * True when a Tokui-Waza was declared at setup. Distinct from `tokuiWaza`
+   * because a Freestyle declaration grants the same +1 PUR and Endurance
+   * access without naming a Style.
+   */
+  tokuiWazaDeclared?: boolean;
   masteryCardId?: string;
   senseiCardId?: string;
   /** The Main Personality. */

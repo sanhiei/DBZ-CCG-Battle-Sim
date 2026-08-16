@@ -6,6 +6,7 @@
 import type { GameEvent, GameState, PersonalityInPlay, PowerRating, Step } from '@dbz/shared';
 import { STEPS } from '@dbz/shared';
 import type { CardDb } from './loader.js';
+import { TOKUI_WAZA_PUR_BONUS } from './mastery.js';
 
 export const ANGER_TO_ADVANCE = 5;
 
@@ -56,7 +57,10 @@ export function draw(state: GameState, playerIdx: number, n: number): void {
 function purOf(state: GameState, playerIdx: number, mp: PersonalityInPlay, db: CardDb): number {
   const cardId = mp.levelCardIds[mp.currentLevel - 1];
   const pur = cardId ? db.personality(cardId)?.pur : null;
-  return typeof pur === 'number' && pur > 0 ? pur : 1;
+  const base = typeof pur === 'number' && pur > 0 ? pur : 1;
+  // Declaring a Tokui-Waza grants +1 PUR for the remainder of the game (CRD ~L76).
+  const bonus = state.players[playerIdx]?.tokuiWazaDeclared ? TOKUI_WAZA_PUR_BONUS : 0;
+  return base + bonus;
 }
 
 export function currentRatings(p: PersonalityInPlay, db: CardDb): PowerRating[] {

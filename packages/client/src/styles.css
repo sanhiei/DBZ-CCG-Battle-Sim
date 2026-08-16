@@ -805,3 +805,17 @@ button.danger {
   border-color: var(--danger);
   color: var(--danger);
 }
+.tokui {
+  font-size: 12px;
+  margin: -4px 0 10px;
+  padding: 6px 8px;
+  border-radius: 5px;
+}
+.tokui--ok {
+  color: var(--ok);
+  border: 1px solid var(--ok);
+}
+.tokui--bad {
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}

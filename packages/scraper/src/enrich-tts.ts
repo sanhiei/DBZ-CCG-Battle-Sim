@@ -96,6 +96,14 @@ async function main(): Promise<void> {
     // a cross-saga name match cannot identify the print (vision proved this).
     return list.length === 1 && !list[0]!.isPersonality ? list[0] : undefined;
   };
+  const lackeyByIdStyle = new Map<string, string | null>();
+  const MARTIAL = new Set(['Red', 'Blue', 'Orange', 'Black', 'Saiyan', 'Namekian']);
+  const normalizeStyle = (raw: string | null | undefined): string | null => {
+    if (!raw) return null;
+    const first = raw.split('/')[0]!.trim();
+    const cased = first.charAt(0).toUpperCase() + first.slice(1).toLowerCase();
+    return MARTIAL.has(cased) ? cased : null;
+  };
   const simNorm = (t: string) => t.toLowerCase().replace(/[^a-z0-9+]/g, '');
   /** Cheap similarity: shared-trigram ratio. */
   const similar = (a: string, b: string): number => {
@@ -159,6 +167,7 @@ async function main(): Promise<void> {
       ?? lackeyLoose(c.name, rec?.level);
     if (lk) {
       matched++;
+      lackeyByIdStyle.set(c.id, lk.style);
       // Agreement: two independent transcriptions -> take the typed one, mark
       // verified. Disagreement: the card FACE (errata'd, most-recent wording)
       // outranks Lackey's original-printing text, which is kept as evidence —
@@ -266,7 +275,9 @@ async function main(): Promise<void> {
       id: c.id,
       number: null,
       name: c.name,
-      style: null,
+      // Style is a deck-construction rule (Tokui-Waza), so it is promoted to a
+      // top-level field. "Colorless"/"Named" are not Martial Arts styles.
+      style: normalizeStyle(lackeyByIdStyle.get(c.id)),
       saga: c.saga,
       rarity: 'Unknown',
       imageUrl: `images-tts/${c.id}.jpg`,

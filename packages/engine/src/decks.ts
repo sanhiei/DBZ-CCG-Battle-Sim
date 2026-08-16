@@ -9,12 +9,16 @@
  *    named cards matching the MP's name 4.
  *  - All Dragon Balls from a single set.
  *
- * Not yet enforced (needs catalog data we don't have): Namekian Tokui-Waza's
- * 90-card ceiling, Sensei Deck size limits (printed on the Sensei card), and
- * Tokui-Waza style matching.
+ *  - Tokui-Waza legality when a Mastery is present: every Styled card must
+ *    match the Mastery's style, plus at least one Martial Arts Styled card.
+ *
+ * Not yet enforced (needs catalog data we don't have): the Namekian
+ * Tokui-Waza 90-card ceiling and Sensei Deck size limits (printed on the
+ * Sensei card).
  */
 import type { DeckList } from '@dbz/shared';
 import type { CardDb, EngineCard } from './loader.js';
+import { checkTokuiWaza } from './mastery.js';
 
 export const MIN_DECK_SIZE = 50;
 export const MAX_DECK_SIZE = 85;
@@ -127,6 +131,12 @@ export function validateDeck(deck: DeckList, db: CardDb, opts: DeckValidationOpt
       .map((c) => c.saga),
   );
   if (ballSets.size > 1) errors.push(`Dragon Balls must all be from one set (found ${[...ballSets].join(', ')})`);
+
+  // --- Tokui-Waza: a Mastery may only be played with a legal declaration ---
+  if (deck.masteryId) {
+    const all = [...deck.mpLevels, ...deck.life.map((l) => l.cardId), ...(deck.senseiDeck ?? []).map((l) => l.cardId)];
+    errors.push(...checkTokuiWaza(deck.masteryId, all, db).errors);
+  }
 
   // --- Deck size (Sensei Deck cards do not count) ---
   const lifeCount = deck.life.reduce((n, e) => n + e.qty, 0);
