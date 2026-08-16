@@ -82,14 +82,18 @@ async function main(): Promise<void> {
   // snapping) when available — that is what the ability parser consumes.
   const enrichedPath = join(root, 'data', 'cards.tts.enriched.json');
   const enrichedText = new Map<string, string>();
+  interface EnrichedPersonality { level?: number; pur?: number | null; powerRatings?: Array<number | 'Z'> }
+  const enrichedPers = new Map<string, EnrichedPersonality>();
   try {
     const enriched = JSON.parse(await readFile(enrichedPath, 'utf8')) as Array<{
       name: string;
       saga: string;
-      rules?: { text?: string };
+      rules?: { text?: string; personality?: EnrichedPersonality };
     }>;
     for (const c of enriched) {
-      if (c.rules?.text) enrichedText.set(`${c.name.toLowerCase()}|${c.saga}`, c.rules.text);
+      const key = `${c.name.toLowerCase()}|${c.saga}`;
+      if (c.rules?.text) enrichedText.set(key, c.rules.text);
+      if (c.rules?.personality) enrichedPers.set(key, c.rules.personality);
     }
   } catch {
     /* enrichment not run yet — fall back to raw OCR text */
@@ -100,6 +104,10 @@ async function main(): Promise<void> {
   const level = tally();
   const pur = tally();
   const top = tally();
+  // Same fields scored against the MERGED catalog (what the engine consumes).
+  const mLevel = tally();
+  const mPur = tally();
+  const mTop = tally();
   const cers: Array<{ name: string; cer: number }> = [];
   let notFound = 0;
 
@@ -117,6 +125,13 @@ async function main(): Promise<void> {
       score(pur, truth.pur, rec.pur, 'pur', notes);
       const highest = rec.powerRatings?.filter((r): r is number => typeof r === 'number').at(-1);
       score(top, truth.topRating, highest, 'topRating', notes);
+      const merged = enrichedPers.get(`${truth.name.toLowerCase()}|${truth.saga}`);
+      if (merged) {
+        score(mLevel, truth.level, merged.level, 'merged.level', notes);
+        score(mPur, truth.pur, merged.pur ?? undefined, 'merged.pur', notes);
+        const mHighest = merged.powerRatings?.filter((r): r is number => typeof r === 'number').at(-1);
+        score(mTop, truth.topRating, mHighest, 'merged.topRating', notes);
+      }
     } else {
       score(type, truth.type, rec.type, 'type', notes);
     }
@@ -143,6 +158,10 @@ async function main(): Promise<void> {
   line('level', level);
   line('pur', pur);
   line('top rating', top);
+  console.log('  --- merged catalog (what the engine consumes) ---');
+  line('level', mLevel);
+  line('pur', mPur);
+  line('top rating', mTop);
   if (cers.length) {
     const avg = cers.reduce((s, c) => s + c.cer, 0) / cers.length;
     const worst = cers.reduce((a, b) => (b.cer > a.cer ? b : a));
