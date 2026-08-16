@@ -60,6 +60,36 @@ async function main(): Promise<void> {
   const templates: Template[] = existsSync(phrasesPath)
     ? (JSON.parse(await readFile(phrasesPath, 'utf8')) as { templates: Template[] }).templates
     : [];
+  // Lackey plugin: independent human-typed card data for triangulation.
+  const lackeyPath = join(dataDir, 'cards.lackey.json');
+  interface LackeyCard { name: string; saga: string; number: string; level: number | null; rarity: string; style: string | null; type: string; pur: number | null; text: string }
+  const lackey: LackeyCard[] = existsSync(lackeyPath) ? (JSON.parse(await readFile(lackeyPath, 'utf8')) as LackeyCard[]) : [];
+  const normName = (n: string) => n.toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
+  // Lackey prefixes styled card names with the style word ("Orange One Knuckle
+  // Punch"); index under both spellings.
+  const lackeyByKey = new Map<string, LackeyCard>();
+  for (const lc of lackey) {
+    const keys = [normName(lc.name)];
+    const bare = lc.style && normName(lc.name).startsWith(normName(lc.style) + ' ') ? normName(lc.name).slice(normName(lc.style).length + 1) : null;
+    if (bare) keys.push(bare);
+    for (const k of keys) {
+      const full = k + '|' + lc.saga + '|' + (lc.level ?? '');
+      if (!lackeyByKey.has(full)) lackeyByKey.set(full, lc);
+      const noLevel = k + '|' + lc.saga + '|';
+      if (!lackeyByKey.has(noLevel)) lackeyByKey.set(noLevel, lc);
+    }
+  }
+  const simNorm = (t: string) => t.toLowerCase().replace(/[^a-z0-9+]/g, '');
+  /** Cheap similarity: shared-trigram ratio. */
+  const similar = (a: string, b: string): number => {
+    const A = simNorm(a); const B = simNorm(b);
+    if (!A.length || !B.length) return 0;
+    const tri = (x: string) => { const s = new Set<string>(); for (let i = 0; i < x.length - 2; i++) s.add(x.slice(i, i + 3)); return s; };
+    const ta = tri(A); const tb = tri(B);
+    let hit = 0; for (const t of ta) if (tb.has(t)) hit++;
+    return hit / Math.max(ta.size, tb.size, 1);
+  };
+  let matched = 0; let verified = 0;
   let snappedTotal = 0;
   let cardsSnapped = 0;
   const fixText = (raw: string): string => {
@@ -84,22 +114,50 @@ async function main(): Promise<void> {
     const type = rec?.isPersonality ? 'Personality' : rec?.type ?? 'Unknown';
 
     const rules: Record<string, unknown> = { type, coverage: 'unknown', needsReview };
-    if (rec?.text) rules.text = fixText(rec.text);
+    const ocrText = rec?.text ? fixText(rec.text) : undefined;
+    if (ocrText) rules.text = ocrText;
     if (c.errata) rules.errata = c.errata;
 
-    if (rec?.isPersonality) {
+    // Triangulate with the Lackey database (matched by name+saga, +level for
+    // personalities). Typed text supersedes OCR; agreement between the two
+    // independent transcriptions marks the text verified.
+    const lk = lackeyByKey.get(normName(c.name) + '|' + c.saga + '|' + (rec?.level ?? '')) ?? lackeyByKey.get(normName(c.name) + '|' + c.saga + '|');
+    if (lk) {
+      matched++;
+      // Agreement: two independent transcriptions -> take the typed one, mark
+      // verified. Disagreement: the card FACE (errata'd, most-recent wording)
+      // outranks Lackey's original-printing text, which is kept as evidence —
+      // Saiyan Truce Card's errata rewrite showed why this must not be a
+      // blind replacement.
+      const sim = ocrText ? similar(lk.text, ocrText) : 0;
+      if (sim >= 0.55) {
+        verified++;
+        rules.text = lk.text;
+        rules.textVerified = true;
+      } else {
+        rules.textOriginal = lk.text;
+        if (ocrText) needsReview.push('textDisagreement');
+        else rules.text = lk.text; // no OCR at all -> typed text beats nothing
+      }
+      if (lk.type) rules.type = lk.type;
+      rules.lackey = { number: lk.number, rarity: lk.rarity, style: lk.style, ...(lk.pur != null ? { pur: lk.pur } : {}), ...(lk.level != null ? { level: lk.level } : {}) };
+    }
+    const effType = (rules.type as string) ?? type;
+
+    if (rec?.isPersonality || (lk && lk.pur != null)) {
       personalities++;
       const personality: Record<string, unknown> = {
         personalityName: c.name,
         // Alignment is not printed as text; needs the hero/villain frame colour
         // or a curated list. Rogue is the CRD's explicit "neither" bucket.
         alignment: 'Rogue',
-        powerRatings: rec.powerRatings ?? [],
+        powerRatings: rec?.powerRatings ?? [],
         zeroStageIndex: 0,
-        pur: rec.pur ?? null,
+        pur: (lk?.pur ?? rec?.pur) ?? null,
         canBeAlly: true,
       };
-      if (rec.level !== undefined) personality.level = rec.level;
+      const lvl = lk?.level ?? rec?.level;
+      if (lvl !== undefined && lvl !== null) personality.level = lvl;
       else needsReview.push('level');
       if (!needsReview.includes('alignment')) needsReview.push('alignment');
       rules.personality = personality;
@@ -107,8 +165,8 @@ async function main(): Promise<void> {
 
     // Parse abilities off the rules text. The parser is conservative: cards it
     // cannot confidently read stay manual.
-    if (rec?.text && type !== 'Personality') {
-      const ability = parseAbility((rules.text as string | undefined) ?? rec.text, type);
+    if (rules.text && (rules.type ?? type) !== 'Personality') {
+      const ability = parseAbility(rules.text as string, (rules.type as string) ?? type);
       if (ability) {
         rules.abilities = [ability];
         withAbilities++;
@@ -144,6 +202,7 @@ async function main(): Promise<void> {
   console.log(`[enrich-tts] coverage: ${JSON.stringify(coverage)}`);
   console.log(`[enrich-tts] effect kinds: ${JSON.stringify(effectKinds)}`);
   console.log(`[enrich-tts] template snaps: ${snappedTotal} sentences on ${cardsSnapped} cards (${templates.length} templates)`);
+  console.log(`[enrich-tts] lackey: ${lackey.length} cards loaded, ${matched} matched, ${verified} text-verified by OCR agreement`);
 }
 
 main().catch((e: unknown) => {

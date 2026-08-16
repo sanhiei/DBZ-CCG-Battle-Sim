@@ -60,6 +60,30 @@ The first two joiners take the seats, everyone after spectates, and the `token` 
 `session` message reclaims a seat after a disconnect. Environment: `PORT`, `HOST`,
 `DBZ_DATA_DIR`, and `DBZ_ALLOW_SMALL_DECKS=1` to relax the 50-card minimum while testing.
 
+## Credits & data sources
+
+This project would not exist without the retro DBZ CCG community. Card data is
+built by combining, cross-checking, and crediting these sources:
+
+- **[retrodbzccg.com](https://retrodbzccg.com)** — the community archive whose
+  card galleries seeded the original catalog and images, and whose site hosts
+  the Comprehensive Rules Document this engine implements as law.
+- **"Dragon Ball Z Score CCG - All Sagas (Errata on Cards)"**
+  ([Steam Workshop 2132906085](https://steamcommunity.com/sharedfiles/filedetails/?id=2132906085))
+  — a decade of restoration work by its author: the high-resolution card scans
+  (with current errata printed on the faces), per-card ruling notes, and the
+  scouter PAT scans transcribed in `data/pat/` all come from this mod.
+- **The [LackeyCCG DBZ plugin](https://lackeyccg.com/dbzccg/)** — its
+  hand-typed database of 2,360 cards (names, sets, types, PUR, levels, and
+  original-printing rules text) is the independent transcription used to
+  verify our OCR: text is marked verified only when both sources agree.
+- **[Pojo.com's DBZ archives](https://www.pojo.com/pojos-score-dragon-ball-z-dbz-card-of-the-day-reviews/)**
+  and the era's fan sites, whose preservation work kept this game documented.
+
+If you are one of these maintainers and want different attribution (or
+removal), open an issue — this is a non-commercial fan project and your work
+is the reason it can exist.
+
 ## Legal / attribution
 
 Dragon Ball Z, the DBZ CCG, and all card art are the property of their respective rights holders (Toei/Bird Studio; Score Entertainment / Panini). Card images are sourced from the community archive at retrodbzccg.com. This is a non-commercial fan simulator for playing cards you own.
