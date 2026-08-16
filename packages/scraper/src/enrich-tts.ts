@@ -90,9 +90,11 @@ async function main(): Promise<void> {
     const list = lackeyByName.get(normName(name)) ?? [];
     if (level !== undefined) {
       const atLevel = list.filter((x) => x.level === level);
-      if (atLevel.length === 1) return atLevel[0];
+      if (atLevel.length === 1 && !atLevel[0]!.isPersonality) return atLevel[0];
     }
-    return list.length === 1 ? list[0] : undefined;
+    // Personalities exist as multiple distinct prints with different ladders;
+    // a cross-saga name match cannot identify the print (vision proved this).
+    return list.length === 1 && !list[0]!.isPersonality ? list[0] : undefined;
   };
   const simNorm = (t: string) => t.toLowerCase().replace(/[^a-z0-9+]/g, '');
   /** Cheap similarity: shared-trigram ratio. */
@@ -104,7 +106,23 @@ async function main(): Promise<void> {
     let hit = 0; for (const t of ta) if (tb.has(t)) hit++;
     return hit / Math.max(ta.size, tb.size, 1);
   };
-  let matched = 0; let verified = 0; let laddersVerified = 0;
+  // Vision fleet readings of the card faces (see the vision-card-extraction
+  // workflow): the printed face outranks every transcription of it.
+  interface VisionCard { id: string; isPersonality?: boolean; ladder?: string[]; level?: number; pur?: number; alignment?: string; text?: string; confidence: string; doubleRead?: boolean }
+  const visionPath = join(dataDir, 'vision.tts.json');
+  const visionById = new Map<string, VisionCard>();
+  if (existsSync(visionPath)) {
+    for (const v of (JSON.parse(await readFile(visionPath, 'utf8')) as { cards: VisionCard[] }).cards) {
+      if (v.confidence !== 'low') visionById.set(v.id, v);
+    }
+  }
+  const visionLadder = (v: VisionCard): Array<number | 'Z'> | null => {
+    if (!v.ladder || v.ladder.length < 6) return null;
+    const out = v.ladder.map((r) => (/^z$/i.test(r) ? ('Z' as const) : Number(String(r).replace(/[^0-9]/g, ''))));
+    if (out.some((x) => typeof x === 'number' && !Number.isFinite(x))) return null;
+    return out;
+  };
+  let matched = 0; let verified = 0; let laddersVerified = 0; let visionApplied = 0;
   let snappedTotal = 0;
   let cardsSnapped = 0;
   const fixText = (raw: string): string => {
@@ -159,9 +177,19 @@ async function main(): Promise<void> {
       if (lk.type) rules.type = lk.type;
       rules.lackey = { number: lk.number, rarity: lk.rarity, style: lk.style, ...(lk.pur != null ? { pur: lk.pur } : {}), ...(lk.level != null ? { level: lk.level } : {}) };
     }
+    const vis = visionById.get(c.id);
+    if (vis) {
+      visionApplied++;
+      if (vis.text && vis.text.length >= 12) {
+        rules.text = vis.text;
+        rules.textVerified = 'vision';
+        const ix = needsReview.indexOf('textDisagreement'); if (ix !== -1) needsReview.splice(ix, 1);
+        const tx = needsReview.indexOf('text'); if (tx !== -1) needsReview.splice(tx, 1);
+      }
+    }
     const effType = (rules.type as string) ?? type;
 
-    if (rec?.isPersonality || lk?.isPersonality) {
+    if (rec?.isPersonality || lk?.isPersonality || vis?.isPersonality) {
       personalities++;
       const personality: Record<string, unknown> = {
         personalityName: c.name,
@@ -191,6 +219,19 @@ async function main(): Promise<void> {
       const lvl = lk?.level ?? rec?.level;
       if (lvl !== undefined && lvl !== null) personality.level = lvl;
       else needsReview.push('level');
+      // The face is final: vision readings override on the fields they cover.
+      if (vis) {
+        const vl = visionLadder(vis);
+        if (vl && (needsReview.includes('ladderDisagreement') || !(lk?.ladder?.length))) {
+          personality.powerRatings = vl;
+          personality.ladderVerified = vis.doubleRead ? 'double-read' : 'vision';
+          const ix = needsReview.indexOf('ladderDisagreement'); if (ix !== -1) needsReview.splice(ix, 1);
+          const px = needsReview.indexOf('powerRatings'); if (px !== -1) needsReview.splice(px, 1);
+        }
+        if (vis.level !== undefined) { personality.level = vis.level; const ix = needsReview.indexOf('level'); if (ix !== -1) needsReview.splice(ix, 1); }
+        if (vis.pur !== undefined) personality.pur = vis.pur;
+        if (vis.alignment && vis.alignment !== 'unknown') { personality.alignment = vis.alignment; const ix = needsReview.indexOf('alignment'); if (ix !== -1) needsReview.splice(ix, 1); }
+      }
       rules.personality = personality;
     }
 
@@ -235,6 +276,7 @@ async function main(): Promise<void> {
   console.log(`[enrich-tts] template snaps: ${snappedTotal} sentences on ${cardsSnapped} cards (${templates.length} templates)`);
   console.log(`[enrich-tts] lackey: ${lackey.length} cards loaded, ${matched} matched, ${verified} text-verified by OCR agreement`);
   console.log(`[enrich-tts] ladders verified (typed vs OCR agreement): ${laddersVerified}`);
+  console.log(`[enrich-tts] vision readings applied: ${visionApplied}`);
 }
 
 main().catch((e: unknown) => {
