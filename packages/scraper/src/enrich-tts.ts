@@ -159,14 +159,21 @@ async function main(): Promise<void> {
     let best = 0;
     for (const [g, n] of counts) if (n > best) { best = n; step = g; }
     if (step <= 0 || best < healthy.length - 1 || best < 3) return null;
-    const idx = breaks[0]!;
-    const expected = nums[idx - 1]! + step;
-    const next = nums[idx + 1];
-    if (next !== undefined && next - expected !== step) return null;
-    const out = nums.slice();
-    out[idx] = expected;
-    for (let i = 1; i < out.length; i++) if (out[i]! <= out[i - 1]!) return null;
-    return { ladder: out, from: nums[idx]!, to: expected };
+    // The break registers at the rung AFTER the bad value as often as at the
+    // bad value itself (a rung read too HIGH only trips the comparison on its
+    // successor), so try both and accept whichever yields a clean sequence.
+    for (const idx of [breaks[0]!, breaks[0]! - 1]) {
+      if (idx < 1 || idx >= nums.length) continue;
+      const expected = nums[idx - 1]! + step;
+      const next = nums[idx + 1];
+      if (next !== undefined && next - expected !== step) continue;
+      const out = nums.slice();
+      out[idx] = expected;
+      let clean = true;
+      for (let i = 1; i < out.length; i++) if (out[i]! <= out[i - 1]!) { clean = false; break; }
+      if (clean) return { ladder: out, from: nums[idx]!, to: expected };
+    }
+    return null;
   };
   let laddersRepaired = 0;
   /**

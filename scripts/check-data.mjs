@@ -35,6 +35,7 @@ if (catalogs.length === 0) fail('no cards.*.enriched.json committed — the serv
 let personalities = 0;
 let zeroRungBad = 0;
 let ladderTooShort = 0;
+let flatLadders = 0;
 
 for (const file of catalogs) {
   const cards = readJson(file);
@@ -61,18 +62,24 @@ for (const file of catalogs) {
     }
     if (ladder.length > 0 && ladder.length < 6) ladderTooShort++;
 
-    // Numeric rungs must strictly increase; 'Z' sits outside the ordering.
+    // A scouter never goes DOWN as it climbs — a decrease is always corruption.
+    // Flat rungs are merely unusual: the corpus includes unofficial fan-made
+    // cards ('Not Endorsed by Toei Animation') whose ladders genuinely repeat a
+    // value, and vision zoom-verified those. Warn, do not fail.
     const nums = ladder.filter((r) => typeof r === 'number');
+    let flat = false;
     for (let i = 1; i < nums.length; i++) {
-      if (nums[i] <= nums[i - 1]) {
-        fail(`${file}: ${c.name} ladder is not strictly increasing (${nums[i - 1]} -> ${nums[i]})`);
+      if (nums[i] < nums[i - 1]) {
+        fail(`${file}: ${c.name} ladder decreases (${nums[i - 1]} -> ${nums[i]})`);
         break;
       }
+      if (nums[i] === nums[i - 1]) flat = true;
     }
+    if (flat) flatLadders++;
   }
   note(`${file}: ${cards.length} cards`);
 }
-note(`${personalities} personalities; ${ladderTooShort} with a short ladder (flagged, not fatal)`);
+note(`${personalities} personalities; ${ladderTooShort} short ladder(s), ${flatLadders} with repeated rungs (both flagged, not fatal)`);
 
 /* ---------- Physical Attack Table ---------- */
 

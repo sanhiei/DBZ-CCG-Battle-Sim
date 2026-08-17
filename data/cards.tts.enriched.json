@@ -1285,7 +1285,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "0 a 0 = TF D AS E [DW T | A N w N [5 ky J JERE"
+      "text": "At the beginning of each player's turn, that player discards the top card from his Life Deck.",
+      "textVerified": "vision"
     }
   },
   {
@@ -1912,7 +1913,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "= 0 ” SN - 7 un"
+      "text": "Each player has his Main Personality's PUR reduced by 1.",
+      "textVerified": "vision"
     }
   },
   {
@@ -4431,8 +4433,31 @@
       "needsReview": [
         "type"
       ],
-      "text": "Nothing can raise Lowr anger » — except this Constant Combat Power.\nIf Android 13 is your Main Personality.\nyou mai remove 2 you control with \"In the title from the game to J advance a personality level.\nAll of your physical attacks do +3 power stages of damage.",
-      "errata": "Android 13’s ability to remove your Android Allies from the game to advance a personality level must be done during one of your “Attacker Attacks” phases."
+      "text": "Constant Combat Power: Nothing can raise your anger except this Constant Combat Power. If Android 13 is your Main Personality, you may remove 2 Allies you control with \"Android\" in the title from the game to advance a personality level. All of your physical attacks do +3 power stages of damage.",
+      "errata": "Android 13’s ability to remove your Android Allies from the game to advance a personality level must be done during one of your “Attacker Attacks” phases.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Android 13",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          1910000,
+          1920000,
+          1930000,
+          1940000,
+          1950000,
+          1960000,
+          1970000,
+          1980000,
+          1990000,
+          2000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -4597,11 +4622,49 @@
     "imageUrl": "images-tts/tts-30fb99ff-4.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
-      "text": "f=\" Energy life cards of F- damage.\nCosts 1 power stage to perform.\nIF you | have Android 14 in .\nplay, this attack does y be!\nan additional +4 life 5 Codsofdamage."
+      "text": "Energy attack doing 6 life cards of damage. Costs 1 power stage to perform. If you have Android 14 in play, this attack does an additional +4 life cards of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Android 15",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          1310000,
+          1320000,
+          1330000,
+          1340000,
+          1350000,
+          1360000,
+          1370000,
+          1380000,
+          1390000,
+          1400000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 1
+          }
+        }
+      ]
     }
   },
   {
@@ -5518,10 +5581,28 @@
     "imageUrl": "images-tts/tts-b77448ca-6.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type",
-        "text"
+        "type"
+      ],
+      "text": "Energy attack doing 5 life cards of damage. When you perform this attack, you may remove 3 Commons in your discard pile from the game to make this a focused attack and lower your opponent's anger 2 levels.",
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            }
+          ],
+          "source": "parsed"
+        }
       ]
     }
   },
@@ -6118,7 +6199,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "\\\\ ooo : Constant Combat Power: All Bohan Named cards in | your Life Deck that do not have Endurance gain 1.375.000 \\ Endurance 3.\n\\ lj J oooo | 2 AY / NAT 3 \\ zor"
+      "text": "Constant Combat Power: All Gohan Named cards in your Life Deck that do not have Endurance gain Endurance 3.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Gohan, Energized",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          1375000,
+          1400000,
+          1425000,
+          1450000,
+          1475000,
+          1500000,
+          1525000,
+          1550000,
+          1575000,
+          1600000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -6201,7 +6305,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "POV/ER Oraw 2 cards.\nPlace the on bottom 2 cards of your discard pile on the bottom - \\ of Life Deck."
+      "text": "Draw 2 cards. Place the bottom 2 cards of your discard pile on the bottom of your Life Deck.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Goku, the Legendary",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          5100000,
+          5200000,
+          5300000,
+          5400000,
+          5500000,
+          5600000,
+          5700000,
+          5800000,
+          5900000,
+          6000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 5,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 5
+      }
     }
   },
   {
@@ -6717,7 +6844,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "| \\\\ 120 POWER Constant Combat Power: |!\n| Whenever your opponent uses a || card effect to discard any of your Allies.\nhe must discard this Ally before discarding any others.\nJewel does not Ji no | 2 ~1'| have to take over Combat"
+      "text": "Constant Combat Power: Whenever your opponent uses a card effect to discard any of your Allies, he must discard this Ally before discarding any others. Jewel does not have to take over Combat to use this power.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Jewel",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          100,
+          110,
+          120,
+          130,
+          140,
+          150,
+          160,
+          170,
+          180,
+          190
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -6758,7 +6908,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "RANA / POV/ER \\ # Evi Menace: Search your Life i = > 7 Deck for a Majin and place it play at 3 power stages above your anger 1 level oooo CNY"
+      "text": "Evil Menace: Search your Life Deck for a Majin and place it into play at 3 power stages above 0. Raise your anger 1 level.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Babidi",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          220000,
+          240000,
+          260000,
+          280000,
+          300000,
+          320000,
+          340000,
+          360000,
+          380000,
+          400000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -6927,7 +7100,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "guy - | / POWER Constant Combat Power: 1,400,000 When entering Combat, you may UL 71 J | reveal any number of cards that perform physical attacks in your hand to all players.\nFor the remainder of 1.200,000 « [Combat all of your physical | | attacks do + 3 power stages of damage Al for each card \\ revealed from"
+      "text": "Constant Combat Power: When entering Combat, you may reveal any number of cards that perform physical attacks in your hand to all players. For the remainder of Combat all of your physical attacks do + 3 power stages of damage for each card revealed from your hand.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Dabura, King of Fighting",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          1200000,
+          1400000,
+          1600000,
+          1800000,
+          2000000,
+          2200000,
+          2400000,
+          2600000,
+          2800000,
+          3000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -6944,7 +7140,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Constant Combat Power: 2,100,000 All of your attacks do +1 life cards of damage for each card you have drawn this turn."
+      "text": "Constant Combat Power: All of your attacks do +1 life cards of damage for each card you have drawn this turn.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Dabura, Meditated",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          1850000,
+          2100000,
+          2350000,
+          2600000,
+          2850000,
+          3100000,
+          3350000,
+          3600000,
+          3850000,
+          4100000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -7379,7 +7598,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "360.000 PO\\YER \\ Constant Combat Power: 1.840.000 |} When entering Combat."
+      "text": "Constant Combat Power: When entering Combat, search your Life Deck for any non-personality card with \"Majin\" in the title and place it into your hand.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Vegeta, the Evil",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          1720000,
+          1840000,
+          1960000,
+          2080000,
+          2200000,
+          2320000,
+          2440000,
+          2560000,
+          2680000,
+          2800000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -7428,7 +7670,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Constant Combat Power: 4.380.000 All physical attacks you | perform with In the title — do -3 power stages of 4.315,000 7 tomage and are | 7 focused attacks.\n0000 7 of Ie []"
+      "text": "Constant Combat Power: All physical attacks you perform with \"Majin\" in the title do +3 power stages of damage and are focused attacks.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Vegeta, the Malicious",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          4315000,
+          4380000,
+          4445000,
+          4610000,
+          4675000,
+          4740000,
+          4805000,
+          4870000,
+          4935000,
+          5000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 5,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 4
+      }
     }
   },
   {
@@ -7550,7 +7815,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "(X=Your opponents MP's printed PUR.) 1 POWER Combat |} Power: All of your focused attacks do +2 life cards of damage “If — 4 and gain | successful.\nralse your 9 0ooo anger 1 level."
+      "text": "[X=Your opponent's MP's printed PUR.] Constant Combat Power: All of your focused attacks do +2 life cards of damage and gain \"If successful, raise your anger 1 level.\"",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Yakon",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          355000,
+          360000,
+          365000,
+          370000,
+          375000,
+          380000,
+          385000,
+          390000,
+          395000,
+          400000
+        ],
+        "zeroStageIndex": 0,
+        "pur": null,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -7567,7 +7855,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "4 hy !\nA / AV (X=Your opponent's MP's printed PLR.) ER Combat Pover: When entering Combat, choose 3 cards that can perform focused attacks in 020.000 | RE) your discard pile and shuffle them back A into your Life Deck.\nFor each card you shuffle in this way, Majin Yakon gains 1 power stage."
+      "text": "[X=Your opponent's MP's printed PUR.] Constant Combat Power: When entering Combat, choose 3 cards that can perform focused attacks in your discard pile and shuffle them back into your Life Deck. For each card you shuffle in this way, Majin Yakon gains 1 power stage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Yakon, the Absorber",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          1020000,
+          1040000,
+          1060000,
+          1080000,
+          1100000,
+          1120000,
+          1140000,
+          1160000,
+          1180000,
+          1200000
+        ],
+        "zeroStageIndex": 0,
+        "pur": null,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -9440,7 +9751,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Constant Combat Power: || | After drawing your cards during || the \"Defender Oraws 3 Cards” | phase.\nyou may shuffle your hand into your Life Deck and draw the same | Oooo | amount of cards into (18 ~ Wour hand.\n/ - aor 7"
+      "text": "Constant Combat Power: After drawing your cards during the \"Defender Draws 3 Cards\" phase, you may shuffle your hand into your Life Deck and draw the same amount of cards into your hand.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Supreme Kai, the Mentor",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z"
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -9741,7 +10075,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "(Bee does not have to be in control — of to use ths [orstant wi Powen Main Buu may ply Bee as an Aly.) Constant Combat Power: If Majin Buu is a Main x Personality.\nMajin Buu's anger cannot be raised or lowered."
+      "text": "(Bee does not have to be in control of Combat to use this Constant Combat Power. Majin Buu may play Bee as an Ally.) Constant Combat Power: If Majin Buu is a Main Personality, Majin Buu's anger cannot be raised or lowered.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Bee",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "zeroStageIndex": 0,
+        "pur": 0,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -10868,7 +11225,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Lombat When entering Combat and the top card of discard pile is Saiyan our a card.\nyou may remove it from the game to raise your anger 2 levels, nd fc remainder of Combat all = attacks you perform do +2 stages damage."
+      "text": "Constant Combat Power: When entering Combat and the top card of your discard pile is a Saiyan Style card, you may remove it from the game to raise your anger 2 levels, and for the remainder of Combat all physical attacks you perform do +2 power stages of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Broly, the Enraged Saiyan",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          2620000,
+          2640000,
+          2660000,
+          2680000,
+          2700000,
+          2720000,
+          2740000,
+          2760000,
+          2780000,
+          2800000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -10885,7 +11265,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Nv p= A : \\ Ne 84 EA This may only be Der [a T Shuffle the top | cards In discard jue your 0 your Life Deck."
+      "text": "This power may only be used once per game. Shuffle the top 15 Saiyan Style cards in your discard pile back into your Life Deck.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Broly, the Legendary Saiyan",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          5120000,
+          5140000,
+          5160000,
+          5180000,
+          5200000,
+          5220000,
+          5240000,
+          5260000,
+          5280000,
+          5300000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 5,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 4
+      }
     }
   },
   {
@@ -10902,7 +11305,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "> istant Combat entering Combat = a card in your hand.\nIf =m the remainder of Combat = Ue attacks your Broly"
+      "text": "Constant Combat Power: When entering Combat you may discard a card in your hand. If you do, for the remainder of Combat any Saiyan Style attacks your Broly performs are focused attacks.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Broly, the Unstoppable",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          6320000,
+          6340000,
+          6360000,
+          6380000,
+          6400000,
+          6420000,
+          6440000,
+          6460000,
+          6480000,
+          6500000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 7,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 5
+      }
     }
   },
   {
@@ -11150,11 +11576,23 @@
     "imageUrl": "images-tts/tts-6a69cdcc-19.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
-      "text": "attack.\nChoose a rarity.\nFor the remainder f Combat, all cards in your discard pile are ow of the chosen rarity while in your iscard pile."
+      "text": "Physical attack. Choose a rarity. For the remainder of Combat, all cards in your discard pile are now of the chosen rarity while in your discard pile.",
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -12012,7 +12450,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "J Lfonstant Combat Power: = When entering Combat 10,000 you may remove 7 Saiyan Style cards in your discard pile from the game to raise your anger b levels."
+      "text": "Constant Combat Power: When entering Combat you may remove 7 Saiyan Style cards in your discard pile from the game to raise your anger 6 levels. All of your physical attacks do +1 life cards of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Goku",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          1125000,
+          1200000,
+          1275000,
+          1350000,
+          1425000,
+          1500000,
+          1575000,
+          1650000,
+          1725000,
+          1800000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -12099,7 +12560,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "- = joo Power: Physical attack doing +5 power of damage.\nIf the top card of your | discard pile is a boku Named card.\nthis IS a focused attack and lowers your Opponents anger 3 levels."
+      "text": "Power: Physical attack doing +5 power stages of damage. If the top card of your discard pile is a Goku Named card, this is a focused attack and lowers your opponent's anger 3 levels.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Goku, Super Saiyan 2",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          3545000,
+          3590000,
+          3635000,
+          3680000,
+          3725000,
+          3770000,
+          3815000,
+          3860000,
+          3905000,
+          3950000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -12116,7 +12600,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "6.025, = WN Constant Combat Power: AL the beginning of every turn choose 2 of your boku's lower personality levels.\nFor the remainder of that turn.\nBoku has the Powers and Lonstant Combat Powers of the AL \\ | A= I'm that so much longer than AY the others but | havent hed much"
+      "text": "Constant Combat Power: At the beginning of every turn choose 2 of your Goku's lower personality levels. For the remainder of that turn, Goku has the Powers and Constant Combat Powers of the chosen 2 levels.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Goku, Super Saiyan 3",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          6025000,
+          6100000,
+          6175000,
+          6250000,
+          6325000,
+          6400000,
+          6475000,
+          6550000,
+          6625000,
+          6700000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 6,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 5
+      }
     }
   },
   {
@@ -12133,7 +12640,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "-x — 4,740,000 Constant Combat Power: — All of your Saiyan Style cards that do not themselves from the game after use are placed at the bottom of your Life : Ueck after All of Saiyan use.\nyour / 4 Style attacks do an additional (0) «2 life cards of damage.\nof a for uso how."
+      "text": "Constant Combat Power: All of your Non-Drill Saiyan Style cards that do not remove themselves from the game after use are placed at the bottom of your Life Deck after use. All of your Saiyan Style attacks do an additional +2 life cards of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Goku, Super Saiyan Ascended",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          4740000,
+          4780000,
+          4820000,
+          4860000,
+          4900000,
+          4940000,
+          4980000,
+          5020000,
+          5060000,
+          5100000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 4
+      }
     }
   },
   {
@@ -12941,7 +13471,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "| ooo 640.000 Power: Focused energy attack doing 3 life cards of damage.\nIf successful, all of your energy attacks do +2 life cards of damage for the remainder \\ of Combat.\n: Main P lity Onl 7 R (Main Personality Only)"
+      "text": "Power: Focused energy attack doing 3 life cards of damage. If successful, all of your energy attacks do +2 life cards of damage for the remainder of Combat. (Main Personality Only)",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Kid Trunks",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          640000,
+          680000,
+          720000,
+          760000,
+          800000,
+          840000,
+          880000,
+          920000,
+          960000,
+          1000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -13084,7 +13637,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "A does not have to be in —_ control to use this Constant / Lornmbat Power:) Constant Combat Power: During your Power Up Step.\nyour gain an amount 3 of power stages equal their Lh PUR instead of 1."
+      "text": "(Korin does not have to be in control to use this Constant Combat Power.) Constant Combat Power: During your Power Up Step, your Allies gain an amount of power stages equal their PUR instead of 1.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Korin",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          27,
+          31,
+          32,
+          35,
+          37,
+          41,
+          42,
+          43,
+          44,
+          69
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -13199,7 +13775,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "0 220.000 o Combat Power: 00.000 When entering Combat, you may discard the top 2 cards of your Life Deck.\nIf you do, for the remainder of that Combat you may discard a card from your hand during your \"Attacker phase to have one of your Allies take over Combat until the beginning of your next \"Attacker Attacks\" phase."
+      "text": "Constant Combat Power: When entering Combat, you may discard the top 2 cards of your Life Deck. If you do, for the remainder of that Combat you may discard a card from your hand during your \"Attacker Attacks\" phase to have one of your Allies take over Combat until the beginning of your next \"Attacker Attacks\" phase. (Main Personality Only)",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Babidi",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          220000,
+          240000,
+          260000,
+          280000,
+          300000,
+          320000,
+          340000,
+          360000,
+          380000,
+          400000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -13216,7 +13815,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "f a T \\/ 4 7 J 4 .\n7 a J] (Main Babid!\ndoes not have to be | 00,000 In control of Combat to use this \\ Lonstant Combat \\ oN = Constant Combat Power: NN \\!\nAll attacks your Allies NZ | | \\ 0 XZ perform do an additional +3 life cards of damage.\nA E L 3"
+      "text": "(Majin Babidi does not have to be in control of Combat to use this Constant Combat Power.) Constant Combat Power: All attacks your Allies perform do an additional +3 life cards of damage. (Main Personality Only)",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Babidi",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          365000,
+          380000,
+          395000,
+          410000,
+          425000,
+          440000,
+          455000,
+          470000,
+          485000,
+          500000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -13311,7 +13933,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "B=) Constant Combat Power: 4 When defending against an Neg gttack.\nyou may have one of your Alles take control of Combat until the beginning of your next \"Attacker phase.\neven if Majin Babidi Is 2 power stages TER above O or higher."
+      "text": "Constant Combat Power: When defending against an attack, you may have one of your Allies take control of Combat until the beginning of your next \"Attacker Attacks\" phase, even if Majin Babidi is 2 power stages above 0 or higher.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Babidi",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          220000,
+          240000,
+          260000,
+          280000,
+          300000,
+          320000,
+          340000,
+          360000,
+          380000,
+          400000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -13328,7 +13973,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "; nw L (Majin Babidl does not have to be In control of Combat to use hn this Lonstant Combat Power) Constant Combat Power: Any of your Allies may take control of Combat.\neven if Majin is 2 power ON stages above O higher.\nAll attacks or your perform do an additional «2 life cards of damage.\n| ' a Ard as for you Mn \\ A — arn Vou IND a on Far el"
+      "text": "(Majin Babidi does not have to be in control of Combat to use this Constant Combat Power.) Constant Combat Power: Any of your Allies may take control of Combat, even if Majin Babidi is 2 power stages above 0 or higher. All attacks your Allies perform do an additional +2 life cards of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Babidi",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          510000,
+          520000,
+          530000,
+          540000,
+          550000,
+          560000,
+          570000,
+          580000,
+          590000,
+          600000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 5,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 4
+      }
     }
   },
   {
@@ -13345,7 +14013,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "NS = 5 1:11 | Bao 1 nO ® 21 =n OR / | I ly | 0 0 5 ~ —~— el << Fs?"
+      "text": "Power: Physical attack doing +3 power stages of damage. Raise your anger 1 level. Constant Combat Power: All of your attacks do an additional +1 life cards of damage. (Main Personality Only)",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Buu",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          2645000,
+          2745000,
+          2845000,
+          2945000,
+          3045000,
+          3145000,
+          3245000,
+          3345000,
+          3445000,
+          3545000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -13373,11 +14064,47 @@
     "imageUrl": "images-tts/tts-a15907e0-58.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
-      "text": "i = or » 3 gu a Dm ) bed =| nv fin HERE"
+      "text": "Power: Shuffle the top 2 Styled cards of your discard pile into your Life Deck. Constant Combat Power: Prevent 2 life cards of damage from each attack your opponent performs. (Main Personality Only)",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Buu",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          2645000,
+          2745000,
+          2845000,
+          2945000,
+          3045000,
+          3145000,
+          3245000,
+          3345000,
+          3445000,
+          3545000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      },
+      "abilities": [
+        {
+          "trigger": "defense",
+          "effects": [
+            {
+              "kind": "preventLifeCards",
+              "amount": 2,
+              "attackType": "any"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -13469,7 +14196,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "28 Power: Focused physical 2 Y 8 attack doing 10 power stages of damage.\nor shuffle 10 cards from your discard pile into your Life Deck instead."
+      "text": "Power: Focused physical attack doing 10 power stages of damage, or shuffle 10 cards from your discard pile into your Life Deck instead.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Buu",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          8585000,
+          8590000,
+          8595000,
+          8600000,
+          8615000,
+          8620000,
+          8625000,
+          8630000,
+          8635000,
+          8640000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 5,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 5
+      }
     }
   },
   {
@@ -13486,7 +14236,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Power: ted | Shuffle the B cards top of your discard pile into your Life Deck."
+      "text": "Power: Shuffle the top 8 cards of your discard pile into your Life Deck.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Buu",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          7060000,
+          7090000,
+          7115000,
+          7140000,
+          7165000,
+          7190000,
+          7215000,
+          7240000,
+          7265000,
+          7290000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 4
+      }
     }
   },
   {
@@ -13839,7 +14612,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Uiscard all Drills in play.\nEach player may then search his discard pile and Life Deck for Drills different than | | those he just discarded and place them into play (up to the same number discarded].\n4 | You Then give Buu smooch i SE 5 or"
+      "text": "Discard all Drills in play. Each player may then search his discard pile and Life Deck for Drills different than those he just discarded and place them into play (up to the same number discarded).",
+      "textVerified": "vision"
     }
   },
   {
@@ -13890,7 +14664,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "2 2 15 2 2 \\ 3 Jc viv r i ps | = g S S SQ 49 | 3 2"
+      "text": "Power: Focused physical attack doing +4 power stages of damage. You may remove from the game any cards in your discard pile with the word \"focused\" in the power box. For every card removed in this way, this attack does an additional +3 power stages of damage. (Main Personality Only)",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Dabura",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          2010000,
+          2120000,
+          2230000,
+          2340000,
+          2450000,
+          2560000,
+          2670000,
+          2780000,
+          2890000,
+          3000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -13982,7 +14779,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "3 Lfonstant Combat Power: When a focused attack 2 alk you perform is successful.\nyou may use its “If successful” effects twice."
+      "text": "Constant Combat Power: When a focused attack you perform is successful, you may use its \"If successful\" effects twice.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Dabura",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          1180000,
+          1260000,
+          1340000,
+          1420000,
+          1500000,
+          1580000,
+          1660000,
+          1740000,
+          1820000,
+          1900000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -14164,7 +14984,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Power: Focused energy attack doing life cards of il damage.\nYou may discard a card with “Majin” in the title from your hand.\nIf you do.\nthis power may be used a second time this Combat."
+      "text": "Power: Focused energy attack doing 6 life cards of damage. You may discard a card with \"Majin\" in the title from your hand. If you do, this power may be used a second time this Combat.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Vegeta",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          3055000,
+          3160000,
+          3265000,
+          3370000,
+          3475000,
+          3580000,
+          3685000,
+          3790000,
+          3895000,
+          4000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -14181,7 +15024,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "| Constant Combat Power: | Any attacks you perform =.\n123 that have \"Mgjin” in the title are focused gttacks.\nDuring the Rejuvenation Step."
+      "text": "Constant Combat Power: Any attacks you perform that have \"Majin\" in the title are focused attacks. During the Rejuvenation Step, if you place a card with \"Majin\" in the title at the bottom of your Life Deck gain 5 power stages.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Vegeta",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          2100000,
+          2200000,
+          2300000,
+          2400000,
+          2500000,
+          2600000,
+          2700000,
+          2800000,
+          2900000,
+          3000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -15193,8 +16059,31 @@
       "needsReview": [
         "type"
       ],
-      "text": "> does not have to 2,500 3 control of Combat to this = use Lonstant Combat Constant Combat Power: If your Main Personality is Broly, no card 4 can lower Broly's anger and per- sonality levels, and card effects cannot Broly from gaining anger la.\n(= except for \"Mind Control Device\".",
-      "errata": "Winter Countryside vs. Paragus Lv.1 (Babidi Broly Subset #31) – Because Winter Countryside caps the amount of anger you gain, and not prevent or lower, you would still only raise your anger 1 level from card effects."
+      "text": "(Paragus does not have to be in control of Combat to use this Constant Combat Power.) Constant Combat Power: If your Main Personality is Broly, no card effects can lower Broly's anger and personality levels, and card effects cannot prevent Broly from gaining anger except for \"Mind Control Device\".",
+      "errata": "Winter Countryside vs. Paragus Lv.1 (Babidi Broly Subset #31) – Because Winter Countryside caps the amount of anger you gain, and not prevent or lower, you would still only raise your anger 1 level from card effects.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Paragus",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          5500,
+          6000,
+          6500,
+          7000,
+          7500,
+          8000,
+          8500,
+          9000,
+          9500,
+          10000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -15247,7 +16136,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "= J EM m 1 \\ DER 5 5 n 0 : 2 000 5 J 5 | asl lal N 4Q | @S HS ISHS B--"
+      "text": "Power: Physical attack doing +4 power stages of damage. Choose 3 cards with different titles in your discard pile. Your opponent chooses one of the 3 cards. The chosen card is placed into your hand and the other 2 are removed from the game. (Main Personality Only)",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Piccolo",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          800000,
+          900000,
+          1000000,
+          1100000,
+          1200000,
+          1300000,
+          1400000,
+          1500000,
+          1600000,
+          1700000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -16800,7 +17712,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "End combat.\nAll players discard all cards in their hands.\nRemove \\ from the after game use.\ni Hm J Wait v 2 of 2"
+      "text": "End Combat. All players discard all cards in their hands. Remove from the game after use.",
+      "textVerified": "vision"
     }
   },
   {
@@ -31509,7 +32422,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "For every anger you reduce on your Sword.\nreduce |, all opponents’ that anger / i many as well."
+      "text": "For every anger you reduce on your Warrior Sword, reduce all opponents' anger that many as well.",
+      "textVerified": "vision"
     }
   },
   {
@@ -37379,7 +38293,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Constant Combat Power: When entering Combat, remove I | the top card of your Life Deck ———— from the game to remove the top 2 cards of your opponent's 0040 Life Deck from the game and raise your anger 3 levels.\nIf Or.\nWillo is your Main you may not win by Most Powerful Personality Victory."
+      "text": "Constant Combat Power: When entering Combat, remove the top card of your Life Deck from the game to remove the top 2 cards of your opponent's Life Deck from the game and raise your anger 3 levels. If Dr. Willo is your Main Personality you may not win by Most Powerful Personality Victory.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Dr. Willow",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -37563,7 +38500,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "JLT attack doing 5 power stages of damage or energy | 7 life cards of damage.\nYou doing the top ard cards of your | : make this \\ to a focused 1d re Se anger | Ie 27 7A PEE a Amazg Wester"
+      "text": "Power: Physical attack doing +5 power stages of damage or energy attack doing 7 life cards of damage. You may discard the top 3 cards of your Life Deck to make this a focused attack and raise your anger 1 level.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Gohan, Mystic Empowered",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          8730000,
+          8740000,
+          8750000,
+          8775000,
+          8800000,
+          8825000,
+          8850000,
+          8900000,
+          8950000,
+          9000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 6,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 4
+      }
     }
   },
   {
@@ -37992,11 +38952,25 @@
     "imageUrl": "images-tts/tts-e3673ab6-68.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
-      "text": "doing 4 power stages of damage.\nshuffle any \"Hercule Draws Steel” cards in Jour discard pile into your Life Deck."
+      "text": "Endurance 3. Physical attack doing 4 power stages of damage. Shuffle any \"Hercule Draws Steel\" cards in your discard pile into your Life Deck.",
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "powerStages": 4
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
+      "endurance": 3
     }
   },
   {
@@ -38434,7 +39408,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Attach to your opponent's Main Personality.\nWhile the attached personality is in control of Combat, damage from your attacks cannot be redirected to Allies."
+      "text": "Attach to your opponent's Main Personality. While the attached personality is in control of Combat, damage from your attacks cannot be redirected to Allies.",
+      "textVerified": "vision"
     }
   },
   {
@@ -38492,7 +39467,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "2 or ole ck doing —— hy > J tages of damage.\nJOW raw a card.\n| 4% ay P SRY Je ORE Bad Buu or 4b"
+      "text": "Power: Physical attack doing +3 power stages of damage. If stopped, draw a card.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Buu, Evil Buu",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          3600000,
+          3700000,
+          3800000,
+          3900000,
+          4000000,
+          4100000,
+          4200000,
+          4300000,
+          4400000,
+          4500000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -38549,7 +39547,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "28 1 YOU may discard down to instead of 1 during any ard Step.\nWhen Majin Buu performs, Lou may pay an additional /Br stages to make it a New dothes to match figure."
+      "text": "Constant Combat Power: You may discard down to 2 cards instead of 1 during any Discard Step. When Majin Buu performs an attack, you may pay an additional +2 power stages to make it a focused attack and do +2 life cards of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Buu, Gotenks Absorbed",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          9650000,
+          9675000,
+          9700000,
+          9750000,
+          9800000,
+          9850000,
+          9900000,
+          10000000,
+          10100000,
+          10200000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 5,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 4
+      }
     }
   },
   {
@@ -38566,7 +39587,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "INR 7) / Bull EL =x\" attacks do : I BF your life cards of damage.\nWhen Majin stages from a card ns double the amount of en you gain anger."
+      "text": "Constant Combat Power: All of your attacks do +3 life cards of damage. When Majin Buu gains power stages from a card effect, he gains double the amount of power stages. When you gain anger, increase that amount by +1.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Buu, Piccolo Absorbed",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          8100000,
+          8200000,
+          8300000,
+          8400000,
+          8500000,
+          8600000,
+          8700000,
+          8800000,
+          8900000,
+          9000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -38583,7 +39627,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "All of your attacks do — A 2 { power stages of damage.\ncurrent anger level At the place the bottom a urn.\nard pile r dist at the ife Deck."
+      "text": "Constant Combat Power: All of your attacks do +X power stages of damage. X = your current anger level. At the end of every turn, place the bottom card of your discard pile at the bottom of your Life Deck.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Buu, Super Buu",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          7200000,
+          7300000,
+          7400000,
+          7500000,
+          7600000,
+          7700000,
+          7800000,
+          7900000,
+          8000000,
+          8100000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -38979,7 +40046,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Power: Attach to a Battleground or Location in play.\nWhile attached, your Main Personality's PUR is increased by +2 and all of your attacks do +1 power stage of damage."
+      "text": "Power: Attach to a Battleground or Location in play. While attached, your Main Personality's PUR is increased by +2 and all of your attacks do +1 power stage of damage.",
+      "textVerified": "vision"
     }
   },
   {
@@ -39035,7 +40103,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "This personality gains Sg — power stages.\nThis 3 gon Balls.\nChoose 1 card at TOM Your opponent's hand IL from the game."
+      "text": "Power: This personality gains 3 power stages. This card can affect Dragon Balls. Choose 1 card at random from your opponent's hand and remove it from the game.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Mr. Popo",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z"
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -39283,11 +40374,25 @@
     "imageUrl": "images-tts/tts-8281ee74-3.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
-      "text": "ning B life cards of damage.\nIf successful, attach to one of your Freestyle Drills in play.\nWhile attached and a card would discard the attached a Drill this card is discarded instead."
+      "text": "Endurance 4. Energy attack doing 6 life cards of damage. If successful, attach to one of your Freestyle Drills in play. While attached and a card would discard the attached Drill, this card is discarded instead.",
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
+      "endurance": 4
     }
   },
   {
@@ -39457,11 +40562,24 @@
     "imageUrl": "images-tts/tts-8281ee74-6.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
-      "text": "Endurance 3.\nattack 6 life cards of damage.\nIf successful, search your Life Deck for an Orange Style Drill and place it into play.",
+      "text": "Endurance 3. Energy attack doing 6 life cards of damage. If successful, search your Life Deck for an Orange Style Drill and place it into play.",
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -40731,11 +41849,34 @@
     "imageUrl": "images-tts/tts-2b332fa4-21.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
-      "text": "SAAN J, Endurance 1.\nPhysical attack doing +4 power stages of damage.\nName a ard.\nIf successful and the named card was one ff the life cards of damage from this attack, remove your opponent's discard \\ ) pile from the game and raise / = >» your anger 1 level.\nDont.tel me how to fight \\"
+      "text": "Endurance 1. Physical attack doing +4 power stages of damage. Name a card. If successful and the named card was one of the life cards of damage from this attack, remove your opponent's discard pile from the game and raise your anger 1 level.",
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
+      "endurance": 1
     }
   },
   {
@@ -40808,8 +41949,9 @@
       "needsReview": [
         "type"
       ],
-      "text": "3 your uses a Stops the effects of the Non-Combat/ Non-DOrill card your opponent is using.",
-      "errata": "You can play a second Startled if your opponent uses Trunks Energy Sphere (Trunks 84) on your first Startled."
+      "text": "Power: (Use when your opponent uses a Non-Combat/Non-Drill card.) Stops the effects of the Non-Combat/Non-Drill card your opponent is using.",
+      "errata": "You can play a second Startled if your opponent uses Trunks Energy Sphere (Trunks 84) on your first Startled.",
+      "textVerified": "vision"
     }
   },
   {
@@ -40867,8 +42009,33 @@
       "needsReview": [
         "type"
       ],
-      "text": "wigs Zz Constant Combat Power: When entering Combat.\nshuffle up to 5 A cards in your discard pile into your Life Deck and draw the top or bottom card oooo of your discard pile.",
-      "errata": "Supreme West Kai cannot play or use cards that can be used to stop or prevent damage from an attack playing or using cards in response to an attack. Floating effects that prevent damage still work when using Supreme West Kai.\n\n\nIf Supreme West Kai is your Main Personality, whenever your opponent performs an attack Supreme West Kai cannot be played as an Ally.\n\n “Even” or “Odd” and announce it. You remove the top card of your Life Deck from the game and you check the card number. If your opponent guessed correctly the attack is\n\nsuccessful, if your opponent guessed incorrectly, the attack is stopped. This will stop Focused attacks.\n\n\nThe ability of removing the top card of your Life Deck takes up your action in response to an Attack, and you may not use other cards that could be used in response to an attack.\n\n\nSupreme West Kai must use Pure Defense before the opponent declares Even/Odd.\n\n\nSupreme West Kai cannot have cards in her deck that end Combat or use cards that end Combat."
+      "text": "Constant Combat Power: When entering Combat, shuffle up to 5 cards in your discard pile into your Life Deck and draw the top or bottom card of your discard pile.",
+      "errata": "Supreme West Kai cannot play or use cards that can be used to stop or prevent damage from an attack playing or using cards in response to an attack. Floating effects that prevent damage still work when using Supreme West Kai.\n\n\nIf Supreme West Kai is your Main Personality, whenever your opponent performs an attack Supreme West Kai cannot be played as an Ally.\n\n “Even” or “Odd” and announce it. You remove the top card of your Life Deck from the game and you check the card number. If your opponent guessed correctly the attack is\n\nsuccessful, if your opponent guessed incorrectly, the attack is stopped. This will stop Focused attacks.\n\n\nThe ability of removing the top card of your Life Deck takes up your action in response to an Attack, and you may not use other cards that could be used in response to an attack.\n\n\nSupreme West Kai must use Pure Defense before the opponent declares Even/Odd.\n\n\nSupreme West Kai cannot have cards in her deck that end Combat or use cards that end Combat.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Supreme West Kai",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z"
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -40885,8 +42052,32 @@
       "needsReview": [
         "type"
       ],
-      "text": "Constant Combat Power: - When entering Combat.\ndraw the yA bottom or top card of your discard ple.\n- 0oooo Tom NA",
-      "errata": "Supreme West Kai cannot play or use cards that can be used to stop or prevent damage from an attack playing or using cards in response to an attack. Floating effects that prevent damage still work when using Supreme West Kai.\n\n\nIf Supreme West Kai is your Main Personality, whenever your opponent performs an attack Supreme West Kai cannot be played as an Ally.\n\n “Even” or “Odd” and announce it. You remove the top card of your Life Deck from the game and you check the card number. If your opponent guessed correctly the attack is\n\nsuccessful, if your opponent guessed incorrectly, the attack is stopped. This will stop Focused attacks.\n\n\nThe ability of removing the top card of your Life Deck takes up your action in response to an Attack, and you may not use other cards that could be used in response to an attack.\n\n\nSupreme West Kai must use Pure Defense before the opponent declares Even/Odd.\n\n\nSupreme West Kai cannot have cards in her deck that end Combat or use cards that end Combat."
+      "text": "Constant Combat Power: When entering Combat, draw the bottom or top card of your discard pile.",
+      "errata": "Supreme West Kai cannot play or use cards that can be used to stop or prevent damage from an attack playing or using cards in response to an attack. Floating effects that prevent damage still work when using Supreme West Kai.\n\n\nIf Supreme West Kai is your Main Personality, whenever your opponent performs an attack Supreme West Kai cannot be played as an Ally.\n\n “Even” or “Odd” and announce it. You remove the top card of your Life Deck from the game and you check the card number. If your opponent guessed correctly the attack is\n\nsuccessful, if your opponent guessed incorrectly, the attack is stopped. This will stop Focused attacks.\n\n\nThe ability of removing the top card of your Life Deck takes up your action in response to an Attack, and you may not use other cards that could be used in response to an attack.\n\n\nSupreme West Kai must use Pure Defense before the opponent declares Even/Odd.\n\n\nSupreme West Kai cannot have cards in her deck that end Combat or use cards that end Combat.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Supreme West Kai",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z"
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -41317,7 +42508,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "7/ ConstantjCombat; you declared a Tokui-Waza.\nany of your Freestyle Physical Combat —ards that say \"Remove from the game after | / gain the text \"Place at the bottom of Jour Life Deck after use\" instead.\nAll of your physical attacks do +1 power stages of damage."
+      "text": "Constant Combat Power: If you declared a Tokui-Waza, any of your Freestyle Physical Combat cards that say \"Remove from the game after use\" gain the text \"Place at the bottom of your Life Deck after use\" instead. All of your physical attacks do +1 power stages of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Vegeta, the Celestial",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          1250000,
+          1300000,
+          1350000,
+          1400000,
+          1450000,
+          1500000,
+          1550000,
+          1600000,
+          1650000,
+          1700000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -41440,7 +42654,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "h ooo 9 — CEE Your opponent discards the top 7 cards of his Life Deck.\n71 1 < ( Y 4 Cal me Super NY 4 or 1G"
+      "text": "Power: Your opponent discards the top 7 cards of his Life Deck.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Vegito, Super Saiyan",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          14999991,
+          14999992,
+          14999993,
+          14999994,
+          14999995,
+          14999996,
+          14999997,
+          14999998,
+          14999999,
+          15000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 6,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -41624,7 +42861,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "When entering Combat."
+      "text": "Power: When entering Combat, you may remove 3 cards in your discard pile from the game to search your discard pile for a card that can perform an energy attack with a Base Damage of less than 6 life cards and place it into your hand.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Yamcha, the Amazing",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          600000,
+          700000,
+          800000,
+          900000,
+          1000000,
+          1100000,
+          1200000,
+          1300000,
+          1400000,
+          1500000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -42862,7 +44122,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "y Comstan: 1.550.000 | [If Bock is your Main = Personality.\nyour Alles can use 1.500.000 this Constant Combat with the Bojack Unbound Subset can 1.450.000 ™ take control of Combat.\neven if this personality is 2 power of your attacks do «| power < — stages of damage for each A play with the Bojack LAP Unbound Subset Symbol a"
+      "text": "Constant Combat Power: (If Bojack is your Main Personality, your Allies can use this Constant Combat Power.) Personalities with the Bojack Unbound Subset Symbol can take control of Combat, even if this personality is 2 power stages above 0 or higher. All of your attacks do +1 power stages of damage for each Ally in play with the Bojack Unbound Subset Symbol.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Bojack",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          1450000,
+          1500000,
+          1550000,
+          1600000,
+          1650000,
+          1700000,
+          1750000,
+          1800000,
+          1850000,
+          1900000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -42879,7 +44162,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "[If Bojack is your Mair Personality.\nAllies | your can use this Constant Combat 3.200.000 Personalities with the Bojack - Unbound Subset Symbol can 3.1 take control of Combat, even =i if this personality is 2 power fe stages above 0 or higher.\nAny attacks performed by | personalities with the Bojack 7 8 4 Unbound Subset Symbol i are focused attacks."
+      "text": "Constant Combat Power: (If Bojack is your Main Personality, your Allies can use this Constant Combat Power.) Personalities with the Bojack Unbound Subset Symbol can take control of Combat, even if this personality is 2 power stages above 0 or higher. Any attacks performed by personalities with the Bojack Unbound Subset Symbol are focused attacks.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Bojack, the Notorious",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          3100000,
+          3200000,
+          3300000,
+          3400000,
+          3500000,
+          3600000,
+          3700000,
+          3800000,
+          3900000,
+          4000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 5,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -42896,7 +44202,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "\\ 4 Cor=tant Combat 1 [If Bojack is your Main \\\\ Personality.\nyour Allies can use 2 2.100.000 Constant Combat Personalities with the Bojack Unbound Subset Symbol can take control of Combat, even If wl 2.000.000 this personality is 2 power stages 0 or higher.\nAll of your physical attacks do +3 power stages of damage.\nand life cards of \\ damage from the attacks Ni removed from the A = are \\ instead of discarded.\nSei game"
+      "text": "Constant Combat Power: (If Bojack is your Main Personality, your Allies can use this Constant Combat Power.) Personalities with the Bojack Unbound Subset Symbol can take control of Combat, even if this personality is 2 power stages above 0 or higher. All of your attacks do +3 power stages of damage, and life cards of damage from the attacks are removed from the game instead of discarded.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Bojack, the Villainous",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          2000000,
+          2100000,
+          2200000,
+          2300000,
+          2400000,
+          2500000,
+          2600000,
+          2700000,
+          2800000,
+          2900000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -43083,7 +44412,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "4 ring Lo 3 J"
+      "text": "Power: When entering Combat, search your Life Deck for a Saiyan Style card and place it into your hand.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Broly, the Electrified",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          2350000,
+          2400000,
+          2450000,
+          2500000,
+          2550000,
+          2600000,
+          2650000,
+          2700000,
+          2750000,
+          2800000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -43100,7 +44452,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "» aa 3 att | Cong +4 = LEW 3 > x 2 « his oi vi > - 3 - Oo ped 10] nr ooo : 5 1 ert 3 1 1 Sit JOO 1 BS ; \\ rH S & VA ox 3 2 - 3 | a i Ara 3 8 a 8 ¢ RR fl 4 2) ab : 7 ¥ as 2 555 a & Lf 4 | 2 FUL .\n; gr.\npp 4 | roy 4 CORE N"
+      "text": "Power: Physical attack doing +4 power stages of damage. For the remainder of Combat, all of your Saiyan Style attacks do +3 power stages of damage, damage from your Saiyan Style attacks cannot be prevented, and life cards of damage from Saiyan Style attacks are removed from the game after use instead of discarded.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Broly, the Ferocious",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          3200000,
+          3300000,
+          3400000,
+          3500000,
+          3600000,
+          3700000,
+          3800000,
+          3900000,
+          4000000,
+          4100000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -43158,7 +44533,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "y f =.\n3 4 2 \\ : = = : ATT = .\n| = 3 » ~ 2 IT =) 5 : Lic hm SFA o= - al.\nro ue oer - N | 2 : HU Ga : y : 18 | y 300 00 | \\ ar - N al By | pe | 11 \\ TTS » 5 ey 1 dite?\npr 4 4 THIER [- tt a"
+      "text": "Power: Physical attack doing +5 power stages of damage. This power may be used a second time this Combat. For the remainder of Combat, when your opponent plays a Combat card, he must remove the top 2 cards of his Life Deck from the game.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Broly, the Unbeatable",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          5120000,
+          5140000,
+          5160000,
+          5180000,
+          5200000,
+          5220000,
+          5240000,
+          5260000,
+          5280000,
+          5300000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 5,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 4
+      }
     }
   },
   {
@@ -43209,12 +44607,48 @@
     "imageUrl": "images-tts/tts-89fe8da5-17.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
-      "text": "omy \\When one A of your Bulma Named cards leaves | your opponent discards the top 4 cards life A of his Life Deck.\nPrevent 2 cards of damage from your | opponent's energy attacks.",
-      "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken."
+      "text": "Constant Combat Power: When one of your Bulma Named cards leaves play, your opponent discards the top 4 cards of his Life Deck. Prevent 2 life cards of damage from your opponent's energy attacks.",
+      "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Bulma, the Wife",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500,
+          600,
+          700,
+          800,
+          900,
+          1000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      },
+      "abilities": [
+        {
+          "trigger": "defense",
+          "effects": [
+            {
+              "kind": "preventLifeCards",
+              "amount": 2,
+              "attackType": "energy"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -43276,8 +44710,31 @@
       "needsReview": [
         "type"
       ],
-      "text": "Your Alies with Saiyan Heritage cannot be discarded 1 A removed from the game.\nIf have or you A Sor more Alles in play at the | Q.\nof your turn.\nadvance WV.\nChi-Chi a ANS ro Mt Paris",
-      "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken."
+      "text": "Constant Combat Power: Your Allies with Saiyan Heritage cannot be discarded or removed from the game. If you have 5 or more Allies in play at the beginning of your turn, advance Chi-Chi a personality level.",
+      "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Chi-Chi, the Grandmother",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500,
+          600,
+          700,
+          800,
+          900,
+          1000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -43905,7 +45362,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "8.250,000 J foun - (or cock | contruction and game play.\nthis card's | \\ title is \"Majin Bur.\nKidd Buu?) The first | dttack you each Combat with a Martial Arts Styled \\ Card cannat be @ V Jet"
+      "text": "Constant Combat Power: (For deck contruction and game play, this card's title is \"Majin Buu, Kidd Buu\") The first attack you perform each Combat with a Martial Arts Styled card cannot be stopped.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Kid Buu, Majin Buu",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          8250000,
+          9000000,
+          9750000,
+          10500000,
+          11250000,
+          12000000,
+          12750000,
+          13500000,
+          14250000,
+          15000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 8,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 5
+      }
     }
   },
   {
@@ -44120,7 +45600,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Power: 925.000 Physical attack doing +5 power stages of 850.000 damage.\nIf successful, your opponent discards je opponent discards eC a card from his hand."
+      "text": "Power: Physical attack doing +5 power stages of damage. If successful, your opponent discards your opponent discards a card from his hand.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Kogu",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          775000,
+          850000,
+          925000,
+          1000000,
+          1075000,
+          1150000,
+          1225000,
+          1300000,
+          1375000,
+          1450000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -46790,9 +48293,33 @@
       "type": "Unknown",
       "coverage": "unknown",
       "needsReview": [
-        "type"
+        "type",
+        "ladder:arithmeticRepair"
       ],
-      "text": "Soh = pl ~ \\ A DS 0 = la} 1Q 8 HERE HUES"
+      "text": "Power: When entering Combat, search the top 8 cards of your Life Deck for a card with \"Sword\" and/or \"Swordplay\" in the title and place it into your hand. Shuffle the rest of the cards back into your Life Deck. If you searched for a card with \"Swordplay\" in the title, you may place it into play instead.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Trunks, the Weaponmaster",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          850000,
+          900000,
+          950000,
+          1000000,
+          1050000,
+          1100000,
+          1150000,
+          1200000,
+          1250000,
+          1300000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -47046,7 +48573,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Tempe | Your 1 Opponent cannot play and use \\ Combat IN cards.\nAll of your attacks do +2 life cards of damage."
+      "text": "Constant Combat Power: Your opponent cannot play and use Combat cards. All of your attacks do +2 life cards of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Vegeta, Settled Down",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          1800000,
+          1900000,
+          2000000,
+          2100000,
+          2200000,
+          2300000,
+          2400000,
+          2500000,
+          2600000,
+          2700000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -47107,7 +48657,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "AAT hi Vegeta only.\nChoose 3 Vegeta Named cards that are removed Tom the game and shuffle them nto your Life Deck.\n4 Darn those idiots!\nDon't they J 28 or 28"
+      "text": "Vegeta only. Choose 3 Vegeta Named cards that are removed from the game and shuffle them into your Life Deck.",
+      "textVerified": "vision"
     }
   },
   {
@@ -63170,7 +64721,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "800.000 “4 All of your physical | attacks do +2 Power Stages of damage.\n-“ 2 | \\ Excuse boys, but me.\nyou WP stand a chance Score\""
+      "text": "Constant Combat Power: All of your physical attacks do +2 Power stages of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Trunks, the Swordsman",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          700000,
+          750000,
+          800000,
+          850000,
+          900000,
+          950000,
+          1000000,
+          1050000,
+          1100000,
+          1150000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -64057,7 +65631,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "BOWER: Your Allies in play with in thelr cannot be discarded or removed from the game."
+      "text": "Your Allies in play with \"Android\" in their titles cannot be discarded or removed from the game.",
+      "textVerified": "vision"
     }
   },
   {
@@ -64096,7 +65671,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Personality - Hero Constant Combat ar [Announcer does nat have to be in control of 4 0 Combat to use this Constant Combat Power."
+      "text": "Constant Combat Power: [Announcer does not have to be in control of Combat to use this Constant Combat Power. Announcer may be played as an Ally if your Main Personality is a Hero, Villain, or Majin.] Players cannot win by the Most Powerful Personality Victory unless their Main Personality stack contains a level 4.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Announcer, Rules Lawyer",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          21,
+          21,
+          21,
+          22,
+          22,
+          22,
+          23,
+          23,
+          23,
+          24
+        ],
+        "zeroStageIndex": 0,
+        "pur": 0,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -65571,7 +67169,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Attach to one of your Allies in play.\nWhile this card is attached, this Ally | # his 2M each can use power a time Combat.\nThis does not work with 1 Combat Powers or powers that can be used multiple in a Combat."
+      "text": "Attach to one of your Allies in play. While this card is attached, this Ally can use his power a 2nd time each Combat. This does not work with Constant Combat Powers or powers that can be used multiple times in a Combat.",
+      "textVerified": "vision"
     }
   },
   {
@@ -65953,7 +67552,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "If you declared a Tokui-Waza.\nyou may have multiple copies of this Orill in play.\nWhenever your opponent would gain or lose anger.\nthey discard the top 2 cards of their Life Deck."
+      "text": "If you declared a Tokui-Waza, you may have multiple copies of this Drill in play. Whenever your opponent would gain or lose anger, they discard the top 2 cards of their Life Deck.",
+      "textVerified": "vision"
     }
   },
   {
@@ -66520,7 +68120,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "CE Combat {| 2 that \\ AVA om i A 5 3 i Ey p J oF 5 Movie"
+      "text": "Constant Combat Power: All your Saiyan Style attacks that do not remove themselves from the game after use are placed at the bottom of your Life Deck after use.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Broly, Empowered",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          3200000,
+          3300000,
+          3400000,
+          3500000,
+          3600000,
+          3700000,
+          3800000,
+          3900000,
+          4000000,
+          4100000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -66563,7 +68186,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "J Step.\nif the top card — - le Is a Saiyan | ur anger 2 raise your ~L2 ind shuffle le cards ANA i (CO) Nove 8 Pramo aa"
+      "text": "Constant Combat Power: At the beginning of your rejuvenation Step, if the top card of your discard pile is a Saiyan Style card, raise your anger 2 levels. If Goku is in play, raise your anger 3 levels instead, and shuffle the bottom 2 Saiyan Style cards of your discard pile into your Life Deck.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Broly, the Calm",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          160000,
+          180000,
+          200000,
+          220000,
+          240000,
+          260000,
+          280000,
+          300000,
+          320000,
+          340000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -66917,7 +68563,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "ast : = m < { 8 SMe 73 4 PRN 7 Po » M OF is 3 of;"
+      "text": "Bulma is considered to be in play as an Ally for card effects. Players cannot discard cards from their opponent's hand with non-Mastery card effects.",
+      "textVerified": "vision"
     }
   },
   {
@@ -67284,7 +68931,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "[You may play and use this card during your Power-Lip 5tep.) You cannot win by the Most Powerful Personality Victory for the remainder of the game.\nRemove cards in your discard pile from the game to advance your Main Personality 1 personality level."
+      "text": "[You may play and use this card during your Power-Up Step.] You cannot win by the Most Powerful Personality Victory for the remainder of the game. Remove 8 cards in your discard pile from the game to advance your Main Personality 1 personality level.",
+      "textVerified": "vision"
     }
   },
   {
@@ -67299,9 +68947,10 @@
       "type": "Unknown",
       "coverage": "unknown",
       "needsReview": [
-        "type",
-        "text"
-      ]
+        "type"
+      ],
+      "text": "Use only if you have used a Non-Combat card this turn that is not a drill. Your Main Personality gains 4 power stages. Raise your anger 1 level. Draw a card.",
+      "textVerified": "vision"
     }
   },
   {
@@ -67819,7 +69468,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "and Tuff Enuff only.\nUse a5 Defense.\na Prevent all but 2 life cards of damage dealt to you by the attack just performed against you.\nRemove from the game after use."
+      "text": "League and Tuff Enuff only. Use as a Defense. Prevent all but 2 life cards of damage dealt to you by the attack just performed against you. Remove from the game after use.",
+      "textVerified": "vision"
     }
   },
   {
@@ -68441,7 +70091,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Endurance 3.\nIf you played 3 attacks § from 3 different cards from your | hand in 3 consecutive “Attacker | Attacks” phases this Combat, § discard the top 39 cards of | ¢ your Life Deck.\n; Dragon Bal 2",
+      "text": "Endurance 3. If you played 3 attacks from 3 different cards from your hand in 3 consecutive \"Attacker Attacks\" phases this Combat, discard the top 9 cards of your opponent's Life Deck.",
+      "textVerified": "vision",
       "endurance": 3
     }
   },
@@ -68917,7 +70568,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "If you have a Fusion personality In your Sensel Deck and Its corresponding per- Sonalities in play at the same ity level.\nthey may fuse.\nThey cannot defuse except from card effects for the | remainder of the game.\nRemove from the game after use."
+      "text": "If you have a Fusion personality in your Sensei Deck and its corresponding personalities in play at the same personality level, they may fuse. They cannot defuse except from card effects for the remainder of the game. Remove from the game after use.",
+      "textVerified": "vision"
     }
   },
   {
@@ -69177,7 +70829,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Remove an Ally or Non-Combat card you control from the game.\nRemove an Ally or Non-Combat card your opponent controls from the game.\nAt the end of Combat.\nmay put any number of cards removed with this effect back into play under their owner's control.\nfrom the game after use."
+      "text": "Remove an Ally or Non-Combat card you control from the game. Remove an Ally or Non-Combat card your opponent controls from the game. At the end of Combat, you may put any number of cards removed with this effect back into play under their owner's control. Remove from the game after use.",
+      "textVerified": "vision"
     }
   },
   {
@@ -69344,7 +70997,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Constant Combat 13 [If Baba Is your Main Personality.\nGhost Usher (8 0 does not have to be In control of Combat to use this Constant Combat Power.) When a Celestial Fighter you control is | | removed from the game.\nyour opponent discards the top card of their Life Deck.\nIf that card is a Dragon Ball that is not in play.\nyou may place it into play under 4 your control without using its power."
+      "text": "Constant Combat Power: [If Baba is your Main Personality, Ghost Usher does not have to be in control of Combat to use this Constant Combat Power.] When a Celestial Fighter you control is removed from the game, your opponent discards the top card of their Life Deck. If that card is a Dragon Ball that is not in play, you may place it into play under your control without using its power.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Ghost Usher, Attendant",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          13
+        ],
+        "zeroStageIndex": 0,
+        "pur": 0,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -70170,7 +71846,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Until the end of Combat, if a card | power lets you search your Life | Deck for any number of Allies, you get to search for 1 additional Ally.\nLimit 1 per deck."
+      "text": "Until the end of Combat, if a card power lets you search your Life Deck for any number of Allies, you get to search for 1 additional Ally. Limit 1 per deck.",
+      "textVerified": "vision"
     }
   },
   {
@@ -70529,7 +72206,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "POWER: Vegeta only.\nYou may give up winning by the Most Powerful Personality Victory this tum to advance Vegeta up to 3 personality levels.\nYour opponent skips their next Attack Phase this Combat.\nAt the beginning of your opponent's next Attack Phase.\nlower your Main Personality 3 personality levels and you cannot use personality powers for the remainder of Combat."
+      "text": "Vegeta only. You may give up winning by the Most Powerful Personality Victory this turn to advance Vegeta up to 3 personality levels. Your opponent skips their next Attack Phase this Combat. At the beginning of your opponent's next Attack Phase, lower your Main Personality 3 personality levels and you cannot use personality powers for the remainder of Combat.",
+      "textVerified": "vision"
     }
   },
   {
@@ -70577,7 +72255,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Use this card after you take Life | Cards of damage.\nShuffle the discarded cards back into your Life Deck, and discard the same amount 5 of cards."
+      "text": "Use this card after you take Life Cards of damage. Shuffle the discarded cards back into your Life Deck, and discard the same amount of cards.",
+      "textVerified": "vision"
     }
   },
   {
@@ -70956,7 +72635,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Constant Foovars 490 Kami has the Constant Combat 0 7 of his level 2 personality card.\nand you may choose any number of Battle- grounds and Locations in play instead of up to 2.\nWhen entering Combat.\nyou may put up to S Battlegrounds and/or | = LOCations in your discard pile at 4+ the bottom of your Life Deck."
+      "text": "Constant Combat Power: Kami has the Constant Combat Power of his level 2 personality card, and you may choose any number of Battlegrounds and Locations in play instead of up to 2. When entering Combat, you may put up to 5 Battlegrounds and/or Locations in your discard pile at the bottom of your Life Deck.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Kami, Guardian of Earth",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          490,
+          550,
+          610,
+          670,
+          730,
+          790,
+          850,
+          910,
+          970,
+          1030
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -71167,9 +72869,32 @@
       "type": "Unknown",
       "coverage": "unknown",
       "needsReview": [
-        "type",
-        "text"
-      ]
+        "type"
+      ],
+      "text": "Constant Combat Power: The first energy attack you perform during Combat costs 2 less power stages to perform. If you declared a Black Tokui-Waza, all of your energy attacks do +2 life cards of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "King Kai",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z"
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -71182,12 +72907,54 @@
     "imageUrl": "images-tts/tts-be34bddc-32.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type",
-        "text"
+        "type"
       ],
-      "text": "\\ ANY PIAS"
+      "text": "Physical attack. Doing +2 power stages of damage. If you declared a Black Tokui-Waza, you may use this power to stop an energy attack instead.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "King Kai",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z"
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -71200,10 +72967,56 @@
     "imageUrl": "images-tts/tts-be34bddc-31.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type",
-        "text"
+        "ability:energyLifeCards"
+      ],
+      "text": "Energy attack. Costs 1 power stage to perform. If successful, and you declared a Black Tokui-Waza, your opponent must discard a card from his hand.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "King Kai",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z"
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 1
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 1
+          },
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
       ]
     }
   },
@@ -71471,7 +73284,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "King Piccolo only.\nDiscard an Ally in play.\nFor the remainder of Combat.\nall attacks performed by Main Personali- ties gain \"If successful, discard an Ally in play.\" Remove from the game after use."
+      "text": "King Piccolo only. Discard an Ally in play. For the remainder of Combat, all attacks performed by Main Personalities gain \"If successful, discard an Ally in play.\" Remove from the game after use.",
+      "textVerified": "vision"
     }
   },
   {
@@ -71488,7 +73302,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Villain 2700 attack doing +2 power i oll stages of damage for each person- E ality you conuol with Saiyan 2 Heritage."
+      "text": "Power: Physical attack doing +2 power stages of damage for each personality you control with Saiyan Heritage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "King Vegeta, Monarch",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          2700,
+          2780,
+          2860,
+          2940,
+          3020,
+          3100,
+          3180,
+          3260,
+          3340,
+          3420
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -71547,7 +73384,32 @@
       "needsReview": [
         "type"
       ],
-      "text": "Personality - Hero 800,000 Constant Combat 720,000 1 When you advance to this personality level.\n== put all Krillin Named cards in your removed ol from game pile into your discard pile.\nAll of your Krillin Named cards that are removed from the game after use are discarded instead.\nDuring your Rejuvenation Step.\nyou may choose 3 Krillin Named cards in your discard pile and shuffie them into your Life Deck.\nX = 2 + the number of Krillin ps Named cards in your discard pile."
+      "text": "Constant Combat Power: When you advance to this personality level, put all Krillin Named cards in your removed from game pile into your discard pile. All of your Krillin Named cards that are removed from the game after use are discarded instead. During your Rejuvenation Step, you may choose 3 Krillin Named cards in your discard pile and shuffle them into your Life Deck. X = 2 + the number of Krillin Named cards in your discard pile.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Krillin, the Beta Male",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          720000,
+          800000,
+          880000,
+          960000,
+          1040000,
+          1120000,
+          1200000,
+          1280000,
+          1460000,
+          1540000,
+          1620000,
+          1700000
+        ],
+        "zeroStageIndex": 0,
+        "pur": null,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 5
+      }
     }
   },
   {
@@ -72290,7 +74152,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "A EN f ws | You cannot use this card if you control less than 3 Dragon Balls of the same set.\nShuffle all Dragon balls you control back each owner's Life Decks.\nShuffle 10 Cards from your discard pile back into your Life Deck."
+      "text": "You cannot use this card if you control less than 3 Dragon Balls of the same set. Shuffle all Dragon balls you control back into each owner's Life Decks. Shuffle 10 cards from your discard pile back into your Life Deck.",
+      "textVerified": "vision"
     }
   },
   {
@@ -72632,8 +74495,31 @@
       "needsReview": [
         "type"
       ],
-      "text": "1 1,430,000 % g h ty as k 1370000 E Constant Combat Power: : © All of your physical attacks do +2 = power stages of the top card of your discard pile 0000 = is a Red Style card all of your | = attacks do an additional +2 life cards of",
-      "errata": "Mighty Mask cannot use Kid Trunks or Goten personality cards as part of his Main Personality, and vice versa.\n\nMighty Mask can have 4 copies of Goten and Kid Trunks Named cards in his deck.\n\nMighty Mask can use Goten and Kid Trunks only cards.\n\nIf you play Mighty Mask as your Main Personality, you are considered to have +1 Ally in play for game effects. This “Ally” works just like the “Allies” on the Ginyu Force.\n\nMighty Mask cannot fuse into Gotenks."
+      "text": "Constant Combat Power: All of your physical attacks do +2 power stages of damage. When the top card of your discard pile is a Red Style card all of your attacks do an additional +2 life cards of damage.",
+      "errata": "Mighty Mask cannot use Kid Trunks or Goten personality cards as part of his Main Personality, and vice versa.\n\nMighty Mask can have 4 copies of Goten and Kid Trunks Named cards in his deck.\n\nMighty Mask can use Goten and Kid Trunks only cards.\n\nIf you play Mighty Mask as your Main Personality, you are considered to have +1 Ally in play for game effects. This “Ally” works just like the “Allies” on the Ginyu Force.\n\nMighty Mask cannot fuse into Gotenks.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Mighty Mask",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          1310000,
+          1370000,
+          1430000,
+          1490000,
+          1550000,
+          1640000,
+          1670000,
+          1730000,
+          1790000,
+          1850000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      }
     }
   },
   {
@@ -72773,7 +74659,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Villains only.\nWhenever an Ally leaves play.\nplace it under this Orill.\nWhen this Orill - leaves play.\nremove all cards under it from the game.\nyour opponent discards the top X cards from their Life Deck.\nand you shuffie X cards from your discard pile into your Life Deck.\nX = the number af cards under this"
+      "text": "Villains only. Whenever an Ally leaves play, place it under this Drill. When this Drill leaves play, remove all cards under it from the game, your opponent discards the top X cards from their Life Deck, and you shuffle X cards from your discard pile into your Life Deck. X = the number of cards under this Drill.",
+      "textVerified": "vision"
     }
   },
   {
@@ -73245,7 +75132,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "ROWER: You cannot win by the Most Powerful Personality Victory for the remainder of the game.\nIf your Main Personality has \"The Sword of Trunks\" attached, you may advance it 1 personality level."
+      "text": "You cannot win by the Most Powerful Personality Victory for the remainder of the game. If your Main Personality has \"The Sword of Trunks\" attached, you may advance it 1 personality level.",
+      "textVerified": "vision"
     }
   },
   {
@@ -74489,7 +76377,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "You are allowed to hav multiple copies of Piccolo in play with this card effect.) Tuff Enuff only, Search your Life Deck for up to 3 Piccolo personality cards and place them into play as Allies at 5S power stages above 0.\nRemove from the game after use.\n= GC K— 7 print ) 7 al Majin Buu 5eason 7 or B Week 5 Attended"
+      "text": "[You are allowed to have multiple copies of Piccolo in play with this card effect.] Tuff Enuff only. Search your Life Deck for up to 3 Piccolo personality cards and place them into play as Allies at 5 power stages above 0. Remove from the game after use.",
+      "textVerified": "vision"
     }
   },
   {
@@ -74580,8 +76469,9 @@
       "needsReview": [
         "type"
       ],
-      "text": "0 7 9 \\ PON/EK AN For the remainder of the game you may put the top card of your discard pile into your Life Deck during the Rejuvenation Step even if you didn't skip Combat.\nLimit 1 per deck.\nRemove from the game after use.",
-      "errata": "If you skip Combat then you may not place 2 cards at the bottom of your Life Deck in the Rejuvenation Step.\n\nYou may only put the top card back into your Life Deck during your Rejuvenation Step and not during your opponent’s."
+      "text": "For the remainder of the game you may put the top card of your discard pile into your Life Deck during the Rejuvenation Step even if you didn't skip Combat. Limit 1 per deck. Remove from the game after use.",
+      "errata": "If you skip Combat then you may not place 2 cards at the bottom of your Life Deck in the Rejuvenation Step.\n\nYou may only put the top card back into your Life Deck during your Rejuvenation Step and not during your opponent’s.",
+      "textVerified": "vision"
     }
   },
   {
@@ -74644,7 +76534,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "only.\nuff Enuff Shuffle up to 4 ‘cards in your discard pile Into your Life Deck.\nIf used by Majin Buu.\ngain BE power stages.\nRemove from the game after use."
+      "text": "Tuff Enuff only. Shuffle up to 4 cards in your discard pile into your Life Deck. If used by Majin Buu, gain 6 power stages. Remove from the game after use.",
+      "textVerified": "vision"
     }
   },
   {
@@ -74741,7 +76632,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Gain 5 power stages.\nPlace the top card of your discard pile at the bottom of your life deck."
+      "text": "Gain 5 power stages.  Place the top card of your discard pile at the bottom of your life deck.",
+      "textVerified": "vision"
     }
   },
   {
@@ -75171,7 +77063,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "ERC When a Red Style card effect causes opponent to discard cards from the top of their Life Deck.\ndiscard addi- | an tional +3 cards.\nYou have multiple may copies of this Orill in play.\nTuff Enuff only: This cannot be discarded."
+      "text": "When a Red Style card effect causes your opponent to discard cards from the top of their Life Deck, discard an additional +3 cards. You may have multiple copies of this Drill in play. Tuff Enuff only: This Drill cannot be discarded.",
+      "textVerified": "vision"
     }
   },
   {
@@ -75411,7 +77304,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "When you would gain anger.\nchoose 1 of the following effects to occur instead: discard Orill play attacks do | a in or your +1 life card of damage for the remainder of the turn."
+      "text": "When you would gain anger, choose 1 of the following effects to occur instead: discard a Drill in play or your attacks do +1 life card of damage for the remainder of the turn.",
+      "textVerified": "vision"
     }
   },
   {
@@ -75881,7 +77775,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "You may only use this card if your opponent has dealt you 6 or more life cards of damage from a single attack this Lombat.\nCombat ends."
+      "text": "You may only use this card if your opponent has dealt you 6 or more life cards of damage from a single attack this Combat. Combat ends.",
+      "textVerified": "vision"
     }
   },
   {
@@ -75935,7 +77830,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "POWER: Once per combat, you may remove 1 of your other Non-Combat cards in play from the game.\nIf you do.\nchoose a personality in play.\nThat personality gains S power stages.\nIf the removed Non-Combat card is a named card matching your Main Person- ality.\nyou may it into your Life Deck instead."
+      "text": "Once per combat, you may remove 1 of your other Non-Combat cards in play from the game. If you do, choose a personality in play. That personality gains 5 power stages. If the removed Non-Combat card is a named card matching your Main Personality, you may shuffle it into your Life Deck instead.",
+      "textVerified": "vision"
     }
   },
   {
@@ -75950,10 +77846,10 @@
       "type": "Unknown",
       "coverage": "unknown",
       "needsReview": [
-        "type",
-        "text"
+        "type"
       ],
-      "text": "Q mo >"
+      "text": "When a personality is at a power level above 0, it is considered to have a power level of Z.",
+      "textVerified": "vision"
     }
   },
   {
@@ -76479,7 +78375,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Your PUR is +1 until the end of the § game.\nRemove from the game after use.\nLimit 1 per deck."
+      "text": "Your PUR is +1 until the end of the game. Remove from the game after use. Limit 1 per deck.",
+      "textVerified": "vision"
     }
   },
   {
@@ -76518,7 +78415,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "If you declared a Tokui-Waza.\nyou only need to reach 3 anger to advance a personality level.\nTuff Enuff only: When you advance a personality level.\nyou may return this to your hand."
+      "text": "If you declared a Tokui-Waza, you only need to reach 3 anger to advance a personality level. Tuff Enuff only: When you advance a personality level, you may return this Drill to your hand.",
+      "textVerified": "vision"
     }
   },
   {
@@ -76702,7 +78600,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Endurance 2.\nEnergy attack doing 3 life cards of damage.\nIf you declared s this attack stays on the table to be used 2 more tmeas this Combat.",
+      "text": "Endurance 2. Energy attack doing 3 life cards of damage. If you declared a Tokui-Waza, this attack stays on the table to be used 2 more times this Combat.",
+      "textVerified": "vision",
       "abilities": [
         {
           "trigger": "attack",
@@ -76945,7 +78844,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "- Enuff only.\nAttach f this card to one of your opponent's Allies in play.\nWhile attached at the 3 beginning of your opponent's \"Defender Defends\" phase you may choose for the attached | y to take control of Combat for your \\ /| opponent until the next \"Fight Back\" | \\ phase, if his Main Personality 2 4 even is at 2 stages above 0 higher 7 | power or / 4 ove gf Vegeta Season"
+      "text": "Tuff Enuff only. Attach this card to one of your opponent's Allies in play. While attached at the beginning of your opponent's \"Defender Defends\" phase you may choose for the attached Ally to take control of Combat for your opponent until the next \"Fight Back\" phase, even if his Main Personality is at 2 power stages above 0 or higher.",
+      "textVerified": "vision"
     }
   },
   {
@@ -77038,7 +78938,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Search your Life Deck.\ndiscard pile.\nand from game pile for up to 2 cards with \"Kamikaze Ghost\" the title and place them into play.\nRemove from the game after use."
+      "text": "Search your Life Deck, discard pile, and removed from game pile for up to 2 cards with \"Kamikaze Ghost\" in the title and place them into play. Remove from the game after use.",
+      "textVerified": "vision"
     }
   },
   {
@@ -77948,7 +79849,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "ROWER: If you declared a Tokui-Waza, your non- cards with \"Sword\" in their title are considered Styled cards that match your Tokui-Waza.\nDamage from your attacks with \"Sword\" in their title cannot be prevented by endurance."
+      "text": "If you declared a Tokui-Waza, your non-Drill cards with \"Sword\" in their title are considered Styled cards that match your Tokui-Waza. Damage from your attacks with \"Sword\" in their title cannot be prevented by endurance.",
+      "textVerified": "vision"
     }
   },
   {
@@ -78183,7 +80085,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "BOWER: | = Twice per game.\nduring your \"Attacker Attacks\" phase.\nUou may remove up to 7 cards iN your opponent's discard pile from the game."
+      "text": "Twice per game, during your \"Attacker Attacks\" phase, you may remove up to 7 cards in your opponent's discard pile from the game.",
+      "textVerified": "vision"
     }
   },
   {
@@ -78200,7 +80103,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Rw 7, POWER “Sw, For the remainder of Combat Allies can not take control of Combat and all attacks performed by a Main Personality do +2 power stages of damage.\nRemove from the game after use."
+      "text": "For the remainder of Combat Allies can not take control of Combat and all attacks performed by a Main Personality do +2 power stages of damage. Remove from the game after use.",
+      "textVerified": "vision"
     }
   },
   {
@@ -78312,8 +80216,31 @@
       "needsReview": [
         "type"
       ],
-      "text": "Power: Perform 2 physical attacks, one £00 right after another, or prevent 4 stages damage froma | attack.\n\" ABN Muilti-Forml",
-      "errata": "The controlling player performs a physical attack; that player’s opponent defends, the controlling player performs another physical attack, that player’s opponent defends. Then the opponent can attack, and Combat continues as usual. Both physical attacks come from Tien’s Multiform Power, and are not any cards played from your hand.\n\nPersonality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken."
+      "text": "Perform 2 physical attacks, one right after another, or prevent 4 stages of damage from a physical attack.",
+      "errata": "The controlling player performs a physical attack; that player’s opponent defends, the controlling player performs another physical attack, that player’s opponent defends. Then the opponent can attack, and Combat continues as usual. Both physical attacks come from Tien’s Multiform Power, and are not any cards played from your hand.\n\nPersonality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Tien",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500,
+          600,
+          700,
+          800,
+          900,
+          1000
+        ],
+        "zeroStageIndex": 0,
+        "pur": null,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -78375,8 +80302,32 @@
       "needsReview": [
         "type"
       ],
-      "text": "dersonality-Hero ~~ 925,000 Constant Combat When entering Combat.\nyou may draw 8 28 a card.\nIf that card is a Tien Named card.\nyou may discard it to draw a | =) card.\nYour Tien Named cards that are removed from the game after use are discarded instead.\nYou may pay costs Of your Tien Named cards in life * ) cards instead of power stages.",
-      "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken."
+      "text": "When entering Combat, you may draw a card. If that card is a Tien Named card, you may discard it to draw a card. Your Tien Named cards that are removed from the game after use are discarded instead. You may pay costs of your Tien Named cards in life cards instead of power stages.",
+      "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Tien, the Crane Master",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          800000,
+          925000,
+          1050000,
+          1175000,
+          1300000,
+          1425000,
+          1550000,
+          1675000,
+          1800000,
+          1925000,
+          2050000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -78501,7 +80452,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "/ BAY Ei \\ Majin Buu and Tuff Enuff only.\nFor the remainder of Combat, any attacks performed with your Majin Buu's personlity power are focused attacks that do an additional +3 power stages of damage.\nYou may discard any cards attached to your Majin Buu."
+      "text": "Majin Buu and Tuff Enuff only. For the remainder of Combat, any attacks performed with your Majin Buu's personlity power are focused attacks that do an additional +3 power stages of damage. You may discard any cards attached to your Majin Buu.",
+      "textVerified": "vision"
     }
   },
   {
@@ -79731,7 +81683,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "Personality Constant Combat When entering Combat.\nyou may ol search your Life Deck or discard pile for a \"Heroes Only\" or Videl Named card and put it in your hand.\nYour | attacks do +3 life cards of damage.\n| Your opponent skips their first Attacks\" phase each 4 Combat."
+      "text": "When entering Combat, you may search your Life Deck or discard pile for a \"Heroes Only\" or Videl Named card and put it in your hand. Your attacks do +3 life cards of damage. Your opponent skips their first \"Attacker Attacks\" phase each Combat.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Videl, the Great Saiyanwoman",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          50000,
+          54000,
+          58000,
+          62000,
+          66000,
+          70000,
+          74000,
+          78000,
+          82000,
+          86000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 4
+      }
     }
   },
   {
@@ -79748,8 +81723,31 @@
       "needsReview": [
         "type"
       ],
-      "text": "- in mm UUU - A ’ Personality Hero Constant Combat 18,500 (If this Is part of your Main stack.\n> 3 your opponent's are considered to o be Villains and Majins for your card effects for the remainder of the game.) Your attacks do +1 life card of damage for each Villain personality in play.\nIf a person- ality in play has Majin in its printed title.",
-      "errata": "Cards that create artifical allies for card effects such as West City, Mighty Mask, and Ginyu Force are not counted for Videl's card power.  Only actual personality cards in play count toward Videl's card power.\n\nPersonality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken."
+      "text": "[If this is part of your Main Personality stack, your opponent's personalities are considered to be Villains and Majins for your card effects for the remainder of the game.] Your attacks do +1 life card of damage for each Villain personality in play. If a personality in play has Majin in its printed title, your attacks do +2 life cards of damage for each Villain personality in play instead.",
+      "errata": "Cards that create artifical allies for card effects such as West City, Mighty Mask, and Ginyu Force are not counted for Videl's card power.  Only actual personality cards in play count toward Videl's card power.\n\nPersonality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Videl, the Hellion",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          18500,
+          19000,
+          19500,
+          20000,
+          20500,
+          21000,
+          21500,
+          22000,
+          22500,
+          23000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -79863,7 +81861,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "Boll Po Se POWER: - When your opponent's non-damage card effects discard or remove from the game cards from your Life Deck or from your discard pile.\nlower that amount by 2.\nto a minimum of I."
+      "text": "When your opponent's non-damage card effects discard or remove from the game cards from your Life Deck or from your discard pile, lower that amount by 2, to a minimum of 1.",
+      "textVerified": "vision"
     }
   },
   {
@@ -80050,7 +82049,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "sague and Tuff Enuff only.\nWhen a physical attack you perform becomes successful, place a card In your discard pile under this Orill face down.\nWhen entering Combat and there are at least 4 cards under this Orill you may discard the cards under this to have all of your physical attacks do +4 power stages of damage for that Combat.\n/ / Yomcha Season Week 3 Attended"
+      "text": "League and Tuff Enuff only. When a physical attack you perform becomes successful, place a card in your discard pile under this Drill face down. When entering Combat and there are at least 4 cards under this Drill you may discard the cards under this Drill to have all of your physical attacks do +4 power stages of damage for that Combat.",
+      "textVerified": "vision"
     }
   },
   {
@@ -80175,7 +82175,8 @@
       "needsReview": [
         "type"
       ],
-      "text": "> apr Heroes only.\nChoose X cards in youl discard pile and shuffle them into your Life Deck.\nX equals either 5, or the number of Allies you have in play whichever number is lower.\nLimit 1 per deck."
+      "text": "Heroes only. Choose X cards in your discard pile and shuffle them into your Life Deck. X equals either 5, or the number of Allies you have in play whichever number is lower. Limit 1 per deck.",
+      "textVerified": "vision"
     }
   },
   {
@@ -80229,11 +82230,50 @@
     "imageUrl": "images-tts/tts-0e3b7819-14.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "alignment"
       ],
-      "text": "550,000 \\ 500,000 JOWED Lgl Ce J"
+      "text": "Physical attack doing +4 power stages of damage. If \"Arqua's Arena\" is in play, raise Arqua to his highest power stage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Arqua, the Water Champion",
+        "alignment": "Rogue",
+        "powerRatings": [
+          0,
+          450000,
+          500000,
+          550000,
+          600000,
+          650000,
+          700000,
+          750000,
+          800000,
+          850000,
+          900000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -80248,9 +82288,33 @@
       "type": "Unknown",
       "coverage": "unknown",
       "needsReview": [
-        "type"
+        "type",
+        "alignment"
       ],
-      "text": "750,000 700,000 of Lo"
+      "text": "Constant Combat Power: All of your physical attacks do +2 power stages of damage. If \"Arqua's Arena\" is in play, all of your attacks do an additional +3 power stages of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Arqua, Unleashed",
+        "alignment": "Rogue",
+        "powerRatings": [
+          0,
+          650000,
+          700000,
+          750000,
+          800000,
+          850000,
+          900000,
+          950000,
+          1000000,
+          1050000,
+          1100000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -81444,12 +83508,46 @@
     "imageUrl": "images-tts/tts-0a93c43d-54.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type",
-        "text"
+        "type"
       ],
-      "text": "400,000"
+      "text": "Physical attack doing 3 power stages of damage. If successful, remove a Drill in play from the game. If you did not declare a Tokui-Waza, you may use this power three times per Combat.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Chapuchai, the Tenacious",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          300000,
+          400000,
+          500000,
+          600000,
+          700000,
+          800000,
+          900000,
+          1000000,
+          1100000,
+          1200000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "powerStages": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -81462,11 +83560,48 @@
     "imageUrl": "images-tts/tts-0a93c43d-53.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "alignment"
       ],
-      "text": "200.000 the x \"TY VERY 8."
+      "text": "Stops a physical attack. Place the bottom 2 cards of your discard pile at the bottom of your Life Deck. You may use this power twice per Combat.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Chapuchai, the Tiny",
+        "alignment": "Rogue",
+        "powerRatings": [
+          0,
+          100000,
+          200000,
+          300000,
+          400000,
+          500000,
+          600000,
+          700000,
+          800000,
+          900000,
+          1000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      },
+      "abilities": [
+        {
+          "trigger": "defense",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -81767,9 +83902,32 @@
       "type": "Unknown",
       "coverage": "unknown",
       "needsReview": [
-        "type",
-        "text"
-      ]
+        "type"
+      ],
+      "text": "Constant Combat Power: The first physical attack Froug performs in Combat does +6 power stages of damage. All successful physical attacks performed against Froug do +3 power stages of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Froug, the Huge",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          1550000,
+          1600000,
+          1650000,
+          1700000,
+          1750000,
+          1800000,
+          1850000,
+          1900000,
+          1950000,
+          2000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -81782,11 +83940,47 @@
     "imageUrl": "images-tts/tts-0a93c43d-58.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
-      "text": "\\ / 500.000 \\ E 400.000"
+      "text": "Stops a physical attack. If you declared a Tokui-Waza, draw the bottom card of your discard pile.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Froug, the Underdog",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          300000,
+          400000,
+          500000,
+          600000,
+          700000,
+          800000,
+          900000,
+          1000000,
+          1100000,
+          1200000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 2
+      },
+      "abilities": [
+        {
+          "trigger": "defense",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -82073,7 +84267,32 @@
       "needsReview": [
         "type"
       ],
-      "text": "N— k A.\n3,200,000 | 3,100,000 3.000,0004 Once per g mak - or yo | IIE py for up to 5 7 NA Ori El place ther Ii 4"
+      "text": "Once per game, you may search either your Life Deck or your discard pile for up to 5 Drills and place them into play.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Goku, the King's Pupil",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          2900000,
+          3000000,
+          3100000,
+          3200000,
+          3300000,
+          3400000,
+          3500000,
+          3600000,
+          3700000,
+          3800000,
+          3900000,
+          4000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 4
+      }
     }
   },
   {
@@ -82463,7 +84682,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "AE POWER Zz fA 1 5 3 jr - 35 - = g 1 3 3 5 { = Y @ Hei S Pc) x .\n- = A .\n1 A 3 - We."
+      "text": "Constant Combat Power: All your attacks do +1 power stages of damage. Grand Kai does not need to take control of Combat to use this power.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Grand Kai",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z"
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -83014,8 +85256,33 @@
       "needsReview": [
         "type"
       ],
-      "text": "375,000 275.000 Lonstant Combat Power: All energL Pp attacks you perform do +1 power stages of damage for every Named card in your discard pile.\nAt the beginning of your | = o turn, remove 2 Named cards Card 5 in your discard pile from the = game.",
-      "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken."
+      "text": "Constant Combat Power: All energy attacks you perform do +1 power stages of damage for every Named card in your discard pile. At the beginning of your turn, remove 2 Named cards in your discard pile from the game.",
+      "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Krillin, the Great",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          225000,
+          275000,
+          325000,
+          375000,
+          425000,
+          475000,
+          525000,
+          575000,
+          625000,
+          675000,
+          725000,
+          775000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -83246,7 +85513,32 @@
       "needsReview": [
         "type"
       ],
-      "text": "A 22,000 21.000 - Constant Combat Power: All of your physical attacks do +2 | | power stages of damage.\nAll - 19.00 ENN your physical attacks J & bY performed against Videl y | 3 re 000 Al AN do +3 power stages of | = damage instead."
+      "text": "Constant Combat Power: All of your physical attacks do +2 power stages of damage. All your physical attacks performed against Videl do +3 power stages of damage instead.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Spopovich",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          19000,
+          20000,
+          21000,
+          22000,
+          23000,
+          24000,
+          25000,
+          26000,
+          27000,
+          28000,
+          29000,
+          30000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -83306,7 +85598,32 @@
       "needsReview": [
         "type"
       ],
-      "text": "46,000 mr 43,000 40,000 Place the bottom 3 cards of your discard pile at the bottom of 37 00 your Life Deck.\nIf you declared : RN a Tokui-Waza, your opponent ( the 7 000, of his discard pile from We 0 WISE <3"
+      "text": "Place the bottom 3 cards of your discard pile at the bottom of your Life Deck. If you declared a Tokui-Waza, your opponent removes the top 3 cards of his discard pile from the game.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Majin Spopovich, the Revitalized",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          37000,
+          40000,
+          43000,
+          46000,
+          49000,
+          52000,
+          55000,
+          58000,
+          61000,
+          64000,
+          67000,
+          70000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      }
     }
   },
   {
@@ -83401,11 +85718,48 @@
     "imageUrl": "images-tts/tts-0e3b7819-45.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
-      "text": "{88 2.280.000 = \\ | 2.190.000 2,100,000 stages of damage.\nIf successful, 2 : the bottom 3 cards of your discard 1 2,0 10,000 back into pile your Life Deck.\nIf Ne AN Life Deck ~ Db» 0000"
+      "text": "Physical attack doing 10 power stages of damage. If successful, shuffle the bottom 3 cards of your discard pile back into your Life Deck. If stopped, discard the top 3 cards of your Life Deck.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Maraikoh, the Mighty",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          2010000,
+          2100000,
+          2190000,
+          2280000,
+          2370000,
+          2460000,
+          2550000,
+          2640000,
+          2730000,
+          2820000,
+          2910000,
+          3000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 3,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 3
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "powerStages": 10
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -84277,7 +86631,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "800,000 1} Constant Lomaoat All of your Freestyle attacks do +2 life cards \\ of damage."
+      "text": "[Main Personality Only] Constant Combat Power: All of your Freestyle attacks do +2 life cards of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Olibu",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          600000,
+          700000,
+          800000,
+          900000,
+          1000000,
+          1100000,
+          1200000,
+          1300000,
+          1400000,
+          1500000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -84329,11 +86706,52 @@
     "imageUrl": "images-tts/tts-0e3b7819-2.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
-      "text": "a NY, 2.600.000 - A 2,475,000 \\ = 0 OWE 2 5 I] 1 Ic r If successful | - opponent's discard ATR pile from A 1 the"
+      "text": "Physical attack doing +8 power stages of damage. If successful, remove your opponent's discard pile from the game.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Olibu, the Honorable",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          2225000,
+          2350000,
+          2475000,
+          2600000,
+          2725000,
+          2850000,
+          2975000,
+          3100000,
+          3225000,
+          3350000,
+          3475000,
+          3600000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 4
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 8,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -84350,7 +86768,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "700,000 < 600.000 the top card of L Physical Combat cz 0a) it into your har f"
+      "text": "When entering Combat, discard the top card of your Life Deck. If it is a Physical Combat card, you may place it into your hand.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Olibu, the Mythical Hero",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          600000,
+          700000,
+          800000,
+          900000,
+          1000000,
+          1100000,
+          1200000,
+          1300000,
+          1400000,
+          1500000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -84930,7 +87371,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "fii | 485,000 nN at 440,000 = Ii P= ain OF ity Only 395,000 v Constant Poyyers |b 4 Any cards in your discard pile cannot be removed from the game."
+      "text": "[Main Personality Only] Constant Combat Power: Any cards in your discard pile cannot be removed from the game.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Piccolo",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          395000,
+          440000,
+          485000,
+          530000,
+          575000,
+          620000,
+          665000,
+          710000,
+          755000,
+          800000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -84947,7 +87411,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "PO\\YER 440.000 Place the bottom 3 cards Sam your discard pile at the bottom of your Life Deck."
+      "text": "Place the bottom 3 cards of your discard pile at the bottom of your Life Deck.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Piccolo, Majunior",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          395000,
+          440000,
+          485000,
+          530000,
+          575000,
+          620000,
+          665000,
+          710000,
+          755000,
+          800000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -85099,7 +87586,32 @@
       "needsReview": [
         "type"
       ],
-      "text": "| 3.00000 PO\\/ER energ | ror Av"
+      "text": "Constant Combat Power: All energy attacks performed by Pikkon gain \"If successful, remove a Non-Combat card in play from the game.\"",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Pikkon, the Hero",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          2900000,
+          3000000,
+          3100000,
+          3200000,
+          3300000,
+          3400000,
+          3500000,
+          3600000,
+          3700000,
+          3800000,
+          3900000,
+          4000000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 4,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 4
+      }
     }
   },
   {
@@ -86109,16 +88621,16 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "textDisagreement",
         "ability:energyLifeCards"
       ],
-      "text": "Endurance 1.\nEnergy attack.",
+      "text": "Endurance 1. Energy attack. If successful, place this card at the bottom of your Life Deck.",
       "textOriginal": "Endurance 1. Energy attack. If successful, place this card at the bottom of your Life Deck.",
       "lackey": {
         "number": "033",
         "rarity": "C",
         "style": "Saiyan"
       },
+      "textVerified": "vision",
       "abilities": [
         {
           "trigger": "attack",
@@ -86246,16 +88758,15 @@
     "rules": {
       "type": "Non-Combat",
       "coverage": "metadata",
-      "needsReview": [
-        "textDisagreement"
-      ],
-      "text": "fe y Just to let you Know, D4 : | am going to win.",
+      "needsReview": [],
+      "text": "All \"Saiyan Heritage only\" cards that perform attacks do +2 power stages of damage.",
       "textOriginal": "All \"Saiyan Heritage only\" cards that perform attacks do +2 power stages of damage.",
       "lackey": {
         "number": "109",
         "rarity": "U",
         "style": "Saiyan"
-      }
+      },
+      "textVerified": "vision"
     }
   },
   {
@@ -86456,17 +88967,17 @@
       "type": "Mastery",
       "coverage": "unknown",
       "needsReview": [
-        "type",
-        "textDisagreement"
+        "type"
       ],
-      "text": "3 ga F When entering Combat, draw a card.\nIf it is | i a Saiyan Style card, you may show it to : opponent and prevent 4 power and 4 life cards of damage from Ie 2 the first attack performed against you.\n| NESE Otherwise, prevent 4 power stages A of damage from the first attack | performed against you.\nPA | de 0 oF",
+      "text": "When entering Combat, draw a card. If it is a Saiyan Style card, you may show it to your opponent and prevent 4 power stages and 4 life cards of damage from the first attack performed against you. Otherwise, prevent 4 power stages of damage from the first attack performed against you.",
       "errata": "This mastery prevents damage from the first attack each Combat.",
       "textOriginal": "Draw a card when entering any combat. If that card is a Saiyan Style card, you may show it to your opponent and they lose 4 power stages to a minimum of 0.",
       "lackey": {
         "number": "148",
         "rarity": "R",
         "style": "Saiyan"
-      }
+      },
+      "textVerified": "vision"
     }
   },
   {
@@ -86516,16 +89027,15 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "metadata",
-      "needsReview": [
-        "textDisagreement"
-      ],
-      "text": "Sensei Deck.\nPhysical attack doing +4 power stages of damage.",
+      "needsReview": [],
+      "text": "Sensei Deck. Physical attack doing +4 power stages of damage. If performed against Pikkon, this attack does +7 power stages of damage instead. Lower your opponent's anger 1 level.",
       "textOriginal": "Sensei Deck. Physical attack doing +4 power stages of damage. If performed against Pikkon, this attack does +7 power stages of damage instead. Lower your opponent's anger 1 level.",
       "lackey": {
         "number": "115",
         "rarity": "U",
         "style": "Saiyan"
-      }
+      },
+      "textVerified": "vision"
     }
   },
   {
@@ -86561,16 +89071,16 @@
       "type": "Sensei",
       "coverage": "unknown",
       "needsReview": [
-        "type",
-        "textDisagreement"
+        "type"
       ],
-      "text": "| » Tes 2 UW 0 “er HED Lou {Lc = =}.\n4 / LoL U mall RN na ~ 1 3 [ 1 plat 2 iE] ay a 3 power Ste [em hy",
+      "text": "Once per game during your Non-Combat Step, you may search your Life Deck for a level 1 Ally and place it in play at 3 power stages above 0.",
       "textOriginal": "(Deck Size: 5) Once per game during your Non-Combat Step, you may search your Life Deck for a level 1 Ally and place it in play at 3 power stages above 0.",
       "lackey": {
         "number": "149",
         "rarity": "R",
         "style": null
-      }
+      },
+      "textVerified": "vision"
     }
   },
   {
@@ -86672,22 +89182,27 @@
       "type": "Physical Combat",
       "coverage": "partial",
       "needsReview": [
-        "textDisagreement",
         "ability:focusedAttack"
       ],
-      "text": "Focused physical attack doing +/ power stages of damage.",
+      "text": "Focused physical attack doing +7 power stages of damage. If successful, you may not use a card during your next \"Defender Defends\" phase. Lower your anger 1 level.",
       "textOriginal": "Focused physical attack doing +7 power stages of damage. If successful, you may not use a card during your next \"Defender Defends\" phase. Lower your anger 1 level.",
       "lackey": {
         "number": "117",
         "rarity": "U",
         "style": "Colorless"
       },
+      "textVerified": "vision",
       "abilities": [
         {
           "trigger": "attack",
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 7,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -86771,7 +89286,31 @@
       "needsReview": [
         "type"
       ],
-      "text": "entering Combat.\nlook at the top 5 cards of your opponent's Life | Deck and place them back order.\nDraw ~.\nthe bottom card of your Jj discard pile.\nooog | J AAR.\nA K J"
+      "text": "When entering Combat, look at the top 5 cards of your opponent's Life Deck and place them back in any order. Draw the bottom card of your discard pile.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Supreme Kai",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z",
+          "Z"
+        ],
+        "zeroStageIndex": 0,
+        "pur": 2,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -86987,16 +89526,15 @@
     "rules": {
       "type": "Non-Combat",
       "coverage": "metadata",
-      "needsReview": [
-        "textDisagreement"
-      ],
-      "text": "Another batch of",
+      "needsReview": [],
+      "text": "Discard 2 Non-Combat cards in play. If Gohan or Videl are in play, discard 1 Non-Combat card in play instead. Limit 1 per deck.",
       "textOriginal": "Discard 2 Non-Combat cards in play. If Gohan or Videl are in play, discard 1 Non-Combat card in play instead. Limit 1 per deck.",
       "lackey": {
         "number": "118",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "textVerified": "vision"
     }
   },
   {
@@ -87051,11 +89589,49 @@
     "imageUrl": "images-tts/tts-0e3b7819-4.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:energyLifeCards"
       ],
-      "text": "575.000 # 500.000 | Energy 425,000 If 1"
+      "text": "Energy attack. If successful, remove the bottom card of your opponent's discard pile from the game.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Torbie, the Silent",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          425000,
+          500000,
+          575000,
+          650000,
+          725000,
+          800000,
+          875000,
+          950000,
+          1025000,
+          1100000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -87275,7 +89851,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "L 675.000 \\ 600,000"
+      "text": "You may search your Life Deck for up to 3 Vegeta Named cards and discard them. Raise your anger 1 level.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Vegeta, the Proud",
+        "alignment": "Hero",
+        "powerRatings": [
+          0,
+          525000,
+          600000,
+          675000,
+          750000,
+          825000,
+          900000,
+          975000,
+          1050000,
+          1125000,
+          1200000
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -87292,7 +89891,30 @@
       "needsReview": [
         "type"
       ],
-      "text": "4 | 300 250 4 7 x \\ i | Can | wish | were him."
+      "text": "Constant Combat Power: Any attacks Vegeta performs that allow him to gain anger do +3 life cards of damage.",
+      "textVerified": "vision",
+      "personality": {
+        "personalityName": "Vegeta, the Puppet",
+        "alignment": "Villain",
+        "powerRatings": [
+          0,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700
+        ],
+        "zeroStageIndex": 0,
+        "pur": 1,
+        "canBeAlly": true,
+        "ladderVerified": "vision",
+        "level": 1
+      }
     }
   },
   {
@@ -87502,16 +90124,16 @@
       "type": "Sensei",
       "coverage": "unknown",
       "needsReview": [
-        "type",
-        "textDisagreement"
+        "type"
       ],
-      "text": "| ioc : a - J Once per ( 1 1 yA | Ve 4 \\ i dl] TEITIOVE : : Non L 1 | a « from the Mm ge Che ga",
+      "text": "Once per game during your \"Attacker Attacks\" phase, you may remove up to 2 Non-Combat cards in play from the game.",
       "textOriginal": "(Deck Size: 7) Once per game during your \"Attacker Attacks\" phase, you may remove up to 2 Non-Combat cards in play from the game.",
       "lackey": {
         "number": "156",
         "rarity": "R",
         "style": null
-      }
+      },
+      "textVerified": "vision"
     }
   },
   {
