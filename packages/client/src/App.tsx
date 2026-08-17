@@ -92,6 +92,9 @@ export function App() {
           }
           onAnswer={(promptId, choice) => game.send({ type: 'answerPrompt', promptId, choice })}
           onConcede={() => game.seat !== null && game.send({ type: 'concede', playerIdx: game.seat })}
+          onSetStage={(personalityUid, stageIndex) => game.send({ type: 'setStage', personalityUid, stageIndex })}
+          onSetAnger={(personalityUid, anger) => game.send({ type: 'setAnger', personalityUid, anger })}
+          onMoveCard={(cardUid, toZone) => game.send({ type: 'moveCard', cardUid, toZone })}
         />
       ) : (
         <>

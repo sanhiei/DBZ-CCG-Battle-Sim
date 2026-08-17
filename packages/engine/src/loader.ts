@@ -18,6 +18,10 @@ export interface EngineCardRules {
   coverage: string;
   text?: string;
   needsReview?: string[];
+  /** Ruling note carried on the card by the TTS mod author. */
+  errata?: string;
+  /** True when two independent sources agree on the text, or vision read it. */
+  textVerified?: boolean | string;
   /** Endurance value printed at the start of the rules text (CRD ~L1118). */
   endurance?: number;
   personality?: EnginePersonality;

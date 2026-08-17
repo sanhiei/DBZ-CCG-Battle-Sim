@@ -10,13 +10,16 @@
  * derives a single `handMode` from state and passes it down — nothing else in
  * the UI has to re-derive that.
  */
-import type { AttackType, GameState, PlayerState, Step } from '@dbz/shared';
+import { useState } from 'react';
+import type { AttackType, GameState, PlayerState, Step, Zone } from '@dbz/shared';
 import { STEPS } from '@dbz/shared';
 import type { CardDb } from '@dbz/engine';
 import { Scouter } from './Scouter.tsx';
 import { AngerSword } from './AngerSword.tsx';
 import { Hand, type HandMode } from './Hand.tsx';
 import { PromptPanel, type PromptChoice } from './PromptPanel.tsx';
+import { ManualPanel } from './ManualPanel.tsx';
+import { CardDetail } from './CardDetail.tsx';
 
 export interface BoardProps {
   state: GameState;
@@ -28,6 +31,9 @@ export interface BoardProps {
   onAttack(attackType: AttackType, cardUid?: string): void;
   onAnswer(promptId: string, choice: PromptChoice | string | null): void;
   onConcede(): void;
+  onSetStage(personalityUid: string, stageIndex: number): void;
+  onSetAnger(personalityUid: string, anger: number): void;
+  onMoveCard(cardUid: string, toZone: Zone): void;
 }
 
 function Zones({ player, own }: { player: PlayerState; own: boolean }) {
@@ -107,7 +113,12 @@ export function Board({
   onAttack,
   onAnswer,
   onConcede,
+  onSetStage,
+  onSetAnger,
+  onMoveCard,
 }: BoardProps) {
+  const [manualOpen, setManualOpen] = useState(false);
+  const [inspecting, setInspecting] = useState<string | null>(null);
   // Spectators have no seat but still need both sides laid out.
   const bottomIdx = seat ?? 1;
   const me = state.players[bottomIdx];
@@ -125,7 +136,11 @@ export function Board({
   const useCard = (cardUid: string) => {
     if (handMode === 'defend' && prompt) onAnswer(prompt.id, { cardUid });
     else if (handMode === 'attack') onAttack('physical', cardUid);
+    // Idle: open the card so it can be read and resolved by hand.
+    else setInspecting(cardUid);
   };
+
+  const inspected = me?.zones.hand.find((c) => c.uid === inspecting);
 
   return (
     <div className="board">
@@ -182,6 +197,28 @@ export function Board({
         <div className="board__hand">
           <Hand cards={me.zones.hand} db={db} mode={handMode} onUse={useCard} />
         </div>
+      )}
+
+      <ManualPanel
+        state={state}
+        seat={seat}
+        open={manualOpen}
+        onToggle={() => setManualOpen((v) => !v)}
+        onSetStage={onSetStage}
+        onSetAnger={onSetAnger}
+        onMoveCard={onMoveCard}
+      />
+
+      {inspected && (
+        <CardDetail
+          card={db?.get(inspected.cardId)}
+          onClose={() => setInspecting(null)}
+          actions={[
+            { label: 'Discard', run: () => { onMoveCard(inspected.uid, 'discard'); setInspecting(null); } },
+            { label: 'Put in play', run: () => { onMoveCard(inspected.uid, 'inPlay'); setInspecting(null); } },
+            { label: 'Remove from game', run: () => { onMoveCard(inspected.uid, 'removed'); setInspecting(null); } },
+          ]}
+        />
       )}
 
       <aside className="log">
