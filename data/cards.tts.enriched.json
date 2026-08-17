@@ -552,7 +552,7 @@
     "imageUrl": "images-tts/tts-49d99703-21.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Villans only. Raise you Main Pwersonality to its highest power stage. Place the bottom 4 cards from your discard pile at the bottom of your Life Deck. Remove from the game after use.",
       "textVerified": true,
@@ -560,7 +560,23 @@
         "number": "091",
         "rarity": "R",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 4,
+              "from": "bottom"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -651,7 +667,7 @@
     "imageUrl": "images-tts/tts-514f40cb-4.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Villians only. Place the bottom 4 cards from your discard pile at the bottom of your Life Deck.",
       "textVerified": true,
@@ -659,7 +675,20 @@
         "number": "005",
         "rarity": "C",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 4,
+              "from": "bottom"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -939,6 +968,11 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 1
             }
           ],
           "source": "parsed",
@@ -1668,9 +1702,22 @@
     "imageUrl": "images-tts/tts-514f40cb-58.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
-      "text": "w | ali 1 3 | opponent | RIB 113 | Your discards a card at random from his hand."
+      "text": "w | ali 1 3 | opponent | RIB 113 | Your discards a card at random from his hand.",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -1923,7 +1970,7 @@
     "imageUrl": "images-tts/tts-514f40cb-48.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Raise all personalities in play to their highest power stage. Choose 3 cards from your discard pile, and put them on the bottom of your Life Deck. Remove from the game after use.",
       "textVerified": true,
@@ -1931,7 +1978,23 @@
         "number": "049",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 3,
+              "from": "choose"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -4751,7 +4814,7 @@
     "imageUrl": "images-tts/tts-30fb99ff-29.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Energy attack doing 5 life cards of damage. If you have at least 2 personalities in play with \"Android\" in the title, raise your anger 1 level and shuffle this card back into your Life Deck after use.",
       "textVerified": true,
@@ -4760,6 +4823,23 @@
         "rarity": "P",
         "style": "Named"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -5310,7 +5390,7 @@
     "imageUrl": "images-tts/tts-be34bddc-23.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -5321,6 +5401,26 @@
         "rarity": "P",
         "style": "Black"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -6031,15 +6131,36 @@
     "imageUrl": "images-tts/tts-30fb99ff-12.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards",
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack. Costs 3 power stages to perform. If successful, search your Life Deck for any Location and place it into play.",
       "textVerified": true,
       "lackey": {
         "number": "M13",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 3
+          },
+          "needsReview": [
+            "energyLifeCards",
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -6889,6 +7010,11 @@
             {
               "kind": "drawCards",
               "count": 1
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 1
             }
           ],
           "source": "parsed"
@@ -7266,9 +7392,26 @@
     "imageUrl": "images-tts/tts-c29a516a-53.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
-      "text": "Focused physical attack doing +7 power stages of damage.\nIf | performed against a Rogue 77 this attack does 7 an additional «4 life cards of damage.\nIf the Rogue VY NZ Personality is a this Na) 2 a focused attadk."
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
+      "text": "Focused physical attack doing +7 power stages of damage.\nIf | performed against a Rogue 77 this attack does 7 an additional «4 life cards of damage.\nIf the Rogue VY NZ Personality is a this Na) 2 a focused attadk.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 4
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -8327,7 +8470,7 @@
     "imageUrl": "images-tts/tts-c29a516a-13.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Once per Combat, you may discard a card from your hand and have your Main Personality pay 2 power stages to perform a physical attack doing +3 power stage of damage. If your opponent's current anger is 0 when you use this Drill, gain 2 power stages.",
       "textVerified": true,
@@ -8335,7 +8478,20 @@
         "number": "083",
         "rarity": "U",
         "style": "Red"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -9025,9 +9181,26 @@
     "imageUrl": "images-tts/tts-30fb99ff-2.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
-      "text": "Focused physical attack doing +5 power stages of damage.\nYour opponent skips ml his next \"Attacker Attacks\" * phase.\nDunng your next \"Attacker Attacks\" phase.\nAndroid 13 must perform a focused physical attack 3 doing 5 power stages of damage, if possible."
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
+      "text": "Focused physical attack doing +5 power stages of damage.\nYour opponent skips ml his next \"Attacker Attacks\" * phase.\nDunng your next \"Attacker Attacks\" phase.\nAndroid 13 must perform a focused physical attack 3 doing 5 power stages of damage, if possible.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "powerStages": 5
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -9156,9 +9329,10 @@
     "imageUrl": "images-tts/tts-30fb99ff-15.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:focusedAttack"
       ],
       "text": "Focused physical attack doing +2 power stages of damage. If your opponent declared a Tokui-Waza, this attack does an additional +2 life cards of damage for each Dragon Ball your opponent controls.",
       "textVerified": "vision",
@@ -9183,7 +9357,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 2
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -9343,10 +9532,30 @@
     "imageUrl": "images-tts/tts-c29a516a-22.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +4 power stages of damage.\n| f performed against a || Majin.\nthis Is a Ih 23,000 focused attack doing jf arn additional +4 Ife JJ cords of damage.",
-      "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken."
+      "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -10187,15 +10396,32 @@
     "imageUrl": "images-tts/tts-bf3b8d7f-53.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +3 power stages of damage. If successful, attach this card to your Main Personality until your opponent successfully deals at least 1 life card of damage to you. While attached, your opponent cannot play or use cards that allow him to look at your hand or Life Deck.",
       "textVerified": true,
       "lackey": {
         "number": "054",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -10405,7 +10631,7 @@
     "imageUrl": "images-tts/tts-bf3b8d7f-8.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. Physical attack doing +3 power stages of damage. Empower 1. Lower your opponent's anger 2 levels.",
       "textVerified": true,
@@ -10414,6 +10640,26 @@
         "rarity": "C",
         "style": "Blue"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -10427,15 +10673,36 @@
     "imageUrl": "images-tts/tts-bf3b8d7f-58.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +3 power stages of damage. If successful and you declared a Tokui-Waza, search your opponent's Life Deck for up to 3 Drills with different titles and discard them.",
       "textVerified": true,
       "lackey": {
         "number": "059",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -11182,15 +11449,44 @@
     "imageUrl": "images-tts/tts-bf3b8d7f-11.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +3 power stages of damage. If successful, lower your opponent's anger 3 levels. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
         "number": "012",
         "rarity": "C",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -3
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -11454,15 +11750,37 @@
     "imageUrl": "images-tts/tts-be34bddc-36.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack doing +1 life cards of damage for each card in your discard pile with \"Kamehameha\" in the title. Raise your anger 1 level.",
       "textVerified": true,
       "lackey": {
         "number": "K1",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -11475,15 +11793,34 @@
     "imageUrl": "images-tts/tts-bf3b8d7f-12.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack. If successful, search your Life Deck for any card with \"Swordplay\" in the title and place it in play. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
         "number": "013",
         "rarity": "C",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -11939,7 +12276,7 @@
     "imageUrl": "images-tts/tts-a15907e0-63.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. Physical attack doing +4 power stages of damage. If your Main Personality is at level 2 or above, this attack does an addition +4 life cards of damage and is a focused attack. If successful, search your Life Deck for a Drill and place it into play.",
       "textVerified": true,
@@ -11948,6 +12285,18 @@
         "rarity": "P",
         "style": "Named"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 4
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -12174,9 +12523,29 @@
     "imageUrl": "images-tts/tts-117cae92-48.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
-      "text": "Focused physical attack doing +4 power stages of damage.\nYou may any amount of cards in your discard pile from the game.\nFor every 3 cards you remove in this way.\nyou may discard a 4 / Non-Combat card Ally in play.\nThey sound kinda frightened to me."
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
+      "text": "Focused physical attack doing +4 power stages of damage.\nYou may any amount of cards in your discard pile from the game.\nFor every 3 cards you remove in this way.\nyou may discard a 4 / Non-Combat card Ally in play.\nThey sound kinda frightened to me.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -12282,7 +12651,7 @@
     "imageUrl": "images-tts/tts-bf3b8d7f-67.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -12292,7 +12661,20 @@
         "number": "068",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 3,
+              "from": "bottom"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -13048,9 +13430,29 @@
     "imageUrl": "images-tts/tts-a15907e0-55.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
-      "text": "Focused physical attack doing +3 power stages of damage.\nIf you did not dedare a Tokui- Waza.\nyou may use this power a second time this Combat."
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
+      "text": "Focused physical attack doing +3 power stages of damage.\nIf you did not dedare a Tokui- Waza.\nyou may use this power a second time this Combat.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -13329,10 +13731,30 @@
     "imageUrl": "images-tts/tts-a15907e0-64.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +4 power stages of damage.\nEmpower 2.\nFor the remain- der of Combat, during each player's p “Attacker Attacks” phase, that player must perform an attack or pass.",
-      "errata": "During each player’s “Attacker’s Attack” phase that this effect is floating, that player must play or use a card or floating effect that performs an attack or pass.  \n\n\nIf you play Majin Buu’s Fury, players cannot play or use cards that have the potential to create a second effect that performs an attack if that card itself does not perform an attack.  An example of such an effect is Hercule’s Amazing Techniques."
+      "errata": "During each player’s “Attacker’s Attack” phase that this effect is floating, that player must play or use a card or floating effect that performs an attack or pass.  \n\n\nIf you play Majin Buu’s Fury, players cannot play or use cards that have the potential to create a second effect that performs an attack if that card itself does not perform an attack.  An example of such an effect is Hercule’s Amazing Techniques.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -13430,7 +13852,7 @@
     "imageUrl": "images-tts/tts-117cae92-6.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. Physical attack doing 3 life cards of damage. Empower 2. If successful, attach this card to one of your opponent's Allies in play. While attached, that Ally cannot take control of Combat or have damage redirected to him.",
       "textVerified": true,
@@ -13439,6 +13861,18 @@
         "rarity": "U",
         "style": "Named"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -13469,9 +13903,29 @@
     "imageUrl": "images-tts/tts-a15907e0-43.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
-      "text": "Focused physical attack doing +3 power stages of damage.\nFor the remainder of Combat.\nall attacks you perform with Styled and Named cards are 4 Yea focused attacks.\n“ Ca You wouldn't dare ( 4"
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
+      "text": "Focused physical attack doing +3 power stages of damage.\nFor the remainder of Combat.\nall attacks you perform with Styled and Named cards are 4 Yea focused attacks.\n“ Ca You wouldn't dare ( 4",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -13950,7 +14404,7 @@
     "imageUrl": "images-tts/tts-117cae92-9.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. Physical attack. Empower 4. Discard one of your opponent's Non-Combat, Ally, or Battleground cards in play. Lower your opponent's anger 2 levels.",
       "textOriginal": "Endurance 3. Physical attack. Empower 4. Discard one of your opponent's Non-Combat, Ally, or Battleground cards in play. Lower your opponent's anger 2 levels.",
@@ -13960,6 +14414,22 @@
         "style": "Namekian"
       },
       "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -13973,8 +14443,10 @@
     "imageUrl": "images-tts/tts-117cae92-10.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Endurance 4. Focused physical attack doing +3 power stages of damage. Empower 3. Your opponent cannot use Defense Shields for the remainder of Combat. Discard up to 3 of your opponent's Allies in play.",
       "textOriginal": "Endurance 4. Focused physical attack doing +3 power stages of damage. Empower 3. Your opponent cannot use Defense Shields for the remainder of Combat. Discard up to 3 of your opponent's Allies in play.",
       "lackey": {
@@ -13983,6 +14455,24 @@
         "style": "Namekian"
       },
       "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ],
       "endurance": 4
     }
   },
@@ -14084,8 +14574,10 @@
     "imageUrl": "images-tts/tts-043989cc-7.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack doing 2 life cards of damage. Costs 1 power stage to perform. Remove from the game after use. Empower 4. This attack is no longer focused. This attack stays on the table to be used 2 more times this Combat without using its Empower.",
       "textOriginal": "Focused energy attack doing 2 life cards of damage. Costs 1 power stage to perform. Remove from the game after use. Empower 4. This attack is no longer focused. This attack stays on the table to be used 2 more times this Combat without using its Empower.",
       "lackey": {
@@ -14093,7 +14585,28 @@
         "rarity": "U",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 2
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 1
+          },
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -14142,7 +14655,7 @@
     "imageUrl": "images-tts/tts-bf3b8d7f-21.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Physical attack doing +2 power stages of damage. Empower 3. Your Main Personality gains +2 to his PUR until the end of your next turn.",
       "textOriginal": "Endurance 2. Physical attack doing +2 power stages of damage. Empower 3. Your Main Personality gains +2 to his PUR until the end of your next turn.",
@@ -14152,6 +14665,21 @@
         "style": "Orange"
       },
       "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -14329,7 +14857,7 @@
     "imageUrl": "images-tts/tts-117cae92-14.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. Physical attack doing +4 power stages of damage. All of your other attacks do +1 power stages of damage for the remainder of Combat. Lower your opponent's anger 2 levels.",
       "textVerified": true,
@@ -14338,6 +14866,26 @@
         "rarity": "U",
         "style": "Orange"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -14546,7 +15094,7 @@
     "imageUrl": "images-tts/tts-117cae92-20.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. Energy attack doing 5 life cards of damage. For the remainder of Combat, all your attacks gain \"If successful, your Main Personality gains 2 power stages.\" Lower your opponent's anger 2 levels.",
       "textVerified": true,
@@ -14555,6 +15103,23 @@
         "rarity": "U",
         "style": "Orange"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -15104,9 +15669,27 @@
     "imageUrl": "images-tts/tts-a15907e0-67.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
-      "text": "Focused energy attack doing 3 life 4 cards of damage.\nEmpower 3.\nIf successful, search your Life Deck | for a Drill and place it Jip play."
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards",
+        "ability:focusedAttack"
+      ],
+      "text": "Focused energy attack doing 3 life 4 cards of damage.\nEmpower 3.\nIf successful, search your Life Deck | for a Drill and place it Jip play.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards",
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -15615,7 +16198,7 @@
     "imageUrl": "images-tts/tts-bf3b8d7f-34.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 4. Physical attack doing +3 power stages of damage and +2 life cards of damage.",
       "textVerified": true,
@@ -15624,6 +16207,18 @@
         "rarity": "C",
         "style": "Saiyan"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 4
     }
   },
@@ -15849,6 +16444,11 @@
             {
               "kind": "damageStages",
               "stages": 3
+            },
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 1
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -16257,15 +16857,35 @@
     "imageUrl": "images-tts/tts-a15907e0-9.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack. If you declared a Tokui-Waza and your Main Personality is above level 1, you may have him lose a personality level to have this attack do an additional +7 life cards of damage. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
         "number": "148",
         "rarity": "R",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 7
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -19615,6 +20235,11 @@
             {
               "kind": "physicalAttack",
               "lifeCards": 1
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 2
             }
           ],
           "source": "parsed"
@@ -21743,6 +22368,11 @@
               "count": 1
             },
             {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "choose"
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
@@ -22096,6 +22726,11 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "bottom"
             }
           ],
           "source": "parsed"
@@ -23967,6 +24602,11 @@
             {
               "kind": "damageStages",
               "stages": 4
+            },
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 1
             }
           ],
           "source": "parsed"
@@ -24220,6 +24860,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 7
+            },
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 1
             }
           ],
           "source": "parsed"
@@ -25513,8 +26158,10 @@
     "imageUrl": "images-tts/tts-930d6a1e-32.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards"
+      ],
       "text": "Endurance 3. Energy attack. If you declared a Tokui-Waza, and the personality that performed this attack is at 0 power stages, this attack does +2 life cards and +2 power stages of damage.",
       "textVerified": true,
       "lackey": {
@@ -25522,6 +26169,24 @@
         "rarity": "U",
         "style": "Black"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ],
       "endurance": 3
     }
   },
@@ -25557,8 +26222,10 @@
     "imageUrl": "images-tts/tts-930d6a1e-0.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards"
+      ],
       "text": "Endurance 2. Energy attack. If successful, discard one of your opponent's Allies in play.",
       "textVerified": true,
       "lackey": {
@@ -25566,6 +26233,20 @@
         "rarity": "C",
         "style": "Black"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ],
       "endurance": 2
     }
   },
@@ -25579,15 +26260,36 @@
     "imageUrl": "images-tts/tts-930d6a1e-35.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +2 power stages of damage. If successful, choose 1 card from your opponent's hand and have him discard it.",
       "textVerified": true,
       "lackey": {
         "number": "036",
         "rarity": "U",
         "style": "Black"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -25600,7 +26302,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-1.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -25611,6 +26313,21 @@
         "rarity": "C",
         "style": "Black"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -25624,7 +26341,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-34.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 1. Energy attack doing 3 life cards of damage. If you declared a Tokui-Waza, the attack also does +2 power stages of damage.",
       "textVerified": true,
@@ -25633,6 +26350,18 @@
         "rarity": "U",
         "style": "Black"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 1
     }
   },
@@ -25646,15 +26375,38 @@
     "imageUrl": "images-tts/tts-930d6a1e-2.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards",
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack. If successful, raise your anger 1 level.",
       "textVerified": true,
       "lackey": {
         "number": "003",
         "rarity": "C",
         "style": "Black"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards",
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -25868,15 +26620,32 @@
     "imageUrl": "images-tts/tts-930d6a1e-42.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack doing 3 life cards of damage. If successful, remove the top 10 cards of your opponent's discard pile from the game.",
       "textVerified": true,
       "lackey": {
         "number": "043",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 3
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -25925,15 +26694,36 @@
     "imageUrl": "images-tts/tts-40b278df-34.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +2 power stages of damage. If successful, prevent X power stages or life cards of damage from the next attack performed against this personality this combat. X = power stages of damage dealt by this attack.",
       "textVerified": true,
       "lackey": {
         "number": "104",
         "rarity": "R",
         "style": "Blue"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -25946,7 +26736,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-3.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -25957,6 +26747,27 @@
         "rarity": "C",
         "style": "Blue"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -25970,15 +26781,31 @@
     "imageUrl": "images-tts/tts-930d6a1e-46.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack. If successful, capture an opponent's Dragon Ball.",
       "textVerified": true,
       "lackey": {
         "number": "047",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -26026,7 +26853,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-45.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Once per Combat, after dealing 5 or more life cards of damage, discard 1 card from your hand to raise your Main Personality to his highest power rating.",
       "textVerified": true,
@@ -26035,6 +26862,19 @@
         "rarity": "U",
         "style": "Blue"
       },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -26082,7 +26922,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-4.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -26094,6 +26934,18 @@
         "style": "Blue"
       },
       "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -26180,6 +27032,11 @@
               "kind": "damageStages",
               "stages": 5,
               "ifSuccessful": true
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 1
             }
           ],
           "source": "parsed",
@@ -26200,9 +27057,10 @@
     "imageUrl": "images-tts/tts-930d6a1e-49.jpg",
     "rules": {
       "type": "Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:energyLifeCards"
       ],
       "text": "Endurance 3. Energy attacks do a maximum of 2 life cards and 0 power stages of damage for the remainder of Combat.",
       "textVerified": true,
@@ -26211,6 +27069,20 @@
         "rarity": "U",
         "style": "Colorless"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ],
       "endurance": 3
     }
   },
@@ -26639,7 +27511,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-53.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -26650,6 +27522,27 @@
         "rarity": "U",
         "style": "Named"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            },
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "top"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -26914,15 +27807,33 @@
     "imageUrl": "images-tts/tts-930d6a1e-54.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards",
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack. If successful, you may discard up to 4 cards from the top of your Life Deck. Your opponent must discard the same number from the top of his Life Deck.",
       "textVerified": true,
       "lackey": {
         "number": "055",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards",
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -27220,9 +28131,10 @@
     "imageUrl": "images-tts/tts-930d6a1e-8.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:focusedAttack"
       ],
       "text": "Endurance 2. Focused physical attack doing +2 power stages of damage. Raise your anger 1 level.",
       "textVerified": true,
@@ -27231,6 +28143,29 @@
         "rarity": "C",
         "style": "Named"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ],
       "endurance": 2
     }
   },
@@ -27579,7 +28514,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-9.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -27590,6 +28525,24 @@
         "rarity": "C",
         "style": "Namekian"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -27735,15 +28688,36 @@
     "imageUrl": "images-tts/tts-930d6a1e-11.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +3 power stages of damage. If successful, choose any cards in your discard pile and remove them from the game.",
       "textVerified": true,
       "lackey": {
         "number": "012",
         "rarity": "C",
         "style": "Namekian"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -27756,7 +28730,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-12.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 4. Physical attack doing +2 power stages of damage. If successful, choose a card in your discard pile and shuffle it back into your Life Deck.",
       "textVerified": true,
@@ -27765,6 +28739,22 @@
         "rarity": "C",
         "style": "Namekian"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 4
     }
   },
@@ -27778,8 +28768,10 @@
     "imageUrl": "images-tts/tts-930d6a1e-62.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards"
+      ],
       "text": "Endurance 2. Energy attack. If successful, discard one of your opponent's Allies in play. Lower your opponent's anger 1 level.",
       "textOriginal": "Endurance 2. Energy attack. If succesful, discard one of your opponent's Allies in play. Lower your opponent's anger 1 level.",
       "lackey": {
@@ -27788,6 +28780,25 @@
         "style": "Namekian"
       },
       "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ],
       "endurance": 2
     }
   },
@@ -27835,15 +28846,32 @@
     "imageUrl": "images-tts/tts-930d6a1e-64.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack doing 5 life cards of damage. If successful, choose up to 4 cards in your discard pile. Remove 2 of them from the game. Shuffle the remaining cards back into your Life Deck. If successful, remove from the game.",
       "textVerified": true,
       "lackey": {
         "number": "065",
         "rarity": "U",
         "style": "Namekian"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -27958,15 +28986,32 @@
     "imageUrl": "images-tts/tts-40b278df-5.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +2 power stages of damage. If successful, all energy attacks this personality performs for the remainder of Combat do +2 life cards of damage.",
       "textVerified": true,
       "lackey": {
         "number": "075",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 2
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -27979,7 +29024,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-68.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. Physical attack. If successful, look at your opponent's hand and choose a Physical Combat card. Your opponent discards the chosen card, if any.",
       "textVerified": true,
@@ -27988,6 +29033,17 @@
         "rarity": "U",
         "style": "Orange"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -28059,9 +29115,10 @@
     "imageUrl": "images-tts/tts-40b278df-1.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:energyLifeCards"
       ],
       "text": "Endurance 2. Energy attack. Costs 3 power stages to perform. If successful, and you declared a Tokui-Waza, your opponent discards a card from his hand.",
       "textVerified": true,
@@ -28070,6 +29127,28 @@
         "rarity": "U",
         "style": "Orange"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 1
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 3
+          },
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ],
       "endurance": 2
     }
   },
@@ -28199,9 +29278,10 @@
     "imageUrl": "images-tts/tts-40b278df-4.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:energyLifeCards"
       ],
       "text": "Endurance 2. Energy attack. If successful, find a Dende Dragon Ball in your Life Deck and place it in play without using its power.",
       "textVerified": true,
@@ -28210,6 +29290,20 @@
         "rarity": "U",
         "style": "Orange"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ],
       "endurance": 2
     }
   },
@@ -28223,8 +29317,10 @@
     "imageUrl": "images-tts/tts-40b278df-40.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack doing 5 life cards of damage. If successful, prevent all damage from any physical attack during your opponent's next \"Attacker Attacks\" phase.",
       "textOriginal": "Focused energy attack doing 5 life cards of damage. If successful, prevent all damage from any physical attack during your opponents next \"Attacker Attacks\" phase.",
       "lackey": {
@@ -28232,7 +29328,22 @@
         "rarity": "R",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -28279,7 +29390,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-14.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -28290,6 +29401,18 @@
         "rarity": "C",
         "style": "Orange"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 8
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -28408,6 +29531,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 6
+            },
+            {
+              "kind": "rejuvenate",
+              "count": 1,
+              "from": "bottom"
             }
           ],
           "source": "parsed"
@@ -28579,7 +29707,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-17.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -28590,6 +29718,21 @@
         "rarity": "C",
         "style": "Red"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -28667,9 +29810,10 @@
     "imageUrl": "images-tts/tts-40b278df-12.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:focusedAttack"
       ],
       "text": "Focused energy attack doing 3 life cards of damage. If successful, gain 2 anger.",
       "textOriginal": "Focused energy attack doing 3 life cards of damage. If successful, gain 2 anger.",
@@ -28678,7 +29822,22 @@
         "rarity": "U",
         "style": "Red"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 3
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -28691,7 +29850,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-19.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -28702,6 +29861,22 @@
         "rarity": "C",
         "style": "Red"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -28787,9 +29962,10 @@
     "imageUrl": "images-tts/tts-40b278df-14.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:focusedAttack"
       ],
       "text": "Focused physical attack doing +1 power stages of damage. If successful, raise your anger 2 levels.",
       "textOriginal": "Focused physical attack doing +1 power stages of damage. If successful, raise your anger 2 levels.",
@@ -28798,7 +29974,31 @@
         "rarity": "U",
         "style": "Red"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 1,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -28811,7 +30011,7 @@
     "imageUrl": "images-tts/tts-40b278df-15.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -28823,6 +30023,22 @@
         "style": "Red"
       },
       "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -28836,7 +30052,7 @@
     "imageUrl": "images-tts/tts-40b278df-16.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -28847,6 +30063,20 @@
         "rarity": "U",
         "style": "Red"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -28902,7 +30132,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-22.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. Physical attack. If successful, search your Life Deck for any Ally whose personality level is the same as your Main Personality's, and place it in place at its highest power stage.",
       "textVerified": true,
@@ -28911,6 +30141,17 @@
         "rarity": "C",
         "style": "Saiyan"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -28992,7 +30233,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-24.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -29003,6 +30244,21 @@
         "rarity": "C",
         "style": "Saiyan"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 7
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 1
     }
   },
@@ -29054,7 +30310,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-25.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -29065,6 +30321,21 @@
         "rarity": "C",
         "style": "Saiyan"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -29102,15 +30373,36 @@
     "imageUrl": "images-tts/tts-930d6a1e-27.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +2 power stages of damage. If successful, discard one of your opponent's Drills in play.",
       "textVerified": true,
       "lackey": {
         "number": "028",
         "rarity": "C",
         "style": "Saiyan"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -29123,7 +30415,7 @@
     "imageUrl": "images-tts/tts-40b278df-19.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -29134,6 +30426,20 @@
         "rarity": "U",
         "style": "Saiyan"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -29181,9 +30487,10 @@
     "imageUrl": "images-tts/tts-930d6a1e-28.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:focusedAttack"
       ],
       "text": "Focused energy attack doing 3 life cards of damage. If successful, draw a card.",
       "textVerified": true,
@@ -29191,7 +30498,26 @@
         "number": "029",
         "rarity": "C",
         "style": "Saiyan"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 3
+            },
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -29557,15 +30883,32 @@
     "imageUrl": "images-tts/tts-be34bddc-63.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused Energy Attack doing 5 life cards of damage. If successful, this personality does not have to pay any costs for energy attacks for the remainder of combat.",
       "textVerified": true,
       "lackey": {
         "number": "X2",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -34626,7 +35969,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-34.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -34637,6 +35980,18 @@
         "rarity": "U",
         "style": "Black"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 1
     }
   },
@@ -34671,7 +36026,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-0.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. Physical attack. This attack does +2 life cards of damage for each Dragon Ball you control.",
       "textVerified": true,
@@ -34680,6 +36035,18 @@
         "rarity": "C",
         "style": "Black"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -34982,17 +36349,25 @@
       "textVerified": "vision",
       "abilities": [
         {
-          "trigger": "defense",
+          "trigger": "attack",
           "effects": [
             {
-              "kind": "stopAttack",
-              "attackType": "any",
-              "window": "thisAttack"
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
             },
             {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -35049,7 +36424,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-40.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. Physical attack doing +3 power stages of damage. Raise your anger 1 level. If successful, for the remainder of Combat all of your physical attacks have a Base Damage of X when you use the Physical Attack Table. X = 4 minus your opponent's current anger level.",
       "textVerified": true,
@@ -35058,6 +36433,27 @@
         "rarity": "U",
         "style": "Blue"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -35244,9 +36640,10 @@
     "imageUrl": "images-tts/tts-2b332fa4-44.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:energyLifeCards"
       ],
       "text": "Endurance 1. Energy attack. Lower your opponent's anger 2 levels. For the remainder of Combat, all of your energy attacks gain \"If successful, raise your anger 1 level.\" Remove from the game after use.",
       "textVerified": true,
@@ -35255,6 +36652,28 @@
         "rarity": "U",
         "style": "Blue"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ],
       "endurance": 1
     }
   },
@@ -35268,7 +36687,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-27.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -35279,6 +36698,21 @@
         "rarity": "R",
         "style": "Blue"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -35793,7 +37227,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-49.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -35804,6 +37238,26 @@
         "rarity": "U",
         "style": "Colorless"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 1
     }
   },
@@ -36049,15 +37503,35 @@
     "imageUrl": "images-tts/tts-e3673ab6-61.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack doing 6 life cards of damage. If used by Frieza, for the remainder of Combat all your attacks from Frieza Named cards do an additional +3 life cards of damage. If successful, shuffle all Frieza Named cards in your discard pile into your Life Deck. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
         "number": "CR6",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -36912,7 +38386,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-34.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -36923,6 +38397,26 @@
         "rarity": "R",
         "style": "Colorless"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 1
     }
   },
@@ -37202,7 +38696,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-59.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -37213,6 +38707,23 @@
         "rarity": "U",
         "style": "Named"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -3
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -37226,7 +38737,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-10.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -37238,6 +38749,21 @@
         "style": "Named"
       },
       "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 1
     }
   },
@@ -37625,7 +39151,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-42.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Energy attack doing 6 life cards of damage. If successful, while the current Battleground or Location is in play, your opponent cannot place a new Battleground or Location in play and cannot discard or remove from the game the current Battleground or Location unless he plays \"Dimension Scream.\"",
       "textVerified": true,
@@ -37634,6 +39160,18 @@
         "rarity": "R",
         "style": "Namekian"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -37762,7 +39300,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-20.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 1. Physical attack doing +3 power stages of damage. Empower 2. If successful, take control of one of your opponent's Freestyle Drills in play.",
       "textOriginal": "Endurance 1. Physical attack doing +3 power stages of damage. Empower 2. If successful, take control of one of your opponent's Freestyle Drills in play.",
@@ -37772,6 +39310,22 @@
         "style": "Orange"
       },
       "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 1
     }
   },
@@ -37785,7 +39339,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-64.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -37796,6 +39350,18 @@
         "rarity": "U",
         "style": "Orange"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 1
     }
   },
@@ -37998,7 +39564,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-13.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -38009,6 +39575,18 @@
         "rarity": "C",
         "style": "Orange"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 1
     }
   },
@@ -38022,7 +39600,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-14.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -38034,6 +39612,21 @@
         "style": "Orange"
       },
       "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -38112,7 +39705,7 @@
     "imageUrl": "images-tts/tts-c611d949-32.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Physical attack doing +4 power stages of damage. Gain 4 power stages. If successful and this attack deals life cards of damage, remove from the game X cards in your opponent's discard pile. X = twice as many life cards of damage that this attack dealt.",
       "textVerified": true,
@@ -38121,6 +39714,22 @@
         "rarity": "P",
         "style": "Named"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -38518,7 +40127,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-7.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Energy attack doing 2 life cards of damage. This attack stays on the table to be used 2 more times this Combat. You may discard a card from your hand when you perform this attack to do an additional +3 life cards of damage. Remove from the game after use.",
       "textVerified": true,
@@ -38527,6 +40136,26 @@
         "rarity": "U",
         "style": "Red"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 2
+            },
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 1
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -38600,7 +40229,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-48.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -38611,6 +40240,26 @@
         "rarity": "R",
         "style": "Red"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -38813,7 +40462,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-13.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -38824,6 +40473,30 @@
         "rarity": "U",
         "style": "Saiyan"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -38837,7 +40510,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-14.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 1. Physical attack doing +3 power stages of damage. Raise your anger 1 level. Empower 2. For the remainder of Combat, all of your physical attacks gain \"This attack does an additional +X power stages of damage. X = the amount of times you have used Endurance after you played \"Saiyan Neckbreaker\".\"",
       "textVerified": true,
@@ -38846,6 +40519,26 @@
         "rarity": "U",
         "style": "Saiyan"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 1
     }
   },
@@ -39129,7 +40822,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-50.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -39140,6 +40833,23 @@
         "rarity": "R",
         "style": "Colorless"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -39526,8 +41236,15 @@
       },
       "abilities": [
         {
-          "trigger": "defense",
+          "trigger": "attack",
           "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2
+            },
             {
               "kind": "stopAttack",
               "attackType": "energy",
@@ -39613,7 +41330,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-21.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -39624,6 +41341,25 @@
         "rarity": "U",
         "style": "Named"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -39733,6 +41469,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 5
+            },
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "bottom"
             }
           ],
           "source": "parsed"
@@ -39750,15 +41491,41 @@
     "imageUrl": "images-tts/tts-2b332fa4-28.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +X power stages of damage. X = the attacking personality's PUR and personality level added together. Raise your anger 1 level. If used by a Fused Personality, place this card and the bottom card of your discard pile at the bottom of your Life Deck after use.",
       "textVerified": true,
       "lackey": {
         "number": "029",
         "rarity": "C",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "rejuvenate",
+              "count": 1,
+              "from": "bottom"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -40348,6 +42115,11 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 2
             }
           ],
           "source": "parsed",
@@ -40393,15 +42165,36 @@
     "imageUrl": "images-tts/tts-18cbdeb1-13.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +3 power stages of damage. If successful, your opponent must discard cards from his hand until he only has 2 or fewer cards in his hand.",
       "textVerified": true,
       "lackey": {
         "number": "097",
         "rarity": "R",
         "style": "Black"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -40493,8 +42286,10 @@
     "imageUrl": "images-tts/tts-89fe8da5-9.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Endurance 3. Focused physical attack doing +3 power stages of damage. If Namek Dragon Ball 4 is in play, your opponent must discard 2 cards from his hand.",
       "textVerified": true,
       "lackey": {
@@ -40502,6 +42297,29 @@
         "rarity": "U",
         "style": "Black"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 2
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ],
       "endurance": 3
     }
   },
@@ -40829,7 +42647,9 @@
     "rules": {
       "type": "Energy Combat",
       "coverage": "partial",
-      "needsReview": [],
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack doing 5 life cards of damage or stops an energy attack. Shuffle 1 card in your discard pile into your Life Deck for each level of your anger. If all the cards you shuffled in were Non-Combat cards, gain 3 power stages. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
@@ -40839,18 +42659,25 @@
       },
       "abilities": [
         {
-          "trigger": "defense",
+          "trigger": "attack",
           "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            },
             {
               "kind": "stopAttack",
               "attackType": "energy",
               "window": "thisAttack"
-            },
-            {
-              "kind": "removeFromGameAfterUse"
             }
           ],
-          "source": "parsed"
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
         }
       ]
     }
@@ -41140,15 +42967,35 @@
     "imageUrl": "images-tts/tts-434ce590-32.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack doing 5 life cards of damage. Set all player's anger levels to 2. If successful, you may shuffle any of your Allies that are removed from the game that have the Bojack Unbound Subset Symbol into your Life Deck. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
         "number": "033",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -41487,8 +43334,10 @@
     "imageUrl": "images-tts/tts-434ce590-35.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack. Lower your opponent's anger 1 level. Empower 3. This attack does +1 life cards of damage for each card in your discard pile with \"Kamehameha\" in the title. If successful, shuffle up to 6 cards in your discard pile with \"Kamehameha\" in the title into your Life Deck.",
       "textOriginal": "Focused energy attack. Lower your opponent's anger 1 level. Empower 3. This attack does +1 life cards of damage for each card in your discard pile with \"Kamehameha\" in the title. If successful, shuffle up to 6 cards in your discard pile with \"Kamehameha\" in the title into your Life Deck.",
       "lackey": {
@@ -41496,7 +43345,27 @@
         "rarity": "P",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -41509,8 +43378,10 @@
     "imageUrl": "images-tts/tts-89fe8da5-21.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards"
+      ],
       "text": "Endurance 1. Energy attack. You may discard one of your Non-Combat cards in play to search your Life Deck for a Non-Combat card and place it into play. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
@@ -41518,6 +43389,23 @@
         "rarity": "U",
         "style": "Colorless"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ],
       "endurance": 1
     }
   },
@@ -41909,15 +43797,35 @@
     "imageUrl": "images-tts/tts-434ce590-24.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Heroes only. Focused energy attack doing +1 life cards of damage for each card in your discard pile with \"Heroic\" in the title. If your opponent's Main Personality is a Villain, you may discard a Non-Combat card in play.",
       "textVerified": true,
       "lackey": {
         "number": "025",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 1
+            }
+          ],
+          "source": "parsed",
+          "restriction": {
+            "alignment": "Hero"
+          },
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -42226,7 +44134,9 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [],
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +4 power stages of damage. If used by Kogu, this card can stop a physical attack instead. If used by Kogu, your opponent discards a card from his hand. If successful, search your Life Deck for an Ally and place it into play at 4 power stages above 0.",
       "textVerified": true,
       "lackey": {
@@ -42236,15 +44146,31 @@
       },
       "abilities": [
         {
-          "trigger": "defense",
+          "trigger": "attack",
           "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 1
+            },
             {
               "kind": "stopAttack",
               "attackType": "physical",
               "window": "thisAttack"
             }
           ],
-          "source": "parsed"
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
         }
       ]
     }
@@ -42353,15 +44279,37 @@
     "imageUrl": "images-tts/tts-839c2c98-23.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack doing 7 life cards of damage. Lower your opponent's anger 1 level. If successful and your opponent used Endurance against this attack, shuffle this card into your Life Deck after use.",
       "textVerified": true,
       "lackey": {
         "number": "P10",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 7
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -42660,7 +44608,7 @@
     "imageUrl": "images-tts/tts-a296f453-19.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Physical attack doing +5 power stages of damage. For the remainder of Combat, your opponent cannot put cards into his Life Deck from card effects. Lower your opponent's anger 1 level.",
       "textVerified": true,
@@ -42669,6 +44617,26 @@
         "rarity": "C",
         "style": "Orange"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -42703,8 +44671,10 @@
     "imageUrl": "images-tts/tts-193cbccb-5.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Endurance 2. Focused physical attack doing +3 power stages of damage. If successful, discard up to 4 of your opponent's Allies in play. Lower your opponent's anger 2 levels.",
       "textVerified": true,
       "lackey": {
@@ -42712,6 +44682,30 @@
         "rarity": "U",
         "style": "Orange"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ],
       "endurance": 2
     }
   },
@@ -42748,15 +44742,35 @@
     "imageUrl": "images-tts/tts-193cbccb-6.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +2 power stages of damage. Empower 4. If you perform a physical attack that uses the Physical Attack Table in your next \"Attacker Attacks\" phase, the Base Damage of that physical attack is 6.",
       "textVerified": true,
       "lackey": {
         "number": "062",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -42883,8 +44897,10 @@
     "imageUrl": "images-tts/tts-18cbdeb1-26.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Endurance 2. Focused energy attack doing 6 life cards of damage. If the defending personality has more power stages above 0 than the attacking personality, lower the defending personality to the same amount of power stages above 0 as the attacking personality.",
       "textOriginal": "Endurance 2. Focused energy attack doing 6 life cards of damage. If your opponent's personality that is in contol of Combat has more power stages above 0 than yours, lower your opponent's personality in control of Combat to the same amount of power stages above 0 as the personality performing this attack.",
       "lackey": {
@@ -42893,6 +44909,21 @@
         "style": "Orange"
       },
       "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ],
       "endurance": 2
     }
   },
@@ -42906,7 +44937,7 @@
     "imageUrl": "images-tts/tts-18cbdeb1-27.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Physical attack doing +4 power stages of damage. For the remainder of Combat, damage from your attacks cannot be prevented. Empower 2. If successful, remove from the game all Freestyle Drills in play.",
       "textOriginal": "Endurance 2. Physical attack doing +4 power stages of damage. For the remainder of Combat, damage from your attacks cannot be prevented. Empower 2. If successful, remove from the game all Freestyle Drills in play.",
@@ -42916,6 +44947,22 @@
         "style": "Orange"
       },
       "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -42929,15 +44976,37 @@
     "imageUrl": "images-tts/tts-193cbccb-7.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack. For the remainder of Combat, you may discard a card from your hand during your \"Attacker Attacks\" phase to perform either a physical attack doing +3 power stages of damage or an energy attack doing 5 life cards of damage.",
       "textVerified": true,
       "lackey": {
         "number": "063",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            },
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -42988,7 +45057,7 @@
     "imageUrl": "images-tts/tts-193cbccb-9.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. Physical attack doing +3 power stages of damage. For the remainder of Combat, you may discard one of your Drills during your \"Attacker Attacks\" phase to perform a physical attack doing +3 power stages of damage.",
       "textVerified": true,
@@ -42997,6 +45066,21 @@
         "rarity": "U",
         "style": "Orange"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -43075,7 +45159,8 @@
       "type": "Physical Combat",
       "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:focusedAttack"
       ],
       "text": "Focused physical attack doing 5 power stages of damage. If your opponent's Main Personality's power rating is three or more times larger than your Main Personality's power rating, prevent 3 life cards of damage from your opponent's attacks for the remainder of Combat.",
       "textVerified": true,
@@ -43086,15 +45171,17 @@
       },
       "abilities": [
         {
-          "trigger": "defense",
+          "trigger": "attack",
           "effects": [
             {
-              "kind": "preventLifeCards",
-              "amount": 3,
-              "attackType": "physical"
+              "kind": "physicalAttack",
+              "lifeCards": 3
             }
           ],
-          "source": "parsed"
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
         }
       ]
     }
@@ -43301,7 +45388,7 @@
     "imageUrl": "images-tts/tts-839c2c98-16.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Physical attack doing +4 power stages of damage. Place the top 3 Martial Arts Styled cards in your discard pile at the top of your Life Deck. Remove from the game after use.",
       "textVerified": true,
@@ -43310,6 +45397,24 @@
         "rarity": "P",
         "style": "Colorless"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -43369,8 +45474,10 @@
     "imageUrl": "images-tts/tts-193cbccb-16.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +4 power stages of damage. Remove from the game 3 random cards in your opponent's Sensei Deck. If your opponent has a Sensei card but no cards in his Sensei Deck, your opponent discards the top 8 cards of his Life Deck. Raise your anger 1 level.",
       "errata": "Cards removed from your opponent’s Sensei Deck due to this card’s effects are removed at random.",
       "textVerified": true,
@@ -43378,7 +45485,30 @@
         "number": "072",
         "rarity": "U",
         "style": "Red"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -43642,7 +45772,7 @@
     "imageUrl": "images-tts/tts-839c2c98-2.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Energy attack doing 6 life cards of damage. Damage from this attack is removed from the game instead of discarded. Draw the bottom card of your Life Deck. Remove from the game after use.",
       "textVerified": true,
@@ -43651,6 +45781,21 @@
         "rarity": "R",
         "style": "Red"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -43747,7 +45892,7 @@
     "imageUrl": "images-tts/tts-193cbccb-21.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Physical attack doing +4 power stages of damage. If you declared a Tokui-Waza, for the remainder of Combat any Red Style attacks you perform with cards from your hand are considered to have \"Sword\" in the title until they leave play. Raise your anger 1 level. Lower your opponent's anger 1 level.",
       "errata": "Your Red Style attacks gain \"Sword\" at the end of their titles. This effectively changes the title of the Red Style attack while it is being played and used.",
@@ -43758,6 +45903,26 @@
         "style": "Red"
       },
       "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -43771,8 +45936,10 @@
     "imageUrl": "images-tts/tts-193cbccb-22.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +3 power stages of damage. Attach this card to one of your Red Style cards in play that adds damage to your attacks but does not have a copy of \"Red Thunder Clap\" attached already. While attached, double the amount of additional damage the attached card would give you.",
       "errata": "If this card attaches to a card that increases damage from a floating effect, such as the Red Style Mastery (Cell Saga #131), it only doubles the damage when the effect triggers, rather than as soon as this card attaches.\n\n\nEx: If this attaches to the Red Style Mastery (Cell Saga #131), it does not double the damage from the Mastery until the following Combat as it has already triggered and created a floating effect.",
       "textVerified": true,
@@ -43780,7 +45947,25 @@
         "number": "078",
         "rarity": "U",
         "style": "Red"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -43838,15 +46023,35 @@
     "imageUrl": "images-tts/tts-839c2c98-4.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +5 power stages of damage. For the remainder of Combat, when you use a Saiyan Style card to perform an attack, it is placed on the bottom of your Life Deck after use instead of being discarded or removed.",
       "textVerified": true,
       "lackey": {
         "number": "116",
         "rarity": "R",
         "style": "Saiyan"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -43997,7 +46202,7 @@
     "imageUrl": "images-tts/tts-193cbccb-24.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 4. Energy attack doing 5 life cards of damage. For the remainder of Combat, any of your Saiyan Style attacks that have Empower are focused attacks. Raise your anger 1 level.",
       "textVerified": true,
@@ -44006,6 +46211,23 @@
         "rarity": "U",
         "style": "Saiyan"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 4
     }
   },
@@ -44061,7 +46283,7 @@
     "imageUrl": "images-tts/tts-839c2c98-6.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Physical attack doing +5 power stages of damage. If successful, raise your anger 1 level for each Dragon Ball you control.",
       "textVerified": true,
@@ -44070,6 +46292,27 @@
         "rarity": "R",
         "style": "Saiyan"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -44104,15 +46347,36 @@
     "imageUrl": "images-tts/tts-839c2c98-7.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +3 power stages of damage. Search your Life Deck for a Saiyan Style Drill and place it into play. If successful, your opponent's Main Personality's PUR is set to 0 until the end of his next turn and cannot be modified by other effects.",
       "textVerified": true,
       "lackey": {
         "number": "119",
         "rarity": "R",
         "style": "Saiyan"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -44180,7 +46444,7 @@
     "imageUrl": "images-tts/tts-193cbccb-27.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings",
         "level"
@@ -44192,6 +46456,24 @@
         "rarity": "U",
         "style": "Saiyan"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -44370,7 +46652,7 @@
     "imageUrl": "images-tts/tts-434ce590-25.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Energy attack doing +2 life cards of damage for each Ally in play with the Bojack Unbound Subset Symbol. Raise your anger 1 level. This card stays on the table to be used 1 more time by an Ally with the Bojack Unbound Subset Symbol. Remove from the game after use.",
       "textVerified": true,
@@ -44379,6 +46661,26 @@
         "rarity": "P",
         "style": "Colorless"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 2
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -44403,17 +46705,24 @@
       },
       "abilities": [
         {
-          "trigger": "defense",
+          "trigger": "attack",
           "effects": [
             {
-              "kind": "stopAttack",
-              "attackType": "any",
-              "window": "thisAttack"
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
             },
             {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -44432,8 +46741,10 @@
     "imageUrl": "images-tts/tts-434ce590-23.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +4 power stages of damage. Raise your anger 1 level. You may discard any cards that perform attacks from your hand to add the damage modifier from those attacks to this attack.",
       "textOriginal": "Focused physical attack doing +4 power stages of damage. Raise your anger 1 level. You may discard any cards that perform attacks from your hand to add the damage modifier from those attacks to this attack.",
       "lackey": {
@@ -44441,7 +46752,30 @@
         "rarity": "P",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -44505,15 +46839,32 @@
     "imageUrl": "images-tts/tts-18cbdeb1-1.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +3 power stages of damage and +3 life cards of damage. If successful, end Combat.",
       "textVerified": true,
       "lackey": {
         "number": "085",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 3
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -44644,8 +46995,10 @@
     "imageUrl": "images-tts/tts-839c2c98-21.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Endurance 2. Focused physical attack doing +3 power stages of damage. Empower 3. Raise your anger 1 level. Lower your opponent's anger 1 level. Discard an Ally in play. Gain 3 power stages. Place at the bottom of your Life Deck after use.",
       "textVerified": true,
       "lackey": {
@@ -44653,6 +47006,29 @@
         "rarity": "P",
         "style": "Named"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ],
       "endurance": 2
     }
   },
@@ -44955,15 +47331,36 @@
     "imageUrl": "images-tts/tts-434ce590-21.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +4 power stages of damage. If used by Zangya, for the remainder of Combat your opponent's Allies cannot take control of Combat and cannot have damage redirected to them. If successful, search your Life Deck for an Ally and place it into play at 4 power stages above 0.",
       "textVerified": true,
       "lackey": {
         "number": "022",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -45082,7 +47479,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-17.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Use when needed.  Your opponent discards 3 cards from his life deck.  Remove from the game after use.",
       "textOriginal": "Does 3 life card discards in damage at any time to a foe. Discard this card from the game after 1 use.",
@@ -45091,7 +47488,23 @@
         "rarity": "R",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 3
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -45731,7 +48144,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-29.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Increase your anger level by 2. Take the top 2 cards from your discard pile and place them at the bottom of your life deck.",
       "textVerified": true,
@@ -45739,7 +48152,20 @@
         "number": "099",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "top"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -46471,7 +48897,7 @@
     "imageUrl": "images-tts/tts-fcd37d11-22.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Increase your anger level by 2. Take the bottom 2 cards from your discard pile and place them at the bottom of your life deck. Discard this card from the game after use.",
       "textVerified": true,
@@ -46479,7 +48905,20 @@
         "number": "023",
         "rarity": "C",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "bottom"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -47035,7 +49474,7 @@
     "imageUrl": "images-tts/tts-f1189c19-51.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -47045,7 +49484,20 @@
         "number": "190",
         "rarity": "R",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "choose"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -48299,7 +50751,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-9.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -48310,7 +50762,23 @@
         "rarity": "U",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "choose"
+            }
+          ],
+          "source": "parsed",
+          "restriction": {
+            "alignment": "Hero"
+          }
+        }
+      ]
     }
   },
   {
@@ -50294,7 +52762,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-28.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Raise one of your personalities in play to its highest power stage. Choose 2 cards from your discard pile and place them at the bottom of your life deck.",
       "textOriginal": "Powers up to the personality's highest stage. Select 2 discarded cards and place them at the bottomof your life deck.",
@@ -50303,7 +52771,20 @@
         "rarity": "U",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "choose"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -50316,7 +52797,7 @@
     "imageUrl": "images-tts/tts-fcd37d11-21.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Gain 5 power stages. Place the top card of your discard pile at the bottom of your life deck.",
       "textOriginal": "Powers up 5 stages for a personality, going no higher than their maximum stage. Take the top discarded card and place at the bottom of your life deck.",
@@ -50325,7 +52806,20 @@
         "rarity": "C",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 1,
+              "from": "top"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -51355,7 +53849,7 @@
     "imageUrl": "images-tts/tts-f1189c19-54.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Choose 2 cards from your discard pile and place them at the bottom of your life deck.  Remove from the game after use.",
       "textOriginal": "The spirit of the Earth heals you. Place 2 discarded cards at the bottom of your life deck. Discard from the game after use.",
@@ -51364,7 +53858,23 @@
         "rarity": "R",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "choose"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -51415,9 +53925,25 @@
     "imageUrl": "images-tts/tts-8cbb81b5-8.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
-      "text": "Heroes only.\nPlace the top 3 cards of your discard pile at the bottom of your life deck."
+      "text": "Heroes only.\nPlace the top 3 cards of your discard pile at the bottom of your life deck.",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 3,
+              "from": "top"
+            }
+          ],
+          "source": "parsed",
+          "restriction": {
+            "alignment": "Hero"
+          }
+        }
+      ]
     }
   },
   {
@@ -51748,7 +54274,7 @@
     "imageUrl": "images-tts/tts-fcd37d11-44.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Villains only. Skip your next Combat step. Place the top 2 cards from your discard pile on the bottom of your Life Deck. Remove from the game after use.",
       "textVerified": true,
@@ -51756,7 +54282,23 @@
         "number": "045",
         "rarity": "C",
         "style": "Saiyan"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "top"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -52134,7 +54676,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-10.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Villains and Goku only. Choose 2 cards from your discard pile and place them on the bottom of your life deck.",
       "textOriginal": "Not useable by heroes except for Goku. 2 discarded cards of the user's choice are placed at the bottom of the life deck.",
@@ -52143,7 +54685,27 @@
         "rarity": "U",
         "style": "Saiyan"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "choose"
+            }
+          ],
+          "source": "parsed",
+          "restriction": {
+            "namedOnly": [
+              "Villains",
+              "Goku",
+              "Gohan"
+            ]
+          }
+        }
+      ]
     }
   },
   {
@@ -59159,7 +61721,7 @@
     "imageUrl": "images-tts/tts-94ce7717-63.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -59169,7 +61731,20 @@
         "number": "133",
         "rarity": "R",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "top"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -59197,6 +61772,11 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 1
             }
           ],
           "source": "parsed"
@@ -61244,15 +63824,35 @@
     "imageUrl": "images-tts/tts-7bdadf12-23.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +3 power stages of damage. Damage from this attack cannot be prevented. This card is considered a Named card for your Main Personality for deck construction and gameplay.",
       "textVerified": true,
       "lackey": {
         "number": "CCPP8",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -61651,7 +64251,7 @@
     "imageUrl": "images-tts/tts-e9f3a19a-17.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Use when needed. Your opponent discards 3 cards from his life deck. Remove from the game after use.",
       "textOriginal": "Does 3 life card discards in damage at any time to a foe. Discard this card from the game after 1 use.",
@@ -61660,7 +64260,23 @@
         "rarity": "R",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 3
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -62917,7 +65533,7 @@
     "imageUrl": "images-tts/tts-a42f5098-29.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Increase your anger level by 2. Take the top 2 cards from your discard pile and place them at the bottom of your life deck.",
       "textVerified": true,
@@ -62925,7 +65541,20 @@
         "number": "099",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "top"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -64301,7 +66930,7 @@
     "imageUrl": "images-tts/tts-e0273976-22.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -64311,7 +66940,20 @@
         "number": "023",
         "rarity": "C",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "bottom"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -64672,7 +67314,7 @@
     "imageUrl": "images-tts/tts-be34bddc-49.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -64682,7 +67324,20 @@
         "number": "SZ3",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -65759,6 +68414,11 @@
               "delta": 2
             },
             {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "choose"
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
@@ -66473,9 +69133,34 @@
     "imageUrl": "images-tts/tts-a8664770-54.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
-      "text": "Focused physical attack doing +3 power stages of damage.\nIf you declared a Saiyan ToKui-Waza.\nthis card is consid- ered a Saiyan Style card.\nIf used by Future raise your anger 2 levels | or choose a in play and shuffle it into its owner's Life Deck."
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
+      "text": "Focused physical attack doing +3 power stages of damage.\nIf you declared a Saiyan ToKui-Waza.\nthis card is consid- ered a Saiyan Style card.\nIf used by Future raise your anger 2 levels | or choose a in play and shuffle it into its owner's Life Deck.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -67044,15 +69729,43 @@
     "imageUrl": "images-tts/tts-be34bddc-34.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused physical attack doing +4 power stages of damage. Raise your anger 1 level. This attack cannot be stopped by Physical Combat cards. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
         "number": "K4",
         "rarity": "P",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -68504,7 +71217,7 @@
     "imageUrl": "images-tts/tts-a42f5098-9.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Heroes only. Choose 2 cards from your discard pile and place them at the bottom of your life deck.",
       "textOriginal": "Heroes only. 2 cards of your choice are placed at the bottom of your life deck.",
@@ -68513,7 +71226,23 @@
         "rarity": "U",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "choose"
+            }
+          ],
+          "source": "parsed",
+          "restriction": {
+            "alignment": "Hero"
+          }
+        }
+      ]
     }
   },
   {
@@ -69272,7 +72001,7 @@
     "imageUrl": "images-tts/tts-bfe1b102-43.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. Physical attack doing +5 power stages of damage. You may search your Life Deck for a copy of \"Hideous Intent\" and place it into your hand. If successful, discard one of your opponent's Non-Combat cards in play.",
       "textVerified": true,
@@ -69281,6 +72010,22 @@
         "rarity": "P",
         "style": "Named"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -70041,9 +72786,29 @@
     "imageUrl": "images-tts/tts-a8664770-22.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2.\nPhysical attack doing +3 power stages of damage.\nRaise your anger 1 level.\nYou can have up to B copies of this card in your deck.\nEmpower 2.\nAttach to your Main Personality.\nWhile gttached.\nthe top card of your discard pile is considered to be a Namekian ~ Style card for card effects.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -70187,9 +72952,24 @@
     "imageUrl": "images-tts/tts-9f900382-24.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3.\nPhysical attack doing +3 power stages of damage.\nEmpower 2.\nYou cannot win by the Most Powerful Personality Victory for the remainder of the game.\nAttach this card to your Le// Saga Namekian 5tyle Mastery.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -70254,9 +73034,29 @@
     "imageUrl": "images-tts/tts-be34bddc-11.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
-      "text": "Focused physical attack doing +2 power stages of damage.\nFor the remainder of Combat.\nAll of your physical attacks do +2 power stages of damage."
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
+      "text": "Focused physical attack doing +2 power stages of damage.\nFor the remainder of Combat.\nAll of your physical attacks do +2 power stages of damage.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -71902,7 +74702,7 @@
     "imageUrl": "images-tts/tts-a42f5098-28.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Raise one of your personalities in play to its highest power stage.  Choose 2 cards from your discard pile and place them at the bottom of your life deck.",
       "textOriginal": "Powers up to the personality's highest stage. Select 2 discarded cards and place them at the bottomof your life deck.",
@@ -71911,7 +74711,20 @@
         "rarity": "U",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "choose"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -72144,7 +74957,7 @@
     "imageUrl": "images-tts/tts-7bdadf12-22.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 4. Energy attack doing 1 life card of damage and an additional +X life cards of damage. X = your current anger level. If successful, shuffle this card into your Life Deck.",
       "textVerified": true,
@@ -72153,6 +74966,18 @@
         "rarity": "P",
         "style": "Red"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 4
     }
   },
@@ -72976,7 +75801,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-54.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Choose 2 cards from your discard pile and place them at the bottom of your life deck.\nRemove from the game after use.",
       "textOriginal": "The spirit of the Earth heals you. Place 2 discarded cards at the bottom of your life deck. Discard from the game after use.",
@@ -72985,7 +75810,23 @@
         "rarity": "R",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "choose"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -73278,7 +76119,7 @@
     "imageUrl": "images-tts/tts-780b41cb-0.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -73288,7 +76129,23 @@
         "number": "045",
         "rarity": "C",
         "style": "Saiyan"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "top"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -73810,9 +76667,24 @@
     "imageUrl": "images-tts/tts-a8664770-27.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3.\nEnergy attack doing 7 life cards of damage.\nCosts 5 power stages to perform.\nFor the remainder of Combat.\nwhen you gain power stages or anger from your Mastery.\ngain twice that amount.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 7
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 5
+          }
+        }
+      ],
       "endurance": 3
     }
   },
@@ -73826,11 +76698,23 @@
     "imageUrl": "images-tts/tts-a8664770-2.jpg",
     "rules": {
       "type": "Unknown",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
       "text": "Endurance 2.\nEnergy attack doing 3 life cards of damage.\nIf you declared s this attack stays on the table to be used 2 more tmeas this Combat.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -73893,7 +76777,7 @@
     "imageUrl": "images-tts/tts-780b41cb-1.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Villains and Goku only.\nChoose 2 cards from your discard pile and place them on the bottom of your life deck.",
       "textOriginal": "Not useable by heroes except for Goku. 2 discarded cards of the user's choice are placed at the bottom of the life deck.",
@@ -73902,7 +76786,27 @@
         "rarity": "U",
         "style": "Saiyan"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "choose"
+            }
+          ],
+          "source": "parsed",
+          "restriction": {
+            "namedOnly": [
+              "Villains",
+              "Goku",
+              "Gohan"
+            ]
+          }
+        }
+      ]
     }
   },
   {
@@ -77727,7 +80631,7 @@
     "imageUrl": "images-tts/tts-570381d6-5.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 1. Physical attack doing +5 power stages of damage. Lower your opponent's anger 1 level.",
       "textVerified": true,
@@ -77736,6 +80640,26 @@
         "rarity": "C",
         "style": "Black"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 1
     }
   },
@@ -79202,9 +82126,30 @@
     "imageUrl": "images-tts/tts-76e864b5-9.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
-      "needsReview": [],
-      "text": "Focused physical attack doing +4 power stages of damage.\nIf successful and the bottom card of your discard pile is a Boku Named card.\n- you may draw that card into hand."
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
+      "text": "Focused physical attack doing +4 power stages of damage.\nIf successful and the bottom card of your discard pile is a Boku Named card.\n- you may draw that card into hand.",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -79297,6 +82242,11 @@
           "effects": [
             {
               "kind": "drawCards",
+              "count": 1
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
               "count": 1
             }
           ],
@@ -79471,15 +82421,32 @@
     "imageUrl": "images-tts/tts-570381d6-13.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack doing 8 life cards of damage. You can only perform this attack if you have no cards in your discard pile.",
       "textVerified": true,
       "lackey": {
         "number": "014",
         "rarity": "C",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 8
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -79806,7 +82773,7 @@
     "imageUrl": "images-tts/tts-570381d6-38.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. Energy attack doing 6 life cards of damage. Discard the top 2 cards of your Life Deck.",
       "textVerified": true,
@@ -79815,6 +82782,18 @@
         "rarity": "C",
         "style": "Named"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -80684,6 +83663,11 @@
             {
               "kind": "damageStages",
               "stages": 3
+            },
+            {
+              "kind": "rejuvenate",
+              "count": 1,
+              "from": "top"
             }
           ],
           "source": "parsed"
@@ -80717,6 +83701,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 6
+            },
+            {
+              "kind": "rejuvenate",
+              "count": 3,
+              "from": "bottom"
             }
           ],
           "source": "parsed"
@@ -80791,8 +83780,10 @@
     "imageUrl": "images-tts/tts-0a93c43d-2.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Focused energy attack doing 5 life cards of damage. Lower your opponent's anger 2 levels.",
       "textOriginal": "Focused energy attack doing 5 life cards of damage. Lower your opponent's anger 2 levels.",
       "lackey": {
@@ -80800,7 +83791,27 @@
         "rarity": "U",
         "style": "Namekian"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -82594,8 +85605,10 @@
     "imageUrl": "images-tts/tts-570381d6-28.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards"
+      ],
       "text": "Endurance 1. Energy attack. Lower your opponent's anger 1 level. If used by Goku, gain 2 power stages.",
       "textVerified": true,
       "lackey": {
@@ -82603,6 +85616,25 @@
         "rarity": "C",
         "style": "Red"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ],
       "endurance": 1
     }
   },
@@ -83075,9 +86107,10 @@
     "imageUrl": "images-tts/tts-570381d6-32.jpg",
     "rules": {
       "type": "Energy Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "textDisagreement"
+        "textDisagreement",
+        "ability:energyLifeCards"
       ],
       "text": "Endurance 1.\nEnergy attack.",
       "textOriginal": "Endurance 1. Energy attack. If successful, place this card at the bottom of your Life Deck.",
@@ -83086,6 +86119,20 @@
         "rarity": "C",
         "style": "Saiyan"
       },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ],
       "endurance": 1
     }
   },
@@ -83623,9 +86670,10 @@
     "imageUrl": "images-tts/tts-0a93c43d-47.jpg",
     "rules": {
       "type": "Physical Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "textDisagreement"
+        "textDisagreement",
+        "ability:focusedAttack"
       ],
       "text": "Focused physical attack doing +/ power stages of damage.",
       "textOriginal": "Focused physical attack doing +7 power stages of damage. If successful, you may not use a card during your next \"Defender Defends\" phase. Lower your anger 1 level.",
@@ -83633,7 +86681,21 @@
         "number": "117",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "attack",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {

@@ -208,7 +208,10 @@ function applyPowerStageDamage(state: GameState, personalityUid: string, db: Car
   const dmg = atk.pendingPowerStageDamage ?? 0;
   if (target) loseStages(target, dmg, db, events);
   events.push({ type: 'attackResolved', successful: true, powerStages: dmg, lifeCards: 0 });
-  applyIfSuccessful(state, atk.ifSuccessfulEffects, db, events);
+  applyIfSuccessful(state, atk.ifSuccessfulEffects, db, events, {
+    userIdx: atk.attackerPlayerIdx,
+    foeIdx: atk.defenderPlayerIdx,
+  });
   nextAttackPhase(state, events);
 }
 
@@ -318,7 +321,10 @@ function resolveLifeCardDamage(
   delete atk.enduranceOffer;
   const dealt = atk.lifeCardsDealt ?? 0;
   events.push({ type: 'attackResolved', successful: true, powerStages: 0, lifeCards: dealt });
-  applyIfSuccessful(state, atk.ifSuccessfulEffects, db, events);
+  applyIfSuccessful(state, atk.ifSuccessfulEffects, db, events, {
+    userIdx: atk.attackerPlayerIdx,
+    foeIdx: atk.defenderPlayerIdx,
+  });
 
   if (result.exhausted) {
     endGame(state, atk.attackerPlayerIdx, events);

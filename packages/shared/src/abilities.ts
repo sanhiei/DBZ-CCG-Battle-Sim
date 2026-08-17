@@ -41,6 +41,15 @@ export type Effect =
     }
   | { kind: 'preventLifeCards'; amount: number; attackType?: AttackKind | 'any' }
   | { kind: 'drawCards'; count: number }
+  /**
+   * Rejuvenation: move cards from the discard pile to the BOTTOM of the Life
+   * Deck. `from` is which end of the discard pile they come off; "choose" means
+   * the player picks, which the engine currently resolves as the bottom-most
+   * cards and flags for review rather than prompting.
+   */
+  | { kind: 'rejuvenate'; count: number; from: 'bottom' | 'top' | 'choose' }
+  /** Discard from hand — as a cost (`user`) or as an effect on the opponent. */
+  | { kind: 'discardCards'; target: EffectTarget; count: number }
   | { kind: 'stunSkipNextPhase' }
   | { kind: 'removeFromGameAfterUse' }
   | { kind: 'manual'; note?: string }; // not yet modeled — resolve manually

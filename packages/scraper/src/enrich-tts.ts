@@ -132,6 +132,44 @@ async function main(): Promise<void> {
   };
   let matched = 0; let verified = 0; let laddersVerified = 0; let visionApplied = 0; let enduranceFound = 0;
   /**
+   * Repair a single misread rung by arithmetic. A scouter ladder is an
+   * arithmetic sequence, so when exactly one rung breaks the ordering and the
+   * other gaps agree on a step, the true value is DETERMINED (prev + step)
+   * rather than guessed. In practice these are dropped leading digits:
+   * 1,000,000 read as 100000, or 2,150,000 as 1150000.
+   *
+   * This lives in the pipeline, not in a post-hoc script: enrichment rebuilds
+   * the catalog from source every run, so a repair applied afterwards is
+   * silently undone the next time anyone re-enriches.
+   */
+  const repairLadder = (ladder: Array<number | 'Z'>): { ladder: Array<number | 'Z'>; from: number; to: number } | null => {
+    if (!Array.isArray(ladder) || ladder.length < 5) return null;
+    if (ladder.some((v) => typeof v !== 'number')) return null; // 'Z' sits outside the ordering
+    const nums = ladder as number[];
+    const breaks: number[] = [];
+    for (let i = 1; i < nums.length; i++) if (nums[i]! <= nums[i - 1]!) breaks.push(i);
+    if (breaks.length === 0 || breaks.length > 2) return null;
+    // Gaps above stage 0; the 0 -> first rung gap is the card's base, not the step.
+    const gaps: number[] = [];
+    for (let i = 2; i < nums.length; i++) gaps.push(nums[i]! - nums[i - 1]!);
+    const healthy = gaps.filter((g) => g > 0);
+    const counts = new Map<number, number>();
+    for (const g of healthy) counts.set(g, (counts.get(g) ?? 0) + 1);
+    let step = 0;
+    let best = 0;
+    for (const [g, n] of counts) if (n > best) { best = n; step = g; }
+    if (step <= 0 || best < healthy.length - 1 || best < 3) return null;
+    const idx = breaks[0]!;
+    const expected = nums[idx - 1]! + step;
+    const next = nums[idx + 1];
+    if (next !== undefined && next - expected !== step) return null;
+    const out = nums.slice();
+    out[idx] = expected;
+    for (let i = 1; i < out.length; i++) if (out[i]! <= out[i - 1]!) return null;
+    return { ladder: out, from: nums[idx]!, to: expected };
+  };
+  let laddersRepaired = 0;
+  /**
    * Endurance is printed at the START of a card's rules text as "Endurance #"
    * (CRD ~L1118). Anchoring to the start avoids picking up prose that merely
    * mentions the keyword, and the value is capped at a sane range — OCR
@@ -264,6 +302,13 @@ async function main(): Promise<void> {
         if (vis.pur !== undefined) personality.pur = vis.pur;
         if (vis.alignment && vis.alignment !== 'unknown') { personality.alignment = vis.alignment; const ix = needsReview.indexOf('alignment'); if (ix !== -1) needsReview.splice(ix, 1); }
       }
+      // Final pass: a single arithmetic misread is repairable and flagged.
+      const fixed = repairLadder(personality.powerRatings as Array<number | 'Z'>);
+      if (fixed) {
+        personality.powerRatings = fixed.ladder;
+        needsReview.push('ladder:arithmeticRepair');
+        laddersRepaired++;
+      }
       rules.personality = personality;
     }
 
@@ -318,6 +363,7 @@ async function main(): Promise<void> {
   console.log(`[enrich-tts] ladders verified (typed vs OCR agreement): ${laddersVerified}`);
   console.log(`[enrich-tts] vision readings applied: ${visionApplied}`);
   console.log(`[enrich-tts] endurance values parsed: ${enduranceFound}`);
+  console.log(`[enrich-tts] ladders repaired by arithmetic: ${laddersRepaired}`);
 }
 
 main().catch((e: unknown) => {

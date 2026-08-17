@@ -81,6 +81,12 @@ export function setupAttackAbility(
       case 'changePowerStages':
         changeControllerStages(state, e.target === 'user' ? attackerIdx : defenderIdx, e.toZero ? -99 : e.delta, db, events);
         break;
+      case 'rejuvenate':
+        rejuvenate(state, attackerIdx, e.count, e.from);
+        break;
+      case 'discardCards':
+        discardFromHand(state, e.target === 'user' ? attackerIdx : defenderIdx, e.count);
+        break;
       default:
         leftover.push(e); // stopAttack/stun/etc. -> resolve on success (coverage grows)
     }
@@ -88,12 +94,53 @@ export function setupAttackAbility(
   if (leftover.length) attack.ifSuccessfulEffects = leftover;
 }
 
+/**
+ * Move `count` cards from a player's discard pile to the BOTTOM of their Life
+ * Deck (rejuvenation). Returns how many actually moved.
+ *
+ * 'choose' is resolved as the bottom-most cards rather than prompting: the
+ * choice rarely changes anything mechanically, and a wrong automated pick is
+ * worse than a deterministic one. Cards that specify their own selection stay
+ * flagged for review.
+ */
+export function rejuvenate(state: GameState, playerIdx: number, count: number, from: 'bottom' | 'top' | 'choose'): number {
+  const p = state.players[playerIdx];
+  if (!p || count <= 0) return 0;
+  const pile = p.zones.discard;
+  const n = Math.min(count, pile.length);
+  if (n === 0) return 0;
+  // The discard pile's "top" is the most recently added card (end of array).
+  const taken = from === 'top' ? pile.splice(pile.length - n, n) : pile.splice(0, n);
+  p.zones.lifeDeck.push(...taken.map((c) => ({ ...c, faceDown: true })));
+  state.log.push(`${p.name} rejuvenates ${n} card(s) to the bottom of their Life Deck.`);
+  return n;
+}
+
+/** Discard `count` cards from a player's hand. Returns how many went. */
+export function discardFromHand(state: GameState, playerIdx: number, count: number): number {
+  const p = state.players[playerIdx];
+  if (!p || count <= 0) return 0;
+  const taken = p.zones.hand.splice(0, Math.min(count, p.zones.hand.length));
+  p.zones.discard.push(...taken.map((c) => ({ ...c, faceDown: false })));
+  if (taken.length) state.log.push(`${p.name} discards ${taken.length} card(s) from hand.`);
+  return taken.length;
+}
+
 /** Run non-damage "if successful" effects after an attack succeeds (best-effort). */
-export function applyIfSuccessful(state: GameState, effects: Effect[] | undefined, _db: CardDb, _events: GameEvent[]): void {
+export function applyIfSuccessful(
+  state: GameState,
+  effects: Effect[] | undefined,
+  _db: CardDb,
+  _events: GameEvent[],
+  ctx?: { userIdx: number; foeIdx: number },
+): void {
   for (const e of effects ?? []) {
     if (e.kind === 'stopAttack') state.log.push(`Effect: stops a ${e.attackType ?? 'any'} attack (${e.window ?? 'thisAttack'}).`);
     else if (e.kind === 'stunSkipNextPhase') state.log.push('Effect: opponent is stunned (skips next Attack Phase).');
-    else state.log.push(`Effect not yet automated: ${e.kind} (resolve manually).`);
+    else if (e.kind === 'rejuvenate' && ctx) rejuvenate(state, ctx.userIdx, e.count, e.from);
+    else if (e.kind === 'discardCards' && ctx) {
+      discardFromHand(state, e.target === 'user' ? ctx.userIdx : ctx.foeIdx, e.count);
+    } else state.log.push(`Effect not yet automated: ${e.kind} (resolve manually).`);
   }
 }
 
@@ -127,6 +174,22 @@ function stripLead(t: string): string {
 function stripTypePlate(t: string): string {
   const s = t.replace(/^[^a-z0-9]+/, '');
   return s.replace(/^(?:(?:physical|energy|non)\b[^a-z0-9]*)?combat\b(?!\s*cards?)[^a-z0-9]*/, '').trim();
+}
+/**
+ * "Endurance N." is printed BEFORE the rest of the rules text (CRD ~L1118), so
+ * it sits between the anchor and the sentence the parser needs to match. Left
+ * in place it hides the attack on all 141 Endurance cards. The value itself is
+ * already extracted into rules.endurance during enrichment.
+ */
+function stripEndurance(t: string): string {
+  return t.replace(/^endurance\s*[0-9]{1,2}\s*[.,:]?\s*/i, '').trim();
+}
+/** Leading qualifiers that precede the real sentence on many cards. */
+function stripLeadingNoise(t: string): string {
+  let out = stripEndurance(stripTypePlate(stripLead(t)));
+  // A second pass: some cards carry both a plate and an Endurance prefix.
+  out = stripEndurance(stripTypePlate(out));
+  return out;
 }
 function parseCost(t: string): Ability['cost'] | undefined {
   const m = t.match(/cost\w*\s*([0-9b]+)\s*(?:power\s*)?stage/) || t.match(/([0-9b]+)\s*stages?\s*of\s*power\s*(?:drain\s*)?to\s*perform/);
@@ -209,6 +272,43 @@ function pushDraw(effects: Effect[], t: string): void {
   const m = t.match(/draw\s+([0-9b]+|a)\s*cards?\b/);
   if (m) effects.push({ kind: 'drawCards', count: m[1] === 'a' ? 1 : toNum(m[1]) });
 }
+
+/**
+ * Rejuvenation: cards travel from the discard pile to the BOTTOM of the Life
+ * Deck. Anchored on "at/on the bottom of ... life deck" so it cannot fire on
+ * the many cards that merely mention the discard pile (searching it, removing
+ * from it, counting it).
+ */
+function pushRejuvenate(effects: Effect[], t: string): void {
+  if (!/bottom of (your|his|her|the)\s+life\s*deck/.test(t)) return;
+  if (!/discard\s*pile/.test(t)) return;
+  // "place the bottom 4 cards from your discard pile at the bottom of your Life Deck"
+  // "choose 3 cards from your discard pile, and put them on the bottom ..."
+  // "place the top card from your discard pile at the bottom ..."
+  const m =
+    t.match(/(bottom|top)\s+([0-9b]+)?\s*cards?\s+(?:of|from)\s+your\s+discard\s*pile/) ??
+    t.match(/(choose|select)\s+([0-9b]+)\s+cards?\s+from\s+your\s+discard\s*pile/);
+  if (!m) return;
+  const where = m[1] === 'top' ? 'top' : m[1] === 'bottom' ? 'bottom' : 'choose';
+  effects.push({ kind: 'rejuvenate', count: m[2] ? toNum(m[2]) : 1, from: where });
+}
+
+/**
+ * Hand discards. The subject matters: "your opponent must discard 2 cards" is
+ * an effect ON the foe, while "discard 1 card from your hand to ..." is a cost
+ * the user pays. Anything that does not name a side is left alone.
+ */
+function pushDiscardCards(effects: Effect[], t: string): void {
+  const foe = t.match(/(?:opponent|foe)[^.]{0,40}?discards?\s+([0-9b]+|a)\s+cards?/);
+  if (foe) {
+    effects.push({ kind: 'discardCards', target: 'foe', count: foe[1] === 'a' ? 1 : toNum(foe[1]) });
+    return;
+  }
+  const self = t.match(/\b(?:you\s+may\s+)?discard\s+([0-9b]+|a)\s+cards?\s+from\s+your\s+hand/);
+  if (self) {
+    effects.push({ kind: 'discardCards', target: 'user', count: self[1] === 'a' ? 1 : toNum(self[1]) });
+  }
+}
 function pushStun(effects: Effect[], t: string): void {
   if (/(foe|opponent)[^.]{0,60}skip\w*[^.]{0,40}attack\s*phase|skip\w*\s+(his|her|their)\s+next\s+attack\s*phase/.test(t)) {
     effects.push({ kind: 'stunSkipNextPhase' });
@@ -228,15 +328,21 @@ const hasPerformerCondition = (t: string) => /if\s+this\s+attack\s+is\s+performe
 export function parseAbility(rawText: string, type: string): Ability | null {
   const t = rawText.toLowerCase().replace(/\s+/g, ' ').trim();
   const restriction = parseRestriction(t);
-  const body = stripTypePlate(stripLead(t));
+  const body = stripLeadingNoise(t);
   const needsReview: string[] = [];
 
   // A bare "attack ..." opener after the plate was stripped means the plate
   // swallowed the qualifier; the card's declared type says which kind it was.
-  const bareAttack = /^(a\s+)?attack[\s.,]/.test(body);
-  const startsPhysical = /^(a\s+)?phys\w*\s+attack/.test(body) || (bareAttack && type === 'Physical Combat');
+  const bareAttack = /^(?:focused\s+)?(a\s+)?attack[\s.,]/.test(body);
+  // 'Focused' is the only qualifier that precedes the attack noun (67 cards);
+  // it is a real mechanic (resists some stops) that the engine does not model
+  // yet, so it parses but is flagged. NOT a blanket wildcard: 'all physical
+  // attacks ...' is a statement about attacks, not a declaration of one.
+  const focused = /^focused\s+/.test(body);
+  const core = focused ? body.replace(/^focused\s+/, '') : body;
+  const startsPhysical = /^(a\s+)?phys\w*\s+attack/.test(core) || (bareAttack && type === 'Physical Combat');
   const startsEnergy =
-    /^(a\s+)?energy\s+attack/.test(body) ||
+    /^(a\s+)?energy\s+attack/.test(core) ||
     /^(does|do|doing)\s+[0-9b]+\s*life\s*cards?\s*draws?\s*of\s*damage/.test(body) ||
     (bareAttack && type === 'Energy Combat');
   const defenseEffects = parseDefensiveEffects(t);
@@ -263,6 +369,8 @@ export function parseAbility(rawText: string, type: string): Ability | null {
     pushSelfPowerLoss(effects, body);
     pushDraw(effects, body);
     pushStun(effects, body);
+    pushRejuvenate(effects, body);
+    pushDiscardCards(effects, body);
     if (removesAfterUse(body)) effects.push({ kind: 'removeFromGameAfterUse' });
     // stop riders ("plus it stops...", "if successful ... stops ... next phase")
     for (const s of defenseEffects) if (s.kind === 'stopAttack') effects.push({ ...s, window: s.window ?? 'nextPhase' });
@@ -276,6 +384,7 @@ export function parseAbility(rawText: string, type: string): Ability | null {
     // attack but flag it so the card stays out of 'full' coverage.
     if (hasPerformerCondition(body)) needsReview.push('performerCondition');
     if (bareAttack) needsReview.push('attackKindFromType');
+    if (focused) needsReview.push('focusedAttack');
     if (needsReview.length) ability.needsReview = needsReview;
     return ability;
   }
@@ -303,6 +412,8 @@ export function parseAbility(rawText: string, type: string): Ability | null {
     pushRaiseOwnPower(effects, body);
     pushDraw(effects, body);
     pushStun(effects, body);
+    pushRejuvenate(effects, body);
+    pushDiscardCards(effects, body);
     if (effects.length === 0) return null;
     if (removesAfterUse(body)) effects.push({ kind: 'removeFromGameAfterUse' });
     const ability: Ability = { trigger: 'onPlay', effects, source: 'parsed' };
