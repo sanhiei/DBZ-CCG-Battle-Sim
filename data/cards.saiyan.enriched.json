@@ -2388,6 +2388,7 @@
         "personalityName": "Tien",
         "alignment": "Hero",
         "powerRatings": [
+          0,
           100,
           200,
           300,
@@ -2400,9 +2401,10 @@
           1000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 1,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },
@@ -2434,17 +2436,18 @@
           600,
           700,
           800,
-          300,
+          900,
           1000,
-          110,
+          1100,
           1200,
           1300,
           1400
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 2,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },
@@ -2471,20 +2474,23 @@
         "personalityName": "Yamcha",
         "alignment": "Hero",
         "powerRatings": [
+          0,
           100,
           200,
           300,
-          0,
+          400,
           500,
           600,
           700,
           800,
-          800
+          900,
+          1000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 1,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },
@@ -2516,7 +2522,7 @@
           600,
           700,
           800,
-          800,
+          900,
           1000,
           1100,
           1200,
@@ -2524,9 +2530,10 @@
           1400
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 2,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },
@@ -2554,21 +2561,23 @@
         "personalityName": "Chi-Chi",
         "alignment": "Hero",
         "powerRatings": [
-          21,
+          0,
           100,
           200,
           300,
-          0,
+          400,
           500,
           600,
           700,
           800,
-          800
+          900,
+          1000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 1,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },
@@ -2599,18 +2608,19 @@
           100,
           200,
           300,
-          200,
+          400,
           500,
           600,
           700,
           800,
-          800,
+          900,
           1000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 1,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },
@@ -3024,17 +3034,18 @@
           100,
           200,
           300,
-          0,
+          400,
           500,
           600,
           700,
           800,
-          800,
+          900,
           1000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 1,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -3066,16 +3077,17 @@
           600,
           700,
           800,
-          800,
+          900,
           1000,
           1100,
           1200,
           1300,
-          1200
+          1400
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 2,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -3106,16 +3118,19 @@
           0,
           100,
           200,
-          0,
+          300,
+          400,
           500,
           600,
           700,
           800,
+          900,
           1000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 1,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -3147,15 +3162,17 @@
           600,
           700,
           800,
-          800,
+          900,
           1000,
           1100,
+          1200,
           1300,
           1400
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 2,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4304,16 +4321,17 @@
           600,
           700,
           800,
-          800,
+          900,
           1000,
           1100,
           1200,
           1300,
-          1200
+          1400
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 1,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4343,7 +4361,7 @@
           0,
           3200,
           3700,
-          200,
+          4200,
           4700,
           5200,
           5700,
@@ -4353,8 +4371,9 @@
           7700
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 2,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4381,19 +4400,22 @@
         "personalityName": "Goku",
         "alignment": "Hero",
         "powerRatings": [
-          8500,
-          8000,
-          9500,
           0,
+          7500,
+          8000,
+          9000,
+          9500,
+          10000,
           10500,
-          1,
+          11000,
           11500,
           12000,
           12500
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 3,
+        "canBeAlly": true,
+        "source": "lackey"
       },
       "abilities": [
         {
@@ -4439,16 +4461,17 @@
           600,
           700,
           800,
-          0,
+          900,
           1000,
           1100,
           1200,
           1300,
-          1200
+          1400
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 1,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4475,7 +4498,7 @@
         "personalityName": "Piccolo",
         "alignment": "Hero",
         "powerRatings": [
-          481,
+          0,
           1500,
           1700,
           1900,
@@ -4484,12 +4507,13 @@
           2500,
           2700,
           2900,
-          100,
+          3100,
           3200
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 2,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4520,8 +4544,8 @@
           0,
           3200,
           3700,
-          200,
-          700,
+          4200,
+          4700,
           5200,
           5700,
           6200,
@@ -4530,8 +4554,9 @@
           7700
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 3,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4558,16 +4583,22 @@
         "personalityName": "Gohan",
         "alignment": "Hero",
         "powerRatings": [
+          0,
+          100,
           200,
           300,
-          0,
+          400,
           500,
           600,
-          0
+          700,
+          800,
+          900,
+          1000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 1,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4594,18 +4625,22 @@
         "personalityName": "Gohan",
         "alignment": "Hero",
         "powerRatings": [
+          0,
           500,
           600,
           700,
           800,
+          900,
           1000,
+          1100,
           1200,
           1300,
-          1200
+          1400
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 2,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4632,14 +4667,22 @@
         "personalityName": "Gohan",
         "alignment": "Hero",
         "powerRatings": [
+          0,
+          1500,
           1700,
           1900,
+          2100,
+          2300,
+          2500,
           2700,
-          3100
+          2900,
+          3100,
+          3200
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 3,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4668,17 +4711,22 @@
         "alignment": "Hero",
         "powerRatings": [
           0,
-          0,
+          100,
+          200,
+          300,
           400,
           500,
           600,
           700,
-          800
+          800,
+          900,
+          1000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 1,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },
@@ -4706,20 +4754,23 @@
         "personalityName": "Krillin",
         "alignment": "Hero",
         "powerRatings": [
+          0,
           500,
           600,
           700,
           800,
+          900,
           1000,
-          110,
+          1100,
           1200,
           1300,
-          1900
+          1400
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 2,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },
@@ -4755,12 +4806,14 @@
           2500,
           2700,
           2900,
-          3100
+          3100,
+          3200
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 3,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },
@@ -4787,7 +4840,6 @@
         "personalityName": "Raditz",
         "alignment": "Villain",
         "powerRatings": [
-          2,
           0,
           1100,
           1200,
@@ -4801,8 +4853,9 @@
           2000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 1,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4837,13 +4890,14 @@
           2800,
           3000,
           3200,
-          300,
+          3400,
           3600,
           3800
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 2,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4870,8 +4924,8 @@
         "alignment": "Villain",
         "powerRatings": [
           0,
-          200,
-          700,
+          4200,
+          4700,
           5200,
           5700,
           6200,
@@ -4882,8 +4936,9 @@
           8700
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 3,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4922,8 +4977,9 @@
           3800
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 2,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4962,8 +5018,9 @@
           8700
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 4,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -4992,6 +5049,7 @@
           0,
           9000,
           10000,
+          11000,
           12000,
           13000,
           14000,
@@ -5001,8 +5059,9 @@
           18000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 4,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -5032,18 +5091,19 @@
           0,
           2000,
           2200,
-          200,
+          2400,
           2600,
           2800,
           3000,
-          2200,
+          3200,
           3400,
           3600,
           3800
         ],
         "zeroStageIndex": 0,
-        "pur": 3,
-        "canBeAlly": true
+        "pur": 2,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -5071,8 +5131,8 @@
         "alignment": "Villain",
         "powerRatings": [
           0,
-          200,
-          700,
+          4200,
+          4700,
           5200,
           5700,
           6200,
@@ -5083,8 +5143,9 @@
           8700
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 3,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -5111,21 +5172,22 @@
         "personalityName": "Nappa",
         "alignment": "Villain",
         "powerRatings": [
-          1,
           0,
           9000,
           9500,
           10000,
           10500,
-          1100,
+          11000,
+          11500,
           12000,
           12500,
           13000,
           13500
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
-        "canBeAlly": true
+        "pur": 4,
+        "canBeAlly": true,
+        "source": "lackey"
       }
     }
   },
@@ -5153,19 +5215,23 @@
         "personalityName": "Goku",
         "alignment": "Hero",
         "powerRatings": [
-          5,
-          11,
+          0,
+          500,
+          600,
+          700,
           800,
-          300,
+          900,
+          1000,
           1100,
           1200,
           1300,
-          14900
+          1400
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 1,
         "canBeAlly": true,
-        "variant": "HT"
+        "variant": "HT",
+        "source": "lackey"
       }
     }
   },
@@ -5198,17 +5264,18 @@
           600,
           700,
           800,
-          0,
-          100,
-          110,
+          900,
+          1000,
+          1100,
           1200,
-          130,
+          1300,
           1400
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 1,
         "canBeAlly": true,
-        "variant": "HT"
+        "variant": "HT",
+        "source": "lackey"
       }
     }
   },
@@ -5239,18 +5306,19 @@
           100,
           200,
           300,
-          0,
+          400,
           500,
+          600,
           700,
           800,
-          3,
-          100,
-          9
+          900,
+          1000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 1,
         "canBeAlly": true,
-        "variant": "HT"
+        "variant": "HT",
+        "source": "lackey"
       }
     }
   },
@@ -5277,7 +5345,7 @@
         "alignment": "Hero",
         "powerRatings": [
           0,
-          10,
+          100,
           200,
           300,
           400,
@@ -5289,10 +5357,11 @@
           1000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 1,
         "canBeAlly": true,
         "canCaptureDragonBall": true,
-        "variant": "HT"
+        "variant": "HT",
+        "source": "lackey"
       }
     }
   },
@@ -5321,21 +5390,22 @@
         "alignment": "Villain",
         "powerRatings": [
           0,
-          17100,
+          1100,
           1200,
           1300,
-          1900,
+          1400,
           1500,
           1600,
           1700,
           1800,
-          77,
-          0
+          1900,
+          2000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 1,
         "canBeAlly": true,
-        "variant": "HT"
+        "variant": "HT",
+        "source": "lackey"
       }
     }
   },
@@ -5375,9 +5445,10 @@
           3800
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 2,
         "canBeAlly": true,
-        "variant": "HT"
+        "variant": "HT",
+        "source": "lackey"
       }
     }
   },
@@ -5405,22 +5476,23 @@
         "personalityName": "Nappa",
         "alignment": "Villain",
         "powerRatings": [
+          0,
           2000,
-          217,
+          2200,
           2400,
-          11,
+          2600,
           2800,
           3000,
           3200,
           3400,
           3600,
-          3800,
-          7
+          3800
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 2,
         "canBeAlly": true,
-        "variant": "HT"
+        "variant": "HT",
+        "source": "lackey"
       }
     }
   },
@@ -6445,9 +6517,8 @@
         "personalityName": "Saibaimen",
         "alignment": "Villain",
         "powerRatings": [
-          4,
           0,
-          11700,
+          1100,
           1200,
           1300,
           1400,
@@ -6459,9 +6530,10 @@
           2000
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 1,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },
@@ -6500,9 +6572,10 @@
           3800
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 2,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },
@@ -6530,8 +6603,8 @@
         "alignment": "Villain",
         "powerRatings": [
           0,
-          200,
-          700,
+          4200,
+          4700,
           5200,
           5700,
           6200,
@@ -6542,9 +6615,10 @@
           8700
         ],
         "zeroStageIndex": 0,
-        "pur": 0,
+        "pur": 3,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },
@@ -6572,9 +6646,9 @@
         "alignment": "Villain",
         "powerRatings": [
           0,
-          0,
+          9000,
           10000,
-          1,
+          11000,
           12000,
           13000,
           14000,
@@ -6584,9 +6658,10 @@
           18000
         ],
         "zeroStageIndex": 0,
-        "pur": 1,
+        "pur": 4,
         "canBeAlly": true,
-        "canCaptureDragonBall": true
+        "canCaptureDragonBall": true,
+        "source": "lackey"
       }
     }
   },

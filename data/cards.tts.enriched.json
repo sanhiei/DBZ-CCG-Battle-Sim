@@ -11284,7 +11284,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "ladder:arithmeticRepair"
+      ],
       "text": "Power: Energy attack doing 5 life cards of damage. You may discard any amount of your Non-Combat cards in play. For each Non-Combat card discarded this way, this attack does an additional +4 life cards of damage.",
       "textVerified": "vision",
       "personality": {
@@ -11296,7 +11298,7 @@
           1940000,
           2010000,
           2080000,
-          1150000,
+          2150000,
           2220000,
           2290000,
           2360000,
@@ -56505,7 +56507,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "ladder:arithmeticRepair"
       ],
       "text": "(Constant Combat Power) Defense shield: stop the first unstopped energy attack in combat. You cannot have your anger lowered by more than 1 level by any card.",
       "errata": "Goku’s Defense Shield is separate from his Constant Combat Power preventing lowering anger more than 1 level from any card.  You do not need to have used the Defense Shield for it to be in effect.",
@@ -56526,7 +56529,7 @@
           700000,
           800000,
           900000,
-          100000,
+          1000000,
           1100000,
           1200000,
           1300000,
@@ -56553,7 +56556,8 @@
       "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
-        "type"
+        "type",
+        "ladder:arithmeticRepair"
       ],
       "text": "Constant Combat Power: All your energy attacks do 2 life cards of damage when they are stopped.",
       "textOriginal": "(Constant Combat Power) All of your energy attacks do 2 life cards of damage when they are stopped.",
@@ -56573,7 +56577,7 @@
           700000,
           800000,
           900000,
-          100000,
+          1000000,
           1100000,
           1200000,
           1300000,
@@ -56913,7 +56917,8 @@
       "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
-        "type"
+        "type",
+        "ladder:arithmeticRepair"
       ],
       "text": "Constant Combat Power: Your anger cannot be reduced. (Main Personality Only)",
       "textVerified": "vision",
@@ -56937,7 +56942,7 @@
           700000,
           800000,
           900000,
-          100000
+          1000000
         ],
         "zeroStageIndex": 0,
         "pur": 2,
@@ -57006,7 +57011,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "ladder:arithmeticRepair"
       ],
       "text": "(Constant Combat Power) Choose any personality in play. You may use that personality's power stage for determining damage.",
       "textVerified": true,
@@ -57031,7 +57037,7 @@
           700000,
           800000,
           900000,
-          100000
+          1000000
         ],
         "zeroStageIndex": 0,
         "pur": 2,
@@ -60708,7 +60714,8 @@
       "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
-        "type"
+        "type",
+        "ladder:arithmeticRepair"
       ],
       "text": "Constant Combat Power: During your opponent's turn, all damage (power stages and life cards) from physical attacks performed against your Vegeta, Saiyan Prince is reduced to 1 power stage of damage.",
       "textOriginal": "(Constant Combat Power) During your opponents turn, all damage from physical attacks performed against you is reduced to 1 power stage of damage.",
@@ -60733,7 +60740,7 @@
           700000,
           800000,
           900000,
-          100000,
+          1000000,
           1100000
         ],
         "zeroStageIndex": 0,

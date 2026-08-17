@@ -9,7 +9,7 @@
     "dev": "tsc -b && node --watch dist/index.js",
     "watch": "tsc -b --watch",
     "start": "node dist/index.js",
-    "test": "tsc -b && node --test dist/server.test.js"
+    "test": "tsc -b && node --test \"dist/*.test.js\""
   },
   "dependencies": {
     "@dbz/engine": "*",

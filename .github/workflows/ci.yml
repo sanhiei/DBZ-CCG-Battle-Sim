@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# A newer push to the same branch cancels the older run.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: typecheck + test (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 22.6 is the floor: the OCR and scraper scripts run TypeScript directly
+        # via --experimental-strip-types. 24 is what development happens on.
+        node: ['22.x', '24.x']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      # `sharp` ships prebuilt binaries; npm ci resolves them per platform.
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      # The client is built separately: it is bundled by Vite rather than tsc,
+      # so a passing typecheck does not prove it builds.
+      - name: Build client
+        run: npm run build -w @dbz/client
+
+  data:
+    name: card data invariants
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+          cache: npm
+      - run: npm ci
+
+      # Guards the committed catalogs themselves, not the code that reads them.
+      # These are the failures that previously reached the board before anyone
+      # noticed: a ladder missing its zero rung made every power stage read one
+      # rung high.
+      - name: Check catalog invariants
+        run: node scripts/check-data.mjs
