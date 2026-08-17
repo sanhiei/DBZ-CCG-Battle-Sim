@@ -34,6 +34,7 @@ export interface BoardProps {
   onSetStage(personalityUid: string, stageIndex: number): void;
   onSetAnger(personalityUid: string, anger: number): void;
   onMoveCard(cardUid: string, toZone: Zone): void;
+  onPlayCard(cardUid: string): void;
 }
 
 function Zones({ player, own }: { player: PlayerState; own: boolean }) {
@@ -116,6 +117,7 @@ export function Board({
   onSetStage,
   onSetAnger,
   onMoveCard,
+  onPlayCard,
 }: BoardProps) {
   const [manualOpen, setManualOpen] = useState(false);
   const [inspecting, setInspecting] = useState<string | null>(null);
@@ -131,11 +133,19 @@ export function Board({
   const awaitingMyDefence = prompt?.type === 'defend' && prompt.playerIdx === seat;
 
   // One derivation of what a hand click means right now.
-  const handMode: HandMode = awaitingMyDefence ? 'defend' : myAttackPhase ? 'attack' : 'idle';
+  const myNonCombatStep = seat != null && state.activePlayerIdx === seat && state.step === 'nonCombat';
+  const handMode: HandMode = awaitingMyDefence
+    ? 'defend'
+    : myAttackPhase
+      ? 'attack'
+      : myNonCombatStep
+        ? 'play'
+        : 'idle';
 
   const useCard = (cardUid: string) => {
     if (handMode === 'defend' && prompt) onAnswer(prompt.id, { cardUid });
     else if (handMode === 'attack') onAttack('physical', cardUid);
+    else if (handMode === 'play') onPlayCard(cardUid);
     // Idle: open the card so it can be read and resolved by hand.
     else setInspecting(cardUid);
   };
@@ -156,6 +166,13 @@ export function Board({
             canDefendWith={me?.zones.hand.length ?? 0}
             onAnswer={(choice) => onAnswer(prompt.id, choice)}
           />
+        )}
+
+        {myNonCombatStep && !prompt && (
+          <div className="attackbar">
+            <strong>Non-Combat Step</strong>
+            <span className="muted">Click a Non-Combat card, Drill, Location or Battleground in hand to play it</span>
+          </div>
         )}
 
         {myAttackPhase && !prompt && (

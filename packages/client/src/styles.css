@@ -983,3 +983,14 @@ button.danger {
   line-height: 1;
   padding: 2px 6px;
 }
+.handcard--inspect {
+  opacity: 0.9;
+  cursor: pointer;
+}
+.handcard--inspect:hover {
+  transform: translateY(-4px);
+  border-color: var(--ink-dim);
+}
+.hand--play .handcard--usable {
+  border-color: var(--ok);
+}

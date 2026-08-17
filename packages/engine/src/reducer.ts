@@ -21,6 +21,7 @@ import {
 } from './combat.js';
 import { firstAttackAbility } from './abilities.js';
 import { checkVictory } from './victory.js';
+import { maxAllyLevel, playCard } from './noncombat.js';
 
 const clone = <T>(x: T): T => structuredClone(x);
 const START_ALLY_STAGES_ABOVE_ZERO = 3;
@@ -94,11 +95,18 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
     case 'setAnger':
       advancedByAnger = setAnger(state, action.personalityUid, action.anger, db, events);
       break;
+    case 'playCard':
+      err = playCard(state, action.playerIdx, action.cardUid, db, events);
+      break;
     case 'playAlly': {
       const p = state.players[action.playerIdx];
       const loc = findInstance(state, action.cardUid);
       const per = loc && p ? db.personality(p.zones[loc.zone][loc.idx]?.cardId ?? '') : undefined;
       if (!p || !loc || !per) return fail(prev, 'cannot play ally');
+      // An Ally may not out-level your Main Personality (CRD ~L544).
+      if (per.level > maxAllyLevel(state, action.playerIdx)) {
+        return fail(prev, `a level ${per.level} Ally needs a level ${per.level} Main Personality`);
+      }
       const inst = p.zones[loc.zone].splice(loc.idx, 1)[0]!;
       const ratings = per.powerRatings.length ? per.powerRatings : [0];
       const stageIndex = Math.min(per.zeroStageIndex + START_ALLY_STAGES_ABOVE_ZERO, ratings.length - 1);

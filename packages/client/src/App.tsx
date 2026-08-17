@@ -95,6 +95,7 @@ export function App() {
           onSetStage={(personalityUid, stageIndex) => game.send({ type: 'setStage', personalityUid, stageIndex })}
           onSetAnger={(personalityUid, anger) => game.send({ type: 'setAnger', personalityUid, anger })}
           onMoveCard={(cardUid, toZone) => game.send({ type: 'moveCard', cardUid, toZone })}
+          onPlayCard={(cardUid) => game.seat !== null && game.send({ type: 'playCard', playerIdx: game.seat, cardUid })}
         />
       ) : (
         <>

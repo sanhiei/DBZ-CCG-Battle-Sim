@@ -7,6 +7,7 @@ import type { GameEvent, GameState, PersonalityInPlay, PowerRating, Step } from 
 import { STEPS } from '@dbz/shared';
 import type { CardDb } from './loader.js';
 import { TOKUI_WAZA_PUR_BONUS } from './mastery.js';
+import { discardDrills } from './noncombat.js';
 
 export const ANGER_TO_ADVANCE = 5;
 
@@ -40,6 +41,14 @@ export function advanceStep(state: GameState, events: GameEvent[]): void {
     state.activePlayerIdx = (state.activePlayerIdx + 1) % state.players.length;
     state.turnNumber += 1;
     delete state.combat;
+    delete state.skipCombatThisTurn;
+  }
+  // A Location/Battleground played this turn costs the Combat Step (~L713).
+  if (next === 'combat' && state.skipCombatThisTurn) {
+    state.step = 'discard';
+    state.log.push('Combat Step skipped — a Location or Battleground was played this turn.');
+    events.push({ type: 'stepChanged', step: 'discard', turnNumber: state.turnNumber, activePlayerIdx: state.activePlayerIdx });
+    return;
   }
   state.step = next;
   events.push({ type: 'stepChanged', step: next, turnNumber: state.turnNumber, activePlayerIdx: state.activePlayerIdx });
@@ -115,15 +124,7 @@ export function advanceLevel(state: GameState, mp: PersonalityInPlay, db: CardDb
   mp.currentRating = ratingAt(ratings, mp.stageIndex);
   events.push({ type: 'personalityAdvanced', personalityUid: mp.uid, toLevel: mp.currentLevel });
   // Discard this player's Drills (CRD Drill rule).
-  const idx = ownerOf(state, mp.uid);
-  const p = state.players[idx];
-  if (p) {
-    const drills = p.zones.inPlay.filter((c) => db.type(c.cardId) === 'Drill');
-    if (drills.length) {
-      p.zones.inPlay = p.zones.inPlay.filter((c) => db.type(c.cardId) !== 'Drill');
-      p.zones.discard.push(...drills);
-    }
-  }
+  discardDrills(state, ownerOf(state, mp.uid), db);
   state.log.push(`${mp.personalityName} advances to level ${mp.currentLevel}!`);
 }
 

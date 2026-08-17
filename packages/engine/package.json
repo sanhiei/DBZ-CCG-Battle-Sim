@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "tsc -b",
-    "test": "tsc -b && node --test dist/engine.test.js dist/parser.test.js dist/victory.test.js dist/damage.test.js dist/mastery.test.js dist/endurance.test.js"
+    "test": "tsc -b && node --test dist/engine.test.js dist/parser.test.js dist/victory.test.js dist/damage.test.js dist/mastery.test.js dist/endurance.test.js dist/noncombat.test.js"
   },
   "dependencies": {
     "@dbz/shared": "*"

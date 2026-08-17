@@ -15,6 +15,7 @@ export type Action =
   | { type: 'setStage'; personalityUid: string; stageIndex: number }
   | { type: 'setAnger'; personalityUid: string; anger: number }
   | { type: 'playAlly'; playerIdx: number; cardUid: string }
+  | { type: 'playCard'; playerIdx: number; cardUid: string }
   | { type: 'drawCards'; playerIdx: number; count: number }
   | { type: 'moveCard'; cardUid: string; toZone: Zone; toPlayerIdx?: number }
   | { type: 'declareAttack'; attackType: AttackType; cardUid?: string }

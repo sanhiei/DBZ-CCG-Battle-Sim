@@ -10,7 +10,7 @@
 import type { CardInstance } from '@dbz/shared';
 import type { CardDb } from '@dbz/engine';
 
-export type HandMode = 'idle' | 'attack' | 'defend';
+export type HandMode = 'idle' | 'attack' | 'defend' | 'play';
 
 export interface HandProps {
   cards: CardInstance[];
@@ -23,6 +23,8 @@ export interface HandProps {
 const ATTACK_TYPES = new Set(['Physical Combat', 'Energy Combat', 'Combat']);
 /** Card types that can answer a defend prompt. */
 const DEFEND_TYPES = new Set(['Physical Combat', 'Energy Combat', 'Combat']);
+/** Card types that enter play during the Non-Combat Step (CRD ~L627). */
+const PLAY_TYPES = new Set(['Non-Combat', 'Drill', 'Location', 'Battleground']);
 
 export function Hand({ cards, db, mode, onUse }: HandProps) {
   if (cards.length === 0) {
@@ -33,12 +35,18 @@ export function Hand({ cards, db, mode, onUse }: HandProps) {
     );
   }
 
+  /**
+   * Whether a click DOES something in the current mode. Idle is always true:
+   * the click opens the card for reading, which is how an unautomated card gets
+   * resolved by hand.
+   */
   const usable = (cardId: string): boolean => {
-    if (mode === 'idle') return false;
+    if (mode === 'idle') return true;
     const type = db?.type(cardId) ?? 'Unknown';
     // Unknown-typed cards stay usable: coverage is partial by design, and the
     // server is the authority on legality anyway.
     if (type === 'Unknown') return true;
+    if (mode === 'play') return PLAY_TYPES.has(type);
     return mode === 'attack' ? ATTACK_TYPES.has(type) : DEFEND_TYPES.has(type);
   };
 
@@ -52,9 +60,9 @@ export function Hand({ cards, db, mode, onUse }: HandProps) {
           <button
             key={c.uid}
             type="button"
-            className={`handcard ${can ? 'handcard--usable' : ''}`}
+            className={`handcard ${can ? (mode === 'idle' ? 'handcard--inspect' : 'handcard--usable') : ''}`}
             disabled={!can}
-            title={card?.rules?.text ?? card?.name ?? 'Card'}
+            title={mode === 'idle' ? `${card?.name ?? 'Card'} — click to read` : (card?.rules?.text ?? card?.name ?? 'Card')}
             onClick={() => can && onUse(c.uid)}
           >
             {hidden ? (

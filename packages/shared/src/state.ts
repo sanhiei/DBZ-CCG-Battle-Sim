@@ -167,6 +167,11 @@ export interface GameState {
   combat?: CombatState;
   /** Outstanding decision, if the engine is waiting on a player. */
   pendingPrompt?: Prompt;
+  /**
+   * Set when a Location/Battleground entered play this turn: the active player
+   * must skip the Combat Step (CRD ~L233, ~L713). Cleared on the next turn.
+   */
+  skipCombatThisTurn?: boolean;
   /** Human-readable event log. */
   log: string[];
   /**

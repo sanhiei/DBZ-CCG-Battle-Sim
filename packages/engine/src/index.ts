@@ -8,5 +8,6 @@ export * from './combat.js';
 export * from './damage.js';
 export * from './decks.js';
 export * from './mastery.js';
+export * from './noncombat.js';
 export * from './victory.js';
 export * from './reducer.js';
