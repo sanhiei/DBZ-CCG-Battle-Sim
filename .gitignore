@@ -24,3 +24,4 @@ data/ocr-tts/
 # Lackey plugin download cache (parsed output data/cards.lackey.json IS committed)
 data/lackey/
 data/vision-batches/
+data/verify-batches/

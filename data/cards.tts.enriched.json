@@ -75882,16 +75882,15 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "textDisagreement"
-      ],
-      "text": "Stops a physical attack.\nRaise your anger 1 level.",
+      "needsReview": [],
+      "text": "Stops a physical attack. Raise your anger 1 level.",
       "textOriginal": "Stops the foes' physical attack played this round. Raise card user's anger level 1.",
       "lackey": {
         "number": "049",
         "rarity": "C",
         "style": "Orange"
       },
+      "textVerified": "vision",
       "abilities": [
         {
           "trigger": "defense",
@@ -77400,16 +77399,15 @@
     "rules": {
       "type": "Non-Combat",
       "coverage": "metadata",
-      "needsReview": [
-        "textDisagreement"
-      ],
+      "needsReview": [],
       "text": "All physical attacks performed against you do 2 less power stages of damage, to a minimum of zero.",
       "textOriginal": "Stops 2 stages of power from being drained by any physical attack.",
       "lackey": {
         "number": "124",
         "rarity": "U",
         "style": "Red"
-      }
+      },
+      "textVerified": "vision"
     }
   },
   {
