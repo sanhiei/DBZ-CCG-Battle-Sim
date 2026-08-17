@@ -75,9 +75,14 @@ export function setupAttackAbility(
         if (e.ifSuccessful) attack.ifSuccessfulStages += e.stages;
         else attack.modifiers += e.stages;
         break;
-      case 'changeAnger':
-        changeMpAnger(state, e.target === 'user' ? attackerIdx : defenderIdx, e.delta, db, events);
+      case 'changeAnger': {
+        const who = e.target === 'user' ? attackerIdx : defenderIdx;
+        if (e.toZero) {
+          const mp = state.players[who]?.mp;
+          if (mp) setAnger(state, mp.uid, 0, db, events);
+        } else changeMpAnger(state, who, e.delta, db, events);
         break;
+      }
       case 'changePowerStages':
         changeControllerStages(state, e.target === 'user' ? attackerIdx : defenderIdx, e.toZero ? -99 : e.delta, db, events);
         break;
@@ -156,9 +161,32 @@ function toNum(s: string | undefined, fb = 1): number {
 const ifSucc = (t: string) => /if[\s:.\-|\\]{0,6}suc/.test(t);
 
 function parseRestriction(t: string): Ability['restriction'] | undefined {
-  if (/heroes only/.test(t)) return { alignment: 'Hero' };
+  // Named-only comes first: 'Villains, Goku and Gohan only' is NOT a plain
+  // villain restriction.
   if (/villains?[, ].{0,20}(goku|gohan)/.test(t)) return { namedOnly: ['Villains', 'Goku', 'Gohan'] };
+  if (/heroes only/.test(t)) return { alignment: 'Hero' };
+  // stripLead removes this prefix before parsing, so without an explicit check
+  // the restriction vanished and a Hero deck could legally play the card.
+  if (/villains?\s+only/.test(t)) return { alignment: 'Villain' };
   return undefined;
+}
+
+/**
+ * Clauses whose numbers are CONDITIONAL and must not be read as the card's
+ * base damage: 'if you declared Tokui-Waza, this attack does 5 power stages
+ * instead' describes an alternative, not the printed base. Taking the number
+ * from one of these makes every copy of the card deal the conditional amount.
+ */
+const CONDITIONAL_CLAUSE = /\b(if\s+(you|this|your|the)\b|instead\b|tokui[\s-]*waza|toku[\s-]*waza)/;
+
+/** Split a card's text into sentences so a clause's own context can be judged. */
+function sentences(t: string): string[] {
+  return t.split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter(Boolean);
+}
+
+/** The sentence containing `needle`, or '' when it is not found. */
+function clauseFor(t: string, needle: RegExp): string {
+  return sentences(t).find((s) => needle.test(s)) ?? '';
 }
 function stripLead(t: string): string {
   return t.replace(/^\s*(villains?[^.]*only|heroes only|namekian[^.]*only|saiyan[^.]*only)[.,]?\s*/i, '').trim();
@@ -196,17 +224,46 @@ function parseCost(t: string): Ability['cost'] | undefined {
   return m ? { powerStages: toNum(m[1]) } : undefined;
 }
 
-/** Fixed base damage on an attack, if the card states one (overrides PAT). */
-function parseAttackDamage(t: string): { lifeCards?: number; powerStages?: number } {
-  const lc =
-    t.match(/(?:causing|doing|does|do|deal\w*)\s+([0-9b]+)\s*life\s*cards?/) ||
-    t.match(/([0-9b]+)\s*life\s*cards?\s*(?:draws?|in damage|of damage)/) ||
-    t.match(/([0-9b]+)\s*draws?\s*(?:from\s*the\s*life\s*deck|of damage)/) ||
-    t.match(/(?:defender\s+to\s+)?lose\s+([0-9b]+)\s*life\s*cards?/);
-  if (lc) return { lifeCards: toNum(lc[1]) };
+/**
+ * Fixed base damage, if the card states one. Setting `lifeCards`/`powerStages`
+ * makes that amount the card's BASE, which OVERRIDES the Physical Attack Table
+ * — so reading the wrong number here does not merely add a little damage, it
+ * silently deletes all PAT damage. Two traps, both found by auditing parses
+ * against the printed text:
+ *
+ *  1. "+N life cards" is a MODIFIER added on top of base damage (CRD ~L433),
+ *     not a base. Encoding it as a base turned 'physical attack doing +2 life
+ *     cards' into 'deal exactly 2 life cards and no power stages'. There is no
+ *     life-card modifier Effect kind, so the honest result is NO base and a
+ *     review flag.
+ *  2. A number inside a CONDITIONAL clause ('if you declared Tokui-Waza, this
+ *     attack does 5 power stages instead') is an alternative, not the printed
+ *     base. Taking it made every copy of the card deal the conditional amount.
+ */
+function parseAttackDamage(t: string): { lifeCards?: number; powerStages?: number; conditional?: boolean; lifeCardModifier?: boolean } {
+  // A signed life-card amount is a modifier, never a base.
+  if (/[+\-]\s?[0-9b]+\s*life\s*cards?/.test(t)) return { lifeCardModifier: true };
+
+  const lcPatterns = [
+    /(?:causing|doing|does|do|deal\w*)\s+([0-9b]+)\s*life\s*cards?/,
+    /([0-9b]+)\s*life\s*cards?\s*(?:draws?|in damage|of damage)/,
+    /([0-9b]+)\s*draws?\s*(?:from\s*the\s*life\s*deck|of damage)/,
+    /(?:defender\s+to\s+)?lose\s+([0-9b]+)\s*life\s*cards?/,
+  ];
+  for (const re of lcPatterns) {
+    const m = t.match(re);
+    if (!m) continue;
+    if (CONDITIONAL_CLAUSE.test(clauseFor(t, re))) return { conditional: true };
+    return { lifeCards: toNum(m[1]) };
+  }
+
   // Fixed power-stage damage stated WITHOUT a +/- sign (not the "+N" modifier).
-  const ps = t.match(/(?:doing|does|deal\w*)\s+([0-9b]+)\s*(?:power\s*)?stages?\s*of\s*damage/);
-  if (ps) return { powerStages: toNum(ps[1]) };
+  const psRe = /(?:doing|does|deal\w*)\s+([0-9b]+)\s*(?:power\s*)?stages?\s*of\s*damage/;
+  const ps = t.match(psRe);
+  if (ps) {
+    if (CONDITIONAL_CLAUSE.test(clauseFor(t, psRe))) return { conditional: true };
+    return { powerStages: toNum(ps[1]) };
+  }
   return {};
 }
 
@@ -245,6 +302,14 @@ function parseDefensiveEffects(t: string): Effect[] {
 }
 
 function pushAnger(effects: Effect[], t: string): void {
+  // 'lower ... anger to 0' is a SET, not a delta. Parsed as a delta it became
+  // delta:0 — the engine changed anger by zero while the card looked modelled.
+  const toZero = /anger[^.]{0,24}\bto\s*(0|zero)\b/.test(t);
+  if (toZero) {
+    const foe = /(foe|opponent)/.test(t) && !/your\s+anger/.test(t);
+    effects.push({ kind: 'changeAnger', target: foe ? 'foe' : 'user', delta: 0, toZero: true });
+    return;
+  }
   // Strip foe-possessives as UNITS first, so "raise your opponent's anger"
   // cannot leave a bare "your" behind and read as user-anger. The errata'd TTS
   // text says "Raise your anger 1 level" where 2001-era scans said "Raise card
@@ -383,6 +448,8 @@ export function parseAbility(rawText: string, type: string): Ability | null {
     // Riders gated on who performs the attack can't be honoured yet; keep the
     // attack but flag it so the card stays out of 'full' coverage.
     if (hasPerformerCondition(body)) needsReview.push('performerCondition');
+    if (dmg.conditional) needsReview.push('conditionalDamage');
+    if (dmg.lifeCardModifier) needsReview.push('lifeCardModifier');
     if (bareAttack) needsReview.push('attackKindFromType');
     if (focused) needsReview.push('focusedAttack');
     if (needsReview.length) ability.needsReview = needsReview;

@@ -27,7 +27,9 @@ export type Effect =
   | { kind: 'physicalAttack'; lifeCards?: number; powerStages?: number }
   | { kind: 'energyAttack'; lifeCards?: number; powerStages?: number }
   | { kind: 'damageStages'; stages: number; ifSuccessful?: boolean } // +/- modifier on PAT
-  | { kind: 'changeAnger'; target: EffectTarget; delta: number }
+  /** `toZero` sets anger to 0 outright ('lower your anger to 0'); a delta of
+   *  0 would otherwise be a silent no-op that still looks modelled. */
+  | { kind: 'changeAnger'; target: EffectTarget; delta: number; toZero?: boolean }
   | { kind: 'changePowerStages'; target: EffectTarget; delta: number; toZero?: boolean }
   | { kind: 'movePowerStage'; target: EffectTarget; to: 'highest' | 'lowest' }
   // Defensive: stop an attack, or prevent some of its life-card damage.
