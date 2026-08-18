@@ -10,9 +10,9 @@
  *     will work").
  * It is conservative and flags uncertainty; unrecognized cards stay `manual`.
  */
-import type { Ability, AttackType, Effect, GameEvent, GameState } from '@dbz/shared';
+import type { Ability, AttackType, Effect, EffectTarget, GameEvent, GameState } from '@dbz/shared';
 import type { CardDb } from './loader.js';
-import { currentRatings, setAnger, syncRating } from './turn.js';
+import { currentRatings, draw, setAnger, syncRating } from './turn.js';
 
 /* ============================ Execution ============================ */
 
@@ -161,6 +161,67 @@ export function discardFromHand(state: GameState, playerIdx: number, count: numb
 }
 
 /** Run non-damage "if successful" effects after an attack succeeds (best-effort). */
+/**
+ * Resolve a Non-Combat card's on-play ability.
+ *
+ * playCard put the card in play and logged it, and that was all — no effect of
+ * any kind was executed, so every Non-Combat card with a parsed ability sat
+ * there doing nothing while reading as modelled.
+ *
+ * Returns whether the card removes itself from the game, which the caller
+ * needs in order to put the used card in the right zone.
+ */
+export function applyOnPlay(
+  state: GameState,
+  userIdx: number,
+  foeIdx: number,
+  effects: Effect[],
+  db: CardDb,
+  events: GameEvent[],
+): { removeFromGame: boolean; resolved: number; manual: number } {
+  let removeFromGame = false;
+  let resolved = 0;
+  let manual = 0;
+  for (const e of effects) {
+    const who = (t: EffectTarget) => (t === 'user' ? userIdx : foeIdx);
+    switch (e.kind) {
+      case 'changeAnger': {
+        if (e.toZero) {
+          const mp = state.players[who(e.target)]?.mp;
+          if (mp) setAnger(state, mp.uid, 0, db, events);
+        } else changeMpAnger(state, who(e.target), e.delta, db, events);
+        break;
+      }
+      case 'changePowerStages':
+        changeControllerStages(state, who(e.target), e.toZero ? -99 : e.delta, db, events);
+        break;
+      case 'movePowerStage':
+        moveControllerToEnd(state, who(e.target), e.to, db, events);
+        break;
+      case 'rejuvenate':
+        rejuvenate(state, userIdx, e.count, e.from);
+        break;
+      case 'drawCards':
+        draw(state, userIdx, e.count);
+        break;
+      case 'discardCards':
+        discardFromHand(state, who(e.target), e.count);
+        break;
+      case 'removeFromGameAfterUse':
+        removeFromGame = true;
+        break;
+      default:
+        // Say so rather than silently doing nothing: a card that looks
+        // resolved but was not is worse than one the player knows to resolve.
+        state.log.push(`Effect not yet automated: ${e.kind} (resolve manually).`);
+        manual++;
+        continue;
+    }
+    resolved++;
+  }
+  return { removeFromGame, resolved, manual };
+}
+
 export function applyIfSuccessful(
   state: GameState,
   effects: Effect[] | undefined,

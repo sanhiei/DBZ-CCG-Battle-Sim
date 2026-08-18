@@ -7,7 +7,7 @@ import type { GameEvent, GameState, PersonalityInPlay, PowerRating, Step } from 
 import { STEPS } from '@dbz/shared';
 import type { CardDb } from './loader.js';
 import { TOKUI_WAZA_PUR_BONUS } from './mastery.js';
-import { discardDrills } from './noncombat.js';
+import { discardDrills } from './drills.js';
 
 export const ANGER_TO_ADVANCE = 5;
 

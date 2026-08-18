@@ -17,39 +17,16 @@
  */
 import type { CardInstance, GameEvent, GameState } from '@dbz/shared';
 import type { CardDb } from './loader.js';
+import { applyOnPlay } from './abilities.js';
+// Re-exported so callers keep importing the Non-Combat Step's rules from one
+// place; they live in drills.ts to keep turn.ts from importing this module.
+export { discardDrills, isDrill, isFreestyleDrill } from './drills.js';
 
 /** Card types that may be placed in play during the Non-Combat Step. */
 const PLAYABLE_IN_PLAY = new Set(['Non-Combat', 'Drill', 'Location', 'Battleground']);
 
 /** Types that cost you the Combat Step when played. */
 const SKIPS_COMBAT = new Set(['Location', 'Battleground']);
-
-export function isDrill(cardId: string, db: CardDb): boolean {
-  return db.type(cardId) === 'Drill';
-}
-
-/**
- * A Drill is Freestyle unless its title starts with a Martial Arts Style
- * (~L640). Freestyle Drills are legal in any deck and may be duplicated in
- * play; Styled ones are bound to the declared Tokui-Waza.
- */
-export function isFreestyleDrill(cardId: string, db: CardDb): boolean {
-  if (!isDrill(cardId, db)) return false;
-  const name = db.get(cardId)?.name ?? '';
-  return !/^(red|blue|orange|black|saiyan|namekian)\b/i.test(name);
-}
-
-/** Discard every Drill a player controls (MP gained or lost a level). */
-export function discardDrills(state: GameState, playerIdx: number, db: CardDb): number {
-  const p = state.players[playerIdx];
-  if (!p) return 0;
-  const drills = p.zones.inPlay.filter((c) => isDrill(c.cardId, db));
-  if (drills.length === 0) return 0;
-  p.zones.inPlay = p.zones.inPlay.filter((c) => !isDrill(c.cardId, db));
-  p.zones.discard.push(...drills.map((c) => ({ ...c, faceDown: false })));
-  state.log.push(`${p.name}'s ${drills.length} Drill(s) are discarded.`);
-  return drills.length;
-}
 
 /**
  * Play a card from hand into play during your Non-Combat Step.
@@ -84,6 +61,28 @@ export function playCard(
   if (SKIPS_COMBAT.has(type)) {
     state.skipCombatThisTurn = true;
     state.log.push(`${name} is a ${type} — ${player.name} must skip the Combat Step this turn.`);
+  }
+
+  // Resolve what the card actually does. Until now the card entered play and
+  // nothing else happened, for every effect kind.
+  const ability = db.get(card.cardId)?.rules?.abilities?.find((a) => a.trigger === 'onPlay');
+  if (ability) {
+    const foeIdx = playerIdx === 0 ? 1 : 0;
+    const { removeFromGame } = applyOnPlay(state, playerIdx, foeIdx, ability.effects, db, events);
+
+    // A used Non-Combat card does not stay on the table (~L6): it is discarded,
+    // or removed from the game when the card says so. Drills, Locations and
+    // Battlegrounds are continuous and stay where they are.
+    if (type === 'Non-Combat') {
+      const used = player.zones.inPlay.findIndex((c: CardInstance) => c.uid === cardUid);
+      if (used !== -1) {
+        const [spent] = player.zones.inPlay.splice(used, 1);
+        if (spent) {
+          (removeFromGame ? player.zones.removed : player.zones.discard).push(spent);
+          state.log.push(`${name} is ${removeFromGame ? 'removed from the game' : 'discarded'} after use.`);
+        }
+      }
+    }
   }
 
   events.push({ type: 'log', message: `${player.name} plays ${name}` });
