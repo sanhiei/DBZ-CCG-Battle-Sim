@@ -9,7 +9,7 @@
     "imageUrl": "images-tts/tts-49d99703-66.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Use when needed. Raise all of your personalities to their highest power stage. Remove from the game after use.",
       "textVerified": true,
@@ -17,7 +17,23 @@
         "number": "P3",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -264,6 +280,11 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -3
             }
           ],
           "source": "parsed"
@@ -392,6 +413,11 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -2
             }
           ],
           "source": "parsed",
@@ -501,6 +527,11 @@
               "window": "thisAttack"
             },
             {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -2
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
@@ -568,6 +599,11 @@
         {
           "trigger": "onPlay",
           "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
             {
               "kind": "rejuvenate",
               "count": 4,
@@ -960,6 +996,11 @@
             {
               "kind": "physicalAttack",
               "powerStages": 3
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
             }
           ],
           "source": "parsed"
@@ -994,6 +1035,11 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -4
             },
             {
               "kind": "discardCards",
@@ -1073,7 +1119,8 @@
           "effects": [
             {
               "kind": "physicalAttack",
-              "lifeCards": 1
+              "lifeCards": 1,
+              "powerStages": 1
             }
           ],
           "source": "parsed"
@@ -1152,7 +1199,7 @@
     "imageUrl": "images-tts/tts-514f40cb-49.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Raise any personality to its highest power stage. If you declared Toku-Waza, you may also end Combat.",
       "textVerified": true,
@@ -1160,7 +1207,20 @@
         "number": "050",
         "rarity": "U",
         "style": "Black"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -2035,6 +2095,16 @@
           "trigger": "onPlay",
           "effects": [
             {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "foe",
+              "to": "highest"
+            },
+            {
               "kind": "rejuvenate",
               "count": 3,
               "from": "choose"
@@ -2077,8 +2147,13 @@
             },
             {
               "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "changeAnger",
               "target": "foe",
-              "delta": -1
+              "delta": -3
             }
           ],
           "source": "parsed"
@@ -2412,7 +2487,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -2593,6 +2668,11 @@
             {
               "kind": "damageStages",
               "stages": 4
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -2653,7 +2733,7 @@
     "imageUrl": "images-tts/tts-514f40cb-62.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Piccolo and Nail only. Raise your Main Personality to its highest power stage. Choose up to 3 cards in your discard pile and shuffle them into your Life Deck.",
       "textVerified": true,
@@ -2661,7 +2741,20 @@
         "number": "063",
         "rarity": "U",
         "style": "Namekian"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -2704,7 +2797,7 @@
     "imageUrl": "images-tts/tts-49d99703-33.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Raise all of your Allies to their highest power stage. You may use all of their personality powers this Combat even if your Main Personality is at 2 power stages above 0 or higher. Discard 1 card from the top of your Life Deck for each Ally you have.",
       "errata": "Allies may take over Combat ONLY to use their personality powers, and then the Main Personality resumes control of Combat. This card only affects allies that were in play when this card was used. It does not affect allies brought into play later that Combat.",
@@ -2713,7 +2806,20 @@
         "number": "103",
         "rarity": "R",
         "style": "Namekian"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -2881,7 +2987,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -3173,6 +3279,10 @@
               "kind": "physicalAttack"
             },
             {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
@@ -3461,6 +3571,10 @@
               "kind": "physicalAttack"
             },
             {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
@@ -3500,6 +3614,11 @@
             {
               "kind": "damageStages",
               "stages": 6
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -1
             }
           ],
           "source": "parsed"
@@ -3579,7 +3698,7 @@
     "imageUrl": "images-tts/tts-49d99703-39.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -3589,7 +3708,20 @@
         "number": "109",
         "rarity": "R",
         "style": "Red"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -3696,7 +3828,7 @@
             },
             {
               "kind": "damageStages",
-              "stages": 6
+              "stages": 3
             }
           ],
           "source": "parsed"
@@ -3731,6 +3863,11 @@
               "kind": "stopAttack",
               "attackType": "energy",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -4
             }
           ],
           "source": "parsed"
@@ -3904,6 +4041,11 @@
               "kind": "stopAttack",
               "attackType": "physical",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -4
             }
           ],
           "source": "parsed"
@@ -3938,6 +4080,11 @@
               "kind": "stopAttack",
               "attackType": "any",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -3
             }
           ],
           "source": "parsed"
@@ -3955,9 +4102,22 @@
     "imageUrl": "images-tts/tts-49d99703-12.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
-      "text": "Raise your Main Personality and dll of Allies to their highest power stage.\nUse when needed.\nLimit 1 per deck.\nfrom the game after use."
+      "text": "Raise your Main Personality and dll of Allies to their highest power stage.\nUse when needed.\nLimit 1 per deck.\nfrom the game after use.",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -4053,6 +4213,11 @@
             {
               "kind": "physicalAttack",
               "lifeCards": 7
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 6
             }
           ],
           "source": "parsed",
@@ -4173,6 +4338,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -4899,7 +5069,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -5322,7 +5492,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "user",
+              "target": "foe",
               "delta": 2
             }
           ],
@@ -5360,7 +5530,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -5747,6 +5917,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -6003,7 +6178,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "user",
+              "target": "foe",
               "delta": 2
             },
             {
@@ -6217,7 +6392,7 @@
     "imageUrl": "images-tts/tts-b77448ca-51.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Whenever an attack you perform becomes successful, you may place the bottom card of your discard pile under this Drill facedown. During your Power Up Step, you may discard any cards placed under this Drill. For each card discarded this way, your Main Personality gains 1 power stage.",
       "textVerified": true,
@@ -6225,7 +6400,20 @@
         "number": "052",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -6504,6 +6692,11 @@
               "kind": "stopAttack",
               "attackType": "any",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -6856,7 +7049,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed",
@@ -7454,6 +7647,11 @@
               "kind": "stopAttack",
               "attackType": "energy",
               "window": "thisAttack"
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             },
             {
               "kind": "drawCards",
@@ -8101,7 +8299,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "user",
+              "target": "foe",
               "delta": 1
             }
           ],
@@ -8199,7 +8397,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             },
             {
               "kind": "changeAnger",
@@ -8321,7 +8519,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -8420,11 +8618,11 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             },
             {
               "kind": "changeAnger",
-              "target": "user",
+              "target": "foe",
               "delta": 2
             }
           ],
@@ -8656,7 +8854,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -8821,8 +9019,8 @@
             },
             {
               "kind": "changeAnger",
-              "target": "user",
-              "delta": 1
+              "target": "foe",
+              "delta": 0
             }
           ],
           "source": "parsed"
@@ -8860,6 +9058,11 @@
               "kind": "stopAttack",
               "attackType": "physical",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
             },
             {
               "kind": "changeAnger",
@@ -8916,6 +9119,11 @@
         {
           "trigger": "onPlay",
           "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 0
+            },
             {
               "kind": "discardCards",
               "target": "user",
@@ -9373,6 +9581,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 2
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -9407,6 +9620,11 @@
               "kind": "stopAttack",
               "attackType": "physical",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -6
             }
           ],
           "source": "parsed"
@@ -9441,7 +9659,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -9698,12 +9916,17 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
               "window": "thisCombat",
               "scope": "all"
             },
             {
               "kind": "changeAnger",
-              "target": "user",
+              "target": "foe",
               "delta": 2
             },
             {
@@ -9923,7 +10146,7 @@
     "imageUrl": "images-tts/tts-c29a516a-15.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "When entering Combat, you may remove 4 Uncommons in your discard pile from the game for your Main Personality to gain 2 power stages at the beginning of each of your \"Attacker Attacks\" phases for the remainder of Combat.",
       "textVerified": true,
@@ -9931,7 +10154,20 @@
         "number": "085",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -9960,7 +10196,7 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -10267,6 +10503,11 @@
               "kind": "damageStages",
               "stages": 3,
               "ifSuccessful": true
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -10678,6 +10919,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 6
             }
           ],
           "source": "parsed"
@@ -11028,6 +11274,11 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
@@ -11109,7 +11360,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisCombat"
+              "window": "thisAttack"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -11617,7 +11868,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -11770,6 +12021,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -11948,7 +12204,7 @@
     "imageUrl": "images-tts/tts-bf3b8d7f-10.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -11958,7 +12214,20 @@
         "number": "011",
         "rarity": "C",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -11988,6 +12257,11 @@
               "kind": "stopAttack",
               "attackType": "energy",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
             },
             {
               "kind": "changeAnger",
@@ -12844,6 +13118,11 @@
             },
             {
               "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "changeAnger",
               "target": "foe",
               "delta": -1
             }
@@ -13028,6 +13307,11 @@
         {
           "trigger": "defense",
           "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
+              "window": "thisAttack"
+            },
             {
               "kind": "stopAttack",
               "attackType": "energy",
@@ -15344,7 +15628,7 @@
     "imageUrl": "images-tts/tts-6a69cdcc-29.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -15354,7 +15638,20 @@
         "number": "M29",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -15833,7 +16130,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisCombat"
+              "window": "thisAttack"
             },
             {
               "kind": "changeAnger",
@@ -16858,6 +17155,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
             }
           ],
           "source": "parsed"
@@ -17530,7 +17832,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "nextPhase"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -20168,7 +20470,8 @@
           "effects": [
             {
               "kind": "energyAttack",
-              "lifeCards": 2
+              "lifeCards": 2,
+              "powerStages": 2
             }
           ],
           "source": "parsed"
@@ -20402,6 +20705,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
             }
           ],
           "source": "parsed"
@@ -20565,6 +20873,11 @@
               "target": "foe",
               "delta": 0,
               "toZero": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 1
             }
           ],
           "source": "parsed"
@@ -20930,7 +21243,7 @@
     "imageUrl": "images-tts/tts-3ae57df1-2.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Heroes only. Raise any personality in play to its highest power stage.",
       "textVerified": true,
@@ -20938,7 +21251,23 @@
         "number": "072",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed",
+          "restriction": {
+            "alignment": "Hero"
+          }
+        }
+      ]
     }
   },
   {
@@ -21309,9 +21638,22 @@
     "imageUrl": "images-tts/tts-3ae57df1-12.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
-      "text": "Cell only.\nIf Android 17 or Android 18 is in play and they are not a Main Personality.\nremove one of them from the game.\nRaise [Cell to his highest power stage."
+      "text": "Cell only.\nIf Android 17 or Android 18 is in play and they are not a Main Personality.\nremove one of them from the game.\nRaise [Cell to his highest power stage.",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -21465,7 +21807,7 @@
     "imageUrl": "images-tts/tts-3ae57df1-53.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Cell only. Raise your Main Personality to its highest power stage. Lower all of your opponent's Allies to 0 power stages.",
       "textVerified": true,
@@ -21473,7 +21815,20 @@
         "number": "123",
         "rarity": "R",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -21787,7 +22142,7 @@
     "imageUrl": "images-tts/tts-3ae57df1-45.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Raise any personality in play to its highest power stage. The next energy attack that personality performs this Combat costs 0 power stages to perform.",
       "textVerified": true,
@@ -21795,7 +22150,20 @@
         "number": "115",
         "rarity": "R",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -22673,6 +23041,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -2
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "foe",
+              "to": "highest"
             }
           ],
           "source": "parsed",
@@ -23312,6 +23685,11 @@
               "kind": "stopAttack",
               "attackType": "energy",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -23444,6 +23822,11 @@
               "kind": "stopAttack",
               "attackType": "physical",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -23513,6 +23896,11 @@
         {
           "trigger": "onPlay",
           "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
             {
               "kind": "drawCards",
               "count": 1
@@ -23665,6 +24053,11 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -23824,6 +24217,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 3
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
             }
           ],
           "source": "parsed"
@@ -25161,6 +25559,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
             }
           ],
           "source": "parsed"
@@ -25201,6 +25604,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
             }
           ],
           "source": "parsed"
@@ -27701,6 +28109,11 @@
               "kind": "stopAttack",
               "attackType": "physical",
               "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -28605,6 +29018,11 @@
               "kind": "damageStages",
               "stages": 3,
               "ifSuccessful": true
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -28859,7 +29277,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -29437,7 +29855,7 @@
     "imageUrl": "images-tts/tts-40b278df-29.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -29448,7 +29866,35 @@
         "number": "099",
         "rarity": "R",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -5
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -31010,6 +31456,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
             }
           ],
           "source": "parsed",
@@ -31361,7 +31812,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -31931,7 +32382,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-30.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. All Main Personalities are raised to their highest power stage. Every player raises his anger 1 level. Every player may search his Life Deck for a Freestyle Drill and place it in play.",
       "textVerified": true,
@@ -31940,6 +32391,24 @@
         "rarity": "C",
         "style": "Colorless"
       },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 1
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -32204,6 +32673,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -32546,8 +33020,13 @@
             },
             {
               "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "changeAnger",
               "target": "foe",
-              "delta": -1
+              "delta": -2
             }
           ],
           "source": "parsed"
@@ -32605,8 +33084,13 @@
             },
             {
               "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            },
+            {
+              "kind": "changeAnger",
               "target": "foe",
-              "delta": -2
+              "delta": -1
             }
           ],
           "source": "parsed"
@@ -32712,7 +33196,7 @@
     "imageUrl": "images-tts/tts-4caf6df6-20.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All opponents & their allies lose 3 power stages. Remove from the game after use. Limit 1 per deck.",
       "textVerified": true,
@@ -32720,7 +33204,23 @@
         "number": "050",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -3
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -33263,6 +33763,11 @@
               "delta": 1
             },
             {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
@@ -33340,6 +33845,11 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
               "window": "thisCombat",
               "scope": "all"
             }
@@ -33419,6 +33929,11 @@
         {
           "trigger": "defense",
           "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
+              "window": "thisAttack"
+            },
             {
               "kind": "stopAttack",
               "attackType": "energy",
@@ -33640,6 +34155,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
             }
           ],
           "source": "parsed",
@@ -34342,7 +34862,7 @@
     "imageUrl": "images-tts/tts-4caf6df6-21.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -34352,7 +34872,23 @@
         "number": "051",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -2
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -35163,6 +35699,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
             }
           ],
           "source": "parsed"
@@ -35754,7 +36295,7 @@
     "imageUrl": "images-tts/tts-7b6b6ee0-11.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Any one of your personalities gains 5 power stages.",
       "textVerified": true,
@@ -35762,7 +36303,20 @@
         "number": "012",
         "rarity": "C",
         "style": "Saiyan"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -36214,6 +36768,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -1
             }
           ],
           "source": "parsed"
@@ -36593,6 +37152,11 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
             },
             {
               "kind": "changeAnger",
@@ -37375,6 +37939,11 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
               "window": "thisCombat"
             },
             {
@@ -37409,6 +37978,11 @@
         {
           "trigger": "defense",
           "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
+              "window": "thisAttack"
+            },
             {
               "kind": "stopAttack",
               "attackType": "physical",
@@ -37691,7 +38265,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisCombat"
+              "window": "thisAttack"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -37795,6 +38369,11 @@
             {
               "kind": "damageStages",
               "stages": 5
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -37869,6 +38448,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -2
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -38055,7 +38639,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -38095,7 +38679,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "user",
+              "target": "foe",
               "delta": 1
             },
             {
@@ -38254,6 +38838,11 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -38644,7 +39233,7 @@
     "imageUrl": "images-tts/tts-c611d949-17.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -38654,7 +39243,25 @@
         "number": "CA18",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -38683,6 +39290,11 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -38857,6 +39469,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -38978,11 +39595,16 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
               "window": "thisCombat"
             },
             {
               "kind": "changeAnger",
-              "target": "user",
+              "target": "foe",
               "delta": 1
             }
           ],
@@ -39086,7 +39708,12 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "foe",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -39126,6 +39753,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
             }
           ],
           "source": "parsed"
@@ -40020,6 +40652,11 @@
               "kind": "damageStages",
               "stages": 4,
               "ifSuccessful": true
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -1
             }
           ],
           "source": "parsed"
@@ -40124,6 +40761,11 @@
             {
               "kind": "damageStages",
               "stages": 4
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -40252,7 +40894,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "user",
+              "target": "foe",
               "delta": 2
             }
           ],
@@ -40628,6 +41270,11 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
               "window": "thisCombat",
               "scope": "all"
             },
@@ -41046,6 +41693,11 @@
             {
               "kind": "damageStages",
               "stages": 2
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -41108,7 +41760,7 @@
     "imageUrl": "images-tts/tts-8281ee74-11.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Use during your Non-Combat Step if you did not put this card into play this turn. If you and your opponent did not declare Combat on your previous turns, raise your Main Personality to his highest power stage and place 6 cards in your discard pile at the bottom of your Life Deck.",
       "textVerified": true,
@@ -41116,7 +41768,20 @@
         "number": "Preview 4",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "foe",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -41149,6 +41814,11 @@
               "kind": "damageStages",
               "stages": 4,
               "ifSuccessful": true
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 4
             }
           ],
           "source": "parsed"
@@ -41308,6 +41978,11 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
               "window": "thisCombat"
             }
           ],
@@ -41450,6 +42125,11 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
               "window": "thisCombat",
               "scope": "all"
             },
@@ -41487,6 +42167,11 @@
         {
           "trigger": "defense",
           "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
+              "window": "thisAttack"
+            },
             {
               "kind": "stopAttack",
               "attackType": "energy",
@@ -41851,6 +42536,11 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
               "window": "thisCombat"
             },
             {
@@ -42064,7 +42754,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -42141,7 +42831,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisCombat"
+              "window": "thisAttack"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -42183,7 +42873,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "user",
+              "target": "foe",
               "delta": 1
             }
           ],
@@ -42219,6 +42909,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 6
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 1
             }
           ],
           "source": "parsed"
@@ -42756,6 +43451,11 @@
               "stages": 2
             },
             {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 4
+            },
+            {
               "kind": "stopAttack",
               "attackType": "energy",
               "window": "thisAttack"
@@ -42885,6 +43585,11 @@
               "kind": "damageStages",
               "stages": 3,
               "ifSuccessful": true
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -43118,6 +43823,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -1
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "foe",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -43159,6 +43869,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -44208,6 +44923,11 @@
             {
               "kind": "damageStages",
               "stages": 5
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -44243,6 +44963,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 5
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -44570,6 +45295,11 @@
         {
           "trigger": "defense",
           "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
+              "window": "thisAttack"
+            },
             {
               "kind": "stopAttack",
               "attackType": "energy",
@@ -45010,8 +45740,18 @@
             },
             {
               "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "changeAnger",
               "target": "foe",
-              "delta": -1
+              "delta": -3
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 4
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -45523,6 +46263,11 @@
         {
           "trigger": "defense",
           "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
+              "window": "thisAttack"
+            },
             {
               "kind": "stopAttack",
               "attackType": "energy",
@@ -46309,8 +47054,7 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisCombat",
-              "scope": "all"
+              "window": "thisAttack"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -47191,6 +47935,11 @@
             {
               "kind": "damageStages",
               "stages": 8
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -47499,6 +48248,11 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
               "window": "thisCombat"
             },
             {
@@ -47760,6 +48514,11 @@
             {
               "kind": "damageStages",
               "stages": 4
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
             },
             {
               "kind": "changeAnger",
@@ -48274,6 +49033,11 @@
               "kind": "stopAttack",
               "attackType": "energy",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 7
             }
           ],
           "source": "parsed"
@@ -48699,6 +49463,11 @@
               "kind": "stopAttack",
               "attackType": "energy",
               "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -48902,8 +49671,18 @@
             },
             {
               "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "changeAnger",
               "target": "foe",
               "delta": -1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed",
@@ -49280,7 +50059,7 @@
     "imageUrl": "images-tts/tts-f1189c19-52.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Increase the anger of a level 1 or 2 personality by 1 and discard this card from the game.",
       "textVerified": true,
@@ -49288,7 +50067,20 @@
         "number": "191",
         "rarity": "R",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -49662,6 +50454,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 6
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -3
             }
           ],
           "source": "parsed"
@@ -50066,6 +50863,11 @@
           "trigger": "onPlay",
           "effects": [
             {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            },
+            {
               "kind": "rejuvenate",
               "count": 2,
               "from": "top"
@@ -50227,7 +51029,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-68.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Every time you place cards from your life deck into your discard pile, your opponent loses 1 power stage for each card discarded.",
       "textOriginal": "For every life card you lose in combat, your foe loses 1 power stage, down to (0).",
@@ -50236,7 +51038,20 @@
         "rarity": "U",
         "style": "Blue"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -50249,7 +51064,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-59.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -50259,7 +51074,20 @@
         "number": "129",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -50666,6 +51494,11 @@
             },
             {
               "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "changeAnger",
               "target": "foe",
               "delta": -1
             }
@@ -50685,7 +51518,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-1.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -50696,7 +51529,23 @@
         "rarity": "R",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -50818,6 +51667,11 @@
         {
           "trigger": "onPlay",
           "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            },
             {
               "kind": "rejuvenate",
               "count": 2,
@@ -51398,6 +52252,11 @@
           "trigger": "onPlay",
           "effects": [
             {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            },
+            {
               "kind": "rejuvenate",
               "count": 2,
               "from": "choose"
@@ -51790,7 +52649,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-44.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -51801,7 +52660,23 @@
         "rarity": "P",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -2
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -51895,6 +52770,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
             }
           ],
           "source": "parsed"
@@ -52621,6 +53501,11 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -54567,6 +55452,11 @@
               "kind": "stopAttack",
               "attackType": "physical",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 4
             }
           ],
           "source": "parsed"
@@ -54665,7 +55555,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-27.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -54676,7 +55566,20 @@
         "rarity": "U",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -54703,6 +55606,11 @@
         {
           "trigger": "onPlay",
           "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
             {
               "kind": "rejuvenate",
               "count": 2,
@@ -54738,6 +55646,11 @@
         {
           "trigger": "onPlay",
           "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
+            },
             {
               "kind": "rejuvenate",
               "count": 1,
@@ -55182,6 +56095,11 @@
               "kind": "damageStages",
               "stages": 3,
               "ifSuccessful": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
             },
             {
               "kind": "stopAttack",
@@ -56943,7 +57861,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -57126,6 +58044,11 @@
               "target": "foe",
               "delta": 0,
               "toZero": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 1
             }
           ],
           "source": "parsed"
@@ -57673,7 +58596,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-49.jpg",
     "rules": {
       "type": "Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Saiyan Heritage only. Use when needed. This must be your first card played during Combat. Raise your Main Personality to its highest power stage. Remove from the game after use.",
       "textVerified": true,
@@ -57681,7 +58604,23 @@
         "number": "119",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -58231,7 +59170,7 @@
     "imageUrl": "images-tts/tts-94ce7717-52.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Villains Only. Place all opponents allies at the bottom of their life decks. Raise any personality to its highest power stage.",
       "textVerified": true,
@@ -58239,7 +59178,23 @@
         "number": "122",
         "rarity": "R",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed",
+          "restriction": {
+            "alignment": "Villain"
+          }
+        }
+      ]
     }
   },
   {
@@ -58286,7 +59241,7 @@
     "imageUrl": "images-tts/tts-d3eb7677-4.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "After a successful energy attack is performed against you, raise any one of your personalities to its highest power stage.",
       "textVerified": true,
@@ -58294,7 +59249,20 @@
         "number": "Preview 2",
         "rarity": "C",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -58406,6 +59374,11 @@
             {
               "kind": "physicalAttack",
               "powerStages": 2
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
             },
             {
               "kind": "changeAnger",
@@ -58548,6 +59521,11 @@
               "kind": "stopAttack",
               "attackType": "physical",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -58658,6 +59636,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 2
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -58954,6 +59937,11 @@
               "kind": "physicalAttack"
             },
             {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -1
+            },
+            {
               "kind": "removeFromGameAfterUse"
             },
             {
@@ -59055,7 +60043,7 @@
     "imageUrl": "images-tts/tts-ab6f7d43-61.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Raise any villain Main Personality to its highest power stage. Set all of his allies to five power stages above 0. Remove from the game after use.",
       "textVerified": true,
@@ -59063,7 +60051,23 @@
         "number": "062",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -60178,7 +61182,7 @@
     "imageUrl": "images-tts/tts-ab6f7d43-50.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -60188,7 +61192,23 @@
         "number": "051",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
+            }
+          ],
+          "source": "parsed",
+          "restriction": {
+            "alignment": "Villain"
+          }
+        }
+      ]
     }
   },
   {
@@ -61417,7 +62437,7 @@
     "imageUrl": "images-tts/tts-ab6f7d43-36.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "When your opponents anger level reaches 5 or more, they reduce their anger level to 3 instead of gaining a personality level. Use when needed. Remove from the game after use.",
       "textVerified": true,
@@ -61425,7 +62445,23 @@
         "number": "037",
         "rarity": "C",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -3
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -62610,6 +63646,11 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -62762,7 +63803,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "nextPhase"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -63264,6 +64305,11 @@
               "kind": "stopAttack",
               "attackType": "energy",
               "window": "thisAttack"
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -64689,6 +65735,11 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
             }
           ],
           "source": "parsed"
@@ -64706,7 +65757,7 @@
     "imageUrl": "images-tts/tts-94ce7717-16.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -64716,7 +65767,20 @@
         "number": "086",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -64881,7 +65945,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "nextPhase"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -64914,6 +65978,11 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
             },
             {
               "kind": "changeAnger",
@@ -65859,7 +66928,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-52.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Increase the anger of a level 1 or 2 personality by 1 and discard this card from the game.",
       "textVerified": true,
@@ -65867,7 +66936,20 @@
         "number": "191",
         "rarity": "R",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -66909,6 +67991,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 6
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -3
             }
           ],
           "source": "parsed"
@@ -67438,6 +68525,11 @@
               "window": "thisAttack"
             },
             {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
@@ -67517,7 +68609,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -67570,6 +68662,11 @@
           "trigger": "onPlay",
           "effects": [
             {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            },
+            {
               "kind": "rejuvenate",
               "count": 2,
               "from": "top"
@@ -67618,6 +68715,16 @@
             {
               "kind": "energyAttack",
               "lifeCards": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
             },
             {
               "kind": "changeAnger",
@@ -67824,7 +68931,7 @@
     "imageUrl": "images-tts/tts-a42f5098-68.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -67835,7 +68942,20 @@
         "rarity": "U",
         "style": "Blue"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -67848,7 +68968,7 @@
     "imageUrl": "images-tts/tts-a42f5098-59.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "When entering combat as the defender, you may gain up to 3 power stages.",
       "textVerified": true,
@@ -67856,7 +68976,20 @@
         "number": "129",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -67956,6 +69089,11 @@
               "kind": "stopAttack",
               "attackType": "any",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -2
             }
           ],
           "source": "parsed"
@@ -68441,6 +69579,11 @@
             },
             {
               "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "changeAnger",
               "target": "foe",
               "delta": -1
             }
@@ -68536,7 +69679,7 @@
     "imageUrl": "images-tts/tts-e9f3a19a-1.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Raise your main personality to its highest power stage. Remove from the game after use.",
       "textOriginal": "Your power level was miscounted. Raise it to full power. Discard this from the game after use.",
@@ -68545,7 +69688,23 @@
         "rarity": "R",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -69034,6 +70193,11 @@
         {
           "trigger": "onPlay",
           "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            },
             {
               "kind": "rejuvenate",
               "count": 2,
@@ -70453,7 +71617,7 @@
     "imageUrl": "images-tts/tts-d8c9f943-34.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -70463,7 +71627,20 @@
         "number": "IR34",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -71836,6 +73013,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
             }
           ],
           "source": "parsed"
@@ -72597,6 +73779,11 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -73213,7 +74400,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -75218,6 +76405,11 @@
               "stages": 5
             },
             {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
@@ -75733,6 +76925,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 4
             }
           ],
           "source": "parsed"
@@ -76406,7 +77603,7 @@
     "imageUrl": "images-tts/tts-bfe1b102-6.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Use after you discard or remove an Ally from play. All of your opponent's Allies lose 4 power stages to a minimum of 0. Your opponent's Main Personality loses 3 power stages. Limit 1 per deck.",
       "textVerified": true,
@@ -76414,7 +77611,25 @@
         "number": "L1-6",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -4
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -76438,6 +77653,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 2
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -76817,6 +78037,11 @@
               "kind": "stopAttack",
               "attackType": "physical",
               "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 4
             }
           ],
           "source": "parsed"
@@ -77030,7 +78255,7 @@
     "imageUrl": "images-tts/tts-a42f5098-27.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -77041,7 +78266,20 @@
         "rarity": "U",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -77068,6 +78306,11 @@
         {
           "trigger": "onPlay",
           "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
             {
               "kind": "rejuvenate",
               "count": 2,
@@ -77366,6 +78609,11 @@
               "ifSuccessful": true
             },
             {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            },
+            {
               "kind": "stopAttack",
               "attackType": "energy",
               "window": "thisCombat",
@@ -77426,6 +78674,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -1
             }
           ],
           "source": "parsed",
@@ -77799,6 +79052,11 @@
             {
               "kind": "damageStages",
               "stages": 4
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -78561,6 +79819,11 @@
           "trigger": "onPlay",
           "effects": [
             {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
+            {
               "kind": "drawCards",
               "count": 2
             }
@@ -79039,6 +80302,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 7
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
             }
           ],
           "source": "parsed",
@@ -79736,7 +81004,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -80130,7 +81398,7 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 8
+              "delta": 1
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -80509,6 +81777,11 @@
               "target": "foe",
               "delta": 0,
               "toZero": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 1
             }
           ],
           "source": "parsed"
@@ -81806,7 +83079,7 @@
     "imageUrl": "images-tts/tts-a42f5098-49.jpg",
     "rules": {
       "type": "Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Saiyan Heritage only. Use when needed. This must be your first card played during Combat. Raise your Main Personality to its highest power stage. Remove from the game after use.",
       "textVerified": true,
@@ -81814,7 +83087,23 @@
         "number": "119",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -82113,6 +83402,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -2
             }
           ],
           "source": "parsed"
@@ -82755,6 +84049,11 @@
             {
               "kind": "damageStages",
               "stages": 4
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -82914,7 +84213,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -82984,7 +84283,12 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 10
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -83026,6 +84330,11 @@
             },
             {
               "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            },
+            {
+              "kind": "changePowerStages",
               "target": "foe",
               "delta": -1
             }
@@ -83301,6 +84610,11 @@
             {
               "kind": "physicalAttack",
               "powerStages": 2
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed",
@@ -83533,6 +84847,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
             }
           ],
           "source": "parsed"
@@ -83630,7 +84949,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "user",
+              "target": "foe",
               "delta": 2
             },
             {
@@ -84185,7 +85504,7 @@
     "imageUrl": "images-tts/tts-fe44b0fe-14.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -84196,7 +85515,20 @@
         "rarity": "U",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -84268,6 +85600,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -85288,6 +86625,11 @@
             {
               "kind": "damageStages",
               "stages": 6
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -85366,6 +86708,11 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -86172,6 +87519,11 @@
               "window": "thisAttack"
             },
             {
+              "kind": "stopAttack",
+              "attackType": "any",
+              "window": "thisAttack"
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
@@ -86468,6 +87820,11 @@
               "kind": "stopAttack",
               "attackType": "physical",
               "window": "thisAttack"
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -86685,6 +88042,11 @@
               "kind": "damageStages",
               "stages": 4,
               "ifSuccessful": true
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
             }
           ],
           "source": "parsed"
@@ -86721,6 +88083,11 @@
             {
               "kind": "damageStages",
               "stages": 5
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 4
             }
           ],
           "source": "parsed"
@@ -87465,6 +88832,11 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -87674,7 +89046,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -87749,7 +89121,7 @@
     "imageUrl": "images-tts/tts-0a93c43d-19.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Sensei Deck. Endurance 1. Raise your Main Personality to its highest power stage. Shuffle a Dragon Ball an opponent controls back into the owner's Life Deck.",
       "textOriginal": "Sensei Deck. Endurance 1. Raise your Main Personality to its highest power stage. Shuffle a Dragon Ball in play into its owner's Life Deck.",
@@ -87758,7 +89130,20 @@
         "rarity": "U",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -88314,7 +89699,7 @@
     "imageUrl": "images-tts/tts-0e3b7819-68.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Sensei Deck. When entering Combat, you may remove the bottom card of your opponent's discard pile from the game. If that card is a Freestyle card, gain 3 power stages.",
       "textOriginal": "Sensei Deck. When entering Combat, you may remove the bottom card of your opponent's discard pile from the game. If that card is a freestyle card, gain 3 power stages.",
@@ -88323,7 +89708,20 @@
         "rarity": "P",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -88373,7 +89771,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -88410,7 +89808,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -88591,6 +89989,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
             }
           ],
           "source": "parsed"
@@ -88630,6 +90033,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
             }
           ],
           "source": "parsed",
@@ -89074,6 +90482,16 @@
               "kind": "stopAttack",
               "attackType": "physical",
               "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -89172,7 +90590,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "thisAttack"
             }
           ],
           "source": "parsed"
@@ -89623,6 +91041,11 @@
             {
               "kind": "physicalAttack",
               "powerStages": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 1
             }
           ],
           "source": "parsed"
@@ -89656,6 +91079,11 @@
             {
               "kind": "physicalAttack",
               "powerStages": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 2
             }
           ],
           "source": "parsed"
@@ -89696,6 +91124,11 @@
               "kind": "damageStages",
               "stages": 7,
               "ifSuccessful": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -1
             }
           ],
           "source": "parsed",
@@ -89735,6 +91168,11 @@
             {
               "kind": "damageStages",
               "stages": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -2
             }
           ],
           "source": "parsed"

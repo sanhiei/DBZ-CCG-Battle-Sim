@@ -12,7 +12,7 @@
  */
 import type { Ability, AttackType, Effect, GameEvent, GameState } from '@dbz/shared';
 import type { CardDb } from './loader.js';
-import { setAnger, syncRating } from './turn.js';
+import { currentRatings, setAnger, syncRating } from './turn.js';
 
 /* ============================ Execution ============================ */
 
@@ -40,7 +40,33 @@ function changeControllerStages(state: GameState, playerIdx: number, delta: numb
   if (!p) return;
   const ctl = p.allies.find((a) => a.inControlOfCombat) ?? p.mp;
   const from = ctl.stageIndex;
-  ctl.stageIndex = Math.max(0, ctl.stageIndex + delta);
+  // Clamp BOTH ends. Only the floor was clamped, which was harmless while no
+  // card ever emitted a stage gain; now that "Gain 4 power stages" parses, an
+  // unclamped gain runs off the top of the ladder and the rating reads back
+  // as undefined.
+  const top = Math.max(0, currentRatings(ctl, db).length - 1);
+  ctl.stageIndex = Math.max(0, Math.min(ctl.stageIndex + delta, top));
+  syncRating(ctl, db);
+  if (ctl.stageIndex !== from) events.push({ type: 'stageChanged', personalityUid: ctl.uid, from, to: ctl.stageIndex });
+}
+
+/**
+ * "Raise your Main Personality to its highest power stage" / "lower ... to its
+ * lowest". A jump to an end of the ladder, not a delta — the amount depends on
+ * where the personality currently sits.
+ */
+function moveControllerToEnd(
+  state: GameState,
+  playerIdx: number,
+  to: 'highest' | 'lowest',
+  db: CardDb,
+  events: GameEvent[],
+): void {
+  const p = state.players[playerIdx];
+  if (!p) return;
+  const ctl = p.allies.find((a) => a.inControlOfCombat) ?? p.mp;
+  const from = ctl.stageIndex;
+  ctl.stageIndex = to === 'highest' ? Math.max(0, currentRatings(ctl, db).length - 1) : 0;
   syncRating(ctl, db);
   if (ctl.stageIndex !== from) events.push({ type: 'stageChanged', personalityUid: ctl.uid, from, to: ctl.stageIndex });
 }
@@ -85,6 +111,9 @@ export function setupAttackAbility(
       }
       case 'changePowerStages':
         changeControllerStages(state, e.target === 'user' ? attackerIdx : defenderIdx, e.toZero ? -99 : e.delta, db, events);
+        break;
+      case 'movePowerStage':
+        moveControllerToEnd(state, e.target === 'user' ? attackerIdx : defenderIdx, e.to, db, events);
         break;
       case 'rejuvenate':
         rejuvenate(state, attackerIdx, e.count, e.from);
@@ -135,14 +164,17 @@ export function discardFromHand(state: GameState, playerIdx: number, count: numb
 export function applyIfSuccessful(
   state: GameState,
   effects: Effect[] | undefined,
-  _db: CardDb,
-  _events: GameEvent[],
+  db: CardDb,
+  events: GameEvent[],
   ctx?: { userIdx: number; foeIdx: number },
 ): void {
   for (const e of effects ?? []) {
     if (e.kind === 'stopAttack') state.log.push(`Effect: stops a ${e.attackType ?? 'any'} attack (${e.window ?? 'thisAttack'}).`);
     else if (e.kind === 'stunSkipNextPhase') state.log.push('Effect: opponent is stunned (skips next Attack Phase).');
     else if (e.kind === 'rejuvenate' && ctx) rejuvenate(state, ctx.userIdx, e.count, e.from);
+    else if (e.kind === 'movePowerStage' && ctx) {
+      moveControllerToEnd(state, e.target === 'user' ? ctx.userIdx : ctx.foeIdx, e.to, db, events);
+    }
     else if (e.kind === 'discardCards' && ctx) {
       discardFromHand(state, e.target === 'user' ? ctx.userIdx : ctx.foeIdx, e.count);
     } else state.log.push(`Effect not yet automated: ${e.kind} (resolve manually).`);
@@ -253,8 +285,13 @@ function parseAttackDamage(t: string): { lifeCards?: number; powerStages?: numbe
   for (const re of lcPatterns) {
     const m = t.match(re);
     if (!m) continue;
-    if (CONDITIONAL_CLAUSE.test(clauseFor(t, re))) return { conditional: true };
-    return { lifeCards: toNum(m[1]) };
+    const clause = clauseFor(t, re);
+    if (CONDITIONAL_CLAUSE.test(clause)) return { conditional: true };
+    // Some attacks state BOTH bases: 'doing 1 life card of damage and 1 power
+    // stage of damage' (Black Jump Kick). Returning at the first match dropped
+    // the power-stage half. Read the conjunction from the same sentence only.
+    const both = clause.match(/and\s+([0-9b]+)\s*(?:power\s*)?stages?\s*of\s*damage/);
+    return { lifeCards: toNum(m[1]), ...(both ? { powerStages: toNum(both[1]) } : {}) };
   }
 
   // Fixed power-stage damage stated WITHOUT a +/- sign (not the "+N" modifier).
@@ -306,51 +343,97 @@ function parseDefensiveEffects(t: string): Effect[] {
 
   // "stops ... (physical|energy) attack" — tolerate interposed words
   // ("stops a successful physical attack", "stops a single named foe ... attack").
-  const alreadyStop = out.some((e) => e.kind === 'stopAttack');
-  m = t.match(/stop\w*\s+.{0,40}?(physical|energy)?\s*attack/);
-  if (m && !alreadyStop) {
-    const scope = STOPS_EVERY.test(t) ? 'all' : /single|a named|one\s+(named\s+)?foe/.test(t) ? 'single' : undefined;
-    out.push({ kind: 'stopAttack', attackType: at(m[1]), window: stopWindow(t), ...(scope ? { scope } : {}) });
+  // A card can stop twice — "Stops an energy attack. Stops all energy
+  // attacks for the remainder of Combat." (Frieza's Force Bubble). Matching
+  // once against the whole text dropped the combat-long clause, so walk the
+  // sentences and keep every distinct stop.
+  for (const s of sentences(t)) {
+    const sm = s.match(/stop\w*\s+.{0,40}?(physical|energy)?\s*attack/);
+    if (!sm) continue;
+    const scope = STOPS_EVERY.test(s) ? 'all' : /single|a named|one\s+(named\s+)?foe/.test(s) ? 'single' : undefined;
+    const eff: Effect = { kind: 'stopAttack', attackType: at(sm[1]), window: stopWindow(s), ...(scope ? { scope } : {}) };
+    const dup = out.some((e) => e.kind === 'stopAttack' && e.attackType === eff.attackType && e.window === eff.window);
+    if (!dup) out.push(eff);
   }
   // "prevents an energy/physical attack" (no number)
-  if (!out.some((e) => e.kind === 'stopAttack') && !m) {
+  if (!out.some((e) => e.kind === 'stopAttack')) {
     const p = t.match(/prevent\w*\s+(?:an?\s+)?(physical|energy)\s+attack/);
     if (p) out.push({ kind: 'stopAttack', attackType: at(p[1]), window: 'thisAttack' });
   }
   return out;
 }
 
+/**
+ * Anger changes, judged one sentence at a time.
+ *
+ * Reading the whole text at once produced three separate defects, each
+ * found by auditing parses against printed cards:
+ *   - "Raise your anger 1 level. Lower your opponent's anger 3 levels."
+ *     (Gohan's Ready) emitted only the foe half, because the user branch
+ *     was suppressed whenever a foe-lowering clause appeared anywhere;
+ *   - "Lower your anger 3 levels." (Android 17's Neck Hold) emitted
+ *     nothing, since the user branch only understood raising;
+ *   - amounts leaked between clauses, so the foe effect could take its
+ *     number from the user's sentence.
+ * Each sentence carries its own target, direction and amount.
+ */
 function pushAnger(effects: Effect[], t: string): void {
-  // 'lower ... anger to 0' is a SET, not a delta. Parsed as a delta it became
-  // delta:0 — the engine changed anger by zero while the card looked modelled.
-  const toZero = /anger[^.]{0,24}\bto\s*(0|zero)\b/.test(t);
-  if (toZero) {
-    const foe = /(foe|opponent)/.test(t) && !/your\s+anger/.test(t);
-    effects.push({ kind: 'changeAnger', target: foe ? 'foe' : 'user', delta: 0, toZero: true });
-    return;
-  }
-  // Strip foe-possessives as UNITS first, so "raise your opponent's anger"
-  // cannot leave a bare "your" behind and read as user-anger. The errata'd TTS
-  // text says "Raise your anger 1 level" where 2001-era scans said "Raise card
-  // user's anger level 1" — both must parse.
-  const selfOnly = t.replace(/your\s+opponent'?s?|the\s+opponent'?s?|foe'?s?|opponent'?s?/g, '');
-  if (/rais\w*[^.]*anger|gain\w*[^.]*anger[^.]*level|anger\s*level\s*\d/.test(t) && /(card\s*)?user|your|gains?|self/.test(selfOnly)) {
-    const n = t.match(/anger[^0-9]*level\s*(\d)/) ?? t.match(/anger[^0-9]{0,8}(\d)/);
-    // Only user-anger here; foe handled below.
-    if (!/low\w*[^.]*(foe|opponent)[^.]*anger/.test(t)) effects.push({ kind: 'changeAnger', target: 'user', delta: toNum(n?.[1], 1) });
-  }
-  if (/low\w*[^.]*(foe|opponent)[^.]*anger|low\w*[^.]*anger[^.]*(foe|opponent)|reduc\w*[^.]*(foe|opponent)[^.]*anger/.test(t)) {
-    const n = t.match(/anger[^0-9]{0,10}(\d)/);
-    effects.push({ kind: 'changeAnger', target: 'foe', delta: -toNum(n?.[1], 1) });
+  for (const s of sentences(t)) {
+    if (!/anger/.test(s)) continue;
+
+    // "your opponent's anger" is a FOE clause despite containing "your".
+    const foe = /(your\s+opponent|the\s+opponent|opponent'?s|foe'?s|his\s+anger|her\s+anger)/.test(s);
+    const target = foe ? ('foe' as const) : ('user' as const);
+
+    // A set, not a delta: as delta 0 it was a no-op that still looked modelled.
+    if (/anger[^.]{0,24}\bto\s*(0|zero)\b/.test(s)) {
+      effects.push({ kind: 'changeAnger', target, delta: 0, toZero: true });
+      continue;
+    }
+
+    const lowers = /\b(low\w*|reduc\w*|decreas\w*|loses?)\b/.test(s);
+    const raises = /\b(rais\w*|gain\w*|increas\w*|add)\b/.test(s);
+    if (!lowers && !raises) continue;
+
+    const n =
+      s.match(/anger[^0-9]*levels?\s*(\d)/) ??
+      s.match(/anger[^0-9]{0,10}(\d)/) ??
+      s.match(/(\d)\s*(?:anger|levels?)/);
+    const amount = toNum(n?.[1], 1);
+    effects.push({ kind: 'changeAnger', target, delta: lowers ? -amount : amount });
   }
 }
 function pushSelfPowerLoss(effects: Effect[], t: string): void {
   const m = t.match(/attacker\s+([0-9b]+)\s*stages?\s*of\s*power|attacker\s+to\s+lose\s+([0-9b]+)\s*stages?/);
   if (m) effects.push({ kind: 'changePowerStages', target: 'user', delta: -toNum(m[1] ?? m[2]) });
 }
+/**
+ * Power-stage changes stated outside the damage clause.
+ *
+ * The old pattern only understood "raise ... power rating by N", so the far
+ * more common printings were dropped even though the effect already existed:
+ * "Gain 4 power stages" (Piccolo's Destruction Attack, Cell's Charge) and
+ * "Your opponent loses 4 power stages" (Saiyan Lightning Dodge).
+ */
 function pushRaiseOwnPower(effects: Effect[], t: string): void {
-  const m = t.match(/rais\w*[^.]*power\s*rating\s*by\s*([0-9b]+)|increase\w*[^.]*power\s*rating\s*by\s*([0-9b]+)/);
-  if (m) effects.push({ kind: 'changePowerStages', target: 'user', delta: toNum(m[1] ?? m[2]) });
+  for (const s of sentences(t)) {
+    // Damage clauses belong to the attack parser; this is the extra rider.
+    if (/of\s*damage/.test(s)) continue;
+    const foe = /(your\s+opponent|the\s+opponent|opponent\S*|foe\S*)/.test(s);
+
+    if (foe) {
+      const loss = s.match(/los\w*\s*([0-9b]+)\s*(?:power\s*)?stages?/);
+      if (loss) effects.push({ kind: 'changePowerStages', target: 'foe', delta: -toNum(loss[1]) });
+      continue;
+    }
+    const gain = s.match(/\b(?:gain|rais|increas)\w*\b[^.]{0,40}?([0-9b]+)\s*(?:power\s*)?stages?\b/);
+    if (gain) {
+      effects.push({ kind: 'changePowerStages', target: 'user', delta: toNum(gain[1]) });
+      continue;
+    }
+    const rating = s.match(/(?:rais|increas)\w*[^.]{0,30}power\s*rating\s*by\s*([0-9b]+)/);
+    if (rating) effects.push({ kind: 'changePowerStages', target: 'user', delta: toNum(rating[1]) });
+  }
 }
 function pushDraw(effects: Effect[], t: string): void {
   const m = t.match(/draw\s+([0-9b]+|a)\s*cards?\b/);
@@ -398,11 +481,26 @@ function pushStun(effects: Effect[], t: string): void {
     effects.push({ kind: 'stunSkipNextPhase' });
   }
 }
+/**
+ * "Raise your Main Personality to its highest power stage."
+ *
+ * The old pattern wanted the literal "your personality" and the literal
+ * "highest stage", so the usual printings — "your Main Personality", and
+ * "highest power stage" — were dropped. "All personalities in play"
+ * (Gohan's Peaceful Stance) raises the opponent's as well.
+ */
 function pushMoveStage(effects: Effect[], t: string): void {
-  if (/rais\w*[^.]{0,60}(all of your personalities|your personality|your mp)[^.]{0,40}highest\s*stage/.test(t)) {
-    effects.push({ kind: 'movePowerStage', target: 'user', to: 'highest' });
-  } else if (/low\w*[^.]{0,60}(foe|opponent)[^.]{0,50}lowest\s*stage/.test(t)) {
-    effects.push({ kind: 'movePowerStage', target: 'foe', to: 'lowest' });
+  for (const s of sentences(t)) {
+    if (/highest\s*(?:power\s*)?stage/.test(s) && /rais\w*|power\s*up\b/.test(s)) {
+      const everyone = /all\s+(?:the\s+)?personalities\s+in\s+play/.test(s);
+      const foeOnly = !everyone && /(your\s+opponent|the\s+opponent|opponent\S*|foe\S*)/.test(s);
+      effects.push({ kind: 'movePowerStage', target: foeOnly ? 'foe' : 'user', to: 'highest' });
+      if (everyone) effects.push({ kind: 'movePowerStage', target: 'foe', to: 'highest' });
+      continue;
+    }
+    if (/low\w*[^.]{0,60}(foe|opponent)[^.]{0,50}lowest\s*(?:power\s*)?stage/.test(s)) {
+      effects.push({ kind: 'movePowerStage', target: 'foe', to: 'lowest' });
+    }
   }
 }
 const removesAfterUse = (t: string) => /remov\w*[^.]{0,30}game[^.]{0,20}after\s*use/.test(t);
@@ -410,7 +508,15 @@ const removesAfterUse = (t: string) => /remov\w*[^.]{0,30}game[^.]{0,20}after\s*
 const hasPerformerCondition = (t: string) => /if\s+this\s+attack\s+is\s+performed\s+by/.test(t);
 
 export function parseAbility(rawText: string, type: string): Ability | null {
-  const t = rawText.toLowerCase().replace(/\s+/g, ' ').trim();
+  const t = rawText
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    // Cards print the damage modifier both ways: "+4 power stages of damage"
+    // and "4+ power stages of damage". Fold the trailing-plus form into the
+    // leading-plus form so one well-tested modifier path handles both, rather
+    // than the trailing form being read as a fixed base (Red Knee Bash).
+    .replace(/(\d+)\s?\+(\s*(?:power\s*)?stages?\s*of\s*damage)/g, '+$1$2')
+    .trim();
   const restriction = parseRestriction(t);
   const body = stripLeadingNoise(t);
   const needsReview: string[] = [];
@@ -450,6 +556,12 @@ export function parseAbility(rawText: string, type: string): Ability | null {
       if (md) effects.push({ kind: 'damageStages', stages: toNum(md[2]) * (md[1] === '-' ? -1 : 1), ...(ifSucc(body) ? { ifSuccessful: true } : {}) });
     }
     pushAnger(effects, body);
+    // Attacks carry non-damage riders too — 'Gain 4 power stages' (Piccolo's
+    // Destruction Attack), 'Raise your Main Personality to his highest power
+    // stage' (Blue Knockdown). Neither parser ran on the attack branch, so
+    // those clauses were dropped while the card looked fully modelled.
+    pushRaiseOwnPower(effects, body);
+    pushMoveStage(effects, body);
     pushSelfPowerLoss(effects, body);
     pushDraw(effects, body);
     pushStun(effects, body);
@@ -480,6 +592,7 @@ export function parseAbility(rawText: string, type: string): Ability | null {
     const effects: Effect[] = [...defenseEffects];
     pushAnger(effects, t);
     pushRaiseOwnPower(effects, t);
+    pushMoveStage(effects, t);
     pushDraw(effects, t);
     if (removesAfterUse(t)) effects.push({ kind: 'removeFromGameAfterUse' });
     if (!effects.length) return null;

@@ -43,9 +43,19 @@ test('"any more ... attacks in this combat" is a combat-long lockout', () => {
     'Stops a physical attack. It also stops your opponent from making any more physical attacks in this combat.',
     'Combat',
   )!;
-  const s = stop(a.effects)!;
-  assert.equal(s.window, 'thisCombat');
-  assert.equal(s.attackType, 'physical');
+  // The card does BOTH: it stops the attack in front of it AND locks out
+  // further physical attacks. Collapsing the two clauses into one stop
+  // dropped whichever half lost the race.
+  const stops = a.effects.filter((e) => e.kind === 'stopAttack');
+  assert.equal(stops.length, 2, 'both clauses are real effects');
+  assert.ok(
+    stops.some((s) => s.window === 'thisAttack' && s.attackType === 'physical'),
+    'the attack in front of it is stopped',
+  );
+  assert.ok(
+    stops.some((s) => s.window === 'thisCombat' && s.attackType === 'physical'),
+    'and no more physical attacks land this combat',
+  );
 });
 
 test('a plain stop is still a single attack', () => {
