@@ -1134,7 +1134,7 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -1847,7 +1847,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -2411,7 +2412,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -2880,7 +2881,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -3560,7 +3561,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -4898,7 +4899,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -5038,7 +5039,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -5359,7 +5360,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -5472,7 +5473,7 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -6855,7 +6856,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed",
@@ -8198,7 +8199,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "changeAnger",
@@ -8320,7 +8321,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -8419,7 +8420,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "changeAnger",
@@ -8655,7 +8656,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -9440,7 +9441,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -9697,7 +9698,8 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "changeAnger",
@@ -9958,7 +9960,7 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -10772,7 +10774,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -11107,7 +11109,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -11615,7 +11617,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -13029,7 +13031,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -13513,7 +13516,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed",
@@ -15830,7 +15833,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "changeAnger",
@@ -17120,7 +17123,7 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -17527,7 +17530,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -28856,7 +28859,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -29278,7 +29281,8 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -31357,7 +31361,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -32423,7 +32427,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -33335,7 +33340,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -33416,7 +33422,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -34314,7 +34321,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed",
@@ -34604,7 +34611,8 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -34661,7 +34669,8 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -35806,7 +35815,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -36064,7 +36074,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -36508,7 +36519,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed",
@@ -36545,7 +36557,8 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -36748,7 +36761,8 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed",
@@ -36988,7 +37002,8 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -37360,7 +37375,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -37397,7 +37412,8 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -37557,7 +37573,7 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -37675,7 +37691,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -38039,7 +38055,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -38962,7 +38978,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "changeAnger",
@@ -39070,7 +39086,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -39427,7 +39443,7 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "changeAnger",
@@ -40612,7 +40628,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -40891,7 +40908,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -41290,7 +41308,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -41432,7 +41450,8 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -41471,7 +41490,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -41831,7 +41851,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -42044,7 +42064,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -42121,7 +42141,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -44553,7 +44573,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -45505,7 +45526,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -46288,7 +46309,8 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -47477,7 +47499,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "changeAnger",
@@ -49322,7 +49344,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -51434,7 +51457,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -51472,7 +51495,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -52632,7 +52655,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -53485,7 +53508,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -53522,7 +53546,8 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -55161,7 +55186,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -56917,7 +56943,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -57684,7 +57710,8 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -58486,7 +58513,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -58932,7 +58959,8 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -62734,7 +62762,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -64853,7 +64881,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -65946,7 +65974,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -67488,7 +67517,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -70597,7 +70626,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -70744,7 +70773,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -72773,7 +72802,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -73184,7 +73213,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -75501,7 +75530,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -75538,7 +75568,8 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -77337,7 +77368,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -79704,7 +79736,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -81227,7 +81259,7 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -81869,7 +81901,8 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -81933,7 +81966,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -82880,7 +82914,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -82950,7 +82984,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -83337,7 +83371,8 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "thisCombat",
+              "scope": "all"
             }
           ],
           "source": "parsed"
@@ -87639,7 +87674,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -88338,7 +88373,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -88375,7 +88410,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"
@@ -89137,7 +89172,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "thisCombat"
             }
           ],
           "source": "parsed"

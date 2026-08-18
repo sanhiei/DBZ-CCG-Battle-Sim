@@ -117,6 +117,37 @@ export interface CombatCtx {
   actingPlayerIdx: number;
 }
 
+/**
+ * Whether `playerIdx` is barred from performing `kind` for the rest of this
+ * combat. Returns the blocking lockout's type so the caller can say why.
+ */
+function lockoutAgainst(
+  c: NonNullable<GameState['combat']>,
+  playerIdx: number,
+  kind: AttackType,
+): 'physical' | 'energy' | 'any' | undefined {
+  const hit = (c.lockouts ?? []).find(
+    (l) => l.playerIdx === playerIdx && (l.attackType === 'any' || l.attackType === kind),
+  );
+  return hit?.attackType;
+}
+
+/**
+ * Record a combat-long stop from a defense card. The attacker is the one shut
+ * out, and duplicates are collapsed so repeated plays do not pile up.
+ */
+function addLockout(
+  state: GameState,
+  c: NonNullable<GameState['combat']>,
+  playerIdx: number,
+  attackType: 'physical' | 'energy' | 'any',
+): void {
+  c.lockouts = c.lockouts ?? [];
+  if (c.lockouts.some((l) => l.playerIdx === playerIdx && l.attackType === attackType)) return;
+  c.lockouts.push({ playerIdx, attackType });
+  const what = attackType === 'any' ? 'attacks' : `${attackType} attacks`;
+  state.log.push(`${state.players[playerIdx]?.name} cannot perform ${what} for the remainder of Combat.`);
+}
 /** Attacker declares a physical or energy attack in their Attack Phase. */
 export function declareAttack(
   state: GameState,
@@ -133,6 +164,8 @@ export function declareAttack(
   if (c.currentAttack) return 'an attack is already in progress';
   if (ctx.actingPlayerIdx !== c.phasePlayerIdx) return 'not your Attack Phase';
   if (c.finalUsed.includes(ctx.actingPlayerIdx)) return 'you must pass after a Final Physical Attack';
+  const locked = lockoutAgainst(c, ctx.actingPlayerIdx, attackType);
+  if (locked) return `${locked === 'any' ? 'All attacks' : `${locked} attacks`} are stopped for the remainder of this Combat`;
 
   const attackerIdx = c.phasePlayerIdx;
   const defenderIdx = other(state, attackerIdx);
@@ -232,6 +265,10 @@ export function resolveDefense(
   if (opts.cardUid && !opts.takeDamage) {
     // Provisional: any offered defense card stops the attack (starburst check = coverage TODO).
     atk.stopped = true;
+    // A defense card may also lock the attacker out for the whole combat.
+    for (const e of defenseStops(state, opts.cardUid, db)) {
+      if (e.window === 'thisCombat') addLockout(state, c, atk.attackerPlayerIdx, e.attackType ?? 'any');
+    }
     discardAttackCards(state, atk, opts.cardUid);
     events.push({ type: 'attackResolved', successful: false, powerStages: 0, lifeCards: 0 });
     state.log.push(`${state.players[atk.defenderPlayerIdx]!.name} stops the attack.`);
@@ -430,6 +467,18 @@ export function resolveCapture(
   return undefined;
 }
 
+/** stopAttack effects carried by the defense card that was just played. */
+function defenseStops(state: GameState, cardUid: string, db: CardDb) {
+  for (const p of state.players) {
+    for (const zone of ['hand', 'inPlay', 'discard'] as const) {
+      const inst = p.zones[zone].find((x) => x.uid === cardUid);
+      if (!inst) continue;
+      const abilities = db.get(inst.cardId)?.rules?.abilities ?? [];
+      return abilities.flatMap((a) => a.effects).filter((e) => e.kind === 'stopAttack');
+    }
+  }
+  return [];
+}
 /** Answer the redirect prompt: send the pending power-stage damage to a personality. */
 export function redirectDamage(state: GameState, toUid: string | null, ctx: CombatCtx, db: CardDb, events: GameEvent[]): string | undefined {
   const atk = state.combat?.currentAttack;

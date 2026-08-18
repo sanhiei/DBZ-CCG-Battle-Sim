@@ -140,6 +140,12 @@ export interface CombatState {
   consecutivePasses: number;
   /** Player idxs who have used their Final Physical Attack this combat. */
   finalUsed: number[];
+  /**
+   * Attack types a player may not perform for the REMAINDER of this combat,
+   * from cards like "stops all energy attacks for the rest of this combat".
+   * Cleared automatically when the Combat Step ends, since `combat` is dropped.
+   */
+  lockouts?: Array<{ playerIdx: number; attackType: 'physical' | 'energy' | 'any' }>;
   currentAttack?: AttackInProgress;
 }
 

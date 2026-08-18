@@ -268,6 +268,26 @@ function parseAttackDamage(t: string): { lifeCards?: number; powerStages?: numbe
 }
 
 /** Parse stop/prevent effects mentioned anywhere in the text (defense card or rider). */
+/**
+ * How long a stop lasts. The parser used to default everything to a single
+ * attack, which understated ~50 cards: 'stops all attacks for the remainder of
+ * Combat' was resolving as 'stop one attack', so every later attack that combat
+ * went straight through.
+ *
+ * Order matters — a card can name several horizons in one sentence, and the
+ * longest-lived one wins.
+ */
+function stopWindow(t: string): 'thisAttack' | 'nextPhase' | 'thisCombat' | 'firstSuccessful' {
+  if (/(remainder|rest)\s+of\s+(the\s+|this\s+)?combat|\bin\s+this\s+combat\b|\bthis\s+combat\b|any\s+more\s+.{0,30}attacks?/.test(t)) {
+    return 'thisCombat';
+  }
+  if (/first\s+successful/.test(t)) return 'firstSuccessful';
+  if (/next\s*(phase|round|attack)/.test(t)) return 'nextPhase';
+  return 'thisAttack';
+}
+
+/** 'stops ALL attacks' / 'any more attacks' -> the stop is not single-target. */
+const STOPS_EVERY = /stops?\s+all\b|all\s+attacks?\b|any\s+(other|more)\s+.{0,20}attacks?/;
 function parseDefensiveEffects(t: string): Effect[] {
   const out: Effect[] = [];
   const at = (m?: string): AttackType | 'any' => (m === 'physical' || m === 'energy' ? m : 'any');
@@ -289,9 +309,8 @@ function parseDefensiveEffects(t: string): Effect[] {
   const alreadyStop = out.some((e) => e.kind === 'stopAttack');
   m = t.match(/stop\w*\s+.{0,40}?(physical|energy)?\s*attack/);
   if (m && !alreadyStop) {
-    const window = /next\s*(phase|round)/.test(t) ? 'nextPhase' : /first successful/.test(t) ? 'firstSuccessful' : 'thisAttack';
-    const scope = /single|a named|one\s+(named\s+)?foe/.test(t) ? 'single' : undefined;
-    out.push({ kind: 'stopAttack', attackType: at(m[1]), window, ...(scope ? { scope } : {}) });
+    const scope = STOPS_EVERY.test(t) ? 'all' : /single|a named|one\s+(named\s+)?foe/.test(t) ? 'single' : undefined;
+    out.push({ kind: 'stopAttack', attackType: at(m[1]), window: stopWindow(t), ...(scope ? { scope } : {}) });
   }
   // "prevents an energy/physical attack" (no number)
   if (!out.some((e) => e.kind === 'stopAttack') && !m) {
