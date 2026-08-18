@@ -273,8 +273,27 @@ function parseCost(t: string): Ability['cost'] | undefined {
  *     base. Taking it made every copy of the card deal the conditional amount.
  */
 function parseAttackDamage(t: string): { lifeCards?: number; powerStages?: number; conditional?: boolean; lifeCardModifier?: boolean } {
-  // A signed life-card amount is a modifier, never a base.
-  if (/[+\-]\s?[0-9b]+\s*life\s*cards?/.test(t)) return { lifeCardModifier: true };
+  // Fixed power-stage damage stated WITHOUT a +/- sign (not the "+N" modifier).
+  const psRe = /(?:doing|does|deal\w*)\s+([0-9b]+)\s*(?:power\s*)?stages?\s*of\s*damage/;
+
+  // An attack that deals no damage at all is still an attack, and can still be
+  // "successful" (CRD battle-sequence step 8). Without a fixed 0 the engine
+  // rolled the Physical Attack Table and dealt damage the card forbids.
+  if (/does\s+no\s+damage|cannot\s+take\s+[^.]{0,40}damage\s+from\s+this\s+attack/.test(t)) {
+    return { powerStages: 0 };
+  }
+
+  // A signed life-card amount is a modifier, never a base — but it must not
+  // hide a fixed base stated in the same text ("doing 3 power stages of damage
+  // ... an additional +3 life cards", Carpet Attack Technique), which used to
+  // return here and lose the printed base entirely.
+  if (/[+\-]\s?[0-9b]+\s*life\s*cards?/.test(t)) {
+    const base = t.match(psRe);
+    if (base && !CONDITIONAL_CLAUSE.test(clauseFor(t, psRe))) {
+      return { powerStages: toNum(base[1]), lifeCardModifier: true };
+    }
+    return { lifeCardModifier: true };
+  }
 
   const lcPatterns = [
     /(?:causing|doing|does|do|deal\w*)\s+([0-9b]+)\s*life\s*cards?/,
@@ -294,8 +313,6 @@ function parseAttackDamage(t: string): { lifeCards?: number; powerStages?: numbe
     return { lifeCards: toNum(m[1]), ...(both ? { powerStages: toNum(both[1]) } : {}) };
   }
 
-  // Fixed power-stage damage stated WITHOUT a +/- sign (not the "+N" modifier).
-  const psRe = /(?:doing|does|deal\w*)\s+([0-9b]+)\s*(?:power\s*)?stages?\s*of\s*damage/;
   const ps = t.match(psRe);
   if (ps) {
     if (CONDITIONAL_CLAUSE.test(clauseFor(t, psRe))) return { conditional: true };
@@ -315,11 +332,18 @@ function parseAttackDamage(t: string): { lifeCards?: number; powerStages?: numbe
  * longest-lived one wins.
  */
 function stopWindow(t: string): 'thisAttack' | 'nextPhase' | 'thisCombat' | 'firstSuccessful' {
+  // "Stops the next physical attack performed against you this Combat" is a
+  // single deferred stop. It names a combat, so the combat-long test below
+  // claimed it and turned one stop into a lockout on every later attack.
+  if (/stops?\s+the\s+next\b/.test(t)) return 'nextPhase';
   if (/(remainder|rest)\s+of\s+(the\s+|this\s+)?combat|\bin\s+this\s+combat\b|\bthis\s+combat\b|any\s+more\s+.{0,30}attacks?/.test(t)) {
     return 'thisCombat';
   }
   if (/first\s+successful/.test(t)) return 'firstSuccessful';
   if (/next\s*(phase|round|attack)/.test(t)) return 'nextPhase';
+  // "during your opponent's next 'Attacker Attacks' phase" — the phase name
+  // sits between "next" and "phase", so the pattern above walked straight past it.
+  if (/next\s+[^.]{0,40}phase/.test(t)) return 'nextPhase';
   return 'thisAttack';
 }
 
@@ -350,8 +374,17 @@ function parseDefensiveEffects(t: string): Effect[] {
   for (const s of sentences(t)) {
     const sm = s.match(/stop\w*\s+.{0,40}?(physical|energy)?\s*attack/);
     if (!sm) continue;
+    // "Stops a physical or energy attack" means either type. The lazy match
+    // above walks past "physical or" and captures "energy", which left the
+    // engine refusing to let the card stop a physical attack at all.
+    const eitherType = /(physical\s+or\s+energy|energy\s+or\s+physical)/.test(s);
     const scope = STOPS_EVERY.test(s) ? 'all' : /single|a named|one\s+(named\s+)?foe/.test(s) ? 'single' : undefined;
-    const eff: Effect = { kind: 'stopAttack', attackType: at(sm[1]), window: stopWindow(s), ...(scope ? { scope } : {}) };
+    const eff: Effect = {
+      kind: 'stopAttack',
+      attackType: eitherType ? 'any' : at(sm[1]),
+      window: stopWindow(s),
+      ...(scope ? { scope } : {}),
+    };
     const dup = out.some((e) => e.kind === 'stopAttack' && e.attackType === eff.attackType && e.window === eff.window);
     if (!dup) out.push(eff);
   }
@@ -378,11 +411,24 @@ function parseDefensiveEffects(t: string): Effect[] {
  * Each sentence carries its own target, direction and amount.
  */
 function pushAnger(effects: Effect[], t: string): void {
-  for (const s of sentences(t)) {
+  // Split on "and"/"then" first: one sentence often states both players'
+  // anger changes, and a single target for the whole sentence loses one.
+  const clauses = sentences(t).flatMap((s) =>
+    /anger[^.]*\band\b[^.]*anger/.test(s) ? s.split(/\s+(?:and|then)\s+/) : [s],
+  );
+  for (const s of clauses) {
     if (!/anger/.test(s)) continue;
 
-    // "your opponent's anger" is a FOE clause despite containing "your".
-    const foe = /(your\s+opponent|the\s+opponent|opponent'?s|foe'?s|his\s+anger|her\s+anger)/.test(s);
+    // Bind the target to the possessive attached to "anger", not to whether
+    // the sentence mentions an opponent at all: "If you declared a Tokui-Waza
+    // and your opponent did not, raise your anger 2 levels" (Blue Speediness)
+    // names the opponent in its condition and raises the USER'S anger.
+    const foeAnger = /(opponent|foe|his|her|their)'?s?\s+(current\s+)?anger/.test(s);
+    const ownAnger = /(your|user'?s?|own)\s+(current\s+)?anger/.test(s);
+    const foe = foeAnger && !ownAnger;
+    // Both halves in one sentence ("raise your anger 1 level and lower your
+    // opponent's anger 2 levels", Red Fist Lunge) are handled by the split
+    // below rather than by picking one target for the whole sentence.
     const target = foe ? ('foe' as const) : ('user' as const);
 
     // A set, not a delta: as delta 0 it was a no-op that still looked modelled.
@@ -419,7 +465,9 @@ function pushRaiseOwnPower(effects: Effect[], t: string): void {
   for (const s of sentences(t)) {
     // Damage clauses belong to the attack parser; this is the extra rider.
     if (/of\s*damage/.test(s)) continue;
-    const foe = /(your\s+opponent|the\s+opponent|opponent\S*|foe\S*)/.test(s);
+    // As with anger, the opponent merely being named in a condition does not
+    // make the gain theirs — require them to be the one losing/gaining.
+    const foe = /(opponent|foe)\S*(\s+main\s+personality)?\s+(los|gain|rais)/.test(s);
 
     if (foe) {
       const loss = s.match(/los\w*\s*([0-9b]+)\s*(?:power\s*)?stages?/);

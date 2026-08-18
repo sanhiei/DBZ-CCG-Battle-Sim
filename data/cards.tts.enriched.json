@@ -523,7 +523,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -908,6 +908,11 @@
               "target": "foe",
               "delta": 0,
               "toZero": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 1
             }
           ],
           "source": "parsed"
@@ -1035,11 +1040,6 @@
           "effects": [
             {
               "kind": "energyAttack"
-            },
-            {
-              "kind": "changePowerStages",
-              "target": "foe",
-              "delta": -4
             },
             {
               "kind": "discardCards",
@@ -1181,7 +1181,7 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisCombat"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -2266,6 +2266,11 @@
               "target": "foe",
               "delta": 0,
               "toZero": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 1
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -3680,7 +3685,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisCombat"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -4149,6 +4154,11 @@
               "target": "foe",
               "delta": 0,
               "toZero": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 1
             }
           ],
           "source": "parsed"
@@ -5413,7 +5423,7 @@
             },
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             }
           ],
@@ -5492,7 +5502,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "foe",
+              "target": "user",
               "delta": 2
             }
           ],
@@ -5958,7 +5968,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "nextPhase"
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -6133,7 +6143,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -6173,12 +6183,12 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
               "kind": "changeAnger",
-              "target": "foe",
+              "target": "user",
               "delta": 2
             },
             {
@@ -8299,7 +8309,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "foe",
+              "target": "user",
               "delta": 1
             }
           ],
@@ -8622,7 +8632,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "foe",
+              "target": "user",
               "delta": 2
             }
           ],
@@ -8775,7 +8785,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "foe",
+              "target": "user",
               "delta": -1
             }
           ],
@@ -9019,7 +9029,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "foe",
+              "target": "user",
               "delta": 0
             }
           ],
@@ -9123,6 +9133,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": 0
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
             },
             {
               "kind": "discardCards",
@@ -9926,7 +9941,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "foe",
+              "target": "user",
               "delta": 2
             },
             {
@@ -11019,8 +11034,8 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
-              "window": "thisCombat"
+              "attackType": "any",
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -11359,7 +11374,7 @@
             },
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -11867,7 +11882,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             }
           ],
@@ -11903,7 +11918,8 @@
           "trigger": "attack",
           "effects": [
             {
-              "kind": "physicalAttack"
+              "kind": "physicalAttack",
+              "powerStages": 3
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -13799,8 +13815,8 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
-              "window": "thisCombat"
+              "attackType": "any",
+              "window": "nextPhase"
             }
           ],
           "source": "parsed",
@@ -16477,6 +16493,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -2
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
             }
           ],
           "source": "parsed"
@@ -20632,7 +20653,8 @@
           "trigger": "attack",
           "effects": [
             {
-              "kind": "physicalAttack"
+              "kind": "physicalAttack",
+              "powerStages": 0
             }
           ],
           "source": "parsed"
@@ -20876,7 +20898,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "foe",
+              "target": "user",
               "delta": 1
             }
           ],
@@ -21073,7 +21095,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -24421,6 +24443,11 @@
               "kind": "stopAttack",
               "attackType": "physical",
               "window": "thisAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -26367,7 +26394,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -28036,7 +28063,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             }
           ],
@@ -28112,7 +28139,7 @@
             },
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             }
           ],
@@ -31219,7 +31246,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -31501,8 +31528,13 @@
             },
             {
               "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "changeAnger",
               "target": "foe",
-              "delta": -1
+              "delta": -2
             }
           ],
           "source": "parsed"
@@ -33196,7 +33228,7 @@
     "imageUrl": "images-tts/tts-4caf6df6-20.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "partial",
+      "coverage": "metadata",
       "needsReview": [],
       "text": "All opponents & their allies lose 3 power stages. Remove from the game after use. Limit 1 per deck.",
       "textVerified": true,
@@ -33204,23 +33236,7 @@
         "number": "050",
         "rarity": "U",
         "style": "Named"
-      },
-      "abilities": [
-        {
-          "trigger": "onPlay",
-          "effects": [
-            {
-              "kind": "changePowerStages",
-              "target": "foe",
-              "delta": -3
-            },
-            {
-              "kind": "removeFromGameAfterUse"
-            }
-          ],
-          "source": "parsed"
-        }
-      ]
+      }
     }
   },
   {
@@ -33844,7 +33860,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -34420,7 +34436,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -34862,7 +34878,7 @@
     "imageUrl": "images-tts/tts-4caf6df6-21.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "partial",
+      "coverage": "unknown",
       "needsReview": [
         "type"
       ],
@@ -34872,23 +34888,7 @@
         "number": "051",
         "rarity": "U",
         "style": "Named"
-      },
-      "abilities": [
-        {
-          "trigger": "onPlay",
-          "effects": [
-            {
-              "kind": "changePowerStages",
-              "target": "foe",
-              "delta": -2
-            },
-            {
-              "kind": "removeFromGameAfterUse"
-            }
-          ],
-          "source": "parsed"
-        }
-      ]
+      }
     }
   },
   {
@@ -35941,7 +35941,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack",
+              "window": "nextPhase",
               "scope": "single"
             }
           ],
@@ -36156,7 +36156,8 @@
           "trigger": "attack",
           "effects": [
             {
-              "kind": "physicalAttack"
+              "kind": "physicalAttack",
+              "powerStages": 0
             }
           ],
           "source": "parsed"
@@ -37270,7 +37271,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "foe",
+              "target": "user",
               "delta": -1
             },
             {
@@ -37603,7 +37604,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -38053,7 +38054,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -39594,13 +39595,13 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
               "kind": "stopAttack",
-              "attackType": "energy",
-              "window": "thisCombat"
+              "attackType": "any",
+              "window": "nextPhase"
             },
             {
               "kind": "changeAnger",
@@ -40045,6 +40046,11 @@
             {
               "kind": "energyAttack",
               "lifeCards": 6
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
             }
           ],
           "source": "parsed",
@@ -40615,6 +40621,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -2
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 0
             }
           ],
           "source": "parsed"
@@ -40712,7 +40723,8 @@
           "trigger": "attack",
           "effects": [
             {
-              "kind": "physicalAttack"
+              "kind": "physicalAttack",
+              "powerStages": 3
             },
             {
               "kind": "changeAnger",
@@ -41269,7 +41281,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -41554,7 +41566,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisCombat",
               "scope": "all"
             }
@@ -41983,7 +41995,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisCombat"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -42873,7 +42885,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "foe",
+              "target": "user",
               "delta": 1
             }
           ],
@@ -43457,7 +43469,7 @@
             },
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             }
           ],
@@ -44370,7 +44382,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -44853,7 +44865,7 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisAttack"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -46265,12 +46277,12 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisCombat"
             },
             {
@@ -48740,7 +48752,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -49031,7 +49043,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -49339,7 +49351,7 @@
             {
               "kind": "stopAttack",
               "attackType": "any",
-              "window": "thisAttack"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -49459,11 +49471,6 @@
         {
           "trigger": "defense",
           "effects": [
-            {
-              "kind": "stopAttack",
-              "attackType": "energy",
-              "window": "thisAttack"
-            },
             {
               "kind": "stopAttack",
               "attackType": "any",
@@ -51152,7 +51159,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -51239,7 +51246,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -52668,7 +52675,12 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": -2
+              "delta": 2
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": -1
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -53423,7 +53435,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             }
           ],
@@ -53539,7 +53551,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "physical",
+              "attackType": "any",
               "window": "thisCombat"
             },
             {
@@ -54100,7 +54112,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -55415,7 +55427,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             }
           ],
@@ -57507,7 +57519,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -58769,7 +58781,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -59305,7 +59317,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             }
           ],
@@ -64449,7 +64461,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             }
           ],
@@ -67955,7 +67967,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             }
           ],
@@ -68085,7 +68097,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -68521,7 +68533,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -69054,7 +69066,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -69089,11 +69101,6 @@
               "kind": "stopAttack",
               "attackType": "any",
               "window": "thisAttack"
-            },
-            {
-              "kind": "changePowerStages",
-              "target": "foe",
-              "delta": -2
             }
           ],
           "source": "parsed"
@@ -69257,7 +69264,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -73988,7 +73995,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "physical",
+              "attackType": "any",
               "window": "thisCombat"
             },
             {
@@ -76247,7 +76254,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -77619,11 +77626,6 @@
             {
               "kind": "changePowerStages",
               "target": "foe",
-              "delta": -4
-            },
-            {
-              "kind": "changePowerStages",
-              "target": "foe",
               "delta": -3
             }
           ],
@@ -77979,7 +77981,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             }
           ],
@@ -83326,7 +83328,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -83442,6 +83444,11 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -2
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
             }
           ],
           "source": "parsed"
@@ -84885,7 +84892,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "nextPhase"
             },
             {
               "kind": "changeAnger",
@@ -84949,7 +84956,7 @@
             },
             {
               "kind": "changeAnger",
-              "target": "foe",
+              "target": "user",
               "delta": 2
             },
             {
@@ -87515,11 +87522,6 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
-              "window": "thisAttack"
-            },
-            {
-              "kind": "stopAttack",
               "attackType": "any",
               "window": "thisAttack"
             },
@@ -88280,7 +88282,7 @@
           "effects": [
             {
               "kind": "stopAttack",
-              "attackType": "energy",
+              "attackType": "any",
               "window": "thisAttack"
             },
             {
@@ -88720,7 +88722,7 @@
             {
               "kind": "stopAttack",
               "attackType": "physical",
-              "window": "thisAttack"
+              "window": "nextPhase"
             }
           ],
           "source": "parsed"
@@ -90486,7 +90488,7 @@
             {
               "kind": "stopAttack",
               "attackType": "energy",
-              "window": "thisAttack"
+              "window": "nextPhase"
             },
             {
               "kind": "stopAttack",
