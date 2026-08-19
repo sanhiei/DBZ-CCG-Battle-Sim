@@ -21,6 +21,7 @@ import { applyOnPlay } from './abilities.js';
 // Re-exported so callers keep importing the Non-Combat Step's rules from one
 // place; they live in drills.ts to keep turn.ts from importing this module.
 export { discardDrills, isDrill, isFreestyleDrill } from './drills.js';
+import { isDrill } from './drills.js';
 
 /** Card types that may be placed in play during the Non-Combat Step. */
 const PLAYABLE_IN_PLAY = new Set(['Non-Combat', 'Drill', 'Location', 'Battleground']);
@@ -65,7 +66,13 @@ export function playCard(
 
   // Resolve what the card actually does. Until now the card entered play and
   // nothing else happened, for every effect kind.
-  const ability = db.get(card.cardId)?.rules?.abilities?.find((a) => a.trigger === 'onPlay');
+  //
+  // Drills are the exception: they are CONSTANTLY in effect, so resolving one
+  // on entry would apply it once and then discard it. The parser cannot tell a
+  // Drill from any other Non-Combat card — most Drills are typed `Non-Combat` —
+  // so 28 of them carry an `onPlay` ability they should never resolve.
+  const drill = isDrill(card.cardId, db);
+  const ability = drill ? undefined : db.get(card.cardId)?.rules?.abilities?.find((a) => a.trigger === 'onPlay');
   if (ability) {
     const foeIdx = playerIdx === 0 ? 1 : 0;
     const { removeFromGame } = applyOnPlay(state, playerIdx, foeIdx, ability.effects, db, events);

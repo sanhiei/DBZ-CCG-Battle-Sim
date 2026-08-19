@@ -10,8 +10,19 @@
 import type { GameState } from '@dbz/shared';
 import type { CardDb } from './loader.js';
 
+/**
+ * A card is a Drill when its TITLE says so.
+ *
+ * The catalog's type field is unreliable here: 262 cards are named "... Drill"
+ * and exactly 4 of them carry the type `Drill` — the rest are typed
+ * `Non-Combat`, which is what the printed type line on most of them actually
+ * says. Trusting the type meant `discardDrills` fired on almost nothing and
+ * Freestyle-vs-Styled legality went unenforced. The title is the reliable
+ * signal; every Drill in the game has "Drill" in its name.
+ */
 export function isDrill(cardId: string, db: CardDb): boolean {
-  return db.type(cardId) === 'Drill';
+  if (db.type(cardId) === 'Drill') return true;
+  return /\bdrills?\b/i.test(db.get(cardId)?.name ?? '');
 }
 
 /**

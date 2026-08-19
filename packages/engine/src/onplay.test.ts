@@ -72,6 +72,10 @@ const db = new CardDb([
   nonCombat('plain', 'Plain Card'),
   // A Drill is continuous: it stays in play and is not resolved on entry.
   nonCombat('drill', 'Red Anger Drill', { trigger: 'constant', effects: [{ kind: 'changeAnger', target: 'user', delta: 3 }] }, 'Drill'),
+  // The realistic case: 262 cards are named "... Drill" and only 4 carry the
+  // type `Drill`. This one is typed Non-Combat, like almost every real Drill,
+  // and the parser gave it an onPlay ability because it could not tell either.
+  nonCombat('realdrill', 'Energy Storage Drill', onPlay({ kind: 'changePowerStages', target: 'user', delta: 1 })),
 ]);
 
 let uid = 0;
@@ -183,4 +187,17 @@ test('a Drill stays in play and is NOT resolved on entry', () => {
   play(s, s.players[0]!.zones.hand[0]!.uid);
   assert.equal(s.players[0]!.zones.inPlay.length, 1, 'the Drill stays on the table');
   assert.equal(s.players[0]!.mp.anger, 2, 'its constant effect did not fire on play');
+});
+
+test('a Drill TYPED Non-Combat is still treated as a Drill', () => {
+  // The one that matters: only 4 of 262 Drills carry the type `Drill`, so a
+  // type-only check let the rest be resolved once and discarded — a continuous
+  // card spent like a one-shot. Recognised by title instead.
+  const s = state(['realdrill']);
+  const before = s.players[0]!.mp.stageIndex;
+  play(s, s.players[0]!.zones.hand[0]!.uid);
+  const z = s.players[0]!.zones;
+  assert.equal(z.inPlay.length, 1, 'the Drill stays on the table');
+  assert.equal(z.discard.length, 0, 'and is NOT spent like a one-shot');
+  assert.equal(s.players[0]!.mp.stageIndex, before, 'its continuous effect did not fire once on play');
 });
