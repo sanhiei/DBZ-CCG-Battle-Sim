@@ -209,7 +209,32 @@ async function main(): Promise<void> {
   const coverage: Record<string, number> = {};
   const effectKinds: Record<string, number> = {};
 
-  const cards = catalog.cards.map((c) => {
+  /**
+ * The printed card types. Anything read off a card face has to land on one
+ * of these exactly, because the engine matches type strings literally: a
+ * stray space in "Non Combat" is the difference between Senzu Bean being
+ * playable and the engine refusing it as an unknown card type.
+ */
+const CARD_TYPES = ['Personality', 'Physical Combat', 'Energy Combat', 'Combat', 'Non-Combat', 'Drill', 'Location', 'Battleground', 'Mastery', 'Dragon Ball', 'Sensei'];
+const TYPE_BY_KEY = new Map(CARD_TYPES.map((t) => [t.toLowerCase().replace(/[^a-z]/g, ''), t]));
+
+/**
+ * Fold OCR damage in the type line back onto a printed type.
+ *
+ * The line is read off the face, so it arrives as "Non Combat",
+ * "Non-combat", "Non- Combat", "Physical-Combat" — all of which the engine
+ * treated as unknown types. Comparing on letters alone collapses them.
+ *
+ * A card carrying personality data IS a Personality whatever its type line
+ * said: four cards read their ALIGNMENT ("Villian") as their type.
+ */
+function canonicalType(raw: string | undefined, isPersonality: boolean): string {
+  if (isPersonality) return 'Personality';
+  const key = (raw ?? '').toLowerCase().replace(/[^a-z]/g, '');
+  return TYPE_BY_KEY.get(key) ?? raw ?? 'Unknown';
+}
+
+const cards = catalog.cards.map((c) => {
     const rec = ocrById.get(c.id);
     const needsReview = [...(rec?.needsReview ?? [])];
     const type = rec?.isPersonality ? 'Personality' : rec?.type ?? 'Unknown';
@@ -256,7 +281,6 @@ async function main(): Promise<void> {
         const tx = needsReview.indexOf('text'); if (tx !== -1) needsReview.splice(tx, 1);
       }
     }
-    const effType = (rules.type as string) ?? type;
 
     // Personality classification by source precedence: the face (vision) beats
     // the typed database, which beats OCR. A veto matters as much as a claim —
@@ -266,6 +290,7 @@ async function main(): Promise<void> {
       vis?.isPersonality !== undefined ? vis.isPersonality
       : lk ? lk.isPersonality
       : rec?.isPersonality ?? false;
+    rules.type = canonicalType(rules.type as string, isPersonality);
     if (isPersonality) {
       personalities++;
       const personality: Record<string, unknown> = {

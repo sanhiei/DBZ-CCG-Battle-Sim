@@ -4659,7 +4659,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0d2c3416-2.jpg",
     "rules": {
-      "type": "Physical-Combat",
+      "type": "Physical Combat",
       "coverage": "partial",
       "needsReview": [],
       "text": "Physical attack. Lower your opponent's anger to 0 at the end of this Combat. Remove from the game after use.",
@@ -4700,7 +4700,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-30fb99ff-1.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -4893,12 +4893,10 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-30fb99ff-4.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
-        "type",
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "type"
       ],
       "text": "Energy attack doing 6 life cards of damage. Costs 1 power stage to perform. If you have Android 14 in play, this attack does an additional +4 life cards of damage.",
       "textVerified": "vision",
@@ -4923,25 +4921,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      },
-      "abilities": [
-        {
-          "trigger": "attack",
-          "effects": [
-            {
-              "kind": "energyAttack"
-            }
-          ],
-          "source": "parsed",
-          "cost": {
-            "powerStages": 1
-          },
-          "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
-          ]
-        }
-      ]
+      }
     }
   },
   {
@@ -6499,7 +6479,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-c29a516a-28.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -6605,7 +6585,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-c29a516a-29.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -7149,7 +7129,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-c29a516a-57.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -7213,7 +7193,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-b77448ca-66.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -7405,7 +7385,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-c29a516a-11.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -7445,7 +7425,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-c29a516a-39.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -7908,7 +7888,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-b77448ca-56.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -7980,7 +7960,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-c29a516a-44.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -8125,7 +8105,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-c29a516a-0.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -8165,7 +8145,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-c29a516a-35.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -10008,12 +9988,10 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-30fb99ff-15.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
-        "type",
-        "ability:lifeCardModifier",
-        "ability:focusedAttack"
+        "type"
       ],
       "text": "Focused physical attack doing +2 power stages of damage. If your opponent declared a Tokui-Waza, this attack does an additional +2 life cards of damage for each Dragon Ball your opponent controls.",
       "textVerified": "vision",
@@ -10038,26 +10016,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      },
-      "abilities": [
-        {
-          "trigger": "attack",
-          "effects": [
-            {
-              "kind": "physicalAttack"
-            },
-            {
-              "kind": "damageStages",
-              "stages": 2
-            }
-          ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier",
-            "focusedAttack"
-          ]
-        }
-      ]
+      }
     }
   },
   {
@@ -10069,8 +10028,8 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-30fb99ff-22.jpg",
     "rules": {
-      "type": "Physical Combat",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "metadata",
       "needsReview": [],
       "text": "Defense Shield: Stops the first 2 unstopped physical attacks performed on you during Combat. If you declared a Tokui-Waza, this Defensive Shield stops the first unstopped physical attack performed against you during Combat.",
       "textVerified": "vision",
@@ -10095,20 +10054,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      },
-      "abilities": [
-        {
-          "trigger": "defense",
-          "effects": [
-            {
-              "kind": "stopAttack",
-              "attackType": "physical",
-              "window": "thisAttack"
-            }
-          ],
-          "source": "parsed"
-        }
-      ]
+      }
     }
   },
   {
@@ -10120,7 +10066,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-c29a516a-51.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -10457,7 +10403,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-bf3b8d7f-40.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -11550,7 +11496,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-6a69cdcc-1.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -11628,7 +11574,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-6a69cdcc-2.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -11668,7 +11614,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-6a69cdcc-4.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -11708,7 +11654,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-6a69cdcc-5.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -12095,7 +12041,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-117cae92-60.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -12884,7 +12830,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-17.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -12994,7 +12940,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-19.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -13034,7 +12980,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-13.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -13074,7 +13020,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-117cae92-46.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -13941,7 +13887,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-30.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -14107,7 +14053,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-117cae92-45.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -14245,7 +14191,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-48.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -14285,7 +14231,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-164632ee-0.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -14403,7 +14349,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-45.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -14443,7 +14389,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-117cae92-50.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -14483,7 +14429,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-60.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -14538,8 +14484,8 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-58.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
         "type"
       ],
@@ -14566,20 +14512,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      },
-      "abilities": [
-        {
-          "trigger": "defense",
-          "effects": [
-            {
-              "kind": "preventLifeCards",
-              "amount": 2,
-              "attackType": "any"
-            }
-          ],
-          "source": "parsed"
-        }
-      ]
+      }
     }
   },
   {
@@ -14666,7 +14599,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-12.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -14706,7 +14639,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-117cae92-44.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -15152,7 +15085,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-44.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -15267,7 +15200,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-41.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -15472,7 +15405,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-52.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -15512,7 +15445,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-51.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -16571,7 +16504,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-6a69cdcc-31.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -16648,7 +16581,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a15907e0-40.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -19374,7 +19307,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-7c91d4cf-30.jpg",
     "rules": {
-      "type": "Villian",
+      "type": "Personality",
       "coverage": "metadata",
       "needsReview": [],
       "text": "Power: Choose an Ally in play. Your opponent cannot redirect damage to that Ally and the Ally cannot take over Combat. If you have \"The Car\" in play you can choose up to 2 Allies instead of 1. (Main Personality Only)",
@@ -19421,7 +19354,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-76cb49e3-43.jpg",
     "rules": {
-      "type": "Villian",
+      "type": "Personality",
       "coverage": "metadata",
       "needsReview": [],
       "text": "Power: When entering Combat as the attacker, look at the top 6 cards from your Life Deck and place them back on top in any order, then draw a card.",
@@ -19467,7 +19400,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-3ae57df1-63.jpg",
     "rules": {
-      "type": "Villian",
+      "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
         "powerRatings"
@@ -34998,7 +34931,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-560f9124-25.jpg",
     "rules": {
-      "type": "Non Combat",
+      "type": "Non-Combat",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -39170,7 +39103,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-c611d949-3.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -39403,7 +39336,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-e3673ab6-31.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -40395,7 +40328,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-2b332fa4-9.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -40475,7 +40408,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-e3673ab6-36.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -40515,7 +40448,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-2b332fa4-56.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -40555,7 +40488,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-2b332fa4-57.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -41050,7 +40983,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-e3673ab6-58.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -43030,7 +42963,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-c611d949-2.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -43073,7 +43006,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-c611d949-1.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -43534,7 +43467,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-8281ee74-4.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -43685,7 +43618,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-e3673ab6-55.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -43902,7 +43835,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-e3673ab6-22.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -45173,7 +45106,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-434ce590-7.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -45213,7 +45146,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-434ce590-9.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -45253,7 +45186,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-434ce590-8.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -45475,7 +45408,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-3b425687-3.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -45515,7 +45448,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-3b425687-4.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -45596,7 +45529,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-3b425687-5.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -45674,8 +45607,8 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-89fe8da5-17.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
         "type"
       ],
@@ -45703,20 +45636,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      },
-      "abilities": [
-        {
-          "trigger": "defense",
-          "effects": [
-            {
-              "kind": "preventLifeCards",
-              "amount": 2,
-              "attackType": "energy"
-            }
-          ],
-          "source": "parsed"
-        }
-      ]
+      }
     }
   },
   {
@@ -45783,7 +45703,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-89fe8da5-19.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -46446,7 +46366,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-18cbdeb1-22.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -46684,7 +46604,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-434ce590-3.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -49416,7 +49336,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-434ce590-2.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type",
@@ -49710,7 +49630,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-839c2c98-10.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -57601,8 +57521,8 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-fcd37d11-42.jpg",
     "rules": {
-      "type": "Non-combat",
-      "coverage": "metadata",
+      "type": "Non-Combat",
+      "coverage": "partial",
       "needsReview": [],
       "text": "When you place this card in play, immediately raise your Main Personality to its highest power stage. Remove from the game after use.",
       "textVerified": true,
@@ -57610,7 +57530,23 @@
         "number": "043",
         "rarity": "C",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -61007,7 +60943,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-94ce7717-30.jpg",
     "rules": {
-      "type": "Villian",
+      "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
         "powerRatings"
@@ -63338,7 +63274,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-ab6f7d43-54.jpg",
     "rules": {
-      "type": "Non- Combat",
+      "type": "Non-Combat",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -65710,7 +65646,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-d3eb7677-8.jpg",
     "rules": {
-      "type": "Non- Combat",
+      "type": "Non-Combat",
       "coverage": "metadata",
       "needsReview": [],
       "text": "Search your Life Deck for up to 2 Trunks Named cards and put them in your hand. Remove from the game after use.",
@@ -66217,7 +66153,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-ac3c3683-47.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -67181,7 +67117,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-9f900382-55.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -69723,7 +69659,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-be34bddc-3.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -69789,7 +69725,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-be34bddc-1.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -72624,7 +72560,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a8664770-36.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -74272,7 +74208,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-9f900382-9.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -74508,7 +74444,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-be34bddc-33.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -74548,8 +74484,8 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-be34bddc-32.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
         "type"
       ],
@@ -74576,27 +74512,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      },
-      "abilities": [
-        {
-          "trigger": "attack",
-          "effects": [
-            {
-              "kind": "physicalAttack"
-            },
-            {
-              "kind": "damageStages",
-              "stages": 2
-            },
-            {
-              "kind": "stopAttack",
-              "attackType": "energy",
-              "window": "thisAttack"
-            }
-          ],
-          "source": "parsed"
-        }
-      ]
+      }
     }
   },
   {
@@ -74608,11 +74524,10 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-be34bddc-31.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
-        "type",
-        "ability:energyLifeCards"
+        "type"
       ],
       "text": "Energy attack. Costs 1 power stage to perform. If successful, and you declared a Black Tokui-Waza, your opponent must discard a card from his hand.",
       "textVerified": "vision",
@@ -74637,29 +74552,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      },
-      "abilities": [
-        {
-          "trigger": "attack",
-          "effects": [
-            {
-              "kind": "energyAttack"
-            },
-            {
-              "kind": "discardCards",
-              "target": "foe",
-              "count": 1
-            }
-          ],
-          "source": "parsed",
-          "cost": {
-            "powerStages": 1
-          },
-          "needsReview": [
-            "energyLifeCards"
-          ]
-        }
-      ]
+      }
     }
   },
   {
@@ -74939,7 +74832,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-9f900382-33.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -75021,7 +74914,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-9f900382-15.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -76132,7 +76025,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-7bdadf12-4.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -80529,8 +80422,8 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-e0273976-42.jpg",
     "rules": {
-      "type": "Non-combat",
-      "coverage": "unknown",
+      "type": "Non-Combat",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -80540,7 +80433,23 @@
         "number": "043",
         "rarity": "C",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -81970,7 +81879,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a42f5098-12.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -82056,7 +81965,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-9f900382-17.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -83465,7 +83374,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a8664770-13.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -83505,7 +83414,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-a8664770-10.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -84016,8 +83925,8 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0e3b7819-14.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
         "type",
         "alignment"
@@ -84045,27 +83954,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      },
-      "abilities": [
-        {
-          "trigger": "attack",
-          "effects": [
-            {
-              "kind": "physicalAttack"
-            },
-            {
-              "kind": "damageStages",
-              "stages": 4
-            },
-            {
-              "kind": "movePowerStage",
-              "target": "user",
-              "to": "highest"
-            }
-          ],
-          "source": "parsed"
-        }
-      ]
+      }
     }
   },
   {
@@ -84077,7 +83966,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0e3b7819-16.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type",
@@ -85320,8 +85209,8 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0a93c43d-54.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
         "type"
       ],
@@ -85348,19 +85237,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      },
-      "abilities": [
-        {
-          "trigger": "attack",
-          "effects": [
-            {
-              "kind": "physicalAttack",
-              "powerStages": 3
-            }
-          ],
-          "source": "parsed"
-        }
-      ]
+      }
     }
   },
   {
@@ -85372,8 +85249,8 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0a93c43d-53.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
         "type",
         "alignment"
@@ -85401,20 +85278,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      },
-      "abilities": [
-        {
-          "trigger": "defense",
-          "effects": [
-            {
-              "kind": "stopAttack",
-              "attackType": "physical",
-              "window": "thisAttack"
-            }
-          ],
-          "source": "parsed"
-        }
-      ]
+      }
     }
   },
   {
@@ -85730,7 +85594,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0a93c43d-59.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -85770,8 +85634,8 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0a93c43d-58.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
         "type"
       ],
@@ -85798,20 +85662,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      },
-      "abilities": [
-        {
-          "trigger": "defense",
-          "effects": [
-            {
-              "kind": "stopAttack",
-              "attackType": "physical",
-              "window": "thisAttack"
-            }
-          ],
-          "source": "parsed"
-        }
-      ]
+      }
     }
   },
   {
@@ -86093,7 +85944,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0a93c43d-61.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -86508,7 +86359,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0a93c43d-62.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -87092,7 +86943,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0a93c43d-65.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -87349,7 +87200,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0a93c43d-66.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -87434,7 +87285,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0a93c43d-68.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -87558,8 +87409,8 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0e3b7819-45.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
         "type"
       ],
@@ -87588,19 +87439,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      },
-      "abilities": [
-        {
-          "trigger": "attack",
-          "effects": [
-            {
-              "kind": "physicalAttack",
-              "powerStages": 10
-            }
-          ],
-          "source": "parsed"
-        }
-      ]
+      }
     }
   },
   {
@@ -88486,7 +88325,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0e3b7819-50.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -88565,8 +88404,8 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0e3b7819-2.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
         "type"
       ],
@@ -88595,23 +88434,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 4
-      },
-      "abilities": [
-        {
-          "trigger": "attack",
-          "effects": [
-            {
-              "kind": "physicalAttack"
-            },
-            {
-              "kind": "damageStages",
-              "stages": 8,
-              "ifSuccessful": true
-            }
-          ],
-          "source": "parsed"
-        }
-      ]
+      }
     }
   },
   {
@@ -88623,7 +88446,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0e3b7819-47.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -89244,7 +89067,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0e3b7819-58.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -89284,7 +89107,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0e3b7819-55.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -89459,7 +89282,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0e3b7819-7.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -91214,7 +91037,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-fe44b0fe-16.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -91521,11 +91344,10 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0e3b7819-4.jpg",
     "rules": {
-      "type": "Unknown",
-      "coverage": "partial",
+      "type": "Personality",
+      "coverage": "unknown",
       "needsReview": [
-        "type",
-        "ability:energyLifeCards"
+        "type"
       ],
       "text": "Energy attack. If successful, remove the bottom card of your opponent's discard pile from the game.",
       "textVerified": "vision",
@@ -91550,21 +91372,7 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      },
-      "abilities": [
-        {
-          "trigger": "attack",
-          "effects": [
-            {
-              "kind": "energyAttack"
-            }
-          ],
-          "source": "parsed",
-          "needsReview": [
-            "energyLifeCards"
-          ]
-        }
-      ]
+      }
     }
   },
   {
@@ -91779,7 +91587,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-0e3b7819-23.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"
@@ -91819,7 +91627,7 @@
     "rarity": "Unknown",
     "imageUrl": "images-tts/tts-76e864b5-11.jpg",
     "rules": {
-      "type": "Unknown",
+      "type": "Personality",
       "coverage": "unknown",
       "needsReview": [
         "type"

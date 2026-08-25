@@ -37,6 +37,26 @@ let zeroRungBad = 0;
 let ladderTooShort = 0;
 let flatLadders = 0;
 
+// The engine matches card types as literal strings, so a type read off a card
+// face with OCR damage ("Non Combat", "Physical-Combat") is not a cosmetic
+// blemish — it makes the card unplayable. 'Unknown' is allowed: it honestly
+// means the type line could not be read.
+const CARD_TYPES = new Set([
+  'Personality',
+  'Physical Combat',
+  'Energy Combat',
+  'Combat',
+  'Non-Combat',
+  'Drill',
+  'Location',
+  'Battleground',
+  'Mastery',
+  'Dragon Ball',
+  'Sensei',
+  'Unknown',
+]);
+const badTypes = new Map();
+
 for (const file of catalogs) {
   const cards = readJson(file);
   if (!Array.isArray(cards)) {
@@ -49,7 +69,13 @@ for (const file of catalogs) {
     else if (ids.has(c.id)) fail(`${file}: duplicate card id ${c.id}`);
     ids.add(c?.id);
 
+    const t = c?.rules?.type;
+    if (t && !CARD_TYPES.has(t)) badTypes.set(t, (badTypes.get(t) ?? 0) + 1);
+
     const p = c?.rules?.personality;
+    // A card carrying personality data must be typed as one, or deck building
+    // and the ability parser disagree about what it is.
+    if (p && t !== 'Personality') fail(`${file}: ${c.name} has personality data but is typed ${t}`);
     if (!p) continue;
     personalities++;
     const ladder = p.powerRatings;
@@ -80,6 +106,8 @@ for (const file of catalogs) {
   note(`${file}: ${cards.length} cards`);
 }
 note(`${personalities} personalities; ${ladderTooShort} short ladder(s), ${flatLadders} with repeated rungs (both flagged, not fatal)`);
+
+for (const [t, n] of badTypes) fail(`${n} card(s) have an unrecognised type ${JSON.stringify(t)} — the engine will refuse them`);
 
 /* ---------- Physical Attack Table ---------- */
 
