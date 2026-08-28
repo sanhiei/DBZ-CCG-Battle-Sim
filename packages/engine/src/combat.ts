@@ -249,20 +249,44 @@ export function declareEmpower(state: GameState, amount: number, ctx: CombatCtx)
 const COMBAT_CARD_TYPES = new Set(['Physical Combat', 'Energy Combat', 'Combat']);
 
 /**
- * Is `cardUid` a card this player may play in Combat right now?
+ * Find a card this player may play in Combat, in hand or already in play.
  *
- * The card has to be in THAT PLAYER'S HAND. This was previously unchecked in
- * both directions: any string at all was accepted as a defense, and the
- * attacker's card was looked up across every player and every zone — so a card
- * sitting in the opponent's discard pile could be played as an attack.
+ * Both zones count. CRD ~L305 lists five ways to defend and the second is "use
+ * one of your Non-Combat cards in play if that card has a starburst on it" —
+ * every Defense Shield Drill and every defensive Mastery lives in `inPlay` and
+ * never touches hand, so a hand-only check deleted a legal option outright.
+ * ~L288 says the same for attacking from a card in play.
+ *
+ * What matters is that the card is THIS PLAYER'S and is somewhere it can be
+ * played from: the old lookup searched both players and the discard pile.
  */
-function combatCardError(state: GameState, playerIdx: number, cardUid: string, db: CardDb, verb: string): string | undefined {
+function findCombatCard(
+  state: GameState,
+  playerIdx: number,
+  cardUid: string,
+): { inst: CardInstance; zone: 'hand' | 'inPlay' } | undefined {
   const p = state.players[playerIdx];
-  if (!p) return 'no such player';
-  const inst = p.zones.hand.find((c: CardInstance) => c.uid === cardUid);
-  if (!inst) return `that card is not in your hand`;
-  const card = db.get(inst.cardId);
-  const type = db.type(inst.cardId);
+  if (!p) return undefined;
+  const inHand = p.zones.hand.find((c: CardInstance) => c.uid === cardUid);
+  if (inHand) return { inst: inHand, zone: 'hand' };
+  const inPlay = p.zones.inPlay.find((c: CardInstance) => c.uid === cardUid);
+  if (inPlay) return { inst: inPlay, zone: 'inPlay' };
+  return undefined;
+}
+
+function combatCardError(state: GameState, playerIdx: number, cardUid: string, db: CardDb, verb: string): string | undefined {
+  const found = findCombatCard(state, playerIdx, cardUid);
+  if (!found) return `that card is not in your hand or in play`;
+  const card = db.get(found.inst.cardId);
+  const type = db.type(found.inst.cardId);
+  // A card in play got there by being legally played, and the CRD lets Drills
+  // and Masteries defend, so the combat-type gate applies only to cards
+  // coming out of hand.
+  if (found.zone !== 'hand') return undefined;
+  // 'Unknown' means the printed type line could not be read, not that the card
+  // is illegal. Refusing it would take 59 real cards — printed attacks and
+  // blocks among them — out of the game on the strength of an OCR failure.
+  if (type === 'Unknown') return undefined;
   if (!COMBAT_CARD_TYPES.has(type)) {
     return `${card?.name ?? 'that card'} is a ${type} card and cannot be used to ${verb}`;
   }
@@ -287,11 +311,24 @@ function discardAttackCards(
     if (!uid) return;
     const p = state.players[playerIdx];
     if (!p) return;
+    // Only cards played FROM HAND are spent. A Drill or Mastery that defended
+    // is a permanent: it was already in play and stays there.
     const at = p.zones.hand.findIndex((c: CardInstance) => c.uid === uid);
-    if (at === -1) return; // already spent, or never in hand
+    if (at === -1) return;
+    const card = db.get(p.zones.hand[at]!.cardId);
+
+    // "This card stays on the table to be used 1 more time this Combat."
+    // Discarding it deleted a use the card explicitly grants, so move it into
+    // play instead and let the players count the remaining uses.
+    if (/stays on the table/i.test(card?.rules?.text ?? '')) {
+      const [held] = p.zones.hand.splice(at, 1);
+      if (held) p.zones.inPlay.push({ ...held, faceDown: false });
+      state.log.push(`${card?.name ?? 'A card'} stays on the table — track its remaining uses by hand.`);
+      return;
+    }
+
     const [spent] = p.zones.hand.splice(at, 1);
     if (!spent) return;
-    const card = db.get(spent.cardId);
     const removes = (card?.rules?.abilities ?? []).some((a) =>
       a.effects.some((e) => e.kind === 'removeFromGameAfterUse'),
     );
@@ -359,6 +396,19 @@ export function resolveDefense(
   if (ctx.actingPlayerIdx !== atk.defenderPlayerIdx) return 'only the defender may respond';
   if (c.finalUsed.includes(ctx.actingPlayerIdx)) return 'you cannot defend after a Final Physical Attack';
 
+  // An attack is answered ONCE. Power-stage damage used to end the attack
+  // outright, so `currentAttack` never outlived its resolution and this could
+  // not be re-entered. Now that overflow routes into the life-card path, that
+  // path PAUSES for an Endurance or capture prompt with the attack still on
+  // the table — which left this function re-callable. Sending `defend` again
+  // re-resolved the whole attack (damage dealt two and three times over), and
+  // sending a defense card retroactively STOPPED an attack whose damage had
+  // already landed, erasing an earned Dragon Ball capture.
+  if (atk.successful || atk.stopped) return 'this attack has already been answered';
+  if (state.pendingPrompt && !(state.pendingPrompt.type === 'defend' && state.pendingPrompt.playerIdx === ctx.actingPlayerIdx)) {
+    return 'resolve the current prompt first';
+  }
+
   if (opts.cardUid && !opts.takeDamage) {
     const bad = combatCardError(state, atk.defenderPlayerIdx, opts.cardUid, db, 'defend');
     if (bad) return bad;
@@ -369,10 +419,15 @@ export function resolveDefense(
     // the strength of missing data. An unmodelled defense is logged as such.
     const stops = defenseStops(state, atk.defenderPlayerIdx, opts.cardUid, db);
     if (stops.length > 0) {
-      const covers = stops.some((e) => (e.attackType ?? 'any') === 'any' || e.attackType === atk.attackType);
+      // The stop has to apply NOW. A card whose only stop is deferred ("stops
+      // the next physical attack", "the first successful attack") was being
+      // spent to stop the attack in front of it, which is not what it says.
+      const nowStops = stops.filter((e) => e.window === undefined || e.window === 'thisAttack' || e.window === 'thisCombat');
+      const covers = nowStops.some((e) => (e.attackType ?? 'any') === 'any' || e.attackType === atk.attackType);
       if (!covers) {
-        const name = db.get(state.players[atk.defenderPlayerIdx]!.zones.hand.find((x) => x.uid === opts.cardUid)!.cardId)?.name;
-        return `${name ?? 'That card'} does not stop ${atk.attackType} attacks`;
+        const found = findCombatCard(state, atk.defenderPlayerIdx, opts.cardUid);
+        const name = found ? db.get(found.inst.cardId)?.name : undefined;
+        return `${name ?? 'That card'} does not stop ${atk.attackType} attacks right now`;
       }
     } else {
       state.log.push('Defense card has no modelled stop — resolving it as a stop; verify by hand.');
@@ -589,9 +644,9 @@ export function resolveCapture(
  * card the opponent had already thrown away could answer for the defense.
  */
 function defenseStops(state: GameState, playerIdx: number, cardUid: string, db: CardDb) {
-  const inst = state.players[playerIdx]?.zones.hand.find((x) => x.uid === cardUid);
-  if (!inst) return [];
-  const abilities = db.get(inst.cardId)?.rules?.abilities ?? [];
+  const found = findCombatCard(state, playerIdx, cardUid);
+  if (!found) return [];
+  const abilities = db.get(found.inst.cardId)?.rules?.abilities ?? [];
   return abilities.flatMap((a) => a.effects).filter((e) => e.kind === 'stopAttack');
 }
 /** Answer the redirect prompt: send the pending power-stage damage to a personality. */
@@ -599,6 +654,14 @@ export function redirectDamage(state: GameState, toUid: string | null, ctx: Comb
   const atk = state.combat?.currentAttack;
   if (!atk || !state.pendingPrompt || state.pendingPrompt.type !== 'redirect') return 'no redirect pending';
   if (ctx.actingPlayerIdx !== atk.defenderPlayerIdx) return 'only the defender may redirect';
+  // The target has to be one the prompt actually offered. Unvalidated, naming
+  // any other uid — the attacker's own MP, or a typo — found no personality and
+  // the entire attack evaporated: no stages lost, no life cards, and the
+  // if-successful chain skipped, all for free and without spending a card.
+  if (toUid !== null) {
+    const legal = redirectTargets(state, atk.defenderPlayerIdx, atk.defenderControllerUid);
+    if (!legal.some((p) => p.uid === toUid)) return 'that personality is not a legal redirect target';
+  }
   const target = toUid ?? atk.defenderControllerUid; // null = take it on the controller
   applyPowerStageDamage(state, target, db, events);
   return undefined;
