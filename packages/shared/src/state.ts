@@ -126,6 +126,12 @@ export interface AttackInProgress {
   enduranceOffer?: { uid: string; cardId: string; value: number; remaining: number };
   /** Power-stage damage awaiting redirect/application (physical). */
   pendingPowerStageDamage?: number;
+  /**
+   * Power stages the target could actually lose. Damage beyond the stages a
+   * personality has left converts to life cards (CRD ~L422, ~L436), so an
+   * attack can deal both kinds at once and the report has to carry both.
+   */
+  powerStagesDealt?: number;
   /** Which of the 16 battle-sequence steps we are on (1..16). */
   resolutionStep: number;
 }

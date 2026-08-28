@@ -5,15 +5,24 @@
  * ... until both pass back-to-back. Each function MUTATES state and pushes events.
  * Physical Base Damage uses the PAT; energy attacks are a flat 4 life cards.
  *
- * Modeled: prepare-phase draw, physical/energy attacks, Empower, defend (stop vs
- * take damage), power-stage vs life-card damage, redirect of power-stage damage,
- * survival loss, pass/consecutive-pass end. Not yet: Endurance, Defense Shields,
- * Final Physical Attack, Dragon Ball capture, "if successful" chains, most card
- * abilities (these layer on with card coverage).
+ * Modeled: prepare-phase draw, physical/energy attacks, Empower, defend (the
+ * card is checked: yours, a Combat card, and it stops this attack type),
+ * power-stage damage with overflow converting to life cards, redirect,
+ * Endurance, Dragon Ball capture, "if successful" chains, spending the attack
+ * and defense cards, survival loss, pass/consecutive-pass end.
+ *
+ * NOT modeled: Defense Shields (battle-sequence step 7), Final Physical Attack,
+ * the Declare step, and most Personality Powers.
+ *
+ * Keep this list honest. It previously listed Endurance and Dragon Ball capture
+ * as missing long after both were built, while claiming power-stage damage was
+ * modeled when overflow was being silently dropped — so it was wrong in both
+ * directions at once and could not be trusted either way.
  */
 import type {
   Ability,
   AttackType,
+  CardInstance,
   GameEvent,
   GameState,
   PersonalityInPlay,
@@ -72,13 +81,24 @@ export function beginCombat(state: GameState, db: CardDb, events: GameEvent[]): 
   state.log.push(`Combat begins — ${state.players[defender]!.name} draws ${PREPARE_DRAW}.`);
 }
 
-function loseStages(p: PersonalityInPlay, n: number, db: CardDb, events: GameEvent[]): void {
+/**
+ * Lower a personality's power stages. Returns the stages it could NOT lose.
+ *
+ * That remainder is not slack to be thrown away: "when a personality is at 0
+ * and is dealt power stages of damage, those power stages are converted into
+ * life cards of damage, and is considered both types of damage" (CRD ~L436,
+ * ~L422). Clamping at 0 and discarding the excess made a personality at its
+ * bottom stage immune to physical damage outright.
+ */
+function loseStages(p: PersonalityInPlay, n: number, db: CardDb, events: GameEvent[]): number {
   const from = p.stageIndex;
-  p.stageIndex = Math.max(0, p.stageIndex - n);
+  const taken = Math.min(n, from);
+  p.stageIndex = from - taken;
   syncRating(p, db);
   if (p.stageIndex !== from) {
     events.push({ type: 'stageChanged', personalityUid: p.uid, from, to: p.stageIndex });
   }
+  return n - taken;
 }
 
 /**
@@ -166,6 +186,10 @@ export function declareAttack(
   if (c.finalUsed.includes(ctx.actingPlayerIdx)) return 'you must pass after a Final Physical Attack';
   const locked = lockoutAgainst(c, ctx.actingPlayerIdx, attackType);
   if (locked) return `${locked === 'any' ? 'All attacks' : `${locked} attacks`} are stopped for the remainder of this Combat`;
+  if (cardUid) {
+    const bad = combatCardError(state, ctx.actingPlayerIdx, cardUid, db, 'attack');
+    if (bad) return bad;
+  }
 
   const attackerIdx = c.phasePlayerIdx;
   const defenderIdx = other(state, attackerIdx);
@@ -221,9 +245,61 @@ export function declareEmpower(state: GameState, amount: number, ctx: CombatCtx)
   return undefined;
 }
 
-/** Discard the attack card (battle sequence step 16) and any named defense card. */
-function discardAttackCards(state: GameState, atk: NonNullable<GameState['combat']>['currentAttack'], defenseCardUid?: string): void {
-  // (Card instances live in hand/inPlay; a full impl moves them. Provisional: log only.)
+/** Card types that may be played during Combat, to attack or to defend. */
+const COMBAT_CARD_TYPES = new Set(['Physical Combat', 'Energy Combat', 'Combat']);
+
+/**
+ * Is `cardUid` a card this player may play in Combat right now?
+ *
+ * The card has to be in THAT PLAYER'S HAND. This was previously unchecked in
+ * both directions: any string at all was accepted as a defense, and the
+ * attacker's card was looked up across every player and every zone — so a card
+ * sitting in the opponent's discard pile could be played as an attack.
+ */
+function combatCardError(state: GameState, playerIdx: number, cardUid: string, db: CardDb, verb: string): string | undefined {
+  const p = state.players[playerIdx];
+  if (!p) return 'no such player';
+  const inst = p.zones.hand.find((c: CardInstance) => c.uid === cardUid);
+  if (!inst) return `that card is not in your hand`;
+  const card = db.get(inst.cardId);
+  const type = db.type(inst.cardId);
+  if (!COMBAT_CARD_TYPES.has(type)) {
+    return `${card?.name ?? 'that card'} is a ${type} card and cannot be used to ${verb}`;
+  }
+  return undefined;
+}
+
+/**
+ * Send the attack card (battle sequence step 16) and any defense card to the
+ * discard pile — or out of the game when the card says so.
+ *
+ * This was an empty function body. Nothing was ever spent: one attack card
+ * could be replayed every phase forever and a single defense card could block
+ * an entire game, so hand size and deck construction meant nothing.
+ */
+function discardAttackCards(
+  state: GameState,
+  atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>,
+  db: CardDb,
+  defenseCardUid?: string,
+): void {
+  const spend = (playerIdx: number, uid: string | undefined): void => {
+    if (!uid) return;
+    const p = state.players[playerIdx];
+    if (!p) return;
+    const at = p.zones.hand.findIndex((c: CardInstance) => c.uid === uid);
+    if (at === -1) return; // already spent, or never in hand
+    const [spent] = p.zones.hand.splice(at, 1);
+    if (!spent) return;
+    const card = db.get(spent.cardId);
+    const removes = (card?.rules?.abilities ?? []).some((a) =>
+      a.effects.some((e) => e.kind === 'removeFromGameAfterUse'),
+    );
+    (removes ? p.zones.removed : p.zones.discard).push({ ...spent, faceDown: false });
+    state.log.push(`${card?.name ?? 'A card'} is ${removes ? 'removed from the game' : 'discarded'} after use.`);
+  };
+  spend(atk.attackerPlayerIdx, atk.cardUid);
+  spend(atk.defenderPlayerIdx, defenseCardUid);
 }
 
 function redirectTargets(state: GameState, defenderIdx: number, controllerUid: string): PersonalityInPlay[] {
@@ -239,8 +315,29 @@ function applyPowerStageDamage(state: GameState, personalityUid: string, db: Car
     (p) => p.uid === personalityUid,
   );
   const dmg = atk.pendingPowerStageDamage ?? 0;
-  if (target) loseStages(target, dmg, db, events);
-  events.push({ type: 'attackResolved', successful: true, powerStages: dmg, lifeCards: 0 });
+  if (!target) {
+    events.push({ type: 'attackResolved', successful: true, powerStages: 0, lifeCards: 0 });
+    nextAttackPhase(state, events);
+    return;
+  }
+
+  const overflow = loseStages(target, dmg, db, events);
+  atk.powerStagesDealt = dmg - overflow;
+
+  // Stages the personality could not lose become life cards, and count as BOTH
+  // kinds of damage (CRD ~L436, ~L579). Handing them to the life-card path is
+  // what makes them real: that path is where Endurance, Dragon Ball capture and
+  // running out of Life Deck all live, and all three were unreachable from a
+  // physical attack while the excess was being dropped on the floor.
+  if (overflow > 0) {
+    state.log.push(
+      `${target.personalityName} is out of power stages — ${overflow} converts to life cards of damage.`,
+    );
+    dealLifeCardsAndFinish(state, atk, overflow, db, events);
+    return;
+  }
+
+  events.push({ type: 'attackResolved', successful: true, powerStages: atk.powerStagesDealt, lifeCards: 0 });
   applyIfSuccessful(state, atk.ifSuccessfulEffects, db, events, {
     userIdx: atk.attackerPlayerIdx,
     foeIdx: atk.defenderPlayerIdx,
@@ -263,13 +360,30 @@ export function resolveDefense(
   if (c.finalUsed.includes(ctx.actingPlayerIdx)) return 'you cannot defend after a Final Physical Attack';
 
   if (opts.cardUid && !opts.takeDamage) {
-    // Provisional: any offered defense card stops the attack (starburst check = coverage TODO).
+    const bad = combatCardError(state, atk.defenderPlayerIdx, opts.cardUid, db, 'defend');
+    if (bad) return bad;
+
+    // If the card's defense is modelled, it has to stop THIS kind of attack.
+    // Cards whose text is not parsed yet are still allowed through: the engine
+    // does not know what they do, and refusing them would block legal play on
+    // the strength of missing data. An unmodelled defense is logged as such.
+    const stops = defenseStops(state, atk.defenderPlayerIdx, opts.cardUid, db);
+    if (stops.length > 0) {
+      const covers = stops.some((e) => (e.attackType ?? 'any') === 'any' || e.attackType === atk.attackType);
+      if (!covers) {
+        const name = db.get(state.players[atk.defenderPlayerIdx]!.zones.hand.find((x) => x.uid === opts.cardUid)!.cardId)?.name;
+        return `${name ?? 'That card'} does not stop ${atk.attackType} attacks`;
+      }
+    } else {
+      state.log.push('Defense card has no modelled stop — resolving it as a stop; verify by hand.');
+    }
+
     atk.stopped = true;
     // A defense card may also lock the attacker out for the whole combat.
-    for (const e of defenseStops(state, opts.cardUid, db)) {
+    for (const e of stops) {
       if (e.window === 'thisCombat') addLockout(state, c, atk.attackerPlayerIdx, e.attackType ?? 'any');
     }
-    discardAttackCards(state, atk, opts.cardUid);
+    discardAttackCards(state, atk, db, opts.cardUid);
     events.push({ type: 'attackResolved', successful: false, powerStages: 0, lifeCards: 0 });
     state.log.push(`${state.players[atk.defenderPlayerIdx]!.name} stops the attack.`);
     nextAttackPhase(state, events);
@@ -278,7 +392,7 @@ export function resolveDefense(
 
   // Take the damage -> attack is successful.
   atk.successful = true;
-  discardAttackCards(state, atk);
+  discardAttackCards(state, atk, db);
 
   // Life-card damage: energy attacks, or a physical attack that states a fixed
   // life-card amount ("causing 1 life card of damage").
@@ -357,7 +471,8 @@ function resolveLifeCardDamage(
 
   delete atk.enduranceOffer;
   const dealt = atk.lifeCardsDealt ?? 0;
-  events.push({ type: 'attackResolved', successful: true, powerStages: 0, lifeCards: dealt });
+  // An attack that overflowed dealt power stages AND life cards; report both.
+  events.push({ type: 'attackResolved', successful: true, powerStages: atk.powerStagesDealt ?? 0, lifeCards: dealt });
   applyIfSuccessful(state, atk.ifSuccessfulEffects, db, events, {
     userIdx: atk.attackerPlayerIdx,
     foeIdx: atk.defenderPlayerIdx,
@@ -468,16 +583,16 @@ export function resolveCapture(
 }
 
 /** stopAttack effects carried by the defense card that was just played. */
-function defenseStops(state: GameState, cardUid: string, db: CardDb) {
-  for (const p of state.players) {
-    for (const zone of ['hand', 'inPlay', 'discard'] as const) {
-      const inst = p.zones[zone].find((x) => x.uid === cardUid);
-      if (!inst) continue;
-      const abilities = db.get(inst.cardId)?.rules?.abilities ?? [];
-      return abilities.flatMap((a) => a.effects).filter((e) => e.kind === 'stopAttack');
-    }
-  }
-  return [];
+/**
+ * The stops a defender's card provides. Scoped to that player's HAND: this
+ * used to search every player and every zone including the discard pile, so a
+ * card the opponent had already thrown away could answer for the defense.
+ */
+function defenseStops(state: GameState, playerIdx: number, cardUid: string, db: CardDb) {
+  const inst = state.players[playerIdx]?.zones.hand.find((x) => x.uid === cardUid);
+  if (!inst) return [];
+  const abilities = db.get(inst.cardId)?.rules?.abilities ?? [];
+  return abilities.flatMap((a) => a.effects).filter((e) => e.kind === 'stopAttack');
 }
 /** Answer the redirect prompt: send the pending power-stage damage to a personality. */
 export function redirectDamage(state: GameState, toUid: string | null, ctx: CombatCtx, db: CardDb, events: GameEvent[]): string | undefined {

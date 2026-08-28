@@ -11,7 +11,11 @@
  * Special rules implemented per CRD:
  *   - If either personality has 'Z' power stages, the result is always 2.
  *   - The "D bracket" go-first rule uses `bracketOf`.
- *   - Bubbles' "Tuff Enuff only" fixed-3 rule is card-specific (handled in combat).
+ *
+ * NOT implemented: Bubbles' "Tuff Enuff only" fixed-3 rule. This comment used
+ * to say it was "handled in combat"; the word Bubbles appears nowhere else in
+ * the engine. A comment claiming coverage that does not exist is worse than no
+ * comment, because it stops anyone from looking.
  */
 import type { PowerRating } from '@dbz/shared';
 

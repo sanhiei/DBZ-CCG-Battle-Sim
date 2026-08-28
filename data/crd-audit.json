@@ -1,0 +1,829 @@
+{
+  "generated": "crd-conformance-audit",
+  "findings": [
+    {
+      "rank": 1,
+      "title": "Defense is never validated - any card id, including a nonexistent one, stops any attack, and the defense type is never matched to the attack type",
+      "area": "combat-sequence",
+      "areas": [
+        "combat-sequence",
+        "endurance-and-stops"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD:298 \"The card you are defending with must defend against the type of attack your opponent is performing.\" CRD:303-307 (correctly 304-308) enumerates the only five legal defenses (a starburst card from hand, a starburst Non-Combat in play, an MP effect, an effect from the Ally in control of Combat, or take the damage). CRD L793 \"the card must be able to stop that same kind of attack\"; glossary CRD L2525/L2549 define Energy Combat / Physical Combat cards as stopping their own kind of attack.",
+      "engineLocation": "packages/engine/src/combat.ts:265-277 (resolveDefense); defenseStops at combat.ts:471-481; packages/engine/src/reducer.ts:150 forwards cardUid unvalidated",
+      "defect": "resolveDefense does `if (opts.cardUid && !opts.takeDamage) { atk.stopped = true; ... }`. It never looks the card up, never checks that the defender owns it, never checks that it carries a stopAttack/defense ability or a starburst, and never compares `atk.attackType`. The card id is used purely as a key for the optional combat-long lockout lookup, and defenseStops (combat.ts:471-481) searches every player's hand, inPlay and discard rather than the defender's hand. reducer.ts:150 does no validation either.",
+      "consequence": "Verified at runtime: `resolveDefense(state, { cardUid: 'totally-made-up-uid' }, { actingPlayerIdx: 1 }, db, [])` returned no error and logged \"P1 stops the attack.\" Combined with rank 2 (nothing leaves hand), no attack ever has to land - a defender names any string and every attack in the game is stopped. Cross-type defense also works: Nappa's Energy Aura played against a PHYSICAL attack stops it and additionally locks the attacker out of all energy attacks for the rest of the combat. Defending is never a resource-matching decision.",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "combat.ts:265-266 is `if (opts.cardUid && !opts.takeDamage) {` / `    // Provisional: any offered defense card stops the attack (starburst check = coverage TODO).` followed by `atk.stopped = true;` - the comment is the engine admitting it. The uid is never resolved before the stop: the only lookup is defenseStops, and combat.ts:471-481 confirms it iterates `for (const p of state.players)` over `['hand', 'inPlay', 'discard']`, returns `[]` on a miss, and its result is only used for `if (e.window === 'thisCombat') addLockout(...)`. So a bogus uid falls through to `atk.stopped = true`. No ownership, starburst, or attack-type match anywhere - grep for `starburst` across packages and apps returns only two comments (combat.ts:266 and shared/abilities.ts:10), no code. No server-side validation either. CRD:298 and the five-option list at CRD:304-308 are quoted accurately (the range should be 304-308, not 303-307; line 303 is blank - immaterial). || Corroborated by the endurance-and-stops audit: the type is only consulted AFTER the stop, at combat.ts:269-271, purely to register the lockout; reducer.ts:150 is `err = resolveDefense(state, { ...(action.cardUid ? { cardUid: action.cardUid } : {}), ... })` with no validation, and grep of packages/server/src finds no defend validation. No test covers cross-type defense: lockout.test.ts:68-82 answers an energy attack with an energy stop and lockout.test.ts:94 uses an 'any' card. Data check confirms Nappa's Energy Aura parses to [{stopAttack, energy, thisCombat, all},{removeFromGameAfterUse}]."
+    },
+    {
+      "rank": 2,
+      "title": "Attack cards and defense cards are never discarded and never leave the player's hand",
+      "area": "combat-sequence",
+      "areas": [
+        "combat-sequence"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:364 battle-sequence step 16 \"The card used to perform the attack is now discarded unless the attack says otherwise.\" CRD:380 \"If you use a card from your hand to attack, you play it on the table from your hand, use the effects of the attack, and then discard it.",
+      "engineLocation": "packages/engine/src/combat.ts:225-227 - `function discardAttackCards(state, atk, defenseCardUid?): void { }` has an empty body (the comment says \"Provisional: log only\"); called at combat.ts:272 and combat.ts:281. packages/engine/src/reducer.ts:136-145 only calls findInstance to read the card's ability and never splices it out of hand.",
+      "defect": "Battle-sequence step 16 is a no-op. No code path in combat.ts or reducer.ts moves the attack card or the defense card from hand to discard.",
+      "consequence": "Verified at runtime: after a full attack-and-defend exchange the attacker's hand stayed at 2 cards with 0 in discard, and the defender's hand stayed at 5 with 0 in discard. One attack card can therefore be replayed in every Attack Phase for the entire game, and one defense card blocks every attack forever. It also breaks everything downstream of the discard pile: nothing accumulates for the Rejuvenation Step, and hand size never shrinks during combat.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "combat.ts:225-227 is literally `function discardAttackCards(state, atk, defenseCardUid?): void {` / `  // (Card instances live in hand/inPlay; a full impl moves them. Provisional: log only.)` / `}` - an empty body, and the compiled packages/engine/dist/combat.js:155-157 is identical, so this is what actually runs. It is the only step-16 hook, called at combat.ts:272 and combat.ts:281. reducer.ts:136-145 (the declareAttack case) does `const loc = findInstance(state, action.cardUid);` purely to read `cardId` for `firstAttackAbility` - no splice. The only splices in the reducer are `moveCard` (line 131) and `playAlly` (line 110), neither on the attack path. CRD:364 reads verbatim \"16) The card used to perform the attack is now discarded unless the attack says otherwise.\" No test asserts hand or discard size after an attack."
+    },
+    {
+      "rank": 3,
+      "title": "Power-stage damage in excess of the target's remaining stages is silently dropped instead of converting to life cards",
+      "area": "combat-sequence",
+      "areas": [
+        "combat-sequence",
+        "pat-and-damage",
+        "victory",
+        "dragon-balls",
+        "endurance-and-stops"
+      ],
+      "mergedFrom": 5,
+      "crdEvidence": "CRD L422 \"Power stages of damage are dealt by lowering your opponent's power stage ... What happens when that personality runs out of power stages? The remaining power stages are converted to life cards of damage.\" CRD L436 \"When a personality is at 0 and is dealt power stages of damage, those power stages of damage are converted into life cards of damage, and is considered both types of damage.\" CRD L579 \"Any power stages of damage converted into life cards of damage are still discarded from your Life Deck.\" CRD L157 lists it as a Survival Victory route: \"Your opponent discards one card from his Life Deck for each power stage of damage taken by a Personality when that Personality is at their lowest power stage.\" CRD L821 confirms the conversion happens as damage is dealt. CRD L358 (step 14) \"If the attack does 5 or more life cards of damage, the attacker may capture an opponent's Dragon Ball.\" CRD L1125 Endurance is used \"while you are taking damage from an unstopped attack.",
+      "engineLocation": "packages/engine/src/combat.ts:75-82 (loseStages, `p.stageIndex = Math.max(0, p.stageIndex - n)` at combat.ts:77), called from applyPowerStageDamage at combat.ts:242, which reports `{ type: 'attackResolved', successful: true, powerStages: dmg, lifeCards: 0 }` at combat.ts:243; the dead helper takeLifeCards sits at combat.ts:89; the life-card/Endurance/capture paths are only reachable from combat.ts:285-292 -> 314-337 -> 373-385",
+      "defect": "loseStages clamps the scouter at index 0 and throws away the surplus; it returns void so no caller could recover it. There is no conversion path anywhere in the engine (grep for convert/overflow in packages/engine/src returns nothing), and the resolution event hard-codes lifeCards: 0 for every physical attack. The helper written for the conversion, takeLifeCards (combat.ts:89), has no call sites in the repo. Every personality in the catalog has zeroStageIndex 0, so array index 0 really is the CRD's \"0 power stage\" and the clamp is exactly the CRD's overflow point.",
+      "consequence": "Verified at runtime against packages/engine/dist: a physical attack with base damage 6 against a personality sitting at stage 2 moved it to stage 0 and discarded ZERO life cards (life deck 27 -> 27, discard 0); the CRD requires 4 life cards. The consequences compound across five subsystems: a personality parked at 0 power stages is permanently immune to physical damage; the Survival-Victory route at CRD L157 can never remove a card, so a beaten-down opponent can never be decked by physical attacks and stalling at 0 stages becomes strictly correct play; because capture is gated on life cards actually discarded (combat.ts:374), a physical attack can never reach the 5-life-card Dragon Ball capture threshold; and the defender is never offered Endurance against an ordinary physical attack, so the entire 144-card Endurance pool only ever triggers against energy attacks and the handful of physicals printing a fixed life-card number.",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "Tried hard to find a conversion path and there is none. combat.ts:77 is exactly `p.stageIndex = Math.max(0, p.stageIndex - n);` - the surplus is never captured, and loseStages returns void. combat.ts:242-243 is `if (target) loseStages(target, dmg, db, events);` immediately followed by `events.push({ type: 'attackResolved', successful: true, powerStages: dmg, lifeCards: 0 });` - lifeCards is a literal 0. I grepped every `stageIndex =` write in packages/engine/src: combat.ts:77, abilities.ts:48/69, turn.ts:88/110/123, reducer.ts:112, setup.ts:44 - all clamp with Math.max/Math.min and none emit life cards. damage.ts contains zero occurrences of `stageIndex` or `powerStage`. CRD:422 reads verbatim \"What happens when that personality runs out of power stages? The remaining power stages are converted to life cards of damage.\" and CRD:436 and CRD:579 are quoted accurately. No test covers overflow: engine.test.ts only asserts `defStageBefore - defStageAfter === expected` in a case with headroom. || Corroborated independently by four other areas. pat-and-damage: verified all 571 personalities in data/cards.tts.enriched.json have zeroStageIndex 0, so setup.ts:43-44's `const zero = p?.zeroStageIndex ?? 0` makes index 0 the CRD's 0 power stage. victory: `grep -rn 'takeLifeCards'` over packages/ returns a single hit, its own definition at combat.ts:89, so the helper is dead; L157/L821 read as quoted. dragon-balls: the capture window at combat.ts:373-385 lives only on the life-card path in resolveLifeCardDamage, so it is unreachable from a PAT attack. endurance-and-stops: the Endurance gate is combat.ts:289 `if (lifeCards !== undefined) { dealLifeCardsAndFinish(...); return; }`, where lifeCards is only set for energy or a fixed `damageLifeCards` (combat.ts:285-288), so discardForDamageWithEndurance (damage.ts:153) is never reached; the catalog has 144 cards with a parsed endurance value."
+    },
+    {
+      "rank": 4,
+      "title": "Personality Powers are not implemented anywhere in the pipeline or the engine",
+      "area": "personality-powers",
+      "areas": [
+        "personality-powers"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:492 - \"Personality Powers are the effects in a personality's power box. A Personality Power can only be used during the Combat Step and is only used once per turn (unless the personality power says it can be used multiple times...), unless the character advances or loses a Personality level... You cannot use your MP's power when an Ally is in control of Combat and vice-versa.\" CRD:290 lists \"5. Use a Personality power\" as one of the seven things an Attack Phase can be spent on; CRD:307 lists it as a legal defense; CRD:374 covers attacks made from a Personality Power.",
+      "engineLocation": "packages/scraper/src/enrich-tts.ts:349 (`if (rules.text && (rules.type ?? type) !== 'Personality')`); packages/engine/src/abilities.ts:619-733 (parseAbility never returns `trigger:'personalityPower'`); packages/shared/src/protocol.ts:9-31 (Action union has no `usePersonalityPower`); packages/engine/src/reducer.ts:78-210 (no case handles one)",
+      "defect": "The enrichment step explicitly excludes cards whose type is 'Personality' from parseAbility, so all 571 personality cards in data/cards.tts.enriched.json carry `rules.text` and zero `rules.abilities`. parseAbility itself has only three branches - attack, defense, non-combat/onPlay - and can never emit the `personalityPower` trigger that packages/shared/src/abilities.ts:12 declares. There is no action a player can send to use a power, no code path in reducer.ts or combat.ts that reads one, and no per-turn usage counter on PersonalityInPlay (packages/shared/src/state.ts:45-66) or anywhere else in GameState, so the once-per-turn limit, the reset-on-level-change exception, and the \"MP's power is unusable while an Ally controls Combat\" restriction have no implementation to attach to.",
+      "consequence": "348 of 571 personality cards print a \"Power:\" and none of them do anything. Every MP in every game loses its card power entirely: Piccolo, the Trained cannot shut off an opponent's powers, Chi-Chi cannot stop a physical attack against Gohan, Dende cannot rebuild an Ally. Combat is reduced to hand cards plus the Final Physical Attack. Players who work around it by hand can also use the same power twice in one turn, or use the MP's power while an Ally holds Combat, with nothing objecting.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "I tried to find an implementation and could not. packages/scraper/src/enrich-tts.ts:349 reads `if (rules.text && (rules.type ?? type) !== 'Personality') {` - Personality cards are excluded from parseAbility by construction. parseAbility (packages/engine/src/abilities.ts:619-733) has exactly three return points: `{ trigger: 'attack', ... }`, `{ trigger: 'defense', ... }`, `{ trigger: 'onPlay', ... }`, then `return null` - 'personalityPower' is never emitted. Grepping the whole repo, `personalityPower` appears only at packages/shared/src/abilities.ts:12 (the union member) and its compiled .d.ts; zero uses. The Action union (packages/shared/src/protocol.ts:9-31) has no power-use action, and reducer.ts's switch (78-210) has no case for one; I also grepped for usePower/powerBox/cardPower across all packages - no hits. Counting the enriched data myself: 572 Personality records, 348 matching /power\\s*:/i, and with abilities 0. packages/shared/src/state.ts:45-66 defines PersonalityInPlay with uid/personalityName/alignment/levelCardIds/currentLevel/stageIndex/currentRating/anger/isAlly/inControlOfCombat - no per-turn usage counter. CRD:492 reads exactly as quoted. No test in packages/engine/src/*.test.ts touches personality powers. (Minor count correction: 572 Personality records, not 571.)"
+    },
+    {
+      "rank": 5,
+      "title": "The Discard Step never enforces the 1-card hand limit, for either player",
+      "area": "turn-structure",
+      "areas": [
+        "turn-structure"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:240-241 - \"6) Discard Step: If you are the Attacker and you have more than 1 card in your hand during this step, place all but 1 of your cards into the discard pile. ... you may have no more than 1 card in your hand at the end of this step. Your opponent does the same, right after you discard.",
+      "engineLocation": "packages/engine/src/reducer.ts:79-85; packages/engine/src/turn.ts:36-56",
+      "defect": "Neither the reducer's `advanceStep` case nor `advanceStep()` itself does anything when the step is or becomes `'discard'` - the step is a pure pass-through. There is no hand-size check anywhere in the engine or server: the only `hand.length` references in engine/server source are abilities.ts:157 (a card-effect discard) and a server test. Nothing trims either player's hand at end of turn.",
+      "consequence": "Both players accumulate cards without limit across turns. Hand size is the game's central resource constraint - every attack, defense, Drill and Non-Combat is paid for out of a hand that is supposed to be emptied to 1 card every single turn. Without it a player can bank a dozen cards and dump an unanswerable chain of attacks in one Combat Step, and the discard pile never fills, which in turn starves every discard-pile-based card effect.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD:241 reads \"...you may have no more than 1 card in your hand at the end of this step.  Your opponent does the same, right after you discard.\" Neither reducer.ts:79-85 nor turn.ts:36-56 touches the hand on `'discard'`. I grepped `hand.length|zones.hand` across engine+server non-test source: abilities.ts:157 (card-effect discard), noncombat.ts:48/51/57 (playing a card from hand), turn.ts:63 (draw), server/src/redact.ts:28 (view redaction) - that is all. A grep for `hand limit|handLimit|MAX_HAND|all but 1|all but one` across every package returns zero hits. Executed the engine: hands were [3, 0] at the discard step and [4, 0] after passing through discard and rejuvenation into the next turn - no trim. Cannot refute."
+    },
+    {
+      "rank": 6,
+      "title": "The Draw Step draws 1 card instead of 3",
+      "area": "turn-structure",
+      "areas": [
+        "turn-structure",
+        "victory"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD:214-215 - \"1) Draw Step / If you are the Attacker, draw 3 cards from the top of your Life Deck and put them in your hand.",
+      "engineLocation": "packages/engine/src/reducer.ts:81",
+      "defect": "The `advanceStep` case hardcodes a one-card draw: `if (state.step === 'draw') draw(state, state.activePlayerIdx, 1);`. The constant is 1, not 3. Nothing else in the codebase supplements it - `draw()` is called from only four places (reducer.ts:81, reducer.ts:87 for the manual `drawCards` action, combat.ts:64 with `PREPARE_DRAW = 3` for the defender's Prepare Phase, and abilities.ts:205 for card effects). Verified by running the built engine: on turn 2 the new attacker's hand went from 3 to 4, i.e. +1.",
+      "consequence": "The attacker draws one third of their legal hand every turn while the defender still draws a full 3 in the Prepare Phase. Card flow collapses, the attacker is starved of attacks and defenses, and Life Decks deplete at roughly a third of the correct rate - which directly distorts the Survival Victory clock, the way most real games end, and suppresses the anger and Dragon Ball routes that depend on drawing cards.",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD line 215 reads verbatim \"If you are the Attacker, draw 3 cards from the top of your Life Deck and put them in your hand.\" packages/engine/src/reducer.ts:81 reads `if (state.step === 'draw') draw(state, state.activePlayerIdx, 1);` - the literal is 1. I grepped every `draw(` call site in non-test source: abilities.ts:205 (card effects), combat.ts:64 (`draw(state, defender, PREPARE_DRAW)` with `const PREPARE_DRAW = 3` at combat.ts:40), reducer.ts:81, reducer.ts:87 (manual `drawCards`), and the definition at turn.ts:59. Nothing supplements the Draw Step. Executed the built engine (seed 42): entering the turn-2 Draw Step the new attacker's hand went 3 -> 4, i.e. +1. No test in packages/engine/src/*.test.ts asserts a 3-card Draw Step; engine.test.ts:93 only asserts the defender's Prepare-Phase draw of 3. Cannot refute. || Corroborated by the victory audit: no deliberate deviation is documented - docs/RULES-NOTES.md line 20 lists \"1. **Draw Step**\" with no count, while line 30 records \"Defender draws 3 cards into hand\" for the Prepare Phase. The full suite (128 tests) passes as written, so nothing pins the wrong number."
+    },
+    {
+      "rank": 7,
+      "title": "Drills in play never produce any game effect",
+      "area": "noncombat-drills",
+      "areas": [
+        "noncombat-drills"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:636 \"Drills are constantly in use for their game effects as long as they are in play, and may even create effects multiple times within a turn. You must use a Drill's ability even if you don't want to",
+      "engineLocation": "packages/engine/src/noncombat.ts:74-75 (`const drill = isDrill(...); const ability = drill ? undefined : ...find(a => a.trigger === 'onPlay')`); packages/shared/src/abilities.ts:14 (`'constant'` trigger declared)",
+      "defect": "playCard deliberately suppresses a Drill's parsed ability on entry, and nothing anywhere replaces it with continuous application. `trigger === 'constant'` is declared in the Ability union but is read by no engine code, and the enriched catalog contains 0 abilities with that trigger (census of data/cards.tts.enriched.json: onPlay 118, defense 329, attack 751, constant 0). The only reads of `zones.inPlay` in the whole engine are the Mastery test at damage.ts:137, the discard at drills.ts:43-45, playCard's own push/splice at noncombat.ts:58/84-86, and setup.ts:85 - none of them evaluate a Drill. Of the 263 Drill cards in the catalog, 28 carry an onPlay ability that is now dropped and 0 gain anything back.",
+      "consequence": "Every Drill is inert cardboard. Blue Holding Drill does not cap the opponent's Non-Combat plays, Chiaotzu's Drill does not reduce physical damage, Orange Energy Phasing Drill never applies - a player pays a card and a Non-Combat play for literally nothing, and Drill-based decks cannot function.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD:636 reads verbatim \"Drills are constantly in use for their game effects as long as they are in play... You must use a Drill's ability even if you don't want to\". packages/engine/src/noncombat.ts:74-75 is exactly as cited: `const drill = isDrill(card.cardId, db); const ability = drill ? undefined : db.get(card.cardId)?.rules?.abilities?.find((a) => a.trigger === 'onPlay');` - the ability is suppressed. I looked for the replacement and found none: grep for `constant` across packages/engine/src returns only packages/shared/src/abilities.ts:14 (`| 'constant'; // Drills / continuous`) and two lines in onplay.test.ts; no engine code branches on it. Every read of `zones.inPlay` in non-test engine code is damage.ts:137 (Mastery), drills.ts:43/45 (discard), noncombat.ts:58/84/86, setup.ts:85, and combat.ts:473 (a uid lookup for stopAttack) - none evaluates a Drill's ability. My own census of data/cards.tts.enriched.json reproduces the numbers exactly: triggers are {onPlay:118, defense:329, attack:751}, zero `constant`; 263 Drills by title/type, 28 of them carrying an onPlay ability. The one test that touches this, packages/engine/src/onplay.test.ts:189, asserts the opposite of the rule (`assert.equal(s.players[0]!.mp.anger, 2, 'its constant effect did not fire on play')`), so it locks the gap in rather than covering it."
+    },
+    {
+      "rank": 8,
+      "title": "Constant Combat Powers do not exist in the engine - the always-on half of every personality is inert",
+      "area": "personality-powers",
+      "areas": [
+        "personality-powers"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:495 - \"Constant Combat Powers have the words 'Constant Combat Power' as a header in the power box. These powers are constantly active and must be used whenever possible. You cannot use your MP's Constant Combat Power when an Ally is in control of Combat and vice-versa, unless the effect states otherwise.\" CRD:589 extends the same gating to Allies.",
+      "engineLocation": "packages/scraper/src/enrich-tts.ts:349; packages/engine/src/abilities.ts:619-733; packages/engine/src/combat.ts:152-213 and 252-311 (declareAttack / resolveDefense consult only the played card's ability, never the controlling personality)",
+      "defect": "200 personality cards in the enriched data carry \"Constant Combat Power\" in `rules.text` and none of them are parsed (same exclusion at enrich-tts.ts:349). Nothing in combat.ts ever looks at the personality in control of Combat for a continuous effect. declareAttack computes cost, base damage and modifiers purely from the attack card's ability (combat.ts:190-202), and resolveDefense applies no personality-sourced prevention (combat.ts:265-296).",
+      "consequence": "Android 17's \"Your anger level cannot be lowered\" does not protect him, so anger-drain cards work on him anyway. Android 16's \"every successful energy attack performed against Android 16 lowers your opponent's anger 1 level\" never fires. Master Roshi Lv.3's ally damage bonus and Gohan, the Protector Lv.2's \"your Allies cannot be removed from the game\" are absent. Roughly a third of the personality pool plays as a blank power box in both directions.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "Same exclusion gate at enrich-tts.ts:349 covers these too; my own count of data/cards.tts.enriched.json gives 200 Personality records whose rules.text matches /constant combat power/i and 0 with any parsed ability. I checked whether combat.ts consults the controlling personality anywhere and it does not: declareAttack derives everything from the passed-in card ability - combat.ts:201 is `attack.baseDamage = computeBaseDamage(attCtl.currentRating, defCtl.currentRating);` and the only ability call is `setupAttackAbility(state, ability, ...)` where `ability` comes from `firstAttackAbility(db.get(cardId))` in reducer.ts:190-196. resolveDefense (combat.ts:252-311) reads only `opts.cardUid` and `defenseStops(state, opts.cardUid, db)`; nothing looks up `controllerOf(...)`'s card power. CRD:495 matches the quote verbatim, and CRD:589 does say \"Allies cannot use their Personality Powers or Constant Combat Powers unless they are in control of Combat.\" One supporting detail is wrong but does not change the defect: Drills do NOT 'get a constant trigger' from the pipeline - `'constant'` appears only in a test fixture at onplay.test.ts:74; noncombat.ts:74-75 skips their onPlay ability rather than applying a constant one."
+    },
+    {
+      "rank": 9,
+      "title": "A defense card's non-stop secondary effects are silently discarded - only its stopAttack effects are read",
+      "area": "anger-and-levels",
+      "areas": [
+        "anger-and-levels",
+        "endurance-and-stops"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD.txt:334 - battle sequence step 6: \"Resolve all secondary effects from the defender's card or personality power.\" CRD L2029 prints Piccolo's Physical Defense as \"Stops a physical attack. Gain 4 power stages.\"; CRD L1633 prints Gohan's Energy Defense as \"Stops an energy attack. Raise your anger 1 level.",
+      "engineLocation": "packages/engine/src/combat.ts:265-277 and combat.ts:471-481 (defenseStops)",
+      "defect": "When the defender plays a card, `resolveDefense` sets `atk.stopped = true`, then calls `defenseStops(state, opts.cardUid, db)` - which at line 477 does `abilities.flatMap((a) => a.effects).filter((e) => e.kind === 'stopAttack')` - and uses those only to register combat-long lockouts. It then discards the card and moves to the next phase. No other effect on the defense card is ever executed; there is no call to applyOnPlay or any equivalent on the defense path, and `applyIfSuccessful` (abilities.ts:225-243) does not handle `changeAnger` either. 102 parsed abilities with `trigger:'defense'` in data/cards.tts.enriched.json carry a `changeAnger` effect.",
+      "consequence": "Defence cards deliver only their stop. Gohan's Energy Defense (\"Stops an energy attack. Raise your anger 1 level.\") stops the attack but grants no anger; Red Forearm Block's \"Raise your anger 1 level. Lower your opponent's anger 1 level.\" does neither; Piccolo's Physical Defense never grants its +4 power stages. Anger raises, power-stage gains, draws and rejuvenation printed on defences are all silently lost. Defending is a primary way anger is gained and lost in this game and none of it happens, so anger accumulates far more slowly than the CRD dictates and anger-denial defense cards are inert. removeFromGameAfterUse is ignored by the same filter, and because discardAttackCards (combat.ts:225-227) is an empty stub the card is never even removed from hand, so the same defence can be replayed against every attack for the whole game.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD.txt:334 reads \"6) Resolve all secondary effects from the defender's card or personality power.\" combat.ts:265-277 is the whole defense-card path: it sets `atk.stopped = true`, loops `for (const e of defenseStops(state, opts.cardUid, db))` only to `addLockout`, then discards and calls `nextAttackPhase`. defenseStops (combat.ts:471-481) throws the rest away at line 477: `return abilities.flatMap((a) => a.effects).filter((e) => e.kind === 'stopAttack');`. There is no applyOnPlay/applyIfSuccessful call anywhere on that path, and applyIfSuccessful (abilities.ts:225-243) handles only stopAttack, stunSkipNextPhase, rejuvenate, movePowerStage and discardCards - no changeAnger. I drove it through the real reducer with a card parsed exactly as the shipped Gohan's Energy Defense (`stopAttack` + `changeAnger user +1`): declareAttack then defend gave `defender anger before: 0 -> after: 0`, log only `P1 stops the attack.` The catalog counts check out - 102 abilities with trigger 'defense' carry a changeAnger effect, and Gohan's Energy Defense and Red Forearm Block parse exactly as described. No test in packages/engine/src/*.test.ts exercises defense-card secondary effects. || Corroborated by the endurance-and-stops audit with a second worked example: Piccolo's Physical Defense parses to [{stopAttack, physical, thisAttack},{changePowerStages, user, +4}] and the +4 never happens, and Nappa's Energy Aura's {removeFromGameAfterUse} is filtered away by the same line 477; combat.ts:225-227 is confirmed an empty stub, so the card stays in hand."
+    },
+    {
+      "rank": 10,
+      "title": "Damage modifiers and Empower are dropped entirely on life-card attacks, and Empower is applied as power stages rather than life cards",
+      "area": "combat-sequence",
+      "areas": [
+        "combat-sequence",
+        "pat-and-damage"
+      ],
+      "mergedFrom": 3,
+      "crdEvidence": "CRD:1102 \"Empower always appears as 'Empower X' ... the attack will do +X life cards, however any text that appears on the card after the Empower is deleted for that attack.\" CRD:346 battle-sequence step 10 \"Add and/or subtract any modifiers, from the attack, Drills, personality powers, etc., to the Base Damage.\" CRD:433 \"If an effect inside a card power modifies the damage from an attack, it is always added on top of the Base Damage of the attack, even if the attack doesn't deal the kind of damage that is being modified.\" Battle sequence step 2 (CRD:319) has the attacker announce Empower.",
+      "engineLocation": "packages/engine/src/combat.ts:285-292 (the life-card branch computes `atk.energyLifeCards ?? 4` or `atk.damageLifeCards` and returns early, never consulting `atk.empower`, `atk.modifiers` or `atk.ifSuccessfulStages`); combat.ts:296 adds `atk.empower` into the POWER-STAGE total for PAT physicals; declareEmpower at combat.ts:216-222",
+      "defect": "Step 10 of the battle sequence is skipped for every attack that deals life cards. Empower, which the CRD defines as +X life cards, is either ignored (life-card attacks) or added as the wrong damage type (physical attacks). The \"text after the Empower is deleted\" clause is not modelled anywhere.",
+      "consequence": "Verified at runtime: an energy attack with `empower = 3` and `modifiers = 2` dealt exactly 4 life cards and left the defender's stageIndex unchanged at 2 - 5 points of damage vanished. This hits real cards: 69 cards in data/cards.tts.enriched.json print Empower, and 5 cards parse as a bare energy attack plus a damageStages modifier (Android 20's Energy Burst +3, Orange Solar Flare +3, Orange Side Shot +2, Black Blasting Beam +2, Krillin's Destructo Disk +1) and every one of them deals a flat 4 life cards with the modifier discarded. Black Diving Energy Drop (\"Energy attack doing 5 life cards of damage. Empower 2.\") deals 5 instead of 7; Black Overhead Smack (Empower 3) deals 3 extra POWER STAGES instead of 3 life cards and its post-Empower text still resolves.",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "Verified both halves. abilities.ts:100-102 accumulates the modifier: `case 'damageStages': if (e.ifSuccessful) attack.ifSuccessfulStages += e.stages; else attack.modifiers += e.stages;`. combat.ts:285-292 then computes `atk.attackType === 'energy' ? atk.energyLifeCards ?? ENERGY_LIFE_CARDS : atk.damageLifeCards` and, if defined, calls `dealLifeCardsAndFinish(...)` and `return undefined;` - `atk.modifiers`, `atk.empower` and `atk.ifSuccessfulStages` are never read on that path. They appear only at combat.ts:296 `(atk.baseDamage ?? 0) + (atk.empower ?? 0) + (atk.modifiers ?? 0) + (atk.ifSuccessfulStages ?? 0)`, i.e. Empower is summed into POWER STAGES while CRD:1102 says \"the attack will do +X life cards\". CRD:346 and CRD:433 are quoted verbatim, and CRD:433's \"even if the attack doesn't deal the kind of damage that is being modified\" is precisely the case being dropped. I re-ran the data check against data/cards.tts.enriched.json: exactly 5 cards carry energyAttack + damageStages, and they are the 5 named ones with the stated values. || Corroborated by two pat-and-damage findings: combat.ts:220 is `atk.empower = Math.max(0, amount);` and a grep for /empower/i over packages/*/src shows exactly one read, combat.ts:296, assigned to `atk.pendingPowerStageDamage` at combat.ts:297 - power stages, not life cards; the deletion clause has no implementation site at all; the Empower count is exact (69 cards, verified by script) and Black Diving Energy Drop / Black Overhead Smack carry the quoted text; Orange Side Shot parses to [{energyAttack},{damageStages,2}] and Orange Solar Flare to [{energyAttack},{damageStages,3}]. No Empower test exists in packages/engine/src/*.test.ts."
+    },
+    {
+      "rank": 11,
+      "title": "PAT Base Damage and the damage target are frozen at attack declaration, before the defender announces who is in Control of Combat",
+      "area": "combat-sequence",
+      "areas": [
+        "combat-sequence",
+        "pat-and-damage",
+        "personality-powers"
+      ],
+      "mergedFrom": 3,
+      "crdEvidence": "CRD:328 battle-sequence step 4 \"If an Ally can take over Combat for the Main Personality, the Defender must announce which personality is in Control of Combat until this attack is resolved.\" CRD:343 step 9 \"Determine the Base Damage ... by consulting the Physical Attack Table\" - i.e. after steps 4-8. CRD:586 \"Whenever you enter the Defender Defends phase, you must choose which personality is in control of Combat. That personality must stay in control of Combat until the attack is resolved.\" CRD:576 damage may be redirected only \"to one of your personalities not in control of Combat.",
+      "engineLocation": "packages/engine/src/combat.ts:172-173 (`const defCtl = controllerOf(state.players[defenderIdx]!)`), combat.ts:181 (`defenderControllerUid: defCtl.uid`), combat.ts:186 (`resolutionStep: 5`) and combat.ts:200-202 (`attack.baseDamage = computeBaseDamage(attCtl.currentRating, defCtl.currentRating)`) all run inside declareAttack, before the defend prompt is raised at combat.ts:206-211; redirectTargets at combat.ts:229-232; takeControlOfCombat at combat.ts:493-503 has no in-attack guard",
+      "defect": "Steps 9 and 4 are collapsed into step 1. The defender is never given the step-4 choice - the attack jumps straight to resolutionStep 5 and prompts for a defense, and takeControlOfCombat is the only entry point. By the time the defend prompt exists both the PAT result and the damage target are already frozen on the attack object, and nothing recomputes them. takeControlOfCombat checks neither `state.combat.currentAttack` nor `state.pendingPrompt`, and reducer.ts:155-157 dispatches it unguarded, so the defender can switch controller mid-attack with no effect on the attack in flight.",
+      "consequence": "A defender can never put an Ally in Control of Combat in response to a declared physical attack, which is the core defensive use of Allies. A defender whose MP is beaten down to 0 stages cannot interpose a healthy Ally: the PAT is read off the MP's collapsed rating and the larger damage is already fixed. If the defender switches control anyway, the engine applies the damage to the personality that just gave up control (combat.ts:309 uses atk.defenderControllerUid) and offers the newly-controlling Ally as a redirect target, which CRD:576 forbids - the exact inverse of CRD:586.",
+      "severity": "timing",
+      "confidence": "high",
+      "verifiedBy": "Every cited line matches. Inside declareAttack: combat.ts:173 `const defCtl = controllerOf(state.players[defenderIdx]!);`, combat.ts:181 `defenderControllerUid: defCtl.uid,`, combat.ts:186 `resolutionStep: 5,` (the only assignment of resolutionStep in the repo outside its type declaration at shared/src/state.ts:130), and combat.ts:200-202 `if (kind === 'physical' && attack.baseDamage === undefined && ...) { attack.baseDamage = computeBaseDamage(attCtl.currentRating, defCtl.currentRating); }` - all before the prompt is raised at combat.ts:206-211. Both values are then frozen on the attack object and used downstream at combat.ts:296 (baseDamage), combat.ts:299 and 309 (`atk.defenderControllerUid`). I verified the secondary point: takeControlOfCombat at combat.ts:493-503 guards only `!ally` and `player.mp.stageIndex > 1` - no check on `c.currentAttack`, none on state.pendingPrompt - and reduce() has no global pending-prompt gate (declareAttack and passPhase check it individually; the takeControlOfCombat case at reducer.ts:155-157 does not), so it is dispatchable with the defend prompt open. I checked for a recompute: grep shows baseDamage is written only at combat.ts:200-202 and abilities.ts:94/97, and read only at combat.ts:296. redirectTargets (combat.ts:229-232, `.filter((per) => per.uid !== controllerUid)`) filters on the stale uid, so the new controller is offered as a redirect target. grepping combat.ts for 'announce' returns only the Empower comment at line 215 - there is no step-4 control prompt. CRD:328, CRD:343 and CRD:576 are verbatim; the L590 pointer in one source finding drifted - the Defender-Defends sentence is at CRD:586. Confidence raised to high: three independent audits reached the same conclusion, one of them line-by-line on the dispatch path."
+    },
+    {
+      "rank": 12,
+      "title": "Control of Combat is never released - no return to the MP at end of Combat, no loss when the MP leaves its bottom 2 stages, and no way to hand control back",
+      "area": "combat-sequence",
+      "areas": [
+        "combat-sequence",
+        "personality-powers"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD:604 \"The control of Combat always returns to the MP at the end of Combat.\" CRD:589 \"When your Ally takes control of Combat from your MP, it remains in control as long as your MP is still at its bottom 2 power stages or until you have another personality take control of Combat.\" CRD:586 \"You may choose to keep the current Ally in control of Combat, or have another personality take control of Combat.",
+      "engineLocation": "packages/engine/src/combat.ts:493-503 (takeControlOfCombat), combat.ts:110-114 (endCombatStep deletes state.combat and state.pendingPrompt only), packages/engine/src/turn.ts:39-45 (advanceStep deletes state.combat only); `inControlOfCombat` is written at combat.ts:499-500 and cleared nowhere else; flag declared on PersonalityInPlay at packages/shared/src/state.ts:65",
+      "defect": "The flag lives on PersonalityInPlay inside `player.allies`, not on CombatState, so dropping `state.combat` does not release it. Nothing re-checks the MP's stage after the initial guard at combat.ts:498, so control is not returned when the MP powers back up above its bottom 2 stages. takeControlOfCombat resolves its target with `player.allies.find(...)` and returns 'not your ally' otherwise, so the MP's uid is rejected and control can never be handed back by any action.",
+      "consequence": "Verified at runtime: after an Ally took control and both players passed to end the Combat Step, `players[0].allies[0].inControlOfCombat` was still true with `state.combat` undefined. The first time an Ally takes control, it controls Combat permanently for the rest of the game. Next turn the MP powers up to full and still does not fight: controllerOf (combat.ts:52) keeps feeding the Ally's power rating to the PAT on both attack and defense, all attack damage keeps landing on the Ally by default, redirectTargets (combat.ts:229-232) excludes the Ally instead of the MP, and changeControllerStages/moveControllerToEnd (abilities.ts:41, 67) point every \"lose/gain power stages\" card at the Ally - including Non-Combat cards resolved in the Non-Combat Step, when no combat exists at all.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "The flag is on the personality, not on combat state: packages/shared/src/state.ts:65 `inControlOfCombat?: boolean;` on PersonalityInPlay. Grepping `inControlOfCombat` across packages/*/src gives five hits: reads at abilities.ts:41, abilities.ts:67, combat.ts:52, the declaration at shared/src/state.ts:65, and the only writes, combat.ts:499-500 `for (const a of player.allies) delete a.inControlOfCombat; ally.inControlOfCombat = true;` - the only clear is the one inside takeControlOfCombat that makes room for a new controller. endCombatStep is combat.ts:110-114 and its body is `delete state.combat; delete state.pendingPrompt; advanceStep(...)`; turn.ts:39-45 is `if (next === 'draw') { ... delete state.combat; delete state.skipCombatThisTurn; }` - neither touches any personality. takeControlOfCombat guards once at combat.ts:498 (`if (player.mp.stageIndex > 1) return 'MP must be at its bottom 2 power stages';`) and controllerOf (combat.ts:52, `player.allies.find((a) => a.inControlOfCombat) ?? player.mp`) never re-checks it. Handing control back is impossible: combat.ts:496 is `const ally = player.allies.find((a) => a.uid === personalityUid); if (!ally) return 'not your ally';` - the MP's uid is not in `allies`. I also grepped for allies.splice/allies.filter/removeAlly and found no ally-removal code at all, so CRD:589's \"If an Ally has taken control of Combat, and then it leaves play ... the MP immediately takes control of Combat again\" has nothing behind it either. CRD:604 reads verbatim \"The control of Combat always returns to the MP at the end of Combat.\" (One consequence in a source finding overreaches: personality powers are not executed at all, so that sub-effect is moot. The defect itself stands.) No test covers any of it."
+    },
+    {
+      "rank": 13,
+      "title": "The Declare Step is a no-op - entering Combat is mandatory",
+      "area": "turn-structure",
+      "areas": [
+        "turn-structure"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:232-233 - \"4) Declare Step: In this ste you declare if you are going to enter Combat with your opponent. If you choose not to declare Combat skip the Combat Step and go to the Discard Step.",
+      "engineLocation": "packages/engine/src/turn.ts:36-56 (with packages/shared/src/protocol.ts:9-31)",
+      "defect": "`advanceStep` walks `STEPS` unconditionally; the only branch that can skip the Combat Step is `if (next === 'combat' && state.skipCombatThisTurn)` (turn.ts:47), and `skipCombatThisTurn` is set from exactly one place - playing a Location/Battleground (noncombat.ts:62-65). There is no action in the `Action` union (protocol.ts:9-31) for declaring or declining Combat, and no field on `GameState` (state.ts:165-191) recording whether Combat was declared. So the `declare` step consumes one `advanceStep` and always falls through into `combat`.",
+      "consequence": "The attacker can never choose to skip Combat. Declining Combat is a normal, frequent line of play - you skip to avoid a bad Physical Attack Table matchup, to deny the defender their free 3-card Prepare-Phase draw, or to earn the Rejuvenation. The engine forces the defender's 3-card draw and a full Combat Step on every single turn of the game.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD:233 reads \"In this ste you declare if you are going to enter Combat with your opponent.  If you choose not to declare Combat skip the Combat Step and go to the Discard Step.\" turn.ts:36-56 walks STEPS unconditionally; the sole skip branch is turn.ts:47 `if (next === 'combat' && state.skipCombatThisTurn)`. I grepped `skipCombatThisTurn` across all packages: the only writer in source is noncombat.ts:63 `state.skipCombatThisTurn = true;` (the Location/Battleground path), plus the clear at turn.ts:44. The Action union at protocol.ts:9-31 has no declare/decline-combat member, and a repo-wide grep for `declareCombat|declineCombat|combatDeclared` returns nothing. I read GameState at state.ts:165-191 - there is no field recording a declaration. Executed the engine: every turn ran declare -> combat with `beginCombat` firing. Cannot refute."
+    },
+    {
+      "rank": 14,
+      "title": "The active player can end the Combat Step unilaterally with `advanceStep`, and combat state leaks into later steps",
+      "area": "turn-structure",
+      "areas": [
+        "turn-structure"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:279 - \"The Attacker gets the first Attack Phase. After his Attack Phase is over, the Defender gets his own Attack Phase. ... This continues until both the Attacker and Defender choose to pass in back-to-back Attack Phases. When that happens - the Combat Step ends.",
+      "engineLocation": "packages/engine/src/turn.ts:36-56 (with packages/engine/src/combat.ts:161-165 and packages/server/src/room.ts:281)",
+      "defect": "`advanceStep` has no guard on `state.combat`: from `step === 'combat'` it computes `next = 'discard'` and sets it. Because `delete state.combat` only runs on the wrap into `'draw'` (turn.ts:39-45), `state.combat` survives into the Discard and Rejuvenation Steps. The proper exit, `endCombatStep` (combat.ts:110-114), deletes `combat` first - `advanceStep` does not. The server permits this: `authorize` only checks `state.activePlayerIdx !== seatIdx` for `advanceStep` (room.ts:281), and the client's Advance-step button is enabled whenever it is your turn and no prompt is pending (Board.tsx:188). Separately, `declareAttack` guards on `state.combat` and `phasePlayerIdx` (combat.ts:161-165) but never on `state.step`.",
+      "consequence": "The attacker attacks once, then presses Advance step and the Combat Step ends - the defender never gets the Attack Phase the rules guarantee them, and gets no chance to pass consecutively. The stale `combat` object then lets attacks continue to be declared and resolved during the Discard and Rejuvenation Steps, and `combat` is finally torn out from under any attack still in progress when the turn wraps.",
+      "severity": "timing",
+      "confidence": "high",
+      "verifiedBy": "CRD:279 reads \"...This continues until both the Attacker and Defender choose to pass in back-to-back Attack Phases. When that happens - the Combat Step ends.\" turn.ts:36-56 has no `state.combat` guard, and `delete state.combat` only runs inside the `if (next === 'draw')` wrap at turn.ts:39-45. declareAttack's guards at combat.ts:161-165 (`if (!c) return 'not in combat'` ... `if (ctx.actingPlayerIdx !== c.phasePlayerIdx)`) are exactly at the cited lines and none of them checks `state.step`. Server authorize at room.ts:281 is `if (action.type === 'advanceStep' && state.activePlayerIdx !== seatIdx) return 'not your turn';` - nothing more - and Board.tsx:188 is `<button disabled={!myTurn || !!prompt} onClick={onAdvanceStep}>` (packages/client/src/components/Board.tsx). Executed the engine: `advanceStep` during combat returned no error, left step='discard' with `combat` still set, and a following `declareAttack` in the Discard Step succeeded with an attack in progress. One citation drifts: `endCombatStep` is at combat.ts:110-114, not 104-108 (104-108 is `nextAttackPhase`) - but combat.ts:111 is still `delete state.combat;` before `advanceStep`, so the contrast holds and the primary location is exact. Cannot refute."
+    },
+    {
+      "rank": 15,
+      "title": "Non-Combat cards resolve and are discarded in the Non-Combat Step instead of being used in the Combat Step",
+      "area": "noncombat-drills",
+      "areas": [
+        "noncombat-drills"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:629 \"They are played in front of you during your Non-Combat Step, and they remain face up on the table until they are used\"; CRD:632 \"Generally, you use a this card in your Attack Phase in the Combat Step, then you discard them from play\"; CRD:288 \"Use a Non-Combat card for its effects and then discard it after use\" (an Attack Phase option); CRD:305 \"Use one of your Non-Combat cards in play if that card has a starburst on it\" (a defender option)",
+      "engineLocation": "packages/engine/src/noncombat.ts:76-93 (resolves the onPlay ability immediately, then splices the card out of inPlay into discard/removed at lines 83-92)",
+      "defect": "The card's effect fires the instant it is placed, two steps before Combat, and a type 'Non-Combat' card is then moved out of play in the same call. Nothing in combat.ts can use a card sitting in inPlay: declareAttack (combat.ts:152-215) looks up `firstAttackAbility` (trigger 'attack'), resolveDefense (combat.ts:252-310) never calls applyOnPlay, and `applyOnPlay` is invoked from exactly one place - noncombat.ts:78. So the Attack-Phase and starburst-defense use windows do not exist, and CRD:766's requirement that a \"____ only\" Non-Combat be used while a matching personality is in control of Combat can never be evaluated.",
+      "consequence": "Timing-sensitive Non-Combat cards are worth less or more than printed. The 33 catalog effects of the form movePowerStage{user,'highest'} fire before the Power-Up Step, so the MP is already at the top of its ladder when powerUp() runs (turn.ts:88 clamps at `ratings.length - 1`) and the entire PUR gain is thrown away; used correctly in the Attack Phase the same card would restore stages spent on energy attacks and damage taken. Conversely, an opponent's \"remove a Non-Combat card in play\" effect has nothing to target, because the card is already in the discard pile before Combat begins.",
+      "severity": "timing",
+      "confidence": "high",
+      "verifiedBy": "CRD:632 is verbatim (\"Generally, you use a this card in your Attack Phase in the Combat Step, then you discard them from play\"), as are CRD:288 and CRD:305; the \"remain face up on the table until they are used\" quote is at CRD:628, not 629 as cited - an off-by-one on a blank line, not a misquote. noncombat.ts:76-93 is exactly as described: applyOnPlay at line 78, then `if (type === 'Non-Combat')` at 83 splices the card out of inPlay into `removed`/`discard` at 86-88. STEPS (state.ts:6-14) orders nonCombat before powerUp, and turn.ts:88 is indeed `p.stageIndex = Math.max(0, Math.min(p.stageIndex + delta, ratings.length - 1));`, so a raise-to-highest that fires at play time is erased by the clamp before powerUp adds PUR. applyOnPlay is called from exactly one site (grep: abilities.ts:174 definition, noncombat.ts:78 call). Two corrections that do not change the verdict: the count is 33 onPlay `movePowerStage{user,'highest'}` effects, not 36 (46 across all triggers); and combat.ts:471-478 `defenseStops` does search `inPlay` by uid, so a card in play can be offered to `defend` - but resolveDefense (combat.ts:252-311) never calls applyOnPlay, so the starburst use window really is absent."
+    },
+    {
+      "rank": 16,
+      "title": "Dragon Balls can never enter play, so nothing populates `dragonBalls` and no Dragon Ball rule is reachable",
+      "area": "dragon-balls",
+      "areas": [
+        "dragon-balls",
+        "victory",
+        "noncombat-drills"
+      ],
+      "mergedFrom": 3,
+      "crdEvidence": "CRD L164: \"You win the game the moment you control all 7 Dragon Balls of the same set.\" CRD L219: \"If you are the Attacker, you may now play Allies, Non-Combats, Locations, Battlegrounds and Dragon Balls from your hand during this step... If you play a Dragon Ball, you do what it tells you to right after you play it\". CRD L669: \"You gain control of Dragon Balls by playing them from your hand in front of you, and by capturing them from your opponent.\" CRD L666: \"If you get the last of the 7 Dragon Balls by playing it, you win.",
+      "engineLocation": "packages/engine/src/noncombat.ts:27 (`PLAYABLE_IN_PLAY`) and the rejection at noncombat.ts:52-55; the success path at noncombat.ts:58; consumers packages/engine/src/damage.ts:97-99 and packages/engine/src/victory.ts:46; initialiser packages/engine/src/setup.ts:78; the only writer packages/engine/src/damage.ts:111-112 (captureBall)",
+      "defect": "`PLAYABLE_IN_PLAY = new Set(['Non-Combat', 'Drill', 'Location', 'Battleground'])` omits 'Dragon Ball', and db.type() returns rules.type verbatim (loader.ts:57-59), so `playCard` returns \"...is a Dragon Ball card and does not enter play in the Non-Combat Step\" for every real Dragon Ball. Even the success path pushes the instance into `player.zones.inPlay` (noncombat.ts:58), never into `player.dragonBalls` - the array victory.ts:46 iterates. No other action can put one into play: protocol.ts:9-31 has only `playCard` and `playAlly`, and `moveCard` cannot target `dragonBalls` because it is not a Zone (state.ts:18-25). A repo-wide grep shows the only write to `dragonBalls` outside `setup.ts:78` (`dragonBalls: []`) is `to.dragonBalls.push(ball!)` in `captureBall` (damage.ts:112), which first requires the ball to already be in the opponent's `dragonBalls`. Since both players start empty and nothing ever seeds it, the array is empty for the entire game.",
+      "consequence": "A Dragon Ball deck is completely inert. All 53 Dragon Ball cards in the catalog are unplayable dead cards that can only be discarded. `checkVictory`'s Dragon Ball branch (victory.ts:113-116) can never see a non-zero count, `deferDragonVictory` can never fire, and the 5+ life-card capture prompt never appears because `capturableBalls` (damage.ts:97-99) always returns []. One of the game's three victory conditions cannot occur - the only way to hold seven is to capture all seven from an opponent who himself can never put one into play.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "Tried hard to find a second path and there is none. packages/engine/src/noncombat.ts:27 is literally `const PLAYABLE_IN_PLAY = new Set(['Non-Combat', 'Drill', 'Location', 'Battleground']);` and :53 rejects anything else with `return `...is a ${type} card and does not enter play in the Non-Combat Step``. packages/engine/src/loader.ts:57-59 is `type(id) { return this.byId.get(id)?.rules?.type ?? 'Unknown'; }` - no canonicalisation, despite commit 0998d62's title. In data/cards.tts.enriched.json 53 cards carry rules.type === 'Dragon Ball', including tts-fcd37d11-14 'Earth Dragon Ball 1' and tts-f71532b6-38 'Dende Dragon Ball 1', so the rejection fires for every real ball. packages/engine/src/reducer.ts:98-99 shows `playCard` is the only hand-to-play route; `moveCard` (reducer.ts:128-133) can only target `zones`, and `dragonBalls` is a sibling field of `zones` (packages/shared/src/state.ts:90), absent from ZONES at state.ts:18-25. A repo-wide grep for `dragonBalls` outside tests returns only setup.ts:78 (`dragonBalls: [],`), damage.ts:111-112 (captureBall), damage.ts:82/98, victory.ts:46, combat.ts:447 and a client read at packages/client/src/components/Board.tsx:48. protocol.ts has no play-a-Dragon-Ball action (only `captureDragonBall` at protocol.ts:26). CRD L219 and L669 read exactly as quoted. Three independent audits (victory, dragon-balls, noncombat-drills) reached the identical conclusion; the only discrepancy between them was a card count (53 is correct, not 44)."
+    },
+    {
+      "rank": 17,
+      "title": "Stop effects riding on attack cards never take effect - they are routed to \"if successful\" and only logged",
+      "area": "endurance-and-stops",
+      "areas": [
+        "endurance-and-stops"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L2560 glossary: secondary effects exclude \"anything that stops an attack\", and CRD L405 limits \"If successful\" effects to text that \"start[s] with the words 'If successful.'\" CRD L2403 prints Vegeta's Jolting Slash as \"Energy attack. Stop all physical attacks performed against villains for the remainder of Combat.\" - no success condition anywhere.",
+      "engineLocation": "packages/engine/src/abilities.ts:124-128 (default branch pushes stopAttack to `leftover` -> `attack.ifSuccessfulEffects`) and abilities.ts:232-233 (applyIfSuccessful), consumed at packages/engine/src/combat.ts:361",
+      "defect": "setupAttackAbility's switch has no case for `stopAttack`, so it falls to the default at line 124-125 and lands in attack.ifSuccessfulEffects. applyIfSuccessful then does nothing but `state.log.push('Effect: stops a ... attack (...)')` at abilities.ts:233 - no lockout is registered, no window is scheduled. Worse, combat.ts:265-277 (the stopped branch) never calls applyIfSuccessful at all, so if the attack is stopped the rider is not even logged.",
+      "consequence": "Vegeta's Jolting Slash parses to effects including {stopAttack, physical, thisCombat, all} and that clause does nothing: the opponent keeps making physical attacks all combat. 46 attack cards in data/cards.tts.enriched.json carry a parsed stopAttack rider and every one of them is inert.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "setupAttackAbility's switch (abilities.ts:90-127) has cases only through 'discardCards'; abilities.ts:124-125 is `default:` / `leftover.push(e); // stopAttack/stun/etc. -> resolve on success (coverage grows)` and abilities.ts:128 `if (leftover.length) attack.ifSuccessfulEffects = leftover;`. applyIfSuccessful then does exactly one thing for that kind at abilities.ts:233: `if (e.kind === 'stopAttack') state.log.push(...)` - no addLockout, no state written. And the stopped branch of resolveDefense (combat.ts:265-277) returns via nextAttackPhase without ever calling applyIfSuccessful, so on a stop it is not even logged. The riders really do land there: abilities.ts:681 `for (const s of defenseEffects) if (s.kind === 'stopAttack') effects.push({ ...s, window: s.window ?? 'nextPhase' });` inside the attack branch. CRD L2560 is verbatim (\"The following are NOT secondary effects: costs, Endurance, \\\"if successful\\\" effects, attacks, anything that stops an attack\"), L405 verbatim, and L2403 prints Jolting Slash with no success clause. My own count of the enriched catalog gives exactly 46 cards with an attack-trigger stopAttack."
+    },
+    {
+      "rank": 18,
+      "title": "\"If successful\" anger changes are applied at attack declaration, before the defender can stop the attack",
+      "area": "anger-and-levels",
+      "areas": [
+        "anger-and-levels"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD.txt:322 - step 3 resolves secondary effects, and \"This does not include ... effects with the clause 'If successful' attached to it\"; CRD.txt:361 - step 15: \"Any 'If successful' effects that the attacker has are resolved.",
+      "engineLocation": "packages/engine/src/abilities.ts:474-512 (pushAnger) and abilities.ts:104-110 (setupAttackAbility); called from packages/engine/src/combat.ts:190",
+      "defect": "`pushAnger` never inspects the \"If successful\" qualifier - it emits a bare `{kind:'changeAnger', target, delta}` with no `ifSuccessful` flag (unlike `damageStages`, which does carry one and is honoured at abilities.ts:101). `setupAttackAbility` then executes every `changeAnger` immediately in its switch (lines 104-110), and combat.ts:190 calls setupAttackAbility inside `declareAttack` - before `resolveDefense` runs at combat.ts:252.",
+      "consequence": "Declaring the attack is enough. The defender stops it with a defense card and still gains 6 anger from Straining Jump Kick Move, still advances a personality level, still has all their Drills discarded (turn.ts:127). Conversely a card like Majin Vegeta's Frantic Attack gives the attacker their anger whether or not the attack lands. 44 cards in data/cards.tts.enriched.json pair \"If successful\" with an anger clause. The test suite pins the wrong behaviour: missing-effects.test.ts:49 asserts that \"Physical attack. If successful. Lower your anger 3 levels.\" produces an ungated `{kind:'changeAnger', target:'user', delta:-3}`.",
+      "severity": "timing",
+      "confidence": "high",
+      "verifiedBy": "CRD.txt:322 and :361 say what is claimed (step 3 excludes \"effects with the clause 'If successful' attached to it\"; step 15 resolves them). pushAnger (abilities.ts:474-512) never reads the qualifier - its only emit sites are line 497 `effects.push({ kind: 'changeAnger', target, delta: 0, toZero: true });` and line 510 `effects.push({ kind: 'changeAnger', target, delta: lowers ? -amount : amount });`, neither carrying a flag; shared/src/abilities.ts:32 has no `ifSuccessful` field on `changeAnger` while line 29 `{ kind: 'damageStages'; stages: number; ifSuccessful?: boolean }` does, and abilities.ts:101 honours it. setupAttackAbility's `case 'changeAnger'` (abilities.ts:104-111) executes unconditionally and never falls into the `leftover` branch at line 125, so `attack.ifSuccessfulEffects` (line 128) never receives it. combat.ts:190 `if (ability) setupAttackAbility(...)` runs inside declareAttack, and resolveDefense (combat.ts:252) can only be reached afterwards. Runtime probe on the shipped Straining Jump Kick Move text parsed to `[{kind:'physicalAttack',lifeCards:7},{kind:'changeAnger',target:'foe',delta:6}]`; after setupAttackAbility alone the defender's MP had already advanced to level 2 and `atk.ifSuccessfulEffects` was `undefined`. (One narration nit: anger reads 0 rather than 6 after the probe because advanceLevel zeroes it at turn.ts:120 - the effect still fired at declaration, which is the defect.) missing-effects.test.ts:49-50 does pin the ungated shape."
+    },
+    {
+      "rank": 19,
+      "title": "Battle-sequence step 7 (Defense Shields) is skipped entirely",
+      "area": "combat-sequence",
+      "areas": [
+        "combat-sequence",
+        "endurance-and-stops"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD:337 battle-sequence step 7 \"If the attack was not stopped, the defender must now activate any Defense Shields from his cards in play.\" CRD:340 step 8 then makes the attack successful. CRD:2519 \"Defense Shield: A card power that is activated when you do not stop an opponent's attack. Defense Shields attempt to stop the first unstopped attack.\" CRD:2283 confirms shields still work while the controller is Stunned.",
+      "engineLocation": "packages/engine/src/combat.ts:279-311 - resolveDefense goes straight from `atk.successful = true` (combat.ts:280) to computing damage; the file header at combat.ts:10-11 documents \"Not yet: ... Defense Shields\"; the parsed `firstSuccessful` window is declared at packages/shared/src/abilities.ts:41 and produced at abilities.ts:403/423",
+      "defect": "Nothing scans the defender's inPlay zone between the defense choice and success. defenseStops - the only inPlay scan in the file - is called on the STOPPED branch at combat.ts:269, never on the successful one, and CombatState has no per-combat shield-used tracking. Defense Shield cards also parse as ordinary defense cards: Majin Defense Drill (\"Defense Shield: Stops the first unstopped attack performed against you each Combat\") parses to {trigger:'defense', effects:[{stopAttack, any, thisAttack}]}, a hand-played defense, and it sits in inPlay where nothing reads it.",
+      "consequence": "The whole Defense Shield card class is inert - 36 cards in the enriched catalog reference Defense Shield and none of them ever fire. Per the CRD's own errata these are real, printed cards: Fall 7 Times Get Up 8 Times (CRD:1566), Fortify Your Spirit (CRD:1578), It's The Little Things That Matter (CRD:1762), T-Rex Defense (CRD:2326), Majin Defense Drill - each of which should stop the first unstopped attack of a Combat and instead does nothing. A player with any of them in play takes the first unstopped attack of every combat at full damage.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "Verified line by line: combat.ts:279-292 runs `atk.successful = true;` then `discardAttackCards(state, atk);` then straight into the lifeCards computation - there is no read of the defender's inPlay zone anywhere between the defense choice and success, and defenseStops is called on the STOPPED branch at combat.ts:269 only; damage.ts:137 reads inPlay solely for a Mastery. CombatState (state.ts:133-150) has no shield tracking. combat.ts:10 still says \"Not yet: Endurance, Defense Shields, ...\" (stale on Endurance, accurate on shields). CRD:337, CRD:340 and CRD:2519 read verbatim as quoted, and the errata cards check out exactly (CRD:1566, CRD:1578, CRD:1762, CRD:2326, plus CRD:2283 on Stunned controllers). IMPORTANT correction to one source write-up before anyone scopes the fix: grep for \"shield\" does NOT return nothing - packages/shared/src/cards.ts:83 lists 'Defense Shield' in KEYWORDS - and the Effect union DOES have a shield encoding, `stopAttack` with `window: 'firstSuccessful'` (shared/abilities.ts:41, commented \"firstSuccessful = the first that gets through\"), which the parser actively produces at abilities.ts:403 and abilities.ts:423 and which a passing test covers (stopwindow.test.ts:72-75). So this is purely an execution gap in combat.ts, not a missing representation - the parsed `firstSuccessful` window is never consulted by any combat code. Data confirms 36 cards mention Defense Shield and Majin Defense Drill is type 'Non-Combat' with abilities [{trigger:'defense', effects:[{stopAttack, any, thisAttack}]}]."
+    },
+    {
+      "rank": 20,
+      "title": "The first turn's Draw Step never happens - the opening attacker starts and stays at 0 cards",
+      "area": "turn-structure",
+      "areas": [
+        "turn-structure"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:214-215 - the Draw Step is step 1 of every turn, including the first; CRD:212 - \"If you are the Attacker, you go through all 5 steps of a turn",
+      "engineLocation": "packages/engine/src/reducer.ts:80-81 (with packages/engine/src/setup.ts:135)",
+      "defect": "The draw is performed as a side effect of *transitioning into* the Draw Step: `advanceStep(state, events); if (state.step === 'draw') draw(...)`. But `createGame` returns a state that is already `step: 'draw'` (setup.ts:135) without ever drawing, and there is no starting hand - `emptyZones()` (setup.ts:26) leaves `hand: []`. The first `advanceStep` moves draw->nonCombat, so the predicate is false and no draw ever fires for turn 1.",
+      "consequence": "The player who goes first plays their entire first turn with an empty hand: no Non-Combat cards, no Allies, no Drills, and in the Combat Step nothing to attack or defend with. They can only pass, so the opening turn is a guaranteed no-op and the D-Power first-player rule is inverted into a penalty.",
+      "severity": "timing",
+      "confidence": "high",
+      "verifiedBy": "The draw is a transition side effect: reducer.ts:80-81 is `advanceStep(state, events); if (state.step === 'draw') draw(...)`. setup.ts:135 returns `step: 'draw',` from `createGame` with no draw performed, and setup.ts:26 `emptyZones()` returns `hand: []`, so there is no starting hand. The first `advanceStep` moves draw->nonCombat, so the predicate never fires on turn 1. I checked for an opening draw outside the engine too: packages/server/src/room.ts:209 `this.state = createGame({ seed: this.seed, players }, this.db);` and `start()` does nothing else. Executed the built engine (seed 42): INITIAL step=draw handActive=0, then nonCombat/powerUp/declare/combat/discard/rejuvenation all with handActive=0 - the turn-1 attacker held 0 cards through the entire turn while the defender got 3 from the Prepare Phase. CRD:211 confirms the attacker goes through all the steps. Cannot refute."
+    },
+    {
+      "rank": 21,
+      "title": "Final Physical Attack is not implemented - the state field exists and is read, but nothing ever sets it",
+      "area": "combat-sequence",
+      "areas": [
+        "combat-sequence",
+        "pat-and-damage"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD:291 lists \"6. Perform a Final Physical Attack.\" as one of the seven things you may do in an Attack Phase. CRD:409 \"you may discard any card in your hand as a cost to perform a Final Physical Attack ... You then perform a physical attack doing PAT power stages of damage.\" CRD:412 \"For the rest of Combat, you must pass in all of your Attack Phases, and you cannot defend against your opponent's attacks ... Both you and your opponent can perform a Final Physical Attack once per Combat Step.\" CRD:2526 repeats it in the glossary.",
+      "engineLocation": "packages/engine/src/combat.ts:70 initialises `finalUsed: []`; combat.ts:166 and combat.ts:263 read it to bar attacking and defending; declaration at packages/shared/src/state.ts:142; packages/shared/src/protocol.ts:9-31 (Action union); packages/engine/src/reducer.ts:136-201 (switch)",
+      "defect": "Grep across packages for `finalUsed` returns only those four sites - nothing ever pushes to the array. There is no `finalPhysicalAttack` member in the Action union and no matching case in the reducer's switch, and declareAttack has no path that takes a hand-card discard as the cost (combat.ts:192-197 pays only `ability?.cost?.powerStages`). The guards are dead code: there is no way for a player to declare a Final Physical Attack, so neither the attack (CRD:409) nor its penalty (CRD:412) exists in the engine.",
+      "consequence": "A player whose Attack Phase options are exhausted - no attack card in hand, no usable personality power - has no legal play except pass, when the CRD gives them a guaranteed PAT-damage attack for the cost of one card from hand. This is a core Attack Phase option (choice 6 of 7) and it is missing on both sides; the matching penalty (forced passes, cannot defend) never occurs either.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "grep for `finalUsed|finalPhysical|FinalPhysical` across packages/**/*.ts returns exactly four sites and no more: packages/shared/src/state.ts:142 `finalUsed: number[];`, combat.ts:70 `finalUsed: [],`, combat.ts:166 `if (c.finalUsed.includes(ctx.actingPlayerIdx)) return 'you must pass after a Final Physical Attack';`, and combat.ts:263 `if (c.finalUsed.includes(ctx.actingPlayerIdx)) return 'you cannot defend after a Final Physical Attack';`. No push, no splice, no assignment. I read the whole Action union (protocol.ts:9-31) myself: declareAttack, takeControlOfCombat, declareEmpower, defend, redirectDamage, captureDragonBall, useEndurance, pass, answerPrompt - no finalPhysicalAttack variant - and the reducer's switch is exhaustiveness-checked at reducer.ts:207 (`const _exhaustive: never = action;`), so there is no undeclared back door. Grep over apps/ found nothing (no apps/ directory exists). CRD:409, CRD:412 and CRD:2526 read verbatim as quoted. Citation slips corrected here: the Attack Phase option \"6. Perform a Final Physical Attack.\" is at CRD:291, not CRD:311 or L297; and the Action union spans 9-31, not 20-26, omitting useEndurance at line 27."
+    },
+    {
+      "rank": 22,
+      "title": "The Rejuvenation Step does nothing",
+      "area": "turn-structure",
+      "areas": [
+        "turn-structure"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:244-245, 248 - \"7) Rejuvenation Step / If you are the Attacker and you did not declare Combat in the Declare Step, you may take the top card of your discard pile and place it facedown at the bottom of your Life Deck.\" ... \"The Rejuvenation Step itself is not optional, and you must go through the Rejuvenation Step during each of your turns.",
+      "engineLocation": "packages/engine/src/reducer.ts:79-85; packages/engine/src/turn.ts:36-56",
+      "defect": "`'rejuvenation'` exists in `STEPS` (state.ts:13) and `advanceStep` passes through it, but the reducer's `advanceStep` case only special-cases `'draw'`, `'powerUp'` and `'combat'` - there is no `'rejuvenation'` branch, and `advanceStep` itself does nothing for that step. Grepping the whole repo for rejuvenation turns up only the generic `rejuvenate` effect helper used by card abilities (abilities.ts:133, 553) and its tests; nothing wires it to the step. There is also no state flag recording whether Combat was declared, so the step's precondition could not be evaluated even if the branch existed.",
+      "consequence": "A player who skips Combat never recovers the top card of their discard pile to the bottom of their Life Deck. Every turn spent out of Combat loses the one card of deck recursion the rules grant it, shortening games and removing the standard defensive line of skipping Combat to rebuild the Life Deck against a Survival loss.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD:245 and CRD:248 read as quoted. `'rejuvenation'` is state.ts:13 in STEPS, and reducer.ts:79-85 special-cases only `'draw'`, `'powerUp'` and `'combat'` - there is no `'rejuvenation'` branch; turn.ts:36-56 does nothing step-specific for it either. My repo-wide `rejuven` grep over non-test source returns only the card-effect helper (abilities.ts:118-119, 133, 140, 149, 201-202, 235, 553-569, 677, 723), the shared Effect type (shared/src/abilities.ts:52), the STEPS entry, and a turn.ts doc comment - nothing wires the step to `rejuvenate()`. The precondition is also unrepresentable: no combat-declaration flag exists in GameState (state.ts:165-191). Executed the engine: passing through the rejuvenation step changed no zone. Cannot refute."
+    },
+    {
+      "rank": 23,
+      "title": "Anger raised by a card never registers as an anger advance, so the Most Powerful Personality Victory is unreachable in real play",
+      "area": "anger-and-levels",
+      "areas": [
+        "anger-and-levels",
+        "victory"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD.txt:171 - \"When your Main Personality reaches the highest level possible out of all personalities in the current game, if you reach that level by Anger ... you win the game.",
+      "engineLocation": "packages/engine/src/reducer.ts:77, 96, 217; packages/engine/src/abilities.ts:31-35, 104-109, 188-192; packages/engine/src/victory.ts:119-125",
+      "defect": "`setAnger` (turn.ts:143-154) returns the MP uid when THIS call advanced a level by anger, and victory.ts:120 requires `opts.advancedByAngerUid === player.mp.uid` to grant the win. But reducer.ts assigns `advancedByAnger` in exactly one place - `case 'setAnger'` at line 96, a manual/debug action. Every real anger gain flows through a card: `playCard` -> `applyOnPlay` -> `changeMpAnger` (abilities.ts:31-35) and `declareAttack` -> `setupAttackAbility` (abilities.ts:104-110) -> `changeMpAnger`. `changeMpAnger` is declared `: void` and throws away setAnger's return, and neither `applyOnPlay` nor `declareAttack` propagates it. So at reducer.ts:217 `advancedByAnger` is always undefined for card-driven anger and checkVictory is called with `{}`. No GameState field records the advance, so the win cannot be recovered on a later checkVictory either.",
+      "consequence": "A player whose MP hits its top level by playing anger cards - the entire point of an anger deck, and how anger is gained in real play - does not win. The MP advances, the log says so, and the game just continues; the opportunity is gone permanently once that action finishes. The only way to trigger the win in this engine is the out-of-band `setAnger` action, which is exactly what the sole reducer-level test does (victory.test.ts:212-219), so the gap is invisible to the suite.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "Every cited line matches. `packages/engine/src/reducer.ts:77` declares `let advancedByAnger: string | undefined;` and the ONLY assignment is reducer.ts:96 `advancedByAnger = setAnger(state, action.personalityUid, action.anger, db, events);` under `case 'setAnger'`. reducer.ts:217 passes it: `checkVictory(state, db, events, advancedByAnger ? { advancedByAngerUid: advancedByAnger } : {});` and victory.ts:120 gates the win on `opts.advancedByAngerUid === player.mp.uid`. The card path drops it: abilities.ts:31 `function changeMpAnger(state, playerIdx, delta, db, events): void {` with abilities.ts:34 `setAnger(state, mp.uid, mp.anger + delta, db, events);` - return value discarded. The two `changeAnger` handlers call it identically - abilities.ts:109 (attack effects) and abilities.ts:192 (applyOnPlay). A repo-wide grep for `advancedByAnger` finds it in only reducer.ts (77/96/217), victory.ts (75/120) and victory.test.ts. I proved it at runtime through the real reducer: a Non-Combat card with `{kind:'changeAnger',target:'user',delta:5}` took a level-2 MP to level 3 (top of a 3-level stack, opponent also 3) and produced `phase: playing | victoryType: undefined`, log `Goku advances to level 3!`. The same state via `{type:'setAnger',...,anger:5}` ended the game as `mostPowerful`. No test covers the card route. CRD L171 matches the quote verbatim."
+    },
+    {
+      "rank": 24,
+      "title": "The Prepare Phase runs only the defender's draw - no \"When entering Combat\" effects are ever executed for either player",
+      "area": "combat-sequence",
+      "areas": [
+        "combat-sequence"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:261 \"As the Attacker, you prepare for the fight by using all your effects that happen 'When entering Combat.'\" CRD:267 \"1. Use any 'When entering Combat' effects on his cards in play.\" CRD:270 \"2. Draw 3 cards from the top of his Life Deck.",
+      "engineLocation": "packages/engine/src/combat.ts:60-73 - beginCombat calls `draw(state, defender, PREPARE_DRAW)` and then builds the CombatState. There is no attacker half of the Prepare Phase.",
+      "defect": "Only CRD:270 is implemented. The `whenEnteringCombat` ability trigger is declared at packages/shared/src/abilities.ts:13 but grep across packages/engine/src finds no code that ever reads it, so even a hand-authored ability with that trigger would never fire.",
+      "consequence": "Every \"When entering Combat\" effect is a dead card. Concretely, per the CRD's own errata: Nappa Lv.1 HT gains no power stages (CRD:1924), Blue Deceiving Drill grants no defensive stages (CRD:1431), Red Coordination Drill and Red Knee Pick Drill never draw (CRD:2092, CRD:2110), Meditation Drill never shuffles (CRD:1882), Android 18 Lv.1 never filters and draws (CRD:1338). The attacker's entire half of the Prepare Phase is absent.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "combat.ts:60-73 beginCombat contains exactly one game action, `draw(state, defender, PREPARE_DRAW);` at line 64, then builds the CombatState - no attacker half, no ability scan for either side. The trigger exists but is dead: packages/shared/src/abilities.ts:13 declares `| 'whenEnteringCombat'`, and grepping `whenEnteringCombat|enteringCombat` across packages/**/*.ts returns only that declaration and its .d.ts copy. Confirming from the other direction, the only two places any code filters on a trigger are abilities.ts:28 `a.trigger === 'attack'` and noncombat.ts:75 `a.trigger === 'onPlay'` - so no authored whenEnteringCombat ability could ever fire. CRD:261, 267 and 270 all read exactly as quoted, and I spot-checked every errata citation: CRD:1924 Nappa Lv.1 HT, CRD:1431 Blue Deceiving Drill, CRD:2092 Red Coordination Drill, CRD:2110 Red Knee Pick Drill, CRD:1882 Meditation Drill, CRD:1338 Android 18 Lv.1 - all correct line-for-line."
+    },
+    {
+      "rank": 25,
+      "title": "playAlly enforces no step, no active-player and no zone gate - either player can field an Ally at any moment, from any zone",
+      "area": "turn-structure",
+      "areas": [
+        "turn-structure",
+        "noncombat-drills",
+        "personality-powers"
+      ],
+      "mergedFrom": 3,
+      "crdEvidence": "CRD:218-219 - \"2) Non-Combat Step / If you are the Attacker, you may now play Allies, Non-Combats, Locations, Battlegrounds and Dragon Balls from your hand during this step\"; CRD:544 - \"Allies are placed into play during the Non-Combat Step by the Attacker for the turn, they are initially set at 3 power stages above 0.",
+      "engineLocation": "packages/engine/src/reducer.ts:101-127 (the `playAlly` case), zone lookup at reducer.ts:30-38 (`findInstance` iterates `Object.keys(p.zones)`); contrast packages/engine/src/noncombat.ts:45-46 (playCard's guards); packages/server/src/room.ts:278-283 (authorize)",
+      "defect": "The `playAlly` case checks only that the player exists, the card is findable, it resolves to a personality, and the Ally's level does not exceed the MP's (reducer.ts:107-109). It never checks `state.step === 'nonCombat'` and never checks `playerIdx === state.activePlayerIdx`. Contrast `playCard`, which enforces both (noncombat.ts:45-46) and is covered by a test (noncombat.test.ts:81-88, which exercises playCard only). `findInstance` searches every zone, so the card may be pulled from discard, lifeDeck, removed, sensei or inPlay, not just hand. The server's `authorize` (room.ts:278-283) only rejects acting from another player's seat, so it does not close either gap.",
+      "consequence": "The defender can drop an Ally into play in the middle of the attacker's Combat Step - a fresh body at 3 stages above 0 that can immediately take Control of Combat or absorb redirected power-stage damage from the attack currently resolving (combat.ts:229-232). The attacker can hold Allies back and deploy them inside the Combat Step after seeing the opening attacks. Either player can also field Allies during the Power-Up, Discard or Rejuvenation Steps (an Ally played after the Power-Up Step dodges the +1 it should have received), and can resurrect an Ally straight out of the discard pile.",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "I read reducer.ts:101-127 in full: the only rejections are `if (!p || !loc || !per) return fail(prev, 'cannot play ally');` (105) and the level check at reducer.ts:107-109; there is no `state.step` test and no `state.activePlayerIdx` test, and no global guard before the switch (reducer.ts:68-78 only clones and resolves the actor). `playCard` by contrast has both at noncombat.ts:45-46 (`return 'only the active player may play cards in the Non-Combat Step'` / `return 'cards enter play during the Non-Combat Step'`). findInstance (reducer.ts:30-38) iterates `Object.keys(p.zones)`, so discard/lifeDeck/removed/sensei/inPlay are all valid sources, and reducer.ts:103/110 source the card from findInstance's zone rather than requiring the hand. Server authorize (room.ts:278-283) is exactly `if (typeof named === 'number' && named !== seatIdx) return 'cannot act for another player'; if (action.type === 'advanceStep' && state.activePlayerIdx !== seatIdx) return 'not your turn';` - playAlly from your own seat passes in any step. Executed the engine: the NON-active player played a level-1 Ally during the attacker's Combat Step with error `(none)` and `allies.length` went to 1. The only playAlly tests (noncombat.test.ts:136-149) cover the level rule alone. Three independent audits reached the same conclusion; they disagreed only on severity labelling (missing-rule vs timing vs wrong-rule)."
+    },
+    {
+      "rank": 26,
+      "title": "Focused attacks have no representation, so cards that stop both attack types still stop them",
+      "area": "endurance-and-stops",
+      "areas": [
+        "endurance-and-stops"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L1160: \"A focused attack cannot be stopped or prevented by cards that have the ability to stop or prevent damage from both physical and energy attacks.\" CRD L1164 adds that such a card may still be played for its secondary effects but \"the attack will still be successful and deal all its damage.\" CRD L1167: \"Endurance can still be used to prevent damage from a focused attack.",
+      "engineLocation": "packages/engine/src/abilities.ts:640 and 694 (the only handling: `needsReview.push('focusedAttack')`); packages/shared/src/state.ts:97-131 (AttackInProgress has no focused flag) and combat.ts never reads one",
+      "defect": "parseAbility detects the Focused keyword, strips it from the text and records a review flag; the resulting Ability carries no marker, declareAttack (combat.ts:152-213) stores nothing about it on the attack, and resolveDefense has no test for it. 204 cards in the enriched catalog carry Focused in their text.",
+      "consequence": "A card printed to \"stop a physical or energy attack\" - which parses to attackType 'any' at abilities.ts:441-447 - stops a Focused attack it is specifically forbidden to stop. Focused, one of the main reasons to play those attacks, is worth nothing. (Endurance against a focused attack, per CRD L1167, does still work, incidentally.)",
+      "severity": "missing-rule",
+      "confidence": "medium",
+      "verifiedBy": "abilities.ts:640 `const focused = /^focused\\s+/.test(body);` and abilities.ts:641 strips it (`const core = focused ? body.replace(/^focused\\s+/, '') : body;`); the only downstream use is abilities.ts:694 `if (focused) needsReview.push('focusedAttack');`. The parser's own comment at abilities.ts:637-638 concedes it: \"it is a real mechanic (resists some stops) that the engine does not model yet\". AttackInProgress (shared/src/state.ts:97-131) has no focused field, declareAttack builds the attack object at combat.ts:177-187 without one, and resolveDefense never tests for it. The 'any' widening the claim relies on is at abilities.ts:441/445: `const eitherType = /(physical\\s+or\\s+energy|energy\\s+or\\s+physical)/.test(s);` -> `attackType: eitherType ? 'any' : at(sm[1])`. CRD L1160, L1164 and L1167 are all verbatim as quoted. Exactly 204 cards in data/cards.tts.enriched.json carry \"Focused\" in their rules text. It overlaps rank 1 (today any card stops anything), but it names a separate rule that would still be missing once type-matching lands, and points at the missing flag, so it is actionable."
+    },
+    {
+      "rank": 27,
+      "title": "An energy attack that states power-stage damage deals the default 4 life cards instead, ignoring the stated amount",
+      "area": "pat-and-damage",
+      "areas": [
+        "pat-and-damage"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L455: \"Cards that state damage: ... the damage from the attack is what is stated on the card itself.\" CRD L2505 (Glossary, Base Damage): \"the base damage is PAT for physical attacks and 4 Life cards for Energy attacks, unless the card states a set amount of damage\".",
+      "engineLocation": "packages/engine/src/combat.ts:285-292, with the value set at packages/engine/src/abilities.ts:96-98",
+      "defect": "setupAttackAbility (abilities.ts:96-98) writes a stated energy amount as `attack.baseDamage = e.powerStages` and only sets `energyLifeCards` in the else branch. resolveDefense then takes the energy path unconditionally: `atk.attackType === 'energy' ? atk.energyLifeCards ?? ENERGY_LIFE_CARDS : atk.damageLifeCards`. Because `energyLifeCards` is undefined, it falls through to ENERGY_LIFE_CARDS = 4 (combat.ts:42) and `atk.baseDamage` is never read for an energy attack anywhere in the file.",
+      "consequence": "Orange Energy Focus (\"Energy attack doing 5 power stages of damage.\") deals 4 life cards and zero power stages. Same for Dodoria Flames of Fury and Black Strike's power-stage clause - the wrong damage type against the wrong resource, on cards the parser already reads correctly.",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "packages/engine/src/abilities.ts:96-98 `case 'energyAttack': if (e.powerStages !== undefined) attack.baseDamage = e.powerStages; else attack.energyLifeCards = e.lifeCards ?? 4;` - so a stated power-stage energy attack leaves energyLifeCards undefined. combat.ts:285-288 then takes the energy path unconditionally on attackType and falls through to `ENERGY_LIFE_CARDS` (combat.ts:42 `= 4`), returning at combat.ts:290 before line 296, the only place `atk.baseDamage` is ever read (confirmed by grep for baseDamage/energyLifeCards across packages/engine/src). I confirmed the live data path by loading data/cards.tts.enriched.json: Orange Energy Focus is type 'Energy Combat', text \"Energy attack doing 5 power stages of damage...\", parsed abilities `[{\"kind\":\"energyAttack\",\"powerStages\":5}]` - so it really does resolve as 4 life cards, 0 power stages. The auditor's L446 pointer had drifted (the sentence \"the damage from the attack is what is stated on the card itself\" is at CRD:455, corrected above), but the second citation is exact - CRD:2505."
+    },
+    {
+      "rank": 28,
+      "title": "Deferred \"next phase\" and \"first successful\" stop windows are parsed and then discarded",
+      "area": "endurance-and-stops",
+      "areas": [
+        "endurance-and-stops"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L2179: \"Saiyan Energy Aura ... Stops an energy attack and stops an energy attack during your opponent's next Attacker Attacks phase.\" CRD L2221 prints Saiyan Sweeping Defense the same way for physical.",
+      "engineLocation": "packages/engine/src/combat.ts:269-271; parsed at packages/engine/src/abilities.ts:395-409 (stopWindow) and shared/src/abilities.ts:41",
+      "defect": "The lockout loop reads `for (const e of defenseStops(...)) { if (e.window === 'thisCombat') addLockout(...) }`. Only 'thisCombat' is handled. A stopAttack effect with window 'nextPhase' falls out of the loop with no state written anywhere; CombatState (shared/src/state.ts:133-150) has no field to hold a deferred stop. 'firstSuccessful' - the Defense Shield encoding - is likewise dropped.",
+      "consequence": "Saiyan Energy Aura and Saiyan Sweeping Defense buy only the attack in front of them; the second, deferred stop they are printed for never happens and the attacker's next-phase attack lands in full. 23 cards in the enriched catalog parse to a nextPhase stop and all 23 lose that half of their text.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "combat.ts:269-271 is the whole consumer: `for (const e of defenseStops(state, opts.cardUid, db)) { if (e.window === 'thisCombat') addLockout(state, c, atk.attackerPlayerIdx, e.attackType ?? 'any'); }` - 'nextPhase' and 'firstSuccessful' fall out with nothing written. CombatState (shared/src/state.ts:133-150) carries only `lockouts?: Array<{ playerIdx: number; attackType: 'physical' | 'energy' | 'any' }>` plus currentAttack; there is no field for a deferred stop, and AttackInProgress (state.ts:97-131) has none either. The parser does produce the value - abilities.ts:399 `if (/stops?\\s+the\\s+next\\b/.test(t)) return 'nextPhase';` and abilities.ts:407 for the \"next ... phase\" form - and shared/src/abilities.ts:41 declares the window union. stopwindow.test.ts:67-70 asserts only `parseAbility(...)` output, so it tests the parser and not the engine; nothing covers application. CRD L2179 and L2221 are verbatim as quoted. My count of nextPhase stops in data/cards.tts.enriched.json is exactly 23, and Saiyan Energy Aura parses to [{stopAttack, energy, nextPhase}]."
+    },
+    {
+      "rank": 29,
+      "title": "Damage prevention is not modelled: preventLifeCards is emitted by the parser and read by nothing, and a prevention card instead stops the whole attack",
+      "area": "endurance-and-stops",
+      "areas": [
+        "endurance-and-stops"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L306 lists stopping and preventing as two distinct defensive options: \"Use an effect from your Main Personality that stops an attack or prevents damage from an attack.\" CRD L446: \"Preventing damage from the attack is not counted as modifying damage from the attack.",
+      "engineLocation": "packages/engine/src/abilities.ts:426-427 emits {kind:'preventLifeCards', amount, attackType}; no consumer exists - the only other occurrence in the repo is the type declaration at packages/shared/src/abilities.ts:44",
+      "defect": "22 cards in data/cards.tts.enriched.json carry a parsed preventLifeCards effect and no engine code path reads the kind. Neither resolveLifeCardDamage (combat.ts:330-388) nor discardForDamageWithEndurance (damage.ts:153-192) applies a prevention amount, and combat.ts never consults the defender's inPlay zone while dealing damage, so standing prevention (Orange Hiding Drill: \"Prevent 2 life cards of damage from all attacks performed against you\"; Majin Buu's Constant Combat Power: \"Prevent 2 life cards of damage from each attack\") is inert. When such a card IS played as a defense, combat.ts:265-267 stops the attack outright instead of shaving N life cards.",
+      "consequence": "Prevention is all-or-nothing and always at the wrong extreme: standing prevention drills do nothing at all, while a card printed to blunt an attack by 2 or 3 life cards cancels it entirely - including the 4-life-card energy attack it should have reduced to 1 or 2.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "A repo-wide grep for preventLifeCards returns exactly three hits: the emit at abilities.ts:427 (`if (m) out.push({ kind: 'preventLifeCards', amount: toNum(m[1]), ... })`), the type at shared/src/abilities.ts:44, and a dist .d.ts copy. No switch case in setupAttackAbility, applyOnPlay or applyIfSuccessful handles it - it falls to applyOnPlay's default at abilities.ts:216 (\"Effect not yet automated\") or applyIfSuccessful's final else at abilities.ts:241. discardForDamageWithEndurance (damage.ts:153-192) takes only `(state, playerIdx, n, db)` - there is no prevention parameter - and resolveLifeCardDamage (combat.ts:330-388) never consults inPlay. The second half is also true: because combat.ts:265-267 stops on any uid, playing a prevention card as a defense cancels the attack. CRD L306 and L446 are verbatim as quoted. My count gives exactly 22 cards with a parsed preventLifeCards, and both examples are real: Orange Hiding Drill is a Non-Combat card reading \"Prevent 2 life cards of damage from all attacks performed against you.\" parsed to [{preventLifeCards, 2, any}], and Majin Buu's Constant Combat Power reads \"Prevent 2 life cards of damage from each attack your opponent perfo[rms]\"."
+    },
+    {
+      "rank": 30,
+      "title": "Combat-long stops are implemented as a ban on performing the attack, not as a stop",
+      "area": "endurance-and-stops",
+      "areas": [
+        "endurance-and-stops"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L387: \"If the attack is stopped, the effects are NOT stopped. Secondary effects occur regardless of if an attack is stopped or not.\" CRD L843 reserves the stronger reading for a different wording: \"When an opponent keeps you from performing a type of attack, your opponent is keeping you from using the card.\" CRD L1930/L1933/L2406 print these cards as \"Stops all energy/physical attacks performed against you for the remainder of Combat\" - stops, not prohibitions. CRD L793 confirms a player may play a card into a hopeless stop \"to gain the benefits of any effects on the card he uses.",
+      "engineLocation": "packages/engine/src/combat.ts:167-168 (declareAttack) with the lockout recorded at combat.ts:139-150, 270",
+      "defect": "declareAttack calls lockoutAgainst and, on a hit, returns the error string `'<type> attacks are stopped for the remainder of this Combat'` at line 168 - before setupAttackAbility runs (line 190) and before any cost is paid (lines 193-197). The attack is refused as an illegal action rather than declared, resolved and stopped.",
+      "consequence": "After Nappa's Energy Aura resolves, the attacker cannot declare an energy attack at all. Playing Vegeta's Jolting Slash into that lockout should still resolve its secondary effect (\"Lower your opponent's anger 2 levels\") and discard the card; in the engine the action is rejected, the anger drop never happens, and the card is stuck in hand. Every secondary effect, anger swing and self-power-up printed on the locked-out attack type is silently unavailable for the rest of the combat.",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "combat.ts:167-168 is exactly as described: `const locked = lockoutAgainst(c, ctx.actingPlayerIdx, attackType);` / `if (locked) return ...are stopped for the remainder of this Combat...;` - this returns before setupAttackAbility at combat.ts:190 and before the cost at combat.ts:193-197, so nothing on the card resolves. The lockout is written by addLockout (combat.ts:139-150) from combat.ts:270. CRD L1930/L1933/L2406 are verbatim stops (\"Stops all energy attacks performed against you for the remainder of Combat\"), and CRD L387 is verbatim. The CRD does reserve the ban wording for a different phrasing, but at L843 under the heading \"Performing Attacks and preventing their use\" - the auditor cited L845, a 2-line drift (L845 is blank), corrected here; L793 is about a defender's card rather than an attacker's, so it is an analogy, not direct support. Neither slip changes the outcome. Data confirms the concrete case: Vegeta's Jolting Slash parses to [{energyAttack},{changeAnger,foe,-2},{removeFromGameAfterUse},{stopAttack,physical,thisCombat,all}], so refusing the declaration discards the -2 anger. lockout.test.ts:77-78 asserts the error string, i.e. it codifies the disputed behaviour rather than the CRD one."
+    },
+    {
+      "rank": 31,
+      "title": "A new Location/Battleground does not remove the one already in play, and same-name uniqueness is never enforced",
+      "area": "turn-structure",
+      "areas": [
+        "turn-structure",
+        "noncombat-drills"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD:716 - \"In general, there can only be one Battleground or Location in play at any time. If a Battleground or Location card is played and there is already one in play, you remove the Battleground or Location card that is already in play from the game and the new one comes into play.\"; CRD:719 - \"You cannot place a Battleground or Location card into play if there is already a Battleground or Location card of the same name in play.\"; CRD:711 says these cards \"affect all players at all times\".",
+      "engineLocation": "packages/engine/src/noncombat.ts:57-65 (`player.zones.hand.splice(at, 1); player.zones.inPlay.push({ ...card, faceDown: false });` then the skip-combat flag at 62-64)",
+      "defect": "`playCard` pushes the card straight into `player.zones.inPlay` and, for a Location/Battleground, sets `skipCombatThisTurn`. It never scans either player's `inPlay` for an existing Location/Battleground to remove from the game, and never rejects a duplicate name. The type is used only to set the skip flag. `Battleground` appears in engine source only in noncombat.ts:11/27/30/82 and turn.ts:46/49 - comments, the `PLAYABLE_IN_PLAY` set, the `SKIPS_COMBAT` set, and the skip-combat branch; none implements replacement or a name check.",
+      "consequence": "Locations and Battlegrounds accumulate without limit and their continuous effects stack - three in play means three simultaneous global modifiers where the rules allow exactly one. A player can play Gravity Chamber on turn 1 and Hyperbolic Time Chamber on turn 3 and have both continuously affecting both players, and can replay a same-named Battleground the rules forbid entirely. The one-Location-at-a-time rule that makes these cards a trade-off (and lets you remove the opponent's Location by playing your own) is absent. The catalog has 33 such cards (16 Location, 17 Battleground).",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD:716 and CRD:719 read exactly as quoted, including \"You cannot place a Battleground or Location card into play if there is already a Battleground or Location card of the same name in play.\" noncombat.ts:57-58 is `player.zones.hand.splice(at, 1); player.zones.inPlay.push({ ...card, faceDown: false });` with no scan of either player's inPlay, and noncombat.ts:62-64 only sets `skipCombatThisTurn`. My grep for `Battleground` across engine/server/client source returns noncombat.ts:11/27/30/82 and turn.ts:46/49 and finds nothing that removes a card from play or rejects a same-name play. The only Location/Battleground tests are noncombat.test.ts:90-117, all asserting only the skip-combat flag. I could not runtime-confirm because data/cards.saiyan.enriched.json contains zero Location/Battleground cards, but the code path is unambiguous on read, and a second audit's catalog census confirms 16 Location + 17 Battleground = 33 cards in data/cards.tts.enriched.json."
+    },
+    {
+      "rank": 32,
+      "title": "isDragonBall matches on the card NAME, so ordinary cards titled \"... Dragon Ball ...\" are immune to life-card damage and can end the game with a bogus Dragon Ball Loop loss",
+      "area": "victory",
+      "areas": [
+        "victory",
+        "dragon-balls"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD L1465: \"Bulma Finds a Dragon Ball (Saiyan Saga - #222) - This card is not a Dragon Ball.\" CRD L699: \"Dragon Ball cards do not count as damage when you discard them from your Life Deck as damage from an attack.\" CRD L706/L2521: a real Dragon Ball Loop loses the game.",
+      "engineLocation": "packages/engine/src/damage.ts:26 (`return /dragon ball/i.test(c.rules?.type ?? '') || /dragon ball/i.test(c.name);`), consumed at damage.ts:59-63 and damage.ts:170-174, mis-routed at damage.ts:81-85; loss triggered at packages/engine/src/combat.ts:366-368",
+      "defect": "`isDragonBall` returns true when the card NAME contains \"dragon ball\", regardless of type. The catalog contains non-Dragon-Ball cards that match - Bulma Finds a Dragon Ball (Non-Combat, whose own errata field literally reads \"This is not a Dragon Ball\"), Namek Dragon Ball Wish (Non-Combat), Earth Dragon Ball Capture (Combat), Earth Dragon Ball Combat (Energy Combat), Namek Dragon Ball Combat (Physical Combat), Goku's Dragon Ball Quest (Combat), Vegeta's Dragon Ball Capture - all ordinary life cards. In discardForDamage they are shifted off the top and pushed back to the bottom of the Life Deck without counting as damage; in discardForEffect they are routed to the bottom of the Life Deck instead of the discard pile. The one-pass `guard = deck.length` then reports `exhausted: true`, which combat.ts:366 treats as the Dragon Ball Loop and calls `endGame(state, atk.attackerPlayerIdx, events)`.",
+      "consequence": "An Earth Dragon Ball deck (which normally runs Earth Dragon Ball Capture, Earth Dragon Ball Combat and Bulma Finds a Dragon Ball) takes less damage than it should on every single attack: those cards cycle forever and can never be discarded for damage, so attacks come up short of the 5-life-card capture threshold. Worse, verified at runtime: a 5-card deck of [Earth Dragon Ball Capture, Bulma Finds a Dragon Ball, 3 ordinary Energy Combat cards] taking a 4 life-card energy attack returns `{ discarded: 3, dragonBallsSkipped: 2, exhausted: true }` and the defender instantly loses the game by \"survival\" with 2 cards still in the deck, when the correct outcome is 4 discarded and 1 card left.",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "damage.ts:26 is `return /dragon ball/i.test(c.rules?.type ?? '') || /dragon ball/i.test(c.name);`, consumed at damage.ts:59 and damage.ts:170. Querying data/cards.tts.enriched.json for name-matches whose type is NOT a Dragon Ball returns 10 printings: Goku's Dragon Ball Quest (Combat), Bulma Finds a Dragon Ball (Non-Combat, errata field literally `\"This is not a Dragon Ball\"`), Earth Dragon Ball Capture x2 (Combat), Earth Dragon Ball Combat x2 (Energy Combat), Vegeta's Dragon Ball Capture x2, Namek Dragon Ball Combat (Physical Combat), Namek Dragon Ball Wish (Non-Combat) - one audit said 6 and the other 11; 10 is the verified figure. CRD L1465 reads verbatim \"Bulma Finds a Dragon Ball (Saiyan Saga - #222) - This card is not a Dragon Ball.\" I ran the real code against the real catalog and reproduced the bogus loss exactly as described; combat.ts:366-368 is `if (result.exhausted) { endGame(state, atk.attackerPlayerIdx, events); return; }` (endGame at combat.ts:93-99 sets `victoryType = 'survival'`). One correction to a source write-up: 2 cards remain in the deck at the bogus loss, not 5. No test covers it - damage.test.ts:24-29 names its fixtures `Dragon Ball ${n}` AND types them 'Dragon Ball', so the name fallback is never isolated, and damage.test.ts:70 checks only a real Dragon Ball and a plain Combat card."
+    },
+    {
+      "rank": 33,
+      "title": "Ally legality (alignment, 2-levels-lower, same-character, High-Tech/Majin/Cell Jr.) is enforced neither at deck-build time nor at play time",
+      "area": "decks-and-mastery",
+      "areas": [
+        "decks-and-mastery",
+        "personality-powers"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD L113: \"Allies must be at least 2 levels lower than your Main Personalities highest Personality level.\" CRD L116: \"All Hero Main Personalities may only include Hero Allies in their deck and may only use Hero Allies. All Villain Main Personalities may only include Villain Allies in their deck and may only use Villain Allies.\" CRD L119 (no Ally matching your MP's character), L125 (\"You cannot use High-Tech personality cards as Allies.\"), L128 (Majin), L131 (Cell Jr.).",
+      "engineLocation": "packages/engine/src/decks.ts:64-147 (validateDeck); play-time check at packages/engine/src/reducer.ts:100-124 with the rule source at packages/engine/src/noncombat.ts:100-105; `canBeAlly` declared at packages/engine/src/loader.ts:11 and packages/shared/src/cards.ts:124, read nowhere",
+      "defect": "validateDeck's entire treatment of Ally personalities is the copy limit of 1 at decks.ts:39; it performs no alignment comparison against the MP, no level comparison against the MP's highest level, no same-character test, and never consults `canBeAlly`. At play time reducer.ts:107 enforces only the separate in-play rule (`per.level > maxAllyLevel(...)`, i.e. ally level <= the MP's CURRENT level) and likewise ignores alignment and canBeAlly - it reads `per.alignment` solely to copy it onto the new PersonalityInPlay at reducer.ts:116/118. There is no Majin, Cell Jr. or High-Tech handling anywhere in the repo.",
+      "consequence": "A Hero Goku deck can register and play Villain Allies such as Frieza and vice-versa; a non-Majin MP can field Majin Allies; anyone can field Cell Jrs. without Cell; a player can run an Ally copy of their own Main Personality; and a deck whose MP has levels 1-4 can, once the MP reaches level 4, play a level-4 Ally though the CRD caps its Allies at level 2. Each is a straight power gain - the Ally pool is roughly doubled and the strongest bodies in the game become available to any deck.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "I read validateDeck end to end (decks.ts:64-147). Its only personality handling is the MP consecutiveness block (72-101) and the generic copy limit `if (card.rules?.personality || type === 'Personality') return 1;` (decks.ts:39). There is no alignment comparison, no MP-highest-level comparison, no same-character test, and no Majin/Cell Jr./High-Tech check. Grep for `alignment` in non-test engine/server source returns abilities.ts:260/263 ('heroes only'/'villains only' card-text gates), loader.ts:7, reducer.ts:116, setup.ts:48/74 - none of which compares an Ally's alignment to the MP's. canBeAlly is declared at loader.ts:11 and written by the scraper (merge.ts:73, enrich-tts.ts:304) but read nowhere in engine or server logic, and the enriched data sets it `true` for all 571 personality records that carry it, so even a consumer would learn nothing. At play time reducer.ts:107 is `if (per.level > maxAllyLevel(state, action.playerIdx))`, and noncombat.ts:103-105 defines `maxAllyLevel` as `state.players[playerIdx]?.mp.currentLevel ?? 1` - current level, not \"at least 2 below the MP's highest\". I grepped packages/engine/src, packages/shared/src, packages/server/src and packages/scraper/src for Majin / 'Cell Jr' / High-Tech / highTech and got zero hits outside merge.ts's capture list. The only Ally test (noncombat.test.ts:136-146) asserts exactly the in-play level rule, so it does not rescue the claim. CRD L113, L116, L119, L125, L128 and L131 read verbatim as quoted, and L116 phrases it as a use-time rule (\"and may only use Hero Allies\"), so deck validation alone would not be sufficient anyway."
+    },
+    {
+      "rank": 34,
+      "title": "A Non-Combat card's alignment / \"____ only\" restriction is never checked when it is played",
+      "area": "noncombat-drills",
+      "areas": [
+        "noncombat-drills"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:758 \"To use a card that is '_______ only,' your Personality in control of Combat must match the Personality the card identifies\"; CRD:766 \"You may play/place into play a Non-Combat card with _____ only without having that personality in control of Combat. But, you must have a personality in control of Combat that fits the '_______ only' requirement in order to use the Non-Combat card\"; CRD:904 \"While all characters can have 'Heroes only' and 'Villains only' cards in their deck, a Rogue personality can only use one type in any given game.",
+      "engineLocation": "packages/engine/src/noncombat.ts:75-78 - the ability is found and `applyOnPlay(state, playerIdx, foeIdx, ability.effects, db, events)` is called with only `ability.effects`",
+      "defect": "`Ability.restriction` (packages/shared/src/abilities.ts:64-68, 74) is populated by the parser at abilities.ts:686/709/728 but is read by no engine code - grep for `.restriction` across packages/engine/src returns only those three writes plus parser-side test assertions. playCard passes the effect list straight through and never compares the restriction's alignment or namedOnly list against the player's alignment or the personality in control of Combat. 13 onPlay abilities in the catalog carry a restriction, e.g. \"Hero Enraged!\" {alignment: Hero}, \"Alien Anger!\" {alignment: Villain}, \"Saiyan Training\" {namedOnly: [Villains, Goku, Gohan]}.",
+      "consequence": "A Villain deck plays \"Hero Enraged!\" and gets the anger; a Hero deck plays \"Frieza's Powering Rage\". Restricted Non-Combat cards become universal, which is a straight power gain for whichever deck runs the off-alignment ones.",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD:758 and CRD:904 are verbatim; CRD:766 reads exactly as quoted. noncombat.ts:75-78 passes only `ability.effects` into applyOnPlay and never touches `ability.restriction`. A grep for `.restriction` across packages/ (minus dist) returns writes at engine/src/abilities.ts:686/709/728 and assertions at audit-fixes.test.ts:78/83/88/89 - parser-side only, zero reads in game logic. My census confirms 13 onPlay abilities carry a restriction. One citation nit: `restriction?: AbilityRestriction;` is at packages/shared/src/abilities.ts:74, not 72; the AbilityRestriction interface at 64-68 is correct."
+    },
+    {
+      "rank": 35,
+      "title": "Styled Drill legality is never enforced when a Drill enters play",
+      "area": "noncombat-drills",
+      "areas": [
+        "noncombat-drills"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD:647 \"If you have a Styled Drill in play, you cannot play another Drill from a different Martial Arts Style.\" and CRD:650 \"If you have a Styled Drill in play, you can only have 1 copy of that Drill in play.",
+      "engineLocation": "packages/engine/src/noncombat.ts:36-58 (playCard validates only actor, step, hand membership and card type); packages/engine/src/drills.ts:33-37 (isFreestyleDrill)",
+      "defect": "playCard's only gates are `activePlayerIdx`, `step === 'nonCombat'`, hand membership and `PLAYABLE_IN_PLAY.has(type)`; it then unconditionally pushes to inPlay at line 57-58. `isFreestyleDrill` - the function that classifies a Drill as Styled - is exported from drills.ts and re-exported from noncombat.ts:23 but is called by nothing outside noncombat.test.ts:61-63. decks.ts contains no Drill handling at all, so the rule is not enforced at deck-build time either.",
+      "consequence": "A player may put Red Power Drill, Black Search Drill and Namekian Rejuvenation Drill into play on the same turn, and may stack two copies of the same Styled Drill. The single-Style restriction that is the whole cost of playing Styled Drills does not exist, so any deck can run every Style's Drills at once.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD:647 and CRD:650 are verbatim as quoted. playCard's complete gate list at packages/engine/src/noncombat.ts:44-55 is `no such player` / `only the active player...` / `cards enter play during the Non-Combat Step` / `card is not in your hand` / `!PLAYABLE_IN_PLAY.has(type)`, then noncombat.ts:57-58 splices from hand and pushes to inPlay unconditionally. No Style comparison, no duplicate check. isFreestyleDrill is defined at drills.ts:33 and re-exported at noncombat.ts:23, and a grep across packages/ (excluding dist) finds its only call sites are noncombat.test.ts:61-63 - it is dead outside that one assertion test. `grep -in drill packages/engine/src/decks.ts` returns nothing, so nothing catches it at deck-build time either."
+    },
+    {
+      "rank": 36,
+      "title": "At the highest personality level, 5+ anger does nothing - no power-stage refill and anger is never reset",
+      "area": "anger-and-levels",
+      "areas": [
+        "anger-and-levels"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD.txt:529 - \"If you are at your highest personality level and you have 5 or more anger, raise your MP to your highest power stage and set your anger to 0.",
+      "engineLocation": "packages/engine/src/turn.ts:118 (and 149-153)",
+      "defect": "`advanceLevel` bails at line 118 (`if (mp.currentLevel >= mp.levelCardIds.length) return;`) before touching `mp.anger` or `mp.stageIndex`, and `setAnger` has no else-branch for the can't-advance case - it just calls advanceLevel and returns. Nothing in turn.ts, abilities.ts or drills.ts implements this rule.",
+      "consequence": "A maxed-out MP - routine whenever your 3-level stack faces a 4- or 5-level opponent - gets no benefit from anger at all. Per the CRD each time you cross 5 anger you should snap to your highest power stage (typically a 5-10 stage jump, moving you several brackets up the Physical Attack Table) and zero out. Instead anger sticks permanently at 5 or above, violating the documented 0..5 invariant on `PersonalityInPlay.anger` (state.ts:60-61), and every later anger card is a dead card. Anger-lowering effects then bite off a nonexistent surplus (e.g. \"lower your opponent's anger 2\" takes 7 to 5 instead of 0 to 0).",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD.txt:529 reads verbatim as quoted. turn.ts:118 is `if (mp.currentLevel >= mp.levelCardIds.length) return; // already at highest` - it returns before turn.ts:119-120 (`mp.currentLevel += 1; mp.anger = 0;`) and before any stage change. setAnger (turn.ts:149-153) has no else-branch: `if (p.anger >= ANGER_TO_ADVANCE) { const before = p.currentLevel; advanceLevel(...); if (p.currentLevel > before) return uid; } return undefined;`. Runtime probe against packages/engine/dist/turn.js with a 3-level MP at currentLevel 3, stageIndex 1 of a 10-rung ladder: after `setAnger(s,'mp0',5,db,[])` the result was `anger: 5` (CRD wants 0) and `stageIndex: 1` (CRD wants the top rung). Grepping `highest power stage|highestStage|maxStage` across packages/*/src finds only the parser's `movePowerStage` card-text handling in abilities.ts:54/594/598 - nothing implementing this anger rule. The 5-cap is a documented invariant: shared/src/state.ts:60-61 `/** Anger 0..5 (MP only; advances at 5). */ anger: number;`."
+    },
+    {
+      "rank": 37,
+      "title": "\"Lower all players' anger to 0\" zeroes only the attacker's own anger - the wrong player",
+      "area": "anger-and-levels",
+      "areas": [
+        "anger-and-levels"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD.txt:1696 - \"Goku's Conquering Stance (Saiyan Saga - #19) - Treat this card as if it read, 'Physical attack. If successful, lower all players' anger levels to 0.'",
+      "engineLocation": "packages/engine/src/abilities.ts:487-497 (pushAnger target selection); packages/shared/src/abilities.ts:16, 32 (EffectTarget is only 'user' | 'foe')",
+      "defect": "`pushAnger` decides the target solely from a possessive attached to the word \"anger\": `foeAnger` requires opponent/foe/his/her/their and `ownAnger` requires your/user's/own; \"all players anger\" matches neither, so `foe` is false and it falls through to `target: 'user'` (line 493). There is no 'all'/'both' target in the `EffectTarget` union.",
+      "consequence": "Playing Goku's Conquering Stance destroys your own anger and leaves your opponent's untouched - the exact inverse of a card meant to reset the board. Because of rank 18 it also fires at declaration rather than on success, so a stopped attack still wipes your anger. (Dragon's Glare, Mean Squeeze, Bojack's Extreme Assailment and Are You Tuff Enuff??? use the same \"all players\" phrasing and emit no anger effect at all; Bojack's Extreme Assailment is the worst of those because it otherwise parses to a complete attack ability and so reads as modelled.)",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD.txt:1696 is verbatim as cited. shared/src/abilities.ts:16 `export type EffectTarget = 'user' | 'foe';` - there is no 'all'. In pushAnger, abilities.ts:487 `const foeAnger = /(opponent|foe|his|her|their)'?s?\\s+(current\\s+)?anger/.test(s);` - \"all players anger\" matches neither that nor ownAnger, so line 489 `const foe = foeAnger && !ownAnger;` is false and line 493 yields `const target = foe ? ('foe' as const) : ('user' as const);` = 'user'. The shipped catalog entry for Goku's Conquering Stance already stores `{kind:'changeAnger',target:'user',delta:0,toZero:true}`, and re-running the parser reproduced it. Through setupAttackAbility (abilities.ts:105 `const who = e.target === 'user' ? attackerIdx : defenderIdx;`) my probe with both players at anger 4 gave `attacker anger: 0  defender anger: 4` - the exact inverse. I also confirmed the collateral list: Dragon's Glare, Mean Squeeze and Are You Tuff Enuff??? emit no effects at all, and Bojack's Extreme Assailment parses to [{energyAttack,lifeCards:5},{removeFromGameAfterUse}] with its \"Set all player's anger levels to 2\" silently absent."
+    },
+    {
+      "rank": 38,
+      "title": "Per-card printed deck limits (\"Limit 1/2 per deck\") are ignored; such cards are allowed at 3 or 4 copies",
+      "area": "decks-and-mastery",
+      "areas": [
+        "decks-and-mastery"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L51: \"All Combat, Physical Combat, Energy Combat, Non-Combat, Battleground and Location cards are limited to 3 copies per deck unless they are named cards or say otherwise in the rules text.\" CRD L52-53 (named cards limit 4 \"unless the card says otherwise in the rules text\"). Card-specific errata confirms the clause is live: CRD L1474 Caught Off Guard Drill \"This card gains, 'Limit 2 per deck.'\"; CRD L1581 Frieza is Ready \"... Limit 1 per deck.",
+      "engineLocation": "packages/engine/src/decks.ts:37-43 (copyLimit), used at decks.ts:119-120",
+      "defect": "copyLimit() derives the limit only from the card's type (Personality/Mastery/Sensei/Dragon Ball = 1) and a substring match of the MP's name in the card title (= 4), otherwise 3. It never inspects the card's rules text for a printed limit, and the EngineCardRules interface the engine consumes (packages/engine/src/loader.ts:16-29) does not even carry the `copyLimit` override field that packages/shared/src/cards.ts:139 declares on CardRules.",
+      "consequence": "Illegal decks pass validation and are playable. A Goku deck can register 4 copies of \"Goku's Dashing Punch\" (Physical Combat, printed \"Limit 1 per deck\") - decks.ts:41 actually raises the limit to 4 because the title contains the MP's name - and any deck can run 3 copies of a Limit-1 Non-Combat such as \"Foreboding Evidence\". 146 non-Personality cards print \"Limit 1 per deck\" and 13 print \"Limit 2 per deck\", none of which is honoured.",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "decks.ts:37-43 is the whole of copyLimit: `if (card.rules?.personality || type === 'Personality') return 1; if (/mastery|sensei/i.test(type) || isDragonBall(card)) return 1; if (mpName && card.name.toLowerCase().includes(mpName.toLowerCase())) return 4; return 3;` - `card.rules.text` is never consulted, and it is used unconditionally at decks.ts:119-120. EngineCardRules (loader.ts:16-29) has no copyLimit field, while shared/src/cards.ts:139 declares `copyLimit?: number;` - grep for copyLimit in packages/*/src returns only those three sites, so the override is dead. CRD L51/L52-53 say what is quoted; L1474 and L1581 are at exactly those line numbers. I confirmed the concrete example in data/cards.tts.enriched.json: tts-0d2c3416-5 'Goku's Dashing Punch', type Physical Combat, text ends 'Limit 1 per deck.' - and because the title contains 'Goku', decks.ts:41 returns 4. 'Foreboding Evidence' (Non-Combat) likewise ends 'Limit 1 per deck.' and gets 3. My own counts on the catalog are 146 exact-phrase 'Limit 1 per deck' and 13 'Limit 2 per deck' non-Personality cards (the auditor said 149/13 - a regex-precision difference, not a defect in the claim). No validateDeck test asserts a printed limit."
+    },
+    {
+      "rank": 39,
+      "title": "The Personality Capture Rule (battle-sequence step 11) is not implemented - an Ally can never trade its life-card damage for a Dragon Ball",
+      "area": "dragon-balls",
+      "areas": [
+        "dragon-balls",
+        "personality-powers"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD:349 - \"11) Determine if the Ally currently in control of Combat can capture a Dragon Ball by using the Personality Captures rule and decide if that Ally will either deal damage or capture a Dragon Ball.\" CRD:688 - \"Personality Capture Rule - When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage. Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha... the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
+      "engineLocation": "packages/engine/src/combat.ts:359-387 (resolveLifeCardDamage; the only capture window, gated on `dealt >= LIFE_CARD_CAPTURE_THRESHOLD`, damage.ts:21 = 5); flag declared at packages/engine/src/loader.ts:12 and packages/shared/src/cards.ts:126, read nowhere; `resolutionStep` assigned only at combat.ts:186",
+      "defect": "The only capture opportunity in the engine requires 5+ life cards actually discarded, and it is offered to the attacking PLAYER with no check of which personality is in Control of Combat, no named-personality list, and no option to substitute the capture for the damage. There is no step-11 decision point before damage is dealt. `canCaptureDragonBall` exists on EnginePersonality but is referenced nowhere in packages/engine/src outside its own type declaration.",
+      "consequence": "An attacking Krillin or Yamcha Ally whose successful attack deals 1-4 life cards - the exact case the rule exists for - cannot capture; the defender simply takes the damage and keeps every ball. The Dragon Ball victory route through small Ally attacks is unreachable, and the 5+ capture works identically whether the attacker is the MP or an Ally. Battle-sequence step 11 is skipped entirely (resolutionStep never leaves 5).",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD:349 and CRD:688 read exactly as quoted, including \"the resulting damage must involve 1 or more life cards of damage taken.\" The only capture window in the engine is combat.ts:374, `if (dealt >= LIFE_CARD_CAPTURE_THRESHOLD && balls.length > 0) {` with the threshold pinned at damage.ts:21 (`= 5`); the prompt is addressed to `atk.attackerPlayerIdx` with no reference to the controlling Ally and no damage/capture substitution. resolveCapture (combat.ts:432-467) only checks `ctx.actingPlayerIdx !== atk.attackerPlayerIdx` and then moves the ball. `resolutionStep` is assigned exactly once, at combat.ts:186 (`resolutionStep: 5,`), so step 11 is indeed never entered. A repo-wide grep for `canCaptureDragonBall` returns the declaration at loader.ts:12, the mirror at packages/shared/src/cards.ts:126, and the writer at packages/scraper/src/merge.ts:74; `CAPTURING_ALLIES` (packages/shared/src/cards.ts:149) is imported only by merge.ts. No engine source reads either. One supporting detail in a source finding is wrong: the enrichment DOES populate the field on another path - merge.ts:74 is `canCaptureDragonBall: CAPTURING_ALLIES.has(nm) || undefined,` with the correct 11-name list at merge.ts:36-39, and data/cards.saiyan.enriched.json has it set on 14 personality records (cards.tts.enriched.json genuinely has 0). That does not rescue the rule, since no engine code ever reads the field."
+    },
+    {
+      "rank": 40,
+      "title": "Card-driven Dragon Ball captures are unrepresentable; the only route is an out-of-band action that requires being the current attacker mid-attack and forfeits the rest of the attack phase",
+      "area": "dragon-balls",
+      "areas": [
+        "dragon-balls"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L682: \"Card Captures - Some cards allow for the capture of Dragon Balls.\"; CRD L1551 Earth Dragon Ball Combat: \"Energy attack. If successful, capture a Dragon Ball.\"; CRD L1726 Goku's Touch: \"Use after you perform a successful physical attack to capture an opponent's Dragon Ball.",
+      "engineLocation": "packages/engine/src/reducer.ts:192-196 routing to packages/engine/src/combat.ts:432-468; Effect union at packages/shared/src/abilities.ts:23-57",
+      "defect": "There is no 'captureDragonBall' effect kind in the Effect union, so a card's capture text can never be parsed into an executable effect. The only route is the raw `captureDragonBall` action, which resolveCapture rejects unless state.combat.currentAttack exists (combat.ts:439-440) and the actor is that attack's attacker (combat.ts:441) - so no capture outside the Combat Step and none by the defender. On success it then calls nextAttackPhase (combat.ts:466), which deletes currentAttack and hands the phase to the opponent (combat.ts:102-107).",
+      "consequence": "Cards whose whole function is capturing a ball (Earth Dragon Ball Capture, Goku's Touch, Bulma Finds a Dragon Ball, Eyes of the Dragon) do nothing when played, and the manual workaround aborts the attacker's current attack as a side effect.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "The Effect union in packages/shared/src/abilities.ts (lines 23-57; the auditor's 27-57 is off by the union's opening line only) ends at `| { kind: 'manual'; note?: string }` with no capture kind. I confirmed the downstream effect: tts-f1189c19-50 'Earth Dragon Ball Combat', text 'Energy attack. If successful, capture a Dragon Ball.', parses to `abilities: [{trigger:'attack', effects:[{kind:'energyAttack'}], source:'parsed'}]` - the capture clause is gone. tts-f1189c19-49 'Earth Dragon Ball Capture' and tts-aa1b8542-14 'Bulma Finds a Dragon Ball' carry no abilities array at all. The raw action route at reducer.ts:192-196 lands in resolveCapture, which gates on combat.ts:439-441 (`if (!atk) return 'no attack in progress'; if (ctx.actingPlayerIdx !== atk.attackerPlayerIdx) return 'only the attacker may capture';`) and finishes with `nextAttackPhase` at :466, which deletes currentAttack and flips phasePlayerIdx (:104-106). CRD L1551 and L1726 are verbatim as quoted."
+    },
+    {
+      "rank": 41,
+      "title": "A Dragon Ball \"set\" is derived from the card's printing saga, which both splits legal sets (Alt. printings) and merges unrelated ones",
+      "area": "victory",
+      "areas": [
+        "victory",
+        "dragon-balls"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD L57: \"All Dragon Balls in a deck must belong to the same set.\" CRD L60: \"Dragon Balls with 'Alt.' in the title can be mixed with Dragon Balls of the same set without 'Alt.' in the title.\" CRD L164: victory requires \"all 7 Dragon Balls of the same set\".",
+      "engineLocation": "packages/engine/src/victory.ts:45-59 (`const set = card.saga || 'unknown'` at victory.ts:49, `const key = String(card.number ?? card.name)` at victory.ts:50); duplicated at packages/engine/src/combat.ts:448-458 and packages/engine/src/decks.ts:128-134",
+      "defect": "`dragonBallProgress` groups a player's balls by `card.saga`, but saga is the printing's set, not the Dragon Ball set, and `number` is null for every Dragon Ball in the catalog so the per-ball key degrades to the card name. Grouping the real catalog by saga gives: Buu = {Alt. Dende 1-7, Earth Dragon Ball 3}; Cell = {Dende 1-7}; Kid Buu = {Alt. Namek 1-7}; Saiyan = {Earth 1-7}; Trunks = {Namek 1-7}; Unknown = {Earth 1-7, 'Upa, Littlefoot'}; World Games = {Earth Dragon Ball 3}; Fusion = {Alt. Earth Dragon Ball 3}. Per CRD L60 the Alt. printings are the same set and mix freely, yet the engine files them into separate groups counted independently.",
+      "consequence": "False negative: a player controlling Dende Dragon Balls 1-6 who captures the opponent's Alt. Dende Dragon Ball 7 controls all seven balls of the Dende set and should win, but the engine sees groups of 6 and 1 and the game continues; decks.ts:133 rejects the same legal mix at deck-build time with \"Dragon Balls must all be from one set\". False positive: a player holding Alt. Dende 1,2,4,5,6,7 who captures the opponent's Earth Dragon Ball 3 (Buu printing, 'tts-a15907e0-62') has 7 distinct names in group 'Buu' and is declared the Dragon Ball winner with two different sets. Today both are masked by rank 16, since no ball can enter play at all.",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "victory.ts:49-50 is `const set = card.saga || 'unknown';` / `const key = String(card.number ?? card.name);`, duplicated verbatim at combat.ts:452-454, and decks.ts:127-133 maps `.map((c) => c.saga)` into `ballSets` and errors with the exact string `Dragon Balls must all be from one set` at line 133. I confirmed against the real catalog that `number` is null for all 53 Dragon Balls, so the ball key always degrades to the name, and reproduced the saga grouping table above (one audit omitted the Fusion group; both otherwise agree). The false positive is real: 'Earth Dragon Ball 3' id tts-a15907e0-62 has saga 'Buu', so six Alt. Dende balls plus that one capture yields seven distinct names in group 'Buu'. CRD L57 and L60 read verbatim as quoted. victory.test.ts:142 'balls from different sets do not combine' passes only because its fixture at victory.test.ts:11-20 sets `number: n` - the field that is null in production data - so the test masks rather than covers this."
+    },
+    {
+      "rank": 42,
+      "title": "Capturing a Dragon Ball never uses its powers and never cancels the previous controller's floating effect",
+      "area": "dragon-balls",
+      "areas": [
+        "dragon-balls"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L679: \"When you capture a Dragon Ball, you must choose to use all or none of its powers when you capture it.\"; CRD L691: \"If a Dragon Ball produces a floating effect and the Dragon Ball is captured, the floating effect is cancelled. If the capturing playing uses its power, then it becomes active again.",
+      "engineLocation": "packages/engine/src/damage.ts:105-115 (captureBall), called from packages/engine/src/combat.ts:444",
+      "defect": "captureBall splices the instance out of one player's dragonBalls, pushes it into the other's, and appends a log line. It never looks up the card's abilities, never prompts the capturer for the all-or-none choice, and there is no floating-effect bookkeeping anywhere in the file. resolveCapture (combat.ts:443-463) likewise only recomputes the set count.",
+      "consequence": "Capturing Earth Dragon Ball 5 should raise a personality to its highest power stage, raise anger 2, draw 2 and recycle 2 cards from the discard pile (CRD L1541); the engine moves the card and nothing else. Symmetrically, when Earth Dragon Ball 4's skip-Combat floating effect (CRD L1538) is taken away by a capture it is neither cancelled for the loser nor granted to the capturer, so control of the ball has no in-game meaning beyond the win counter.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "damage.ts:105-115 is the whole of captureBall: a findIndex, a splice, a push, and `state.log.push(...captures a Dragon Ball...)`. It never touches db.get(...).rules.abilities. resolveCapture (combat.ts:432-468) adds only the set recount at :447-462 and then `nextAttackPhase`. A case-insensitive grep for 'floating' across packages/**/*.ts returns zero hits, so there is no floating-effect bookkeeping to cancel or reinstate. CRD L679 and L691 are verbatim, as is the Earth Dragon Ball 5 text at CRD L1541 and the Earth Dragon Ball 4 skip-Combat floating effect at L1538."
+    },
+    {
+      "rank": 43,
+      "title": "A card effect that pushes a personality below 0 power stages discards no life cards",
+      "area": "pat-and-damage",
+      "areas": [
+        "pat-and-damage"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L390: \"When a card effect causes you to lose power stages, not to a minimum of 0, if you go below 0, you must discard the top card of your life deck for every power stage left over.",
+      "engineLocation": "packages/engine/src/abilities.ts:38-52 (changeControllerStages, clamp at line 48)",
+      "defect": "changeControllerStages does `ctl.stageIndex = Math.max(0, Math.min(ctl.stageIndex + delta, top))` and syncs the rating; the amount clamped away is neither computed nor paid out of the Life Deck. It is the single execution path for `changePowerStages` from both attack riders (abilities.ts:113) and Non-Combat on-play effects (abilities.ts:195), and its `toZero` form passes delta -99, which would otherwise overshoot massively.",
+      "consequence": "\\\"Your opponent loses 5 power stages\\\" against a controller sitting at 2 stages costs the opponent 2 stages and nothing else, where the CRD makes them discard 3 life cards. Power-stage drain effects that lack a \"to a minimum of 0\" clause stop being a deck-depletion threat.",
+      "severity": "missing-rule",
+      "confidence": "medium",
+      "verifiedBy": "packages/engine/src/abilities.ts:48 is exactly `ctl.stageIndex = Math.max(0, Math.min(ctl.stageIndex + delta, top));` followed by syncRating and a stageChanged event - the amount lost to the floor clamp is never captured and no life-deck discard follows. It is the sole execution path for changePowerStages from both the attack rider (abilities.ts:113) and the Non-Combat on-play route (abilities.ts:196), both of which pass `e.toZero ? -99 : e.delta`, so a toZero effect overshoots by up to 99 stages with zero consequence. CRD:390 verbatim, and the line number is exact. The engine's Effect type carries no minimum-0 flag either, so it cannot currently distinguish the two card wordings - which makes the finding actionable rather than vague. No test covers it; missing-effects.test.ts only asserts the ceiling clamp."
+    },
+    {
+      "rank": 44,
+      "title": "Sensei Deck contents are never instantiated - setup step 6 (the Sensei swap) does not exist",
+      "area": "decks-and-mastery",
+      "areas": [
+        "decks-and-mastery"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L103: \"To use your Sensei Deck, at Step 5 of the game set up ... you choose any number of cards in your Sensei Deck ... and you shuffle the chosen cards from your Sensei Deck into your Life Deck.\" CRD L201: \"6) Players now may swap cards from their Sensei Deck into their Life Deck.\" CRD L1180 (Fusion): the Fusion personality is placed \"in play directly out of your Sensei Deck.",
+      "engineLocation": "packages/engine/src/setup.ts:58-64 (buildLifeDeck) and setup.ts:94-97 (buildPlayer); packages/server/src/room.ts:194-207 (setReady -> start -> createGame)",
+      "defect": "buildLifeDeck builds zones.lifeDeck only from deck.life. buildPlayer pushes exactly one instance into zones.sensei - the Sensei CARD itself (`zones.sensei.push(instance(deck.senseiId, false))`, setup.ts:96). The DeckList.senseiDeck array (protocol.ts:65), which decks.ts:110 counts for copy limits and decks.ts:137 checks for Tokui-Waza style legality, is never read by setup.ts at all, so those cards do not exist as CardInstances in the game. There is also no swap/prompt step: room.ts goes from 'both seats ready' straight to createGame.",
+      "consequence": "A player who builds a Sensei Deck gets nothing: the pre-game swap never happens, every card they put in the Sensei Deck is inert, Fusion personalities can never be taken from the Sensei Deck (so Fusion is unplayable), \"Sensei Deck only\" cards can never be used, and cards that remove/search an opponent's Sensei Deck always find an empty zone.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "Read setup.ts in full. buildLifeDeck (setup.ts:58-64) loops only `for (const { cardId, qty } of deck.life)`; deck.senseiDeck is never touched. buildPlayer's entire Sensei handling is setup.ts:94-97: `if (deck.senseiId) { player.senseiCardId = deck.senseiId; zones.sensei.push(instance(deck.senseiId, false)); }` - one instance, the Sensei card itself. Grep across packages for `senseiDeck` returns only protocol.ts:65 (the type), decks.ts:52/53/110/137 (validation + Tokui-Waza style scan) and setup.ts:86 (same style scan) - no call site ever converts those entries to CardInstances. zones.sensei is read outside tests only at server/src/redact.ts:29. No swap step exists: room.ts:195 setReady -> 204 start -> 206 `this.state = createGame({ seed: this.seed, players }, this.db)`, with no prompt in between. CRD citations check out verbatim: L103, L201 \"6) Players now may swap cards from their Sensei Deck into their Life Deck.\", L1180 \"...place it in play directly out of your Sensei Deck.\" No test exercises a Sensei swap."
+    },
+    {
+      "rank": 45,
+      "title": "Saiyan/Namekian Tokui-Waza can be declared by a Main Personality without that Heritage",
+      "area": "decks-and-mastery",
+      "areas": [
+        "decks-and-mastery"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L78: \"To declare a Saiyan Tokui-Waza, your Main Personality must have Saiyan Heritage.\" CRD L81: \"To declare a Namekian Tokui-Waza, your Main Personality must have Namekian Heritage.\" Heritage rosters are enumerated at CRD L908-932 (Saiyan) and L938-948 (Namekian).",
+      "engineLocation": "packages/engine/src/mastery.ts:48-83 (checkTokuiWaza), called from packages/engine/src/decks.ts:136-139 and packages/engine/src/setup.ts:86-92",
+      "defect": "checkTokuiWaza takes only (masteryId, cardIds, db) and performs exactly two tests: every non-Mastery Styled card matches the Mastery's style, and at least one Styled card exists. It never looks at which personality the mpLevels belong to - the MP name is not even passed in. There is no heritage data to consult either: EnginePersonality (packages/engine/src/loader.ts:4-14) has no heritage field, and 'Saiyan Heritage'/'Namekian Heritage' exist only as unused entries in the KEYWORDS array at packages/shared/src/cards.ts:84-85.",
+      "consequence": "A Krillin (or Frieza, or any non-Saiyan) deck can register Saiyan Style Mastery plus Saiyan Style cards; validateDeck returns no errors, room.ts:188 accepts it, and setup.ts:91 sets tokuiWazaDeclared = true. That deck then gets +1 PUR on every Power-Up Step (turn.ts:71) and unlocks Endurance (damage.ts:136) off an illegal declaration.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "mastery.ts:48 is `export function checkTokuiWaza(masteryId: string | undefined, cardIds: string[], db: CardDb): TokuiWazaCheck` - the MP is not a parameter, and the body (49-82) does exactly two things: reject a styled card whose `cardStyle !== style` (mastery.ts:72-73) and require `styledOthers === 0` to error (mastery.ts:78-79). EnginePersonality (loader.ts:4-14) has fields level/personalityName/alignment/powerRatings/zeroStageIndex/pur/canBeAlly/canCaptureDragonBall/variant - no heritage. Grep for Heritage across packages hits only shared/src/cards.ts:84-85. I also scanned data/cards.tts.enriched.json: zero cards carry a `rules.heritage` field and zero carry a Heritage keyword, so 'no heritage data to consult' is accurate. Consequences verified: setup.ts:91 `player.tokuiWazaDeclared = true;` on an errors-free check; turn.ts:71 `const bonus = state.players[playerIdx]?.tokuiWazaDeclared ? TOKUI_WAZA_PUR_BONUS : 0;`; damage.ts:136 `if (!p?.tokuiWazaDeclared) return false;` in canUseEndurance. CRD L78/L81 are verbatim, with rosters at L907+ and L937+. No test covers heritage."
+    },
+    {
+      "rank": 46,
+      "title": "Overlaying an Ally creates a second Ally instead of replacing the level underneath, and is rejected outright when the MP is lower level",
+      "area": "noncombat-drills",
+      "areas": [
+        "noncombat-drills",
+        "personality-powers"
+      ],
+      "mergedFrom": 2,
+      "crdEvidence": "CRD:554 - \"After the Ally is in play, you can play that Allies next level Personality card on top of him. This is called 'Overlaying'. When you overlay, you set the Ally to his highest power stage on his next level. It is okay to have an Ally's overlaid level exceed your Main Personality's level.",
+      "engineLocation": "packages/engine/src/reducer.ts:107 (level guard), reducer.ts:112 (stage), reducer.ts:113-124 (`p.allies.push(ally)`); rule source packages/engine/src/noncombat.ts:103-105 (maxAllyLevel)",
+      "defect": "playAlly never looks for an existing ally with the same `per.personalityName`. Playing Krillin level 2 while Krillin level 1 is already in play appends a second entry to `p.allies` with its own uid, `levelCardIds: [inst.cardId]` (a single level) and `stageIndex = zeroStageIndex + 3` - not the highest stage of the new level, and not a replacement. Separately, the guard at reducer.ts:107 (`per.level > maxAllyLevel(...)`, where maxAllyLevel is the MP's CURRENT level) rejects the level-2 card outright when the MP is level 1, which is exactly the case CRD:554 permits. The CRD:547 Majin and CRD:550 Cell Jr. ally restrictions are likewise absent from this code path.",
+      "consequence": "A player who draws two levels of the same Ally fields two separate bodies rather than one upgraded one: two redirect targets absorbing separate attacks (redirectTargets, combat.ts:229-232, returns every entry in `p.allies`), two power-up recipients per turn (turn.ts:100), and two bodies for costs that remove an Ally. The level-2 Ally that should sit at its highest power stage instead enters at 3 above 0. And a level-1 MP cannot overlay at all, so Ally levels are effectively capped at the MP's level in defiance of the printed exception.",
+      "severity": "missing-rule",
+      "confidence": "high",
+      "verifiedBy": "CRD:554 is verbatim, including \"When you overlay, you set the Ally to his highest power stage on his next level\" and \"It is okay to have an Ally's overlaid level exceed your Main Personality's level.\" reducer.ts:113-124 constructs a fresh `PersonalityInPlay` with `uid: ally-${inst.uid}`, `levelCardIds: [inst.cardId]`, `currentLevel: per.level`, then `p.allies.push(ally)` at 124 with no search for an existing `per.personalityName` (grep: `personalityName` appears in playAlly only at line 115, the assignment, and 125, the log). The stage is reducer.ts:112 `const stageIndex = Math.min(per.zeroStageIndex + START_ALLY_STAGES_ABOVE_ZERO, ratings.length - 1);` - always 3 above zero. maxAllyLevel is confirmed at noncombat.ts:103-105 as `return state.players[playerIdx]?.mp.currentLevel ?? 1;`, and noncombat.test.ts:136 (\"an Ally may not out-level the Main Personality\") is a passing test that locks that behaviour in - so the CRD:554 exception is not merely unimplemented, it is actively rejected. That test does not cover overlaying, so it is not a refutation. Two mis-cited CRD lines in one source write-up: the Majin restriction is CRD:547 and the Cell Jr. restriction is CRD:550 (557 is the two-level-discard rule, 559 is blank) - both restrictions are nonetheless genuinely absent from this code path."
+    },
+    {
+      "rank": 47,
+      "title": "Reaching 5 anger advances the level synchronously with no response window, so anger-interception cards can never be used and threshold-shifting cards are unrepresentable",
+      "area": "anger-and-levels",
+      "areas": [
+        "anger-and-levels"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD.txt:1789 - \"King Cold Smiles (Trunks Saga - #37) - Treat this card as if it read, 'Use when your opponent's anger level reaches 5 or more to set their anger level to 3 instead of gaining a personality level.'\"; CRD.txt:520 sets the threshold at 5",
+      "engineLocation": "packages/engine/src/turn.ts:149-153 (with the constant at turn.ts:12)",
+      "defect": "`setAnger` writes the new anger value and, in the same call, tests `p.anger >= ANGER_TO_ADVANCE` and calls `advanceLevel` inline. There is no prompt, no event the opponent can respond to, and no state in which the MP is sitting at 5+ anger waiting to advance - `state.pendingPrompt` is never set on this path. The 5 itself is the module-level constant ANGER_TO_ADVANCE (turn.ts:12), read directly with no per-player override hook.",
+      "consequence": "The opponent is never offered the chance to play King Cold Smiles (or any \"instead of gaining a personality level\" response); the level advance, the anger reset and the Drill discard are already done by the time control returns to the reducer. The hardcoded constant additionally means the printed threshold-shifting cards in the catalog (Blue Style Mastery's \"your opponent must reach 6 anger\", Saiyan Lunar Drill's \"you only need to reach 3 anger\") cannot be represented at all.",
+      "severity": "edge-case",
+      "confidence": "high",
+      "verifiedBy": "CRD.txt:1789 reads verbatim as quoted and CRD.txt:520 sets the threshold at 5. turn.ts:147-152 does it all in one call: `p.anger = Math.max(0, anger);` then `if (p.anger >= ANGER_TO_ADVANCE) { const before = p.currentLevel; advanceLevel(state, p, db, events); ... }` - and advanceLevel (turn.ts:119-127) increments the level, zeroes anger and calls `discardDrills` before returning. `state.pendingPrompt` is assigned at only four sites, all in combat.ts (206, 301, 349, 375); none is on the anger path. turn.ts:12 `export const ANGER_TO_ADVANCE = 5;` is a module constant read directly at line 149 with no per-player override. The catalog confirms the unrepresentable cards: Saiyan Lunar Drill (\"you only need to reach 3 anger to advance a personality level\") parses to `abilities: []`, the Blue Style Mastery printing \"Your opponent must reach 6 anger to advance a personality level\" carries no threshold effect, and King Cold Smiles is flattened to an onPlay `changeAnger foe -3` rather than a replacement of the advance."
+    },
+    {
+      "rank": 48,
+      "title": "Namekian Tokui-Waza decks are capped at 85 cards instead of 90",
+      "area": "decks-and-mastery",
+      "areas": [
+        "decks-and-mastery"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L45: \"Decks must contain a minimum of 50 cards. No Deck may contain more than 85 cards. If you declare a Namekian Tokui-Waza, you may have up to 90 cards in your deck.",
+      "engineLocation": "packages/engine/src/decks.ts:24 (MAX_DECK_SIZE = 85) and decks.ts:145",
+      "defect": "The size check `if (total > MAX_DECK_SIZE)` is unconditional - nothing in decks.ts consults the declared Tokui-Waza style before applying the ceiling, even though checkTokuiWaza already returned that style two statements earlier at decks.ts:138 (it yields 'Namekian' for a Namekian Style Mastery). The header comment at decks.ts:15-17 attributes the gap to missing catalog data, but the Mastery's style is the only input the rule needs and it is in hand.",
+      "consequence": "A legal 86-90 card Namekian Tokui-Waza deck - a real archetype the exception exists for - is rejected by the server at room.ts:188 with \"deck has 88 cards, maximum is 85\" and cannot be played at all.",
+      "severity": "wrong-rule",
+      "confidence": "high",
+      "verifiedBy": "decks.ts:24 `export const MAX_DECK_SIZE = 85;` and decks.ts:145 `if (total > MAX_DECK_SIZE) errors.push(...deck has ${total} cards, maximum is ${MAX_DECK_SIZE}...);` - no branch on the declared style anywhere in the function. decks.ts:138 is `errors.push(...checkTokuiWaza(deck.masteryId, all, db).errors);`, which discards the `style` half of the TokuiWazaCheck return (mastery.ts:36-41 defines `style: Style | null`), so the needed input is in hand and thrown away. The file's own header at decks.ts:15-17 concedes it: 'Not yet enforced (needs catalog data we don't have): the Namekian Tokui-Waza 90-card ceiling...' - but MARTIAL_STYLES (mastery.ts:24) already includes 'Namekian', so styleOf yields it from the Mastery with no extra catalog data. CRD L45 verbatim. The rejection path is real: room.ts:188 `const errors = validateDeck(deck, this.db, this.deckRules);` then 189 `if (errors.length) return reject(...illegal deck...)`. No test asserts a 90-card Namekian deck is legal."
+    },
+    {
+      "rank": 49,
+      "title": "Bubbles' fixed base damage of 3 is documented as implemented but exists nowhere in the engine",
+      "area": "pat-and-damage",
+      "areas": [
+        "pat-and-damage"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L1029: \"Whenever Bubbles performs a physical attack with a 'Tuff Enuff only' card, the base damage for that attack is always 3, regardless of what the Physical Attack Table tells you, this includes Z power stages. This does not affect Final Physical Attacks.",
+      "engineLocation": "packages/engine/src/pat.ts:14 (comment claiming combat handles it) vs packages/engine/src/combat.ts:200-202 (no such branch)",
+      "defect": "pat.ts:14 states the rule is \"card-specific (handled in combat)\" and docs/PAT.md:50 repeats it, but combat.ts's only base-damage assignment is the unconditional `computeBaseDamage(attCtl.currentRating, defCtl.currentRating)`. Grep for /Bubbles/ over packages/engine/src returns no hits - the override, and its Z-rating and Final-Physical-Attack carve-outs, are unimplemented.",
+      "consequence": "Bubbles attacking with a Tuff Enuff only card deals the raw PAT result (typically 1, or 2 against a Z personality) instead of the fixed 3. The misleading comment means a reader checking coverage will believe the rule is handled.",
+      "severity": "edge-case",
+      "confidence": "high",
+      "verifiedBy": "A case-insensitive grep for 'bubbles' over packages/engine/src and packages/shared/src returns exactly one hit - the comment itself, packages/engine/src/pat.ts:14: \" *   - Bubbles' \\\"Tuff Enuff only\\\" fixed-3 rule is card-specific (handled in combat).\" combat.ts's only base-damage assignment is the unconditional combat.ts:201 `attack.baseDamage = computeBaseDamage(attCtl.currentRating, defCtl.currentRating);`, with no card- or personality-specific branch anywhere in the file, and computeBaseDamage (pat.ts:92-100) returns `table.special.zResult` (2) for a Z rating with no override hook. The rule is live content, not hypothetical: data/cards.tts.enriched.json contains three Bubbles Personality printings. CRD:1029 verbatim. The comment is the specific harm here - it asserts coverage that does not exist."
+    },
+    {
+      "rank": 50,
+      "title": "A pending deferred Dragon Ball claim suppresses the opponent's immediate Dragon Ball win",
+      "area": "victory",
+      "areas": [
+        "victory"
+      ],
+      "mergedFrom": 1,
+      "crdEvidence": "CRD L164/L666: \"If you get the last of the 7 Dragon Balls by playing it, you win\" - the defer applies only to the player who captured a 7th ball (CRD L167).",
+      "engineLocation": "packages/engine/src/victory.ts:114",
+      "defect": "The immediate Dragon Ball branch is guarded by `state.pendingDragonVictory === undefined`, a single global flag rather than a per-player one. While player 0's captured-7th claim is waiting to mature, the guard is false for *every* player in the loop, so player 1 completing their own set is not detected.",
+      "consequence": "Player 0 captures a 7th ball and their win defers to their next Draw Step. On the intervening turn player 1 plays the last ball of their own set from hand - a win the CRD grants immediately - but nothing happens, and player 0's deferred claim then matures first and takes the game.",
+      "severity": "edge-case",
+      "confidence": "high",
+      "verifiedBy": "victory.ts:114 is `if (balls && balls.count >= DRAGON_BALL_SET_SIZE && state.pendingDragonVictory === undefined) {`, sitting inside `for (const player of state.players)` (victory.ts:105) - the guard reads a single global field, not `state.pendingDragonVictory !== player.idx`, so it is false for every player in the loop while any claim is pending. The maturation block above it (victory.ts:91-103) only clears the flag when `state.activePlayerIdx === state.pendingDragonVictory && state.step === 'draw'`, so the suppression persists across the whole intervening turn; when it does clear, player 0's endGame at victory.ts:101 returns first. CRD L666 grants the play-it win with no deferral and L167 restricts the deferral to the capturer. The fix is a one-token change to a per-player comparison, so the claim is actionable. victory.test.ts:151-180 covers only the single-player defer, never a second player completing a set during the window."
+    }
+  ]
+}
