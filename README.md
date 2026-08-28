@@ -33,7 +33,7 @@ mode, exactly as at a table.
 | Package | State |
 | --- | --- |
 | `@dbz/shared` | Card schema, game state, client/server protocol. |
-| `@dbz/engine` | Turn sequencing, power-up, anger → advancement, PAT + combat, Endurance, Dragon Balls, Masteries/Tokui-Waza, Drills & Locations, deck legality, three victory conditions. 61 tests. |
+| `@dbz/engine` | Turn sequencing, power-up, anger → advancement, PAT + combat, Endurance, Dragon Balls, Masteries/Tokui-Waza, deck legality, three victory conditions. 141 tests. |
 | `@dbz/server` | ws rooms, lobby, per-seat redaction, reconnect tokens, spectators, card images. 57 tests. |
 | `@dbz/client` | Board, Scouter, Anger Sword, deck builder, card browser, prompt answering, Manual mode. |
 | `@dbz/scraper` + `@dbz/ocr` + `@dbz/tts` | Card pipeline: gallery scrape, TTS atlas slicing, OCR, corpus correction, triangulation. 25 tests. |
@@ -43,6 +43,39 @@ independent sources (card faces read by vision, the hand-typed LackeyCCG
 database, and our own OCR) and measures 0.3% character error against
 hand-transcribed ground truth. 514 personalities carry full power-stage
 ladders, PUR, level and alignment.
+
+### What the engine does not simulate
+
+The engine was audited rule by rule against the CRD (`docs/CRD.txt`); the full
+finding list is in `data/crd-audit.json`. The gaps below are deliberate: the
+game automates the **sequential** rules — the turn, the battle sequence, damage,
+anger, victory — and leaves the **standing** rules to the players, because the
+standing layer needs an authoring pass over 262 Drills and 572 personality
+power boxes before a single one could be resolved correctly.
+
+A simplification written down is a rule of the house. A silent one is a bug, so
+every card the engine cannot resolve says so in the game log rather than
+quietly doing nothing.
+
+- Drills, Masteries, Locations and Battlegrounds are shown in play, but their
+  ongoing effects are not applied — resolve them between players.
+- Personality Powers and Constant Combat Powers are displayed on the card and
+  named in the log, but are not automated.
+- "When entering Combat" effects do not fire automatically.
+- The defender cannot interpose an Ally as Control of Combat; damage stays on
+  the defending personality.
+- At the Discard Step your hand is not trimmed automatically, and you are not
+  asked to choose — hand size is currently unenforced.
+- Sensei Decks are not supported.
+- The Personality Capture Rule is not implemented.
+- Dragon Ball powers are not applied; a ball counts only toward the seven-ball
+  win.
+- Bubbles' fixed base damage of 3 is not applied.
+- Majin, Cell Jr. and High-Tech Ally restrictions are not enforced.
+- Anger-interception and anger-threshold cards have no effect.
+- Cards whose printed text names a use window ("Use when entering Combat",
+  "Use when your opponent would win") can only be played in the Non-Combat
+  Step, so 45 such cards cannot be used at the moment they are meant for.
 
 See `docs/ARCHITECTURE.md` for the design and `docs/RULES-NOTES.md` for the engine-relevant rules distilled from the CRD.
 
