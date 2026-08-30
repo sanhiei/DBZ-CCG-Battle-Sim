@@ -32,7 +32,7 @@ import type {
 } from '@dbz/shared';
 import type { CardDb } from './loader.js';
 import { computeBaseDamage } from './pat.js';
-import { advanceStep, draw, syncRating } from './turn.js';
+import { advanceStep, draw, MP_DOWN_STAGES, releaseControlIfMpRecovered, syncRating } from './turn.js';
 import { applyIfSuccessful, applyOnPlay, attackKindOf, setupAttackAbility } from './abilities.js';
 import {
   canUseEndurance,
@@ -131,6 +131,9 @@ function nextAttackPhase(state: GameState, events: GameEvent[]): void {
 function endCombatStep(state: GameState, events: GameEvent[]): void {
   delete state.combat;
   delete state.pendingPrompt;
+  // Combat is over, so no attack can be mid-resolution: safe to hand control
+  // back to any MP that has recovered (CRD ~L589).
+  for (const p of state.players) releaseControlIfMpRecovered(state, p.idx);
   advanceStep(state, events); // combat -> discard
 }
 
@@ -693,9 +696,21 @@ export function redirectDamage(state: GameState, toUid: string | null, ctx: Comb
 export function takeControlOfCombat(state: GameState, personalityUid: string, ctx: CombatCtx, events: GameEvent[]): string | undefined {
   const player = state.players[ctx.actingPlayerIdx];
   if (!player) return 'bad player';
+  if (state.combat?.currentAttack) return 'control cannot change while an attack is resolving';
+
+  // The MP taking it back is a legal choice, not just an automatic one: "You
+  // may choose to keep the current Ally in control of Combat, or have another
+  // personality take control of Combat" (CRD ~L585). Only Allies were
+  // accepted, so once control left the MP the player could never hand it back.
+  if (personalityUid === player.mp.uid) {
+    for (const a of player.allies) delete a.inControlOfCombat;
+    state.log.push(`${player.name}: ${player.mp.personalityName} takes back Control of Combat.`);
+    return undefined;
+  }
+
   const ally = player.allies.find((a) => a.uid === personalityUid);
   if (!ally) return 'not your ally';
-  if (player.mp.stageIndex > 1) return 'MP must be at its bottom 2 power stages';
+  if (player.mp.stageIndex > MP_DOWN_STAGES) return 'MP must be at its bottom 2 power stages';
   for (const a of player.allies) delete a.inControlOfCombat;
   ally.inControlOfCombat = true;
   state.log.push(`${player.name}: ${ally.personalityName} takes control of Combat.`);

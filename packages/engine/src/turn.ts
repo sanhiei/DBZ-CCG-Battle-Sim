@@ -52,6 +52,7 @@ export function advanceStep(state: GameState, events: GameEvent[]): void {
     state.turnNumber += 1;
     delete state.combat;
     delete state.skipCombatThisTurn;
+    for (const p of state.players) releaseControlIfMpRecovered(state, p.idx);
   }
   // A Location/Battleground played this turn costs the Combat Step (~L713).
   if (next === 'combat' && state.skipCombatThisTurn) {
@@ -103,11 +104,38 @@ function moveStage(state: GameState, p: PersonalityInPlay, delta: number, db: Ca
 }
 
 /** Power-Up Step: MP gains PUR stages; each Ally gains exactly 1 (CRD ~L561). */
+/**
+ * An Ally holds Control of Combat only while the MP is down.
+ *
+ * CRD ~L589: "When your Ally takes control of Combat from your MP, it remains
+ * in control as long as your MP is still at its bottom 2 power stages." Nothing
+ * ever released it, so the first Ally to take control kept it for the rest of
+ * the game — the MP powered back up and still never fought.
+ *
+ * Checked only at points where no attack is in progress, because the CRD also
+ * says the personality in control "must stay in control until the attack is
+ * resolved" (~L585).
+ */
+export function releaseControlIfMpRecovered(state: GameState, playerIdx: number): boolean {
+  const p = state.players[playerIdx];
+  if (!p || p.mp.stageIndex <= MP_DOWN_STAGES) return false;
+  const held = p.allies.find((a) => a.inControlOfCombat);
+  if (!held) return false;
+  delete held.inControlOfCombat;
+  state.log.push(`${p.name}: ${p.mp.personalityName} is back up — ${held.personalityName} releases Control of Combat.`);
+  return true;
+}
+
+/** The MP's "bottom 2 power stages": stage index 0 or 1 (CRD ~L589). */
+export const MP_DOWN_STAGES = 1;
+
 export function powerUp(state: GameState, playerIdx: number, db: CardDb, events: GameEvent[]): void {
   const p = state.players[playerIdx];
   if (!p) return;
   moveStage(state, p.mp, purOf(state, playerIdx, p.mp, db), db, events);
   for (const ally of p.allies) moveStage(state, ally, 1, db, events);
+  // Powering up is exactly what lifts an MP off its bottom stages.
+  releaseControlIfMpRecovered(state, playerIdx);
   events.push({ type: 'poweredUp', playerIdx });
 }
 
