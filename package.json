@@ -22,7 +22,9 @@
     "test": "npm run test --workspaces --if-present",
     "extract:tts": "npm run extract -w @dbz/tts",
     "slice:tts": "npm run slice -w @dbz/tts",
-    "ci": "npm run typecheck && npm test"
+    "ci": "npm run typecheck && npm test",
+    "build:client": "npm run build -w @dbz/client",
+    "start": "npm run build --workspaces --if-present && node packages/server/dist/index.js"
   },
   "engines": {
     "node": ">=22.6"

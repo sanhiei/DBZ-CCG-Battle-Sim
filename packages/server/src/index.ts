@@ -184,7 +184,67 @@ function handleHttp(req: IncomingMessage, res: ServerResponse, catalog: Catalog,
   if (url.pathname.startsWith('/cards/')) {
     return serveCardImage(url.pathname.slice('/cards/'.length), res);
   }
+  if (serveClient(url.pathname, res)) return;
   res.writeHead(404, { 'content-type': 'text/plain' }).end('not found');
+}
+
+const MIME: Record<string, string> = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.ico': 'image/x-icon',
+  '.woff2': 'font/woff2',
+};
+
+/**
+ * Serve the built client, so one process on one port is the whole game.
+ *
+ * The client talks to same-origin `/ws`, `/api` and `/cards`; in development
+ * Vite proxies those to this server, which is why nothing needed to serve the
+ * UI before. In production there is no Vite, so without this there is no single
+ * URL to hand anyone — which is the whole point of a multiplayer game.
+ *
+ * Unknown paths fall back to index.html because the client is a single-page
+ * app: a room link like /r/ABCD is a client route, not a file. Returns false
+ * when there is no build to serve, so `npm run dev:server` still 404s honestly
+ * instead of pretending.
+ */
+function serveClient(pathname: string, res: ServerResponse): boolean {
+  const root = clientDist();
+  if (!root) return false;
+
+  const rel = pathname.replace(/^\/+/, '');
+  // Resolve inside the build directory only; a crafted path must not escape it.
+  const candidate = rel ? join(root, rel) : '';
+  const file = candidate && candidate.startsWith(root) && existsSync(candidate) && !candidate.endsWith('/') ? candidate : join(root, 'index.html');
+  if (!existsSync(file)) return false;
+
+  const ext = file.slice(file.lastIndexOf('.'));
+  res.writeHead(200, {
+    'content-type': MIME[ext] ?? 'application/octet-stream',
+    // Hashed asset filenames may be cached hard; index.html must not be.
+    'cache-control': file.endsWith('index.html') ? 'no-cache' : 'public, max-age=31536000, immutable',
+  });
+  createReadStream(file).pipe(res);
+  return true;
+}
+
+let clientDistCache: string | null | undefined;
+function clientDist(): string | null {
+  if (clientDistCache !== undefined) return clientDistCache;
+  const fromEnv = process.env.DBZ_CLIENT_DIST;
+  const candidates = [
+    ...(fromEnv ? [fromEnv] : []),
+    join(process.cwd(), 'packages', 'client', 'dist'),
+    join(process.cwd(), '..', 'client', 'dist'),
+  ];
+  clientDistCache = candidates.find((d) => existsSync(join(d, 'index.html'))) ?? null;
+  return clientDistCache;
 }
 
 /**

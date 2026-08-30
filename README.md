@@ -81,13 +81,52 @@ See `docs/ARCHITECTURE.md` for the design and `docs/RULES-NOTES.md` for the engi
 
 ## Getting started
 
+### Play it
+
+One command builds everything and serves the whole game — UI, WebSocket and
+card images — from a single port:
+
 ```bash
 npm install
-npm run scrape        # build data/cards.json from the card galleries
-npm run typecheck
-npm test
+npm start
+```
+
+Then open <http://localhost:8787>. Two players join the same room code; a third
+connection spectates.
+
+### Play it with other people
+
+The server binds `0.0.0.0`, so anyone who can reach the machine can play.
+
+- **Same house / same network:** they open `http://<your-lan-ip>:8787`.
+- **Over the internet:** put a tunnel in front of it rather than opening a port
+  on your router — for example `cloudflared tunnel --url http://localhost:8787`
+  — and send them the URL it prints. The client connects to `/ws` on whatever
+  origin served the page, and upgrades to `wss://` automatically over HTTPS, so
+  a tunnel needs no configuration.
+
+Hosting it yourself is the practical option because **card images are not in
+this repository** — they are sliced from a Tabletop Simulator mod into
+`data/images-tts/`, which is gitignored, since the art is not ours to
+redistribute. A deployment built from a clean clone will run and play correctly
+but show cards without faces. Whoever hosts needs to have run the image
+pipeline locally.
+
+### Develop
+
+Two processes, with hot reload; Vite proxies `/ws`, `/api` and `/cards` to the
+game server:
+
+```bash
 npm run dev:server    # authoritative game server on :8787
-npm run dev:client    # web client on :5173
+npm run dev:client    # web client on :5173, open this one
+```
+
+Other useful scripts:
+
+```bash
+npm run scrape        # build data/cards.json from the card galleries
+npm run ci            # typecheck + all tests
 ```
 
 ### Data integrity
