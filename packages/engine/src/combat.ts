@@ -414,6 +414,13 @@ function applyPowerStageDamage(state: GameState, personalityUid: string, db: Car
     return;
   }
 
+  // Say what happened. A successful attack used to be silent — the only sign it
+  // landed was a number changing on a card the player may not be looking at,
+  // while a STOPPED attack got a log line. Playing it, you could not tell
+  // whether your attack had worked.
+  state.log.push(
+    `${state.players[atk.attackerPlayerIdx]?.name}'s ${atk.attackType} attack hits ${target.personalityName} for ${atk.powerStagesDealt} power stage(s).`,
+  );
   events.push({ type: 'attackResolved', successful: true, powerStages: atk.powerStagesDealt, lifeCards: 0 });
   finishSuccessfulAttack(state, atk, db, events);
   nextAttackPhase(state, events);
@@ -587,6 +594,11 @@ function resolveLifeCardDamage(
 
   delete atk.enduranceOffer;
   const dealt = atk.lifeCardsDealt ?? 0;
+  const stages = atk.powerStagesDealt ?? 0;
+  state.log.push(
+    `${state.players[atk.attackerPlayerIdx]?.name}'s ${atk.attackType} attack deals ${dealt} life card(s)` +
+      `${stages > 0 ? ` and ${stages} power stage(s)` : ''} to ${state.players[atk.defenderPlayerIdx]?.name}.`,
+  );
   // An attack that overflowed dealt power stages AND life cards; report both.
   events.push({ type: 'attackResolved', successful: true, powerStages: atk.powerStagesDealt ?? 0, lifeCards: dealt });
   finishSuccessfulAttack(state, atk, db, events);
