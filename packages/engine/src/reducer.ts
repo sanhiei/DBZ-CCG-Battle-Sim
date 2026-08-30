@@ -15,6 +15,7 @@ import {
   redirectDamage,
   resolveCapture,
   resolveEndurance,
+  resolveControlOfCombat,
   resolveDefense,
   takeControlOfCombat,
   type CombatCtx,
@@ -192,6 +193,9 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       } else if (type === 'redirect') {
         const toUid = typeof choice === 'string' ? choice : (choice as { toUid?: string | null })?.toUid ?? null;
         err = redirectDamage(state, toUid, ctx, db, events);
+      } else if (type === 'controlOfCombat') {
+        const uid = typeof choice === 'string' ? choice : (choice as { uid?: string | null })?.uid ?? null;
+        err = resolveControlOfCombat(state, uid, ctx, events);
       } else {
         err = `unhandled prompt '${type}'`;
       }

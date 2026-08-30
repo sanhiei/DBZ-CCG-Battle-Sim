@@ -96,7 +96,17 @@ export function PromptPanel({ prompt, seat, canDefendWith, onAnswer }: PromptPan
           </>
         )}
 
-        {!['defend', 'redirect', 'capture', 'endurance'].includes(prompt.type) && (
+        {prompt.type === 'controlOfCombat' && (
+          <>
+            {options(prompt).map((o) => (
+              <button key={o.uid} onClick={() => onAnswer({ uid: o.uid })}>
+                {o.name}
+              </button>
+            ))}
+          </>
+        )}
+
+        {!['defend', 'redirect', 'capture', 'endurance', 'controlOfCombat'].includes(prompt.type) && (
           <span className="muted">
             No UI for prompt type “{prompt.type}” yet — resolve it manually.
           </span>

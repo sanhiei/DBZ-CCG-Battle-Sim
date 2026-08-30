@@ -136,6 +136,34 @@ export interface AttackInProgress {
   resolutionStep: number;
 }
 
+/**
+ * The CRD's own numbered Battle Sequence (~L316-L364), for display.
+ *
+ * The sequence is the game's answer to "who can respond, and when" — the same
+ * job a priority stack does elsewhere. Showing which step an attack has reached
+ * turns that from something you have to know into something you can read.
+ * Steps the engine does not implement are still listed, because a gap you can
+ * see is better than a gap you cannot.
+ */
+export const BATTLE_SEQUENCE: Record<number, string> = {
+  1: 'attacker plays a card',
+  2: 'costs and Empower',
+  3: "attacker's secondary effects",
+  4: 'defender names Control of Combat',
+  5: 'defender may defend',
+  6: "defender's secondary effects",
+  7: 'Defense Shields',
+  8: 'the attack is successful',
+  9: 'Base Damage',
+  10: 'damage modifiers',
+  11: 'Personality Capture',
+  12: 'power stages dealt',
+  13: 'life cards dealt — Endurance',
+  14: 'Dragon Ball capture',
+  15: '"If successful" effects',
+  16: 'the attack card is discarded',
+}
+
 export interface CombatState {
   /** Active player for the turn (primary attacker). */
   attackerPlayerIdx: number;
@@ -152,6 +180,9 @@ export interface CombatState {
    * Cleared automatically when the Combat Step ends, since `combat` is dropped.
    */
   lockouts?: Array<{ playerIdx: number; attackType: 'physical' | 'energy' | 'any' }>;
+  /** Defense Shields already spent this combat: each stops only the FIRST
+   *  unstopped attack of its type (CRD ~L337). */
+  shieldsUsed?: string[];
   currentAttack?: AttackInProgress;
 }
 

@@ -11,8 +11,13 @@
  * Endurance, Dragon Ball capture, "if successful" chains, spending the attack
  * and defense cards, survival loss, pass/consecutive-pass end.
  *
- * NOT modeled: Defense Shields (battle-sequence step 7), Final Physical Attack,
- * the Declare step, and most Personality Powers.
+ * Also modeled: Control of Combat (step 4), Defense Shields from cards in play
+ * (step 7), and `resolutionStep` tracking so the UI can show where in the
+ * 16-step sequence an attack is.
+ *
+ * NOT modeled: Final Physical Attack, the Declare step, Defense Shields printed
+ * on personalities (they arrive with Personality Powers), and the Personality
+ * Capture rule (step 11).
  *
  * Keep this list honest. It previously listed Endurance and Dragon Ball capture
  * as missing long after both were built, while claiming power-stage damage was
@@ -144,6 +149,7 @@ function finishSuccessfulAttack(
       }
     }
   }
+  atk.resolutionStep = 15; // "If successful" effects resolve
   applyIfSuccessful(state, atk.ifSuccessfulEffects, db, events, {
     userIdx: atk.attackerPlayerIdx,
     foeIdx: atk.defenderPlayerIdx,
@@ -262,12 +268,85 @@ export function declareAttack(
 
   c.currentAttack = attack;
   events.push({ type: 'attackDeclared', attackType: kind });
+
+  // Step 4 comes before the defence: "If an Ally can take over Combat for the
+  // Main Personality, the Defender must announce which personality is in
+  // Control of Combat until this attack is resolved" (CRD ~L325). Only ask
+  // when there is a real choice to make.
+  if (openControlWindow(state, attack, db)) return undefined;
+  openDefenceWindow(state, attack);
+  return undefined;
+}
+
+/**
+ * Battle-sequence step 4 — the defender names who is in Control of Combat.
+ *
+ * Returns true when a choice was actually offered. An Ally may only take over
+ * while the MP is at its bottom two power stages (CRD ~L589), so with no Ally,
+ * or a healthy MP, there is nothing to announce and the sequence goes straight
+ * to the defence.
+ */
+function openControlWindow(
+  state: GameState,
+  atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>,
+  db: CardDb,
+): boolean {
+  const defender = state.players[atk.defenderPlayerIdx];
+  if (!defender || defender.allies.length === 0) return false;
+  if (defender.mp.stageIndex > MP_DOWN_STAGES) return false;
+
+  atk.resolutionStep = 4;
   state.pendingPrompt = newPrompt(
-    defenderIdx,
+    atk.defenderPlayerIdx,
+    'controlOfCombat',
+    'Who is in Control of Combat for this attack?',
+    {
+      options: [
+        { uid: defender.mp.uid, name: `${defender.mp.personalityName} (Main Personality)` },
+        ...defender.allies.map((a) => ({ uid: a.uid, name: a.personalityName })),
+      ],
+    },
+  );
+  return true;
+}
+
+/** Battle-sequence step 5 — the defender answers the attack. */
+function openDefenceWindow(state: GameState, atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>): void {
+  atk.resolutionStep = 5;
+  state.pendingPrompt = newPrompt(
+    atk.defenderPlayerIdx,
     'defend',
-    `Defend the ${kind} attack, or take the damage.`,
+    `Defend the ${atk.attackType} attack, or take the damage.`,
     { optional: true },
   );
+}
+
+/** Answer step 4, then open the defence. */
+export function resolveControlOfCombat(
+  state: GameState,
+  personalityUid: string | null,
+  ctx: CombatCtx,
+  events: GameEvent[],
+): string | undefined {
+  const atk = state.combat?.currentAttack;
+  if (!atk || state.pendingPrompt?.type !== 'controlOfCombat') return 'no Control of Combat choice pending';
+  if (ctx.actingPlayerIdx !== atk.defenderPlayerIdx) return 'only the defender announces Control of Combat';
+
+  const defender = state.players[atk.defenderPlayerIdx]!;
+  if (personalityUid && personalityUid !== defender.mp.uid) {
+    const ally = defender.allies.find((a) => a.uid === personalityUid);
+    if (!ally) return 'not one of your personalities';
+    for (const a of defender.allies) delete a.inControlOfCombat;
+    ally.inControlOfCombat = true;
+    state.log.push(`${defender.name}: ${ally.personalityName} takes Control of Combat.`);
+  } else {
+    for (const a of defender.allies) delete a.inControlOfCombat;
+    state.log.push(`${defender.name}: ${defender.mp.personalityName} stays in Control of Combat.`);
+  }
+  // Control decides who the damage lands on, so re-read it now.
+  atk.defenderControllerUid = controllerOf(defender).uid;
+  openDefenceWindow(state, atk);
+  return undefined;
   return undefined;
 }
 
@@ -282,6 +361,59 @@ export function declareEmpower(state: GameState, amount: number, ctx: CombatCtx)
 
 /** Card types that may be played during Combat, to attack or to defend. */
 const COMBAT_CARD_TYPES = new Set(['Physical Combat', 'Energy Combat', 'Combat']);
+
+/**
+ * Battle-sequence step 7 — Defense Shields on cards already in play.
+ *
+ * "If the attack was not stopped, the defender MUST now activate any Defense
+ * Shields from his cards in play" (CRD ~L337). Mandatory, so there is no prompt
+ * to make: it fires or it does not. This window did not exist at all, so 23
+ * Non-Combat cards printing "Defense Shield: stops the first unstopped attack"
+ * sat in play doing nothing all game.
+ *
+ * Each shield stops the FIRST unstopped attack of its type this combat, so a
+ * spent one is recorded and not offered again. Returns true when the attack is
+ * stopped.
+ */
+function activateDefenseShields(
+  state: GameState,
+  atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>,
+  c: NonNullable<GameState['combat']>,
+  db: CardDb,
+  events: GameEvent[],
+): boolean {
+  const defender = state.players[atk.defenderPlayerIdx];
+  if (!defender) return false;
+
+  for (const inst of defender.zones.inPlay) {
+    const card = db.get(inst.cardId);
+    const text = card?.rules?.text ?? '';
+    if (!/defense\s*shield/i.test(text)) continue;
+    if ((c.shieldsUsed ?? []).includes(inst.uid)) continue;
+
+    // "Stops the first unstopped physical attack" / "energy" / neither = both.
+    const mentionsPhysical = /physical/i.test(text);
+    const mentionsEnergy = /energy/i.test(text);
+    const covers =
+      (!mentionsPhysical && !mentionsEnergy) ||
+      (mentionsPhysical && mentionsEnergy) ||
+      (atk.attackType === 'physical' ? mentionsPhysical : mentionsEnergy);
+    if (!covers) continue;
+
+    c.shieldsUsed = [...(c.shieldsUsed ?? []), inst.uid];
+    atk.stopped = true;
+    state.log.push(`${defender.name}: ${card?.name ?? 'a Defense Shield'} activates and stops the attack.`);
+
+    if (/remov\w*[^.]{0,30}game/i.test(text)) {
+      defender.zones.inPlay = defender.zones.inPlay.filter((x) => x.uid !== inst.uid);
+      defender.zones.removed.push({ ...inst, faceDown: false });
+      state.log.push(`${card?.name ?? 'The shield'} is removed from the game.`);
+    }
+    events.push({ type: 'log', message: `${card?.name ?? 'Defense Shield'} stops the attack` });
+    return true;
+  }
+  return false;
+}
 
 /**
  * Find a card this player may play in Combat, in hand or already in play.
@@ -393,6 +525,7 @@ function applyPowerStageDamage(state: GameState, personalityUid: string, db: Car
     return;
   }
 
+  atk.resolutionStep = 12; // power stages are dealt
   const overflow = loseStages(target, dmg, db, events);
   atk.powerStagesDealt = dmg - overflow;
   // A physical attack can also carry Empower, which is life cards on top of
@@ -503,7 +636,18 @@ export function resolveDefense(
     return undefined;
   }
 
+  // Step 7, before the attack is successful: "If the attack was not stopped,
+  // the defender must now activate any Defense Shields from his cards in play."
+  atk.resolutionStep = 7;
+  if (activateDefenseShields(state, atk, c, db, events)) {
+    discardAttackCards(state, atk, db);
+    events.push({ type: 'attackResolved', successful: false, powerStages: 0, lifeCards: 0 });
+    nextAttackPhase(state, events);
+    return undefined;
+  }
+
   // Take the damage -> attack is successful.
+  atk.resolutionStep = 8;
   atk.successful = true;
   discardAttackCards(state, atk, db);
 
@@ -531,6 +675,7 @@ export function resolveDefense(
   // (CRD ~L1102). Adding it here turned life-card damage into power stages,
   // which are a different resource entirely.
   const total = (atk.baseDamage ?? 0) + (atk.modifiers ?? 0) + (atk.ifSuccessfulStages ?? 0);
+  atk.resolutionStep = 10; // base damage + modifiers determined
   atk.pendingPowerStageDamage = total;
   // Offer redirect to a personality not in control of combat (CRD ~L576).
   const targets = redirectTargets(state, atk.defenderPlayerIdx, atk.defenderControllerUid);
@@ -570,6 +715,7 @@ function resolveLifeCardDamage(
   db: CardDb,
   events: GameEvent[],
 ): void {
+  atk.resolutionStep = 13; // life cards, and the Endurance window
   const owed = atk.pendingLifeCardDamage ?? 0;
   const result = discardForDamageWithEndurance(state, atk.defenderPlayerIdx, owed, db);
   atk.pendingLifeCardDamage = owed - result.discarded;

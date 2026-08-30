@@ -193,6 +193,24 @@ select {
   font-weight: 400;
 }
 
+.seqbar {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+}
+.seqbar__n {
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--edge);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.seqbar__label {
+  opacity: 0.75;
+}
+
 .lobby__invite {
   display: flex;
   align-items: center;

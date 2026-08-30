@@ -12,6 +12,7 @@
  */
 import { useState } from 'react';
 import type { AttackType, GameState, PlayerState, Step, Zone } from '@dbz/shared';
+import { BATTLE_SEQUENCE } from '@dbz/shared';
 import { STEPS } from '@dbz/shared';
 import type { CardDb } from '@dbz/engine';
 import { Scouter } from './Scouter.tsx';
@@ -158,6 +159,15 @@ export function Board({
 
       <div className="board__mid">
         <StepTrack step={state.step} turn={state.turnNumber} />
+
+        {combat?.currentAttack && (
+          <p className="seqbar">
+            <span className="seqbar__n">Battle Sequence {combat.currentAttack.resolutionStep}/16</span>
+            <span className="seqbar__label">
+              {BATTLE_SEQUENCE[combat.currentAttack.resolutionStep] ?? 'resolving'}
+            </span>
+          </p>
+        )}
 
         {prompt && (
           <PromptPanel
