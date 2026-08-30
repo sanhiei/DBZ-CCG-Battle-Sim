@@ -97,7 +97,21 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       draw(state, action.playerIdx, action.count);
       break;
     case 'powerUp':
-      powerUp(state, action.playerIdx, db, events);
+      // Entering the Power-Up Step already powers you up. Leaving this action
+      // unguarded let it be replayed any number of times, so every MP sat at
+      // its top power stage every turn and attrition — the core of the game —
+      // stopped mattering. Once per Power-Up Step, by the player whose step it
+      // is (CRD ~L229).
+      if (state.step !== 'powerUp') {
+        err = 'you may only power up during your Power-Up Step';
+      } else if (action.playerIdx !== state.activePlayerIdx || action.playerIdx !== actor) {
+        err = 'only the active player powers up';
+      } else if (state.poweredUpThisTurn) {
+        err = 'you have already powered up this turn';
+      } else {
+        powerUp(state, action.playerIdx, db, events);
+        state.poweredUpThisTurn = true;
+      }
       break;
     case 'setStage':
       setStage(state, action.personalityUid, action.stageIndex, db, events);

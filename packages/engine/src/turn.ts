@@ -52,6 +52,7 @@ export function advanceStep(state: GameState, events: GameEvent[]): void {
     state.turnNumber += 1;
     delete state.combat;
     delete state.skipCombatThisTurn;
+    delete state.poweredUpThisTurn;
     for (const p of state.players) releaseControlIfMpRecovered(state, p.idx);
   }
   // A Location/Battleground played this turn costs the Combat Step (~L713).

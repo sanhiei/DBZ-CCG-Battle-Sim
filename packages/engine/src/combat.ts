@@ -51,6 +51,7 @@ import {
   type DamageResult,
 } from './damage.js';
 import { deferDragonVictory, DRAGON_BALL_SET_SIZE } from './victory.js';
+import { isDrill } from './drills.js';
 
 const PREPARE_DRAW = 3;
 const ENERGY_STAGE_COST = 2;
@@ -478,10 +479,36 @@ function discardAttackCards(
     if (!uid) return;
     const p = state.players[playerIdx];
     if (!p) return;
-    // Only cards played FROM HAND are spent. A Drill or Mastery that defended
-    // is a permanent: it was already in play and stays there.
     const at = p.zones.hand.findIndex((c: CardInstance) => c.uid === uid);
-    if (at === -1) return;
+    if (at === -1) {
+      // Defended with a card already in play. Letting it simply stay there cost
+      // the defender nothing, so one Drill on the table blocked every attack
+      // for the rest of the game.
+      //
+      // A Non-Combat card in play "stays face up until used, then discarded"
+      // (CRD ~L627), so using it spends it. A Drill or Mastery is a permanent
+      // and stays — but it is recorded as used, so it answers once per combat
+      // rather than forever.
+      const inPlayAt = p.zones.inPlay.findIndex((c: CardInstance) => c.uid === uid);
+      if (inPlayAt === -1) return;
+      const held = p.zones.inPlay[inPlayAt]!;
+      const heldCard = db.get(held.cardId);
+      const permanent = isDrill(held.cardId, db) || db.type(held.cardId) === 'Mastery';
+      const c = state.combat;
+      if (c) c.shieldsUsed = [...(c.shieldsUsed ?? []), uid];
+
+      if (!permanent) {
+        p.zones.inPlay.splice(inPlayAt, 1);
+        const removesInPlay = /remov\w*[^.]{0,30}game/i.test(heldCard?.rules?.text ?? '');
+        (removesInPlay ? p.zones.removed : p.zones.discard).push({ ...held, faceDown: false });
+        state.log.push(
+          `${heldCard?.name ?? 'A card'} is ${removesInPlay ? 'removed from the game' : 'discarded'} after use.`,
+        );
+      } else {
+        state.log.push(`${heldCard?.name ?? 'That card'} has been used this Combat.`);
+      }
+      return;
+    }
     const card = db.get(p.zones.hand[at]!.cardId);
 
     // "This card stays on the table to be used 1 more time this Combat."
@@ -589,6 +616,8 @@ export function resolveDefense(
   if (opts.cardUid && !opts.takeDamage) {
     const bad = combatCardError(state, atk.defenderPlayerIdx, opts.cardUid, db, 'defend');
     if (bad) return bad;
+    // A permanent that already answered this combat does not answer again.
+    if ((c.shieldsUsed ?? []).includes(opts.cardUid)) return 'that card has already been used this Combat';
 
     // If the card's defense is modelled, it has to stop THIS kind of attack.
     // Cards whose text is not parsed yet are still allowed through: the engine
@@ -607,6 +636,22 @@ export function resolveDefense(
         return `${name ?? 'That card'} does not stop ${atk.attackType} attacks right now`;
       }
     } else {
+      // No modelled stop. Allowing that as a full stop was a mistake: it made
+      // EVERY Combat card a perfect defence, including pure attack cards — a
+      // physical attack card stopped an energy attack — so no attack could
+      // land while the defender held anything.
+      //
+      // A card the parser DID read, which turned out to be an attack and
+      // nothing else, is not a defence and is refused. A card the parser could
+      // not read at all is still allowed through, because refusing those would
+      // block legal play on missing data — and it costs the defender the card
+      // either way, which is the real check on it.
+      const found = findCombatCard(state, atk.defenderPlayerIdx, opts.cardUid);
+      const abilities = found ? (db.get(found.inst.cardId)?.rules?.abilities ?? []) : [];
+      const attackOnly = abilities.length > 0 && abilities.every((a) => a.trigger === 'attack');
+      if (attackOnly) {
+        return `${db.get(found!.inst.cardId)?.name ?? 'That card'} is an attack, not a defence`;
+      }
       state.log.push('Defense card has no modelled stop — resolving it as a stop; verify by hand.');
     }
 

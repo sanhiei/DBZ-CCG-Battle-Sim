@@ -215,6 +215,9 @@ export interface GameState {
    * must skip the Combat Step (CRD ~L233, ~L713). Cleared on the next turn.
    */
   skipCombatThisTurn?: boolean;
+  /** Set once the active player has powered up this turn, so the Power-Up Step
+   *  cannot be replayed to sit at the top of the ladder every turn. */
+  poweredUpThisTurn?: boolean;
   /** Human-readable event log. */
   log: string[];
   /**
