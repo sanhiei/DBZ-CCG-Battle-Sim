@@ -131,6 +131,13 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
   const errors = useMemo(() => (db ? validateDeck(deck, db) : ['catalog still loading']), [deck, db]);
   const legal = errors.length === 0;
 
+  /** Recognisable faces first — the point is that a newcomer sees a name they know. */
+  const starters = useMemo(() => {
+    const wanted = ['Goku', 'Vegeta', 'Piccolo', 'Gohan', 'Krillin', 'Nappa'];
+    const picked = wanted.map((n) => mps.find((m) => m.name === n)).filter((m): m is (typeof mps)[number] => !!m);
+    return picked.length > 0 ? picked : mps.slice(0, 6);
+  }, [mps]);
+
   const masteries = useMemo(() => cards.filter((c) => c.rules?.type === 'Mastery'), [cards]);
   /** Live Tokui-Waza read-out: declaring one is what grants +1 PUR. */
   const tokui = useMemo(() => {
@@ -155,6 +162,46 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
       if (qty <= 0) return prev.filter((l) => l.cardId !== cardId);
       return prev.map((l, i) => (i === at ? { ...l, qty } : l));
     });
+
+  /**
+   * Build a complete, legal deck for one personality from nothing.
+   *
+   * The people this game is for should not have to learn deck construction to
+   * take a seat. Landing in a 2,764-card builder needing 50+ legal cards is the
+   * point where a friend gives up, so "play as Goku" has to be one button.
+   */
+  const starterFor = (choice: { key: string; name: string; levels: EngineCard[] }): { lines: Line[]; name: string } => {
+    const chosen = new Map<string, number>();
+    let need = MIN_DECK_SIZE - Math.min(choice.levels.length, 3);
+    for (const c of cards) {
+      if (need <= 0) break;
+      if (c.rules?.personality) continue;
+      if (/dragon ball/i.test(c.rules?.type ?? '')) continue;
+      if (c.name.toLowerCase().includes(choice.name.toLowerCase())) continue; // named-card limits
+      if (c.style) continue; // Freestyle only: no Mastery, so no style to match
+      const printed = /limit\s*(\d+)\s*per\s*deck/i.exec(c.rules?.text ?? '');
+      const cap = printed ? Math.min(3, Number(printed[1])) : 3;
+      const add = Math.min(cap, need);
+      if (add <= 0) continue;
+      chosen.set(c.id, add);
+      need -= add;
+    }
+    return { lines: [...chosen.entries()].map(([cardId, qty]) => ({ cardId, qty })), name: `${choice.name} starter` };
+  };
+
+  const playAs = (choice: { key: string; name: string; levels: EngineCard[] }) => {
+    const built = starterFor(choice);
+    setMpKey(choice.key);
+    setMpDepth(3);
+    setMasteryId('');
+    setLines(built.lines);
+    setDeckName(built.name);
+    onSubmit({
+      name: built.name,
+      mpLevels: choice.levels.slice(0, 3).map((c) => c.id),
+      life: built.lines,
+    });
+  };
 
   /** Fill to the minimum with legal copies, so a playable deck is one click away. */
   const autoFill = () => {
@@ -192,6 +239,19 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
 
   return (
     <main className="builder">
+      <section className="builder__quick">
+        <h2>New here? Pick a character</h2>
+        <p>One click builds you a legal deck. You can change any of it below.</p>
+        <div className="builder__quickrow">
+          {starters.map((s) => (
+            <button key={s.key} onClick={() => playAs(s)}>
+              {s.name}
+              <em>{s.saga}</em>
+            </button>
+          ))}
+        </div>
+      </section>
+
       <section className="builder__config">
         <h2>Deck</h2>
         <label>

@@ -94,6 +94,13 @@ npm start
 Then open <http://localhost:8787>. Two players join the same room code; a third
 connection spectates.
 
+On Windows you can skip the terminal entirely: double-click **`play.cmd`**. It
+installs and builds on first run, starts the server, and opens a public link if
+`cloudflared` is installed (`winget install --id Cloudflare.cloudflared`).
+
+Players who have never seen the game pick a character in the deck builder and
+get a legal 50-card deck in one click; everything is still editable underneath.
+
 ### Play it with other people
 
 The server binds `0.0.0.0`, so anyone who can reach the machine can play.
