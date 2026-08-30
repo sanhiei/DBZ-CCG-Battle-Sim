@@ -223,7 +223,14 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
   // Central victory check. Every action funnels through here, so a life card
   // removed by any route — combat damage, a card effect, a discard — is caught
   // by the same rule rather than at each damage site.
-  checkVictory(state, db, events, advancedByAnger ? { advancedByAngerUid: advancedByAnger } : {});
+  // Anger can advance an MP from anywhere — a defense card's rider, an attack's
+  // secondary effect, a Non-Combat card — and only the explicit `setAnger`
+  // action was reporting it. Every other route reached the highest level and
+  // the Most Powerful victory was simply never checked. The event carries the
+  // signal now, so any path that advances by anger is seen.
+  const angerAdvance = events.find((e) => e.type === 'personalityAdvanced' && e.byAnger);
+  const byAngerUid = advancedByAnger ?? (angerAdvance?.type === 'personalityAdvanced' ? angerAdvance.personalityUid : undefined);
+  checkVictory(state, db, events, byAngerUid ? { advancedByAngerUid: byAngerUid } : {});
 
   return { state, events };
 }

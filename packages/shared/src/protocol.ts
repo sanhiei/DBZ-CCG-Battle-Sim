@@ -38,7 +38,9 @@ export type GameEvent =
   | { type: 'poweredUp'; playerIdx: number }
   | { type: 'stageChanged'; personalityUid: string; from: number; to: number }
   | { type: 'angerChanged'; personalityUid: string; from: number; to: number }
-  | { type: 'personalityAdvanced'; personalityUid: string; toLevel: number }
+  /** `byAnger` matters: only an advance REACHED BY ANGER can win by Most
+   *  Powerful Personality (CRD ~L171). */
+  | { type: 'personalityAdvanced'; personalityUid: string; toLevel: number; byAnger?: boolean }
   | { type: 'attackDeclared'; attackType: AttackType }
   | { type: 'attackResolved'; successful: boolean; powerStages: number; lifeCards: number }
   | { type: 'dragonBallCaptured'; ballUid: string; byPlayerIdx: number }

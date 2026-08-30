@@ -151,7 +151,13 @@ export function setStage(state: GameState, uid: string, stageIndex: number, db: 
 }
 
 /** Advance a Main Personality one level (anger reset, drills discarded). */
-export function advanceLevel(state: GameState, mp: PersonalityInPlay, db: CardDb, events: GameEvent[]): void {
+export function advanceLevel(
+  state: GameState,
+  mp: PersonalityInPlay,
+  db: CardDb,
+  events: GameEvent[],
+  byAnger = false,
+): void {
   if (mp.isAlly) return;
   if (mp.currentLevel >= mp.levelCardIds.length) return; // already at highest
   mp.currentLevel += 1;
@@ -160,7 +166,7 @@ export function advanceLevel(state: GameState, mp: PersonalityInPlay, db: CardDb
   const ratings = currentRatings(mp, db);
   mp.stageIndex = Math.min(mp.stageIndex, ratings.length - 1);
   mp.currentRating = ratingAt(ratings, mp.stageIndex);
-  events.push({ type: 'personalityAdvanced', personalityUid: mp.uid, toLevel: mp.currentLevel });
+  events.push({ type: 'personalityAdvanced', personalityUid: mp.uid, toLevel: mp.currentLevel, ...(byAnger ? { byAnger: true } : {}) });
   // Discard this player's Drills (CRD Drill rule).
   discardDrills(state, ownerOf(state, mp.uid), db);
   state.log.push(`${mp.personalityName} advances to level ${mp.currentLevel}!`);
@@ -186,8 +192,27 @@ export function setAnger(
   if (p.anger !== from) events.push({ type: 'angerChanged', personalityUid: uid, from, to: p.anger });
   if (p.anger >= ANGER_TO_ADVANCE) {
     const before = p.currentLevel;
-    advanceLevel(state, p, db, events);
+    advanceLevel(state, p, db, events, true);
     if (p.currentLevel > before) return uid;
+
+    // Already at the highest level, so there is nowhere to advance to. CRD
+    // ~L529: "If you are at your highest personality level and you have 5 or
+    // more anger, raise your MP to your highest power stage and set your anger
+    // to 0." Without this the anger simply PARKED at 5+, so it stayed over the
+    // threshold forever and every later anger card re-triggered this branch
+    // while doing nothing at all.
+    const ratings = currentRatings(p, db);
+    const top = Math.max(0, ratings.length - 1);
+    if (p.stageIndex !== top) {
+      const fromStage = p.stageIndex;
+      p.stageIndex = top;
+      p.currentRating = ratingAt(ratings, top);
+      events.push({ type: 'stageChanged', personalityUid: uid, from: fromStage, to: top });
+    }
+    const angerWas = p.anger;
+    p.anger = 0;
+    events.push({ type: 'angerChanged', personalityUid: uid, from: angerWas, to: 0 });
+    state.log.push(`${p.personalityName} is at their highest level — anger resets and they rise to their highest power stage.`);
   }
   return undefined;
 }
