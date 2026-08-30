@@ -3,7 +3,8 @@
  * every submitted DeckList is re-validated here before it can start a game.
  *
  * Enforced:
- *  - Deck size 50..85 (MP levels + Mastery + Sensei card + Life Deck cards).
+ *  - Deck size 50..85, or 50..90 for a Namekian Tokui-Waza (MP levels +
+ *    Mastery + Sensei card + Life Deck cards).
  *  - MP: >=3 consecutive levels of one personality, starting at 1, no skips, max 5.
  *  - Copy limits: Personality/Mastery/Sensei/Dragon Ball 1; most cards 3;
  *    named cards matching the MP's name 4.
@@ -12,16 +13,17 @@
  *  - Tokui-Waza legality when a Mastery is present: every Styled card must
  *    match the Mastery's style, plus at least one Martial Arts Styled card.
  *
- * Not yet enforced (needs catalog data we don't have): the Namekian
- * Tokui-Waza 90-card ceiling and Sensei Deck size limits (printed on the
- * Sensei card).
+ * Not yet enforced: Sensei Deck size limits (printed on the Sensei card, which
+ * we do not have as data).
  */
 import type { DeckList } from '@dbz/shared';
 import type { CardDb, EngineCard } from './loader.js';
-import { checkTokuiWaza } from './mastery.js';
+import { checkTokuiWaza, styleOf } from './mastery.js';
 
 export const MIN_DECK_SIZE = 50;
 export const MAX_DECK_SIZE = 85;
+/** CRD ~L45: "If you declare a Namekian Tokui-Waza, you may have up to 90". */
+export const MAX_DECK_SIZE_NAMEKIAN = 90;
 export const MIN_MP_LEVELS = 3;
 export const MAX_MP_LEVEL = 5;
 
@@ -30,8 +32,10 @@ export interface DeckValidationOptions {
   enforceSize?: boolean;
 }
 
-const isDragonBall = (c: EngineCard): boolean =>
-  /dragon ball/i.test(c.rules?.type ?? '') || /dragon ball/i.test(c.name);
+/** By TYPE only — matching the title caught 10 ordinary cards that merely
+ *  mention a Dragon Ball, capping them at 1 per deck and forcing them into the
+ *  single-set rule. All 52 printed balls carry the type. */
+const isDragonBall = (c: EngineCard): boolean => /dragon ball/i.test(c.rules?.type ?? '');
 
 /** Per-deck copy limit for one card. */
 function copyLimit(card: EngineCard, mpName: string | undefined): number {
@@ -141,8 +145,14 @@ export function validateDeck(deck: DeckList, db: CardDb, opts: DeckValidationOpt
   // --- Deck size (Sensei Deck cards do not count) ---
   const lifeCount = deck.life.reduce((n, e) => n + e.qty, 0);
   const total = deck.mpLevels.length + (deck.masteryId ? 1 : 0) + (deck.senseiId ? 1 : 0) + lifeCount;
+  // A Namekian Tokui-Waza raises the ceiling to 90 (CRD ~L45). This was left
+  // unenforced for "catalog data we don't have", but the Mastery's own style is
+  // in the catalog and playing the Mastery IS the declaration, so Namekian
+  // decks were being rejected at 86 cards for a limit that does not apply.
+  const namekian = deck.masteryId ? styleOf(db.get(deck.masteryId)) === 'Namekian' : false;
+  const maxSize = namekian ? MAX_DECK_SIZE_NAMEKIAN : MAX_DECK_SIZE;
   if (enforceSize && total < MIN_DECK_SIZE) errors.push(`deck has ${total} cards, minimum is ${MIN_DECK_SIZE}`);
-  if (total > MAX_DECK_SIZE) errors.push(`deck has ${total} cards, maximum is ${MAX_DECK_SIZE}`);
+  if (total > maxSize) errors.push(`deck has ${total} cards, maximum is ${maxSize}`);
 
   return errors;
 }

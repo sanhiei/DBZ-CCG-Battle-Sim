@@ -504,7 +504,12 @@ export function resolveDefense(
   // life-card amount ("causing 1 life card of damage").
   const lifeCards =
     atk.attackType === 'energy'
-      ? atk.energyLifeCards ?? ENERGY_LIFE_CARDS
+      ? // An energy attack that states POWER-STAGE damage deals power stages.
+        // The flat 4-life-card default was applied regardless, so those cards
+        // dealt the wrong resource in the wrong amount.
+        atk.baseDamage !== undefined
+        ? undefined
+        : atk.energyLifeCards ?? ENERGY_LIFE_CARDS
       : atk.damageLifeCards; // physical fixed life cards, else undefined -> power stages
   if (lifeCards !== undefined) {
     // Empower adds life cards (CRD ~L1102). It was dropped entirely here, so

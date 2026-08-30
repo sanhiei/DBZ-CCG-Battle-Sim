@@ -109,9 +109,19 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       break;
     case 'playAlly': {
       const p = state.players[action.playerIdx];
-      const loc = findInstance(state, action.cardUid);
-      const per = loc && p ? db.personality(p.zones[loc.zone][loc.idx]?.cardId ?? '') : undefined;
-      if (!p || !loc || !per) return fail(prev, 'cannot play ally');
+      if (!p) return fail(prev, 'cannot play ally');
+      // Allies enter during YOUR Non-Combat Step, from YOUR hand (CRD ~L216).
+      // None of that was checked: findInstance searches every zone of both
+      // players, so either player could field an Ally at any moment, out of
+      // the opponent's hand or straight from a discard pile.
+      if (action.playerIdx !== actor) return fail(prev, 'you may only play your own Allies');
+      if (state.activePlayerIdx !== action.playerIdx) return fail(prev, 'only the active player may play an Ally');
+      if (state.step !== 'nonCombat') return fail(prev, 'Allies enter play during the Non-Combat Step');
+      const idx = p.zones.hand.findIndex((c: CardInstance) => c.uid === action.cardUid);
+      if (idx === -1) return fail(prev, 'that card is not in your hand');
+      const loc = { playerIdx: action.playerIdx, zone: 'hand' as const, idx };
+      const per = db.personality(p.zones.hand[idx]?.cardId ?? '');
+      if (!per) return fail(prev, 'cannot play ally');
       // An Ally may not out-level your Main Personality (CRD ~L544).
       if (per.level > maxAllyLevel(state, action.playerIdx)) {
         return fail(prev, `a level ${per.level} Ally needs a level ${per.level} Main Personality`);

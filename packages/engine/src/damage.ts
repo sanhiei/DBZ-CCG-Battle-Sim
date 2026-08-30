@@ -20,10 +20,23 @@ import type { CardDb } from './loader.js';
 /** A successful attack dealing at least this many life cards allows a capture. */
 export const LIFE_CARD_CAPTURE_THRESHOLD = 5;
 
+/**
+ * A Dragon Ball is identified by its TYPE, never its title.
+ *
+ * All 52 printed balls carry the type; matching the name as well caught 10
+ * ordinary cards whose titles mention one — Goku's Dragon Ball Quest, Earth
+ * Dragon Ball Combat, Bulma Finds a Dragon Ball. A false ball in a Life Deck is
+ * not cosmetic: balls are SKIPPED when paying life-card damage and cycled to
+ * the bottom, so those cards silently refused to be damage.
+ *
+ * (Drills go the other way and match on title, because there the type field is
+ * wrong for 258 of 262 cards. Same technique, opposite verdict — decided by
+ * which field the data actually supports.)
+ */
 export function isDragonBall(card: CardInstance, db: CardDb): boolean {
   const c = db.get(card.cardId);
   if (!c) return false;
-  return /dragon ball/i.test(c.rules?.type ?? '') || /dragon ball/i.test(c.name);
+  return /dragon ball/i.test(c.rules?.type ?? '');
 }
 
 export interface DamageResult {
