@@ -40,6 +40,16 @@ interface Line {
  */
 const MIN_MP_LEVELS_FOR_STACK = 3;
 
+/** A ready-made deck served by /api/presets, already resolved to card ids. */
+export interface PresetDeck {
+  id: string;
+  name: string;
+  blurb?: string;
+  mpLevels: string[];
+  masteryId?: string;
+  life: Array<{ cardId: string; qty: number }>;
+}
+
 export interface MpOption {
   key: string;
   name: string;
@@ -144,6 +154,20 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const [mpPicks, setMpPicks] = useState<Record<number, string>>(saved?.mpPicks ?? {});
   const [preview, setPreview] = useState<EngineCard | null>(null);
+  const [presets, setPresets] = useState<PresetDeck[]>([]);
+
+  // Presets are optional: if the file was never generated the endpoint
+  // returns an empty list and the section simply does not appear.
+  useEffect(() => {
+    let live = true;
+    fetch('/api/presets')
+      .then((r) => (r.ok ? r.json() : { decks: [] }))
+      .then((d) => live && setPresets(Array.isArray(d?.decks) ? d.decks : []))
+      .catch(() => undefined);
+    return () => {
+      live = false;
+    };
+  }, []);
 
   const mps = useMemo(() => mpOptions(cards), [cards]);
   const mp = mps.find((m) => m.key === mpKey);
@@ -265,6 +289,30 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
     return { lines: [...chosen.entries()].map(([cardId, qty]) => ({ cardId, qty })), name: `${choice.name} starter` };
   };
 
+  /**
+   * Load a built deck wholesale.
+   *
+   * Presets arrive already resolved to card ids, so the MP levels are exact
+   * printings rather than a character to look up — set the level picks from
+   * them directly so the builder shows what was actually loaded.
+   */
+  const loadPreset = (p: PresetDeck) => {
+    const levelCards = p.mpLevels.map((id) => byId.get(id)).filter((c): c is EngineCard => !!c);
+    const character = levelCards[0]?.rules?.personality?.personalityName ?? '';
+    setMpKey(character);
+    setMpDepth(Math.max(MIN_MP_LEVELS_FOR_STACK, levelCards.length));
+    setMpPicks(Object.fromEntries(levelCards.map((c) => [c.rules!.personality!.level!, c.id])));
+    setMasteryId(p.masteryId ?? '');
+    setLines(p.life.map((l) => ({ cardId: l.cardId, qty: l.qty })));
+    setDeckName(p.name);
+    onSubmit({
+      name: p.name,
+      mpLevels: p.mpLevels,
+      ...(p.masteryId ? { masteryId: p.masteryId } : {}),
+      life: p.life,
+    });
+  };
+
   const playAs = (choice: MpOption) => {
     const built = starterFor(choice);
     setMpKey(choice.key);
@@ -326,6 +374,21 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
             </button>
           ))}
         </div>
+
+        {presets.length > 0 && (
+          <>
+            <h2 className="builder__quick2">Or run a built deck</h2>
+            <p>Real decklists, already tuned. Loading one replaces what you have.</p>
+            <div className="builder__quickrow">
+              {presets.map((p) => (
+                <button key={p.id} onClick={() => loadPreset(p)} title={p.blurb}>
+                  {p.name}
+                  <em>{p.blurb}</em>
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </section>
 
       <section className="builder__config">

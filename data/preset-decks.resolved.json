@@ -1,0 +1,537 @@
+{
+  "generated": "resolve-presets",
+  "decks": [
+    {
+      "id": "blue-allies",
+      "name": "Blue Allies",
+      "blurb": "Android 18 fronts a wall of Allies and Blue energy.",
+      "mpLevels": [
+        "tts-49d99703-47",
+        "tts-7c91d4cf-31",
+        "tts-76cb49e3-45"
+      ],
+      "masteryId": "tts-117cae92-58",
+      "life": [
+        {
+          "cardId": "tts-514f40cb-33",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-a296f453-10",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-aa1b8542-10",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-8cbb81b5-68",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-705bcfba-7",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-514f40cb-54",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-d3eb7677-3",
+          "qty": 2
+        },
+        {
+          "cardId": "tts-3b425687-6",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-40b278df-54",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-3ae57df1-19",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-4caf6df6-18",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-89fe8da5-25",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-3ae57df1-14",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-a15907e0-1",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-18cbdeb1-20",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-94ce7717-27",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-4caf6df6-0",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-514f40cb-53",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-514f40cb-55",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-b77448ca-8",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-2b332fa4-47",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-8cbb81b5-51",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-fcd37d11-27",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-a296f453-9",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-2b332fa4-42",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-89fe8da5-11",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-bf3b8d7f-51",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-bf3b8d7f-6",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-930d6a1e-40",
+          "qty": 2
+        },
+        {
+          "cardId": "tts-3ae57df1-21",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-bf3b8d7f-57",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-514f40cb-16",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-8cbb81b5-50",
+          "qty": 1
+        }
+      ],
+      "resolvedCount": 67
+    },
+    {
+      "id": "orange-drills",
+      "name": "Orange Energy / Drills",
+      "blurb": "Android 19 drains the board with Drills and relentless energy.",
+      "mpLevels": [
+        "tts-49d99703-48",
+        "tts-3ae57df1-25",
+        "tts-3ae57df1-28"
+      ],
+      "masteryId": "tts-a15907e0-3",
+      "life": [
+        {
+          "cardId": "tts-514f40cb-64",
+          "qty": 2
+        },
+        {
+          "cardId": "tts-8cbb81b5-64",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-f1189c19-7",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-117cae92-16",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-a296f453-20",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-705bcfba-12",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-514f40cb-41",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-2b332fa4-6",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-18cbdeb1-6",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-ab6f7d43-58",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-94ce7717-21",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-4caf6df6-7",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-c29a516a-23",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-3deaec36-20",
+          "qty": 2
+        },
+        {
+          "cardId": "tts-d3eb7677-6",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-49d99703-61",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-4caf6df6-0",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-117cae92-11",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-49d99703-2",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-514f40cb-26",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-3ae57df1-22",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-40b278df-22",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-fcd37d11-27",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-49d99703-0",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-193cbccb-8",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-043989cc-7",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-2b332fa4-68",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-117cae92-19",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-40b278df-2",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-7b6b6ee0-16",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-3ae57df1-21",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-bf3b8d7f-65",
+          "qty": 3
+        }
+      ],
+      "resolvedCount": 66
+    },
+    {
+      "id": "red-anger",
+      "name": "Red Beatdown / Anger",
+      "blurb": "Frieza climbs levels on anger and hits until something breaks.",
+      "mpLevels": [
+        "tts-ac3c3683-22",
+        "tts-ac3c3683-23",
+        "tts-ac3c3683-24"
+      ],
+      "masteryId": "tts-a15907e0-5",
+      "life": [
+        {
+          "cardId": "tts-fcd37d11-22",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-8cbb81b5-29",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-fcd37d11-14",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-8cbb81b5-5",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-8cbb81b5-7",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-ab6f7d43-58",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-94ce7717-21",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-4caf6df6-0",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-0a93c43d-25",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-94ce7717-6",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-ab6f7d43-62",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-193cbccb-19",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-94ce7717-5",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-18cbdeb1-28",
+          "qty": 2
+        },
+        {
+          "cardId": "tts-ab6f7d43-56",
+          "qty": 4
+        },
+        {
+          "cardId": "tts-930d6a1e-7",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-b77448ca-67",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-930d6a1e-21",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-f71532b6-45",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-bf3b8d7f-28",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-94ce7717-29",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-94ce7717-7",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-bf3b8d7f-30",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-40b278df-12",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-570381d6-26",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-ab6f7d43-23",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-e3673ab6-5",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-8cbb81b5-50",
+          "qty": 1
+        }
+      ],
+      "resolvedCount": 70
+    },
+    {
+      "id": "black-control",
+      "name": "Black Control",
+      "blurb": "Guldo stalls, strips and grinds the game to a halt.",
+      "mpLevels": [
+        "tts-4caf6df6-15",
+        "tts-4caf6df6-16",
+        "tts-4caf6df6-17"
+      ],
+      "masteryId": "tts-117cae92-56",
+      "life": [
+        {
+          "cardId": "tts-514f40cb-50",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-a296f453-5",
+          "qty": 2
+        },
+        {
+          "cardId": "tts-d3eb7677-3",
+          "qty": 2
+        },
+        {
+          "cardId": "tts-fcd37d11-14",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-fcd37d11-15",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-8cbb81b5-5",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-ab6f7d43-58",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-94ce7717-21",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-4caf6df6-0",
+          "qty": 1
+        },
+        {
+          "cardId": "tts-514f40cb-51",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-89fe8da5-7",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-89fe8da5-10",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-2b332fa4-39",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-c29a516a-25",
+          "qty": 2
+        },
+        {
+          "cardId": "tts-930d6a1e-7",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-2b332fa4-25",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-89fe8da5-8",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-a296f453-7",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-94ce7717-29",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-930d6a1e-0",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-8cbb81b5-0",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-94ce7717-2",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-bf3b8d7f-5",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-930d6a1e-36",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-bf3b8d7f-65",
+          "qty": 3
+        },
+        {
+          "cardId": "tts-8cbb81b5-2",
+          "qty": 2
+        }
+      ],
+      "resolvedCount": 66
+    }
+  ]
+}

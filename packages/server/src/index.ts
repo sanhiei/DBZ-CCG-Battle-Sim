@@ -6,7 +6,7 @@
  *   GET /api/cards        the card catalog, for the client's browser/deck builder
  */
 import { createServer, type IncomingMessage, type Server as HttpServer, type ServerResponse } from 'node:http';
-import { createReadStream, existsSync } from 'node:fs';
+import { createReadStream, existsSync, readFileSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
@@ -174,6 +174,17 @@ function handleHttp(req: IncomingMessage, res: ServerResponse, catalog: Catalog,
   }
   if (url.pathname === '/api/cards') {
     return json(res, { sources: catalog.sources, cards: catalog.cards });
+  }
+  if (url.pathname === '/api/presets') {
+    // Ready-made decks, resolved to card ids by scripts/resolve-presets.mjs.
+    // Optional: without the file the builder simply offers no presets.
+    const path = join(findDataDir(), 'preset-decks.resolved.json');
+    if (!existsSync(path)) return json(res, { decks: [] });
+    try {
+      return json(res, JSON.parse(readFileSync(path, 'utf8')));
+    } catch {
+      return json(res, { decks: [] });
+    }
   }
   if (url.pathname === '/api/pat') {
     // The client runs the same engine for optimistic prediction and renders PAT

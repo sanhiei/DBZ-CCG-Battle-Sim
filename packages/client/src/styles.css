@@ -193,6 +193,14 @@ select {
   font-weight: 400;
 }
 
+.builder__quick2 {
+  margin-top: 14px;
+}
+.builder__quickrow em {
+  max-width: 220px;
+  white-space: normal;
+}
+
 .builder__levels {
   display: flex;
   flex-direction: column;
