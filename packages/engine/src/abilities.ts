@@ -88,6 +88,17 @@ export function setupAttackAbility(
   attack.ifSuccessfulStages = attack.ifSuccessfulStages ?? 0;
   const leftover: Effect[] = [];
   for (const e of ability.effects) {
+    // Deferred by the rules, not by convenience: "If successful" effects and
+    // effects sharing a sentence with the attack wait until the attack lands
+    // (CRD battle-sequence step 3). Applying them here handed the attacker
+    // their anger and their card draw before the defender could respond.
+    // Scoped to GATEABLE: damageStages also carries `ifSuccessful`, but it is
+    // damage and the switch below already banks it into the attack's total.
+    // Diverting it here dropped the modifier from the damage entirely.
+    if (GATEABLE.has(e.kind) && 'ifSuccessful' in e && e.ifSuccessful) {
+      leftover.push(e);
+      continue;
+    }
     switch (e.kind) {
       case 'physicalAttack':
         if (e.lifeCards !== undefined) attack.damageLifeCards = e.lifeCards;
@@ -232,12 +243,11 @@ export function applyIfSuccessful(
   for (const e of effects ?? []) {
     if (e.kind === 'stopAttack') state.log.push(`Effect: stops a ${e.attackType ?? 'any'} attack (${e.window ?? 'thisAttack'}).`);
     else if (e.kind === 'stunSkipNextPhase') state.log.push('Effect: opponent is stunned (skips next Attack Phase).');
-    else if (e.kind === 'rejuvenate' && ctx) rejuvenate(state, ctx.userIdx, e.count, e.from);
-    else if (e.kind === 'movePowerStage' && ctx) {
-      moveControllerToEnd(state, e.target === 'user' ? ctx.userIdx : ctx.foeIdx, e.to, db, events);
-    }
-    else if (e.kind === 'discardCards' && ctx) {
-      discardFromHand(state, e.target === 'user' ? ctx.userIdx : ctx.foeIdx, e.count);
+    else if (ctx && GATEABLE.has(e.kind)) {
+      // The deferred riders finally happen. applyOnPlay already resolves
+      // exactly this set, so they land the same way they would off a
+      // Non-Combat card rather than through a second, divergent executor.
+      applyOnPlay(state, ctx.userIdx, ctx.foeIdx, [e], db, events);
     } else state.log.push(`Effect not yet automated: ${e.kind} (resolve manually).`);
   }
 }
@@ -252,6 +262,22 @@ function toNum(s: string | undefined, fb = 1): number {
   return NUM_WORD[s.toLowerCase()] ?? fb;
 }
 const ifSucc = (t: string) => /if[\s:.\-|\\]{0,6}suc/.test(t);
+
+/**
+ * Effects that can be deferred until an attack is known to have landed.
+ *
+ * Stops and lockouts are deliberately absent: they answer the attack itself and
+ * are already routed separately. `removeFromGameAfterUse` is disposal, not an
+ * effect, and happens either way.
+ */
+const GATEABLE = new Set<Effect['kind']>([
+  'changeAnger',
+  'changePowerStages',
+  'movePowerStage',
+  'drawCards',
+  'rejuvenate',
+  'discardCards',
+]);
 
 function parseRestriction(t: string): Ability['restriction'] | undefined {
   // Named-only comes first: 'Villains, Goku and Gohan only' is NOT a plain
@@ -670,18 +696,38 @@ export function parseAbility(rawText: string, type: string): Ability | null {
       const md = body.match(/([+\-])\s?(\d+)[\s|\\]*(?:power\s*)?stages?\s*of\s*damage/);
       if (md) effects.push({ kind: 'damageStages', stages: toNum(md[2]) * (md[1] === '-' ? -1 : 1), ...(ifSucc(body) ? { ifSuccessful: true } : {}) });
     }
-    pushAnger(effects, body);
     // Attacks carry non-damage riders too — 'Gain 4 power stages' (Piccolo's
     // Destruction Attack), 'Raise your Main Personality to his highest power
-    // stage' (Blue Knockdown). Neither parser ran on the attack branch, so
-    // those clauses were dropped while the card looked fully modelled.
-    pushRaiseOwnPower(effects, body);
-    pushMoveStage(effects, body);
-    pushSelfPowerLoss(effects, body);
-    pushDraw(effects, body);
-    pushStun(effects, body);
-    pushRejuvenate(effects, body);
-    pushDiscardCards(effects, body);
+    // stage' (Blue Knockdown).
+    //
+    // WHEN they happen is a rule, not a detail. CRD battle-sequence step 3
+    // resolves secondary effects at declaration, but excludes two cases: an
+    // effect with "If successful" attached, and an effect sharing a sentence
+    // with the attack ("An effect in the same sentence as an attack is
+    // considered an 'If successful' effect"). Both were being applied the
+    // moment the attack was declared — so the attacker's anger rose, and their
+    // cards were drawn, before the defender was even offered their defence,
+    // and they kept it all when the attack was stopped.
+    //
+    // Riders are therefore read one sentence at a time, and the sentence that
+    // declares the attack — or says "if successful" — produces deferred effects.
+    for (const s of sentences(body)) {
+      const riders: Effect[] = [];
+      pushAnger(riders, s);
+      pushRaiseOwnPower(riders, s);
+      pushMoveStage(riders, s);
+      pushSelfPowerLoss(riders, s);
+      pushDraw(riders, s);
+      pushStun(riders, s);
+      pushRejuvenate(riders, s);
+      pushDiscardCards(riders, s);
+
+      const declaresAttack = /\b(physical|energy)\s+attack\b/.test(s);
+      const deferred = ifSucc(s) || declaresAttack;
+      for (const e of riders) {
+        effects.push(deferred && GATEABLE.has(e.kind) ? ({ ...e, ifSuccessful: true } as Effect) : e);
+      }
+    }
     if (removesAfterUse(body)) effects.push({ kind: 'removeFromGameAfterUse' });
     // stop riders ("plus it stops...", "if successful ... stops ... next phase")
     for (const s of defenseEffects) if (s.kind === 'stopAttack') effects.push({ ...s, window: s.window ?? 'nextPhase' });

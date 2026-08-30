@@ -1043,6 +1043,12 @@
             },
             {
               "kind": "discardCards",
+              "target": "user",
+              "count": 1,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "discardCards",
               "target": "foe",
               "count": 1
             }
@@ -2191,13 +2197,15 @@
               "kind": "changeAnger",
               "target": "user",
               "delta": 0,
-              "toZero": true
+              "toZero": true,
+              "ifSuccessful": true
             },
             {
               "kind": "changeAnger",
               "target": "foe",
               "delta": 0,
-              "toZero": true
+              "toZero": true,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -4014,7 +4022,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 1
+              "delta": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -4233,7 +4242,8 @@
             {
               "kind": "changeAnger",
               "target": "foe",
-              "delta": 6
+              "delta": 6,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -5910,14 +5920,14 @@
               "lifeCards": 5
             },
             {
-              "kind": "changeAnger",
-              "target": "foe",
-              "delta": -1
-            },
-            {
               "kind": "changePowerStages",
               "target": "user",
               "delta": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
             }
           ],
           "source": "parsed"
@@ -8046,7 +8056,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 1
+              "delta": 1,
+              "ifSuccessful": true
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -8891,7 +8902,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 3
+              "delta": 3,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -10474,7 +10486,8 @@
             {
               "kind": "changePowerStages",
               "target": "user",
-              "delta": 3
+              "delta": 3,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -11243,7 +11256,8 @@
             {
               "kind": "movePowerStage",
               "target": "user",
-              "to": "highest"
+              "to": "highest",
+              "ifSuccessful": true
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -12301,7 +12315,8 @@
             {
               "kind": "changeAnger",
               "target": "foe",
-              "delta": -3
+              "delta": -3,
+              "ifSuccessful": true
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -16431,12 +16446,14 @@
             {
               "kind": "changeAnger",
               "target": "foe",
-              "delta": -2
+              "delta": -2,
+              "ifSuccessful": true
             },
             {
               "kind": "changePowerStages",
               "target": "user",
-              "delta": 2
+              "delta": 2,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -21000,7 +21017,8 @@
             {
               "kind": "changeAnger",
               "target": "foe",
-              "delta": -2
+              "delta": -2,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -21672,7 +21690,8 @@
             {
               "kind": "discardCards",
               "target": "foe",
-              "count": 2
+              "count": 2,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -23093,7 +23112,8 @@
             },
             {
               "kind": "drawCards",
-              "count": 1
+              "count": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -24018,7 +24038,8 @@
             {
               "kind": "movePowerStage",
               "target": "user",
-              "to": "highest"
+              "to": "highest",
+              "ifSuccessful": true
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -24182,7 +24203,8 @@
             {
               "kind": "changePowerStages",
               "target": "user",
-              "delta": 2
+              "delta": 2,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -26061,7 +26083,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 1
+              "delta": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -27931,7 +27954,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 1
+              "delta": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -28301,7 +28325,8 @@
             {
               "kind": "changeAnger",
               "target": "foe",
-              "delta": -2
+              "delta": -2,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -28575,7 +28600,8 @@
             {
               "kind": "discardCards",
               "target": "foe",
-              "count": 1
+              "count": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -30724,7 +30750,8 @@
             {
               "kind": "discardCards",
               "target": "foe",
-              "count": 1
+              "count": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -31426,7 +31453,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 2
+              "delta": 2,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -31468,12 +31496,14 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 1
+              "delta": 1,
+              "ifSuccessful": true
             },
             {
               "kind": "changeAnger",
               "target": "foe",
-              "delta": -2
+              "delta": -2,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -31592,7 +31622,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 2
+              "delta": 2,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -32116,7 +32147,8 @@
             },
             {
               "kind": "drawCards",
-              "count": 1
+              "count": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -37211,7 +37243,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": -1
+              "delta": -1,
+              "ifSuccessful": true
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -38392,7 +38425,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 1
+              "delta": 1,
+              "ifSuccessful": true
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -40559,12 +40593,14 @@
             {
               "kind": "changeAnger",
               "target": "foe",
-              "delta": -2
+              "delta": -2,
+              "ifSuccessful": true
             },
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 0
+              "delta": 0,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -42257,7 +42293,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 2
+              "delta": 2,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -42825,7 +42862,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 1
+              "delta": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -44364,7 +44402,8 @@
             {
               "kind": "discardCards",
               "target": "foe",
-              "count": 2
+              "count": 2,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -45677,6 +45716,11 @@
               "stages": 3
             },
             {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 4
+            },
+            {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
@@ -45685,11 +45729,6 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": -3
-            },
-            {
-              "kind": "changePowerStages",
-              "target": "user",
-              "delta": 4
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -47522,7 +47561,8 @@
             {
               "kind": "discardCards",
               "target": "user",
-              "count": 1
+              "count": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -48851,7 +48891,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 1
+              "delta": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -50391,7 +50432,8 @@
             {
               "kind": "changePowerStages",
               "target": "foe",
-              "delta": -3
+              "delta": -3,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -61075,7 +61117,8 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": 0,
-              "toZero": true
+              "toZero": true,
+              "ifSuccessful": true
             },
             {
               "kind": "removeFromGameAfterUse"
@@ -61118,7 +61161,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 1
+              "delta": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -64747,7 +64791,8 @@
             {
               "kind": "discardCards",
               "target": "foe",
-              "count": 1
+              "count": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -64986,7 +65031,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 1
+              "delta": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -65693,7 +65739,8 @@
             {
               "kind": "changePowerStages",
               "target": "user",
-              "delta": 5
+              "delta": 5,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -65799,7 +65846,8 @@
             {
               "kind": "changeAnger",
               "target": "foe",
-              "delta": -3
+              "delta": -3,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -67949,7 +67997,8 @@
             {
               "kind": "changePowerStages",
               "target": "foe",
-              "delta": -3
+              "delta": -3,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -84746,14 +84795,14 @@
               "stages": 3
             },
             {
-              "kind": "changeAnger",
-              "target": "user",
-              "delta": 1
-            },
-            {
               "kind": "changePowerStages",
               "target": "user",
               "delta": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
             }
           ],
           "source": "parsed"
@@ -84940,7 +84989,8 @@
             {
               "kind": "changeAnger",
               "target": "user",
-              "delta": 1
+              "delta": 1,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -87750,7 +87800,8 @@
             {
               "kind": "rejuvenate",
               "count": 3,
-              "from": "bottom"
+              "from": "bottom",
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -87893,7 +87944,8 @@
             {
               "kind": "changePowerStages",
               "target": "user",
-              "delta": 3
+              "delta": 3,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -88660,14 +88712,15 @@
               "ifSuccessful": true
             },
             {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest",
+              "ifSuccessful": true
+            },
+            {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
-            },
-            {
-              "kind": "movePowerStage",
-              "target": "user",
-              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -89817,14 +89870,14 @@
               "stages": 3
             },
             {
-              "kind": "changeAnger",
-              "target": "foe",
-              "delta": -1
-            },
-            {
               "kind": "changePowerStages",
               "target": "user",
               "delta": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
             }
           ],
           "source": "parsed"
@@ -90017,7 +90070,8 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": 0,
-              "toZero": true
+              "toZero": true,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -90056,7 +90110,8 @@
               "kind": "changeAnger",
               "target": "foe",
               "delta": 0,
-              "toZero": true
+              "toZero": true,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",

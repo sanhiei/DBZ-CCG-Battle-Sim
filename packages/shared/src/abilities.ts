@@ -28,10 +28,16 @@ export type Effect =
   | { kind: 'energyAttack'; lifeCards?: number; powerStages?: number }
   | { kind: 'damageStages'; stages: number; ifSuccessful?: boolean } // +/- modifier on PAT
   /** `toZero` sets anger to 0 outright ('lower your anger to 0'); a delta of
-   *  0 would otherwise be a silent no-op that still looks modelled. */
-  | { kind: 'changeAnger'; target: EffectTarget; delta: number; toZero?: boolean }
-  | { kind: 'changePowerStages'; target: EffectTarget; delta: number; toZero?: boolean }
-  | { kind: 'movePowerStage'; target: EffectTarget; to: 'highest' | 'lowest' }
+   *  0 would otherwise be a silent no-op that still looks modelled.
+   *
+   *  `ifSuccessful` defers the effect until the attack is known to have landed.
+   *  CRD battle-sequence step 3 resolves secondary effects at DECLARATION but
+   *  explicitly excludes "If successful" effects and effects sharing a sentence
+   *  with the attack — without this flag those all fired before the defender
+   *  had even been offered their defence. */
+  | { kind: 'changeAnger'; target: EffectTarget; delta: number; toZero?: boolean; ifSuccessful?: boolean }
+  | { kind: 'changePowerStages'; target: EffectTarget; delta: number; toZero?: boolean; ifSuccessful?: boolean }
+  | { kind: 'movePowerStage'; target: EffectTarget; to: 'highest' | 'lowest'; ifSuccessful?: boolean }
   // Defensive: stop an attack, or prevent some of its life-card damage.
   | {
       kind: 'stopAttack';
@@ -42,16 +48,16 @@ export type Effect =
       scope?: 'all' | 'single';
     }
   | { kind: 'preventLifeCards'; amount: number; attackType?: AttackKind | 'any' }
-  | { kind: 'drawCards'; count: number }
+  | { kind: 'drawCards'; count: number; ifSuccessful?: boolean }
   /**
    * Rejuvenation: move cards from the discard pile to the BOTTOM of the Life
    * Deck. `from` is which end of the discard pile they come off; "choose" means
    * the player picks, which the engine currently resolves as the bottom-most
    * cards and flags for review rather than prompting.
    */
-  | { kind: 'rejuvenate'; count: number; from: 'bottom' | 'top' | 'choose' }
+  | { kind: 'rejuvenate'; count: number; from: 'bottom' | 'top' | 'choose'; ifSuccessful?: boolean }
   /** Discard from hand — as a cost (`user`) or as an effect on the opponent. */
-  | { kind: 'discardCards'; target: EffectTarget; count: number }
+  | { kind: 'discardCards'; target: EffectTarget; count: number; ifSuccessful?: boolean }
   | { kind: 'stunSkipNextPhase' }
   | { kind: 'removeFromGameAfterUse' }
   | { kind: 'manual'; note?: string }; // not yet modeled — resolve manually
