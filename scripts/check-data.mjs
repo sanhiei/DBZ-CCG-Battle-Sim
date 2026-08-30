@@ -81,6 +81,11 @@ for (const file of catalogs) {
     const ladder = p.powerRatings;
     if (!Array.isArray(ladder) || ladder.length === 0) continue;
 
+    // Some personalities are rated Z the whole way up; there is no zero rung to
+    // check and no ordering to verify, so skip both tests for them.
+    const allZ = ladder.every((r) => r === 'Z');
+    if (allZ) continue;
+
     // A scouter's bottom rung is printed 0/00/0000 — stage 0 must be 0.
     if (ladder.length >= 6 && ladder[0] !== 0) {
       zeroRungBad++;

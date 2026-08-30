@@ -26,18 +26,30 @@ interface Line {
   qty: number;
 }
 
-/** Personality stacks available as a Main Personality, keyed by name + saga. */
+/**
+ * Personality stacks available as a Main Personality, keyed by CHARACTER.
+ *
+ * Levels are drawn across sets, not within one: plenty of personalities did not
+ * get a level 3, 4 or 5 until a later release, so a Goku stack is routinely
+ * built from cards printed years apart. Grouping by character + saga hid all of
+ * those — a character whose Lv1-2 shipped in one set and Lv3 in another simply
+ * never reached three levels and never appeared.
+ *
+ * Three consecutive levels from 1 is the floor (CRD ~L64), so a character
+ * without a level 3 cannot be a Main Personality at all.
+ */
+const MIN_MP_LEVELS_FOR_STACK = 3;
+
 function mpOptions(cards: EngineCard[]): Array<{ key: string; name: string; saga: string; levels: EngineCard[] }> {
   const groups = new Map<string, EngineCard[]>();
   for (const c of cards) {
     const p = c.rules?.personality;
     if (!p?.personalityName || !p.level) continue;
-    const key = `${p.personalityName}|${c.saga}`;
-    groups.set(key, [...(groups.get(key) ?? []), c]);
+    groups.set(p.personalityName, [...(groups.get(p.personalityName) ?? []), c]);
   }
   const out: Array<{ key: string; name: string; saga: string; levels: EngineCard[] }> = [];
-  for (const [key, list] of groups) {
-    // Need levels 1..N consecutive, one card per level.
+  for (const [name, list] of groups) {
+    // One card per level; prefer the lowest-numbered printing for stability.
     const byLevel = new Map<number, EngineCard>();
     for (const c of list) {
       const lv = c.rules!.personality!.level!;
@@ -45,12 +57,13 @@ function mpOptions(cards: EngineCard[]): Array<{ key: string; name: string; saga
     }
     const levels: EngineCard[] = [];
     for (let lv = 1; byLevel.has(lv); lv++) levels.push(byLevel.get(lv)!);
-    if (levels.length >= 3) {
-      const [name, saga] = key.split('|');
-      out.push({ key, name: name!, saga: saga!, levels });
-    }
+    if (levels.length < MIN_MP_LEVELS_FOR_STACK) continue;
+
+    // Where the levels came from, since they may span several sets.
+    const sagas = [...new Set(levels.map((c) => c.saga))];
+    out.push({ key: name, name, saga: sagas.length > 1 ? `${sagas.length} sets` : sagas[0] ?? '', levels });
   }
-  return out.sort((a, b) => a.name.localeCompare(b.name) || a.saga.localeCompare(b.saga));
+  return out.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /**

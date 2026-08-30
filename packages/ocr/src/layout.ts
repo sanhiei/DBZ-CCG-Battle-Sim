@@ -201,8 +201,15 @@ export function detectLadder(words: Word[]): LadderResult {
   const best = longestDescending(nums);
   const zs = candidates.filter((c) => c.value === 'Z');
 
-  const span = best.length ? Math.abs(best.at(-1)!.y - best[0]!.y) : 0;
-  const conf = best.length ? best.reduce((s, c) => s + c.conf, 0) / best.length : 0;
+  // Measure the span across EVERY rung we are going to keep, not just the
+  // numeric ones. Some personalities have a scouter rated Z all the way up;
+  // with no numbers in the column `best` is empty, so span was 0 and the
+  // "spans most of the card" guard below rejected them every time. The reader
+  // could recognise Z and then never emit an all-Z ladder.
+  const used = [...zs, ...best];
+  const ys = used.map((c) => c.y);
+  const span = ys.length > 1 ? Math.abs(Math.max(...ys) - Math.min(...ys)) : 0;
+  const conf = used.length ? used.reduce((s, c) => s + c.conf, 0) / used.length : 0;
 
   if (best.length + zs.length < LADDER_MIN_RUNGS) {
     return { ratings: [], ok: false, reason: `no descending run of ${LADDER_MIN_RUNGS}+`, span, conf };
