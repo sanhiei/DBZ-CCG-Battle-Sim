@@ -364,17 +364,22 @@ function applyPowerStageDamage(state: GameState, personalityUid: string, db: Car
 
   const overflow = loseStages(target, dmg, db, events);
   atk.powerStagesDealt = dmg - overflow;
+  // A physical attack can also carry Empower, which is life cards on top of
+  // the stage damage (CRD ~L1102) — the two resources are separate.
+  const empowerLife = atk.empower ?? 0;
 
   // Stages the personality could not lose become life cards, and count as BOTH
   // kinds of damage (CRD ~L436, ~L579). Handing them to the life-card path is
   // what makes them real: that path is where Endurance, Dragon Ball capture and
   // running out of Life Deck all live, and all three were unreachable from a
   // physical attack while the excess was being dropped on the floor.
-  if (overflow > 0) {
-    state.log.push(
-      `${target.personalityName} is out of power stages — ${overflow} converts to life cards of damage.`,
-    );
-    dealLifeCardsAndFinish(state, atk, overflow, db, events);
+  if (overflow + empowerLife > 0) {
+    if (overflow > 0) {
+      state.log.push(
+        `${target.personalityName} is out of power stages — ${overflow} converts to life cards of damage.`,
+      );
+    }
+    dealLifeCardsAndFinish(state, atk, overflow + empowerLife, db, events);
     return;
   }
 
@@ -474,13 +479,18 @@ export function resolveDefense(
       ? atk.energyLifeCards ?? ENERGY_LIFE_CARDS
       : atk.damageLifeCards; // physical fixed life cards, else undefined -> power stages
   if (lifeCards !== undefined) {
-    dealLifeCardsAndFinish(state, atk, lifeCards, db, events);
+    // Empower adds life cards (CRD ~L1102). It was dropped entirely here, so
+    // every Empowered energy attack dealt its flat base and the cost of
+    // declaring the Empower bought nothing.
+    dealLifeCardsAndFinish(state, atk, lifeCards + (atk.empower ?? 0), db, events);
     return undefined;
   }
 
   // Otherwise physical power-stage damage from the PAT (+ modifiers).
-  const total =
-    (atk.baseDamage ?? 0) + (atk.empower ?? 0) + (atk.modifiers ?? 0) + (atk.ifSuccessfulStages ?? 0);
+  // Empower is NOT part of this total: "the attack will do +X life cards"
+  // (CRD ~L1102). Adding it here turned life-card damage into power stages,
+  // which are a different resource entirely.
+  const total = (atk.baseDamage ?? 0) + (atk.modifiers ?? 0) + (atk.ifSuccessfulStages ?? 0);
   atk.pendingPowerStageDamage = total;
   // Offer redirect to a personality not in control of combat (CRD ~L576).
   const targets = redirectTargets(state, atk.defenderPlayerIdx, atk.defenderControllerUid);

@@ -13,7 +13,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { CardInstance, GameState } from '@dbz/shared';
 import { CardDb, type EngineCard } from './loader.js';
-import { beginCombat, declareAttack, resolveDefense } from './combat.js';
+import { beginCombat, declareAttack, declareEmpower, resolveDefense } from './combat.js';
 
 const LADDER = [0, 100, 200, 300, 400, 500];
 
@@ -289,6 +289,34 @@ test('a personality at 0 power stages is not immune to physical damage', () => {
   const deckBefore = s.players[1]!.zones.lifeDeck.length;
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
   assert.equal(deckBefore - s.players[1]!.zones.lifeDeck.length, dmg, 'all of it converts');
+});
+
+/* ---------- Empower is life cards, not power stages ---------- */
+
+test('Empower adds life cards to an energy attack', () => {
+  // CRD ~L1102: "the attack will do +X life cards". Empower was dropped
+  // entirely on life-card attacks, so declaring it bought nothing.
+  const s = combatState({ defenderStage: 5, deck: 30 });
+  declareAttack(s, 'energy', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareEmpower(s, 3, { actingPlayerIdx: 0 });
+  const deckBefore = s.players[1]!.zones.lifeDeck.length;
+  resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
+  // Energy base is 4 life cards, +3 Empower.
+  assert.equal(deckBefore - s.players[1]!.zones.lifeDeck.length, 7);
+});
+
+test('Empower does NOT inflate power-stage damage', () => {
+  // It was summed into the power-stage total, turning life cards into stages —
+  // a different resource entirely.
+  const s = combatState({ defenderStage: 5, deck: 30 });
+  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  const base = s.combat!.currentAttack!.baseDamage ?? 0;
+  declareEmpower(s, 3, { actingPlayerIdx: 0 });
+  const deckBefore = s.players[1]!.zones.lifeDeck.length;
+  resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
+
+  assert.equal(s.players[1]!.mp.stageIndex, 5 - base, 'stages lost are the PAT result only');
+  assert.equal(deckBefore - s.players[1]!.zones.lifeDeck.length, 3, 'and the Empower lands as life cards');
 });
 
 test('no conversion happens when the target can absorb the damage', () => {
