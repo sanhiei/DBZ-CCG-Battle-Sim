@@ -7788,7 +7788,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "pur"
+        "pur",
+        "levelDisagreement"
       ],
       "text": "Power: Focused physical attack doing +1 life cards of damage for each card in your opponent's removed from the game pile.",
       "textVerified": "vision",
@@ -13361,7 +13362,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "pur"
+        "pur",
+        "levelDisagreement"
       ],
       "text": "Power: Physical attack doing 3 power stages of damage. If successful, all of your physical attacks do +3 power stages of damage for the remainder of Combat. (Main Personality Only)",
       "textVerified": "vision",
@@ -13457,7 +13459,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Power: Physical attack doing +3 life cards of damage. You may remove any number of cards in your discard pile from the game to have Goten gain the same number of power stages. Lower your opponent's anger 2 levels.",
       "textVerified": "vision",
       "personality": {
@@ -14800,7 +14804,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Power: Physical attack doing +4 power stages of damage. For the remainder of Combat, all of your other physical attacks do +2 power stages of damage.",
       "textVerified": "vision",
       "personality": {
@@ -16707,7 +16713,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Power: Energy attack doing 7 life cards of damage. For the remainder of Combat, you do not have to remove a card from the game to use its Endurance.",
       "textVerified": "vision",
       "personality": {
@@ -18924,7 +18932,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "levelDisagreement"
       ],
       "text": "Constant Combat Power: Whenever your opponent stops one of your physical attacks, lower his Main Personality 2 power stages. (Main Personality Only)",
       "textOriginal": "(Constant Combat Power) Defense Shield: Stops the first unstopped energy attack. Gain 3 power stages after every successful attack you perform.",
@@ -19876,7 +19885,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "levelDisagreement"
       ],
       "text": "Power: Energy attack. Costs 0 power stages to perform. Draw a card. If you declared an Orange Tokui-Waza, draw another card.",
       "textOriginal": "Energy attack. Costs 0 power stages to perform. Draw a card. If you declared an Orange Tokui-Waza, draw another card.",
@@ -20198,7 +20208,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Power: Energy attack doing +3 life cards of damage if \"The Car\" is in play. (Main Personality Only)",
       "textVerified": "vision",
       "personality": {
@@ -21391,7 +21403,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "levelDisagreement"
       ],
       "text": "Physical attack doing +3 power stages of damage. If you declared a Tokui-Waza, you may use this power twice per Combat. (Main Personality Only)",
       "textOriginal": "Physical attack doing +4 power stages of damage.",
@@ -21632,7 +21645,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "levelDisagreement"
       ],
       "text": "Physical attack doing +5 power stages of damage. If successful, raise your anger 1 level. (Main Personality Only)",
       "textVerified": "vision",
@@ -22540,7 +22554,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Power: Physical attack doing 5 power stages and 3 life cards of damage.",
       "textVerified": "vision",
       "personality": {
@@ -23200,7 +23216,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "levelDisagreement"
       ],
       "text": "At the end of Combat, you may search your Life Deck for a Non-Combat card and place it in play. If you declared a Blue Tokui-Waza, lower your opponent's anger 2 levels.",
       "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
@@ -24989,7 +25006,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Power: Place the top card from your discard pile at the bottom of your Life Deck. Draw a card. (Main Personality Only)",
       "textVerified": "vision",
       "lackey": {
@@ -27208,7 +27227,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "levelDisagreement"
       ],
       "text": "Power: When entering Combat, look at your opponent's hand, then choose and discard 1 Non-Dragon Ball card. (Main Personality Only)",
       "textOriginal": "When entering Combat, look at your opponent's hand, then choose and discard 1 Non-Dragon Ball card.",
@@ -27357,7 +27377,8 @@
       "coverage": "metadata",
       "needsReview": [
         "powerRatings",
-        "pur"
+        "pur",
+        "levelDisagreement"
       ],
       "text": "Power: Physical attack doing +9 power stages of damage.",
       "textOriginal": "Physical attack doing +9 power stages of damage.",
@@ -41011,7 +41032,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "pur"
+        "pur",
+        "levelDisagreement"
       ],
       "text": "Power: This personality gains 3 power stages. This card can affect Dragon Balls. Choose 1 card at random from your opponent's hand and remove it from the game.",
       "textVerified": "vision",
@@ -44205,7 +44227,7 @@
         "zeroStageIndex": 0,
         "pur": 2,
         "canBeAlly": true,
-        "level": 1,
+        "level": 2,
         "ladderVerified": "vision"
       }
     }
@@ -45988,7 +46010,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Power: When entering Combat, search the top 12 cards of your Life Deck for a Gohan Named card and place it into your hand. Shuffle the remaining cards back into your Life Deck. Remove 3 cards in your opponent's discard pile from the game.",
       "textVerified": "vision",
       "personality": {
@@ -51537,7 +51561,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "pur"
+        "pur",
+        "levelDisagreement"
       ],
       "text": "Prevent 2 life cards of damage from an energy attack.",
       "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
@@ -52859,7 +52884,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Power: Prevent 2 life cards of damage from an energy attack.",
       "textOriginal": "Kamehameha Energy: Attack does three life card draws and only costs one power stage to perform.",
       "lackey": {
@@ -58118,7 +58145,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Energy attack.  If successful, your opponent skips their next \"Attacker Attacks\" phase.",
       "errata": "Forces your opponent to “skip” his next “Attacker Attacks” phase, meaning you may not pass to end Combat.\n\nPersonality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
       "textOriginal": "Multi-Form allows two physical attacks, one after another, or a defense against a physical attack preventing 4 stages of successful damage.",
@@ -58834,7 +58863,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "pur"
+        "pur",
+        "levelDisagreement"
       ],
       "text": "Power: Energy attack. Costs 3 power stages to perform.",
       "textOriginal": "Physical Attack.",
@@ -60323,7 +60353,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Power: Physical attack. If successful, also stop all opponent's physical attacks for the remainder of Combat.",
       "textOriginal": "(Constant Combat Power) When defending against a physical attack, choose any personality in play and use their power stage to determine damage.",
       "lackey": {
@@ -61535,7 +61567,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "levelDisagreement"
       ],
       "text": "Constant Combat Power: All damage from energy attacks performed against Garlic Jr. is reduced to 1 life card.",
       "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
@@ -61790,7 +61823,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "levelDisagreement"
       ],
       "text": "Power: Defense Shield: When defending in Combat, stop the first unstopped attack performed on you.",
       "textOriginal": "(Constant Combat Power) Defense shield: stop the first unstopped energy attack in combat. You cannot have your anger lowered by more than 1 level by any card.",
@@ -65227,7 +65261,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "levelDisagreement"
       ],
       "text": "Power: Energy attack doing 8 life cards of damage.",
       "textOriginal": "Energy attack doing 8 life cards of damage.",
@@ -65498,7 +65533,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "levelDisagreement"
       ],
       "text": "Constant Combat Power: All successful energy attacks against Trunks do a maximum of 2 life cards of damage. (Main Personality Only)",
       "textOriginal": "(Constant Combat Power) When taking damage from a successful physical attack, do not add any pluses from the attacking card or Drills.",
@@ -66287,7 +66323,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Constant Combat Power: Each successful physical attack you perform allows you to place the top card in your dicard pile at the bottom of your Life Deck. (Main Personality Only)",
       "textVerified": "vision",
       "personality": {
@@ -66350,7 +66388,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "levelDisagreement"
       ],
       "text": "Power: Energy attack doing 7 life cards of damage. Costs no power stages to perform.",
       "textOriginal": "Energy attack doing 7 life cards of damage and costs no power stages to perform.",
@@ -66817,7 +66856,8 @@
       "coverage": "metadata",
       "needsReview": [
         "powerRatings",
-        "pur"
+        "pur",
+        "levelDisagreement"
       ],
       "text": "Constant Combat Power: Gain 1 power stage after every successful physical attack you perform.",
       "textOriginal": "Gain 1 power stage after every successful energy attack you perform.",
@@ -72747,7 +72787,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Whenever your opponent reveals a Dragon Ball while taking life cards of damage, you may take that Dragon Ball and place it into play and use its power instead of it going to the bottom of your opponent's Life Deck. The Dragon Ball cannot currently be in play.",
       "errata": "If you play the Ginyu Force as a Main Personality you are considered to have 4 Allies in play for the purpose of card effects. However you cannot redirect damage to these “Allies” and when the Ginyu Force is played as an Ally, it only counts as 1 personality. These “Allies” cannot pay for attacks and cannot leave play for any reason.",
       "textVerified": "vision",
@@ -75974,7 +76016,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Constant Combat Power: When a Drill that you have in play increases the power stages or life cards of damage from any of your attacks, raise that increase by 3. When performing a physical attack with a Blue Style card and the top card of your discard pile is a Blue Style card, it's a focused attack doing +3 life cards of damage.",
       "textVerified": "vision",
       "personality": {
@@ -82825,7 +82869,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Power: Once per game, after a successful energy attack, you may capture a Dragon Ball from your opponent and end combat.",
       "textVerified": "vision",
       "personality": {
@@ -82863,7 +82909,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Power: Energy attack doing 3 life cards of damage.  Costs 1 power stage to perform.",
       "textVerified": "vision",
       "personality": {
@@ -85720,7 +85768,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Stops a physical attack. If you declared a Tokui-Waza, Combat cards may not be played for the remainder of Combat.",
       "textVerified": "vision",
       "personality": {
@@ -86016,7 +86066,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "[Main Personality Only] Power: Stops a physical attack. If you declared a Tokui-Waza, search your Life Deck for a Freestyle Drill and place it in your hand.",
       "textVerified": "vision",
       "personality": {
@@ -86150,7 +86202,9 @@
     "rules": {
       "type": "Personality",
       "coverage": "metadata",
-      "needsReview": [],
+      "needsReview": [
+        "levelDisagreement"
+      ],
       "text": "Energy attack doing 1 life card of damage for each Non-Combat card you have in play. If you declared a Tokui-Waza, raise Goku to his highest power stage.",
       "textVerified": "vision",
       "personality": {
@@ -89405,7 +89459,8 @@
       "type": "Personality",
       "coverage": "metadata",
       "needsReview": [
-        "pur"
+        "pur",
+        "levelDisagreement"
       ],
       "text": "[Main Personality Only] Power: Stops a physical attack. If you did not declare a Tokui-Waza, search your discard pile for a Martial Arts Styled card and shuffle it into your Life Deck.",
       "textVerified": "vision",

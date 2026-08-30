@@ -204,6 +204,16 @@ async function main(): Promise<void> {
     return text;
   };
 
+  /**
+   * Hand-verified levels, trusted over every reader. See
+   * data/level-overrides.json for why this exists.
+   */
+  const overridePath = join(dataDir, 'level-overrides.json');
+  const levelOverrides: Record<string, { level: number; name?: string; note?: string }> = existsSync(overridePath)
+    ? ((JSON.parse(await readFile(overridePath, 'utf8')) as { levels?: Record<string, { level: number }> }).levels ?? {})
+    : {};
+  let levelsOverridden = 0;
+
   let personalities = 0;
   let withAbilities = 0;
   const coverage: Record<string, number> = {};
@@ -399,6 +409,27 @@ const cards = catalog.cards.map((c) => {
         if (vis.pur !== undefined) personality.pur = vis.pur;
         if (vis.alignment && vis.alignment !== 'unknown') { personality.alignment = vis.alignment; const ix = needsReview.indexOf('alignment'); if (ix !== -1) needsReview.splice(ix, 1); }
       }
+      // Level badges are small stylised digits and BOTH readers get them wrong:
+      // where vision and OCR each read a level they disagree 38 times out of
+      // 207, and 369 personalities have no LackeyCCG row to settle it. A wrong
+      // level is not cosmetic — it decides which slot a card fills in a Main
+      // Personality stack, so one misread level can make a legal stack look
+      // like it has two level 1s and no level 2.
+      if (vis?.level !== undefined && rec?.level !== undefined && rec.level !== null && vis.level !== rec.level) {
+        needsReview.push('levelDisagreement');
+      }
+      // A hand-verified level beats every reader, and is how a misread gets
+      // fixed permanently without re-running the pipeline.
+      const override = levelOverrides[c.id];
+      if (override) {
+        personality.level = override.level;
+        for (const flag of ['level', 'levelDisagreement']) {
+          const ix = needsReview.indexOf(flag);
+          if (ix !== -1) needsReview.splice(ix, 1);
+        }
+        levelsOverridden++;
+      }
+
       // Final pass: a single arithmetic misread is repairable and flagged.
       const fixed = repairLadder(personality.powerRatings as Array<number | 'Z'>);
       if (fixed) {
@@ -459,6 +490,7 @@ const cards = catalog.cards.map((c) => {
   console.log(`[enrich-tts] lackey: ${lackey.length} cards loaded, ${matched} matched, ${verified} text-verified by OCR agreement`);
   console.log(`[enrich-tts] ladders verified (typed vs OCR agreement): ${laddersVerified}`);
   console.log(`[enrich-tts] vision readings applied: ${visionApplied}`);
+  console.log(`[enrich-tts] levels overridden by hand: ${levelsOverridden}`);
   console.log(`[enrich-tts] endurance values parsed: ${enduranceFound}`);
   console.log(`[enrich-tts] ladders repaired by arithmetic: ${laddersRepaired}`);
 }

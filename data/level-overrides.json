@@ -1,0 +1,10 @@
+{
+  "note": "Hand-verified personality levels, applied last in enrich-tts and trusted over every reader. Level badges are small stylised digits and both readers get them wrong: across the 207 personalities where vision and OCR both read a level they disagree 38 times, and 369 personalities have no LackeyCCG row to settle it. This file is how a level gets fixed permanently without re-running anything. Key by card id; `note` should say how the level was confirmed.",
+  "levels": {
+    "tts-89fe8da5-6": {
+      "level": 2,
+      "name": "Android 18, the Mom",
+      "note": "Card face: level badge 2, card #93, '1 of 2 Android 18', ladder 1,110,000-1,200,000. Vision read the badge as 1 (and the number as #34); OCR read 4."
+    }
+  }
+}

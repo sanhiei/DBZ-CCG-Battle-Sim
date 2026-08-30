@@ -125,6 +125,55 @@ test('a card with no printed limit still allows 3', () => {
   assert.equal(validateDeck(deck, db2, { enforceSize: false }).some((e) => /limit/i.test(e)), false);
 });
 
+/* ---------- copy limits count cards, not catalog rows ---------- */
+
+test('two catalog entries for the SAME card still count as one card', () => {
+  // The mod slices the same physical card more than once: 66 name+saga groups
+  // have a duplicate entry, 54 of them Personalities. Counting by catalog id
+  // let a deck hold "one" of each duplicate and so run two copies of a card
+  // limited to one.
+  const a = card('dupe-a', 'Senzu Bean', 'Non-Combat');
+  const b = { ...card('dupe-b', 'Senzu Bean', 'Non-Combat') };
+  const limited: EngineCard = {
+    ...a,
+    rules: { type: 'Non-Combat', coverage: 'metadata', text: 'Limit 1 per deck.' },
+  };
+  const limitedTwin: EngineCard = {
+    ...b,
+    rules: { type: 'Non-Combat', coverage: 'metadata', text: 'Limit 1 per deck.' },
+  };
+  const db2 = new CardDb([...[1, 2, 3].map((lv) => personality(`g${lv}`, lv)), limited, limitedTwin]);
+  const deck: DeckList = {
+    name: 'd',
+    mpLevels: ['g1', 'g2', 'g3'],
+    life: [
+      { cardId: 'dupe-a', qty: 1 },
+      { cardId: 'dupe-b', qty: 1 },
+    ],
+  };
+  assert.ok(
+    validateDeck(deck, db2, { enforceSize: false }).some((e) => /limit 1 per deck/i.test(e)),
+    'two ids for one card is still two copies',
+  );
+});
+
+test('genuinely different printings are still separate cards', () => {
+  // Same name, different set: those are distinct cards and each gets its own
+  // allowance, so identity is name AND saga.
+  const early: EngineCard = { ...card('early', 'Power Up', 'Non-Combat'), saga: 'Saiyan' };
+  const late: EngineCard = { ...card('late', 'Power Up', 'Non-Combat'), saga: 'Cell' };
+  const db2 = new CardDb([...[1, 2, 3].map((lv) => personality(`g${lv}`, lv)), early, late]);
+  const deck: DeckList = {
+    name: 'd',
+    mpLevels: ['g1', 'g2', 'g3'],
+    life: [
+      { cardId: 'early', qty: 3 },
+      { cardId: 'late', qty: 3 },
+    ],
+  };
+  assert.equal(validateDeck(deck, db2, { enforceSize: false }).some((e) => /limit/i.test(e)), false);
+});
+
 /* ---------- playAlly is gated ---------- */
 
 function nonCombatState(step: GameState['step'] = 'nonCombat'): GameState {

@@ -129,8 +129,29 @@ export function validateDeck(deck: DeckList, db: CardDb, opts: DeckValidationOpt
   }
 
   // --- Copy limits across the whole deck (Life Deck + Sensei Deck) ---
+  //
+  // Counted by card IDENTITY, not by catalog id. The same physical card is
+  // sliced more than once out of the Tabletop Simulator mod — 66 name+saga
+  // groups have a duplicate entry, 54 of them Personalities — and each copy
+  // carries its own id. Counting ids let a deck hold "one" of each duplicate
+  // and so run two copies of a card limited to one: a Personality level, a
+  // Mastery, a Dragon Ball, or anything printing "Limit 1 per deck".
+  // The LEVEL is part of a personality's identity: "Guldo" level 1, 2 and 3
+  // share a name and a saga and are three different cards. Without it the whole
+  // Main Personality stack collapses into one card and reads as three copies.
+  const identityOf = (id: string): string => {
+    const card = db.get(id);
+    if (!card) return id;
+    const level = card.rules?.personality?.level;
+    return `${card.name.toLowerCase()}|${card.saga}|${level ?? ''}`;
+  };
   const counts = new Map<string, number>();
-  const bump = (id: string, qty: number) => counts.set(id, (counts.get(id) ?? 0) + qty);
+  const idFor = new Map<string, string>();
+  const bump = (id: string, qty: number) => {
+    const k = identityOf(id);
+    if (!idFor.has(k)) idFor.set(k, id);
+    counts.set(k, (counts.get(k) ?? 0) + qty);
+  };
   for (const id of deck.mpLevels) bump(id, 1);
   if (deck.masteryId) bump(deck.masteryId, 1);
   if (deck.senseiId) bump(deck.senseiId, 1);
@@ -138,10 +159,10 @@ export function validateDeck(deck: DeckList, db: CardDb, opts: DeckValidationOpt
   for (const { cardId, qty } of deck.senseiDeck ?? []) bump(cardId, qty);
 
   const unknown: string[] = [];
-  for (const [cardId, qty] of counts) {
-    const card = db.get(cardId);
+  for (const [identity, qty] of counts) {
+    const card = db.get(idFor.get(identity) ?? identity);
     if (!card) {
-      unknown.push(cardId);
+      unknown.push(idFor.get(identity) ?? identity);
       continue;
     }
     const limit = copyLimit(card, mpName);
@@ -154,7 +175,8 @@ export function validateDeck(deck: DeckList, db: CardDb, opts: DeckValidationOpt
   // --- Dragon Balls must all come from one set ---
   const ballSets = new Set(
     [...counts.keys()]
-      .map((id) => db.get(id))
+      // counts is keyed by identity now, so go back through a real card id.
+      .map((identity) => db.get(idFor.get(identity) ?? identity))
       .filter((c): c is EngineCard => !!c && isDragonBall(c))
       .map((c) => c.saga),
   );
