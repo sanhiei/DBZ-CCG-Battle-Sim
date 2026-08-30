@@ -119,6 +119,37 @@ function endGame(state: GameState, winnerIdx: number, events: GameEvent[]): void
   state.log.push(`${state.players[winnerIdx]?.name} wins by Survival!`);
 }
 
+/**
+ * Run an attack's "if successful" effects, and honour any combat-long stop
+ * among them.
+ *
+ * An attack card can carry a stop of its own ("...and stops all physical
+ * attacks for the remainder of Combat"). Those effects reach applyIfSuccessful,
+ * which LOGS "Effect: stops a physical attack" and does nothing else — so the
+ * log claimed a lockout that never existed. addLockout lives here in combat.ts
+ * because lockouts are combat state; applying it from abilities.ts would close
+ * an import cycle.
+ */
+function finishSuccessfulAttack(
+  state: GameState,
+  atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>,
+  db: CardDb,
+  events: GameEvent[],
+): void {
+  const c = state.combat;
+  if (c) {
+    for (const e of atk.ifSuccessfulEffects ?? []) {
+      if (e.kind === 'stopAttack' && e.window === 'thisCombat') {
+        addLockout(state, c, atk.defenderPlayerIdx, e.attackType ?? 'any');
+      }
+    }
+  }
+  applyIfSuccessful(state, atk.ifSuccessfulEffects, db, events, {
+    userIdx: atk.attackerPlayerIdx,
+    foeIdx: atk.defenderPlayerIdx,
+  });
+}
+
 /** Switch to the next Attack Phase (the other player). Clears any current attack. */
 function nextAttackPhase(state: GameState, events: GameEvent[]): void {
   const c = state.combat!;
@@ -384,10 +415,7 @@ function applyPowerStageDamage(state: GameState, personalityUid: string, db: Car
   }
 
   events.push({ type: 'attackResolved', successful: true, powerStages: atk.powerStagesDealt, lifeCards: 0 });
-  applyIfSuccessful(state, atk.ifSuccessfulEffects, db, events, {
-    userIdx: atk.attackerPlayerIdx,
-    foeIdx: atk.defenderPlayerIdx,
-  });
+  finishSuccessfulAttack(state, atk, db, events);
   nextAttackPhase(state, events);
 }
 
@@ -556,10 +584,7 @@ function resolveLifeCardDamage(
   const dealt = atk.lifeCardsDealt ?? 0;
   // An attack that overflowed dealt power stages AND life cards; report both.
   events.push({ type: 'attackResolved', successful: true, powerStages: atk.powerStagesDealt ?? 0, lifeCards: dealt });
-  applyIfSuccessful(state, atk.ifSuccessfulEffects, db, events, {
-    userIdx: atk.attackerPlayerIdx,
-    foeIdx: atk.defenderPlayerIdx,
-  });
+  finishSuccessfulAttack(state, atk, db, events);
 
   if (result.exhausted) {
     endGame(state, atk.attackerPlayerIdx, events);

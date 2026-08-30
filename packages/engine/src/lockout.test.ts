@@ -65,6 +65,31 @@ function combatState(defenderHand: CardInstance[]): GameState {
   return s;
 }
 
+test('an ATTACK card that also locks out actually locks the defender out', () => {
+  // "...and stops all physical attacks for the remainder of Combat" on an
+  // attack card reached applyIfSuccessful, which logged "Effect: stops a
+  // physical attack" and did nothing — the log claimed a lockout that was
+  // never recorded, so the defender kept attacking freely.
+  const s = combatState([]);
+  const ability = {
+    trigger: 'attack' as const,
+    effects: [
+      { kind: 'physicalAttack' as const },
+      { kind: 'stopAttack' as const, attackType: 'physical' as const, window: 'thisCombat' as const, scope: 'all' as const },
+    ],
+    source: 'parsed' as const,
+  };
+  assert.equal(declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, [], ability), undefined);
+  assert.equal(resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []), undefined);
+
+  // Seat 1 (the defender) is now barred from physical attacks this combat.
+  assert.match(
+    declareAttack(s, 'physical', undefined, { actingPlayerIdx: 1 }, db, []) ?? '',
+    /remainder of this Combat/,
+  );
+  assert.equal(declareAttack(s, 'energy', undefined, { actingPlayerIdx: 1 }, db, []), undefined, 'energy is untouched');
+});
+
 test('a combat-long energy stop blocks later energy attacks', () => {
   const card = inst('lock-energy');
   const s = combatState([card]);
