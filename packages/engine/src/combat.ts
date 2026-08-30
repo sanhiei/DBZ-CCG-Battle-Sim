@@ -23,6 +23,7 @@ import type {
   Ability,
   AttackType,
   CardInstance,
+  Effect,
   GameEvent,
   GameState,
   PersonalityInPlay,
@@ -32,7 +33,7 @@ import type {
 import type { CardDb } from './loader.js';
 import { computeBaseDamage } from './pat.js';
 import { advanceStep, draw, syncRating } from './turn.js';
-import { applyIfSuccessful, attackKindOf, setupAttackAbility } from './abilities.js';
+import { applyIfSuccessful, applyOnPlay, attackKindOf, setupAttackAbility } from './abilities.js';
 import {
   canUseEndurance,
   capturableBalls,
@@ -438,6 +439,20 @@ export function resolveDefense(
     for (const e of stops) {
       if (e.window === 'thisCombat') addLockout(state, c, atk.attackerPlayerIdx, e.attackType ?? 'any');
     }
+
+    // Everything the card does BESIDES stopping still happens. CRD ~L387: "If
+    // the attack is stopped, the effects are NOT stopped. Secondary effects
+    // occur regardless of if an attack is stopped or not." Only the stop was
+    // being read, so every rider a defense card carries — the anger it raises,
+    // the stages it takes off the attacker, the card it draws — was thrown
+    // away. Disposal is handled by discardAttackCards, so drop that effect.
+    const riders = defenseEffects(state, atk.defenderPlayerIdx, opts.cardUid, db).filter(
+      (e) => e.kind !== 'stopAttack' && e.kind !== 'removeFromGameAfterUse',
+    );
+    if (riders.length > 0) {
+      applyOnPlay(state, atk.defenderPlayerIdx, atk.attackerPlayerIdx, riders, db, events);
+    }
+
     discardAttackCards(state, atk, db, opts.cardUid);
     events.push({ type: 'attackResolved', successful: false, powerStages: 0, lifeCards: 0 });
     state.log.push(`${state.players[atk.defenderPlayerIdx]!.name} stops the attack.`);
@@ -643,11 +658,18 @@ export function resolveCapture(
  * used to search every player and every zone including the discard pile, so a
  * card the opponent had already thrown away could answer for the defense.
  */
-function defenseStops(state: GameState, playerIdx: number, cardUid: string, db: CardDb) {
+function defenseEffects(state: GameState, playerIdx: number, cardUid: string, db: CardDb): Effect[] {
   const found = findCombatCard(state, playerIdx, cardUid);
   if (!found) return [];
   const abilities = db.get(found.inst.cardId)?.rules?.abilities ?? [];
-  return abilities.flatMap((a) => a.effects).filter((e) => e.kind === 'stopAttack');
+  // A card used to defend contributes its defense ability; cards with no
+  // trigger split (one parsed ability) contribute that one.
+  const defensive = abilities.filter((a) => a.trigger === 'defense');
+  return (defensive.length > 0 ? defensive : abilities).flatMap((a) => a.effects);
+}
+
+function defenseStops(state: GameState, playerIdx: number, cardUid: string, db: CardDb) {
+  return defenseEffects(state, playerIdx, cardUid, db).filter((e) => e.kind === 'stopAttack');
 }
 /** Answer the redirect prompt: send the pending power-stage damage to a personality. */
 export function redirectDamage(state: GameState, toUid: string | null, ctx: CombatCtx, db: CardDb, events: GameEvent[]): string | undefined {

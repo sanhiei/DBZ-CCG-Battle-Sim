@@ -70,6 +70,31 @@ const db = new CardDb([
   combatCard('block-energy', 'Energy Only Block', { stops: 'energy' }),
   combatCard('block-gone', 'Spent Block', { stops: 'any', removeAfterUse: true }),
   combatCard('unparsed', 'Unparsed Block', { noAbility: true }),
+  // A block that also does something. CRD ~L387: the something still happens.
+  {
+    id: 'rider',
+    number: null,
+    name: 'Red Forearm Block',
+    style: null,
+    saga: 'Buu',
+    rarity: 'Common',
+    imageUrl: '',
+    rules: {
+      type: 'Combat',
+      coverage: 'partial',
+      abilities: [
+        {
+          trigger: 'defense' as const,
+          effects: [
+            { kind: 'stopAttack' as const, attackType: 'any' as const, window: 'thisAttack' as const },
+            { kind: 'changeAnger' as const, target: 'user' as const, delta: 1 },
+            { kind: 'changeAnger' as const, target: 'foe' as const, delta: -1 },
+          ],
+          source: 'parsed' as const,
+        },
+      ],
+    },
+  } as EngineCard,
   combatCard('senzu', 'Senzu Bean', { type: 'Non-Combat', noAbility: true }),
   combatCard('atk', 'Big Punch', { type: 'Physical Combat', noAbility: true }),
   combatCard('filler', 'Filler', { type: 'Physical Combat', noAbility: true }),
@@ -207,6 +232,36 @@ test('an attack card must be in the attacker’s hand', () => {
   const s = combatState();
   const err = declareAttack(s, 'physical', 'ghost-card', { actingPlayerIdx: 0 }, db, []);
   assert.match(err ?? '', /not in your hand/);
+});
+
+/* ---------- a stopped attack does not stop the card's other effects ---------- */
+
+test("a defense card's secondary effects happen even though it stopped the attack", () => {
+  // CRD ~L387: "If the attack is stopped, the effects are NOT stopped.
+  // Secondary effects occur regardless of if an attack is stopped or not."
+  // Only the stop was being read, so every rider a defense card carries was
+  // thrown away — which is most of the anger economy.
+  const card = inst('rider');
+  const s = combatState({ defenderHand: [card] });
+  s.players[0]!.mp.anger = 2; // anger floors at 0, so give the attacker some to lose
+  const attackerAngerBefore = s.players[0]!.mp.anger;
+  const defenderAngerBefore = s.players[1]!.mp.anger;
+
+  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  assert.equal(resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []), undefined);
+
+  assert.equal(s.players[1]!.mp.anger, defenderAngerBefore + 1, "the defender's anger rose");
+  assert.equal(s.players[0]!.mp.anger, attackerAngerBefore - 1, "the attacker's anger dropped");
+});
+
+test('the card is still spent exactly once when it has riders', () => {
+  const card = inst('rider');
+  const s = combatState({ defenderHand: [card] });
+  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []);
+  const z = s.players[1]!.zones;
+  assert.equal(z.discard.filter((c) => c.uid === card.uid).length, 1);
+  assert.equal(z.hand.filter((c) => c.uid === card.uid).length, 0);
 });
 
 /* ---------- power stages that cannot be lost become life cards ---------- */
