@@ -37,13 +37,31 @@ export interface DeckValidationOptions {
  *  single-set rule. All 52 printed balls carry the type. */
 const isDragonBall = (c: EngineCard): boolean => /dragon ball/i.test(c.rules?.type ?? '');
 
-/** Per-deck copy limit for one card. */
+/**
+ * Per-deck copy limit for one card.
+ *
+ * CRD ~L51: cards "are limited to 3 copies per deck unless they are named cards
+ * or say otherwise in the rules text." The printed limit was never read, so all
+ * 168 cards that say "Limit 1 per deck" or "Limit 2 per deck" could be run at 3
+ * — or at 4 when the title happened to contain the MP's name, which is exactly
+ * the case the printed limit exists to stop.
+ */
+function printedLimit(card: EngineCard): number | undefined {
+  const m = /limit\s*(\d+)\s*per\s*deck/i.exec(card.rules?.text ?? '');
+  if (!m) return undefined;
+  const n = Number(m[1]);
+  return Number.isFinite(n) && n > 0 ? n : undefined;
+}
+
 function copyLimit(card: EngineCard, mpName: string | undefined): number {
   const type = card.rules?.type ?? 'Unknown';
   if (card.rules?.personality || type === 'Personality') return 1;
   if (/mastery|sensei/i.test(type) || isDragonBall(card)) return 1;
-  if (mpName && card.name.toLowerCase().includes(mpName.toLowerCase())) return 4;
-  return 3;
+  const base = mpName && card.name.toLowerCase().includes(mpName.toLowerCase()) ? 4 : 3;
+  // A printed limit overrides the default, and overrides the named-card bonus:
+  // "say otherwise in the rules text" is the exception to both.
+  const printed = printedLimit(card);
+  return printed === undefined ? base : Math.min(printed, base);
 }
 
 /** Cheap shape check — this data arrives straight off a socket. */

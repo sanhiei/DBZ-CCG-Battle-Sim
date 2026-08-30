@@ -111,7 +111,12 @@ export function checkVictory(
 
     // 2. Dragon Ball — 7 of one set under one player's control.
     const balls = dragonBallProgress(state, player.idx, db);
-    if (balls && balls.count >= DRAGON_BALL_SET_SIZE && state.pendingDragonVictory === undefined) {
+    // The deferral belongs to the player who CAPTURED a 7th ball (CRD ~L167);
+    // it is not a global pause on the rule. Guarding on "no claim pending at
+    // all" meant that while one player's claim matured, the OTHER player could
+    // not win with seven balls of their own — including by playing the last
+    // one, which the CRD (~L164, ~L666) says wins immediately.
+    if (balls && balls.count >= DRAGON_BALL_SET_SIZE && state.pendingDragonVictory !== player.idx) {
       return endGame(state, player.idx, 'dragonBall', events);
     }
 

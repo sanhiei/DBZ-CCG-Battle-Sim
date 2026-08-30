@@ -29,7 +29,14 @@ function legalDeck(name = 'Test Deck', mpName = 'Goku'): DeckList {
   assert.equal(levels.length, 3, `catalog should have 3 levels of ${mpName}`);
 
   const fillers = catalog.cards.filter(
-    (c: EngineCard) => !c.rules?.personality && !/dragon ball/i.test(c.name) && !c.name.toLowerCase().includes(mpName.toLowerCase()),
+    (c: EngineCard) =>
+      !c.rules?.personality &&
+      !/dragon ball/i.test(c.name) &&
+      !c.name.toLowerCase().includes(mpName.toLowerCase()) &&
+      // This fixture takes 3 copies of everything, so it may only use cards
+      // that allow 3. 168 cards print "Limit 1/2 per deck" (CRD ~L51) and the
+      // deck it built was genuinely illegal once those started being enforced.
+      !/limit\s*\d+\s*per\s*deck/i.test(c.rules?.text ?? ''),
   );
   const life: Array<{ cardId: string; qty: number }> = [];
   let remaining = MIN_DECK_SIZE - levels.length;

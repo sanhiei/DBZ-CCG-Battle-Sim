@@ -94,6 +94,37 @@ test('a non-Namekian deck is still capped at 85', () => {
   assert.ok(errs.some((e) => /maximum is 85/.test(e)), `expected an 85 cap: ${errs.join('; ')}`);
 });
 
+/* ---------- printed deck limits ---------- */
+
+test('a printed "Limit 1 per deck" is enforced', () => {
+  // CRD ~L51: 3 copies "unless they are named cards or say otherwise in the
+  // rules text". 168 cards say otherwise and none of them were being read.
+  const limited: EngineCard = {
+    ...card('lim', 'Cell\'s Defense', 'Combat'),
+    rules: { type: 'Combat', coverage: 'metadata', text: 'Stops a physical attack. Limit 1 per deck.' },
+  };
+  const db2 = new CardDb([...[1, 2, 3].map((lv) => personality(`g${lv}`, lv)), limited, card('plain', 'Plain Card', 'Physical Combat')]);
+  const deck: DeckList = { name: 'd', mpLevels: ['g1', 'g2', 'g3'], life: [{ cardId: 'lim', qty: 2 }, { cardId: 'plain', qty: 50 }] };
+  assert.ok(validateDeck(deck, db2, { enforceSize: false }).some((e) => /limit 1 per deck/i.test(e)));
+});
+
+test('a printed limit beats the named-card allowance of 4', () => {
+  // The named-card bonus is exactly the case a printed limit exists to stop.
+  const named: EngineCard = {
+    ...card('gk', 'Goku\'s Kamehameha', 'Energy Combat'),
+    rules: { type: 'Energy Combat', coverage: 'metadata', text: 'Energy attack. Limit 1 per deck.' },
+  };
+  const db2 = new CardDb([...[1, 2, 3].map((lv) => personality(`g${lv}`, lv)), named]);
+  const deck: DeckList = { name: 'd', mpLevels: ['g1', 'g2', 'g3'], life: [{ cardId: 'gk', qty: 2 }] };
+  assert.ok(validateDeck(deck, db2, { enforceSize: false }).some((e) => /limit 1/i.test(e)));
+});
+
+test('a card with no printed limit still allows 3', () => {
+  const db2 = new CardDb([...[1, 2, 3].map((lv) => personality(`g${lv}`, lv)), card('plain', 'Plain Card', 'Physical Combat')]);
+  const deck: DeckList = { name: 'd', mpLevels: ['g1', 'g2', 'g3'], life: [{ cardId: 'plain', qty: 3 }] };
+  assert.equal(validateDeck(deck, db2, { enforceSize: false }).some((e) => /limit/i.test(e)), false);
+});
+
 /* ---------- playAlly is gated ---------- */
 
 function nonCombatState(step: GameState['step'] = 'nonCombat'): GameState {

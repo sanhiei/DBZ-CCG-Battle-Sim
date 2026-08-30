@@ -487,14 +487,20 @@ function pushAnger(effects: Effect[], t: string): void {
     const foeAnger = /(opponent|foe|his|her|their)'?s?\s+(current\s+)?anger/.test(s);
     const ownAnger = /(your|user'?s?|own)\s+(current\s+)?anger/.test(s);
     const foe = foeAnger && !ownAnger;
+
+    // "Lower ALL PLAYERS' anger levels to 0" (Goku's Conquering Stance) names
+    // no possessive at all, so it matched neither test and fell through to the
+    // user — the card zeroed only its own player's anger, which is close to
+    // the opposite of what it says. EffectTarget has no 'both', so emit one
+    // effect per player rather than widening the schema for a handful of cards.
+    const everyone = /\ball\s+(players|personalities)'?s?\b|\bboth\s+players'?s?\b|\beach\s+player'?s?\b/.test(s);
+    const targets = everyone ? (['user', 'foe'] as const) : ([foe ? 'foe' : 'user'] as const);
     // Both halves in one sentence ("raise your anger 1 level and lower your
     // opponent's anger 2 levels", Red Fist Lunge) are handled by the split
     // below rather than by picking one target for the whole sentence.
-    const target = foe ? ('foe' as const) : ('user' as const);
-
     // A set, not a delta: as delta 0 it was a no-op that still looked modelled.
     if (/anger[^.]{0,24}\bto\s*(0|zero)\b/.test(s)) {
-      effects.push({ kind: 'changeAnger', target, delta: 0, toZero: true });
+      for (const target of targets) effects.push({ kind: 'changeAnger', target, delta: 0, toZero: true });
       continue;
     }
 
@@ -507,7 +513,7 @@ function pushAnger(effects: Effect[], t: string): void {
       s.match(/anger[^0-9]{0,10}(\d)/) ??
       s.match(/(\d)\s*(?:anger|levels?)/);
     const amount = toNum(n?.[1], 1);
-    effects.push({ kind: 'changeAnger', target, delta: lowers ? -amount : amount });
+    for (const target of targets) effects.push({ kind: 'changeAnger', target, delta: lowers ? -amount : amount });
   }
 }
 function pushSelfPowerLoss(effects: Effect[], t: string): void {

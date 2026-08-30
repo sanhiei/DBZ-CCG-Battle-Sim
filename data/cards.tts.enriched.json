@@ -2192,6 +2192,12 @@
               "target": "user",
               "delta": 0,
               "toZero": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 0,
+              "toZero": true
             }
           ],
           "source": "parsed"
