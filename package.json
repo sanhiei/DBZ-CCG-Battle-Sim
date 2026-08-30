@@ -24,7 +24,8 @@
     "slice:tts": "npm run slice -w @dbz/tts",
     "ci": "npm run typecheck && npm test",
     "build:client": "npm run build -w @dbz/client",
-    "start": "npm run build --workspaces --if-present && node packages/server/dist/index.js"
+    "start": "npm run build --workspaces --if-present && node packages/server/dist/index.js",
+    "optimize:images": "node scripts/optimize-images.mjs"
   },
   "engines": {
     "node": ">=22.6"

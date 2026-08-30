@@ -128,6 +128,7 @@ export function Board({
   const foe = state.players.find((p) => p.idx !== bottomIdx);
   const myTurn = seat != null && state.activePlayerIdx === seat;
   const prompt = state.pendingPrompt;
+  const over = state.phase === 'ended';
 
   const combat = state.combat;
   const myAttackPhase = seat != null && combat !== undefined && combat.phasePlayerIdx === seat && !combat.currentAttack;
@@ -135,7 +136,9 @@ export function Board({
 
   // One derivation of what a hand click means right now.
   const myNonCombatStep = seat != null && state.activePlayerIdx === seat && state.step === 'nonCombat';
-  const handMode: HandMode = awaitingMyDefence
+  const handMode: HandMode = over
+    ? 'idle'
+    : awaitingMyDefence
     ? 'defend'
     : myAttackPhase
       ? 'attack'
@@ -194,14 +197,20 @@ export function Board({
           </div>
         )}
 
+        {/* Once the game is over every one of these is refused by the server,
+            so leaving them live just produced a row of errors at exactly the
+            moment a player is deciding whether to play again. */}
         <div className="controls">
-          <button disabled={!myTurn || !!prompt} onClick={onAdvanceStep}>
+          <button disabled={over || !myTurn || !!prompt} onClick={onAdvanceStep}>
             Advance step
           </button>
-          <button disabled={!myTurn || state.step !== 'powerUp' || !!prompt} onClick={onPowerUp}>
+          <button disabled={over || !myTurn || state.step !== 'powerUp' || !!prompt} onClick={onPowerUp}>
             Power up
           </button>
-          <button disabled={!combat || !!prompt || seat === null || combat.phasePlayerIdx !== seat} onClick={onPass}>
+          <button
+            disabled={over || !combat || !!prompt || seat === null || combat.phasePlayerIdx !== seat}
+            onClick={onPass}
+          >
             Pass
           </button>
           {seat !== null && state.phase === 'playing' && (

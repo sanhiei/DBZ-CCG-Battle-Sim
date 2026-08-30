@@ -260,13 +260,24 @@ function serveCardImage(rawName: string, res: ServerResponse): void {
     res.writeHead(400).end();
     return;
   }
-  const file = join(findDataDir(), 'images-tts', safe);
+  // Prefer a web-sized WebP when one exists. The sliced originals average
+  // 206KB and total 541MB, which is fine locally and painful through a tunnel;
+  // `npm run optimize:images` writes smaller copies beside them. Nothing here
+  // depends on that having been run — without it, the originals are served.
+  const dataDir = findDataDir();
+  const webp = join(dataDir, 'images-web', safe.replace(/\.(jpg|jpeg|png)$/i, '.webp'));
+  const original = join(dataDir, 'images-tts', safe);
+  const file = existsSync(webp) ? webp : original;
   if (!existsSync(file)) {
     res.writeHead(404).end();
     return;
   }
   res.writeHead(200, {
-    'content-type': safe.toLowerCase().endsWith('.png') ? 'image/png' : 'image/jpeg',
+    'content-type': file.endsWith('.webp')
+      ? 'image/webp'
+      : safe.toLowerCase().endsWith('.png')
+        ? 'image/png'
+        : 'image/jpeg',
     'cache-control': 'public, max-age=86400',
   });
   createReadStream(file).pipe(res);

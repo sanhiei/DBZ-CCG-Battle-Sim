@@ -18,13 +18,22 @@
 import type { CardInstance, GameEvent, GameState } from '@dbz/shared';
 import type { CardDb } from './loader.js';
 import { applyOnPlay } from './abilities.js';
+import { isDragonBall } from './damage.js';
 // Re-exported so callers keep importing the Non-Combat Step's rules from one
 // place; they live in drills.ts to keep turn.ts from importing this module.
 export { discardDrills, isDrill, isFreestyleDrill } from './drills.js';
 import { isDrill } from './drills.js';
 
-/** Card types that may be placed in play during the Non-Combat Step. */
-const PLAYABLE_IN_PLAY = new Set(['Non-Combat', 'Drill', 'Location', 'Battleground']);
+/**
+ * Card types that may be placed in play during the Non-Combat Step.
+ *
+ * Dragon Balls belong here — CRD ~L216 lists them explicitly — and leaving them
+ * out meant they could never reach the table at all. Everything downstream of
+ * them was already built and tested: capture off life-card damage, the seven-
+ * of-a-set win, the deferred claim when the seventh is taken from an opponent,
+ * and the Dragon Ball Loop. An entire victory condition had no on-ramp.
+ */
+const PLAYABLE_IN_PLAY = new Set(['Non-Combat', 'Drill', 'Location', 'Battleground', 'Dragon Ball']);
 
 /** Types that cost you the Combat Step when played. */
 const SKIPS_COMBAT = new Set(['Location', 'Battleground']);
@@ -55,8 +64,19 @@ export function playCard(
   }
 
   player.zones.hand.splice(at, 1);
-  player.zones.inPlay.push({ ...card, faceDown: false });
   const name = db.get(card.cardId)?.name ?? 'a card';
+
+  // A Dragon Ball you play is one you CONTROL, and control is what the victory
+  // condition counts (CRD ~L163). It lives in its own zone, not among the
+  // Drills and Settings, so that capture can move it between players.
+  if (isDragonBall(card, db)) {
+    player.dragonBalls.push({ ...card, faceDown: false });
+    state.log.push(`${player.name} plays ${name} — ${player.dragonBalls.length} Dragon Ball(s) controlled.`);
+    events.push({ type: 'log', message: `${player.name} plays ${name}` });
+    return undefined;
+  }
+
+  player.zones.inPlay.push({ ...card, faceDown: false });
   state.log.push(`${player.name} plays ${name}.`);
 
   if (SKIPS_COMBAT.has(type)) {
