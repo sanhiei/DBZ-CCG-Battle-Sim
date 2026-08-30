@@ -234,6 +234,50 @@ function canonicalType(raw: string | undefined, isPersonality: boolean): string 
   return TYPE_BY_KEY.get(key) ?? raw ?? 'Unknown';
 }
 
+/**
+ * Words that prefix a character rather than name one.
+ *
+ * "King Piccolo" is not Piccolo and "Super Saiyan Trunks" is not Trunks, so
+ * a leading run of these is kept and the first real word after them is the
+ * character.
+ */
+const NAME_PREFIXES = new Set(['king', 'majin', 'kid', 'future', 'super', 'saiyan', 'great', 'captain', 'dr.', 'mr.', 'android', 'baby', 'ultimate', 'mystic', 'general', 'commander', 'lord']);
+
+/**
+ * The CHARACTER a personality card belongs to.
+ *
+ * A Main Personality is three-plus consecutive levels "of the same
+ * Personality" (CRD ~L64) — and in this game each LEVEL carries its own
+ * subtitle: the Cell saga Piccolo runs "Piccolo, the Warrior" Lv1, "Piccolo,
+ * the Champion" Lv2, "Piccolo, Earth\'s Protector" Lv3, "Piccolo, the Namek"
+ * Lv4. Keying identity on the full card title split that one legal stack into
+ * four one-card groups, none of them playable, which is why the deck builder
+ * offered 22 Main Personalities out of 572 personality cards.
+ */
+function characterOf(name: string): string {
+  const head = name.split(',')[0] ?? name;
+  const tokens = head.trim().split(/\s+/).filter(Boolean);
+  const out: string[] = [];
+  for (const tok of tokens) {
+    out.push(tok);
+    if (!NAME_PREFIXES.has(tok.toLowerCase())) break;
+  }
+  return out.join(' ') || name;
+}
+
+/**
+ * Does this card carry a personality POWER box?
+ *
+ * "Power:" and "Constant Combat Power:" are printed on personality cards and
+ * essentially nowhere else — of 215 cards saying "Constant Combat Power", 200
+ * were already typed Personality and the other 15 were mislabelled. This is
+ * the signal that catches personalities the typed database does not cover:
+ * every mislabelled one found had NO LackeyCCG row, because Lackey thins out
+ * badly in the later sets (World Games, Buu, Fusion, Kid Buu).
+ */
+const hasPowerBox = (text: string | undefined): boolean =>
+  /\b(constant\s+combat\s+)?power\s*:/i.test(text ?? "");
+
 const cards = catalog.cards.map((c) => {
     const rec = ocrById.get(c.id);
     const needsReview = [...(rec?.needsReview ?? [])];
@@ -286,15 +330,36 @@ const cards = catalog.cards.map((c) => {
     // the typed database, which beats OCR. A veto matters as much as a claim —
     // OCR's ladder detector reads digits out of card art and has declared
     // Combat cards to be personalities; a typed "Combat" row overrules it.
+    // A card with a power ladder and/or a PUR is a Personality — that is the
+    // whole rule. The typed database is still trusted first where it has a
+    // row, because a human wrote it; it simply has no row for ~600 of these
+    // cards. For those, the face and the power box decide.
+    const ocrLadder = (rec?.powerRatings ?? []).length >= 6;
+    const ocrPur = typeof rec?.pur === "number" && rec.pur > 0;
+    const powerBox = hasPowerBox(rules.text as string | undefined);
+    // "Constant Combat Power" is printed on personalities and essentially
+    // nowhere else, so it stands on its own. A bare "Power:" does not — cards
+    // like "Straining Tien's Mafuba Move" open with it too — so that one needs
+    // a ladder or a PUR beside it.
+    const constantCombatPower = /constant\s+combat\s+power/i.test((rules.text as string) ?? '');
     const isPersonality =
-      vis?.isPersonality !== undefined ? vis.isPersonality
-      : lk ? lk.isPersonality
-      : rec?.isPersonality ?? false;
+      lk ? lk.isPersonality
+      : vis?.isPersonality !== undefined ? vis.isPersonality
+      // Two independent signals, because OCR alone reads digits out of card
+      // art and has declared Combat cards to be personalities.
+      : (ocrLadder && (ocrPur || powerBox)) || (powerBox && ocrPur) || constantCombatPower
+        ? true
+        : rec?.isPersonality ?? false;
+    // A power box with nothing else behind it is a strong hint we have a
+    // personality whose ladder nobody could read. Say so rather than silently
+    // filing it as a Combat card.
+    if (!isPersonality && powerBox) needsReview.push('possiblePersonality');
     rules.type = canonicalType(rules.type as string, isPersonality);
     if (isPersonality) {
       personalities++;
       const personality: Record<string, unknown> = {
-        personalityName: c.name,
+        // The character, not the card title — see characterOf().
+        personalityName: lk?.nameBare ? characterOf(lk.nameBare) : characterOf(c.name),
         // Alignment is not printed as text; needs the hero/villain frame colour
         // or a curated list. Rogue is the CRD's explicit "neither" bucket.
         alignment: 'Rogue',

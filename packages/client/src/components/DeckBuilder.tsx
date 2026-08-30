@@ -9,6 +9,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { DeckList } from '@dbz/shared';
 import { CardDb, checkTokuiWaza, MAX_DECK_SIZE, MIN_DECK_SIZE, validateDeck, type EngineCard } from '@dbz/engine';
+import { CardDetail } from './CardDetail.tsx';
 
 export interface DeckBuilderProps {
   cards: EngineCard[];
@@ -100,6 +101,8 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
   const [masteryId, setMasteryId] = useState(saved?.masteryId ?? '');
   const [lines, setLines] = useState<Line[]>(saved?.lines ?? []);
   const [q, setQ] = useState('');
+  const [typeFilter, setTypeFilter] = useState<string>('all');
+  const [preview, setPreview] = useState<EngineCard | null>(null);
 
   const mps = useMemo(() => mpOptions(cards), [cards]);
   const mp = mps.find((m) => m.key === mpKey);
@@ -146,13 +149,27 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
     return checkTokuiWaza(masteryId, all, db);
   }, [db, masteryId, deck]);
 
+  /** Types actually present in the pool, most common first. */
+  const poolTypes = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const c of cards) {
+      if (c.rules?.personality) continue;
+      const t = c.rules?.type ?? 'Unknown';
+      counts.set(t, (counts.get(t) ?? 0) + 1);
+    }
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]);
+  }, [cards]);
+
   const pool = useMemo(() => {
     const needle = q.trim().toLowerCase();
-    return cards
+    const matches = cards
       .filter((c) => !c.rules?.personality)
-      .filter((c) => !needle || c.name.toLowerCase().includes(needle) || (c.rules?.text ?? '').toLowerCase().includes(needle))
-      .slice(0, 120);
-  }, [cards, q]);
+      .filter((c) => typeFilter === 'all' || (c.rules?.type ?? 'Unknown') === typeFilter)
+      .filter((c) => !needle || c.name.toLowerCase().includes(needle) || (c.rules?.text ?? '').toLowerCase().includes(needle));
+    // Say how many were cut, rather than silently showing the first 120 and
+    // letting someone conclude the card they want is not in the game.
+    return { shown: matches.slice(0, 120), total: matches.length };
+  }, [cards, q, typeFilter]);
 
   const bump = (cardId: string, delta: number) =>
     setLines((prev) => {
@@ -348,12 +365,41 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
 
       <section className="builder__pool">
         <input placeholder="Search the catalog…" value={q} onChange={(e) => setQ(e.target.value)} />
+
+        <div className="builder__types">
+          <button className={typeFilter === 'all' ? 'on' : ''} onClick={() => setTypeFilter('all')}>
+            All
+          </button>
+          {poolTypes.map(([t, n]) => (
+            <button key={t} className={typeFilter === t ? 'on' : ''} onClick={() => setTypeFilter(t)}>
+              {t} <em>{n}</em>
+            </button>
+          ))}
+        </div>
+
+        <p className="builder__count muted">
+          {pool.total} card{pool.total === 1 ? '' : 's'}
+          {pool.total > pool.shown.length && ` — showing the first ${pool.shown.length}, narrow the search to see more`}
+        </p>
+
         <ul>
-          {pool.map((c) => (
+          {pool.shown.map((c) => (
             <li key={c.id}>
-              <img src={`/cards/${c.id}.jpg`} alt="" loading="lazy" onError={(e) => ((e.target as HTMLImageElement).style.visibility = 'hidden')} />
+              {/* The art is the readable copy of the card, so make it openable:
+                  deck building means reading effects, and the one-line summary
+                  underneath is not enough to choose between two similar cards. */}
+              <button className="builder__thumb" onClick={() => setPreview(c)} title={`Enlarge ${c.name}`}>
+                <img
+                  src={`/cards/${c.id}.jpg`}
+                  alt=""
+                  loading="lazy"
+                  onError={(e) => ((e.target as HTMLImageElement).style.visibility = 'hidden')}
+                />
+              </button>
               <div>
-                <strong>{c.name}</strong>
+                <button className="builder__name" onClick={() => setPreview(c)}>
+                  {c.name}
+                </button>
                 <span className="muted">
                   {c.saga} · {c.rules?.type ?? 'Unknown'}
                 </span>
@@ -363,6 +409,16 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
           ))}
         </ul>
       </section>
+
+      {preview && (
+        <div className="builder__preview" onClick={() => setPreview(null)}>
+          <CardDetail
+            card={preview}
+            onClose={() => setPreview(null)}
+            actions={[{ label: 'Add to deck', run: () => bump(preview.id, +1) }]}
+          />
+        </div>
+      )}
     </main>
   );
 }
