@@ -25,7 +25,13 @@ export const MAX_DECK_SIZE = 85;
 /** CRD ~L45: "If you declare a Namekian Tokui-Waza, you may have up to 90". */
 export const MAX_DECK_SIZE_NAMEKIAN = 90;
 export const MIN_MP_LEVELS = 3;
-export const MAX_MP_LEVEL = 5;
+/**
+ * A Main Personality runs to level 5 — and to 6 in the GT sets. The catalog
+ * currently tops out at 5 because this card pool has no GT printings, so this
+ * is headroom rather than a live case; it should not be the cap that rejects a
+ * GT deck the day those cards are added.
+ */
+export const MAX_MP_LEVEL = 6;
 
 export interface DeckValidationOptions {
   /** Dev/testing escape hatch for the 50-card minimum. */

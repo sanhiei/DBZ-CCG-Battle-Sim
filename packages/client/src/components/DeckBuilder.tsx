@@ -8,7 +8,7 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 import type { DeckList } from '@dbz/shared';
-import { CardDb, checkTokuiWaza, MAX_DECK_SIZE, MIN_DECK_SIZE, validateDeck, type EngineCard } from '@dbz/engine';
+import { CardDb, checkTokuiWaza, MAX_DECK_SIZE, MAX_MP_LEVEL, MIN_DECK_SIZE, validateDeck, type EngineCard } from '@dbz/engine';
 import { CardDetail } from './CardDetail.tsx';
 
 export interface DeckBuilderProps {
@@ -40,30 +40,54 @@ interface Line {
  */
 const MIN_MP_LEVELS_FOR_STACK = 3;
 
-function mpOptions(cards: EngineCard[]): Array<{ key: string; name: string; saga: string; levels: EngineCard[] }> {
+export interface MpOption {
+  key: string;
+  name: string;
+  saga: string;
+  /** Every printing of every level, so the player can choose each one. */
+  byLevel: Map<number, EngineCard[]>;
+  /** Highest level reachable with no gaps from 1. */
+  maxLevel: number;
+}
+
+function mpOptions(cards: EngineCard[]): MpOption[] {
   const groups = new Map<string, EngineCard[]>();
   for (const c of cards) {
     const p = c.rules?.personality;
     if (!p?.personalityName || !p.level) continue;
     groups.set(p.personalityName, [...(groups.get(p.personalityName) ?? []), c]);
   }
-  const out: Array<{ key: string; name: string; saga: string; levels: EngineCard[] }> = [];
+  const out: MpOption[] = [];
   for (const [name, list] of groups) {
-    // One card per level; prefer the lowest-numbered printing for stability.
-    const byLevel = new Map<number, EngineCard>();
+    // Keep EVERY printing of each level. Goku has nine different level 1s and
+    // six level 3s, with different power ratings and different powers, so
+    // picking one for the player is picking their deck for them.
+    const byLevel = new Map<number, EngineCard[]>();
     for (const c of list) {
       const lv = c.rules!.personality!.level!;
-      if (!byLevel.has(lv)) byLevel.set(lv, c);
+      byLevel.set(lv, [...(byLevel.get(lv) ?? []), c]);
     }
-    const levels: EngineCard[] = [];
-    for (let lv = 1; byLevel.has(lv); lv++) levels.push(byLevel.get(lv)!);
-    if (levels.length < MIN_MP_LEVELS_FOR_STACK) continue;
+    for (const [, printings] of byLevel) printings.sort((a, b) => a.name.localeCompare(b.name) || a.saga.localeCompare(b.saga));
 
-    // Where the levels came from, since they may span several sets.
-    const sagas = [...new Set(levels.map((c) => c.saga))];
-    out.push({ key: name, name, saga: sagas.length > 1 ? `${sagas.length} sets` : sagas[0] ?? '', levels });
+    let maxLevel = 0;
+    while (byLevel.has(maxLevel + 1)) maxLevel++;
+    if (maxLevel < MIN_MP_LEVELS_FOR_STACK) continue;
+
+    const sagas = [...new Set(list.map((c) => c.saga))];
+    out.push({ key: name, name, byLevel, maxLevel, saga: sagas.length > 1 ? `${sagas.length} sets` : sagas[0] ?? '' });
   }
   return out.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/** A short, distinguishing label for one printing of a level. */
+function printingLabel(c: EngineCard): string {
+  const ladder = c.rules?.personality?.powerRatings ?? [];
+  const top = ladder.length ? ladder[ladder.length - 1] : undefined;
+  const pur = c.rules?.personality?.pur;
+  const bits = [c.saga];
+  if (top !== undefined) bits.push(`top ${typeof top === 'number' ? top.toLocaleString() : top}`);
+  if (pur) bits.push(`PUR ${pur}`);
+  return `${c.name} — ${bits.join(' · ')}`;
 }
 
 /**
@@ -86,6 +110,8 @@ interface SavedDeck {
   mpDepth: number;
   masteryId: string;
   lines: Line[];
+  /** Chosen printing per level — several exist for most levels. */
+  mpPicks?: Record<number, string>;
 }
 
 function loadSavedDeck(): SavedDeck | null {
@@ -100,6 +126,7 @@ function loadSavedDeck(): SavedDeck | null {
       mpDepth: Number.isInteger(d.mpDepth) ? (d.mpDepth as number) : 3,
       masteryId: typeof d.masteryId === 'string' ? d.masteryId : '',
       lines: d.lines.filter((l): l is Line => !!l && typeof l.cardId === 'string' && Number.isInteger(l.qty)),
+      ...(d.mpPicks && typeof d.mpPicks === 'object' ? { mpPicks: d.mpPicks } : {}),
     };
   } catch {
     return null; // private mode, cleared storage, or hand-edited junk
@@ -115,20 +142,33 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
   const [lines, setLines] = useState<Line[]>(saved?.lines ?? []);
   const [q, setQ] = useState('');
   const [typeFilter, setTypeFilter] = useState<string>('all');
+  const [mpPicks, setMpPicks] = useState<Record<number, string>>(saved?.mpPicks ?? {});
   const [preview, setPreview] = useState<EngineCard | null>(null);
 
   const mps = useMemo(() => mpOptions(cards), [cards]);
   const mp = mps.find((m) => m.key === mpKey);
   const byId = useMemo(() => new Map(cards.map((c) => [c.id, c])), [cards]);
 
+  /** The chosen printing for each level, defaulting to the first available. */
+  const chosenLevels = useMemo(() => {
+    if (!mp) return [] as EngineCard[];
+    const out: EngineCard[] = [];
+    for (let lv = 1; lv <= Math.min(mpDepth, mp.maxLevel); lv++) {
+      const printings = mp.byLevel.get(lv) ?? [];
+      const picked = printings.find((c) => c.id === mpPicks[lv]) ?? printings[0];
+      if (picked) out.push(picked);
+    }
+    return out;
+  }, [mp, mpDepth, mpPicks]);
+
   const deck: DeckList = useMemo(
     () => ({
       name: deckName,
-      mpLevels: mp ? mp.levels.slice(0, mpDepth).map((c) => c.id) : [],
+      mpLevels: chosenLevels.map((c) => c.id),
       ...(masteryId ? { masteryId } : {}),
       life: lines.filter((l) => l.qty > 0),
     }),
-    [deckName, mp, mpDepth, masteryId, lines],
+    [deckName, chosenLevels, masteryId, lines],
   );
 
   // Persist on every change: the deck survives a refresh, a crash, or coming
@@ -136,11 +176,11 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
   // not worth breaking the builder over.
   useEffect(() => {
     try {
-      localStorage.setItem(SAVED_DECK_KEY, JSON.stringify({ deckName, mpKey, mpDepth, masteryId, lines }));
+      localStorage.setItem(SAVED_DECK_KEY, JSON.stringify({ deckName, mpKey, mpDepth, masteryId, lines, mpPicks }));
     } catch {
       /* not fatal */
     }
-  }, [deckName, mpKey, mpDepth, masteryId, lines]);
+  }, [deckName, mpKey, mpDepth, masteryId, lines, mpPicks]);
 
   const lifeCount = lines.reduce((n, l) => n + l.qty, 0);
   const total = deck.mpLevels.length + lifeCount + (masteryId ? 1 : 0);
@@ -200,9 +240,15 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
    * take a seat. Landing in a 2,764-card builder needing 50+ legal cards is the
    * point where a friend gives up, so "play as Goku" has to be one button.
    */
-  const starterFor = (choice: { key: string; name: string; levels: EngineCard[] }): { lines: Line[]; name: string } => {
+  /** The default printing of levels 1-3, which is what a starter deck uses. */
+  const firstThreeLevels = (choice: MpOption): EngineCard[] =>
+    Array.from({ length: MIN_MP_LEVELS_FOR_STACK }, (_, i) => choice.byLevel.get(i + 1)?.[0]).filter(
+      (c): c is EngineCard => !!c,
+    );
+
+  const starterFor = (choice: MpOption): { lines: Line[]; name: string } => {
     const chosen = new Map<string, number>();
-    let need = MIN_DECK_SIZE - Math.min(choice.levels.length, 3);
+    let need = MIN_DECK_SIZE - MIN_MP_LEVELS_FOR_STACK;
     for (const c of cards) {
       if (need <= 0) break;
       if (c.rules?.personality) continue;
@@ -219,7 +265,7 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
     return { lines: [...chosen.entries()].map(([cardId, qty]) => ({ cardId, qty })), name: `${choice.name} starter` };
   };
 
-  const playAs = (choice: { key: string; name: string; levels: EngineCard[] }) => {
+  const playAs = (choice: MpOption) => {
     const built = starterFor(choice);
     setMpKey(choice.key);
     setMpDepth(3);
@@ -228,7 +274,7 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
     setDeckName(built.name);
     onSubmit({
       name: built.name,
-      mpLevels: choice.levels.slice(0, 3).map((c) => c.id),
+      mpLevels: firstThreeLevels(choice).map((c) => c.id),
       life: built.lines,
     });
   };
@@ -294,7 +340,7 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
             <option value="">— choose —</option>
             {mps.map((m) => (
               <option key={m.key} value={m.key}>
-                {m.name} [{m.saga}] · {m.levels.length} levels
+                {m.name} [{m.saga}] · {m.maxLevel} levels
               </option>
             ))}
           </select>
@@ -323,11 +369,42 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
             <input
               type="range"
               min={3}
-              max={Math.min(5, mp.levels.length)}
+              max={Math.min(MAX_MP_LEVEL, mp.maxLevel)}
               value={mpDepth}
               onChange={(e) => setMpDepth(Number(e.target.value))}
             />
           </label>
+        )}
+
+        {mp && (
+          <div className="builder__levels">
+            {/* Each level usually has several printings with different power
+                ratings and different powers — Goku has nine level 1s — so the
+                player chooses each one rather than getting whichever happened
+                to be first in the catalog. */}
+            {chosenLevels.map((card, i) => {
+              const lv = i + 1;
+              const printings = mp.byLevel.get(lv) ?? [];
+              return (
+                <label key={lv}>
+                  Level {lv}
+                  {printings.length > 1 && <em> · {printings.length} printings</em>}
+                  <div className="builder__levelrow">
+                    <select value={card.id} onChange={(e) => setMpPicks((p) => ({ ...p, [lv]: e.target.value }))}>
+                      {printings.map((c) => (
+                        <option key={c.id} value={c.id}>
+                          {printingLabel(c)}
+                        </option>
+                      ))}
+                    </select>
+                    <button className="ghost" onClick={() => setPreview(card)} title={`Enlarge ${card.name}`}>
+                      View
+                    </button>
+                  </div>
+                </label>
+              );
+            })}
+          </div>
         )}
 
         <div className="builder__counts">

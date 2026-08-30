@@ -193,6 +193,32 @@ select {
   font-weight: 400;
 }
 
+.builder__levels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+}
+.builder__levels label {
+  font-size: 0.8rem;
+}
+.builder__levels em {
+  font-style: normal;
+  opacity: 0.6;
+}
+.builder__levelrow {
+  display: flex;
+  gap: 6px;
+  margin-top: 3px;
+}
+.builder__levelrow select {
+  flex: 1;
+  min-width: 0;
+}
+
 .builder__types {
   display: flex;
   flex-wrap: wrap;
