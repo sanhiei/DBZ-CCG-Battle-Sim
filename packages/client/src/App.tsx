@@ -4,17 +4,43 @@
  * Everything rendered here is a view of engine state; the only writes are
  * actions handed to the server (and optimistically to the local reducer).
  */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useGame } from './net/useGame.ts';
 import { Board } from './components/Board.tsx';
 import { CardBrowser } from './components/CardBrowser.tsx';
 import { DeckBuilder } from './components/DeckBuilder.tsx';
 
+/** Room code from a shared link: /r/KAME or ?room=KAME. */
+function codeFromUrl(): string {
+  const path = /^\/r\/([A-Za-z0-9]{1,8})\/?$/.exec(location.pathname);
+  const q = new URLSearchParams(location.search).get('room');
+  return (path?.[1] ?? q ?? '').toUpperCase();
+}
+
+const NAME_KEY = 'dbz.name';
+
 export function App() {
   const game = useGame();
-  const [name, setName] = useState('');
-  const [code, setCode] = useState('');
+  // Remember the name; you are the same person every session, and retyping it
+  // to rejoin the room you were just in is pure friction.
+  const [name, setName] = useState(() => {
+    try {
+      return localStorage.getItem(NAME_KEY) ?? '';
+    } catch {
+      return '';
+    }
+  });
+  // A shared link should land you on the room, not on an empty form.
+  const [code, setCode] = useState(codeFromUrl);
   const [tab, setTab] = useState<'game' | 'cards'>('game');
+
+  useEffect(() => {
+    try {
+      if (name.trim()) localStorage.setItem(NAME_KEY, name.trim());
+    } catch {
+      /* not fatal */
+    }
+  }, [name]);
 
   const joined = game.roomCode !== null;
   const mySeat = game.lobby?.seats.find((s) => s.idx === game.seat);
@@ -101,6 +127,15 @@ export function App() {
         <>
           <section className="lobby lobby--strip">
             <h2>Room {game.roomCode}</h2>
+          <p className="lobby__invite">
+            Invite link: <code>{`${location.origin}/r/${game.roomCode}`}</code>{' '}
+            <button
+              className="ghost"
+              onClick={() => void navigator.clipboard?.writeText(`${location.origin}/r/${game.roomCode}`)}
+            >
+              Copy
+            </button>
+          </p>
             <ul className="lobby__seats">
               {(game.lobby?.seats ?? []).map((s) => (
                 <li key={s.idx} className={s.ready ? 'ready' : ''}>

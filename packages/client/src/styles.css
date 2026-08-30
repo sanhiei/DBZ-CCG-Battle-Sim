@@ -158,6 +158,21 @@ select {
   gap: 8px;
   margin-top: 16px;
 }
+.lobby__invite {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+.lobby__invite code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--edge);
+  user-select: all;
+}
+
 .lobby__seats {
   list-style: none;
   padding: 0;

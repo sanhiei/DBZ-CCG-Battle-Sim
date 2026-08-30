@@ -6,7 +6,7 @@
  * here are exactly the ones that would come back from a rejected submission.
  * The build is still re-validated server-side; this is convenience, not trust.
  */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { DeckList } from '@dbz/shared';
 import { CardDb, checkTokuiWaza, MAX_DECK_SIZE, MIN_DECK_SIZE, validateDeck, type EngineCard } from '@dbz/engine';
 
@@ -52,12 +52,53 @@ function mpOptions(cards: EngineCard[]): Array<{ key: string; name: string; saga
   return out.sort((a, b) => a.name.localeCompare(b.name) || a.saga.localeCompare(b.saga));
 }
 
+/**
+ * The builder's selections, kept in the browser.
+ *
+ * A legal deck is 50+ cards and takes real time to assemble. Everything here
+ * lived in component state, so a refresh — or just closing the tab between
+ * games — threw the whole deck away and you started from an empty list. Nobody
+ * builds that twice.
+ *
+ * Only the selections are stored, not the resolved deck: card ids are
+ * revalidated against the catalog on load, so a stored deck cannot smuggle in
+ * cards that no longer exist. The server revalidates regardless.
+ */
+const SAVED_DECK_KEY = 'dbz.deck.v1';
+
+interface SavedDeck {
+  deckName: string;
+  mpKey: string;
+  mpDepth: number;
+  masteryId: string;
+  lines: Line[];
+}
+
+function loadSavedDeck(): SavedDeck | null {
+  try {
+    const raw = localStorage.getItem(SAVED_DECK_KEY);
+    if (!raw) return null;
+    const d = JSON.parse(raw) as Partial<SavedDeck>;
+    if (typeof d?.deckName !== 'string' || !Array.isArray(d.lines)) return null;
+    return {
+      deckName: d.deckName,
+      mpKey: typeof d.mpKey === 'string' ? d.mpKey : '',
+      mpDepth: Number.isInteger(d.mpDepth) ? (d.mpDepth as number) : 3,
+      masteryId: typeof d.masteryId === 'string' ? d.masteryId : '',
+      lines: d.lines.filter((l): l is Line => !!l && typeof l.cardId === 'string' && Number.isInteger(l.qty)),
+    };
+  } catch {
+    return null; // private mode, cleared storage, or hand-edited junk
+  }
+}
+
 export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName, ready }: DeckBuilderProps) {
-  const [deckName, setDeckName] = useState('My Deck');
-  const [mpKey, setMpKey] = useState('');
-  const [mpDepth, setMpDepth] = useState(3);
-  const [masteryId, setMasteryId] = useState('');
-  const [lines, setLines] = useState<Line[]>([]);
+  const saved = useMemo(() => loadSavedDeck(), []);
+  const [deckName, setDeckName] = useState(saved?.deckName ?? 'My Deck');
+  const [mpKey, setMpKey] = useState(saved?.mpKey ?? '');
+  const [mpDepth, setMpDepth] = useState(saved?.mpDepth ?? 3);
+  const [masteryId, setMasteryId] = useState(saved?.masteryId ?? '');
+  const [lines, setLines] = useState<Line[]>(saved?.lines ?? []);
   const [q, setQ] = useState('');
 
   const mps = useMemo(() => mpOptions(cards), [cards]);
@@ -73,6 +114,17 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
     }),
     [deckName, mp, mpDepth, masteryId, lines],
   );
+
+  // Persist on every change: the deck survives a refresh, a crash, or coming
+  // back tomorrow. Storage can throw (private mode, quota) and a lost deck is
+  // not worth breaking the builder over.
+  useEffect(() => {
+    try {
+      localStorage.setItem(SAVED_DECK_KEY, JSON.stringify({ deckName, mpKey, mpDepth, masteryId, lines }));
+    } catch {
+      /* not fatal */
+    }
+  }, [deckName, mpKey, mpDepth, masteryId, lines]);
 
   const lifeCount = lines.reduce((n, l) => n + l.qty, 0);
   const total = deck.mpLevels.length + lifeCount + (masteryId ? 1 : 0);
@@ -119,8 +171,14 @@ export function DeckBuilder({ cards, db, seat, onSubmit, onReady, submittedName,
         const mStyle = db.get(masteryId)?.style ?? null;
         if (c.style && c.style !== mStyle) continue;
       }
+      // Respect a printed "Limit N per deck" (CRD ~L51). Assuming 3 of
+      // everything now builds a deck the server rejects, since 168 cards say
+      // otherwise — and the quick fill exists precisely so you do not have to
+      // know that.
+      const printed = /limit\s*(\d+)\s*per\s*deck/i.exec(c.rules?.text ?? '');
+      const cap = printed ? Math.min(3, Number(printed[1])) : 3;
       const have = chosen.get(c.id) ?? 0;
-      const add = Math.min(3 - have, need);
+      const add = Math.min(cap - have, need);
       if (add <= 0) continue;
       chosen.set(c.id, have + add);
       need -= add;
