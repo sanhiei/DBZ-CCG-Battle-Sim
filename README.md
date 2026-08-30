@@ -112,6 +112,18 @@ The server binds `0.0.0.0`, so anyone who can reach the machine can play.
   origin served the page, and upgrades to `wss://` automatically over HTTPS, so
   a tunnel needs no configuration.
 
+Card images are heavy — 2,764 slices at ~206KB each. Before playing over a
+tunnel, shrink them once:
+
+```bash
+npm run optimize:images
+```
+
+That writes 600px WebP copies to `data/images-web/` (533MB → 156MB, ~71%
+smaller) and the server prefers them automatically. The originals are never
+touched — they are the OCR/vision source of truth — and deleting
+`data/images-web/` reverts to them.
+
 Hosting it yourself is the practical option because **card images are not in
 this repository** — they are sliced from a Tabletop Simulator mod into
 `data/images-tts/`, which is gitignored, since the art is not ours to
