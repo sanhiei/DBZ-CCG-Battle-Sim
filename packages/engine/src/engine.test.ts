@@ -54,7 +54,15 @@ let state = createGame({ seed: 42, players: [{ name: 'Goku', deck: gokuDeck }, {
 check('two players', state.players.length === 2);
 check('MP name Goku', state.players[0]!.mp.personalityName === 'Goku', `got ${state.players[0]!.mp.personalityName}`);
 check('scouter at 5 above 0 (stageIndex 5)', state.players[0]!.mp.stageIndex === 5, `got ${state.players[0]!.mp.stageIndex}`);
-check('life deck 50', state.players[0]!.zones.lifeDeck.length === 50, `got ${state.players[0]!.zones.lifeDeck.length}`);
+// The game starts ON the first player's Draw Step, so they have already drawn
+// their 3 (CRD ~L215); there is no opening hand. Seat 0 is not always first.
+const firstSeat = state.activePlayerIdx;
+check(
+  'life deck 50 less the first draw',
+  state.players[firstSeat]!.zones.lifeDeck.length === 47 && state.players[1 - firstSeat]!.zones.lifeDeck.length === 50,
+  `got ${state.players[firstSeat]!.zones.lifeDeck.length} / ${state.players[1 - firstSeat]!.zones.lifeDeck.length}`,
+);
+check('first player drew an opening 3', state.players[firstSeat]!.zones.hand.length === 3, `got ${state.players[firstSeat]!.zones.hand.length}`);
 check('deterministic first player', state.activePlayerIdx === createGame({ seed: 42, players: [{ name: 'Goku', deck: gokuDeck }, { name: 'Vegeta', deck: vegetaDeck }] }, db).activePlayerIdx);
 
 console.log('turn sequencing:');

@@ -11,6 +11,16 @@ import { discardDrills } from './drills.js';
 
 export const ANGER_TO_ADVANCE = 5;
 
+/**
+ * Cards the attacker draws on their Draw Step (CRD ~L215: "If you are the
+ * Attacker, draw 3 cards from the top of your Life Deck").
+ *
+ * The engine drew 1. There is no opening hand in this game — the CRD's setup
+ * ends at "begin the game" with an empty hand — so drawing 1 starved every
+ * hand in play by two thirds and made card-hungry decks unplayable.
+ */
+export const DRAW_PER_TURN = 3;
+
 function ratingAt(ratings: PowerRating[], idx: number): PowerRating {
   if (ratings.length === 0) return 0;
   return ratings[Math.max(0, Math.min(idx, ratings.length - 1))]!;

@@ -6,7 +6,7 @@
  */
 import type { Action, CardInstance, GameEvent, GameState, PersonalityInPlay } from '@dbz/shared';
 import type { CardDb } from './loader.js';
-import { advanceStep, draw, powerUp, setAnger, setStage } from './turn.js';
+import { advanceStep, draw, DRAW_PER_TURN, powerUp, setAnger, setStage } from './turn.js';
 import {
   beginCombat,
   declareAttack,
@@ -77,8 +77,17 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
   let advancedByAnger: string | undefined;
   switch (action.type) {
     case 'advanceStep': {
+      // Combat ends when the players end it (both pass, or a Final Physical
+      // Attack), not when the attacker feels like leaving. Unguarded, the
+      // attacker advanced straight from 'combat' to 'discard' and the defender
+      // never got the Attack Phase the CRD guarantees them. endCombatStep
+      // deletes state.combat before advancing, so the real exit still works.
+      if (state.step === 'combat' && state.combat) {
+        err = 'finish the Combat Step first — both players must pass';
+        break;
+      }
       advanceStep(state, events);
-      if (state.step === 'draw') draw(state, state.activePlayerIdx, 1);
+      if (state.step === 'draw') draw(state, state.activePlayerIdx, DRAW_PER_TURN);
       else if (state.step === 'powerUp') powerUp(state, state.activePlayerIdx, db, events);
       else if (state.step === 'combat') beginCombat(state, db, events);
       break;

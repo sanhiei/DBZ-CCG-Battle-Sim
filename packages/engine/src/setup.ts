@@ -12,6 +12,7 @@ import type { CardDb } from './loader.js';
 import { makeRng, shuffle, type Rng } from './rng.js';
 import { bracketOf, isZ } from './pat.js';
 import { checkTokuiWaza } from './mastery.js';
+import { draw, DRAW_PER_TURN } from './turn.js';
 
 /** Power stages above 0 where scouters start (CRD setup step 3). */
 export const START_STAGES_ABOVE_ZERO = 5;
@@ -127,7 +128,7 @@ export function createGame(opts: NewGameOptions, db: CardDb): GameState {
       ? chooseFirstPlayer(players[0]!.mp.currentRating, players[1]!.mp.currentRating, db, rng)
       : 0;
 
-  return {
+  const state: GameState = {
     seed: opts.seed,
     phase: 'playing',
     turnNumber: 1,
@@ -136,4 +137,12 @@ export function createGame(opts: NewGameOptions, db: CardDb): GameState {
     players,
     log: [`Game start — ${players[first]!.name} goes first.`],
   };
+
+  // There is no opening hand in this game: the CRD's setup ends at "begin the
+  // game" and the first player's hand comes from their own Draw Step. The game
+  // starts ON that step, and the draw only ever fired when a step transition
+  // ENTERED 'draw' — so turn 1 was played with an empty hand.
+  draw(state, first, DRAW_PER_TURN);
+  state.log.push(`${players[first]!.name} draws ${DRAW_PER_TURN}.`);
+  return state;
 }
