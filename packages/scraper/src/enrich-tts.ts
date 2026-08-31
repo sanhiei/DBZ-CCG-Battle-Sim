@@ -213,6 +213,17 @@ async function main(): Promise<void> {
     ? ((JSON.parse(await readFile(overridePath, 'utf8')) as { levels?: Record<string, { level: number }> }).levels ?? {})
     : {};
   let levelsOverridden = 0;
+  /**
+   * Hand-verified ladders and PURs, from a double read of the card face.
+   * These are the cards no automated reader could manage — including the
+   * all-Z scouters, which the OCR had never once produced.
+   */
+  const ladderPath = join(dataDir, 'ladder-overrides.json');
+  interface LadderOverride { ladder: Array<number | 'Z'>; pur?: number | null; isPersonality?: boolean; name?: string }
+  const ladderOverrides: Record<string, LadderOverride> = existsSync(ladderPath)
+    ? ((JSON.parse(await readFile(ladderPath, 'utf8')) as { ladders?: Record<string, LadderOverride> }).ladders ?? {})
+    : {};
+  let laddersOverridden = 0;
 
   let personalities = 0;
   let withAbilities = 0;
@@ -352,7 +363,11 @@ const cards = catalog.cards.map((c) => {
     // like "Straining Tien's Mafuba Move" open with it too — so that one needs
     // a ladder or a PUR beside it.
     const constantCombatPower = /constant\s+combat\s+power/i.test((rules.text as string) ?? '');
+    // A hand-verified ladder settles it outright: someone looked at the card.
+    const ladderOverride = ladderOverrides[c.id];
     const isPersonality =
+      ladderOverride?.isPersonality !== undefined ? ladderOverride.isPersonality
+      :
       lk ? lk.isPersonality
       : vis?.isPersonality !== undefined ? vis.isPersonality
       // Two independent signals, because OCR alone reads digits out of card
@@ -409,6 +424,17 @@ const cards = catalog.cards.map((c) => {
         if (vis.pur !== undefined) personality.pur = vis.pur;
         if (vis.alignment && vis.alignment !== 'unknown') { personality.alignment = vis.alignment; const ix = needsReview.indexOf('alignment'); if (ix !== -1) needsReview.splice(ix, 1); }
       }
+      if (ladderOverride?.ladder?.length) {
+        personality.powerRatings = ladderOverride.ladder;
+        personality.ladderVerified = 'hand';
+        if (ladderOverride.pur !== undefined && ladderOverride.pur !== null) personality.pur = ladderOverride.pur;
+        for (const flag of ['powerRatings', 'ladderDisagreement']) {
+          const ix = needsReview.indexOf(flag);
+          if (ix !== -1) needsReview.splice(ix, 1);
+        }
+        laddersOverridden++;
+      }
+
       // Level badges are small stylised digits and BOTH readers get them wrong:
       // where vision and OCR each read a level they disagree 38 times out of
       // 207, and 369 personalities have no LackeyCCG row to settle it. A wrong
@@ -490,6 +516,7 @@ const cards = catalog.cards.map((c) => {
   console.log(`[enrich-tts] lackey: ${lackey.length} cards loaded, ${matched} matched, ${verified} text-verified by OCR agreement`);
   console.log(`[enrich-tts] ladders verified (typed vs OCR agreement): ${laddersVerified}`);
   console.log(`[enrich-tts] vision readings applied: ${visionApplied}`);
+  console.log(`[enrich-tts] ladders overridden by hand: ${laddersOverridden}`);
   console.log(`[enrich-tts] levels overridden by hand: ${levelsOverridden}`);
   console.log(`[enrich-tts] endurance values parsed: ${enduranceFound}`);
   console.log(`[enrich-tts] ladders repaired by arithmetic: ${laddersRepaired}`);

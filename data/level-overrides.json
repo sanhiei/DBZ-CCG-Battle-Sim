@@ -5,6 +5,346 @@
       "level": 2,
       "name": "Android 18, the Mom",
       "note": "Card face: level badge 2, card #93, '1 of 2 Android 18', ladder 1,110,000-1,200,000. Vision read the badge as 1 (and the number as #34); OCR read 4."
+    },
+    "tts-30fb99ff-6": {
+      "level": 1,
+      "name": "Android 14",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Movie 7 holo, collector number M7; green chevron badge is a clear 1 and the PUR is 1 in a red circle. Two ladder rungs are partly occluded by the artwork but the even 10,000 step fixes them."
+    },
+    "tts-b77448ca-55": {
+      "level": 2,
+      "name": "Hercule, the World Champion",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 56, \"2 of 4 Hercule\", Majin saga. Badge a clear 2, PUR 1 in a yellow four-point star. The very low ladder values (top rung 2,000) are genuinely printed that way."
+    },
+    "tts-c29a516a-3": {
+      "level": 1,
+      "name": "Majin Dabura",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 73, \"1 of 3 Majin Dabura\". Badge a clear 1, PUR 1. The ladder is deliberately irregular (a 150,000 jump at 1,350,000); zoomed and confirmed as printed."
+    },
+    "tts-c29a516a-34": {
+      "level": 3,
+      "name": "Majin Pui Pui, the Flashy",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 104, \"3 of 3 Majin Pui Pui\". Badge zoomed and confirmed as 3, PUR zoomed and confirmed as 2 - level and PUR differ here, which is easy to transpose. The power box reads like an attack card, but the ladder, PUR and badge make it a personality."
+    },
+    "tts-a15907e0-25": {
+      "level": 1,
+      "name": "Gohan",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 164. Badge zoomed and confirmed as 1, PUR 2 in an orange flame burst - level and PUR differ. Attack-worded power box on a personality; ladder is a clean 75,000 step and the zero stage is printed \"00,000\"."
+    },
+    "tts-a15907e0-18": {
+      "level": 2,
+      "name": "Goku, Super Saiyan",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 157, \"36 of 38 Goku\". Badge zoomed and confirmed as 2, PUR 2 in the Super Saiyan aura burst. Ladder is a clean 70,000 step."
+    },
+    "tts-a15907e0-35": {
+      "level": 1,
+      "name": "Goten",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 174. Badge unmistakably 1 at 4x even though the collector number is higher than the level 2 (#172) and level 3 (#173) Gotens; the ladder topping out at 950,000 - below the level 2 card - supports level 1."
+    },
+    "tts-a15907e0-34": {
+      "level": 3,
+      "name": "Goten",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 173, \"4 of 5 Goten\", Super Saiyan art. Physical-attack power box, but the ladder and PUR 4 make it a personality."
+    },
+    "tts-a15907e0-33": {
+      "level": 2,
+      "name": "Goten",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 172, \"3 of 5 Goten\". Ladder steps by 30,000."
+    },
+    "tts-3833f635-0": {
+      "level": 2,
+      "name": "Kid Trunks",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 170, \"8 of 8 Kid Trunks\". The scan is double-width (1600x1100) so the badge sits far from the title, but it is clearly a 2; the ladder is identical to #167, also level 2."
+    },
+    "tts-a15907e0-29": {
+      "level": 3,
+      "name": "Kid Trunks",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 168, \"7 of 8 Kid Trunks\", Super Saiyan art. Ladder steps by 20,000."
+    },
+    "tts-a15907e0-28": {
+      "level": 2,
+      "name": "Kid Trunks",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 167, \"6 of 8 Kid Trunks\". Constant Combat Power box; a blue bar clips the copyright line but nothing load-bearing."
+    },
+    "tts-117cae92-47": {
+      "level": 4,
+      "name": "Kid Trunks",
+      "note": "Level 4 from a double read of the card face; both reads agreed. Collector number 117, \"3 of 8 Kid Trunks\", Buu saga. Badge unmistakably 4 at 5x, PUR 5 in the yellow starburst. Zero rung printed \"0000\" here rather than the \"00,000\" used by the other Buu-saga cards; the even 10,000 step makes the reading self-consistent."
+    },
+    "tts-90cd3764-0": {
+      "level": 2,
+      "name": "Majin Buu",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 200, \"31 of 31 Majin Buu\". Medium confidence: the scan is 1600x1100 with a seam at x=800 and discontinuous art, and the only level badge on the face sits on the left panel rather than the #200 panel. Level 2 is corroborated by the ladder being identical to #195 \"Majin Buu, the Rotund\", also a level 2."
+    },
+    "tts-a15907e0-56": {
+      "level": 2,
+      "name": "Majin Buu, the Rotund",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 195, \"28 of 31 Majin Buu\". Badge confirmed as 2 at 5x, PUR 3. Ladder steps 75,000 evenly; same ladder as tts-90cd3764-0."
+    },
+    "tts-a15907e0-53": {
+      "level": 1,
+      "name": "Majin Vegeta",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 192. Badge a clean 1 at 5x - a green chevron on dark blue art, easy for a reader to miss entirely. PUR 2 sits next to the name banner rather than at the card edge. Ladder steps 75,000 evenly."
+    },
+    "tts-6c4f6cd7-0": {
+      "level": 2,
+      "name": "Majin Vegeta",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 193, \"14 of 14 Majin Vegeta\". The 1600x1100 scan is a single continuous face (art and power text run across the crease). Badge 2 at the far top-left; the level 1 / level 2 pairing with #192 is consistent. Ladder steps 100,000 evenly."
+    },
+    "tts-a15907e0-39": {
+      "level": 3,
+      "name": "Piccolo",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 178, \"7 of 8 Piccolo\", Buu saga. Badge confirmed as 3 at 5x, PUR 4. Ladder steps 150,000 evenly."
+    },
+    "tts-a15907e0-37": {
+      "level": 1,
+      "name": "Piccolo",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 176, \"5 of 8 Piccolo\", Buu saga. Badge a clear yellow 1, PUR 2. Attack-worded power box, but the full 11-rung ladder plus PUR make it a personality. Ladder steps 45,000."
+    },
+    "tts-7c91d4cf-37": {
+      "level": 4,
+      "name": "Android 16, the Warrior",
+      "note": "Level 4 from a double read of the card face; both reads agreed. Androids Saga Redemption R14, \"1 of 1 Android 16\". Badge is a crisp yellow 4 on green, PUR 3 in red on a green tab. Ladder steps 10,000."
+    },
+    "tts-7c91d4cf-38": {
+      "level": 4,
+      "name": "Android 17, the Energized",
+      "note": "Level 4 from a double read of the card face; both reads agreed. Androids Saga Redemption R15, \"1 of 1 Android 17\". Badge is a crisp yellow 4 on green, PUR 3. Ladder steps 20,000."
+    },
+    "tts-7c91d4cf-39": {
+      "level": 4,
+      "name": "Android 18, the Survivor",
+      "note": "Level 4 from a double read of the card face; both reads agreed. Androids Saga Redemption R16, \"1 of 1 Android 18\". Badge is a crisp yellow 4 on green, PUR 3. Ladder steps only 5,000, so the digits were checked rung by rung."
+    },
+    "tts-3ae57df1-28": {
+      "level": 3,
+      "name": "Android 19, Recharged",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 98, \"3 of 3 Android 19\", Cell-era red frame. Badge a clear yellow 3, PUR 2. Thirteen rungs, stepping 100,000; the zero rung is printed \"00000\"."
+    },
+    "tts-7c91d4cf-27": {
+      "level": 2,
+      "name": "Android 16, the Machine",
+      "note": "Level 2 from a double read of the card face; the two reads disagreed and were adjudicated. CONTESTED, adjudicated to level 2. One read returned no level: the badge itself sits under Android 16's red hair spike and is not legible on its own even at 12x. The level was settled instead by three legible printed fields - card number R4, a power box that matches Redemption R4 \"Android 16, the Machine (lvl 2)\" verbatim in the project's CRD-derived cards.lackey.json, and a ladder and PUR that match that record exactly. The other printing of this card (Cell Saga #177) is also level 2. Both reads already agreed on the ladder and on PUR 1."
+    },
+    "tts-7c91d4cf-40": {
+      "level": 4,
+      "name": "Android 19, Refreshed",
+      "note": "Level 4 from a double read of the card face; both reads agreed. Androids Saga Redemption R17, \"1 of 1 Android 19\". Non-foil and fully legible: badge an unambiguous yellow 4, PUR a red 3. Thirteen rungs."
+    },
+    "tts-7c91d4cf-29": {
+      "level": 2,
+      "name": "Android 17, the Leader",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Androids Saga Redemption R6. NAME CORRECTION: the face reads \"Android 17, the Leader\"; the 17 is printed on the card and missing from the filed name. Foil card - the badge is a black digit on dark red and needed a contrast stretch, after which it resolves clearly as 2. PUR is a white 1."
+    },
+    "tts-7c91d4cf-32": {
+      "level": 1,
+      "name": "Cell, Stage One",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Androids Saga Redemption R9. Medium confidence only because of the foil: the badge glyph resolves as a single narrow slanted stroke with a top-left flag, sitting in a noticeably narrower red parallelogram than the other Cell-set badges - a 1. PUR is a white 3. Ladder verified at 2x, even 50,000 steps."
+    },
+    "tts-76cb49e3-61": {
+      "level": 3,
+      "name": "Cell, the Perfect Warrior",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 200. Badge resolved cleanly after a gamma lift - top arm running right, a red wedge biting in at mid-height, a lower bowl: an unambiguous 3. PUR a white 3. Thirteen rungs, even 200,000 steps."
+    },
+    "tts-3ae57df1-65": {
+      "level": 4,
+      "name": "Goku",
+      "note": "Level 4 from a double read of the card face; both reads agreed. Collector number 135, \"6 of 11 Goku\", Super Saiyan art, non-foil and fully legible. Badge a clear yellow 4 and PUR a red 4 - level and PUR are the same digit here, a spot where an automated reader could easily copy one into the other. Thirteen rungs, even 150,000 steps."
+    },
+    "tts-7c91d4cf-33": {
+      "level": 2,
+      "name": "Cell",
+      "note": "Level 2 from a double read of the card face; the two reads disagreed and were adjudicated. CONTESTED, adjudicated to level 2. One read returned no level: the badge is a dark red parallelogram blown out by foil glare and stays illegible at 14x even with autocontrast and unsharp. The level was settled by the personality-stack indicator printed under the text box, legible at 16x: \"2 of 2\" over \"Cell\". Corroborated by the repo's own Lackey list, which has \"Cell (lvl 2) Redemption r10 R10 2 P (3)\" with the identical 12-rung ladder. PUR 3 is unambiguous and both reads already agreed on the ladder."
+    },
+    "tts-3ae57df1-27": {
+      "level": 3,
+      "name": "Krillin, the Champion",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 97, non-foil and crisp. Orange 3 on the green wedge, red 3 in the PUR box. Eleven rungs."
+    },
+    "tts-76cb49e3-55": {
+      "level": 3,
+      "name": "Piccolo, Earth's Protector",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 194, foil/hi-tech frame. Medium confidence: the badge is a dark-red embossed digit over a hexagon pattern, but at 6x it is unambiguously the same squared-3 glyph as the confirmed 3s elsewhere in the batch. PUR a clear white 3. Thirteen rungs, 200,000 steps."
+    },
+    "tts-76cb49e3-54": {
+      "level": 3,
+      "name": "Vegeta, the Last Prince",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 193, same foil frame as #194. Medium confidence: this is the darkest badge in the batch - a dark digit on red over black - but the glyph matches the same squared 3. PUR a clear white 3, and the ladder is identical to #194, which corroborates the level."
+    },
+    "tts-76cb49e3-20": {
+      "level": 5,
+      "name": "Vegeta, the Revitalized",
+      "note": "Level 5 from a double read of the card face; both reads agreed. Collector number 159, non-foil and very legible: orange 5 on the green wedge, red 5 in the PUR box. Thirteen rungs, 100,000 steps. The power box reads \"Physical attack doing +9 power stages of damage\", which is almost certainly why it is misfiled as a Physical Combat card, but badge, PUR and ladder make it a personality."
+    },
+    "tts-c611d949-6": {
+      "level": 1,
+      "name": "Zarbon",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number CA7. Definitely a personality (11-rung ladder, PUR 2, Constant Combat Power box). Medium confidence is for the badge alone: a dark olive digit on a green flag over gold halftone, very low contrast. At 12x the glyph is the angled top-left flag serif plus a straight vertical stem, no bowl and no diagonal - the same 1 glyph confirmed on the Bulma and Gohan cards in this batch."
+    },
+    "tts-18cbdeb1-17": {
+      "level": 1,
+      "name": "Gohan, the Bookworm",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 101, \"1 of 2 Gohan\". Badge a clean orange 1 on the green chevron, PUR a white 2 in the blue sphere. Zero rung printed \"00,000\"."
+    },
+    "tts-8cbb81b5-17": {
+      "level": 1,
+      "name": "Bulma",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 87, \"1 of 8\" with the Kame kanji. Badge an orange 1, PUR a red 1. Eleven rungs of plain hundreds with a two-zero bottom rung."
+    },
+    "tts-f1189c19-21": {
+      "level": 3,
+      "name": "Goku",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 160, \"3 of 30\". Badge verified at 8x as a gold 3 (two stacked right-facing bowls), not an 8 or a 5; PUR is a matching red 3."
+    },
+    "tts-8cbb81b5-13": {
+      "level": 2,
+      "name": "Tien",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 83, Saiyan Saga frame, \"2 of 7\". Badge a clean orange 2, PUR 2. The power box describes an energy attack but the 11-rung ladder plus PUR make it a personality."
+    },
+    "tts-8cbb81b5-37": {
+      "level": 2,
+      "name": "Yajirobe",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 107, Saiyan Saga frame, \"2 of 10\". Badge an orange 2 from the same die as the Tien card, PUR 2. Attack-worded power box on a genuine personality."
+    },
+    "tts-94ce7717-38": {
+      "level": 3,
+      "name": "Captain Ginyu Changes",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 108, Frieza-saga red frame. NAME CORRECTION: the printed title is \"Captain Ginyu Changes\", not \"Captain Ginyu the Leader\". Badge is a yellow 3 (crossbar and open lower bowl clear at 4x) and the footer \"3 of 6 / Captain Ginyu\" corroborates it. PUR 2."
+    },
+    "tts-ac3c3683-39": {
+      "level": 3,
+      "name": "Garlic Jr., the Monster",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 178. Badge a yellow 3 and the footer \"3 of 11 / Garlic Jr.\" agrees. PUR 2. Ladder steps 25,000."
+    },
+    "tts-ac3c3683-32": {
+      "level": 2,
+      "name": "Gohan, the Fighter",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 171. Badge is a 2 (orange, flat top stroke and full base bar) and the footer \"2 of 20 / Gohan\" agrees; PUR is a red 3 - level and PUR differ here, which is where readers cross-contaminate."
+    },
+    "tts-ac3c3683-42": {
+      "level": 3,
+      "name": "Spice, the Warrior",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 181. Badge a yellow 3, footer \"3 of 8 / Spice\" agrees. PUR is a red 4 - clearly the open-topped 4, not a 1."
+    },
+    "tts-7c91d4cf-5": {
+      "level": 1,
+      "name": "Trunks",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Promo P14. Medium confidence because the prismatic foil washes the badge out; cropped and upscaled it is a gold digit on a blue triangle (not the usual green shield) and the glyph is a single vertical stroke with a top-left flag, i.e. a 1, with no closed loops or crossbar to allow 2/3/4/5. PUR is a blue 1. Bottom rung is five zeros, verified at 5x."
+    },
+    "tts-ac3c3683-56": {
+      "level": 2,
+      "name": "Vegeta",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 195. Badge an unmistakable gold 2 on the green shield, PUR a blue 3. (\"dicard\" in the power box is a genuine printing typo on the card, not a reader error.)"
+    },
+    "tts-ac3c3683-36": {
+      "level": 3,
+      "name": "Vegeta, in Training",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 175. Badge a clear gold 3, PUR a red 3, and the \"3 of 9 Vegeta\" personality-set stamp confirms it. Attack-style power box on a card that is plainly a personality."
+    },
+    "tts-ac3c3683-45": {
+      "level": 3,
+      "name": "Vinegar, the Henchman",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 184. Badge a clear gold 3 on green, PUR a red 3, \"3 of 7 Vinegar\" stamp agrees. Ladder steps 10,000, not 25,000."
+    },
+    "tts-a42f5098-17": {
+      "level": 1,
+      "name": "Bulma",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 87, \"1 of 8 Bulma\". Filed as type Unknown but unambiguously a personality: green badge with a 1, red PUR of 1, full 11-rung ladder. The image is only 400x550 so the ladder and PUR were cropped at 6-8x; the rungs are plain hundreds with a two-zero bottom rung, the lowest-magnitude ladder in the batch, so a reader expecting six-figure values may have discarded it."
+    },
+    "tts-3deaec36-13": {
+      "level": 2,
+      "name": "Ginyu Force",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number CP14. Badge (gold 2 on green chevron) verified at 3x, PUR 2 in the circle on the left edge, full 11-rung numeric ladder. Constant Combat Power box, i.e. a personality power box."
+    },
+    "tts-be34bddc-61": {
+      "level": 1,
+      "name": "Goku, the Mighty",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Shonen Jump Exclusive promo SJ1, blue frame with the title along the top. Badge is a gold 1 on a green chevron below the title, verified at 3x; PUR is the red 2 in the tab. Thirteen rungs, longer than the rest of its batch."
+    },
+    "tts-3deaec36-2": {
+      "level": 3,
+      "name": "King Kai",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number CP3. Z LADDER - every rung above the zero stage is a stylised white Z; the column was cropped and upscaled to count exactly 10 Z rungs. Badge 3, PUR 3. The energy-attack wording is probably why it is misfiled as an Energy Combat card."
+    },
+    "tts-3deaec36-1": {
+      "level": 2,
+      "name": "King Kai",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number CP2. Z LADDER - 10 Z rungs above the zero stage, same frame as CP1/CP3/CP31. Badge (gold 2 on green chevron) verified at 3x, PUR 2."
+    },
+    "tts-3deaec36-0": {
+      "level": 1,
+      "name": "King Kai",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number CP1. Z LADDER - column cropped and upscaled to confirm 10 Z rungs above the zero stage. Badge is a gold 1 on a green chevron, verified at 3x; PUR 1. The physical-attack wording is likely why it is misfiled as a Physical Combat card."
+    },
+    "tts-7bdadf12-15": {
+      "level": 4,
+      "name": "King Kai, the Mentor",
+      "note": "Level 4 from a double read of the card face; both reads agreed. Collector number CP31. Z LADDER - column cropped and upscaled to confirm 10 Z rungs above the zero stage. Badge (gold 4 on green chevron) and PUR (red 4) both verified at high magnification."
+    },
+    "tts-e3673ab6-58": {
+      "level": 3,
+      "name": "Mr. Popo",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Colossal Redemption CR3, \"3 of 3 Mr. Popo\". Z LADDER - eleven rungs: the zero stage plus ten rungs each printed with a single stylised Z; the top two are dimmed by foil glare but the glyph is visible in all ten. Badge is a clear orange 3 on a green wedge, PUR a black 4 in a gold starburst."
+    },
+    "tts-7bdadf12-11": {
+      "level": 3,
+      "name": "Meta-Cooler",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number CP27, foil Panini-era frame. Badge verified at 6x as a 3, PUR the red 3 in the white circle verified at 8x. Ladder steps 10,000."
+    },
+    "tts-7bdadf12-5": {
+      "level": 3,
+      "name": "Mighty Mask",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number CP21, same foil Panini frame as CP27. Badge verified at 6x as a 3 (identical glyph to CP27), PUR the red 4 verified at 8x. Ladder steps 40,000."
+    },
+    "tts-5577c6fb-24": {
+      "level": 3,
+      "name": "Piccolo",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 163, Score 2000 frame, \"3 of 23\". The image is only 400x550 so the badge was zoomed 8x; the green-wedge glyph is a 3 matching the higher-resolution cards in the batch. PUR is the red 3 beside the power text. Ladder steps 500."
+    },
+    "tts-5577c6fb-36": {
+      "level": 3,
+      "name": "Vegeta",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 175, Score 2000 frame, \"3 of 20\". Small image; badge zoomed 8x to a green-wedge 3, PUR the red 4 verified at 8x."
+    },
+    "tts-5577c6fb-35": {
+      "level": 2,
+      "name": "Vegeta",
+      "note": "Level 2 from a double read of the card face; both reads agreed. Collector number 174, Score 2000, \"2 of 20\". Badge an unambiguous 2 on the green/gold chevron, verified at 6x; PUR a red 4. Bottom rung is printed with three zeros, not four. Attack-worded power box on a card with a full 11-rung ladder."
+    },
+    "tts-0a93c43d-57": {
+      "level": 1,
+      "name": "Froug",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 127, \"1 of 3 Froug\". Badge a 1 in orange on a green chevron, verified at 12x; PUR 1 in a yellow starburst. Ladder increments cleanly by 100,000."
+    },
+    "tts-0e3b7819-34": {
+      "level": 1,
+      "name": "Goku",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 173, \"10 of 10 Goku\". Badge is a dark 1 on a blue chevron, verified at 6x; PUR 1 in a yellow starburst."
+    },
+    "tts-0e3b7819-33": {
+      "level": 3,
+      "name": "Goku, the Proud",
+      "note": "Level 3 from a double read of the card face; both reads agreed. Collector number 172, \"3 of 10 Goku\". Badge a clear orange 3 on a green chevron, verified at 14x - not a 1 or an 8; PUR 3. Note the ladder length: twelve rungs above the zero stage where its batch-mates have ten. The column was re-cropped in two overlapping strips and counted twice, with uniform rung spacing throughout, so 2,400,000 is a genuine rung and not caption art."
+    },
+    "tts-76e864b5-5": {
+      "level": 1,
+      "name": "Jeice, the Avenger",
+      "note": "Level 1 from a double read of the card face; both reads agreed. CONFLICTING LEVEL INDICATORS ON THE FACE, flagged rather than resolved. The top-left chevron badge is a crisp orange 1, but the top-right collector-number slot prints the literal text \"LV5\" instead of a number (verified at 14x). Level 1 is recorded from the badge, and the card's own text (\"place a Level 1 Ally in play\") is consistent with a level 1, but a human should decide which governs before this goes into a Main Personality stack. PUR is an orange 1; footer \"1 of 1 Jeice\"."
+    },
+    "tts-0e3b7819-46": {
+      "level": 1,
+      "name": "Maraikoh",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 185 (the number sits over a glare band; the middle digit was resolved to 8 by thresholding - two enclosed counters, where a 6 would show an open top-left - so 165 is the only other candidate). Badge is a dark 1 on a purple chevron, verified at 12x; PUR 1 in a yellow starburst. The ladder steps exactly 90,000 throughout, which cross-checks every rung. Footer \"4 of 4 Maraikoh\"."
+    },
+    "tts-0e3b7819-54": {
+      "level": 1,
+      "name": "Pikkon",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 193, \"9 of 9 Pikkon\". Badge a clear 1 in the purple wedge, verified at 5x; PUR 2 in the yellow star. The defensive-combat power wording is likely why it was misfiled, but the full 11-rung ladder and PUR make it a personality."
+    },
+    "tts-0e3b7819-62": {
+      "level": 1,
+      "name": "Videl",
+      "note": "Level 1 from a double read of the card face; both reads agreed. Collector number 201, \"5 of 5 Videl\". Badge a clear 1 in the blue wedge, verified at 5x; PUR 1 in the yellow star. Attack-worded power box, but the 11-rung ladder and PUR make it a personality."
     }
   }
 }

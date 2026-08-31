@@ -1,0 +1,902 @@
+{
+ "generated": "level+ladder repair",
+ "cards": [
+  {
+   "id": "tts-30fb99ff-6",
+   "name": "Android 14",
+   "saga": "Babidi",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "ladder too short",
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-b77448ca-55",
+   "name": "Hercule, the World Champion",
+   "saga": "Babidi",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "ladder too short",
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-c29a516a-3",
+   "name": "Majin Dabura",
+   "saga": "Babidi",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "ladder too short",
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-c29a516a-34",
+   "name": "Majin Pui Pui, the Flashy",
+   "saga": "Babidi",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 2,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-a15907e0-25",
+   "name": "Gohan",
+   "saga": "Buu",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-a15907e0-18",
+   "name": "Goku, Super Saiyan",
+   "saga": "Buu",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "ladder too short",
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-a15907e0-35",
+   "name": "Goten",
+   "saga": "Buu",
+   "type": "Personality",
+   "storedLevel": 1,
+   "storedPur": 2,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-a15907e0-34",
+   "name": "Goten",
+   "saga": "Buu",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-a15907e0-33",
+   "name": "Goten",
+   "saga": "Buu",
+   "type": "Personality",
+   "storedLevel": 2,
+   "storedPur": 3,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-3833f635-0",
+   "name": "Kid Trunks",
+   "saga": "Buu",
+   "type": "Energy Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-a15907e0-29",
+   "name": "Kid Trunks",
+   "saga": "Buu",
+   "type": "Energy Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-a15907e0-28",
+   "name": "Kid Trunks",
+   "saga": "Buu",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "ladder too short",
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-117cae92-47",
+   "name": "Kid Trunks",
+   "saga": "Buu",
+   "type": "Energy Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-90cd3764-0",
+   "name": "Majin Buu",
+   "saga": "Buu",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-a15907e0-56",
+   "name": "Majin Buu, the Rotund",
+   "saga": "Buu",
+   "type": "Personality",
+   "storedLevel": 2,
+   "storedPur": 3,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-a15907e0-53",
+   "name": "Majin Vegeta",
+   "saga": "Buu",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-6c4f6cd7-0",
+   "name": "Majin Vegeta",
+   "saga": "Buu",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-a15907e0-39",
+   "name": "Piccolo",
+   "saga": "Buu",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 4,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-a15907e0-37",
+   "name": "Piccolo",
+   "saga": "Buu",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-7c91d4cf-27",
+   "name": "Android 16, the Machine",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": 2,
+   "storedPur": 1,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-7c91d4cf-37",
+   "name": "Android 16, the Warrior",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 8,
+   "reasons": [
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-7c91d4cf-38",
+   "name": "Android 17, the Energized",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 11,
+   "reasons": [
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-7c91d4cf-39",
+   "name": "Android 18, the Survivor",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 8,
+   "reasons": [
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-3ae57df1-28",
+   "name": "Android 19, Recharged",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 2,
+   "storedLadderLen": 13,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-7c91d4cf-40",
+   "name": "Android 19, Refreshed",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": 5,
+   "storedLadderLen": 13,
+   "reasons": [
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-7c91d4cf-29",
+   "name": "Android, the Leader",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": 2,
+   "storedPur": 1,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-7c91d4cf-33",
+   "name": "Cell",
+   "saga": "Cell",
+   "type": "Unknown",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-7c91d4cf-32",
+   "name": "Cell, Stage One",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": 1,
+   "storedPur": 3,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-76cb49e3-61",
+   "name": "Cell, the Perfect Warrior",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 3,
+   "storedLadderLen": 13,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-3ae57df1-65",
+   "name": "Goku",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": 4,
+   "storedPur": 4,
+   "storedLadderLen": 13,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-3ae57df1-27",
+   "name": "Krillin, the Champion",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 3,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-76cb49e3-55",
+   "name": "Piccolo, Earth's Protector",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 3,
+   "storedLadderLen": 13,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-76cb49e3-54",
+   "name": "Vegeta, the Last Prince",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 3,
+   "storedLadderLen": 13,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-76cb49e3-20",
+   "name": "Vegeta, the Revitalized",
+   "saga": "Cell",
+   "type": "Personality",
+   "storedLevel": 5,
+   "storedPur": 5,
+   "storedLadderLen": 13,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-c611d949-31",
+   "name": "Mako Star",
+   "saga": "Fusion",
+   "type": "Unknown",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-e3673ab6-58",
+   "name": "Mr. Popo",
+   "saga": "Fusion",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 4,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-be34bddc-59",
+   "name": "Startled",
+   "saga": "Fusion",
+   "type": "Unknown",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-c611d949-6",
+   "name": "Zarbon",
+   "saga": "Fusion",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "ladder too short",
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-18cbdeb1-17",
+   "name": "Gohan, the Bookworm",
+   "saga": "Kid Buu",
+   "type": "Personality",
+   "storedLevel": 1,
+   "storedPur": 2,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-434ce590-29",
+   "name": "Zangya's Entrapping String",
+   "saga": "Kid Buu",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "ladder too short",
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-8cbb81b5-17",
+   "name": "Bulma",
+   "saga": "Saiyan",
+   "type": "Personality",
+   "storedLevel": 1,
+   "storedPur": 1,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-f1189c19-21",
+   "name": "Goku",
+   "saga": "Saiyan",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 1,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-8cbb81b5-13",
+   "name": "Tien",
+   "saga": "Saiyan",
+   "type": "Personality",
+   "storedLevel": 2,
+   "storedPur": 1,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-8cbb81b5-37",
+   "name": "Yajirobe",
+   "saga": "Saiyan",
+   "type": "Personality",
+   "storedLevel": 2,
+   "storedPur": 1,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-94ce7717-38",
+   "name": "Captain Ginyu the Leader",
+   "saga": "Trunks",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 2,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-ac3c3683-39",
+   "name": "Garlic Jr., the Monster",
+   "saga": "Trunks",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 2,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-ac3c3683-32",
+   "name": "Gohan, the Fighter",
+   "saga": "Trunks",
+   "type": "Personality",
+   "storedLevel": 2,
+   "storedPur": 3,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-ac3c3683-42",
+   "name": "Spice, the Warrior",
+   "saga": "Trunks",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 4,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-7c91d4cf-5",
+   "name": "Trunks",
+   "saga": "Trunks",
+   "type": "Personality",
+   "storedLevel": 1,
+   "storedPur": 1,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-ac3c3683-56",
+   "name": "Vegeta",
+   "saga": "Trunks",
+   "type": "Personality",
+   "storedLevel": 2,
+   "storedPur": 3,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-ac3c3683-36",
+   "name": "Vegeta, in Training",
+   "saga": "Trunks",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 3,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-ac3c3683-45",
+   "name": "Vinegar, the Henchman",
+   "saga": "Trunks",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 3,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-a42f5098-17",
+   "name": "Bulma",
+   "saga": "Unknown",
+   "type": "Energy Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-a8664770-18",
+   "name": "Garlic Jr.'s Dead Zone",
+   "saga": "Unknown",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "ladder too short",
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-3deaec36-13",
+   "name": "Ginyu Force",
+   "saga": "Unknown",
+   "type": "Personality",
+   "storedLevel": 2,
+   "storedPur": 2,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-be34bddc-61",
+   "name": "Goku, the Mighty",
+   "saga": "Unknown",
+   "type": "Unknown",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-3deaec36-2",
+   "name": "King Kai",
+   "saga": "Unknown",
+   "type": "Energy Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-3deaec36-1",
+   "name": "King Kai",
+   "saga": "Unknown",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-3deaec36-0",
+   "name": "King Kai",
+   "saga": "Unknown",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-7bdadf12-15",
+   "name": "King Kai, the Mentor",
+   "saga": "Unknown",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-7bdadf12-11",
+   "name": "Meta-Cooler",
+   "saga": "Unknown",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 3,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-7bdadf12-5",
+   "name": "Mighty Mask",
+   "saga": "Unknown",
+   "type": "Personality",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "ladder too short",
+    "no level"
+   ]
+  },
+  {
+   "id": "tts-9f900382-21",
+   "name": "Orange Overpowering Drill",
+   "saga": "Unknown",
+   "type": "Mastery",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-5577c6fb-24",
+   "name": "Piccolo",
+   "saga": "Unknown",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-3efb4bcb-19",
+   "name": "Straining Tien's Mafuba Move",
+   "saga": "Unknown",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-5577c6fb-36",
+   "name": "Vegeta",
+   "saga": "Unknown",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 2,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-5577c6fb-35",
+   "name": "Vegeta",
+   "saga": "Unknown",
+   "type": "Personality",
+   "storedLevel": 2,
+   "storedPur": 4,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-0a93c43d-57",
+   "name": "Froug",
+   "saga": "World Games",
+   "type": "Personality",
+   "storedLevel": 1,
+   "storedPur": 1,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-0e3b7819-34",
+   "name": "Goku",
+   "saga": "World Games",
+   "type": "Personality",
+   "storedLevel": 1,
+   "storedPur": 1,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-0e3b7819-33",
+   "name": "Goku, the Proud",
+   "saga": "World Games",
+   "type": "Personality",
+   "storedLevel": 3,
+   "storedPur": 3,
+   "storedLadderLen": 13,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-76e864b5-5",
+   "name": "Jeice, the Avenger",
+   "saga": "World Games",
+   "type": "Unknown",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-0e3b7819-46",
+   "name": "Maraikoh",
+   "saga": "World Games",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  },
+  {
+   "id": "tts-0e3b7819-54",
+   "name": "Pikkon",
+   "saga": "World Games",
+   "type": "Personality",
+   "storedLevel": 1,
+   "storedPur": 2,
+   "storedLadderLen": 11,
+   "reasons": [
+    "readers disagree on level"
+   ]
+  },
+  {
+   "id": "tts-0e3b7819-62",
+   "name": "Videl",
+   "saga": "World Games",
+   "type": "Physical Combat",
+   "storedLevel": null,
+   "storedPur": null,
+   "storedLadderLen": 0,
+   "reasons": [
+    "power box, no ladder"
+   ]
+  }
+ ]
+}
