@@ -347,6 +347,56 @@ test('server authority', async (t) => {
     assert.equal(room.gameState!.players[0]!.zones.hand.length, before, 'state unchanged');
   });
 
+  await t.test('a spoofed seat as a STRING is still the opponent seat', () => {
+    // authorize() tested `typeof named === 'number' && named !== seatIdx`, so
+    // anything non-numeric skipped the check entirely while JS array indexing
+    // resolved it anyway. This is the whole exploit: seat B sends '0' and
+    // empties seat A's Life Deck, which is an instant win by Survival.
+    const { room, b } = startedRoom();
+    const before = room.gameState!.players[0]!.zones.lifeDeck.length;
+    room.handleAction('cb', act({ type: 'drawCards', playerIdx: '0' as unknown as number, count: 5 }, 'spoof-str'));
+    assert.match(b.last('error')?.message ?? '', /cannot act for another player/);
+    assert.equal(room.gameState!.players[0]!.zones.lifeDeck.length, before, 'opponent deck untouched');
+  });
+
+  await t.test('a spoofed concede cannot hand the sender the win', () => {
+    const { room, b } = startedRoom();
+    room.handleAction('cb', act({ type: 'concede', playerIdx: '0' as unknown as number }));
+    assert.match(b.last('error')?.message ?? '', /cannot act for another player/);
+    assert.equal(room.gameState!.phase, 'playing');
+    assert.equal(room.gameState!.winnerIdx, undefined);
+  });
+
+  await t.test('a malformed moveCard cannot kill the process', () => {
+    // An unknown zone threw an uncaught TypeError that escaped the bare ws
+    // listener and took down every other game in the process with it.
+    const { room, a } = startedRoom();
+    const uid = room.gameState!.players[0]!.zones.hand[0]!.uid;
+    assert.doesNotThrow(() => {
+      room.handleAction('ca', act({ type: 'moveCard', cardUid: uid, toZone: 'nowhere' as never }));
+    });
+    assert.match(a.last('error')?.message ?? '', /unknown zone/);
+    assert.doesNotThrow(() => {
+      room.handleAction('ca', act({ type: 'moveCard', cardUid: uid, toZone: 'discard', toPlayerIdx: 99 }));
+    });
+    assert.match(a.last('error')?.message ?? '', /unknown player/);
+    assert.equal(room.gameState!.phase, 'playing');
+  });
+
+  await t.test('moveCard cannot pull a card out of the opponent hidden zones', () => {
+    // Redaction keeps the real uid on cards it hides, so the uid is on the
+    // wire. Moving the card to a public zone revealed it; a loop over the
+    // opponent's Life Deck emptied it and won by Survival. Tabletop assist
+    // means moving a card both players can already see.
+    const { room, b } = startedRoom();
+    const victimHand = room.gameState!.players[0]!.zones.hand;
+    const uid = victimHand[0]!.uid;
+    const before = victimHand.length;
+    room.handleAction('cb', act({ type: 'moveCard', cardUid: uid, toZone: 'discard' }));
+    assert.match(b.last('error')?.message ?? '', /hidden zone/);
+    assert.equal(room.gameState!.players[0]!.zones.hand.length, before, 'hand untouched');
+  });
+
   await t.test('only the active player may advance the step', () => {
     const { room } = startedRoom();
     const active = room.gameState!.activePlayerIdx;

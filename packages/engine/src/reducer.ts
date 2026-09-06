@@ -4,7 +4,8 @@
  * `actingPlayerIdx` is who sent the action (the server knows). If omitted, the
  * expected actor is inferred so tests can call without it.
  */
-import type { Action, CardInstance, GameEvent, GameState, PersonalityInPlay } from '@dbz/shared';
+import type { Action, CardInstance, GameEvent, GameState, PersonalityInPlay, Zone } from '@dbz/shared';
+import { ZONES } from '@dbz/shared';
 import type { CardDb } from './loader.js';
 import { advanceStep, draw, DRAW_PER_TURN, powerUp, setAnger, setStage } from './turn.js';
 import {
@@ -25,6 +26,11 @@ import { checkVictory } from './victory.js';
 import { maxAllyLevel, playCard } from './noncombat.js';
 
 const clone = <T>(x: T): T => structuredClone(x);
+/** Zones whose contents redaction hides from the other player. */
+const HIDDEN_ZONES = new Set<Zone>(['hand', 'lifeDeck', 'sensei']);
+const CHAT_MAX = 500;
+/** The whole log ships to both clients on every action, so it cannot grow forever. */
+const LOG_MAX = 500;
 const START_ALLY_STAGES_ABOVE_ZERO = 3;
 
 type PlayerZones = GameState['players'][number]['zones'];
@@ -89,12 +95,31 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       }
       advanceStep(state, events);
       if (state.step === 'draw') draw(state, state.activePlayerIdx, DRAW_PER_TURN);
-      else if (state.step === 'powerUp') powerUp(state, state.activePlayerIdx, db, events);
+      // Claim the once-per-turn flag here too. Entering the step powers you up
+      // automatically, but only the manual `powerUp` action was setting the
+      // flag — so the guard below let one MORE full power-up through, and the
+      // client renders exactly that button in exactly this step. Every MP was
+      // climbing 2x its PUR and every Ally 2 stages instead of 1, every turn,
+      // which put every personality in the game at the wrong power stage and
+      // so read the wrong row out of the PAT for every attack.
+      else if (state.step === 'powerUp') {
+        powerUp(state, state.activePlayerIdx, db, events);
+        state.poweredUpThisTurn = true;
+      }
       else if (state.step === 'combat') beginCombat(state, db, events);
       break;
     }
     case 'drawCards':
-      draw(state, action.playerIdx, action.count);
+      // Unvalidated, this drew any number of cards for your own seat at any
+      // moment — including during the opponent's turn — and authorize() waved
+      // it through because the seat matched. The Draw Step deals its own cards
+      // (DRAW_PER_TURN); this action is the manual assist, so it is bounded and
+      // restricted to the player whose turn it is.
+      if (action.playerIdx !== actor) err = 'you may only draw for yourself';
+      else if (action.playerIdx !== state.activePlayerIdx) err = 'you may only draw on your own turn';
+      else if (!Number.isInteger(action.count) || action.count < 1 || action.count > DRAW_PER_TURN) {
+        err = `you may draw 1 to ${DRAW_PER_TURN} cards`;
+      } else draw(state, action.playerIdx, action.count);
       break;
     case 'powerUp':
       // Entering the Power-Up Step already powers you up. Leaving this action
@@ -114,7 +139,14 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       }
       break;
     case 'setStage':
-      setStage(state, action.personalityUid, action.stageIndex, db, events);
+      // A non-numeric stageIndex reached Math.max(0, Math.min(x, n)) as NaN and
+      // stuck: currentRating went undefined, every later PAT lookup was poisoned,
+      // `stageIndex > MP_DOWN_STAGES` became permanently false so the MP could
+      // never be "down", and no normal play could recover it. Cross-seat
+      // targeting stays allowed — that is the documented tabletop assist.
+      if (!Number.isInteger(action.stageIndex) || action.stageIndex < 0) {
+        err = 'stage must be a whole number';
+      } else setStage(state, action.personalityUid, action.stageIndex, db, events);
       break;
     case 'setAnger':
       advancedByAnger = setAnger(state, action.personalityUid, action.anger, db, events);
@@ -160,10 +192,29 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       break;
     }
     case 'moveCard': {
+      // This is the tabletop-assist fallback for effects the engine cannot
+      // resolve yet, so it is deliberately permissive about WHOSE card moves.
+      // It was permissive about everything else too, and none of that was
+      // deliberate:
+      //  - an unknown toZone or out-of-range toPlayerIdx threw a TypeError that
+      //    escaped the bare ws listener and killed the process, taking every
+      //    other game in it down with one malformed message;
+      //  - moving a card out of an opponent's HIDDEN zone defeated redaction,
+      //    which preserves real uids on cards it hides. One message at a time
+      //    revealed their hand and Life Deck; a loop won the game by Survival.
+      // Assist means moving a card both players can already see.
       const loc = findInstance(state, action.cardUid);
       if (!loc) return fail(prev, 'card not found');
+      if (!ZONES.includes(action.toZone)) return fail(prev, `unknown zone '${action.toZone}'`);
+      const toPlayer = action.toPlayerIdx ?? loc.playerIdx;
+      if (!Number.isInteger(toPlayer) || !state.players[toPlayer]) {
+        return fail(prev, 'unknown player');
+      }
+      if (loc.playerIdx !== actor && HIDDEN_ZONES.has(loc.zone)) {
+        return fail(prev, "cannot move a card out of an opponent's hidden zone");
+      }
       const inst = state.players[loc.playerIdx]!.zones[loc.zone].splice(loc.idx, 1)[0]!;
-      state.players[action.toPlayerIdx ?? loc.playerIdx]!.zones[action.toZone].push(inst);
+      state.players[toPlayer]!.zones[action.toZone].push(inst);
       break;
     }
     // ---- Combat ----
@@ -193,6 +244,16 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       err = passPhase(state, ctx, events);
       break;
     case 'answerPrompt': {
+      // Answer the prompt you were SHOWN, not whatever is pending now. One
+      // action can close a prompt and immediately open the next one for the
+      // same player (resolveDefense -> resolveLifeCardDamage opens the
+      // Endurance prompt), so a double-clicked button sent its second answer
+      // into a question the player had not read yet: it silently spent their
+      // Endurance card and forfeited the prevention. promptId was already on
+      // the wire and in the Prompt; nothing compared them.
+      if (state.pendingPrompt && action.promptId && action.promptId !== state.pendingPrompt.id) {
+        return fail(prev, 'that prompt has already been answered');
+      }
       const type = state.pendingPrompt?.type;
       const choice = action.choice as { cardUid?: string; takeDamage?: boolean; toUid?: string | null } | string | null;
       if (type === 'defend') {
@@ -223,9 +284,15 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       events.push({ type: 'gameEnded', winnerIdx: winner, victoryType: 'concede' });
       break;
     }
-    case 'chat':
-      state.log.push(`${state.players[action.playerIdx]?.name ?? '?'}: ${action.text}`);
+    case 'chat': {
+      // The log is re-serialised to every client on every action, so unbounded
+      // chat text (and an unbounded log) is a payload both players pay for on
+      // every single message for the rest of the game.
+      const text = typeof action.text === 'string' ? action.text.slice(0, CHAT_MAX) : '';
+      if (text.trim().length === 0) break;
+      state.log.push(`${state.players[action.playerIdx]?.name ?? '?'}: ${text}`);
       break;
+    }
     case 'captureDragonBall': {
       // Direct capture (card effects). The 5+ life-card capture goes through
       // the combat prompt instead; both defer a 7th-ball win identically.
@@ -259,6 +326,8 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
   const angerAdvance = events.find((e) => e.type === 'personalityAdvanced' && e.byAnger);
   const byAngerUid = advancedByAnger ?? (angerAdvance?.type === 'personalityAdvanced' ? angerAdvance.personalityUid : undefined);
   checkVictory(state, db, events, byAngerUid ? { advancedByAngerUid: byAngerUid } : {});
+
+  if (state.log.length > LOG_MAX) state.log.splice(0, state.log.length - LOG_MAX);
 
   return { state, events };
 }

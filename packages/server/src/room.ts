@@ -277,7 +277,14 @@ export class Room {
  */
 function authorize(action: ActionWithMeta, seatIdx: number, state: GameState): string | undefined {
   const named = (action as { playerIdx?: unknown }).playerIdx;
-  if (typeof named === 'number' && named !== seatIdx) return 'cannot act for another player';
+  // A playerIdx that is present must be an integer AND must be this seat.
+  // Testing `typeof named === 'number'` FIRST meant a non-number skipped the
+  // whole check while JS array indexing still resolved it: `playerIdx: '1'`
+  // drew the opponent's Life Deck empty for an instant Survival win, conceded
+  // on their behalf, and impersonated them in the shared log.
+  if (named !== undefined && (!Number.isInteger(named) || named !== seatIdx)) {
+    return 'cannot act for another player';
+  }
   if (action.type === 'advanceStep' && state.activePlayerIdx !== seatIdx) return 'not your turn';
   return undefined;
 }

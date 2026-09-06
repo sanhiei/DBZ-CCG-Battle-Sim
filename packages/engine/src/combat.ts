@@ -870,6 +870,17 @@ export function resolveCapture(
   const atk = state.combat?.currentAttack;
   if (!atk) return 'no attack in progress';
   if (ctx.actingPlayerIdx !== atk.attackerPlayerIdx) return 'only the attacker may capture';
+  // Every sibling resolver checks that it is answering its own prompt; this one
+  // did not, so the `captureDragonBall` action was a standing offer: any
+  // attacker could take a Dragon Ball at any point in a Combat with no life
+  // cards dealt at all, and the call clears pendingPrompt on the way out, so it
+  // also wiped whatever question the defender was in the middle of answering.
+  // The entitlement is the prompt — it is only raised once damage actually
+  // crosses LIFE_CARD_CAPTURE_THRESHOLD (~L685).
+  const prompt = state.pendingPrompt;
+  if (prompt?.type !== 'capture' || prompt.playerIdx !== ctx.actingPlayerIdx) {
+    return 'you have not captured a Dragon Ball';
+  }
 
   if (ballUid) {
     if (!captureBall(state, atk.defenderPlayerIdx, atk.attackerPlayerIdx, ballUid)) {

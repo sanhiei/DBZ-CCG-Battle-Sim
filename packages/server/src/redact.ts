@@ -26,7 +26,12 @@ function redactPlayer(p: PlayerState, own: boolean): PlayerState {
     // The Life Deck is secret from everyone, including its owner (order matters).
     lifeDeck: hideAll(p.zones.lifeDeck),
     hand: own ? p.zones.hand : hideAll(p.zones.hand),
-    sensei: own ? p.zones.sensei : hideAll(p.zones.sensei),
+    // The Sensei card is public: CRD ~L88, it "starts the game on the table".
+    // Hiding it was dead secrecy anyway — `senseiCardId` sits unredacted on
+    // PlayerState, so the id was already on the wire. When the Sensei DECK
+    // lands (it is not built at setup today, so this zone holds only the one
+    // public card) its cards are secret and need a zone of their own.
+    sensei: p.zones.sensei,
     inPlay: redactInPlay(p.zones.inPlay, own),
     // discard + removed are public zones and stay as-is.
   };
