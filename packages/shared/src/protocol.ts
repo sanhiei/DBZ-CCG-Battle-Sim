@@ -25,6 +25,7 @@ export type Action =
   | { type: 'redirectDamage'; toPersonalityUid: string }
   | { type: 'captureDragonBall'; ballUid: string }
   | { type: 'useEndurance'; cardUid?: string }
+  | { type: 'declareCombat'; declare: boolean }
   | { type: 'pass' }
   | { type: 'answerPrompt'; promptId: string; choice: unknown }
   | { type: 'concede'; playerIdx: number }

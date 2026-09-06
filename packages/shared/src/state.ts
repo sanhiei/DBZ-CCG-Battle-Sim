@@ -215,6 +215,13 @@ export interface GameState {
    * must skip the Combat Step (CRD ~L233, ~L713). Cleared on the next turn.
    */
   skipCombatThisTurn?: boolean;
+  /**
+   * The Declare Step decision (CRD ~L232): did the attacker declare Combat this
+   * turn? `false` sends them straight to the Discard Step and earns the
+   * Rejuvenation Step's card back; `undefined` means they have not decided yet.
+   * Cleared on the next turn.
+   */
+  declaredCombat?: boolean;
   /** Set once the active player has powered up this turn, so the Power-Up Step
    *  cannot be replayed to sit at the top of the ladder every turn. */
   poweredUpThisTurn?: boolean;

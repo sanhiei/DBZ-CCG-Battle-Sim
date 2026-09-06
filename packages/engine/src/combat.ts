@@ -52,17 +52,14 @@ import {
 } from './damage.js';
 import { deferDragonVictory, DRAGON_BALL_SET_SIZE } from './victory.js';
 import { isDrill } from './drills.js';
+import { newPrompt } from './prompt.js';
 
 const PREPARE_DRAW = 3;
 const ENERGY_STAGE_COST = 2;
 const ENERGY_LIFE_CARDS = 4;
 const DRAGON_BALL_CAPTURE_LIFE = 5;
 
-let promptSeq = 0;
-function newPrompt(playerIdx: number, type: string, message: string, extra: Partial<Prompt> = {}): Prompt {
-  promptSeq += 1;
-  return { id: `p${promptSeq}`, playerIdx, type, message, ...extra };
-}
+
 
 export function controllerOf(player: PlayerState): PersonalityInPlay {
   return player.allies.find((a) => a.inControlOfCombat) ?? player.mp;

@@ -3,6 +3,8 @@ export * from './pat.js';
 export * from './loader.js';
 export * from './setup.js';
 export * from './turn.js';
+export * from './turnsteps.js';
+export * from './prompt.js';
 export * from './abilities.js';
 export * from './combat.js';
 export * from './damage.js';

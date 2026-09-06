@@ -6,7 +6,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import type { DeckList } from '@dbz/shared';
+import type { Action, DeckList, GameState } from '@dbz/shared';
 import { CardDb, type EngineCard } from './loader.js';
 import { createGame } from './setup.js';
 import { reduce } from './reducer.js';
@@ -79,10 +79,24 @@ const mp = findPersonality(state, mpUid)!;
 check('advanced to level 2', mp.currentLevel === 2, `got ${mp.currentLevel}`);
 check('anger reset to 0', mp.anger === 0, `got ${mp.anger}`);
 
+/**
+ * Fast-forward to the Combat Step. The Declare Step is a real decision now, so
+ * a bare `while (step !== 'combat') advanceStep` stalls on its prompt forever —
+ * getting into Combat means saying you want to be there.
+ */
+function toCombat(s: GameState, limit = 12): GameState {
+  let cur = s;
+  for (let i = 0; i < limit && cur.step !== 'combat'; i++) {
+    const act: Action = cur.pendingPrompt?.type === 'declareCombat'
+      ? { type: 'declareCombat', declare: true }
+      : { type: 'advanceStep' };
+    cur = reduce(cur, act, db).state;
+  }
+  return cur;
+}
+
 console.log('energy attack (no PAT needed):');
-// Fast-forward to combat step of active player.
-let guard = 0;
-while (state.step !== 'combat' && guard++ < 10) { r = reduce(state, { type: 'advanceStep' }, db); state = r.state; }
+state = toCombat(state, 10);
 const defenderIdx = (state.activePlayerIdx + 1) % 2;
 const beforeLife = state.players[defenderIdx]!.zones.lifeDeck.length;
 r = reduce(state, { type: 'declareAttack', attackType: 'energy' }, db); state = r.state;
@@ -95,8 +109,7 @@ let g = createGame({ seed: 7, players: [{ name: 'Goku', deck: gokuDeck }, { name
 const atkIdx = g.activePlayerIdx;
 const defIdx = (atkIdx + 1) % 2;
 let gg;
-let guard2 = 0;
-while (g.step !== 'combat' && guard2++ < 12) { gg = reduce(g, { type: 'advanceStep' }, db); g = gg.state; }
+g = toCombat(g);
 check('reached combat step', g.step === 'combat');
 check('prepare: defender drew 3', g.players[defIdx]!.zones.hand.length === 3, `got ${g.players[defIdx]!.zones.hand.length}`);
 check('attacker gets first Attack Phase', g.combat!.phasePlayerIdx === atkIdx);
@@ -130,8 +143,7 @@ const aIdx = h.activePlayerIdx;
 const dIdx = (aIdx + 1) % 2;
 // Put a known attack card ("One Knuckle Punch": physical +1 stage, raise user anger 1) in attacker's hand.
 h.players[aIdx]!.zones.hand.push({ uid: 'test-atk', cardId: id('One Knuckle Punch'), faceDown: false });
-let guard3 = 0;
-while (h.step !== 'combat' && guard3++ < 12) { const rr2 = reduce(h, { type: 'advanceStep' }, db); h = rr2.state; }
+h = toCombat(h);
 const attCtl2 = controllerOf(h.players[aIdx]!);
 const defCtl2 = controllerOf(h.players[dIdx]!);
 const angerBefore = h.players[aIdx]!.mp.anger;

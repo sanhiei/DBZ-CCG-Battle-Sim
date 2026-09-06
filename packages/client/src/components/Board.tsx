@@ -204,7 +204,15 @@ export function Board({
           <button disabled={over || !myTurn || !!prompt} onClick={onAdvanceStep}>
             Advance step
           </button>
-          <button disabled={over || !myTurn || state.step !== 'powerUp' || !!prompt} onClick={onPowerUp}>
+          {/* Entering the Power-Up Step now claims the once-per-turn flag, so
+              this button is the manual fallback for the case where something
+              cleared it — not a second free power-up. Without the flag check it
+              was live in exactly the step where it would be refused, and
+              clicking it was how an MP climbed at twice its PUR. */}
+          <button
+            disabled={over || !myTurn || state.step !== 'powerUp' || !!prompt || !!state.poweredUpThisTurn}
+            onClick={onPowerUp}
+          >
             Power up
           </button>
           <button

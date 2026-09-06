@@ -24,6 +24,14 @@ import {
 import { firstAttackAbility } from './abilities.js';
 import { checkVictory } from './victory.js';
 import { maxAllyLevel, playCard } from './noncombat.js';
+import {
+  openDeclarePrompt,
+  openDiscardPrompt,
+  openRejuvenationPrompt,
+  resolveDeclareCombat,
+  resolveDiscard,
+  resolveRejuvenation,
+} from './turnsteps.js';
 
 const clone = <T>(x: T): T => structuredClone(x);
 /** Zones whose contents redaction hides from the other player. */
@@ -69,6 +77,44 @@ function inferActor(state: GameState, action: Action): number {
   }
 }
 
+/**
+ * What entering a step does on its own, with no action from anyone. Factored
+ * out because two paths reach it: advancing normally, and answering the
+ * Declare Step's prompt, which moves the turn on immediately rather than
+ * making the attacker press "next step" a second time to act on their own
+ * decision.
+ */
+function applyStepEntry(state: GameState, db: CardDb, events: GameEvent[]): void {
+  switch (state.step) {
+    case 'draw':
+      draw(state, state.activePlayerIdx, DRAW_PER_TURN);
+      break;
+    case 'powerUp':
+      // Entering the step powers you up automatically. Claim the once-per-turn
+      // flag here too: only the manual `powerUp` action used to set it, so the
+      // guard on that action let one MORE full power-up through, and the client
+      // renders exactly that button in exactly this step. Every MP was climbing
+      // 2x its PUR and every Ally 2 stages instead of 1, every turn.
+      powerUp(state, state.activePlayerIdx, db, events);
+      state.poweredUpThisTurn = true;
+      break;
+    case 'declare':
+      openDeclarePrompt(state);
+      break;
+    case 'combat':
+      beginCombat(state, db, events);
+      break;
+    case 'discard':
+      openDiscardPrompt(state, state.activePlayerIdx, db);
+      break;
+    case 'rejuvenation':
+      openRejuvenationPrompt(state);
+      break;
+    default:
+      break;
+  }
+}
+
 const fail = (prev: GameState, error: string): ReduceResult => ({ state: prev, events: [], error });
 type ReduceResult = { state: GameState; events: GameEvent[]; error?: string };
 
@@ -93,20 +139,15 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
         err = 'finish the Combat Step first — both players must pass';
         break;
       }
-      advanceStep(state, events);
-      if (state.step === 'draw') draw(state, state.activePlayerIdx, DRAW_PER_TURN);
-      // Claim the once-per-turn flag here too. Entering the step powers you up
-      // automatically, but only the manual `powerUp` action was setting the
-      // flag — so the guard below let one MORE full power-up through, and the
-      // client renders exactly that button in exactly this step. Every MP was
-      // climbing 2x its PUR and every Ally 2 stages instead of 1, every turn,
-      // which put every personality in the game at the wrong power stage and
-      // so read the wrong row out of the PAT for every attack.
-      else if (state.step === 'powerUp') {
-        powerUp(state, state.activePlayerIdx, db, events);
-        state.poweredUpThisTurn = true;
+      // A step cannot be walked past while someone owes an answer — otherwise
+      // the Discard and Rejuvenation prompts are advisory and the attacker can
+      // simply step over their own hand limit.
+      if (state.pendingPrompt) {
+        err = 'answer the pending prompt first';
+        break;
       }
-      else if (state.step === 'combat') beginCombat(state, db, events);
+      advanceStep(state, events);
+      applyStepEntry(state, db, events);
       break;
     }
     case 'drawCards':
@@ -240,6 +281,16 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
     case 'takeControlOfCombat':
       err = takeControlOfCombat(state, action.personalityUid, ctx, events);
       break;
+    case 'declareCombat':
+      err = resolveDeclareCombat(state, action.declare, ctx);
+      // The decision IS the step's work, so acting on it here saves the
+      // attacker pressing "next step" to enact their own answer. advanceStep
+      // routes a declined Combat straight to the Discard Step.
+      if (!err) {
+        advanceStep(state, events);
+        applyStepEntry(state, db, events);
+      }
+      break;
     case 'pass':
       err = passPhase(state, ctx, events);
       break;
@@ -271,6 +322,20 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       } else if (type === 'controlOfCombat') {
         const uid = typeof choice === 'string' ? choice : (choice as { uid?: string | null })?.uid ?? null;
         err = resolveControlOfCombat(state, uid, ctx, events);
+      } else if (type === 'declareCombat') {
+        const declare = (choice as unknown) === true || (typeof choice === 'object' && choice !== null && (choice as { declare?: boolean }).declare === true);
+        err = resolveDeclareCombat(state, declare, ctx);
+        if (!err) {
+          advanceStep(state, events);
+          applyStepEntry(state, db, events);
+        }
+      } else if (type === 'discard') {
+        // null / no choice keeps nothing, which the CRD allows outright.
+        const uid = typeof choice === 'string' ? choice : (choice as { uid?: string | null })?.uid ?? null;
+        err = resolveDiscard(state, uid, ctx, db);
+      } else if (type === 'rejuvenate') {
+        const take = (choice as unknown) === true || (typeof choice === 'object' && choice !== null && (choice as { take?: boolean }).take === true);
+        err = resolveRejuvenation(state, take, ctx);
       } else {
         err = `unhandled prompt '${type}'`;
       }

@@ -14,6 +14,10 @@ export interface PromptChoice {
   takeDamage?: boolean;
   uid?: string | null;
   toUid?: string | null;
+  /** Declare Step: enter Combat this turn? */
+  declare?: boolean;
+  /** Rejuvenation Step: take the top discard card back? */
+  take?: boolean;
 }
 
 export interface PromptPanelProps {
@@ -106,7 +110,39 @@ export function PromptPanel({ prompt, seat, canDefendWith, onAnswer }: PromptPan
           </>
         )}
 
-        {!['defend', 'redirect', 'capture', 'endurance', 'controlOfCombat'].includes(prompt.type) && (
+        {prompt.type === 'declareCombat' && (
+          <>
+            <button onClick={() => onAnswer({ declare: true })}>Declare Combat</button>
+            <button className="ghost" onClick={() => onAnswer({ declare: false })}>
+              Skip Combat
+            </button>
+            <span className="muted">Skipping earns your top discard card back in the Rejuvenation Step.</span>
+          </>
+        )}
+
+        {prompt.type === 'discard' && (
+          <>
+            {options(prompt).map((o) => (
+              <button key={o.uid} onClick={() => onAnswer({ uid: o.uid })}>
+                Keep {o.name}
+              </button>
+            ))}
+            <button className="ghost" onClick={() => onAnswer({ uid: null })}>
+              Discard all
+            </button>
+          </>
+        )}
+
+        {prompt.type === 'rejuvenate' && (
+          <>
+            <button onClick={() => onAnswer({ take: true })}>Take the card back</button>
+            <button className="ghost" onClick={() => onAnswer({ take: false })}>
+              Leave it
+            </button>
+          </>
+        )}
+
+        {!['defend', 'redirect', 'capture', 'endurance', 'controlOfCombat', 'declareCombat', 'discard', 'rejuvenate'].includes(prompt.type) && (
           <span className="muted">
             No UI for prompt type “{prompt.type}” yet — resolve it manually.
           </span>

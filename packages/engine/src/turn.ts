@@ -53,12 +53,21 @@ export function advanceStep(state: GameState, events: GameEvent[]): void {
     delete state.combat;
     delete state.skipCombatThisTurn;
     delete state.poweredUpThisTurn;
+    delete state.declaredCombat;
     for (const p of state.players) releaseControlIfMpRecovered(state, p.idx);
   }
-  // A Location/Battleground played this turn costs the Combat Step (~L713).
-  if (next === 'combat' && state.skipCombatThisTurn) {
+  // Two ways to miss the Combat Step: a Location/Battleground played this turn
+  // costs it (~L713), or the attacker simply declined it in the Declare Step
+  // (~L233 "If you choose not to declare Combat skip the Combat Step and go to
+  // the Discard Step"). Only the first was ever wired up, so declining was not
+  // a thing a player could do.
+  if (next === 'combat' && (state.skipCombatThisTurn || state.declaredCombat === false)) {
     state.step = 'discard';
-    state.log.push('Combat Step skipped — a Location or Battleground was played this turn.');
+    state.log.push(
+      state.skipCombatThisTurn
+        ? 'Combat Step skipped — a Location or Battleground was played this turn.'
+        : `${state.players[state.activePlayerIdx]!.name} declines Combat.`,
+    );
     events.push({ type: 'stepChanged', step: 'discard', turnNumber: state.turnNumber, activePlayerIdx: state.activePlayerIdx });
     return;
   }
