@@ -69,6 +69,21 @@ const db = new CardDb([
 let uid = 0;
 const inst = (cardId: string): CardInstance => ({ uid: `u${uid++}`, cardId, faceDown: false });
 
+/**
+ * Put a card that can attack into a player's hand and return its uid.
+ *
+ * An attack has to come from somewhere — CRD ~L286 lists what an Attack Phase
+ * may be spent on and every attacking option names a source. These tests are
+ * about what happens AFTER an attack is declared, so this supplies the source
+ * and gets out of the way.
+ */
+function armAttack(s: GameState, playerIdx: number): string {
+  const card = inst('filler');
+  s.players[playerIdx]!.zones.hand.push(card);
+  return card.uid;
+}
+
+
 function combatState(defenderHand: CardInstance[], defenderInPlay: CardInstance[] = []): GameState {
   const player = (idx: number): GameState['players'][number] => ({
     idx,
@@ -116,7 +131,7 @@ function combatState(defenderHand: CardInstance[], defenderInPlay: CardInstance[
 test('a pure attack card cannot be used to defend', () => {
   const card = inst('pure-attack');
   const s = combatState([card]);
-  declareAttack(s, 'energy', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'energy', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   const err = resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []);
   assert.match(err ?? '', /is an attack, not a defence/);
   assert.equal(s.combat!.currentAttack!.stopped, false);
@@ -125,7 +140,7 @@ test('a pure attack card cannot be used to defend', () => {
 test('a real defence card still works', () => {
   const card = inst('real-block');
   const s = combatState([card]);
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []), undefined);
 });
 
@@ -134,7 +149,7 @@ test('a card the parser could not read at all is still allowed, and is spent', (
   // card is what keeps it honest.
   const card = inst('unreadable');
   const s = combatState([card]);
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []), undefined);
   assert.equal(s.players[1]!.zones.discard.filter((x) => x.uid === card.uid).length, 1);
 });
@@ -145,7 +160,7 @@ test('a Non-Combat card used from play is discarded', () => {
   // "Stays face up until used, then discarded" (CRD ~L627).
   const card = inst('noncombat-block');
   const s = combatState([], [card]);
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []), undefined);
   const z = s.players[1]!.zones;
   assert.equal(z.inPlay.length, 0, 'it left the table');
@@ -155,14 +170,14 @@ test('a Non-Combat card used from play is discarded', () => {
 test('a Drill stays on the table but only answers once per combat', () => {
   const card = inst('drill');
   const s = combatState([], [card]);
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []), undefined);
   assert.equal(s.players[1]!.zones.inPlay.length, 1, 'a permanent stays');
 
   // Same combat, second attack: it cannot answer again.
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 1 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 1), { actingPlayerIdx: 1 }, db, []);
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 0 }, db, []);
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   const err = resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []);
   assert.match(err ?? '', /already been used this Combat/);
 });

@@ -46,6 +46,21 @@ const db = new CardDb([filler, mpCard]);
 let uid = 0;
 const inst = (): CardInstance => ({ uid: `u${uid++}`, cardId: 'filler', faceDown: false });
 
+/**
+ * Put a card that can attack into a player's hand and return its uid.
+ *
+ * An attack has to come from somewhere — CRD ~L286 lists what an Attack Phase
+ * may be spent on and every attacking option names a source. These tests are
+ * about what happens AFTER an attack is declared, so this supplies the source
+ * and gets out of the way.
+ */
+function armAttack(s: GameState, playerIdx: number): string {
+  const card = inst();
+  s.players[playerIdx]!.zones.hand.push(card);
+  return card.uid;
+}
+
+
 function stateAt(step: GameState['step']): GameState {
   const player = (idx: number): GameState['players'][number] => ({
     idx,
@@ -105,7 +120,7 @@ test('the attacker cannot advance out of an active Combat Step', () => {
 test('an attack in progress cannot be abandoned by advancing', () => {
   const s = stateAt('combat');
   beginCombat(s, db, []);
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   const r = reduce(s, { type: 'advanceStep' }, db, 0);
   assert.ok(r.error, 'refused');
   assert.ok(r.state.combat?.currentAttack, 'the attack still stands');

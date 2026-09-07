@@ -75,6 +75,21 @@ const db = new CardDb([
 let uid = 0;
 const inst = (cardId: string): CardInstance => ({ uid: `u${uid++}`, cardId, faceDown: false });
 
+/**
+ * Put a card that can attack into a player's hand and return its uid.
+ *
+ * An attack has to come from somewhere — CRD ~L286 lists what an Attack Phase
+ * may be spent on and every attacking option names a source. These tests are
+ * about what happens AFTER an attack is declared, so this supplies the source
+ * and gets out of the way.
+ */
+function armAttack(s: GameState, playerIdx: number): string {
+  const card = inst('filler');
+  s.players[playerIdx]!.zones.hand.push(card);
+  return card.uid;
+}
+
+
 function combatState(opts: { defenderHand?: CardInstance[]; defenderInPlay?: CardInstance[]; defenderStage?: number; ally?: boolean } = {}): GameState {
   const player = (idx: number, hand: CardInstance[], inPlay: CardInstance[], stageIndex: number): GameState['players'][number] => ({
     idx,
@@ -131,7 +146,7 @@ test('the same attack cannot be resolved twice', () => {
   // Defender at 0 stages, so all damage overflows into life cards and the
   // attack finishes on the life-card path.
   const s = combatState({ defenderStage: 0 });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []), undefined);
   const afterFirst = s.players[1]!.zones.discard.length;
 
@@ -143,7 +158,7 @@ test('the same attack cannot be resolved twice', () => {
 test('an attack whose damage already landed cannot be retroactively stopped', () => {
   const block = inst('block');
   const s = combatState({ defenderStage: 0, defenderHand: [block] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
   const dealt = s.players[1]!.zones.discard.length;
 
@@ -160,7 +175,7 @@ test('a card already in play may defend (CRD ~L305)', () => {
   // touches hand; a hand-only check deleted the option entirely.
   const shield = inst('shield');
   const s = combatState({ defenderInPlay: [shield] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(resolveDefense(s, { cardUid: shield.uid }, { actingPlayerIdx: 1 }, db, []), undefined);
   // A successful stop ends the attack, so currentAttack is already cleared.
   assert.equal(s.combat!.currentAttack, undefined);
@@ -170,7 +185,7 @@ test('a card already in play may defend (CRD ~L305)', () => {
 test('a card that defended from play stays in play', () => {
   const shield = inst('shield');
   const s = combatState({ defenderInPlay: [shield] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { cardUid: shield.uid }, { actingPlayerIdx: 1 }, db, []);
   const z = s.players[1]!.zones;
   assert.equal(z.inPlay.filter((c) => c.uid === shield.uid).length, 1, 'a permanent is not spent');
@@ -182,7 +197,7 @@ test('a card whose type line could not be read is still playable', () => {
   // 59 real cards out of the game.
   const odd = inst('mystery');
   const s = combatState({ defenderHand: [odd] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(resolveDefense(s, { cardUid: odd.uid }, { actingPlayerIdx: 1 }, db, []), undefined);
 });
 
@@ -191,7 +206,7 @@ test('a card whose type line could not be read is still playable', () => {
 test('a stop deferred to a later phase does not stop the current attack', () => {
   const later = inst('later');
   const s = combatState({ defenderHand: [later] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   const err = resolveDefense(s, { cardUid: later.uid }, { actingPlayerIdx: 1 }, db, []);
   assert.match(err ?? '', /does not stop physical attacks right now/);
   assert.ok(s.players[1]!.zones.hand.some((c) => c.uid === later.uid), 'and is not spent for it');
@@ -200,7 +215,7 @@ test('a stop deferred to a later phase does not stop the current attack', () => 
 test('"stays on the table" keeps the card available instead of discarding it', () => {
   const twice = inst('twice');
   const s = combatState({ defenderHand: [twice] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { cardUid: twice.uid }, { actingPlayerIdx: 1 }, db, []);
   const z = s.players[1]!.zones;
   assert.equal(z.discard.filter((c) => c.uid === twice.uid).length, 0, 'not thrown away');
@@ -213,7 +228,7 @@ test('damage cannot be redirected to a personality that was never offered', () =
   // Naming any other uid found no personality and the whole attack evaporated:
   // no stages, no life cards, no if-successful chain, and no card spent.
   const s = combatState({ ally: true, defenderStage: 4 });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
   assert.equal(s.pendingPrompt?.type, 'redirect', 'the ally makes redirect available');
 
@@ -224,7 +239,7 @@ test('damage cannot be redirected to a personality that was never offered', () =
 
 test('a legal redirect still works', () => {
   const s = combatState({ ally: true, defenderStage: 4 });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
   assert.equal(redirectDamage(s, 'ally-1', { actingPlayerIdx: 1 }, db, []), undefined);
   assert.ok(s.players[1]!.allies[0]!.stageIndex < 3, 'the ally took the damage');

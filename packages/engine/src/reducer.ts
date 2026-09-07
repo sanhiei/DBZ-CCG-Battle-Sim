@@ -12,6 +12,7 @@ import {
   beginCombat,
   declareAttack,
   declareEmpower,
+  finalPhysicalAttack,
   passPhase,
   redirectDamage,
   resolveCapture,
@@ -272,6 +273,9 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
     case 'declareEmpower':
       err = declareEmpower(state, action.amount, ctx);
       break;
+    case 'finalPhysicalAttack':
+      err = finalPhysicalAttack(state, action.discardUid, ctx, db, events);
+      break;
     case 'defend':
       err = resolveDefense(state, { ...(action.cardUid ? { cardUid: action.cardUid } : {}), ...(action.takeDamage ? { takeDamage: action.takeDamage } : {}) }, ctx, db, events);
       break;
@@ -321,7 +325,7 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
         err = redirectDamage(state, toUid, ctx, db, events);
       } else if (type === 'controlOfCombat') {
         const uid = typeof choice === 'string' ? choice : (choice as { uid?: string | null })?.uid ?? null;
-        err = resolveControlOfCombat(state, uid, ctx, events);
+        err = resolveControlOfCombat(state, uid, ctx, db, events);
       } else if (type === 'declareCombat') {
         const declare = (choice as unknown) === true || (typeof choice === 'object' && choice !== null && (choice as { declare?: boolean }).declare === true);
         err = resolveDeclareCombat(state, declare, ctx);

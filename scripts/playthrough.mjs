@@ -81,6 +81,10 @@ for (let i = 0; i < TURNS * 60 && state.phase === 'playing' && state.turnNumber 
   if (signature === lastSignature) {
     if (++stalls > 40) {
       console.error(`\nWEDGED at ${signature}`);
+      console.error('prompt: ' + JSON.stringify(state.pendingPrompt));
+      console.error('attack: ' + JSON.stringify(state.combat?.currentAttack));
+      console.error('answer sent: ' + JSON.stringify(state.pendingPrompt ? answerFor(state.pendingPrompt) : null));
+      console.error('last error: ' + JSON.stringify(Object.keys(counts.errors).slice(-4)));
       console.error('last log lines:\n  ' + state.log.slice(-12).join('\n  '));
       process.exit(1);
     }
@@ -95,9 +99,22 @@ for (let i = 0; i < TURNS * 60 && state.phase === 'playing' && state.turnNumber 
     counts.prompts[prompt.type] = (counts.prompts[prompt.type] ?? 0) + 1;
     result = reduce(state, { type: 'answerPrompt', promptId: prompt.id, choice: answerFor(prompt) }, db, prompt.playerIdx);
   } else if (state.combat && state.combat.phasePlayerIdx != null) {
-    // In Combat with no question pending: attack if it is our phase, else pass.
+    // In Combat with no question pending. An attack needs a source, so: attack
+    // with a card that can, else spend a card on a Final Physical Attack, else
+    // pass. That is the CRD's list of what an Attack Phase can be spent on.
     const who = state.combat.phasePlayerIdx;
-    result = reduce(state, { type: 'declareAttack', attackType: 'physical' }, db, who);
+    const hand = state.players[who].zones.hand;
+    const weapon = hand.find((c) => {
+      const t = db.type(c.cardId);
+      return t === 'Unknown' || /combat/i.test(t);
+    });
+    if (weapon) {
+      result = reduce(state, { type: 'declareAttack', attackType: 'physical', cardUid: weapon.uid }, db, who);
+    } else if (hand.length > 0 && !state.combat.finalUsed.includes(who)) {
+      result = reduce(state, { type: 'finalPhysicalAttack', discardUid: hand[0].uid }, db, who);
+    } else {
+      result = { state, error: 'nothing to attack with' };
+    }
     if (result.error) result = reduce(state, { type: 'pass' }, db, who);
   } else {
     counts.steps += 1;

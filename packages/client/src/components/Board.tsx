@@ -30,6 +30,7 @@ export interface BoardProps {
   onPowerUp(): void;
   onPass(): void;
   onAttack(attackType: AttackType, cardUid?: string): void;
+  onFinalPhysicalAttack(discardUid: string): void;
   onAnswer(promptId: string, choice: PromptChoice | string | null): void;
   onConcede(): void;
   onSetStage(personalityUid: string, stageIndex: number): void;
@@ -113,6 +114,7 @@ export function Board({
   onPowerUp,
   onPass,
   onAttack,
+  onFinalPhysicalAttack,
   onAnswer,
   onConcede,
   onSetStage,
@@ -122,6 +124,8 @@ export function Board({
 }: BoardProps) {
   const [manualOpen, setManualOpen] = useState(false);
   const [inspecting, setInspecting] = useState<string | null>(null);
+  /** Waiting for the player to pick the card that pays for a Final Physical Attack. */
+  const [armingFinal, setArmingFinal] = useState(false);
   // Spectators have no seat but still need both sides laid out.
   const bottomIdx = seat ?? 1;
   const me = state.players[bottomIdx];
@@ -140,15 +144,20 @@ export function Board({
     ? 'idle'
     : awaitingMyDefence
     ? 'defend'
-    : myAttackPhase
-      ? 'attack'
-      : myNonCombatStep
-        ? 'play'
-        : 'idle';
+    : myAttackPhase && armingFinal
+      ? 'final'
+      : myAttackPhase
+        ? 'attack'
+        : myNonCombatStep
+          ? 'play'
+          : 'idle';
 
   const useCard = (cardUid: string) => {
     if (handMode === 'defend' && prompt) onAnswer(prompt.id, { cardUid });
-    else if (handMode === 'attack') onAttack('physical', cardUid);
+    else if (handMode === 'final') {
+      setArmingFinal(false);
+      onFinalPhysicalAttack(cardUid);
+    } else if (handMode === 'attack') onAttack('physical', cardUid);
     else if (handMode === 'play') onPlayCard(cardUid);
     // Idle: open the card so it can be read and resolved by hand.
     else setInspecting(cardUid);
@@ -188,12 +197,28 @@ export function Board({
           </div>
         )}
 
+        {/* An attack comes from a card (CRD ~L286). The two bare buttons that
+            used to live here declared an attack with no source and no cost, so
+            nothing ever ran out and a Combat Step only ended when both players
+            volunteered to stop. */}
         {myAttackPhase && !prompt && (
           <div className="attackbar">
             <strong>Your Attack Phase</strong>
-            <button onClick={() => onAttack('physical')}>Physical attack</button>
-            <button onClick={() => onAttack('energy')}>Energy attack</button>
-            <span className="muted">or click a Combat card in hand</span>
+            {armingFinal ? (
+              <>
+                <span className="muted">Click any card in hand to discard it and attack</span>
+                <button className="ghost" onClick={() => setArmingFinal(false)}>
+                  Cancel
+                </button>
+              </>
+            ) : (
+              <>
+                <span className="muted">Click a Combat card in hand to attack with it</span>
+                <button className="ghost" onClick={() => setArmingFinal(true)} disabled={(me?.zones.hand.length ?? 0) === 0}>
+                  Final Physical Attack
+                </button>
+              </>
+            )}
           </div>
         )}
 

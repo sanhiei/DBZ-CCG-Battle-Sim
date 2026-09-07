@@ -54,6 +54,21 @@ const db = new CardDb([
 let uid = 0;
 const inst = (cardId: string): CardInstance => ({ uid: `u${uid++}`, cardId, faceDown: false });
 
+/**
+ * Put a card that can attack into a player's hand and return its uid.
+ *
+ * An attack has to come from somewhere — CRD ~L286 lists what an Attack Phase
+ * may be spent on and every attacking option names a source. These tests are
+ * about what happens AFTER an attack is declared, so this supplies the source
+ * and gets out of the way.
+ */
+function armAttack(s: GameState, playerIdx: number): string {
+  const card = inst('filler');
+  s.players[playerIdx]!.zones.hand.push(card);
+  return card.uid;
+}
+
+
 const ally = (): PersonalityInPlay => ({
   uid: 'ally-1',
   personalityName: 'Krillin',
@@ -113,7 +128,7 @@ function combatState(opts: { defenderMpStage?: number; withAlly?: boolean; inPla
 
 test('the defender is asked who is in Control when an Ally could take over', () => {
   const s = combatState({ withAlly: true, defenderMpStage: 1 });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(s.pendingPrompt?.type, 'controlOfCombat');
   assert.equal(s.combat!.currentAttack!.resolutionStep, 4);
   assert.equal((s.pendingPrompt!.options as Array<{ uid: string }>).length, 2, 'the MP and the Ally');
@@ -121,20 +136,20 @@ test('the defender is asked who is in Control when an Ally could take over', () 
 
 test('no Control question when the MP is healthy — an Ally may not take over', () => {
   const s = combatState({ withAlly: true, defenderMpStage: 4 });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(s.pendingPrompt?.type, 'defend', 'straight to the defence');
 });
 
 test('no Control question with no Ally to offer', () => {
   const s = combatState({ defenderMpStage: 0 });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(s.pendingPrompt?.type, 'defend');
 });
 
 test('naming the Ally makes it the one that takes the damage', () => {
   const s = combatState({ withAlly: true, defenderMpStage: 1 });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
-  assert.equal(resolveControlOfCombat(s, 'ally-1', { actingPlayerIdx: 1 }, []), undefined);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
+  assert.equal(resolveControlOfCombat(s, 'ally-1', { actingPlayerIdx: 1 }, db, []), undefined);
 
   assert.equal(s.pendingPrompt?.type, 'defend', 'the defence window opens next');
   assert.equal(s.combat!.currentAttack!.resolutionStep, 5);
@@ -154,8 +169,8 @@ test('naming the Ally makes it the one that takes the damage', () => {
 
 test('only the defender may answer the Control question', () => {
   const s = combatState({ withAlly: true, defenderMpStage: 1 });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
-  assert.match(resolveControlOfCombat(s, 'ally-1', { actingPlayerIdx: 0 }, []) ?? '', /only the defender/);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
+  assert.match(resolveControlOfCombat(s, 'ally-1', { actingPlayerIdx: 0 }, db, []) ?? '', /only the defender/);
 });
 
 /* ---------- step 7: Defense Shields ---------- */
@@ -163,7 +178,7 @@ test('only the defender may answer the Control question', () => {
 test('a Defense Shield in play stops an attack the defender did not stop', () => {
   const shield = inst('shield-any');
   const s = combatState({ inPlay: [shield] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   const before = s.players[1]!.mp.stageIndex;
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
 
@@ -174,7 +189,7 @@ test('a Defense Shield in play stops an attack the defender did not stop', () =>
 test('a shield only stops the attack type it names', () => {
   const shield = inst('shield-energy');
   const s = combatState({ inPlay: [shield] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   const before = s.players[1]!.mp.stageIndex;
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
   assert.ok(s.players[1]!.mp.stageIndex < before, 'an energy shield does not stop a physical attack');
@@ -183,15 +198,15 @@ test('a shield only stops the attack type it names', () => {
 test('a shield stops only the FIRST unstopped attack, then is spent', () => {
   const shield = inst('shield-any');
   const s = combatState({ inPlay: [shield] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
   assert.deepEqual(s.combat!.shieldsUsed, [shield.uid]);
 
   // Second attack this combat: the shield is used up.
   const before = s.players[1]!.mp.stageIndex;
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 1 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 1), { actingPlayerIdx: 1 }, db, []);
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 0 }, db, []);
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
   assert.ok(s.players[1]!.mp.stageIndex < before, 'the second attack gets through');
 });
@@ -199,7 +214,7 @@ test('a shield stops only the FIRST unstopped attack, then is spent', () => {
 test('"remove from the game after use" takes the shield out of play', () => {
   const shield = inst('shield-energy');
   const s = combatState({ inPlay: [shield] });
-  declareAttack(s, 'energy', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'energy', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
   const z = s.players[1]!.zones;
   assert.equal(z.inPlay.length, 0);

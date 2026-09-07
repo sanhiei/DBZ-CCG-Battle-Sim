@@ -95,12 +95,50 @@ function toCombat(s: GameState, limit = 12): GameState {
   return cur;
 }
 
+/**
+ * A card in `playerIdx`'s hand that is allowed to perform an attack.
+ *
+ * An attack needs a source (CRD ~L286). These tests draw real cards from a real
+ * deck, so rather than mint one, find one they were actually dealt.
+ */
+function attackCardInHand(s: GameState, playerIdx: number): string {
+  const hand = s.players[playerIdx]!.zones.hand;
+  const found = hand.find((c) => {
+    const t = db.type(c.cardId);
+    return t === 'Unknown' || /combat/i.test(t);
+  });
+  if (!found) throw new Error(`seat ${playerIdx} was dealt no card that can attack`);
+  return found.uid;
+}
+
+/**
+ * Deal `playerIdx` a real catalog card that performs an ENERGY attack.
+ *
+ * The card decides the attack, not the request: asking for 'energy' while
+ * holding up a physical attack card gets you a physical attack, which is what
+ * the deck happened to deal here. An energy attack needs a card that prints one.
+ */
+let plantedUid = 0;
+function giveEnergyAttackCard(s: GameState, playerIdx: number): string {
+  const card = cards.find((c) =>
+    (c.rules?.abilities ?? []).some(
+      (a) => a.trigger === 'attack' && a.effects.some((e) => e.kind === 'energyAttack'),
+    ),
+  );
+  if (!card) throw new Error('the catalog has no energy attack card');
+  const planted = { uid: `planted-${plantedUid++}`, cardId: card.id, faceDown: false };
+  s.players[playerIdx]!.zones.hand.push(planted);
+  return planted.uid;
+}
+
 console.log('energy attack (no PAT needed):');
 state = toCombat(state, 10);
 const defenderIdx = (state.activePlayerIdx + 1) % 2;
 const beforeLife = state.players[defenderIdx]!.zones.lifeDeck.length;
-r = reduce(state, { type: 'declareAttack', attackType: 'energy' }, db); state = r.state;
-r = reduce(state, { type: 'defend', takeDamage: true }, db); state = r.state;
+r = reduce(state, { type: 'declareAttack', attackType: 'energy', cardUid: giveEnergyAttackCard(state, state.activePlayerIdx) }, db);
+state = r.state;
+r = reduce(state, { type: 'defend', takeDamage: true }, db);
+state = r.state;
 const afterLife = state.players[defenderIdx]!.zones.lifeDeck.length;
 check('energy attack removed 4 life cards', beforeLife - afterLife === 4, `${beforeLife} -> ${afterLife}`);
 
@@ -119,7 +157,7 @@ const defCtl = controllerOf(g.players[defIdx]!);
 const expected = computeBaseDamage(attRating, defCtl.currentRating);
 const defStageBefore = defCtl.stageIndex;
 
-gg = reduce(g, { type: 'declareAttack', attackType: 'physical' }, db, atkIdx); g = gg.state;
+gg = reduce(g, { type: 'declareAttack', attackType: 'physical', cardUid: attackCardInHand(g, atkIdx) }, db, atkIdx); g = gg.state;
 check('physical attack prompts defender', g.pendingPrompt?.type === 'defend' && g.pendingPrompt.playerIdx === defIdx, gg.error ?? '');
 
 gg = reduce(g, { type: 'defend', takeDamage: true }, db, defIdx); g = gg.state;

@@ -10,7 +10,7 @@
 import type { CardInstance } from '@dbz/shared';
 import type { CardDb } from '@dbz/engine';
 
-export type HandMode = 'idle' | 'attack' | 'defend' | 'play';
+export type HandMode = 'idle' | 'attack' | 'defend' | 'play' | 'final';
 
 export interface HandProps {
   cards: CardInstance[];
@@ -47,6 +47,9 @@ export function Hand({ cards, db, mode, onUse }: HandProps) {
     // server is the authority on legality anyway.
     if (type === 'Unknown') return true;
     if (mode === 'play') return PLAY_TYPES.has(type);
+    // A Final Physical Attack is paid for with ANY card in hand (CRD ~L409),
+    // not with a card that could have attacked on its own.
+    if (mode === 'final') return true;
     return mode === 'attack' ? ATTACK_TYPES.has(type) : DEFEND_TYPES.has(type);
   };
 

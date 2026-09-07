@@ -49,6 +49,21 @@ const db = new CardDb([
 let uid = 0;
 const inst = (cardId: string): CardInstance => ({ uid: `u${uid++}`, cardId, faceDown: false });
 
+/**
+ * Put a card that can attack into a player's hand and return its uid.
+ *
+ * An attack has to come from somewhere — CRD ~L286 lists what an Attack Phase
+ * may be spent on and every attacking option names a source. These tests are
+ * about what happens AFTER an attack is declared, so this supplies the source
+ * and gets out of the way.
+ */
+function armAttack(s: GameState, playerIdx: number): string {
+  const card = inst('plain');
+  s.players[playerIdx]!.zones.hand.push(card);
+  return card.uid;
+}
+
+
 function combatState(defenderHand: CardInstance[]): GameState {
   const player = (idx: number, hand: CardInstance[]): GameState['players'][number] => ({
     idx, name: `P${idx}`, connected: true, alignment: 'Hero',
@@ -79,67 +94,67 @@ test('an ATTACK card that also locks out actually locks the defender out', () =>
     ],
     source: 'parsed' as const,
   };
-  assert.equal(declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, [], ability), undefined);
+  assert.equal(declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, [], ability), undefined);
   assert.equal(resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []), undefined);
 
   // Seat 1 (the defender) is now barred from physical attacks this combat.
   assert.match(
-    declareAttack(s, 'physical', undefined, { actingPlayerIdx: 1 }, db, []) ?? '',
+    declareAttack(s, 'physical', armAttack(s, 1), { actingPlayerIdx: 1 }, db, []) ?? '',
     /remainder of this Combat/,
   );
-  assert.equal(declareAttack(s, 'energy', undefined, { actingPlayerIdx: 1 }, db, []), undefined, 'energy is untouched');
+  assert.equal(declareAttack(s, 'energy', armAttack(s, 1), { actingPlayerIdx: 1 }, db, []), undefined, 'energy is untouched');
 });
 
 test('a combat-long energy stop blocks later energy attacks', () => {
   const card = inst('lock-energy');
   const s = combatState([card]);
   // Attacker (seat 0) attacks; defender answers with the lockout card.
-  assert.equal(declareAttack(s, 'energy', undefined, { actingPlayerIdx: 0 }, db, []), undefined);
+  assert.equal(declareAttack(s, 'energy', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []), undefined);
   assert.equal(resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []), undefined);
 
   // Back to the attacker's phase: energy is now barred, physical is not.
   s.combat!.phasePlayerIdx = 0;
-  const energyAgain = declareAttack(s, 'energy', undefined, { actingPlayerIdx: 0 }, db, []);
+  const energyAgain = declareAttack(s, 'energy', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.match(energyAgain ?? '', /energy attacks are stopped for the remainder/i);
 
-  assert.equal(declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []), undefined,
+  assert.equal(declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []), undefined,
     'a physical attack is unaffected by an energy lockout');
 });
 
 test('a combat-long "all attacks" stop blocks both kinds', () => {
   const card = inst('lock-all');
   const s = combatState([card]);
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []);
   s.combat!.phasePlayerIdx = 0;
-  assert.match(declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []) ?? '', /All attacks are stopped/i);
-  assert.match(declareAttack(s, 'energy', undefined, { actingPlayerIdx: 0 }, db, []) ?? '', /All attacks are stopped/i);
+  assert.match(declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []) ?? '', /All attacks are stopped/i);
+  assert.match(declareAttack(s, 'energy', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []) ?? '', /All attacks are stopped/i);
 });
 
 test('an ordinary defense card creates no lockout', () => {
   const card = inst('plain');
   const s = combatState([card]);
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []);
   s.combat!.phasePlayerIdx = 0;
   assert.equal(s.combat!.lockouts, undefined);
-  assert.equal(declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []), undefined);
+  assert.equal(declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []), undefined);
 });
 
 test('the lockout only binds the player it was played against', () => {
   const card = inst('lock-all');
   const s = combatState([card]);
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []);
   // The defender's own phase: they may still attack.
   assert.equal(s.combat!.phasePlayerIdx, 1);
-  assert.equal(declareAttack(s, 'physical', undefined, { actingPlayerIdx: 1 }, db, []), undefined);
+  assert.equal(declareAttack(s, 'physical', armAttack(s, 1), { actingPlayerIdx: 1 }, db, []), undefined);
 });
 
 test('lockouts do not survive into the next combat', () => {
   const card = inst('lock-all');
   const s = combatState([card]);
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []);
   assert.ok(s.combat!.lockouts?.length);
   // A fresh Combat Step rebuilds combat from scratch.

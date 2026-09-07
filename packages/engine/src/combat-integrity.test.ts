@@ -14,6 +14,7 @@ import { test } from 'node:test';
 import type { CardInstance, GameState } from '@dbz/shared';
 import { CardDb, type EngineCard } from './loader.js';
 import { beginCombat, declareAttack, declareEmpower, resolveDefense } from './combat.js';
+import { computeBaseDamage } from './pat.js';
 
 const LADDER = [0, 100, 200, 300, 400, 500];
 
@@ -103,6 +104,21 @@ const db = new CardDb([
 let uid = 0;
 const inst = (cardId: string): CardInstance => ({ uid: `u${uid++}`, cardId, faceDown: false });
 
+/**
+ * Put a card that can attack into a player's hand and return its uid.
+ *
+ * An attack has to come from somewhere — CRD ~L286 lists what an Attack Phase
+ * may be spent on and every attacking option names a source. These tests are
+ * about what happens AFTER an attack is declared, so this supplies the source
+ * and gets out of the way.
+ */
+function armAttack(s: GameState, playerIdx: number): string {
+  const card = inst('atk');
+  s.players[playerIdx]!.zones.hand.push(card);
+  return card.uid;
+}
+
+
 /** Attacker is seat 0, defender seat 1. `stageIndex` sets the DEFENDER's stages. */
 function combatState(opts: { attackerHand?: CardInstance[]; defenderHand?: CardInstance[]; defenderStage?: number; deck?: number } = {}): GameState {
   const player = (idx: number, hand: CardInstance[], stageIndex: number, deck: number): GameState['players'][number] => ({
@@ -143,7 +159,7 @@ function combatState(opts: { attackerHand?: CardInstance[]; defenderHand?: CardI
 
 test('a card id that does not exist cannot defend', () => {
   const s = combatState({ defenderHand: [inst('block-any')] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   const err = resolveDefense(s, { cardUid: 'no-such-card' }, { actingPlayerIdx: 1 }, db, []);
   assert.match(err ?? '', /not in your hand/);
   assert.equal(s.combat!.currentAttack!.stopped, false, 'the attack is not stopped');
@@ -152,7 +168,7 @@ test('a card id that does not exist cannot defend', () => {
 test('a card in the ATTACKER’s hand cannot defend', () => {
   const theirs = inst('block-any');
   const s = combatState({ attackerHand: [theirs], defenderHand: [] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   const err = resolveDefense(s, { cardUid: theirs.uid }, { actingPlayerIdx: 1 }, db, []);
   assert.match(err ?? '', /not in your hand/);
 });
@@ -160,7 +176,7 @@ test('a card in the ATTACKER’s hand cannot defend', () => {
 test('a Non-Combat card cannot defend', () => {
   const bean = inst('senzu');
   const s = combatState({ defenderHand: [bean] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   const err = resolveDefense(s, { cardUid: bean.uid }, { actingPlayerIdx: 1 }, db, []);
   assert.match(err ?? '', /cannot be used to defend/);
 });
@@ -168,7 +184,7 @@ test('a Non-Combat card cannot defend', () => {
 test('an energy-only block cannot stop a physical attack', () => {
   const card = inst('block-energy');
   const s = combatState({ defenderHand: [card] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   const err = resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []);
   assert.match(err ?? '', /does not stop physical/);
   assert.equal(s.combat!.currentAttack!.stopped, false);
@@ -179,7 +195,7 @@ test('a card whose text is not parsed yet is still allowed to defend', () => {
   // resolves as a stop and says in the log that it needs checking by hand.
   const card = inst('unparsed');
   const s = combatState({ defenderHand: [card] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []), undefined);
   assert.ok(s.log.some((l) => l.includes('verify by hand')));
 });
@@ -189,7 +205,7 @@ test('a card whose text is not parsed yet is still allowed to defend', () => {
 test('a defense card leaves hand and reaches the discard pile', () => {
   const card = inst('block-any');
   const s = combatState({ defenderHand: [card] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []), undefined);
   const z = s.players[1]!.zones;
   // beginCombat deals the defender 3 cards, so check this card specifically.
@@ -203,7 +219,7 @@ test('a card already in the discard pile cannot be played from there', () => {
   const spent = inst('block-any');
   const s = combatState({ defenderHand: [] });
   s.players[1]!.zones.discard.push(spent);
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   const err = resolveDefense(s, { cardUid: spent.uid }, { actingPlayerIdx: 1 }, db, []);
   assert.match(err ?? '', /not in your hand/, 'the discard pile is not a second hand');
 });
@@ -211,7 +227,7 @@ test('a card already in the discard pile cannot be played from there', () => {
 test('"remove from the game after use" is honoured over discarding', () => {
   const card = inst('block-gone');
   const s = combatState({ defenderHand: [card] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []);
   const z = s.players[1]!.zones;
   assert.equal(z.removed.length, 1);
@@ -247,7 +263,7 @@ test("a defense card's secondary effects happen even though it stopped the attac
   const attackerAngerBefore = s.players[0]!.mp.anger;
   const defenderAngerBefore = s.players[1]!.mp.anger;
 
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.equal(resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []), undefined);
 
   assert.equal(s.players[1]!.mp.anger, defenderAngerBefore + 1, "the defender's anger rose");
@@ -257,12 +273,24 @@ test("a defense card's secondary effects happen even though it stopped the attac
 test('the card is still spent exactly once when it has riders', () => {
   const card = inst('rider');
   const s = combatState({ defenderHand: [card] });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []);
   const z = s.players[1]!.zones;
   assert.equal(z.discard.filter((c) => c.uid === card.uid).length, 1);
   assert.equal(z.hand.filter((c) => c.uid === card.uid).length, 0);
 });
+
+/**
+ * What the PAT says this fixture's attack does. Physical Base Damage is read at
+ * damage time now, not at declaration — step 9 of the battle sequence, after
+ * the defender has named who is in Control of Combat — so there is nothing to
+ * read off `currentAttack` the moment an attack is declared. Stating the
+ * expected number here is what these tests meant anyway; reading it back out of
+ * the engine only ever asserted that the engine agreed with itself.
+ *
+ * The fixture puts the attacker at stage 4 of LADDER.
+ */
+const patDamage = (defenderStage: number): number => computeBaseDamage(LADDER[4]!, LADDER[defenderStage]!);
 
 /* ---------- power stages that cannot be lost become life cards ---------- */
 
@@ -270,8 +298,8 @@ test('power-stage damage beyond the target’s stages converts to life cards', (
   // CRD ~L436: "when a personality is at 0 and is dealt power stages of damage,
   // those power stages are converted into life cards of damage".
   const s = combatState({ defenderStage: 1, deck: 20 });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
-  const dmg = s.combat!.currentAttack!.baseDamage ?? 0;
+  const dmg = patDamage(1);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.ok(dmg > 1, 'this fixture needs an attack bigger than the 1 stage available');
 
   const deckBefore = s.players[1]!.zones.lifeDeck.length;
@@ -284,8 +312,8 @@ test('power-stage damage beyond the target’s stages converts to life cards', (
 
 test('a personality at 0 power stages is not immune to physical damage', () => {
   const s = combatState({ defenderStage: 0, deck: 20 });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
-  const dmg = s.combat!.currentAttack!.baseDamage ?? 0;
+  const dmg = patDamage(0);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   const deckBefore = s.players[1]!.zones.lifeDeck.length;
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
   assert.equal(deckBefore - s.players[1]!.zones.lifeDeck.length, dmg, 'all of it converts');
@@ -297,7 +325,7 @@ test('Empower adds life cards to an energy attack', () => {
   // CRD ~L1102: "the attack will do +X life cards". Empower was dropped
   // entirely on life-card attacks, so declaring it bought nothing.
   const s = combatState({ defenderStage: 5, deck: 30 });
-  declareAttack(s, 'energy', undefined, { actingPlayerIdx: 0 }, db, []);
+  declareAttack(s, 'energy', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   declareEmpower(s, 3, { actingPlayerIdx: 0 });
   const deckBefore = s.players[1]!.zones.lifeDeck.length;
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
@@ -309,8 +337,8 @@ test('Empower does NOT inflate power-stage damage', () => {
   // It was summed into the power-stage total, turning life cards into stages —
   // a different resource entirely.
   const s = combatState({ defenderStage: 5, deck: 30 });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
-  const base = s.combat!.currentAttack!.baseDamage ?? 0;
+  const base = patDamage(5);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   declareEmpower(s, 3, { actingPlayerIdx: 0 });
   const deckBefore = s.players[1]!.zones.lifeDeck.length;
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);
@@ -321,8 +349,8 @@ test('Empower does NOT inflate power-stage damage', () => {
 
 test('no conversion happens when the target can absorb the damage', () => {
   const s = combatState({ defenderStage: 5, deck: 20 });
-  declareAttack(s, 'physical', undefined, { actingPlayerIdx: 0 }, db, []);
-  const dmg = s.combat!.currentAttack!.baseDamage ?? 0;
+  const dmg = patDamage(5);
+  declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   assert.ok(dmg <= 5, 'fixture assumption: the target can take it in stages');
   const deckBefore = s.players[1]!.zones.lifeDeck.length;
   resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []);

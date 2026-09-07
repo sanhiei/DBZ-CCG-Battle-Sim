@@ -26,6 +26,7 @@ export type Action =
   | { type: 'captureDragonBall'; ballUid: string }
   | { type: 'useEndurance'; cardUid?: string }
   | { type: 'declareCombat'; declare: boolean }
+  | { type: 'finalPhysicalAttack'; discardUid: string }
   | { type: 'pass' }
   | { type: 'answerPrompt'; promptId: string; choice: unknown }
   | { type: 'concede'; playerIdx: number }

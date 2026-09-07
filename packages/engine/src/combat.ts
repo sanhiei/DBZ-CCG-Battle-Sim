@@ -37,7 +37,7 @@ import type {
 } from '@dbz/shared';
 import type { CardDb } from './loader.js';
 import { computeBaseDamage } from './pat.js';
-import { advanceStep, draw, MP_DOWN_STAGES, releaseControlIfMpRecovered, syncRating } from './turn.js';
+import { advanceStep, draw, findPersonality, MP_DOWN_STAGES, releaseControlIfMpRecovered, syncRating } from './turn.js';
 import { applyIfSuccessful, applyOnPlay, attackKindOf, setupAttackAbility } from './abilities.js';
 import {
   canUseEndurance,
@@ -225,16 +225,38 @@ export function declareAttack(
   if (c.finalUsed.includes(ctx.actingPlayerIdx)) return 'you must pass after a Final Physical Attack';
   const locked = lockoutAgainst(c, ctx.actingPlayerIdx, attackType);
   if (locked) return `${locked === 'any' ? 'All attacks' : `${locked} attacks`} are stopped for the remainder of this Combat`;
-  if (cardUid) {
-    const bad = combatCardError(state, ctx.actingPlayerIdx, cardUid, db, 'attack');
-    if (bad) return bad;
+  // An attack comes FROM something. CRD ~L286-291 lists everything an Attack
+  // Phase may be spent on, and every attacking option names a source: play a
+  // card from hand that can attack, use a card already in play that can, use a
+  // Personality Power, or perform a Final Physical Attack (which pays by
+  // discarding a card). "Attack with nothing" is not on the list.
+  //
+  // Without this an attack cost nothing and nothing ran out, so a Combat Step
+  // only ended when both players volunteered to stop. A scripted playthrough
+  // declared ~50 free attacks in one Combat Step and emptied a 59-card Life
+  // Deck on turn 2 — every game ended by Survival before the second turn.
+  if (!cardUid) {
+    return 'an attack needs a card — play one that can attack, or perform a Final Physical Attack';
   }
+  const bad = combatCardError(state, ctx.actingPlayerIdx, cardUid, db, 'attack');
+  if (bad) return bad;
 
   const attackerIdx = c.phasePlayerIdx;
   const defenderIdx = other(state, attackerIdx);
   const attCtl = controllerOf(state.players[attackerIdx]!);
   const defCtl = controllerOf(state.players[defenderIdx]!);
   const kind: AttackType = (ability && attackKindOf(ability)) ?? attackType;
+
+  // A cost is compulsory (CRD ~L806), so an attack you cannot pay for is one
+  // you may not perform. The cost was being taken with loseStages, which caps
+  // at the bottom of the ladder and returns the unpayable remainder — and the
+  // remainder was dropped on the floor, so a personality sitting at 0 power
+  // stages performed energy attacks free, forever. "Energy attacks that don't
+  // have their cost listed always cost 2 power stages" (~L452).
+  const stageCost = kind === 'energy' ? ability?.cost?.powerStages ?? ENERGY_STAGE_COST : ability?.cost?.powerStages ?? 0;
+  if (stageCost > attCtl.stageIndex) {
+    return `${attCtl.personalityName} cannot pay the ${stageCost} power stage cost (only ${attCtl.stageIndex} available)`;
+  }
 
   c.consecutivePasses = 0;
   const attack = {
@@ -252,17 +274,10 @@ export function declareAttack(
   // Ability runs its secondary effects (anger) and records damage modifiers.
   if (ability) setupAttackAbility(state, ability, attackerIdx, defenderIdx, attack, db, events);
 
-  // Pay the energy cost (ability may override; default 2 power stages).
-  if (kind === 'energy') {
-    loseStages(attCtl, ability?.cost?.powerStages ?? ENERGY_STAGE_COST, db, events);
-  } else if (ability?.cost?.powerStages) {
-    loseStages(attCtl, ability.cost.powerStages, db, events);
-  }
+  // Pay the cost checked above. It is affordable by construction now, so the
+  // remainder loseStages returns is necessarily 0.
+  if (stageCost > 0) loseStages(attCtl, stageCost, db, events);
 
-  // Physical base = PAT unless the ability set an explicit fixed base.
-  if (kind === 'physical' && attack.baseDamage === undefined && attack.damageLifeCards === undefined) {
-    attack.baseDamage = computeBaseDamage(attCtl.currentRating, defCtl.currentRating);
-  }
 
   c.currentAttack = attack;
   events.push({ type: 'attackDeclared', attackType: kind });
@@ -272,7 +287,75 @@ export function declareAttack(
   // Control of Combat until this attack is resolved" (CRD ~L325). Only ask
   // when there is a real choice to make.
   if (openControlWindow(state, attack, db)) return undefined;
-  openDefenceWindow(state, attack);
+  openDefenceWindow(state, attack, db, events);
+  return undefined;
+}
+
+/**
+ * Final Physical Attack (CRD ~L408) — "a last ditch desperation move".
+ *
+ * The state and both of its restrictions were already wired up: `finalUsed` was
+ * initialised, checked before declaring an attack and checked before defending.
+ * Nothing ever wrote to it, so the move could not be performed — and the
+ * cardless attack that `declareAttack` used to allow was standing in for it,
+ * without the cost or either restriction.
+ *
+ * Discard any card from hand to pay, then perform a physical attack for PAT
+ * damage. Afterwards you must pass every remaining Attack Phase and you cannot
+ * defend. Once per Combat Step each.
+ */
+export function finalPhysicalAttack(
+  state: GameState,
+  discardUid: string,
+  ctx: CombatCtx,
+  db: CardDb,
+  events: GameEvent[],
+): string | undefined {
+  const c = state.combat;
+  if (!c) return 'not in combat';
+  if (state.pendingPrompt) return 'resolve the current prompt first';
+  if (c.currentAttack) return 'an attack is already in progress';
+  if (ctx.actingPlayerIdx !== c.phasePlayerIdx) return 'not your Attack Phase';
+  if (c.finalUsed.includes(ctx.actingPlayerIdx)) {
+    return 'you have already performed a Final Physical Attack this Combat';
+  }
+  const locked = lockoutAgainst(c, ctx.actingPlayerIdx, 'physical');
+  if (locked) return `${locked === 'any' ? 'All attacks' : `${locked} attacks`} are stopped for the remainder of this Combat`;
+
+  const attackerIdx = c.phasePlayerIdx;
+  const player = state.players[attackerIdx]!;
+  const at = player.zones.hand.findIndex((card: CardInstance) => card.uid === discardUid);
+  if (at === -1) return 'discard a card from your hand to pay for a Final Physical Attack';
+
+  const defenderIdx = other(state, attackerIdx);
+  const attCtl = controllerOf(player);
+  const defCtl = controllerOf(state.players[defenderIdx]!);
+
+  // Pay first: the cost is discarding the card, and it is compulsory.
+  const [spent] = player.zones.hand.splice(at, 1);
+  if (spent) player.zones.discard.push({ ...spent, faceDown: false });
+  c.finalUsed.push(attackerIdx);
+  c.consecutivePasses = 0;
+
+  const attack = {
+    attackerPlayerIdx: attackerIdx,
+    defenderPlayerIdx: defenderIdx,
+    attackerControllerUid: attCtl.uid,
+    defenderControllerUid: defCtl.uid,
+    attackType: 'physical' as AttackType,
+    stopped: false,
+    successful: false,
+    resolutionStep: 5,
+  } as NonNullable<GameState['combat']>['currentAttack'] & object;
+
+  c.currentAttack = attack;
+  state.log.push(
+    `${player.name} performs a Final Physical Attack — they must pass for the rest of Combat and cannot defend.`,
+  );
+  events.push({ type: 'attackDeclared', attackType: 'physical' });
+
+  if (openControlWindow(state, attack, db)) return undefined;
+  openDefenceWindow(state, attack, db, events);
   return undefined;
 }
 
@@ -309,8 +392,25 @@ function openControlWindow(
 }
 
 /** Battle-sequence step 5 — the defender answers the attack. */
-function openDefenceWindow(state: GameState, atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>): void {
+function openDefenceWindow(
+  state: GameState,
+  atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>,
+  db: CardDb,
+  events: GameEvent[],
+): void {
   atk.resolutionStep = 5;
+  // A player who performed a Final Physical Attack "cannot defend against your
+  // opponent's attacks" (~L412). Asking them to anyway produced a prompt only
+  // they could answer and every answer was refused — the game wedged there,
+  // permanently, with no legal move for either player. There is no decision to
+  // offer: the attack simply lands.
+  if (state.combat?.finalUsed.includes(atk.defenderPlayerIdx)) {
+    state.log.push(
+      `${state.players[atk.defenderPlayerIdx]?.name} cannot defend after their Final Physical Attack.`,
+    );
+    resolveDefense(state, { takeDamage: true }, { actingPlayerIdx: atk.defenderPlayerIdx }, db, events);
+    return;
+  }
   state.pendingPrompt = newPrompt(
     atk.defenderPlayerIdx,
     'defend',
@@ -324,6 +424,7 @@ export function resolveControlOfCombat(
   state: GameState,
   personalityUid: string | null,
   ctx: CombatCtx,
+  db: CardDb,
   events: GameEvent[],
 ): string | undefined {
   const atk = state.combat?.currentAttack;
@@ -343,8 +444,7 @@ export function resolveControlOfCombat(
   }
   // Control decides who the damage lands on, so re-read it now.
   atk.defenderControllerUid = controllerOf(defender).uid;
-  openDefenceWindow(state, atk);
-  return undefined;
+  openDefenceWindow(state, atk, db, events);
   return undefined;
 }
 
@@ -595,7 +695,12 @@ export function resolveDefense(
   const atk = c?.currentAttack;
   if (!c || !atk) return 'no attack to defend';
   if (ctx.actingPlayerIdx !== atk.defenderPlayerIdx) return 'only the defender may respond';
-  if (c.finalUsed.includes(ctx.actingPlayerIdx)) return 'you cannot defend after a Final Physical Attack';
+  // "You cannot defend" bars using a CARD. Taking the damage is not defending,
+  // and it is the only thing left to do, so it stays available — otherwise a
+  // player in this state has no legal answer to an attack at all.
+  if (opts.cardUid && c.finalUsed.includes(ctx.actingPlayerIdx)) {
+    return 'you cannot defend after a Final Physical Attack';
+  }
 
   // An attack is answered ONCE. Power-stage damage used to end the attack
   // outright, so `currentAttack` never outlived its resolution and this could
@@ -710,6 +815,23 @@ export function resolveDefense(
     // declaring the Empower bought nothing.
     dealLifeCardsAndFinish(state, atk, lifeCards + (atk.empower ?? 0), db, events);
     return undefined;
+  }
+
+  // Physical Base Damage is read from the PAT HERE, not at declaration.
+  //
+  // Battle sequence step 4 is the defender naming who is in Control of Combat;
+  // step 9 is "Determine the Base Damage" (~L343). Reading the table at
+  // declaration meant a defender who correctly answered the Control question
+  // still took the damage worked out against the personality they replaced.
+  // The window only opens when the MP is at its bottom two stages — exactly
+  // when the PAT gap is widest — so using the rule punished them for it. The
+  // attacker's own rating can move between declaration and damage too, so both
+  // controllers are re-read from the uids the attack is actually resolving
+  // against.
+  if (atk.attackType === 'physical' && atk.baseDamage === undefined) {
+    const att = findPersonality(state, atk.attackerControllerUid);
+    const def = findPersonality(state, atk.defenderControllerUid);
+    atk.baseDamage = computeBaseDamage(att?.currentRating ?? 0, def?.currentRating ?? 0);
   }
 
   // Otherwise physical power-stage damage from the PAT (+ modifiers).
