@@ -871,7 +871,7 @@
     "imageUrl": "images-tts/tts-514f40cb-41.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All attacks you perform do +1 Life card of damage. If that attack is performed by a personality with \"Android\" in the card tital, then the attack does +2 life cards of damage instead.",
       "textVerified": true,
@@ -879,7 +879,22 @@
         "number": "042",
         "rarity": "U",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -2405,7 +2420,7 @@
     "imageUrl": "images-tts/tts-514f40cb-42.jpg",
     "rules": {
       "type": "Battleground",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -2416,7 +2431,29 @@
         "rarity": "U",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "all"
+            },
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "all"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -2857,7 +2894,7 @@
     "imageUrl": "images-tts/tts-514f40cb-64.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -2867,7 +2904,22 @@
         "number": "065",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -28061,7 +28113,7 @@
     "imageUrl": "images-tts/tts-930d6a1e-33.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. All of your physical attacks do +2 power stages of damage and cannot be redirected to Allies.",
       "textVerified": true,
@@ -28070,6 +28122,21 @@
         "rarity": "U",
         "style": "Black"
       },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -32889,7 +32956,7 @@
     "imageUrl": "images-tts/tts-40b278df-43.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 3. For the remainder of Combat, play with your hand face up on the table. All of your physical attacks do +4 power stages of damage.",
       "errata": "The +4 power stages of damage to all of your physical attacks last for the remainder of Combat.",
@@ -32899,6 +32966,21 @@
         "rarity": "R",
         "style": "Colorless"
       },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 4,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 3
     }
   },
@@ -34896,7 +34978,7 @@
     "imageUrl": "images-tts/tts-4caf6df6-25.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -34906,7 +34988,32 @@
         "number": "055",
         "rarity": "U",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "stages",
+              "attackType": "any",
+              "applies": "againstYou"
+            },
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed",
+          "restriction": {
+            "alignment": "Villain"
+          }
+        }
+      ]
     }
   },
   {
@@ -35848,7 +35955,7 @@
     "imageUrl": "images-tts/tts-705bcfba-12.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -35858,7 +35965,22 @@
         "number": "071",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -36289,7 +36411,7 @@
     "imageUrl": "images-tts/tts-705bcfba-6.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -36299,7 +36421,22 @@
         "number": "065",
         "rarity": "U",
         "style": "Red"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -39248,7 +39385,7 @@
     "imageUrl": "images-tts/tts-8281ee74-13.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -39258,7 +39395,22 @@
         "number": "Preview 6",
         "rarity": "R",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 5,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -41101,7 +41253,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-60.jpg",
     "rules": {
       "type": "Location",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -41112,7 +41264,22 @@
         "rarity": "U",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "any",
+              "applies": "all"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -41412,7 +41579,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-65.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -41422,7 +41589,22 @@
         "number": "CR10",
         "rarity": "P",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -42252,7 +42434,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-16.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All of your attacks do +1 power stages of damage. When an opponent would shuffle one or more cards into his Life Deck, he must place them at the bottom of his Life Deck instead.",
       "textVerified": true,
@@ -42260,7 +42442,22 @@
         "number": "017",
         "rarity": "C",
         "style": "Red"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "stages",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -42577,7 +42774,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-17.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Endurance 2. All of your physical attacks do +2 power stages of damage. Any cards in your Life Deck with Endurance have their Endurance increased by +1.",
       "textVerified": true,
@@ -42586,6 +42783,21 @@
         "rarity": "C",
         "style": "Red"
       },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ],
       "endurance": 2
     }
   },
@@ -43504,7 +43716,7 @@
     "imageUrl": "images-tts/tts-c611d949-19.jpg",
     "rules": {
       "type": "Battleground",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -43515,7 +43727,22 @@
         "rarity": "P",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "any",
+              "applies": "all"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -47360,7 +47587,7 @@
     "imageUrl": "images-tts/tts-434ce590-17.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -47371,7 +47598,22 @@
         "rarity": "P",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "stages",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -50658,7 +50900,7 @@
     "imageUrl": "images-tts/tts-f1189c19-13.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All energy attacks performed against you do 1 less life card of damage, to a minimum of 0.",
       "textOriginal": "Allows the defender to take 1 less life card draw from damage on any successful energy attack.",
@@ -50667,7 +50909,22 @@
         "rarity": "U",
         "style": "Black"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -50913,7 +51170,7 @@
     "imageUrl": "images-tts/tts-f1189c19-4.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All physical attacks performed against you do 1 less power stage of damage, to a minimum of 0.  Cannot be used with other Black drills in play.",
       "textOriginal": "Allows the defender to take 1 less life card discard from every physical attack. Can't be used with other Black drills in play on the table.",
@@ -50922,7 +51179,22 @@
         "rarity": "U",
         "style": "Black"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -50974,7 +51246,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-27.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All physical attacks performed against you do 2 less power stages of damage to a minimum of 0.",
       "textOriginal": "Allows the card owner to take 2 less stages of power drain from a successful physical attack.",
@@ -50983,7 +51255,22 @@
         "rarity": "R",
         "style": "Black"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -51037,7 +51324,7 @@
     "imageUrl": "images-tts/tts-f1189c19-8.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All of your physical attacks do +2 power stages of damage.",
       "textOriginal": "Allows the attacker to do 2 extra stages of power damage with every successful physical attack.",
@@ -51046,7 +51333,22 @@
         "rarity": "U",
         "style": "Black"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -51295,7 +51597,7 @@
     "imageUrl": "images-tts/tts-f1189c19-6.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -51306,7 +51608,22 @@
         "rarity": "U",
         "style": "Blue"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -51588,7 +51905,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-25.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All attacks performed against you do 1 less life card of damage, to a minimum of 0.",
       "textOriginal": "Drill prevents 1 life card of damage from being taken whenever a successful attack happens on the card owner.",
@@ -51597,7 +51914,22 @@
         "rarity": "R",
         "style": "Blue"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -51633,7 +51965,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-55.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All of your physical attacks do +1 power stages of damage.",
       "textVerified": true,
@@ -51641,7 +51973,22 @@
         "number": "125",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -52133,7 +52480,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-22.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All physical attacks performed against you do 1 less power stage of damage, to a minimum of 0.",
       "textOriginal": "Allows the user to duck and miss the first stage of damage in a physical attack.",
@@ -52142,7 +52489,22 @@
         "rarity": "R",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -54190,7 +54552,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-7.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -54201,7 +54563,22 @@
         "rarity": "R",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -54809,7 +55186,7 @@
     "imageUrl": "images-tts/tts-f1189c19-3.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All energy attacks performed against you do 1 less life card of damage, to a minimum of 0. Cannot be used with other Orange drills in play.",
       "textOriginal": "Allows the defender to take 1 less life card discard from every energy attack. Cannot be used with other Orange Drills in play on the table.",
@@ -54818,7 +55195,22 @@
         "rarity": "U",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -54935,7 +55327,7 @@
     "imageUrl": "images-tts/tts-f1189c19-12.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All of your physical attacks do +4 power stages of damage.",
       "textOriginal": "Allows the attacker to inflict +4 stages of damage from any successful physical attack.",
@@ -54944,7 +55336,22 @@
         "rarity": "U",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 4,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -55237,7 +55644,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-60.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -55247,7 +55654,22 @@
         "number": "130",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -55578,7 +56000,7 @@
     "imageUrl": "images-tts/tts-f1189c19-16.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -55589,7 +56011,22 @@
         "rarity": "U",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -56655,7 +57092,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-24.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -56666,7 +57103,22 @@
         "rarity": "R",
         "style": "Red"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -56764,7 +57216,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-54.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All physical attacks performed against you do 2 less power stages of damage, to a minimum of zero.",
       "textOriginal": "Stops 2 stages of power from being drained by any physical attack.",
@@ -56773,7 +57225,22 @@
         "rarity": "U",
         "style": "Red"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -56786,7 +57253,7 @@
     "imageUrl": "images-tts/tts-f1189c19-9.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All of your energy attacks do +1 life cards of damage.  Cannot be used with other Red drills in play.",
       "textOriginal": "Allows the attacker to do 1 extra life card of damage with every successful energy attack. Cannot be used with other Red Drills in play on the table.",
@@ -56795,7 +57262,22 @@
         "rarity": "U",
         "style": "Red"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -56875,7 +57357,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-62.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -56885,7 +57367,22 @@
         "number": "132",
         "rarity": "U",
         "style": "Red"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -57740,7 +58237,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-28.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -57751,7 +58248,22 @@
         "rarity": "R",
         "style": "Saiyan"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -68163,7 +68675,7 @@
     "imageUrl": "images-tts/tts-a42f5098-61.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All of your physical attacks do +2 power stages of damage.",
       "textVerified": true,
@@ -68171,7 +68683,22 @@
         "number": "131",
         "rarity": "U",
         "style": "Black"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -68228,7 +68755,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-13.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All energy attacks performed against you do 1 less life card of damage, to a minimum of 0.",
       "textOriginal": "Allows the defender to take 1 less life card draw from damage on any successful energy attack.",
@@ -68237,7 +68764,22 @@
         "rarity": "U",
         "style": "Black"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -68619,7 +69161,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-4.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All physical attacks performed against you do 1 less power stage of damage, to a minimum of 0. Cannot be used with other Black drills in play.",
       "textOriginal": "Allows the defender to take 1 less life card discard from every physical attack. Can't be used with other Black drills in play on the table.",
@@ -68628,7 +69170,22 @@
         "rarity": "U",
         "style": "Black"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -68682,7 +69239,7 @@
     "imageUrl": "images-tts/tts-e9f3a19a-27.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All physical attacks performed against you do 2 less power stages of damage to a minimum of 0.",
       "textOriginal": "Allows the card owner to take 2 less stages of power drain from a successful physical attack.",
@@ -68691,7 +69248,22 @@
         "rarity": "R",
         "style": "Black"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -68765,7 +69337,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-8.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All of your physical attacks do +2 power stages of damage.",
       "textOriginal": "Allows the attacker to do 2 extra stages of power damage with every successful physical attack.",
@@ -68774,7 +69346,22 @@
         "rarity": "U",
         "style": "Black"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -69266,7 +69853,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-6.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -69277,7 +69864,22 @@
         "rarity": "U",
         "style": "Blue"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -69668,7 +70270,7 @@
     "imageUrl": "images-tts/tts-e9f3a19a-25.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All attacks performed against you do 1 less life card of damage, to a minimum of 0.",
       "textOriginal": "Drill prevents 1 life card of damage from being taken whenever a successful attack happens on the card owner.",
@@ -69677,7 +70279,22 @@
         "rarity": "R",
         "style": "Blue"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -69705,7 +70322,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-11.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All of your physical attacks do +3 power stages of damage. Cannot be used with any other Blue drills in play.",
       "textVerified": "vision",
@@ -69713,7 +70330,22 @@
         "number": "150",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 3,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -69726,7 +70358,7 @@
     "imageUrl": "images-tts/tts-a42f5098-55.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All of your physical attacks do +1 power stages of damage.",
       "textVerified": true,
@@ -69734,7 +70366,22 @@
         "number": "125",
         "rarity": "U",
         "style": "Blue"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -71121,7 +71768,7 @@
     "imageUrl": "images-tts/tts-e9f3a19a-22.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All physical attacks performed against you do 1 less power stage of damage, to a minimum of 0.",
       "textOriginal": "Allows the user to duck and miss the first stage of damage in a physical attack.",
@@ -71130,7 +71777,22 @@
         "rarity": "R",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -74227,10 +74889,25 @@
     "imageUrl": "images-tts/tts-d8c9f943-5.jpg",
     "rules": {
       "type": "Drill",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All of your physical attacks do +1 power stages of damage.\nAttacks that cannot be stopped can be stopped while this Drill is in play.",
-      "errata": "Although this Drill affects both players, only the player who controls Huge Drill gets the +1 power stage of damage to his physical attacks."
+      "errata": "Although this Drill affects both players, only the player who controls Huge Drill gets the +1 power stage of damage to his physical attacks.",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -75492,7 +76169,7 @@
     "imageUrl": "images-tts/tts-e9f3a19a-7.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All of your attacks do +1 life card of damage.",
       "textOriginal": "Does an extra life card of damage with each successful attack. More than 1 of these drills can be out at the same time.",
@@ -75501,7 +76178,22 @@
         "rarity": "R",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -77310,7 +78002,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-3.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -77321,7 +78013,22 @@
         "rarity": "U",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -77485,7 +78192,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-12.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -77496,7 +78203,22 @@
         "rarity": "U",
         "style": "Orange"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 4,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -77911,7 +78633,7 @@
     "imageUrl": "images-tts/tts-a42f5098-60.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -77921,7 +78643,22 @@
         "number": "130",
         "rarity": "U",
         "style": "Orange"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -78265,7 +79002,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-16.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -78276,7 +79013,22 @@
         "rarity": "U",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -79410,7 +80162,7 @@
     "imageUrl": "images-tts/tts-e9f3a19a-24.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -79421,7 +80173,22 @@
         "rarity": "R",
         "style": "Red"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -79580,7 +80347,7 @@
     "imageUrl": "images-tts/tts-a42f5098-54.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All physical attacks performed against you do 2 less power stages of damage, to a minimum of zero.",
       "textOriginal": "Stops 2 stages of power from being drained by any physical attack.",
@@ -79589,7 +80356,22 @@
         "rarity": "U",
         "style": "Red"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -79602,7 +80384,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-9.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All of your energy attacks do +1 life cards of damage.\nCannot be used with other Red drills in play.",
       "textOriginal": "Allows the attacker to do 1 extra life card of damage with every successful energy attack. Cannot be used with other Red Drills in play on the table.",
@@ -79611,7 +80393,22 @@
         "rarity": "U",
         "style": "Red"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -79689,7 +80486,7 @@
     "imageUrl": "images-tts/tts-a42f5098-62.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All energy attacks performed against you do 1 less life card of damage, to a minimum of 0.",
       "textVerified": true,
@@ -79697,7 +80494,22 @@
         "number": "132",
         "rarity": "U",
         "style": "Red"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": -1,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "againstYou"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -80690,7 +81502,7 @@
     "imageUrl": "images-tts/tts-e9f3a19a-28.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -80701,7 +81513,22 @@
         "rarity": "R",
         "style": "Saiyan"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {

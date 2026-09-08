@@ -37,6 +37,26 @@ export type Effect =
    * damage that is being modified", so this rides on physical attacks too.
    */
   | { kind: 'damageLifeCards'; cards: number; ifSuccessful?: boolean }
+  /**
+   * A continuous damage modifier from a card ON THE TABLE — a Drill, a
+   * Location, a Battleground, a Dragon Ball you control. Battle-sequence step
+   * 10 adds "any modifiers, from the attack, Drills, personality powers, etc."
+   * and only the attack's own were ever added: no code anywhere read either
+   * player's inPlay to change damage, so every one of these was inert in both
+   * directions.
+   *
+   * `applies` is whose attacks it touches, from the card's own wording:
+   *   yours      - "All of your physical attacks do +2 power stages"
+   *   againstYou - "All energy attacks performed against you do 1 less"
+   *   all        - "All physical attacks do +1" (Locations, which are neutral)
+   */
+  | {
+      kind: 'constantDamageModifier';
+      amount: number;
+      resource: 'stages' | 'lifeCards';
+      attackType: AttackKind | 'any';
+      applies: 'yours' | 'againstYou' | 'all';
+    }
   /** `toZero` sets anger to 0 outright ('lower your anger to 0'); a delta of
    *  0 would otherwise be a silent no-op that still looks modelled.
    *

@@ -641,6 +641,61 @@ function pushRaiseOwnPower(effects: Effect[], t: string): void {
     if (rating) effects.push({ kind: 'changePowerStages', target: 'user', delta: toNum(rating[1]) });
   }
 }
+/**
+ * Continuous damage modifiers printed on cards that sit on the table.
+ *
+ * Battle-sequence step 10 adds "any modifiers, from the attack, Drills,
+ * personality powers, etc." to the Base Damage. Only the attack's own were ever
+ * read, so 45 in-play cards printing a signed damage clause were inert in both
+ * directions — including the ones that REDUCE damage, which meant a defensive
+ * Drill did nothing for the player who tabled it.
+ *
+ * Three printed shapes, and the possessive is what decides who is affected:
+ *   "All of your physical attacks do +2 power stages of damage."
+ *   "All energy attacks performed against you do 1 less life card of damage."
+ *   "All physical attacks do +1 power stage of damage."   (a neutral Location)
+ *
+ * Deliberately narrow. A clause carrying a condition ("If you declared a
+ * Tokui-Waza...", "for each card you have drawn") or scoped to a Combat
+ * ("for the remainder of Combat") is NOT continuous board state and is left
+ * alone rather than guessed at.
+ */
+function pushConstantModifiers(effects: Effect[], t: string): void {
+  const CONTINUOUS = /\ball\s+(of\s+your\s+|your\s+)?(physical\s+|energy\s+)?attacks?\s*(you\s+perform\s+|performed\s+against\s+you\s*)?,?\s*(?:do|does)\s+(?:an\s+additional\s+)?([+-]?\d+)\s*(more\s+|less\s+|additional\s+)?(power\s+stages?|life\s+cards?)(\s+or\s+life\s+cards?)?/gi;
+  for (const s of sentences(t)) {
+    // Conditional or combat-scoped clauses are not board state.
+    if (/\bif\b|\bwhile\b|\bfor\s+each\b|remainder\s+of\s+combat|this\s+combat/i.test(s)) continue;
+    CONTINUOUS.lastIndex = 0;
+    let m: RegExpExecArray | null;
+    while ((m = CONTINUOUS.exec(s)) !== null) {
+      const yours = Boolean(m[1]) || /you\s+perform/i.test(m[3] ?? '');
+      const against = /performed\s+against\s+you/i.test(m[3] ?? '');
+      const attackType = m[2] ? (/energy/i.test(m[2]) ? 'energy' : 'physical') : 'any';
+      // The sign is stripped before toNum: it only accepts bare digits, and
+      // silently returns its fallback of 1 for anything else — so "+2" was
+      // reading as +1, which is worse than not parsing the card at all.
+      const signed = m[4]!;
+      const magnitude = toNum(signed.replace(/^[+-]/, ''));
+      // "1 less" is a reduction even though the number is written unsigned.
+      const reduces = /less/i.test(m[5] ?? '') || signed.startsWith('-');
+      const amount = reduces ? -magnitude : magnitude;
+      const bothResources = Boolean(m[7]);
+      const resources: Array<'stages' | 'lifeCards'> = bothResources
+        ? ['stages', 'lifeCards']
+        : [/life/i.test(m[6]!) ? 'lifeCards' : 'stages'];
+      for (const resource of resources) {
+        effects.push({
+          kind: 'constantDamageModifier',
+          amount,
+          resource,
+          attackType,
+          applies: against ? 'againstYou' : yours ? 'yours' : 'all',
+        });
+      }
+    }
+  }
+}
+
 function pushDraw(effects: Effect[], t: string): void {
   const m = t.match(/draw\s+([0-9b]+|a)\s*cards?\b/);
   if (m) effects.push({ kind: 'drawCards', count: m[1] === 'a' ? 1 : toNum(m[1]) });
@@ -712,6 +767,9 @@ function pushMoveStage(effects: Effect[], t: string): void {
 const removesAfterUse = (t: string) => /remov\w*[^.]{0,30}game[^.]{0,20}after\s*use/.test(t);
 /** "If this attack is performed by <name>" — a condition the engine can't check yet. */
 const hasPerformerCondition = (t: string) => /if\s+this\s+attack\s+is\s+performed\s+by/.test(t);
+
+/** Card types that sit on the table, where a continuous clause stays in effect. */
+const IN_PLAY_TYPES = new Set(['Non-Combat', 'Drill', 'Location', 'Battleground', 'Dragon Ball']);
 
 export function parseAbility(rawText: string, type: string): Ability | null {
   const t = rawText
@@ -848,6 +906,21 @@ export function parseAbility(rawText: string, type: string): Ability | null {
     const ability: Ability = { trigger: 'defense', effects, source: 'parsed' };
     if (restriction) ability.restriction = restriction;
     return ability;
+  }
+
+  // ---- CONTINUOUS board modifier (Drill / Location / Battleground / Ball) ----
+  // Checked before the Non-Combat branch: a Drill's damage clause is in effect
+  // for as long as the card is on the table, not once when it is played, and
+  // playCard already refuses to resolve an onPlay ability on a Drill for
+  // exactly that reason.
+  if (IN_PLAY_TYPES.has(type)) {
+    const constant: Effect[] = [];
+    pushConstantModifiers(constant, body);
+    if (constant.length > 0) {
+      const ability: Ability = { trigger: 'constant', effects: constant, source: 'parsed' };
+      if (restriction) ability.restriction = restriction;
+      return ability;
+    }
   }
 
   // ---- NON-COMBAT / utility card ("Use when needed. ...") ----

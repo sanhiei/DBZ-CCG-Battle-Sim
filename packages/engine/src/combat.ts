@@ -864,8 +864,22 @@ export function resolveDefense(
 
   atk.resolutionStep = 10; // base damage + modifiers determined
 
-  // Step 12's total.
-  const stageTotal = (atk.baseDamage ?? 0) + (atk.modifiers ?? 0) + (atk.ifSuccessfulStages ?? 0);
+  // Step 10 proper: the modifiers from the table, not just from the attack.
+  const board = boardModifiers(state, atk.attackerPlayerIdx, atk.defenderPlayerIdx, atk.attackType, db);
+  if (board.stages !== 0 || board.lifeCards !== 0) {
+    const parts = [
+      board.stages !== 0 ? `${board.stages > 0 ? '+' : ''}${board.stages} power stage(s)` : '',
+      board.lifeCards !== 0 ? `${board.lifeCards > 0 ? '+' : ''}${board.lifeCards} life card(s)` : '',
+    ].filter(Boolean);
+    state.log.push(`Cards in play modify the damage: ${parts.join(', ')}.`);
+  }
+
+  // Step 12's total. Floored at 0 — a reduction can cancel an attack's damage
+  // but never turn it into healing.
+  const stageTotal = Math.max(
+    0,
+    (atk.baseDamage ?? 0) + (atk.modifiers ?? 0) + (atk.ifSuccessfulStages ?? 0) + board.stages,
+  );
 
   // Step 13's total. Empower is life cards, never stages (~L1102), and so is
   // prevention, which comes off here rather than cancelling the attack.
@@ -878,7 +892,8 @@ export function resolveDefense(
     statedLifeCards(atk) +
       (atk.lifeCardModifiers ?? 0) +
       (atk.ifSuccessfulLifeCards ?? 0) +
-      (atk.empower ?? 0) -
+      (atk.empower ?? 0) +
+      board.lifeCards -
       prevented,
   );
 
@@ -914,6 +929,50 @@ export function resolveDefense(
  * one that states power stages has those as its base and no life cards unless
  * it names them too.
  */
+/**
+ * Continuous damage modifiers from the cards on the table (battle-sequence step
+ * 10: "any modifiers, from the attack, Drills, personality powers, etc.").
+ *
+ * Nothing anywhere read either player's inPlay to change damage, so 45 cards
+ * printing a signed damage clause were inert in BOTH directions — the +5 Drills
+ * and the defensive ones that reduce incoming damage alike.
+ *
+ * Scans both boards: a card in the attacker's play with "all of your attacks
+ * do..." adds, one in the defender's play with "...performed against you"
+ * subtracts, and a Location's neutral "all attacks do..." counts once for
+ * whoever tabled it. Dragon Balls are included — they are controlled cards in
+ * their own zone, and some print a modifier "while you control this".
+ */
+function boardModifiers(
+  state: GameState,
+  attackerIdx: number,
+  defenderIdx: number,
+  attackType: AttackType,
+  db: CardDb,
+): { stages: number; lifeCards: number } {
+  const out = { stages: 0, lifeCards: 0 };
+  for (const player of state.players) {
+    const mine = player.idx === attackerIdx;
+    const theirs = player.idx === defenderIdx;
+    if (!mine && !theirs) continue;
+    for (const inst of [...player.zones.inPlay, ...player.dragonBalls]) {
+      for (const ability of db.get(inst.cardId)?.rules?.abilities ?? []) {
+        if (ability.trigger !== 'constant') continue;
+        for (const e of ability.effects) {
+          if (e.kind !== 'constantDamageModifier') continue;
+          if (e.attackType !== 'any' && e.attackType !== attackType) continue;
+          const relevant =
+            e.applies === 'all' || (e.applies === 'yours' && mine) || (e.applies === 'againstYou' && theirs);
+          if (!relevant) continue;
+          if (e.resource === 'stages') out.stages += e.amount;
+          else out.lifeCards += e.amount;
+        }
+      }
+    }
+  }
+  return out;
+}
+
 function statedLifeCards(atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>): number {
   if (atk.attackType !== 'energy') return atk.damageLifeCards ?? 0;
   if (atk.energyLifeCards !== undefined) return atk.energyLifeCards;

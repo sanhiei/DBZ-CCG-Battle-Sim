@@ -75,6 +75,8 @@ function answerFor(prompt) {
 const counts = { prompts: {}, errors: {}, steps: 0, actions: 0 };
 let stalls = 0;
 let lastSignature = '';
+/** Turns on which the active player has already tried their Non-Combat Step. */
+const playedThisTurn = new Set();
 
 for (let i = 0; i < TURNS * 60 && state.phase === 'playing' && state.turnNumber <= TURNS; i++) {
   const signature = `${state.turnNumber}|${state.step}|${state.pendingPrompt?.id ?? '-'}|${state.combat?.phasePlayerIdx ?? '-'}|${state.combat?.currentAttack ? 'atk' : '-'}`;
@@ -116,6 +118,30 @@ for (let i = 0; i < TURNS * 60 && state.phase === 'playing' && state.turnNumber 
       result = { state, error: 'nothing to attack with' };
     }
     if (result.error) result = reduce(state, { type: 'pass' }, db, who);
+  } else if (state.step === 'nonCombat' && !playedThisTurn.has(state.turnNumber)) {
+    // Put something on the table before moving on. Without this the driver
+    // never played a single Non-Combat card, so Drills, Locations and every
+    // continuous modifier went completely unexercised by the smoke test.
+    const who = state.activePlayerIdx;
+    const playable = state.players[who].zones.hand.filter((c) => {
+      const t = db.type(c.cardId);
+      return t === 'Non-Combat' || t === 'Drill' || t === 'Location' || t === 'Battleground' || t === 'Dragon Ball';
+    });
+    let played = false;
+    for (const card of playable) {
+      const r = reduce(state, { type: 'playCard', playerIdx: who, cardUid: card.uid }, db, who);
+      if (!r.error) {
+        counts.played = (counts.played ?? 0) + 1;
+        state = r.state;
+        played = true;
+        break;
+      }
+      counts.errors[r.error] = (counts.errors[r.error] ?? 0) + 1;
+    }
+    playedThisTurn.add(state.turnNumber);
+    if (played) continue;
+    counts.steps += 1;
+    result = reduce(state, { type: 'advanceStep' }, db, state.activePlayerIdx);
   } else {
     counts.steps += 1;
     result = reduce(state, { type: 'advanceStep' }, db, state.activePlayerIdx);
@@ -129,7 +155,7 @@ for (let i = 0; i < TURNS * 60 && state.phase === 'playing' && state.turnNumber 
 const hands = state.players.map((p) => `${p.name} hand=${p.zones.hand.length} deck=${p.zones.lifeDeck.length} discard=${p.zones.discard.length}`);
 console.log(`turns reached: ${state.turnNumber}   phase: ${state.phase}${state.winnerIdx != null ? `   winner: ${state.players[state.winnerIdx].name} (${state.victoryType})` : ''}`);
 console.log(`actions: ${counts.actions}  step advances: ${counts.steps}`);
-console.log('prompts answered:', counts.prompts);
+console.log('prompts answered:', counts.prompts, ' cards played into play:', counts.played ?? 0);
 console.log(hands.join('\n'));
 const errs = Object.entries(counts.errors).sort((a, b) => b[1] - a[1]);
 if (errs.length) {
