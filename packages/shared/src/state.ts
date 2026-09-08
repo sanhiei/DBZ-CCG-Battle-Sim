@@ -61,6 +61,16 @@ export interface PersonalityInPlay {
   anger: number;
   /** True for an Ally (vs. the Main Personality). */
   isAlly: boolean;
+  /**
+   * Turn number on which this personality last used its Personality Power.
+   *
+   * "A Personality Power ... is only used once per turn ... unless the
+   * character advances or loses a Personality level. When this happens you get
+   * to use the card effect again even if you used it earlier this turn"
+   * (CRD ~L492) — which is why this is a turn number cleared on a level change
+   * rather than a boolean cleared only at end of turn.
+   */
+  usedPowerTurn?: number;
   /** True while this personality is in Control of Combat. */
   inControlOfCombat?: boolean;
 }

@@ -27,6 +27,7 @@ export type Action =
   | { type: 'useEndurance'; cardUid?: string }
   | { type: 'declareCombat'; declare: boolean }
   | { type: 'finalPhysicalAttack'; discardUid: string }
+  | { type: 'usePersonalityPower' }
   | { type: 'pass' }
   | { type: 'answerPrompt'; promptId: string; choice: unknown }
   | { type: 'concede'; playerIdx: number }

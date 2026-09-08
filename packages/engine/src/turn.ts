@@ -172,6 +172,11 @@ export function advanceLevel(
   if (mp.currentLevel >= mp.levelCardIds.length) return; // already at highest
   mp.currentLevel += 1;
   mp.anger = 0;
+  // "unless the character advances or loses a Personality level. When this
+  // happens you get to use the card effect again even if you used it earlier
+  // this turn" (CRD ~L492) — and the new level card is a different power
+  // anyway.
+  delete mp.usedPowerTurn;
   // Keep the same stage position, clamped to the new level card's ladder.
   const ratings = currentRatings(mp, db);
   mp.stageIndex = Math.min(mp.stageIndex, ratings.length - 1);

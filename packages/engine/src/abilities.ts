@@ -771,6 +771,106 @@ const hasPerformerCondition = (t: string) => /if\s+this\s+attack\s+is\s+performe
 /** Card types that sit on the table, where a continuous clause stays in effect. */
 const IN_PLAY_TYPES = new Set(['Non-Combat', 'Drill', 'Location', 'Battleground', 'Dragon Ball']);
 
+/**
+ * The power box on a Personality card, split into the abilities it actually
+ * contains.
+ *
+ * Personalities were skipped by the parser outright — 0 of 600 carried an
+ * ability, though every one of them has rules text. Every Main Personality and
+ * Ally in the game was a stat block with inert text, and one of the two legal
+ * ways to spend an Attack Phase (using a Personality Power) did not exist.
+ *
+ * A power box holds up to two different things, and they are not
+ * interchangeable:
+ *
+ *   "Power: ..."                  a Personality Power, USED once per turn
+ *   "Constant Combat Power: ..."  continuous, in effect while in Combat
+ *
+ * They can appear in either order and either may be absent, so the markers are
+ * located and the text between them is what belongs to each. Text before the
+ * first marker is flavour or a restriction note and is not parsed.
+ *
+ * parseAbility still returns one Ability, which is why this is a separate
+ * function rather than a change to it: a personality can legitimately have both
+ * kinds at once, and every other card in the game has at most one.
+ */
+const CCP_MARKER = /\(?\s*constant\s+combat\s+power\s*\)?\s*:?/i;
+const POWER_MARKER = /(?:^|[.)\]]\s*)power\s*:/gi;
+
+export function parsePersonalityPowers(rawText: string, type = 'Personality'): Ability[] {
+  const text = (rawText ?? '').trim();
+  if (!text) return [];
+
+  const ccp = CCP_MARKER.exec(text);
+  const ccpFrom = ccp ? ccp.index : -1;
+  const ccpTo = ccp ? ccp.index + ccp[0].length : -1;
+
+  // Find a "Power:" that is not the tail of "Constant Combat Power:". The two
+  // markers appear in EITHER order — "Power: ... Constant Combat Power: ..." is
+  // the commoner printing — so this cannot just search after the CCP.
+  let power: { from: number; to: number } | null = null;
+  POWER_MARKER.lastIndex = 0;
+  let m: RegExpExecArray | null;
+  while ((m = POWER_MARKER.exec(text)) !== null) {
+    const end = m.index + m[0].length;
+    if (ccp && end <= ccpTo && end > ccpFrom) continue; // inside the CCP marker
+    power = { from: m.index, to: end };
+    break;
+  }
+
+  const marks: Array<{ kind: 'constant' | 'personalityPower'; from: number }> = [];
+  if (ccp) marks.push({ kind: 'constant', from: ccpTo });
+  if (power) marks.push({ kind: 'personalityPower', from: power.to });
+  if (marks.length === 0) return [];
+  marks.sort((a, c) => a.from - c.from);
+
+  // Where each section ENDS: at the other marker's start, not its body.
+  const starts = [ccp ? ccpFrom : -1, power ? power.from : -1].filter((n) => n >= 0).sort((a, c) => a - c);
+
+  const out: Ability[] = [];
+  for (const mark of marks) {
+    const next = starts.find((s) => s > mark.from);
+    const body = text.slice(mark.from, next ?? text.length).trim();
+    if (!body) continue;
+
+    if (mark.kind === 'constant') {
+      // A Constant Combat Power is continuous board state, so only the
+      // continuous shapes are read from it. The rest — "your anger cannot be
+      // lowered", "you cannot use Endurance" — are prohibitions the engine has
+      // no layer for, and inventing one would be worse than leaving them.
+      const effects: Effect[] = [];
+      pushConstantModifiers(effects, body);
+      if (effects.length > 0) out.push({ trigger: 'constant', effects, source: 'parsed' });
+      continue;
+    }
+
+    // A Personality Power is used like a card: an attack, a defence (Defense
+    // Shield), or a bundle of riders.
+    const inner = parseAbility(body, type);
+    if (inner) {
+      out.push({ ...inner, trigger: 'personalityPower' });
+      continue;
+    }
+    // parseAbility only claims a rider-only card when its TYPE says Non-Combat,
+    // which a Personality's never does — so a power like "Raise your anger 1
+    // level" fell through it entirely. Read the riders directly.
+    // Lower-cased, because parseAbility lower-cases its input before it does
+    // anything and every rider pattern is written against that. Handing them
+    // the raw text matched nothing at all.
+    const lower = body.toLowerCase().replace(/\s+/g, ' ');
+    const riders: Effect[] = [];
+    pushAnger(riders, lower);
+    pushMoveStage(riders, lower);
+    pushRaiseOwnPower(riders, lower);
+    pushDraw(riders, lower);
+    pushStun(riders, lower);
+    pushRejuvenate(riders, lower);
+    pushDiscardCards(riders, lower);
+    if (riders.length > 0) out.push({ trigger: 'personalityPower', effects: riders, source: 'parsed' });
+  }
+  return out;
+}
+
 export function parseAbility(rawText: string, type: string): Ability | null {
   const t = rawText
     .toLowerCase()

@@ -117,6 +117,7 @@ export function App() {
             game.send({ type: 'declareAttack', attackType, ...(cardUid ? { cardUid } : {}) })
           }
           onFinalPhysicalAttack={(discardUid) => game.send({ type: 'finalPhysicalAttack', discardUid })}
+          onUsePower={() => game.send({ type: 'usePersonalityPower' })}
           onAnswer={(promptId, choice) => game.send({ type: 'answerPrompt', promptId, choice })}
           onConcede={() => game.seat !== null && game.send({ type: 'concede', playerIdx: game.seat })}
           onSetStage={(personalityUid, stageIndex) => game.send({ type: 'setStage', personalityUid, stageIndex })}

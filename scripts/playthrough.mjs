@@ -110,7 +110,11 @@ for (let i = 0; i < TURNS * 60 && state.phase === 'playing' && state.turnNumber 
       const t = db.type(c.cardId);
       return t === 'Unknown' || /combat/i.test(t);
     });
-    if (weapon) {
+    const power = reduce(state, { type: 'usePersonalityPower' }, db, who);
+    if (!power.error) {
+      counts.powers = (counts.powers ?? 0) + 1;
+      result = power;
+    } else if (weapon) {
       result = reduce(state, { type: 'declareAttack', attackType: 'physical', cardUid: weapon.uid }, db, who);
     } else if (hand.length > 0 && !state.combat.finalUsed.includes(who)) {
       result = reduce(state, { type: 'finalPhysicalAttack', discardUid: hand[0].uid }, db, who);
@@ -155,7 +159,7 @@ for (let i = 0; i < TURNS * 60 && state.phase === 'playing' && state.turnNumber 
 const hands = state.players.map((p) => `${p.name} hand=${p.zones.hand.length} deck=${p.zones.lifeDeck.length} discard=${p.zones.discard.length}`);
 console.log(`turns reached: ${state.turnNumber}   phase: ${state.phase}${state.winnerIdx != null ? `   winner: ${state.players[state.winnerIdx].name} (${state.victoryType})` : ''}`);
 console.log(`actions: ${counts.actions}  step advances: ${counts.steps}`);
-console.log('prompts answered:', counts.prompts, ' cards played into play:', counts.played ?? 0);
+console.log('prompts answered:', counts.prompts, ' cards played:', counts.played ?? 0, ' powers used:', counts.powers ?? 0);
 console.log(hands.join('\n'));
 const errs = Object.entries(counts.errors).sort((a, b) => b[1] - a[1]);
 if (errs.length) {

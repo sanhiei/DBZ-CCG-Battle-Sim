@@ -18,7 +18,7 @@ import { existsSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseAbility } from '@dbz/engine';
+import { parseAbility, parsePersonalityPowers } from '@dbz/engine';
 // Reaching into the OCR package's source is deliberate: the corrector operates
 // on OCR output and lives with the OCR calibration tooling.
 import { correctText, type Template } from '../../ocr/src/phrases.ts';
@@ -468,13 +468,29 @@ const cards = catalog.cards.map((c) => {
 
     // Parse abilities off the rules text. The parser is conservative: cards it
     // cannot confidently read stay manual.
-    if (rules.text && (rules.type ?? type) !== 'Personality') {
-      const ability = parseAbility(rules.text as string, (rules.type as string) ?? type);
+    const parsedType = (rules.type as string) ?? type;
+    if (rules.text && parsedType !== 'Personality') {
+      const ability = parseAbility(rules.text as string, parsedType);
       if (ability) {
         rules.abilities = [ability];
         withAbilities++;
         for (const e of ability.effects) effectKinds[e.kind] = (effectKinds[e.kind] ?? 0) + 1;
         if (ability.needsReview?.length) needsReview.push(...ability.needsReview.map((n) => `ability:${n}`));
+      }
+    } else if (rules.text && rules.personality) {
+      // Personalities were skipped outright, so 0 of 600 carried an ability
+      // though every one has rules text — every Main Personality and Ally in
+      // the game was a stat block with inert text. The power box holds up to
+      // two different things ("Power:" and "Constant Combat Power:"), which is
+      // why this returns a list where every other card yields one ability.
+      const powers = parsePersonalityPowers(rules.text as string, parsedType);
+      if (powers.length > 0) {
+        rules.abilities = powers;
+        withAbilities++;
+        for (const a of powers) {
+          for (const e of a.effects) effectKinds[e.kind] = (effectKinds[e.kind] ?? 0) + 1;
+          if (a.needsReview?.length) needsReview.push(...a.needsReview.map((n) => `ability:${n}`));
+        }
       }
     }
 

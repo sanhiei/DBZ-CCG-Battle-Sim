@@ -31,6 +31,7 @@ export interface BoardProps {
   onPass(): void;
   onAttack(attackType: AttackType, cardUid?: string): void;
   onFinalPhysicalAttack(discardUid: string): void;
+  onUsePower(): void;
   onAnswer(promptId: string, choice: PromptChoice | string | null): void;
   onConcede(): void;
   onSetStage(personalityUid: string, stageIndex: number): void;
@@ -115,6 +116,7 @@ export function Board({
   onPass,
   onAttack,
   onFinalPhysicalAttack,
+  onUsePower,
   onAnswer,
   onConcede,
   onSetStage,
@@ -137,6 +139,15 @@ export function Board({
   const combat = state.combat;
   const myAttackPhase = seat != null && combat !== undefined && combat.phasePlayerIdx === seat && !combat.currentAttack;
   const awaitingMyDefence = prompt?.type === 'defend' && prompt.playerIdx === seat;
+
+  // A Personality Power belongs to whoever is in Control of Combat, and it is
+  // once per turn (CRD ~L492). The button is only offered when the engine would
+  // actually accept it.
+  const myController = me ? me.allies.find((a) => a.inControlOfCombat) ?? me.mp : undefined;
+  const powerCardId = myController?.levelCardIds[myController.currentLevel - 1];
+  const hasPower = !!db && !!powerCardId
+    && (db.get(powerCardId)?.rules?.abilities ?? []).some((a) => a.trigger === 'personalityPower');
+  const canUsePower = myAttackPhase && hasPower && myController?.usedPowerTurn !== state.turnNumber;
 
   // One derivation of what a hand click means right now.
   const myNonCombatStep = seat != null && state.activePlayerIdx === seat && state.step === 'nonCombat';
@@ -214,6 +225,9 @@ export function Board({
             ) : (
               <>
                 <span className="muted">Click a Combat card in hand to attack with it</span>
+                <button onClick={onUsePower} disabled={!canUsePower}>
+                  Use Personality Power
+                </button>
                 <button className="ghost" onClick={() => setArmingFinal(true)} disabled={(me?.zones.hand.length ?? 0) === 0}>
                   Final Physical Attack
                 </button>

@@ -213,6 +213,64 @@ function addLockout(
   const what = attackType === 'any' ? 'attacks' : `${attackType} attacks`;
   state.log.push(`${state.players[playerIdx]?.name} cannot perform ${what} for the remainder of Combat.`);
 }
+/**
+ * Use the Personality Power of the personality in Control of Combat
+ * (CRD ~L492).
+ *
+ * This is one of the seven things an Attack Phase may be spent on and it did
+ * not exist: no personality carried an ability, no action invoked one, and the
+ * `personalityPower` trigger was produced and consumed by nothing. A deck built
+ * around a signature power played as a blank body.
+ *
+ * Once per turn, and only by the personality actually in Control — "You cannot
+ * use your MP's power when an Ally is in control of Combat and vice-versa".
+ * The once-per-turn mark is a turn NUMBER, not a flag, because advancing or
+ * losing a level gives the power back the same turn.
+ */
+export function usePersonalityPower(
+  state: GameState,
+  ctx: CombatCtx,
+  db: CardDb,
+  events: GameEvent[],
+): string | undefined {
+  const c = state.combat;
+  if (!c) return 'a Personality Power may only be used during the Combat Step';
+  if (state.pendingPrompt) return 'resolve the current prompt first';
+  if (c.currentAttack) return 'an attack is already in progress';
+  if (ctx.actingPlayerIdx !== c.phasePlayerIdx) return 'not your Attack Phase';
+
+  const player = state.players[ctx.actingPlayerIdx];
+  if (!player) return 'no such player';
+  const controller = controllerOf(player);
+  if (controller.usedPowerTurn === state.turnNumber) {
+    return `${controller.personalityName} has already used their Personality Power this turn`;
+  }
+
+  const cardId = controller.levelCardIds[controller.currentLevel - 1];
+  const ability = (cardId ? db.get(cardId)?.rules?.abilities ?? [] : []).find(
+    (a) => a.trigger === 'personalityPower',
+  );
+  if (!ability) return `${controller.personalityName} has no Personality Power the engine can resolve`;
+
+  controller.usedPowerTurn = state.turnNumber;
+  const kind = attackKindOf(ability);
+  state.log.push(`${player.name}: ${controller.personalityName} uses their Personality Power.`);
+
+  // A power that performs an attack IS the attack for this phase — one of the
+  // CRD's listed Attack Phase options, and the only legitimate way to attack
+  // without a card now that a bare attack is refused.
+  if (kind) {
+    return declareAttack(state, kind, undefined, ctx, db, events, ability, { fromPower: true });
+  }
+
+  // Otherwise it is a bundle of riders, resolved now, and the phase passes.
+  const foeIdx = other(state, ctx.actingPlayerIdx);
+  applyOnPlay(state, ctx.actingPlayerIdx, foeIdx, ability.effects, db, events);
+  c.consecutivePasses = 0;
+  c.phasePlayerIdx = foeIdx;
+  return undefined;
+}
+
 /** Attacker declares a physical or energy attack in their Attack Phase. */
 export function declareAttack(
   state: GameState,
@@ -222,6 +280,7 @@ export function declareAttack(
   db: CardDb,
   events: GameEvent[],
   ability?: Ability,
+  opts: { fromPower?: boolean } = {},
 ): string | undefined {
   const c = state.combat;
   if (!c) return 'not in combat';
@@ -241,11 +300,15 @@ export function declareAttack(
   // only ended when both players volunteered to stop. A scripted playthrough
   // declared ~50 free attacks in one Combat Step and emptied a 59-card Life
   // Deck on turn 2 — every game ended by Survival before the second turn.
-  if (!cardUid) {
-    return 'an attack needs a card — play one that can attack, or perform a Final Physical Attack';
+  // A Personality Power that performs an attack is its own source (~L290), so
+  // it is the one attack that legitimately arrives without a card.
+  if (!cardUid && !opts.fromPower) {
+    return 'an attack needs a card — play one that can attack, use a Personality Power, or perform a Final Physical Attack';
   }
-  const bad = combatCardError(state, ctx.actingPlayerIdx, cardUid, db, 'attack');
-  if (bad) return bad;
+  if (cardUid) {
+    const bad = combatCardError(state, ctx.actingPlayerIdx, cardUid, db, 'attack');
+    if (bad) return bad;
+  }
 
   const attackerIdx = c.phasePlayerIdx;
   const defenderIdx = other(state, attackerIdx);
@@ -489,7 +552,20 @@ function activateDefenseShields(
   const defender = state.players[atk.defenderPlayerIdx];
   if (!defender) return false;
 
-  for (const inst of defender.zones.inPlay) {
+  // The personality in Control is a shield source too. This scanned only
+  // zones.inPlay, so the Defense Shields printed on personality cards — Android
+  // 18, Android 16, Vegeta Ascendant — never fired at all, and CRD defence
+  // option 3 ("use an effect from your Main Personality that stops an attack")
+  // was unreachable. The personality's uid marks it as used, exactly like a
+  // card's, so it answers once per Combat rather than forever.
+  const controller = controllerOf(defender);
+  const controllerCardId = controller.levelCardIds[controller.currentLevel - 1];
+  const shieldSources: Array<{ uid: string; cardId: string; inPlay: boolean }> = [
+    ...defender.zones.inPlay.map((c) => ({ uid: c.uid, cardId: c.cardId, inPlay: true })),
+    ...(controllerCardId ? [{ uid: controller.uid, cardId: controllerCardId, inPlay: false }] : []),
+  ];
+
+  for (const inst of shieldSources) {
     const card = db.get(inst.cardId);
     const text = card?.rules?.text ?? '';
     if (!/defense\s*shield/i.test(text)) continue;
@@ -508,9 +584,12 @@ function activateDefenseShields(
     atk.stopped = true;
     state.log.push(`${defender.name}: ${card?.name ?? 'a Defense Shield'} activates and stops the attack.`);
 
-    if (/remov\w*[^.]{0,30}game/i.test(text)) {
+    // A personality is not a card in play and cannot be removed from the game;
+    // its shield is spent for the Combat by the shieldsUsed mark above.
+    if (inst.inPlay && /remov\w*[^.]{0,30}game/i.test(text)) {
+      const held = defender.zones.inPlay.find((x) => x.uid === inst.uid);
       defender.zones.inPlay = defender.zones.inPlay.filter((x) => x.uid !== inst.uid);
-      defender.zones.removed.push({ ...inst, faceDown: false });
+      if (held) defender.zones.removed.push({ ...held, faceDown: false });
       state.log.push(`${card?.name ?? 'The shield'} is removed from the game.`);
     }
     events.push({ type: 'log', message: `${card?.name ?? 'Defense Shield'} stops the attack` });
@@ -955,8 +1034,17 @@ function boardModifiers(
     const mine = player.idx === attackerIdx;
     const theirs = player.idx === defenderIdx;
     if (!mine && !theirs) continue;
-    for (const inst of [...player.zones.inPlay, ...player.dragonBalls]) {
-      for (const ability of db.get(inst.cardId)?.rules?.abilities ?? []) {
+    // The personality IN CONTROL of Combat contributes its Constant Combat
+    // Power: "You cannot use your MP's Constant Combat Power when an Ally is in
+    // control of Combat and vice-versa" (CRD ~L495). 209 of 600 personalities
+    // print one and not one of them did anything.
+    const controller = controllerOf(player);
+    const controllerCardId = controller.levelCardIds[controller.currentLevel - 1];
+    const sources = [...player.zones.inPlay, ...player.dragonBalls].map((c) => c.cardId);
+    if (controllerCardId) sources.push(controllerCardId);
+
+    for (const cardId of sources) {
+      for (const ability of db.get(cardId)?.rules?.abilities ?? []) {
         if (ability.trigger !== 'constant') continue;
         for (const e of ability.effects) {
           if (e.kind !== 'constantDamageModifier') continue;

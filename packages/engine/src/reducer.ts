@@ -20,6 +20,7 @@ import {
   resolveControlOfCombat,
   resolveDefense,
   takeControlOfCombat,
+  usePersonalityPower,
   type CombatCtx,
 } from './combat.js';
 import { firstAttackAbility } from './abilities.js';
@@ -275,6 +276,9 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
       break;
     case 'finalPhysicalAttack':
       err = finalPhysicalAttack(state, action.discardUid, ctx, db, events);
+      break;
+    case 'usePersonalityPower':
+      err = usePersonalityPower(state, ctx, db, events);
       break;
     case 'defend':
       err = resolveDefense(state, { ...(action.cardUid ? { cardUid: action.cardUid } : {}), ...(action.takeDamage ? { takeDamage: action.takeDamage } : {}) }, ctx, db, events);

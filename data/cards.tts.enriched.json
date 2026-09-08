@@ -302,7 +302,7 @@
     "imageUrl": "images-tts/tts-49d99703-47.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -337,7 +337,20 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
+              "window": "thisCombat"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -350,7 +363,7 @@
     "imageUrl": "images-tts/tts-49d99703-46.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -385,7 +398,20 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
+              "window": "thisCombat"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -4670,7 +4696,7 @@
     "imageUrl": "images-tts/tts-49d99703-55.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack. If successful, also capture an opponent's Dragon Ball.",
       "textVerified": "vision",
@@ -4701,7 +4727,18 @@
         "pur": 3,
         "canBeAlly": true,
         "level": 4
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -4755,7 +4792,7 @@
     "imageUrl": "images-tts/tts-30fb99ff-1.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -4783,7 +4820,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 3,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -7877,9 +7929,10 @@
     "imageUrl": "images-tts/tts-c29a516a-34.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "pur"
+        "pur",
+        "ability:focusedAttack"
       ],
       "text": "Power: Focused physical attack doing +1 life cards of damage for each card in your opponent's removed from the game pile.",
       "textVerified": "vision",
@@ -7904,7 +7957,25 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -12581,9 +12652,10 @@
     "imageUrl": "images-tts/tts-a15907e0-23.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "ladder:arithmeticRepair"
+        "ladder:arithmeticRepair",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack doing 5 life cards of damage. You may discard any amount of your Non-Combat cards in play. For each Non-Combat card discarded this way, this attack does an additional +4 life cards of damage.",
       "textVerified": "vision",
@@ -12608,7 +12680,25 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 4
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -12699,7 +12789,7 @@
     "imageUrl": "images-tts/tts-a15907e0-24.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Energy attack doing 5 life cards of damage. Costs 1 power stage to perform. This attack cannot be stopped. Effects that prevent damage prevent twice their amount for this attack. Lower your opponent's anger 3 levels.",
       "textVerified": "vision",
@@ -12724,7 +12814,27 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -3
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 1
+          }
+        }
+      ]
     }
   },
   {
@@ -12975,7 +13085,7 @@
     "imageUrl": "images-tts/tts-d9b9de78-0.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -13002,7 +13112,27 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -13015,7 +13145,7 @@
     "imageUrl": "images-tts/tts-a15907e0-17.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -13042,7 +13172,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "lifeCards",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -13130,7 +13275,7 @@
     "imageUrl": "images-tts/tts-a15907e0-19.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -13157,7 +13302,27 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -13493,7 +13658,7 @@
     "imageUrl": "images-tts/tts-a15907e0-35.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -13520,7 +13685,19 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "powerStages": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -13612,7 +13789,7 @@
     "imageUrl": "images-tts/tts-a15907e0-33.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack doing +3 life cards of damage. You may remove any number of cards in your discard pile from the game to have Goten gain the same number of power stages. Lower your opponent's anger 2 levels.",
       "textVerified": "vision",
@@ -13637,7 +13814,27 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -13650,7 +13847,7 @@
     "imageUrl": "images-tts/tts-a15907e0-32.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack doing +3 power stages of damage. You may remove 3 cards in your discard pile from the game to have this attack do an additional +3 life cards of damage.",
       "textVerified": "vision",
@@ -13675,7 +13872,26 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -13777,7 +13993,7 @@
     "imageUrl": "images-tts/tts-a15907e0-16.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -13804,7 +14020,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 8
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 0
+          }
+        }
+      ]
     }
   },
   {
@@ -14103,9 +14334,11 @@
     "imageUrl": "images-tts/tts-a15907e0-30.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:energyLifeCards",
+        "ability:focusedAttack"
       ],
       "text": "Power: Focused energy attack doing 3 life cards of damage. If successful, all of your energy attacks do +2 life cards of damage for the remainder of Combat. (Main Personality Only)",
       "textVerified": "vision",
@@ -14130,7 +14363,27 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 2,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards",
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -14182,9 +14435,10 @@
     "imageUrl": "images-tts/tts-a15907e0-29.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "alignment"
+        "alignment",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack 10,000 | doing life cards of damage.\nCosts 3 power stages to perform.\nFor the remainder of Combat.\nyour Kid an Trunks does not have to pay power stages to perform energy attacks.",
       "personality": {
@@ -14208,7 +14462,24 @@
         "canBeAlly": true,
         "ladderVerified": "hand",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 3
+          },
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -14327,8 +14598,10 @@
     "imageUrl": "images-tts/tts-a15907e0-66.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Power: Focused physical attack doing +3 power stages of damage. Shuffle any Goten personality cards in your discard pile into your Life Deck. You may raise your or your opponent's anger 1 level.",
       "textVerified": "vision",
       "personality": {
@@ -14352,7 +14625,30 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -14583,8 +14879,10 @@
     "imageUrl": "images-tts/tts-a15907e0-47.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards"
+      ],
       "text": "Power: Energy attack doing +1 life cards of damage for each Ally you have in play. All of your Allies gain 1 power stage. Lower your opponent's anger 3 levels.",
       "textVerified": "vision",
       "personality": {
@@ -14608,7 +14906,35 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -3
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -14741,7 +15067,7 @@
     "imageUrl": "images-tts/tts-a15907e0-60.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -14768,7 +15094,40 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        },
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -14860,7 +15219,7 @@
     "imageUrl": "images-tts/tts-f5ec86c4-0.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -14887,7 +15246,20 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -14935,9 +15307,11 @@
     "imageUrl": "images-tts/tts-a15907e0-12.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:conditionalDamage",
+        "ability:focusedAttack"
       ],
       "text": "Power: Focused physical attack doing 10 power stages of damage, or shuffle 10 cards from your discard pile into your Life Deck instead.",
       "textVerified": "vision",
@@ -14962,7 +15336,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 5
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "conditionalDamage",
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -15015,7 +15404,7 @@
     "imageUrl": "images-tts/tts-a15907e0-57.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -15042,7 +15431,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 3,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -15055,7 +15459,7 @@
     "imageUrl": "images-tts/tts-a15907e0-56.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack doing +4 power stages of damage. For the remainder of Combat, all of your other physical attacks do +2 power stages of damage.",
       "textVerified": "vision",
@@ -15080,7 +15484,22 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -15426,9 +15845,10 @@
     "imageUrl": "images-tts/tts-a15907e0-44.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:focusedAttack"
       ],
       "text": "Power: Focused physical attack doing +4 power stages of damage. You may remove from the game any cards in your discard pile with the word \"focused\" in the power box. For every card removed in this way, this attack does an additional +3 power stages of damage. (Main Personality Only)",
       "textVerified": "vision",
@@ -15453,7 +15873,25 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -15781,9 +16219,10 @@
     "imageUrl": "images-tts/tts-a15907e0-52.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
-        "type"
+        "type",
+        "ability:focusedAttack"
       ],
       "text": "Power: Focused energy attack doing 6 life cards of damage. You may discard a card with \"Majin\" in the title from your hand. If you do, this power may be used a second time this Combat.",
       "textVerified": "vision",
@@ -15808,7 +16247,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -15888,7 +16342,7 @@
     "imageUrl": "images-tts/tts-6a69cdcc-27.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -15915,7 +16369,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -16955,7 +17424,7 @@
     "imageUrl": "images-tts/tts-a15907e0-40.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -16982,7 +17451,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -16995,7 +17479,7 @@
     "imageUrl": "images-tts/tts-a15907e0-39.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Energy attack doing 7 life cards of damage. For the remainder of Combat, you do not have to remove a card from the game to use its Endurance.",
       "textVerified": "vision",
@@ -17020,7 +17504,19 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 7
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -17060,7 +17556,7 @@
     "imageUrl": "images-tts/tts-a15907e0-37.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "alignment"
       ],
@@ -17086,7 +17582,28 @@
         "canBeAlly": true,
         "ladderVerified": "hand",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "rejuvenate",
+              "count": 1,
+              "from": "bottom"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -19487,7 +20004,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-40.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -19522,7 +20039,22 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -19623,7 +20155,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-42.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -19658,7 +20190,19 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -19766,7 +20310,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-43.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: When entering Combat as the attacker, look at the top 6 cards from your Life Deck and place them back on top in any order, then draw a card.",
       "textOriginal": "Physical attack doing +6 power stages of damage. Lower your opponent's anger 3 levels. If \"The Car\" is in play, this attack also does 5 life cards of damage.",
@@ -19799,7 +20343,19 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -19812,7 +20368,7 @@
     "imageUrl": "images-tts/tts-3ae57df1-63.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -19847,7 +20403,24 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 4
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -19860,7 +20433,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-45.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -19895,7 +20468,19 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 7
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -19908,7 +20493,7 @@
     "imageUrl": "images-tts/tts-7c91d4cf-31.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack doing +5 power stages of damage. If \"The Car\" is in play, you may use this power twice per Combat. (Main Personality Only)",
       "textOriginal": "(Constant Combat Power) No modifiers are added to physical attacks performed against Android 18.",
@@ -19940,7 +20525,22 @@
         "pur": 1,
         "canBeAlly": true,
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -20090,7 +20690,7 @@
     "imageUrl": "images-tts/tts-3ae57df1-20.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings",
         "pur"
@@ -20128,7 +20728,25 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -20192,8 +20810,10 @@
     "imageUrl": "images-tts/tts-3ae57df1-28.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards"
+      ],
       "text": "Power: Energy attack. Costs 0 power stages to perform. Draw a card. If you declared an Orange Tokui-Waza, draw another card.",
       "textOriginal": "Energy attack. Costs 0 power stages to perform. Draw a card. If you declared an Orange Tokui-Waza, draw another card.",
       "lackey": {
@@ -20227,7 +20847,28 @@
         "canBeAlly": true,
         "ladderVerified": "hand",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 0
+          },
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -20282,9 +20923,10 @@
     "imageUrl": "images-tts/tts-76cb49e3-46.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack doing +1 life card of damage for every Android personality card in play.",
       "textOriginal": "Energy attack doing +1 life card of damage for every Android personality card in play.",
@@ -20317,7 +20959,25 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -20330,7 +20990,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-60.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -20364,7 +21024,22 @@
         "pur": 2,
         "canBeAlly": true,
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 8
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 0
+          }
+        }
+      ]
     }
   },
   {
@@ -20377,7 +21052,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-47.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings",
         "pur"
@@ -20413,7 +21088,22 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -20465,7 +21155,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-48.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -20500,7 +21190,22 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -20513,8 +21218,10 @@
     "imageUrl": "images-tts/tts-7c91d4cf-29.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards"
+      ],
       "text": "Power: Energy attack doing +3 life cards of damage if \"The Car\" is in play. (Main Personality Only)",
       "textVerified": "vision",
       "personality": {
@@ -20538,7 +21245,25 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 3
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -22874,7 +23599,7 @@
     "imageUrl": "images-tts/tts-3ae57df1-65.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack doing 5 power stages and 3 life cards of damage.",
       "textVerified": "vision",
@@ -22901,7 +23626,19 @@
         "canBeAlly": true,
         "level": 4,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -23274,7 +24011,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-0.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -23301,7 +24038,25 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 4
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 0,
+              "toZero": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -25321,7 +26076,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-55.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Place the top card from your discard pile at the bottom of your Life Deck. Draw a card. (Main Personality Only)",
       "textVerified": "vision",
@@ -25355,7 +26110,24 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            },
+            {
+              "kind": "rejuvenate",
+              "count": 1,
+              "from": "top"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -27166,7 +27938,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-35.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -27202,7 +27974,22 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -27238,7 +28025,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-36.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings",
         "pur"
@@ -27276,7 +28063,23 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -27440,7 +28243,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-15.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -27477,7 +28280,24 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 4
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -27490,7 +28310,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-29.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -27525,7 +28345,29 @@
         "pur": 2,
         "canBeAlly": true,
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -27586,9 +28428,10 @@
     "imageUrl": "images-tts/tts-76cb49e3-28.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack. Costs 1 power stage to perform.",
       "textOriginal": "Energy attack. Costs 1 power stage to perform.",
@@ -27621,7 +28464,24 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 1
+          },
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -27634,7 +28494,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-30.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -27671,7 +28531,22 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -27684,7 +28559,7 @@
     "imageUrl": "images-tts/tts-76cb49e3-20.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -27721,7 +28596,22 @@
         "canBeAlly": true,
         "ladderVerified": "hand",
         "level": 5
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 9
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -27783,9 +28673,10 @@
     "imageUrl": "images-tts/tts-3ae57df1-14.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack. If successful, lower your opponent's anger 1 level.",
       "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
@@ -27819,7 +28710,27 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -27832,7 +28743,7 @@
     "imageUrl": "images-tts/tts-3ae57df1-18.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings",
         "pur"
@@ -27869,7 +28780,25 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 0,
+              "toZero": true,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -29139,9 +30068,10 @@
     "imageUrl": "images-tts/tts-40b278df-45.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack doing +1 life cards of damage for every Cell Jr. you control.",
       "errata": "Cell Jr. Allies can only be used in your deck or played as Allies if Cell is your Main Personality.\n\nCell Jrs. can only be Allies for Cell when he is a Main Personality and, like Saibaimen, duplicates are allowed in play.  There are 3 different Cell Jr. personality cards: Cell Jr. 1 level 1, Cell Jr. 1 level 2 and lastly Cell Jr. 2 level 1.  The Cell Jr. 1 level 2 will only overlay on its matching Cell Jr. 1 level 1, but can play to its level 2 when Cell is at his level 2 personality level or above.  The entire field of play can have 9 Cell Jrs. in play at once.",
@@ -29175,7 +30105,25 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -29238,7 +30186,7 @@
     "imageUrl": "images-tts/tts-40b278df-28.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -29274,7 +30222,22 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -29540,9 +30503,11 @@
     "imageUrl": "images-tts/tts-40b278df-54.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "level"
+        "level",
+        "ability:energyLifeCards",
+        "ability:focusedAttack"
       ],
       "text": "Power: Focused energy attack.",
       "textVerified": "vision",
@@ -29567,7 +30532,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards",
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -31406,7 +32386,7 @@
     "imageUrl": "images-tts/tts-40b278df-57.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings",
         "level"
@@ -31443,7 +32423,22 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 5
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 5,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -34358,7 +35353,7 @@
     "imageUrl": "images-tts/tts-560f9124-7.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical Attack. If successful it does +4 power stages of damage.",
       "textVerified": "vision",
@@ -34383,7 +35378,23 @@
         "canBeAlly": true,
         "level": 4,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -36118,7 +37129,7 @@
     "imageUrl": "images-tts/tts-560f9124-6.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Energy attack doing 6 life cards of damage.",
       "textVerified": "vision",
@@ -36143,7 +37154,19 @@
         "canBeAlly": true,
         "level": 4,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -37892,7 +38915,7 @@
     "imageUrl": "images-tts/tts-4caf6df6-10.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical Attack. If successful, Yamcha also takes the top 2 discarded cards and places them at the bottom of his life deck.",
       "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
@@ -37926,7 +38949,18 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -39088,7 +40122,7 @@
     "imageUrl": "images-tts/tts-c611d949-12.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -39115,7 +40149,42 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        },
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "drawCards",
+              "count": 1
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -39128,7 +40197,7 @@
     "imageUrl": "images-tts/tts-c611d949-13.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Constant Combat Power: All your physical attacks do +2 power stages of damage. Power: When entering Combat, you may discard a Non-Combat card you have in play to raise your anger 2 levels and Name a Non-Combat card. Search your Life deck for a copy of that Non-Combat card and set it aside. That Non-Combat card comes into play at the end of the turn.",
       "textVerified": "vision",
@@ -39153,7 +40222,33 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        },
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -39166,7 +40261,7 @@
     "imageUrl": "images-tts/tts-c611d949-14.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -39193,7 +40288,33 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 3,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        },
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -39530,7 +40651,7 @@
     "imageUrl": "images-tts/tts-c611d949-4.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -39558,7 +40679,20 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -39807,7 +40941,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-31.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -39834,7 +40968,24 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 4
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 7
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -40221,7 +41372,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-54.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack doing +7 power stages of damage. Lower your opponent's anger to 0. Gain 5 power stages. Place the bottom 3 cards of your discard pile at the bottom of your Life Deck. This power may be used a second time this Combat.",
       "textVerified": "vision",
@@ -40246,7 +41397,38 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 7
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": 0,
+              "toZero": true
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
+            },
+            {
+              "kind": "rejuvenate",
+              "count": 3,
+              "from": "bottom"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -40538,7 +41720,7 @@
     "imageUrl": "images-tts/tts-c611d949-18.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur",
         "level"
@@ -40566,7 +41748,24 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -40797,7 +41996,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-9.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -40824,7 +42023,26 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -40908,7 +42126,7 @@
     "imageUrl": "images-tts/tts-2b332fa4-56.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -40935,7 +42153,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 3,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -41459,7 +42692,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-58.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -41486,7 +42719,20 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -41539,7 +42785,7 @@
     "imageUrl": "images-tts/tts-e3673ab6-56.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -41566,7 +42812,29 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 1,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -43755,7 +45023,7 @@
     "imageUrl": "images-tts/tts-c611d949-9.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -43782,7 +45050,27 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -43795,7 +45083,7 @@
     "imageUrl": "images-tts/tts-c611d949-10.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -43822,7 +45110,27 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -44004,7 +45312,7 @@
     "imageUrl": "images-tts/tts-8281ee74-4.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -44031,7 +45339,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -44412,9 +45735,11 @@
     "imageUrl": "images-tts/tts-c611d949-6.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "alignment"
+        "alignment",
+        "ability:energyLifeCards",
+        "ability:focusedAttack"
       ],
       "text": "8.000 Constant Combat Power: All of your attacks gain \"If successful, raise your anger 1 level and gain 2 power stages.\nPower: Focused energy attack.",
       "personality": {
@@ -44438,7 +45763,22 @@
         "canBeAlly": true,
         "ladderVerified": "hand",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards",
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -44708,7 +46048,7 @@
     "imageUrl": "images-tts/tts-89fe8da5-6.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -44735,7 +46075,19 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -44748,7 +46100,7 @@
     "imageUrl": "images-tts/tts-434ce590-6.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack doing +5 power stages of damage. If successful, discard one of your opponent's Drills in play.",
       "textVerified": "vision",
@@ -44773,7 +46125,23 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -45761,7 +47129,7 @@
     "imageUrl": "images-tts/tts-434ce590-8.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -45788,7 +47156,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 3,
+              "resource": "stages",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -46026,7 +47409,7 @@
     "imageUrl": "images-tts/tts-3b425687-4.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -46053,7 +47436,25 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -46107,7 +47508,7 @@
     "imageUrl": "images-tts/tts-3b425687-5.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -46134,7 +47535,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 4
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -46987,7 +48403,7 @@
     "imageUrl": "images-tts/tts-18cbdeb1-21.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -47014,7 +48430,20 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 4
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -47027,7 +48456,7 @@
     "imageUrl": "images-tts/tts-89fe8da5-28.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -47054,7 +48483,20 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -47128,7 +48570,7 @@
     "imageUrl": "images-tts/tts-89fe8da5-25.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -47156,7 +48598,20 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "rejuvenate",
+              "count": 2,
+              "from": "bottom"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -47184,7 +48639,7 @@
     "imageUrl": "images-tts/tts-434ce590-3.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -47211,7 +48666,29 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 5,
+              "ifSuccessful": true
+            },
+            {
+              "kind": "discardCards",
+              "target": "foe",
+              "count": 1,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -50071,7 +51548,7 @@
     "imageUrl": "images-tts/tts-839c2c98-9.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -50098,7 +51575,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 3,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -50206,7 +51698,7 @@
     "imageUrl": "images-tts/tts-839c2c98-10.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -50233,7 +51725,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -50449,8 +51956,10 @@
     "imageUrl": "images-tts/tts-18cbdeb1-8.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:focusedAttack"
+      ],
       "text": "Power: Focused energy attack doing 5 life cards of damage. If successful, discard one of your opponent's Allies or Drills in play.",
       "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
       "textVerified": "vision",
@@ -50475,7 +51984,22 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 5
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -53446,8 +54970,10 @@
     "imageUrl": "images-tts/tts-aa1b8542-50.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards"
+      ],
       "text": "Power: Energy attack. Costs 1 power stage to perform.",
       "textOriginal": "Kamehameha Energy: Attack does three life card draws and only costs one power stage to perform.",
       "lackey": {
@@ -53479,7 +55005,24 @@
         "canBeAlly": true,
         "level": 4,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 1
+          },
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -53537,7 +55080,7 @@
     "imageUrl": "images-tts/tts-f1189c19-21.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Prevent 2 life cards of damage from an energy attack.",
       "textOriginal": "Kamehameha Energy: Attack does three life card draws and only costs one power stage to perform.",
@@ -53570,7 +55113,20 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "preventLifeCards",
+              "amount": 2,
+              "attackType": "energy"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -53583,7 +55139,7 @@
     "imageUrl": "images-tts/tts-f1189c19-20.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -53618,7 +55174,19 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "powerStages": 4
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -54790,7 +56358,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-56.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Stops an energy attack.",
       "textOriginal": "Saiyan Energy Deflection forces only 2 discards from a successful energy attack, no matter how powerful.",
@@ -54823,7 +56391,20 @@
         "canBeAlly": true,
         "level": 4,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -54836,7 +56417,7 @@
     "imageUrl": "images-tts/tts-f1189c19-46.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -54870,7 +56451,20 @@
         "pur": 2,
         "canBeAlly": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -54929,7 +56523,7 @@
     "imageUrl": "images-tts/tts-f1189c19-38.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack doing 6 power stages of damage.",
       "textOriginal": "Saiyan Energy Deflection forces only 2 discards from a successful energy attack, no matter how powerful.",
@@ -54962,7 +56556,19 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "powerStages": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -57625,7 +59231,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-38.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack doing 5 life cards of damage. There must be at least 1 other Saibaimen personality in play in order to use this power.",
       "textOriginal": "Saiyan Energy Deflection forces only two discards from a successful energy attack, no matter how powerful.",
@@ -57658,7 +59264,19 @@
         "canBeAlly": true,
         "level": 4,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 5
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -59180,7 +60798,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-52.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Your opponent's main personality loses 3 power stages.",
       "textOriginal": "Saiyan Energy Deflection forces only 2 discards form a successful energy attack, no matter how powerful.",
@@ -59213,7 +60831,20 @@
         "canBeAlly": true,
         "level": 4,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "foe",
+              "delta": -3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -59320,7 +60951,7 @@
     "imageUrl": "images-tts/tts-f1189c19-35.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Energy attack doing 3 life cards of damage.  Costs 1 power stage to perform.",
       "textOriginal": "Saiyan Energy Deflection forces only 2 discards form a successful energy attack, no matter how powerful.",
@@ -59353,7 +60984,22 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 3
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 1
+          }
+        }
+      ]
     }
   },
   {
@@ -59661,9 +61307,10 @@
     "imageUrl": "images-tts/tts-8cbb81b5-37.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "pur"
+        "pur",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack. Costs 3 power stages to perform.",
       "textOriginal": "Physical Attack.",
@@ -59696,7 +61343,24 @@
         "canBeAlly": true,
         "ladderVerified": "hand",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 3
+          },
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -59832,8 +61496,10 @@
     "imageUrl": "images-tts/tts-8cbb81b5-15.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
-      "needsReview": [],
+      "coverage": "partial",
+      "needsReview": [
+        "ability:energyLifeCards"
+      ],
       "text": "Power: Energy attack. If successful, your opponent skips their next \"Attacker Attacks\" phase.",
       "errata": "Forces your opponent to “skip” his next “Attacker Attacks” phase, meaning you may not pass to end Combat.\n\nPersonality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
       "textOriginal": "Solar Flare Energy Attack: If it is not blocked it stuns the foe, so he must skip his next opportunity to attack back.",
@@ -59866,7 +61532,21 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -59879,7 +61559,7 @@
     "imageUrl": "images-tts/tts-8cbb81b5-14.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Energy attack doing 2 life cards of damage.",
       "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
@@ -59913,7 +61593,19 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -60940,7 +62632,7 @@
     "imageUrl": "images-tts/tts-7c91d4cf-6.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -60975,7 +62667,19 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -61149,7 +62853,7 @@
     "imageUrl": "images-tts/tts-94ce7717-38.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack. If successful, also stop all opponent's physical attacks for the remainder of Combat.",
       "textOriginal": "(Constant Combat Power) When defending against a physical attack, choose any personality in play and use their power stage to determine damage.",
@@ -61182,7 +62886,24 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
+              "window": "thisCombat",
+              "scope": "all"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -61382,7 +63103,7 @@
     "imageUrl": "images-tts/tts-94ce7717-40.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings",
         "pur"
@@ -61418,7 +63139,19 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -62612,7 +64345,7 @@
     "imageUrl": "images-tts/tts-ac3c3683-32.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Defense Shield: When defending in Combat, stop the first unstopped attack performed on you.",
       "textOriginal": "(Constant Combat Power) Defense shield: stop the first unstopped energy attack in combat. You cannot have your anger lowered by more than 1 level by any card.",
@@ -62645,7 +64378,20 @@
         "canBeAlly": true,
         "ladderVerified": "hand",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -62658,7 +64404,7 @@
     "imageUrl": "images-tts/tts-ac3c3683-31.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings",
         "pur"
@@ -62694,7 +64440,22 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -62775,7 +64536,7 @@
     "imageUrl": "images-tts/tts-ac3c3683-53.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: If Goku takes no damage while defending in combat, you may raise him to his highest power stage at the end of Combat. (Main Personality Only)",
       "textVerified": "vision",
@@ -62800,7 +64561,20 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -62959,7 +64733,7 @@
     "imageUrl": "images-tts/tts-ac3c3683-20.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type",
         "ladder:arithmeticRepair"
@@ -62994,7 +64768,22 @@
         "pur": 3,
         "canBeAlly": true,
         "level": 4
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "lifeCards",
+              "attackType": "energy",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -63645,9 +65434,10 @@
     "imageUrl": "images-tts/tts-ac3c3683-15.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "level"
+        "level",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack. Lower your opponent's anger 1 level. Raise your anger 1 level.",
       "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
@@ -63673,7 +65463,31 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -64914,7 +66728,7 @@
     "imageUrl": "images-tts/tts-ac3c3683-14.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -64948,7 +66762,22 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 4
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -64999,7 +66828,7 @@
     "imageUrl": "images-tts/tts-ac3c3683-28.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings",
         "pur"
@@ -65035,7 +66864,19 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -65751,7 +67592,7 @@
     "imageUrl": "images-tts/tts-7c91d4cf-7.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Draw a card. (Main Personality Only)",
       "textOriginal": "(Constant Combat Power) When defending in combat, your opponent must play with his hand face up on the table.",
@@ -65784,7 +67625,19 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -65906,7 +67759,7 @@
     "imageUrl": "images-tts/tts-ac3c3683-58.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur",
         "level"
@@ -65940,7 +67793,19 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -66048,7 +67913,7 @@
     "imageUrl": "images-tts/tts-ac3c3683-42.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Energy attack doing 8 life cards of damage.",
       "textOriginal": "Energy attack doing 8 life cards of damage.",
@@ -66081,7 +67946,19 @@
         "canBeAlly": true,
         "ladderVerified": "hand",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 8
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -66363,7 +68240,7 @@
     "imageUrl": "images-tts/tts-ac3c3683-46.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack. This must be your first attack in Combat. Your opponent must play/use 2 cards/effects that stop physical attacks in order to stop this attack.",
       "errata": "Your opponent is allowed to play 2 cards from his hand to stop this attack.",
@@ -66396,7 +68273,23 @@
         "pur": 1,
         "canBeAlly": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -67065,7 +68958,7 @@
     "imageUrl": "images-tts/tts-ac3c3683-47.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -67092,7 +68985,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -67167,7 +69075,7 @@
     "imageUrl": "images-tts/tts-ac3c3683-36.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Energy attack doing 7 life cards of damage. Costs no power stages to perform.",
       "textOriginal": "Energy attack doing 7 life cards of damage and costs no power stages to perform.",
@@ -67200,7 +69108,19 @@
         "canBeAlly": true,
         "ladderVerified": "hand",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 7
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -67309,7 +69229,7 @@
     "imageUrl": "images-tts/tts-ac3c3683-35.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings"
       ],
@@ -67344,7 +69264,19 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "powerStages": 8
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -67378,9 +69310,10 @@
     "imageUrl": "images-tts/tts-7c91d4cf-8.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "powerRatings"
+        "powerRatings",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack. This attack cannot be stopped. (Main Personality Only)",
       "textOriginal": "Stops a physical attack.",
@@ -67413,7 +69346,21 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -68432,7 +70379,7 @@
     "imageUrl": "images-tts/tts-a8664770-41.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -68459,7 +70406,22 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -71090,7 +73052,7 @@
     "imageUrl": "images-tts/tts-a8664770-6.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -71118,7 +73080,25 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
+              "window": "thisAttack"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -71645,7 +73625,7 @@
     "imageUrl": "images-tts/tts-a42f5098-16.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur",
         "level"
@@ -71674,7 +73654,20 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -71687,10 +73680,11 @@
     "imageUrl": "images-tts/tts-a42f5098-34.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur",
-        "level"
+        "level",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack. Costs 1 power stage to perform.",
       "textVerified": "vision",
@@ -71715,7 +73709,24 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 1
+          },
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -71728,7 +73739,7 @@
     "imageUrl": "images-tts/tts-9f900382-20.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -71755,7 +73766,20 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -72060,9 +74084,10 @@
     "imageUrl": "images-tts/tts-a8664770-49.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "pur"
+        "pur",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack. For the remainder of Combat, after Cymbal performs a successful attack, you may remove him from the game to search your opponent's Life Deck for a Dragon Ball and put it into play under your control without using its power.",
       "textVerified": "vision",
@@ -72087,7 +74112,21 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -72227,7 +74266,7 @@
     "imageUrl": "images-tts/tts-a8664770-52.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -72254,7 +74293,27 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
+              "window": "thisCombat"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -73080,10 +75139,11 @@
     "imageUrl": "images-tts/tts-9f900382-52.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur",
-        "level"
+        "level",
+        "ability:focusedAttack"
       ],
       "text": "Power: Focused energy attack doing 6 life cards of damage or focused physical attack doing 6 life cards of damage. Costs 0 power stages to perform. If successful, you may search your Life Deck for a Dragon Ball and put it into play.",
       "textVerified": "vision",
@@ -73108,7 +75168,25 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 4
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 0
+          },
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -73121,7 +75199,7 @@
     "imageUrl": "images-tts/tts-a8664770-53.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -73149,7 +75227,19 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -73162,9 +75252,10 @@
     "imageUrl": "images-tts/tts-a8664770-33.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "pur"
+        "pur",
+        "ability:focusedAttack"
       ],
       "text": "Power: Focused physical attack doing 6 life cards of damage. You may shuffle a Dragon Ball in a removed from game pile or in play into its owner's Life Deck. Search your Life Deck for a Dragon Ball that does not end or skip the Combat step and put it into play. Your opponent may not use the powers of Dragon Balls until the end of your next turn.",
       "textVerified": "vision",
@@ -73189,7 +75280,22 @@
         "canBeAlly": true,
         "level": 5,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "lifeCards": 6
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -73235,7 +75341,7 @@
     "imageUrl": "images-tts/tts-3deaec36-11.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur",
         "level"
@@ -73263,7 +75369,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -73358,7 +75479,7 @@
     "imageUrl": "images-tts/tts-a8664770-55.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -73385,7 +75506,20 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -73681,7 +75815,7 @@
     "imageUrl": "images-tts/tts-3deaec36-14.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -73709,7 +75843,22 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 4,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -74220,7 +76369,7 @@
     "imageUrl": "images-tts/tts-be34bddc-61.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type",
         "alignment"
@@ -74250,7 +76399,20 @@
         "canBeAlly": true,
         "ladderVerified": "hand",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "any",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -75100,9 +77262,10 @@
     "imageUrl": "images-tts/tts-a8664770-59.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "pur"
+        "pur",
+        "ability:focusedAttack"
       ],
       "text": "Constant Combat Power: If you have not played a card from under your Mastery this turn, you may put a card from your hand under your Mastery to choose a card under your Mastery that performs an attack and play it during this Attack Phase, and then remove that card from the game. Power: Focused physical attack doing +4 power stages of damage. If successful, choose a Styled card in your removed from game pile and put it under your Mastery.",
       "textVerified": "vision",
@@ -75127,7 +77290,26 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -75180,7 +77362,7 @@
     "imageUrl": "images-tts/tts-9f900382-2.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -75207,7 +77389,20 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -75274,10 +77469,11 @@
     "imageUrl": "images-tts/tts-9f900382-11.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur",
-        "level"
+        "level",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack. If successful and the total number of Battlegrounds and Locations in play is 7 or higher, you win the game.",
       "textVerified": "vision",
@@ -75302,7 +77498,21 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 4
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -75570,7 +77780,7 @@
     "imageUrl": "images-tts/tts-3deaec36-0.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "alignment"
       ],
@@ -75597,7 +77807,18 @@
         "canBeAlly": true,
         "ladderVerified": "hand",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -75843,9 +78064,11 @@
     "imageUrl": "images-tts/tts-3efb4bcb-3.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "pur"
+        "pur",
+        "ability:energyLifeCards",
+        "ability:focusedAttack"
       ],
       "text": "Power: Focused energy attack doing +X life cards of damage. If there are no Allies in play, remove both players' discard piles from the game. X = the number of Allies in all discard piles and removed from game piles, to a maximum of 7.",
       "textVerified": "vision",
@@ -75870,7 +78093,22 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards",
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -76022,7 +78260,7 @@
     "imageUrl": "images-tts/tts-9f900382-33.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -76049,7 +78287,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -76486,7 +78739,7 @@
     "imageUrl": "images-tts/tts-3deaec36-4.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -76513,7 +78766,22 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -76661,9 +78929,10 @@
     "imageUrl": "images-tts/tts-a8664770-15.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "pur"
+        "pur",
+        "ability:focusedAttack"
       ],
       "text": "Power: Focused physical attack doing +4 life cards of damage. For the remainder of Combat, focused attacks performed by Majin Dabura gain \"Raise your anger 1 level.\"",
       "textVerified": "vision",
@@ -76688,7 +78957,30 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 4
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -76985,7 +79277,7 @@
     "imageUrl": "images-tts/tts-3deaec36-6.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -77013,7 +79305,20 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -77238,7 +79543,7 @@
     "imageUrl": "images-tts/tts-7bdadf12-4.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -77266,7 +79571,29 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            },
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "lifeCards",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -77279,7 +79606,7 @@
     "imageUrl": "images-tts/tts-7bdadf12-3.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur",
         "level"
@@ -77308,7 +79635,28 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -77766,7 +80114,7 @@
     "imageUrl": "images-tts/tts-9f900382-41.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack doing +3 power stages of damage. If all of your personalities in play have Saiyan Heritage, for the remainder of Combat, when a personality would gain any number of power stages, they gain 0 power stages instead.",
       "textVerified": "vision",
@@ -77791,7 +80139,27 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 0
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -78923,7 +81291,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-23.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur",
         "level"
@@ -78951,7 +81319,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 2
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 1
+          }
+        }
+      ]
     }
   },
   {
@@ -79289,9 +81672,10 @@
     "imageUrl": "images-tts/tts-3efb4bcb-15.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "pur"
+        "pur",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack. Costs 1 power stage to perform. If Pikkon is your Main Personality and your discard pile has no Freestyle cards, for the remainder of Combat you cannot draw cards or put cards in your hand from card effects, and your Styled if successful effects are secondary effects.",
       "textVerified": "vision",
@@ -79316,7 +81700,24 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 1
+          },
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -79689,7 +82090,7 @@
     "imageUrl": "images-tts/tts-9f900382-36.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Physical attack doing +3 power stages of damage. If all of your personalities in play have Saiyan Heritage, attacks performed by Raditz that use the Physical Attack Table have a base damage of 4 instead for the remainder of Combat.",
       "textVerified": "vision",
@@ -79714,7 +82115,22 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -81794,7 +84210,7 @@
     "imageUrl": "images-tts/tts-a8664770-31.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -81821,7 +84237,20 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "preventLifeCards",
+              "amount": 5,
+              "attackType": "any"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -82687,7 +85116,7 @@
     "imageUrl": "images-tts/tts-3efb4bcb-20.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -82714,7 +85143,22 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 6
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -82934,7 +85378,7 @@
     "imageUrl": "images-tts/tts-9f900382-44.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -82961,7 +85405,19 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -84049,7 +86505,7 @@
     "imageUrl": "images-tts/tts-9f900382-19.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -84076,7 +86532,20 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -84127,7 +86596,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-35.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Energy attack doing 3 life cards of damage.  Costs 1 power stage to perform.",
       "textVerified": "vision",
@@ -84152,7 +86621,22 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 3
+            }
+          ],
+          "source": "parsed",
+          "cost": {
+            "powerStages": 1
+          }
+        }
+      ]
     }
   },
   {
@@ -84165,7 +86649,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-45.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -84192,7 +86676,20 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "energy",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -84205,10 +86702,11 @@
     "imageUrl": "images-tts/tts-9f900382-48.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur",
-        "level"
+        "level",
+        "ability:focusedAttack"
       ],
       "text": "Power: Focused physical attack doing +6 power stages of damage. For the remainder of Combat, you may pay 3 power stages when you perform an attack to have your opponent skip their next Attack Phase this Combat.",
       "textVerified": "vision",
@@ -84233,7 +86731,28 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 5
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 6
+            },
+            {
+              "kind": "stunSkipNextPhase"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "focusedAttack"
+          ]
+        }
+      ]
     }
   },
   {
@@ -84246,7 +86765,7 @@
     "imageUrl": "images-tts/tts-9f900382-45.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -84273,7 +86792,30 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 4
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
+              "kind": "stunSkipNextPhase"
+            },
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -84286,7 +86828,7 @@
     "imageUrl": "images-tts/tts-a8664770-12.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -84313,7 +86855,27 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageStages",
+              "stages": 4
+            },
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -84326,7 +86888,7 @@
     "imageUrl": "images-tts/tts-9f900382-6.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: When entering Combat, you may discard a card from your hand to search your Life Deck for a Non-Combat card with \"Capture\" or \"Captured\" in its power box and put it into play.",
       "textVerified": "vision",
@@ -84351,7 +86913,20 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -85017,7 +87592,7 @@
     "imageUrl": "images-tts/tts-a42f5098-36.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -85044,7 +87619,18 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -85130,7 +87716,7 @@
     "imageUrl": "images-tts/tts-a42f5098-14.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur",
         "level"
@@ -85159,7 +87745,19 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -85398,7 +87996,7 @@
     "imageUrl": "images-tts/tts-0e3b7819-16.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type",
         "alignment"
@@ -85426,7 +88024,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -87280,7 +89893,7 @@
     "imageUrl": "images-tts/tts-0e3b7819-34.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "[Main Personality Only] Power: Stops a physical attack. If you declared a Tokui-Waza, search your Life Deck for a Freestyle Drill and place it in your hand.",
       "textVerified": "vision",
@@ -87305,7 +89918,20 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -87593,7 +90219,7 @@
     "imageUrl": "images-tts/tts-0e3b7819-38.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "[Main Personality Only] Power: Physical attack doing 7 power stages of damage. You must remove the top 2 cards of your discard pile from the game to perform this attack.",
       "textVerified": "vision",
@@ -87618,7 +90244,19 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "physicalAttack",
+              "powerStages": 7
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -87787,7 +90425,7 @@
     "imageUrl": "images-tts/tts-0a93c43d-62.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -87814,7 +90452,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "stages",
+              "attackType": "any",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -88102,7 +90755,7 @@
     "imageUrl": "images-tts/tts-0e3b7819-42.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -88130,7 +90783,25 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack",
+              "lifeCards": 7
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2,
+              "ifSuccessful": true
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -88298,7 +90969,7 @@
     "imageUrl": "images-tts/tts-76e864b5-1.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur",
         "level"
@@ -88326,7 +90997,20 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -88380,7 +91064,7 @@
     "imageUrl": "images-tts/tts-0a93c43d-65.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -88410,7 +91094,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 3
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 1,
+              "resource": "stages",
+              "attackType": "energy",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -88637,7 +91336,7 @@
     "imageUrl": "images-tts/tts-0a93c43d-66.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -88666,7 +91365,22 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "constant",
+          "effects": [
+            {
+              "kind": "constantDamageModifier",
+              "amount": 2,
+              "resource": "stages",
+              "attackType": "physical",
+              "applies": "yours"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -90659,9 +93373,10 @@
     "imageUrl": "images-tts/tts-76e864b5-10.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
-        "level"
+        "level",
+        "ability:energyLifeCards"
       ],
       "text": "Power: Energy attack. If successful, all cards in your Life Deck with no Endurance have Endurance 1 for the remainder of Combat.",
       "textVerified": "vision",
@@ -90686,7 +93401,21 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "energyAttack"
+            }
+          ],
+          "source": "parsed",
+          "needsReview": [
+            "energyLifeCards"
+          ]
+        }
+      ]
     }
   },
   {
@@ -90699,7 +93428,7 @@
     "imageUrl": "images-tts/tts-0e3b7819-54.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -90726,7 +93455,20 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "stopAttack",
+              "attackType": "physical",
+              "window": "thisAttack"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
