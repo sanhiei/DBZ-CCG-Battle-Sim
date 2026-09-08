@@ -120,6 +120,12 @@ export interface Ability {
   label?: string;
   cost?: AbilityCost;
   restriction?: AbilityRestriction;
+  /**
+   * Which side of Combat may use it. 30 "When entering Combat" cards fire only
+   * for one role ("...as the defender"), and firing them for both would hand
+   * the attacker an effect the card does not give them.
+   */
+  role?: 'attacker' | 'defender';
   effects: Effect[];
   /** 'parsed' = auto-derived (verify); 'authored' = hand-verified. */
   source?: 'parsed' | 'authored';

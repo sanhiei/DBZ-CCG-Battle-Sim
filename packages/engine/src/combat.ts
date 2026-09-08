@@ -70,11 +70,56 @@ function other(state: GameState, idx: number): number {
 }
 
 /** Enter the Combat Step: run the Prepare Phase and open the first Attack Phase. */
+/**
+ * One player's half of the Prepare Phase: fire the "When entering Combat"
+ * effects on the cards they have on the table, and on the personality in
+ * Control of Combat.
+ *
+ * "Each effect may only be used once" (~L264), so each source is marked as it
+ * fires. Cards in the attacker's HAND are deliberately not fired: the CRD does
+ * list them (~L258), but almost all of them read "Use when entering Combat",
+ * which is a card being played and spent, and firing that for the player
+ * without asking would spend their hand for them.
+ */
+function runPrepareEffects(
+  state: GameState,
+  playerIdx: number,
+  role: 'attacker' | 'defender',
+  db: CardDb,
+  events: GameEvent[],
+): void {
+  const player = state.players[playerIdx];
+  const c = state.combat;
+  if (!player || !c) return;
+  const foeIdx = other(state, playerIdx);
+
+  const controller = controllerOf(player);
+  const controllerCardId = controller.levelCardIds[controller.currentLevel - 1];
+  const sources: Array<{ uid: string; cardId: string }> = [
+    ...player.zones.inPlay.map((card) => ({ uid: card.uid, cardId: card.cardId })),
+    ...player.dragonBalls.map((card) => ({ uid: card.uid, cardId: card.cardId })),
+    ...(controllerCardId ? [{ uid: controller.uid, cardId: controllerCardId }] : []),
+  ];
+
+  for (const source of sources) {
+    if ((c.preparedUsed ?? []).includes(source.uid)) continue;
+    const abilities = db.get(source.cardId)?.rules?.abilities ?? [];
+    for (const ability of abilities) {
+      if (ability.trigger !== 'whenEnteringCombat') continue;
+      if (ability.role && ability.role !== role) continue;
+      c.preparedUsed = [...(c.preparedUsed ?? []), source.uid];
+      state.log.push(
+        `${player.name}: ${db.get(source.cardId)?.name ?? 'a card'} triggers on entering Combat.`,
+      );
+      applyOnPlay(state, playerIdx, foeIdx, ability.effects, db, events);
+      break; // one effect per source, once
+    }
+  }
+}
+
 export function beginCombat(state: GameState, db: CardDb, events: GameEvent[]): void {
   const attacker = state.activePlayerIdx;
   const defender = other(state, attacker);
-  // Defender's half of the Prepare Phase: draw 3.
-  draw(state, defender, PREPARE_DRAW);
   state.combat = {
     attackerPlayerIdx: attacker,
     defenderPlayerIdx: defender,
@@ -82,6 +127,15 @@ export function beginCombat(state: GameState, db: CardDb, events: GameEvent[]): 
     consecutivePasses: 0,
     finalUsed: [],
   };
+
+  // The Prepare Phase in the CRD's order (~L258-266): the attacker's half
+  // first, then the defender's — their effects, and THEN their 3 cards. Only
+  // the draw existed, so 149 cards printing "When entering Combat" did nothing
+  // all game and the phrase named a trigger the engine never fired.
+  runPrepareEffects(state, attacker, 'attacker', db, events);
+  runPrepareEffects(state, defender, 'defender', db, events);
+  draw(state, defender, PREPARE_DRAW);
+
   state.log.push(`Combat begins — ${state.players[defender]!.name} draws ${PREPARE_DRAW}.`);
 }
 

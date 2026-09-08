@@ -1383,6 +1383,16 @@
             }
           ],
           "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
         }
       ]
     }
@@ -2492,7 +2502,7 @@
     "imageUrl": "images-tts/tts-49d99703-24.jpg",
     "rules": {
       "type": "Battleground",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -2503,7 +2513,19 @@
         "rarity": "R",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -4436,6 +4458,22 @@
             },
             {
               "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 1
+            },
+            {
+              "kind": "movePowerStage",
+              "target": "user",
+              "to": "highest"
             }
           ],
           "source": "parsed"
@@ -20346,6 +20384,17 @@
       },
       "abilities": [
         {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed",
+          "role": "attacker"
+        },
+        {
           "trigger": "personalityPower",
           "effects": [
             {
@@ -20759,7 +20808,7 @@
     "imageUrl": "images-tts/tts-3ae57df1-25.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "powerRatings",
         "pur"
@@ -20797,7 +20846,20 @@
         "canBeAlly": true,
         "ladderVerified": true,
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 5
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -28282,6 +28344,16 @@
         "level": 4
       },
       "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        },
         {
           "trigger": "personalityPower",
           "effects": [
@@ -40611,7 +40683,7 @@
     "imageUrl": "images-tts/tts-c611d949-5.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Constant Combat Power: When entering Combat draw 2 cards. When a player performs a successful attack, gain 2 anger. If Dr. Willow is your Main Personality, then when you reach 5 or more anger, he loses 2 personality levels.",
       "textVerified": "vision",
@@ -40638,7 +40710,19 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 2
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -40705,7 +40789,7 @@
     "imageUrl": "images-tts/tts-c611d949-3.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -40732,7 +40816,20 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 3
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -56454,6 +56551,17 @@
       },
       "abilities": [
         {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        },
+        {
           "trigger": "personalityPower",
           "effects": [
             {
@@ -68528,6 +68636,18 @@
             }
           ],
           "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed",
+          "role": "defender"
         }
       ]
     }
@@ -70434,7 +70554,7 @@
     "imageUrl": "images-tts/tts-a8664770-28.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -70461,7 +70581,19 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -72972,7 +73104,7 @@
     "imageUrl": "images-tts/tts-9f900382-60.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Bulma may use her level 2 personality powers and Constant Combat Powers. When entering Combat, draw a card. If that card is an Ally or Non-Combat card, you may reveal it and put it into play.",
       "errata": "Personality Capture Rule – When some Allies perform attacks that do life cards of damage, they can choose to capture an opponent's Dragon Ball that is in play rather than deal any life cards of damage.  Theses Allies are: Bulma, Chi-Chi, Frieza, Garlic Jr., Guldo, Krillin, Master Roshi, Saibaimen, Videl, Tien, and Yamcha.  Remember, the attacker must be an Ally, the attack must be successful, and the resulting damage must involve 1 or more life cards of damage taken.",
@@ -72998,7 +73130,19 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -79307,6 +79451,17 @@
         "level": 1
       },
       "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        },
         {
           "trigger": "personalityPower",
           "effects": [
@@ -86427,7 +86582,7 @@
     "imageUrl": "images-tts/tts-9f900382-22.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Constant Combat Power: When entering Combat, draw a card. Your opponent cannot use Endurance. All your Styled attacks do +2 life cards of damage. Your opponent cannot win by the Most Powerful Personality Victory unless their Main Personality stack contains a level 4.",
       "textVerified": "vision",
@@ -86452,7 +86607,19 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -86465,7 +86632,7 @@
     "imageUrl": "images-tts/tts-9f900382-18.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -86492,7 +86659,19 @@
         "canBeAlly": true,
         "level": 1,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -87354,6 +87533,22 @@
       "abilities": [
         {
           "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "foe",
+              "delta": -2
+            },
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
           "effects": [
             {
               "kind": "changeAnger",
@@ -89431,6 +89626,17 @@
       "abilities": [
         {
           "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
           "effects": [
             {
               "kind": "changePowerStages",
@@ -94900,7 +95106,7 @@
     "imageUrl": "images-tts/tts-0e3b7819-9.jpg",
     "rules": {
       "type": "Mastery",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -94912,7 +95118,19 @@
         "rarity": "R",
         "style": "Saiyan"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -95316,7 +95534,7 @@
     "imageUrl": "images-tts/tts-0e3b7819-11.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "level"
       ],
@@ -95343,7 +95561,25 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 1
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 3
+            },
+            {
+              "kind": "drawCards",
+              "count": 2
+            }
+          ],
+          "source": "parsed",
+          "role": "defender"
+        }
+      ]
     }
   },
   {
@@ -95377,7 +95613,7 @@
     "imageUrl": "images-tts/tts-0e3b7819-13.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Constant Combat Power: You cannot win with the Most Powerful Personality Victory. If Tapkar has not used any other personality powers this turn when entering Combat as the defender, remove the top 8 cards of your Life Deck from the game, draw 3 cards, and raise your anger 5 levels.",
       "textVerified": "vision",
@@ -95402,7 +95638,25 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 5
+            },
+            {
+              "kind": "drawCards",
+              "count": 3
+            }
+          ],
+          "source": "parsed",
+          "role": "defender"
+        }
+      ]
     }
   },
   {
@@ -95415,7 +95669,7 @@
     "imageUrl": "images-tts/tts-0e3b7819-12.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Constant Combat Power: If Tapkar has not used any other personality powers this turn when entering Combat as the defender, remove the top 6 cards of your Life Deck from the game, draw 3 cards, and raise your anger 4 levels.",
       "textVerified": "vision",
@@ -95440,7 +95694,25 @@
         "canBeAlly": true,
         "level": 2,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 4
+            },
+            {
+              "kind": "drawCards",
+              "count": 3
+            }
+          ],
+          "source": "parsed",
+          "role": "defender"
+        }
+      ]
     }
   },
   {

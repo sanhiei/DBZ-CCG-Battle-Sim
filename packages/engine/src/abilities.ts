@@ -797,6 +797,45 @@ const IN_PLAY_TYPES = new Set(['Non-Combat', 'Drill', 'Location', 'Battleground'
 const CCP_MARKER = /\(?\s*constant\s+combat\s+power\s*\)?\s*:?/i;
 const POWER_MARKER = /(?:^|[.)\]]\s*)power\s*:/gi;
 
+/**
+ * "When entering Combat" — the Prepare Phase (CRD ~L258-266).
+ *
+ * The trigger was declared in the shared union, emitted by no parser branch and
+ * consumed by nothing, so 149 cards printing the phrase did nothing all game
+ * and the Prepare Phase was one line: the defender's draw.
+ *
+ * Only MANDATORY effects are claimed. 48 of those cards say "you may", and an
+ * optional effect fired automatically is not a smaller bug than one that never
+ * fires — it takes the decision away. Those stay manual until there is a prompt
+ * to hang them on. Deck searching and "look at the top 2 cards" are likewise
+ * left alone: the engine has no model for either.
+ */
+export function parseWhenEnteringCombat(rawText: string): Ability | null {
+  const t = (rawText ?? '').toLowerCase().replace(/\s+/g, ' ');
+  const at = t.search(/when\s+entering\s+combat/);
+  if (at === -1) return null;
+  // Just the sentence the trigger opens; the rest of the card is not part of it.
+  const rest = t.slice(at);
+  const sentence = rest.split(/(?<=\.)\s/)[0] ?? rest;
+  if (/\bmay\b/.test(sentence)) return null;
+
+  const effects: Effect[] = [];
+  pushAnger(effects, sentence);
+  pushMoveStage(effects, sentence);
+  pushRaiseOwnPower(effects, sentence);
+  pushDraw(effects, sentence);
+  pushRejuvenate(effects, sentence);
+  pushDiscardCards(effects, sentence);
+  if (effects.length === 0) return null;
+
+  const ability: Ability = { trigger: 'whenEnteringCombat', effects, source: 'parsed' };
+  // Several cards fire only for one side: "When entering Combat as the
+  // defender, ...".
+  if (/as\s+the\s+defender/.test(sentence)) ability.role = 'defender';
+  else if (/as\s+the\s+attacker/.test(sentence)) ability.role = 'attacker';
+  return ability;
+}
+
 export function parsePersonalityPowers(rawText: string, type = 'Personality'): Ability[] {
   const text = (rawText ?? '').trim();
   if (!text) return [];
@@ -832,6 +871,11 @@ export function parsePersonalityPowers(rawText: string, type = 'Personality'): A
     const next = starts.find((s) => s > mark.from);
     const body = text.slice(mark.from, next ?? text.length).trim();
     if (!body) continue;
+
+    // A "When entering Combat" clause inside either half of the box belongs to
+    // the Prepare Phase, not to the continuous layer or the activated power.
+    const entering = parseWhenEnteringCombat(body);
+    if (entering) out.push(entering);
 
     if (mark.kind === 'constant') {
       // A Constant Combat Power is continuous board state, so only the

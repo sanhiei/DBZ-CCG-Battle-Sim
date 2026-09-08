@@ -203,6 +203,8 @@ export interface CombatState {
   consecutivePasses: number;
   /** Player idxs who have used their Final Physical Attack this combat. */
   finalUsed: number[];
+  /** Sources whose "When entering Combat" effect has fired this Combat (~L264). */
+  preparedUsed?: string[];
   /**
    * Attack types a player may not perform for the REMAINDER of this combat,
    * from cards like "stops all energy attacks for the rest of this combat".

@@ -18,7 +18,7 @@ import { existsSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseAbility, parsePersonalityPowers } from '@dbz/engine';
+import { parseAbility, parsePersonalityPowers, parseWhenEnteringCombat, type Ability } from '@dbz/engine';
 // Reaching into the OCR package's source is deliberate: the corrector operates
 // on OCR output and lives with the OCR calibration tooling.
 import { correctText, type Template } from '../../ocr/src/phrases.ts';
@@ -470,12 +470,21 @@ const cards = catalog.cards.map((c) => {
     // cannot confidently read stay manual.
     const parsedType = (rules.type as string) ?? type;
     if (rules.text && parsedType !== 'Personality') {
+      const parsed: Ability[] = [];
       const ability = parseAbility(rules.text as string, parsedType);
-      if (ability) {
-        rules.abilities = [ability];
+      if (ability) parsed.push(ability);
+      // The Prepare Phase trigger is independent of what the card does the rest
+      // of the time: a Drill can carry both a continuous modifier and a "When
+      // entering Combat" effect.
+      const entering = parseWhenEnteringCombat(rules.text as string);
+      if (entering) parsed.push(entering);
+      if (parsed.length > 0) {
+        rules.abilities = parsed;
         withAbilities++;
-        for (const e of ability.effects) effectKinds[e.kind] = (effectKinds[e.kind] ?? 0) + 1;
-        if (ability.needsReview?.length) needsReview.push(...ability.needsReview.map((n) => `ability:${n}`));
+        for (const a of parsed) {
+          for (const e of a.effects) effectKinds[e.kind] = (effectKinds[e.kind] ?? 0) + 1;
+          if (a.needsReview?.length) needsReview.push(...a.needsReview.map((n) => `ability:${n}`));
+        }
       }
     } else if (rules.text && rules.personality) {
       // Personalities were skipped outright, so 0 of 600 carried an ability
