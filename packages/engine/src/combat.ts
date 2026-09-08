@@ -141,6 +141,12 @@ function finishSuccessfulAttack(
 ): void {
   const c = state.combat;
   if (c) {
+    // Unlike the defence path, an unscoped `thisCombat` is taken at face value
+    // here. These are attack riders — "If successful, also stops an opponent
+    // from performing any energy attacks for the remainder of Combat" — and
+    // they mean exactly that. The defence path has to be stricter because 17
+    // cards there carry the window from a rider that has nothing to do with
+    // their stop.
     for (const e of atk.ifSuccessfulEffects ?? []) {
       if (e.kind === 'stopAttack' && e.window === 'thisCombat') {
         addLockout(state, c, atk.defenderPlayerIdx, e.attackType ?? 'any');
@@ -566,13 +572,15 @@ function combatCardError(state: GameState, playerIdx: number, cardUid: string, d
  * could be replayed every phase forever and a single defense card could block
  * an entire game, so hand size and deck construction meant nothing.
  */
-function discardAttackCards(
-  state: GameState,
-  atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>,
-  db: CardDb,
-  defenseCardUid?: string,
-): void {
-  const spend = (playerIdx: number, uid: string | undefined): void => {
+/**
+ * Send one spent combat card where it belongs — discard, removed, or back to
+ * the table when the card grants another use.
+ *
+ * Pulled out of discardAttackCards because a defence that only PREVENTS damage
+ * is spent while the attack carries on, so the defender's card and the
+ * attacker's card no longer always leave together.
+ */
+function spendCombatCard(state: GameState, playerIdx: number, uid: string | undefined, db: CardDb): void {
     if (!uid) return;
     const p = state.players[playerIdx];
     if (!p) return;
@@ -625,9 +633,16 @@ function discardAttackCards(
     );
     (removes ? p.zones.removed : p.zones.discard).push({ ...spent, faceDown: false });
     state.log.push(`${card?.name ?? 'A card'} is ${removes ? 'removed from the game' : 'discarded'} after use.`);
-  };
-  spend(atk.attackerPlayerIdx, atk.cardUid);
-  spend(atk.defenderPlayerIdx, defenseCardUid);
+}
+
+function discardAttackCards(
+  state: GameState,
+  atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>,
+  db: CardDb,
+  defenseCardUid?: string,
+): void {
+  spendCombatCard(state, atk.attackerPlayerIdx, atk.cardUid, db);
+  spendCombatCard(state, atk.defenderPlayerIdx, defenseCardUid, db);
 }
 
 function redirectTargets(state: GameState, defenderIdx: number, controllerUid: string): PersonalityInPlay[] {
@@ -721,66 +736,87 @@ export function resolveDefense(
     // A permanent that already answered this combat does not answer again.
     if ((c.shieldsUsed ?? []).includes(opts.cardUid)) return 'that card has already been used this Combat';
 
-    // If the card's defense is modelled, it has to stop THIS kind of attack.
-    // Cards whose text is not parsed yet are still allowed through: the engine
-    // does not know what they do, and refusing them would block legal play on
-    // the strength of missing data. An unmodelled defense is logged as such.
+    const found = findCombatCard(state, atk.defenderPlayerIdx, opts.cardUid);
+    const cardName = found ? db.get(found.inst.cardId)?.name ?? 'That card' : 'That card';
+    const abilities = found ? db.get(found.inst.cardId)?.rules?.abilities ?? [] : [];
     const stops = defenseStops(state, atk.defenderPlayerIdx, opts.cardUid, db);
-    if (stops.length > 0) {
-      // The stop has to apply NOW. A card whose only stop is deferred ("stops
-      // the next physical attack", "the first successful attack") was being
-      // spent to stop the attack in front of it, which is not what it says.
-      const nowStops = stops.filter((e) => e.window === undefined || e.window === 'thisAttack' || e.window === 'thisCombat');
-      const covers = nowStops.some((e) => (e.attackType ?? 'any') === 'any' || e.attackType === atk.attackType);
-      if (!covers) {
-        const found = findCombatCard(state, atk.defenderPlayerIdx, opts.cardUid);
-        const name = found ? db.get(found.inst.cardId)?.name : undefined;
-        return `${name ?? 'That card'} does not stop ${atk.attackType} attacks right now`;
-      }
-    } else {
-      // No modelled stop. Allowing that as a full stop was a mistake: it made
-      // EVERY Combat card a perfect defence, including pure attack cards — a
-      // physical attack card stopped an energy attack — so no attack could
-      // land while the defender held anything.
-      //
+    const prevents = defensePrevention(state, atk.defenderPlayerIdx, opts.cardUid, atk.attackType, db);
+
+    // The stop has to apply NOW. A card whose only stop is deferred ("stops the
+    // next physical attack", "the first successful attack") was being spent to
+    // stop the attack in front of it, which is not what it says.
+    const nowStops = stops.filter((e) => e.window === undefined || e.window === 'thisAttack' || e.window === 'thisCombat');
+    const stopsThis = nowStops.some((e) => (e.attackType ?? 'any') === 'any' || e.attackType === atk.attackType);
+
+    if (!stopsThis) {
       // A card the parser DID read, which turned out to be an attack and
-      // nothing else, is not a defence and is refused. A card the parser could
-      // not read at all is still allowed through, because refusing those would
-      // block legal play on missing data — and it costs the defender the card
-      // either way, which is the real check on it.
-      const found = findCombatCard(state, atk.defenderPlayerIdx, opts.cardUid);
-      const abilities = found ? (db.get(found.inst.cardId)?.rules?.abilities ?? []) : [];
+      // nothing else, is not a defence.
       const attackOnly = abilities.length > 0 && abilities.every((a) => a.trigger === 'attack');
-      if (attackOnly) {
-        return `${db.get(found!.inst.cardId)?.name ?? 'That card'} is an attack, not a defence`;
+      if (attackOnly) return `${cardName} is an attack, not a defence`;
+      if (prevents === 0 && stops.length > 0) {
+        // It stops attacks — just not this one, and not now.
+        return `${cardName} does not stop ${atk.attackType} attacks right now`;
       }
-      state.log.push('Defense card has no modelled stop — resolving it as a stop; verify by hand.');
+      if (prevents === 0 && abilities.length > 0) {
+        // Read, defensive, and it neither stops nor prevents this attack.
+        // Resolving it as a stop invented a rule the card does not have.
+        return `${cardName} does not stop or prevent this attack`;
+      }
     }
 
-    atk.stopped = true;
-    // A defense card may also lock the attacker out for the whole combat.
-    for (const e of stops) {
-      if (e.window === 'thisCombat') addLockout(state, c, atk.attackerPlayerIdx, e.attackType ?? 'any');
-    }
-
-    // Everything the card does BESIDES stopping still happens. CRD ~L387: "If
-    // the attack is stopped, the effects are NOT stopped. Secondary effects
-    // occur regardless of if an attack is stopped or not." Only the stop was
-    // being read, so every rider a defense card carries — the anger it raises,
-    // the stages it takes off the attacker, the card it draws — was thrown
-    // away. Disposal is handled by discardAttackCards, so drop that effect.
+    // Everything the card does BESIDES stopping or preventing still happens.
+    // CRD ~L387: "If the attack is stopped, the effects are NOT stopped.
+    // Secondary effects occur regardless of if an attack is stopped or not."
     const riders = defenseEffects(state, atk.defenderPlayerIdx, opts.cardUid, db).filter(
-      (e) => e.kind !== 'stopAttack' && e.kind !== 'removeFromGameAfterUse',
+      (e) => e.kind !== 'stopAttack' && e.kind !== 'preventLifeCards' && e.kind !== 'removeFromGameAfterUse',
     );
-    if (riders.length > 0) {
-      applyOnPlay(state, atk.defenderPlayerIdx, atk.attackerPlayerIdx, riders, db, events);
-    }
 
-    discardAttackCards(state, atk, db, opts.cardUid);
-    events.push({ type: 'attackResolved', successful: false, powerStages: 0, lifeCards: 0 });
-    state.log.push(`${state.players[atk.defenderPlayerIdx]!.name} stops the attack.`);
-    nextAttackPhase(state, events);
-    return undefined;
+    if (!stopsThis && prevents > 0) {
+      // PREVENTION IS NOT A STOP. `preventLifeCards` was parsed onto 20 cards,
+      // typed in the shared Effect union, and read by nothing — so a card that
+      // prevents N life cards fell through and cancelled the whole attack
+      // instead. That is better than the card prints, and it also robs the
+      // attacker of a success they earned: "an attack is considered successful
+      // even if it deals no damage" (~L340 step 8), and the success is what
+      // carries the Dragon Ball capture and every "if successful" rider.
+      atk.preventedLifeCards = (atk.preventedLifeCards ?? 0) + prevents;
+      state.log.push(`${cardName} prevents ${prevents} life card(s) of damage.`);
+      if (riders.length > 0) applyOnPlay(state, atk.defenderPlayerIdx, atk.attackerPlayerIdx, riders, db, events);
+      // Only the DEFENCE card is spent here; the attack goes on, so the
+      // attacker's card is spent with the rest of the attack at step 8.
+      spendCombatCard(state, atk.defenderPlayerIdx, opts.cardUid, db);
+      // and fall through to Defense Shields and the damage.
+    } else {
+      if (!stopsThis) {
+        // Nothing parsed at all. The engine does not know what the card does,
+        // and refusing every unread card would block legal play on missing
+        // data, so it still resolves as a stop — flagged, and it costs the
+        // defender the card either way.
+        state.log.push(`${cardName} has no modelled effect — resolving it as a stop; verify by hand.`);
+      }
+      atk.stopped = true;
+      // A defence may also lock the attacker out for the rest of the combat,
+      // but only one that really is combat-long — the parser marks those
+      // `scope: 'all'` from "stops ALL ... for the remainder of Combat".
+      //
+      // Every `thisCombat` stop used to lock out, and 17 cards carry that
+      // window without the scope. Reading them, none of them means it: most
+      // print "Stops an energy attack" and mention the remainder of Combat for
+      // some OTHER rider, and the rest are Defense Shields that stop "the first
+      // unstopped attack this combat" — single use. Any one of them ended the
+      // opponent's entire offence for the Combat Step.
+      for (const e of nowStops) {
+        if (e.window === 'thisCombat' && e.scope === 'all') {
+          addLockout(state, c, atk.attackerPlayerIdx, e.attackType ?? 'any');
+        }
+      }
+      if (riders.length > 0) applyOnPlay(state, atk.defenderPlayerIdx, atk.attackerPlayerIdx, riders, db, events);
+      discardAttackCards(state, atk, db, opts.cardUid);
+      events.push({ type: 'attackResolved', successful: false, powerStages: 0, lifeCards: 0 });
+      state.log.push(`${state.players[atk.defenderPlayerIdx]!.name} stops the attack.`);
+      nextAttackPhase(state, events);
+      return undefined;
+    }
   }
 
   // Step 7, before the attack is successful: "If the attack was not stopped,
@@ -813,7 +849,13 @@ export function resolveDefense(
     // Empower adds life cards (CRD ~L1102). It was dropped entirely here, so
     // every Empowered energy attack dealt its flat base and the cost of
     // declaring the Empower bought nothing.
-    dealLifeCardsAndFinish(state, atk, lifeCards + (atk.empower ?? 0), db, events);
+    // Prevention comes off the total here, not by cancelling the attack.
+    const prevented = atk.preventedLifeCards ?? 0;
+    const owed = Math.max(0, lifeCards + (atk.empower ?? 0) - prevented);
+    if (prevented > 0) {
+      state.log.push(`${prevented} life card(s) of damage prevented — the attack still succeeds.`);
+    }
+    dealLifeCardsAndFinish(state, atk, owed, db, events);
     return undefined;
   }
 
@@ -1038,14 +1080,44 @@ function defenseEffects(state: GameState, playerIdx: number, cardUid: string, db
   const found = findCombatCard(state, playerIdx, cardUid);
   if (!found) return [];
   const abilities = db.get(found.inst.cardId)?.rules?.abilities ?? [];
-  // A card used to defend contributes its defense ability; cards with no
-  // trigger split (one parsed ability) contribute that one.
+  // A card used to defend contributes its defense ability. Cards with no
+  // trigger split contribute what is left once the ATTACK abilities are set
+  // aside — falling back to every ability handed the defensive path effects
+  // that belong to attacking with the card, so a card defended and then also
+  // fired its own attack rider at the person it was defending against.
   const defensive = abilities.filter((a) => a.trigger === 'defense');
-  return (defensive.length > 0 ? defensive : abilities).flatMap((a) => a.effects);
+  return (defensive.length > 0 ? defensive : abilities.filter((a) => a.trigger !== 'attack')).flatMap(
+    (a) => a.effects,
+  );
 }
 
 function defenseStops(state: GameState, playerIdx: number, cardUid: string, db: CardDb) {
   return defenseEffects(state, playerIdx, cardUid, db).filter((e) => e.kind === 'stopAttack');
+}
+
+/**
+ * Life cards this defence prevents against `attackType`.
+ *
+ * `preventLifeCards` was emitted by the parser, typed in the shared Effect
+ * union, and read by nothing at all — so a card that prevents N life cards fell
+ * through to the "no modelled stop" path and cancelled the attack outright
+ * instead. That is strictly better than what it prints, and it also robs the
+ * attacker of a success they earned (~L340).
+ */
+function defensePrevention(
+  state: GameState,
+  playerIdx: number,
+  cardUid: string,
+  attackType: AttackType,
+  db: CardDb,
+): number {
+  return defenseEffects(state, playerIdx, cardUid, db).reduce(
+    (n, e) =>
+      e.kind === 'preventLifeCards' && ((e.attackType ?? 'any') === 'any' || e.attackType === attackType)
+        ? n + e.amount
+        : n,
+    0,
+  );
 }
 /** Answer the redirect prompt: send the pending power-stage damage to a personality. */
 export function redirectDamage(state: GameState, toUid: string | null, ctx: CombatCtx, db: CardDb, events: GameEvent[]): string | undefined {

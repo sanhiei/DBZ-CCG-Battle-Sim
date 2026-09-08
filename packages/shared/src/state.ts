@@ -118,6 +118,15 @@ export interface AttackInProgress {
   damageLifeCards?: number;
   /** Non-damage "if successful" effects still to run on success. */
   ifSuccessfulEffects?: Effect[];
+  /**
+   * Life cards of damage prevented by the defence (CRD ~L340 step 8).
+   *
+   * Prevention is NOT a stop: "an attack is considered successful even if it
+   * deals no damage". A prevent-N card that cancels the attack instead robs the
+   * attacker of the success itself — the capture, and every "if successful"
+   * rider on the card they spent.
+   */
+  preventedLifeCards?: number;
   /** Life cards actually dealt so far by this attack (drives capture). */
   lifeCardsDealt?: number;
   /** Life-card damage still owed, paused while an Endurance prompt resolves. */
