@@ -56,12 +56,23 @@ function buildMp(deck: DeckList, db: CardDb): PersonalityInPlay {
   };
 }
 
+/**
+ * Build and shuffle a Life Deck, stamping the uids AFTER the shuffle.
+ *
+ * Every copy of a card was created in one run, so three copies of a card took
+ * three consecutive uids and kept them through the shuffle. Redaction hides a
+ * card's `cardId` but preserves its `uid` — that is deliberate, so counts and
+ * animations line up — which meant the uids leaked what the redaction was
+ * hiding: reveal one card and its neighbours by uid are the other copies of the
+ * same card. Numbering the shuffled order instead makes a uid say nothing about
+ * what the card is.
+ */
 function buildLifeDeck(deck: DeckList, rng: Rng): CardInstance[] {
   const cards: CardInstance[] = [];
   for (const { cardId, qty } of deck.life) {
-    for (let i = 0; i < qty; i++) cards.push(instance(cardId, true));
+    for (let i = 0; i < qty; i++) cards.push({ uid: '', cardId, faceDown: true });
   }
-  return shuffle(cards, rng);
+  return shuffle(cards, rng).map((c) => ({ ...c, uid: uid('c') }));
 }
 
 function buildPlayer(idx: number, name: string, deck: DeckList, db: CardDb, rng: Rng): PlayerState {

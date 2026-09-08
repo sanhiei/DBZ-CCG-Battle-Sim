@@ -9,6 +9,8 @@
  */
 import type { GameState } from '@dbz/shared';
 import type { CardDb } from './loader.js';
+import type { Style } from '@dbz/shared';
+import { MARTIAL_STYLES, styleOf } from './mastery.js';
 
 /**
  * A card is a Drill when its TITLE says so.
@@ -26,14 +28,66 @@ export function isDrill(cardId: string, db: CardDb): boolean {
 }
 
 /**
+ * The Martial Arts Style of a Drill, or null for Freestyle.
+ *
+ * "A Styled Drill will have the name of a Style as the first word of its title
+ * as well as a Kanji that matches the Style" (~L644). The title is checked
+ * first because that is the printed rule, and the catalog's `style` field is
+ * null on nine Styled Drills — trusting that field alone let those nine slip
+ * every Style check in the game.
+ */
+/** The first word of a title, letters only — a Styled Drill names its Style there. */
+function firstWord(name: string): string {
+  return (name.trim().split(/\s+/)[0] ?? '').replace(/[^A-Za-z]/g, '');
+}
+
+export function drillStyleOf(cardId: string, db: CardDb): Style | null {
+  if (!isDrill(cardId, db)) return null;
+  const card = db.get(cardId);
+  const first = firstWord(card?.name ?? '');
+  const byTitle = MARTIAL_STYLES.find((s) => s.toLowerCase() === first.toLowerCase());
+  return byTitle ?? styleOf(card);
+}
+
+/**
+ * Whether `cardId` may join the Drills this player already has on the table
+ * (CRD ~L646-648): no second Style, and no second copy of the same Styled
+ * Drill. Returns the reason it may not, or undefined.
+ *
+ * There was no check at all — any mix of Styles and any number of duplicates
+ * went down together, across 159 Styled Drills. That was survivable only while
+ * Drills were inert; once their damage modifiers apply, tabling every Drill you
+ * draw is simply the best thing to do.
+ */
+export function drillPlayError(state: GameState, playerIdx: number, cardId: string, db: CardDb): string | undefined {
+  if (!isDrill(cardId, db)) return undefined;
+  const player = state.players[playerIdx];
+  if (!player) return undefined;
+  const style = drillStyleOf(cardId, db);
+  // "You can have multiple copies of a Freestyle Drill in play" (~L640).
+  if (style === null) return undefined;
+
+  const name = db.get(cardId)?.name ?? 'that Drill';
+  for (const inPlay of player.zones.inPlay) {
+    const otherStyle = drillStyleOf(inPlay.cardId, db);
+    if (otherStyle === null) continue;
+    if (otherStyle !== style) {
+      return `you have a ${otherStyle} Style Drill in play, so you cannot play a ${style} Style Drill`;
+    }
+    // Same Style is fine, but "you can only have 1 copy of that Drill in play".
+    if ((db.get(inPlay.cardId)?.name ?? '') === name) return `${name} is already in play`;
+  }
+  return undefined;
+}
+
+/**
  * A Drill is Freestyle unless its title starts with a Martial Arts Style
  * (~L640). Freestyle Drills are legal in any deck and may be duplicated in
  * play; Styled ones are bound to the declared Tokui-Waza.
  */
 export function isFreestyleDrill(cardId: string, db: CardDb): boolean {
   if (!isDrill(cardId, db)) return false;
-  const name = db.get(cardId)?.name ?? '';
-  return !/^(red|blue|orange|black|saiyan|namekian)\b/i.test(name);
+  return drillStyleOf(cardId, db) === null;
 }
 
 /** Discard every Drill a player controls (MP gained or lost a level). */

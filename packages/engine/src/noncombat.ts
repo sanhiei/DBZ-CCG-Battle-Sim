@@ -21,8 +21,8 @@ import { applyOnPlay } from './abilities.js';
 import { isDragonBall } from './damage.js';
 // Re-exported so callers keep importing the Non-Combat Step's rules from one
 // place; they live in drills.ts to keep turn.ts from importing this module.
-export { discardDrills, isDrill, isFreestyleDrill } from './drills.js';
-import { isDrill } from './drills.js';
+export { discardDrills, drillPlayError, drillStyleOf, isDrill, isFreestyleDrill } from './drills.js';
+import { drillPlayError, isDrill } from './drills.js';
 
 /**
  * Card types that may be placed in play during the Non-Combat Step.
@@ -37,6 +37,18 @@ const PLAYABLE_IN_PLAY = new Set(['Non-Combat', 'Drill', 'Location', 'Battlegrou
 
 /** Types that cost you the Combat Step when played. */
 const SKIPS_COMBAT = new Set(['Location', 'Battleground']);
+
+/** The one Battleground or Location in play, on either side of the table. */
+function findLocationInPlay(
+  state: GameState,
+  db: CardDb,
+): { playerIdx: number; idx: number; inst: CardInstance } | undefined {
+  for (const p of state.players) {
+    const idx = p.zones.inPlay.findIndex((c: CardInstance) => SKIPS_COMBAT.has(db.type(c.cardId)));
+    if (idx !== -1) return { playerIdx: p.idx, idx, inst: p.zones.inPlay[idx]! };
+  }
+  return undefined;
+}
 
 /**
  * Play a card from hand into play during your Non-Combat Step.
@@ -63,8 +75,34 @@ export function playCard(
     return `${db.get(card.cardId)?.name ?? 'that card'} is a ${type} card and does not enter play in the Non-Combat Step`;
   }
 
-  player.zones.hand.splice(at, 1);
   const name = db.get(card.cardId)?.name ?? 'a card';
+
+  // Board legality, BEFORE the card leaves hand — a refusal must cost nothing.
+  const drillError = drillPlayError(state, playerIdx, card.cardId, db);
+  if (drillError) return drillError;
+
+  // "You cannot place a Battleground or Location card into play if there is
+  // already a Battleground or Location card of the same name in play" (~L717).
+  // Locations affect both players, so the check spans both boards.
+  const incumbent = SKIPS_COMBAT.has(type) ? findLocationInPlay(state, db) : undefined;
+  if (incumbent && (db.get(incumbent.inst.cardId)?.name ?? '') === name) {
+    return `${name} is already in play`;
+  }
+
+  player.zones.hand.splice(at, 1);
+
+  // "In general, there can only be one Battleground or Location in play at any
+  // time ... you remove the [existing] card from the game and the new one comes
+  // into play" (~L715). Nothing displaced anything: every Location either
+  // player ever played piled up, all continuous, all affecting both sides.
+  if (incumbent) {
+    const owner = state.players[incumbent.playerIdx]!;
+    const [gone] = owner.zones.inPlay.splice(incumbent.idx, 1);
+    if (gone) {
+      owner.zones.removed.push({ ...gone, faceDown: false });
+      state.log.push(`${db.get(gone.cardId)?.name ?? 'A card'} is removed from the game — only one Location or Battleground may be in play.`);
+    }
+  }
 
   // A Dragon Ball you play is one you CONTROL, and control is what the victory
   // condition counts (CRD ~L163). It lives in its own zone, not among the

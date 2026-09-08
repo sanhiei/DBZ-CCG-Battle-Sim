@@ -397,6 +397,38 @@ test('server authority', async (t) => {
     assert.equal(room.gameState!.players[0]!.zones.hand.length, before, 'hand untouched');
   });
 
+  await t.test('uids do not leak which hidden cards are copies of each other', () => {
+    // Redaction hides a card's cardId but keeps its uid, on purpose, so counts
+    // and animations line up. That made the uid ORDER the leak instead: every
+    // copy of a card was created in one run, so three copies took three
+    // consecutive uids and kept them through the shuffle. Reveal one card and
+    // its uid-neighbours were the other copies of the same card.
+    const { room } = startedRoom();
+    const deck = room.gameState!.players[0]!.zones.lifeDeck;
+    const num = (u: string) => Number(u.replace(/\D/g, ''));
+    // Adjacent uids landing on the same cardId is fine by chance; what must not
+    // happen is EVERY copy of a card sitting in one unbroken run.
+    const byCard = new Map<string, number[]>();
+    for (const c of deck) {
+      const list = byCard.get(c.cardId) ?? [];
+      list.push(num(c.uid));
+      byCard.set(c.cardId, list);
+    }
+    let unbrokenRuns = 0;
+    let groupsOfThree = 0;
+    for (const nums of byCard.values()) {
+      if (nums.length < 3) continue;
+      groupsOfThree++;
+      const sorted = [...nums].sort((x, y) => x - y);
+      if (sorted[sorted.length - 1]! - sorted[0]! === sorted.length - 1) unbrokenRuns++;
+    }
+    assert.ok(groupsOfThree > 5, `fixture needs several 3-ofs, got ${groupsOfThree}`);
+    assert.ok(
+      unbrokenRuns <= 1,
+      `${unbrokenRuns} of ${groupsOfThree} cards have all their copies in one uid run`,
+    );
+  });
+
   await t.test('only the active player may advance the step', () => {
     const { room } = startedRoom();
     const active = room.gameState!.activePlayerIdx;
