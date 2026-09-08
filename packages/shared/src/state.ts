@@ -109,8 +109,12 @@ export interface AttackInProgress {
   baseDamage?: number;
   /** Unconditional damage modifiers (power stages). */
   modifiers?: number;
+  /** Unconditional damage modifiers (life cards) — the mirror of `modifiers`. */
+  lifeCardModifiers?: number;
   /** Additional power stages applied only if the attack is successful. */
   ifSuccessfulStages?: number;
+  /** Additional life cards applied only if the attack is successful. */
+  ifSuccessfulLifeCards?: number;
   /** Life cards an energy attack deals (default 4). */
   energyLifeCards?: number;
   /** Life cards a PHYSICAL attack deals when it specifies a fixed life-card amount
@@ -131,6 +135,12 @@ export interface AttackInProgress {
   lifeCardsDealt?: number;
   /** Life-card damage still owed, paused while an Endurance prompt resolves. */
   pendingLifeCardDamage?: number;
+  /**
+   * Life cards this attack owes from the CARD (step 13), worked out at step 10
+   * and carried across the power-stage damage at step 12 — an attack can deal
+   * both resources, and the stages have to land first.
+   */
+  lifeCardsOwed?: number;
   /** The Endurance card currently offered to the defender. */
   enduranceOffer?: { uid: string; cardId: string; value: number; remaining: number };
   /** Power-stage damage awaiting redirect/application (physical). */

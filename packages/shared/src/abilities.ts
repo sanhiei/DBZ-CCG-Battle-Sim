@@ -27,6 +27,16 @@ export type Effect =
   | { kind: 'physicalAttack'; lifeCards?: number; powerStages?: number }
   | { kind: 'energyAttack'; lifeCards?: number; powerStages?: number }
   | { kind: 'damageStages'; stages: number; ifSuccessful?: boolean } // +/- modifier on PAT
+  /**
+   * A signed LIFE-CARD amount on an attack ("+2 life cards of damage").
+   *
+   * The mirror of damageStages, and it did not exist: the parser recognised the
+   * shape, set a bare boolean flag that no Effect could carry, and flagged the
+   * ability for review. The printed amount was never dealt. CRD ~L436 is
+   * explicit that a modifier lands "even if the attack doesn't deal the kind of
+   * damage that is being modified", so this rides on physical attacks too.
+   */
+  | { kind: 'damageLifeCards'; cards: number; ifSuccessful?: boolean }
   /** `toZero` sets anger to 0 outright ('lower your anger to 0'); a delta of
    *  0 would otherwise be a silent no-op that still looks modelled.
    *
@@ -36,7 +46,19 @@ export type Effect =
    *  with the attack — without this flag those all fired before the defender
    *  had even been offered their defence. */
   | { kind: 'changeAnger'; target: EffectTarget; delta: number; toZero?: boolean; ifSuccessful?: boolean }
-  | { kind: 'changePowerStages'; target: EffectTarget; delta: number; toZero?: boolean; ifSuccessful?: boolean }
+  | {
+      kind: 'changePowerStages';
+      target: EffectTarget;
+      delta: number;
+      toZero?: boolean;
+      ifSuccessful?: boolean;
+      /**
+       * The card says "to a minimum of 0", so the loss simply stops there.
+       * Without it, CRD ~L390 applies: "if you go below 0, you must discard the
+       * top card of your life deck for every power stage left over."
+       */
+      minimumZero?: boolean;
+    }
   | { kind: 'movePowerStage'; target: EffectTarget; to: 'highest' | 'lowest'; ifSuccessful?: boolean }
   // Defensive: stop an attack, or prevent some of its life-card damage.
   | {

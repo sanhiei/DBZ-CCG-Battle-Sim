@@ -667,22 +667,25 @@ function applyPowerStageDamage(state: GameState, personalityUid: string, db: Car
   atk.resolutionStep = 12; // power stages are dealt
   const overflow = loseStages(target, dmg, db, events);
   atk.powerStagesDealt = dmg - overflow;
-  // A physical attack can also carry Empower, which is life cards on top of
-  // the stage damage (CRD ~L1102) — the two resources are separate.
-  const empowerLife = atk.empower ?? 0;
+  // Step 13 follows: the life cards the card itself owes — Empower, a stated
+  // life-card amount, and any "+N life cards" modifier — on top of whatever
+  // stages the target could not absorb. Only Empower used to be carried here,
+  // so a physical attack printing life cards dealt none of them.
+  const cardLife = atk.lifeCardsOwed ?? 0;
+  atk.lifeCardsOwed = 0;
 
   // Stages the personality could not lose become life cards, and count as BOTH
   // kinds of damage (CRD ~L436, ~L579). Handing them to the life-card path is
   // what makes them real: that path is where Endurance, Dragon Ball capture and
   // running out of Life Deck all live, and all three were unreachable from a
   // physical attack while the excess was being dropped on the floor.
-  if (overflow + empowerLife > 0) {
+  if (overflow + cardLife > 0) {
     if (overflow > 0) {
       state.log.push(
         `${target.personalityName} is out of power stages — ${overflow} converts to life cards of damage.`,
       );
     }
-    dealLifeCardsAndFinish(state, atk, overflow + empowerLife, db, events);
+    dealLifeCardsAndFinish(state, atk, overflow + cardLife, db, events);
     return;
   }
 
@@ -834,62 +837,67 @@ export function resolveDefense(
   atk.successful = true;
   discardAttackCards(state, atk, db);
 
-  // Life-card damage: energy attacks, or a physical attack that states a fixed
-  // life-card amount ("causing 1 life card of damage").
-  const lifeCards =
-    atk.attackType === 'energy'
-      ? // An energy attack that states POWER-STAGE damage deals power stages.
-        // The flat 4-life-card default was applied regardless, so those cards
-        // dealt the wrong resource in the wrong amount.
-        atk.baseDamage !== undefined
-        ? undefined
-        : atk.energyLifeCards ?? ENERGY_LIFE_CARDS
-      : atk.damageLifeCards; // physical fixed life cards, else undefined -> power stages
-  if (lifeCards !== undefined) {
-    // Empower adds life cards (CRD ~L1102). It was dropped entirely here, so
-    // every Empowered energy attack dealt its flat base and the cost of
-    // declaring the Empower bought nothing.
-    // Prevention comes off the total here, not by cancelling the attack.
-    const prevented = atk.preventedLifeCards ?? 0;
-    const owed = Math.max(0, lifeCards + (atk.empower ?? 0) - prevented);
-    if (prevented > 0) {
-      state.log.push(`${prevented} life card(s) of damage prevented — the attack still succeeds.`);
-    }
-    dealLifeCardsAndFinish(state, atk, owed, db, events);
-    return undefined;
-  }
-
-  // Physical Base Damage is read from the PAT HERE, not at declaration.
+  // Steps 9-13 in order: work out the base damage, add the modifiers, deal the
+  // power stages, then deal the life cards.
   //
-  // Battle sequence step 4 is the defender naming who is in Control of Combat;
-  // step 9 is "Determine the Base Damage" (~L343). Reading the table at
-  // declaration meant a defender who correctly answered the Control question
-  // still took the damage worked out against the personality they replaced.
-  // The window only opens when the MP is at its bottom two stages — exactly
-  // when the PAT gap is widest — so using the rule punished them for it. The
-  // attacker's own rating can move between declaration and damage too, so both
-  // controllers are re-read from the uids the attack is actually resolving
-  // against.
-  if (atk.attackType === 'physical' && atk.baseDamage === undefined) {
+  // This used to be an either/or with an early return, so an attack that stated
+  // BOTH resources dealt only one of them — and in opposite directions for the
+  // two kinds, since the physical branch read life cards and the energy branch
+  // read stages. CRD ~L436 settles it: a modifier is added on top of the base
+  // "even if the attack doesn't deal the kind of damage that is being
+  // modified", and steps 12 and 13 deal each resource in turn.
+
+  // Step 9. Physical Base Damage comes from the PAT unless the card states its
+  // own damage — and it is read HERE, not at declaration. Step 4 is the
+  // defender naming who is in Control of Combat, so reading the table first
+  // meant a defender who used that rule correctly still took the damage worked
+  // out against the personality they had just replaced. The window only opens
+  // while the MP is at its bottom two stages, exactly where the PAT gap is
+  // widest, so the rule punished them for using it. The attacker's rating can
+  // move in between too, so both controllers are re-read from the uids the
+  // attack is actually resolving against.
+  if (atk.attackType === 'physical' && atk.baseDamage === undefined && atk.damageLifeCards === undefined) {
     const att = findPersonality(state, atk.attackerControllerUid);
     const def = findPersonality(state, atk.defenderControllerUid);
     atk.baseDamage = computeBaseDamage(att?.currentRating ?? 0, def?.currentRating ?? 0);
   }
 
-  // Otherwise physical power-stage damage from the PAT (+ modifiers).
-  // Empower is NOT part of this total: "the attack will do +X life cards"
-  // (CRD ~L1102). Adding it here turned life-card damage into power stages,
-  // which are a different resource entirely.
-  const total = (atk.baseDamage ?? 0) + (atk.modifiers ?? 0) + (atk.ifSuccessfulStages ?? 0);
   atk.resolutionStep = 10; // base damage + modifiers determined
-  atk.pendingPowerStageDamage = total;
+
+  // Step 12's total.
+  const stageTotal = (atk.baseDamage ?? 0) + (atk.modifiers ?? 0) + (atk.ifSuccessfulStages ?? 0);
+
+  // Step 13's total. Empower is life cards, never stages (~L1102), and so is
+  // prevention, which comes off here rather than cancelling the attack.
+  const prevented = atk.preventedLifeCards ?? 0;
+  if (prevented > 0) {
+    state.log.push(`${prevented} life card(s) of damage prevented — the attack still succeeds.`);
+  }
+  atk.lifeCardsOwed = Math.max(
+    0,
+    statedLifeCards(atk) +
+      (atk.lifeCardModifiers ?? 0) +
+      (atk.ifSuccessfulLifeCards ?? 0) +
+      (atk.empower ?? 0) -
+      prevented,
+  );
+
+  // No power stages to deal: go straight to step 13.
+  if (stageTotal <= 0) {
+    const owed = atk.lifeCardsOwed;
+    atk.lifeCardsOwed = 0;
+    dealLifeCardsAndFinish(state, atk, owed, db, events);
+    return undefined;
+  }
+
+  atk.pendingPowerStageDamage = stageTotal;
   // Offer redirect to a personality not in control of combat (CRD ~L576).
   const targets = redirectTargets(state, atk.defenderPlayerIdx, atk.defenderControllerUid);
-  if (total > 0 && targets.length > 0) {
+  if (stageTotal > 0 && targets.length > 0) {
     state.pendingPrompt = newPrompt(
       atk.defenderPlayerIdx,
       'redirect',
-      `Redirect ${total} power stage(s) of damage to another personality, or take it on your controller.`,
+      `Redirect ${stageTotal} power stage(s) of damage to another personality, or take it on your controller.`,
       { optional: true, options: targets.map((t) => ({ uid: t.uid, name: t.personalityName })) },
     );
     return undefined;
@@ -899,6 +907,19 @@ export function resolveDefense(
 }
 
 /** Deal `n` life cards to the defender, run if-successful effects, finish the attack. */
+/**
+ * The life cards this attack's CARD states, before modifiers.
+ *
+ * An energy attack that states neither resource deals the default 4 (~L343);
+ * one that states power stages has those as its base and no life cards unless
+ * it names them too.
+ */
+function statedLifeCards(atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>): number {
+  if (atk.attackType !== 'energy') return atk.damageLifeCards ?? 0;
+  if (atk.energyLifeCards !== undefined) return atk.energyLifeCards;
+  return atk.baseDamage === undefined ? ENERGY_LIFE_CARDS : 0;
+}
+
 function dealLifeCardsAndFinish(
   state: GameState,
   atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>,

@@ -13,6 +13,7 @@
 import type { Ability, AttackType, Effect, EffectTarget, GameEvent, GameState } from '@dbz/shared';
 import type { CardDb } from './loader.js';
 import { currentRatings, draw, setAnger, syncRating } from './turn.js';
+import { discardForEffect } from './damage.js';
 
 /* ============================ Execution ============================ */
 
@@ -34,8 +35,26 @@ function changeMpAnger(state: GameState, playerIdx: number, delta: number, db: C
   setAnger(state, mp.uid, mp.anger + delta, db, events);
 }
 
-/** Apply a power-stage change to a player's combat controller (MP or ally in control). */
-function changeControllerStages(state: GameState, playerIdx: number, delta: number, db: CardDb, events: GameEvent[]): void {
+/**
+ * Apply a power-stage change to a player's combat controller (MP or ally in
+ * control).
+ *
+ * A loss that runs past the bottom of the ladder is not simply clamped away.
+ * CRD ~L390: "When a card effect causes you to lose power stages, not to a
+ * minimum of 0, if you go below 0, you must discard the top card of your life
+ * deck for every power stage left over." The floor swallowed the remainder, so
+ * six cards that print a drain with no minimum did nothing once the target was
+ * already at the bottom — and `discardForEffect`, which exists precisely for
+ * this, had no caller anywhere in the engine.
+ */
+function changeControllerStages(
+  state: GameState,
+  playerIdx: number,
+  delta: number,
+  db: CardDb,
+  events: GameEvent[],
+  minimumZero = false,
+): void {
   const p = state.players[playerIdx];
   if (!p) return;
   const ctl = p.allies.find((a) => a.inControlOfCombat) ?? p.mp;
@@ -48,6 +67,21 @@ function changeControllerStages(state: GameState, playerIdx: number, delta: numb
   ctl.stageIndex = Math.max(0, Math.min(ctl.stageIndex + delta, top));
   syncRating(ctl, db);
   if (ctl.stageIndex !== from) events.push({ type: 'stageChanged', personalityUid: ctl.uid, from, to: ctl.stageIndex });
+
+  // This is a card EFFECT, not attack damage, so it does not convert to life
+  // cards the way overflow damage does (~L436) — the leftover is discarded
+  // straight off the top of the Life Deck.
+  if (delta < 0 && !minimumZero) {
+    const leftover = -delta - (from - ctl.stageIndex);
+    if (leftover > 0) {
+      const discarded = discardForEffect(state, playerIdx, leftover, db);
+      if (discarded > 0) {
+        state.log.push(
+          `${ctl.personalityName} is below 0 power stages — ${discarded} card(s) discarded from the top of the Life Deck.`,
+        );
+      }
+    }
+  }
 }
 
 /**
@@ -86,6 +120,8 @@ export function setupAttackAbility(
 ): void {
   attack.modifiers = attack.modifiers ?? 0;
   attack.ifSuccessfulStages = attack.ifSuccessfulStages ?? 0;
+  attack.lifeCardModifiers = attack.lifeCardModifiers ?? 0;
+  attack.ifSuccessfulLifeCards = attack.ifSuccessfulLifeCards ?? 0;
   const leftover: Effect[] = [];
   for (const e of ability.effects) {
     // Deferred by the rules, not by convenience: "If successful" effects and
@@ -100,17 +136,29 @@ export function setupAttackAbility(
       continue;
     }
     switch (e.kind) {
+      // An attack that states BOTH resources deals both. These were written as
+      // either/or — and in opposite directions for the two kinds, so a physical
+      // attack lost its stated power stages and an energy attack lost its
+      // stated life cards. The parser was reading both all along; the executor
+      // threw one half away.
       case 'physicalAttack':
         if (e.lifeCards !== undefined) attack.damageLifeCards = e.lifeCards;
-        else if (e.powerStages !== undefined) attack.baseDamage = e.powerStages;
+        if (e.powerStages !== undefined) attack.baseDamage = e.powerStages;
         break;
       case 'energyAttack':
         if (e.powerStages !== undefined) attack.baseDamage = e.powerStages;
-        else attack.energyLifeCards = e.lifeCards ?? 4;
+        if (e.lifeCards !== undefined) attack.energyLifeCards = e.lifeCards;
+        // An energy attack that states neither deals the default 4 life cards
+        // (CRD ~L343).
+        if (e.powerStages === undefined && e.lifeCards === undefined) attack.energyLifeCards = 4;
         break;
       case 'damageStages':
         if (e.ifSuccessful) attack.ifSuccessfulStages += e.stages;
         else attack.modifiers += e.stages;
+        break;
+      case 'damageLifeCards':
+        if (e.ifSuccessful) attack.ifSuccessfulLifeCards += e.cards;
+        else attack.lifeCardModifiers += e.cards;
         break;
       case 'changeAnger': {
         const who = e.target === 'user' ? attackerIdx : defenderIdx;
@@ -121,7 +169,7 @@ export function setupAttackAbility(
         break;
       }
       case 'changePowerStages':
-        changeControllerStages(state, e.target === 'user' ? attackerIdx : defenderIdx, e.toZero ? -99 : e.delta, db, events);
+        changeControllerStages(state, e.target === 'user' ? attackerIdx : defenderIdx, e.toZero ? -99 : e.delta, db, events, e.toZero || e.minimumZero);
         break;
       case 'movePowerStage':
         moveControllerToEnd(state, e.target === 'user' ? attackerIdx : defenderIdx, e.to, db, events);
@@ -204,7 +252,7 @@ export function applyOnPlay(
         break;
       }
       case 'changePowerStages':
-        changeControllerStages(state, who(e.target), e.toZero ? -99 : e.delta, db, events);
+        changeControllerStages(state, who(e.target), e.toZero ? -99 : e.delta, db, events, e.toZero || e.minimumZero);
         break;
       case 'movePowerStage':
         moveControllerToEnd(state, who(e.target), e.to, db, events);
@@ -542,9 +590,19 @@ function pushAnger(effects: Effect[], t: string): void {
     for (const target of targets) effects.push({ kind: 'changeAnger', target, delta: lowers ? -amount : amount });
   }
 }
+/** "to a minimum of 0" turns a stage loss into a simple floor (CRD ~L390). */
+const MIN_ZERO = /minimum\s+of\s+0/i;
+
 function pushSelfPowerLoss(effects: Effect[], t: string): void {
   const m = t.match(/attacker\s+([0-9b]+)\s*stages?\s*of\s*power|attacker\s+to\s+lose\s+([0-9b]+)\s*stages?/);
-  if (m) effects.push({ kind: 'changePowerStages', target: 'user', delta: -toNum(m[1] ?? m[2]) });
+  if (m) {
+    effects.push({
+      kind: 'changePowerStages',
+      target: 'user',
+      delta: -toNum(m[1] ?? m[2]),
+      ...(MIN_ZERO.test(t) ? { minimumZero: true } : {}),
+    });
+  }
 }
 /**
  * Power-stage changes stated outside the damage clause.
@@ -564,7 +622,14 @@ function pushRaiseOwnPower(effects: Effect[], t: string): void {
 
     if (foe) {
       const loss = s.match(/los\w*\s*([0-9b]+)\s*(?:power\s*)?stages?/);
-      if (loss) effects.push({ kind: 'changePowerStages', target: 'foe', delta: -toNum(loss[1]) });
+      if (loss) {
+        effects.push({
+          kind: 'changePowerStages',
+          target: 'foe',
+          delta: -toNum(loss[1]),
+          ...(MIN_ZERO.test(s) ? { minimumZero: true } : {}),
+        });
+      }
       continue;
     }
     const gain = s.match(/\b(?:gain|rais|increas)\w*\b[^.]{0,40}?([0-9b]+)\s*(?:power\s*)?stages?\b/);
@@ -696,6 +761,25 @@ export function parseAbility(rawText: string, type: string): Ability | null {
       const md = body.match(/([+\-])\s?(\d+)[\s|\\]*(?:power\s*)?stages?\s*of\s*damage/);
       if (md) effects.push({ kind: 'damageStages', stages: toNum(md[2]) * (md[1] === '-' ? -1 : 1), ...(ifSucc(body) ? { ifSuccessful: true } : {}) });
     }
+    // "+N life cards of damage" — the mirror of the stage modifier above, and
+    // it had no Effect to be carried by. parseAttackDamage recognised the shape
+    // and set a bare boolean that was only ever used to flag the ability for
+    // review, so the printed amount was parsed and then dropped on the floor.
+    //
+    // Unlike the stage modifier this is NOT gated on the attack having no fixed
+    // damage: CRD ~L436 says a modifier is added on top of the base "even if
+    // the attack doesn't deal the kind of damage that is being modified", which
+    // is exactly the physical-attack-plus-life-cards case.
+    if (dmg.lifeCardModifier) {
+      const ld = body.match(/([+\-])\s?(\d+)\s*life\s*cards?/);
+      if (ld) {
+        effects.push({
+          kind: 'damageLifeCards',
+          cards: toNum(ld[2]) * (ld[1] === '-' ? -1 : 1),
+          ...(ifSucc(body) ? { ifSuccessful: true } : {}),
+        });
+      }
+    }
     // Attacks carry non-damage riders too — 'Gain 4 power stages' (Piccolo's
     // Destruction Attack), 'Raise your Main Personality to his highest power
     // stage' (Blue Knockdown).
@@ -741,7 +825,11 @@ export function parseAbility(rawText: string, type: string): Ability | null {
     // attack but flag it so the card stays out of 'full' coverage.
     if (hasPerformerCondition(body)) needsReview.push('performerCondition');
     if (dmg.conditional) needsReview.push('conditionalDamage');
-    if (dmg.lifeCardModifier) needsReview.push('lifeCardModifier');
+    // Only still under review if the amount could not be read off the text;
+    // when it can, it is now a real effect with a real number.
+    if (dmg.lifeCardModifier && !effects.some((e) => e.kind === 'damageLifeCards')) {
+      needsReview.push('lifeCardModifier');
+    }
     if (bareAttack) needsReview.push('attackKindFromType');
     if (focused) needsReview.push('focusedAttack');
     if (needsReview.length) ability.needsReview = needsReview;

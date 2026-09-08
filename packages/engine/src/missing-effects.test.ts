@@ -64,7 +64,11 @@ test('the opponent losing power stages is parsed alongside a stop', () => {
   // Saiyan Lightning Dodge.
   const a = parseAbility('Stops a physical attack. Your opponent loses 4 power stages, to a minimum of 0.', 'Physical Combat')!;
   assert.equal(of(a.effects, 'stopAttack').length, 1);
-  assert.deepEqual(of(a.effects, 'changePowerStages'), [{ kind: 'changePowerStages', target: 'foe', delta: -4 }]);
+  // This card says "to a minimum of 0", so the loss stops at the bottom rather
+  // than spilling into life cards (CRD ~L390).
+  assert.deepEqual(of(a.effects, 'changePowerStages'), [
+    { kind: 'changePowerStages', target: 'foe', delta: -4, minimumZero: true },
+  ]);
 });
 
 test('a damage clause is not double-counted as a power-stage gain', () => {

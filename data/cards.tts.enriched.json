@@ -417,7 +417,8 @@
             {
               "kind": "changePowerStages",
               "target": "foe",
-              "delta": -2
+              "delta": -2,
+              "minimumZero": true
             }
           ],
           "source": "parsed",
@@ -2307,8 +2308,7 @@
       "type": "Physical Combat",
       "coverage": "partial",
       "needsReview": [
-        "textDisagreement",
-        "ability:lifeCardModifier"
+        "textDisagreement"
       ],
       "text": "Physical attack doing +2 life cards of damage.\nRR My training allows me to = \\ 4 strike ¢ ar all your pressure",
       "textOriginal": "Physical attack doing +2 life cards of damage.",
@@ -2323,12 +2323,13 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 2
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -3774,9 +3775,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +4 power stages of damage. If you declared Toku-Waza, you may discard the top card from your Life Deck to do an additional +3 life cards of damage.",
       "textVerified": true,
       "lackey": {
@@ -3794,12 +3793,13 @@
             {
               "kind": "damageStages",
               "stages": 4
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 3
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -3871,7 +3871,8 @@
             {
               "kind": "changePowerStages",
               "target": "foe",
-              "delta": -4
+              "delta": -4,
+              "minimumZero": true
             }
           ],
           "source": "parsed"
@@ -3986,9 +3987,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack. If successful and you declared Tokui-Waza, this attack does +4 life cards of damage and raises your anger 1 level.",
       "textVerified": "vision",
       "lackey": {
@@ -4004,16 +4003,18 @@
               "kind": "physicalAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 4,
+              "ifSuccessful": true
+            },
+            {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1,
               "ifSuccessful": true
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -4049,7 +4050,8 @@
             {
               "kind": "changePowerStages",
               "target": "foe",
-              "delta": -4
+              "delta": -4,
+              "minimumZero": true
             }
           ],
           "source": "parsed"
@@ -4412,9 +4414,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing 1 life cards of damage. This attack also does +1 life card of damage for every card in your discard pile with \"Tien\" in the title. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
@@ -4430,13 +4430,14 @@
               "kind": "physicalAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 1
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -5359,9 +5360,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +2 life cards of damage. If successful and either \"Namek Dragon Ball 4\" or \"Namek Dragon Ball 5\" is in play, search your Life Deck for a Namek Dragon Ball and place it into play. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
@@ -5377,13 +5376,15 @@
               "kind": "physicalAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 2,
+              "ifSuccessful": true
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -5849,8 +5850,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy attack. If Earth Dragon Ball 1 or Earth Dragon Ball 2 is in play, this attack does +1 Life Card of damage for each Blue Style Drill you have in play. Raise your anger 1 level.",
       "textVerified": true,
@@ -5867,6 +5867,10 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 1
+            },
+            {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
@@ -5874,8 +5878,7 @@
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -8742,9 +8745,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +2 life cards of damage. If successful and your opponent has more Non-Combat cards in play than you, your opponent discards 1 Non-Combat card at a time until his number of Non-Combat cards in play equals yours.",
       "errata": "Your opponent discards one his Non-Combat cards at a time until he has the same amount of Non-Combat cards in play as you do. Your opponent cannot discard your Non-Combat cards with this effect if you used Orange Temple Strike.",
       "textVerified": true,
@@ -8759,12 +8760,14 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 2,
+              "ifSuccessful": true
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -8896,8 +8899,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy attack. If performed by a Main Personality with \"Android\" in the title and the only personalities you have in play have \"Android\" in the title, this attack does +1 life card of damage for each personality you control with \"Android\" in the title to a maximum of an additional +12 life cards of damage. Raise your anger 1 level.",
       "textVerified": true,
@@ -8914,6 +8916,10 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 1
+            },
+            {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
@@ -8921,8 +8927,7 @@
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -9020,8 +9025,7 @@
       "coverage": "partial",
       "needsReview": [
         "type",
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy attack. Costs 3 power stages to perform. If your opponent's current anger level is 0, reveal the top 8 cards of your discard pile or Life Deck. If your opponent's current anger is not 0, reveal the top 5 cards of your discard pile. This attack does +1 life cards of damage for each Red Style card found with this effect.",
       "textOriginal": "Energy attack. Costs 3 power stages to perform. If your opponent's current anger level is 0, reveal the top 8 cards of your discard pile or Life Deck. If your opponent's current anger level is not 0, reveal the top 5 cards of your discard pile. This attack does +1 life cards of damage for each Red Style card found with this effect.",
@@ -9037,6 +9041,10 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
             }
           ],
           "source": "parsed",
@@ -9044,8 +9052,7 @@
             "powerStages": 3
           },
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -9730,7 +9737,8 @@
             {
               "kind": "changePowerStages",
               "target": "foe",
-              "delta": -6
+              "delta": -6,
+              "minimumZero": true
             }
           ],
           "source": "parsed"
@@ -10038,9 +10046,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +2 power stages of damage. If the only cards you have in play have \"Android\" in the title, this attack does +1 life card of damage for each card with \"Android\" in the title that you have in play. Raise your anger 1 level.",
       "textVerified": true,
       "lackey": {
@@ -10060,15 +10066,16 @@
               "stages": 2
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 1
+            },
+            {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -11097,8 +11104,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy Attack. Costs 0 power stages to perform. The personality performing this attack may pay any amount of power stages. For ever 2 power stages paid, this attack does an additional +1 life cards of damage.",
       "textVerified": true,
@@ -11113,6 +11119,10 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
             }
           ],
           "source": "parsed",
@@ -11120,8 +11130,7 @@
             "powerStages": 0
           },
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -11945,9 +11954,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing 3 power stages of damage. You may discard any of your Non-Combat cards in play. For each Non-Combat card discarded, this attack does an additional +3 life cards of damage. If used by Hercule, you can wait to discard Non-Combat cards until after you know if the attack is successful or not. Remove from the game after use.",
       "textVerified": "vision",
       "lackey": {
@@ -11964,13 +11971,14 @@
               "powerStages": 3
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 3
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -12695,7 +12703,6 @@
       "coverage": "partial",
       "needsReview": [
         "ability:energyLifeCards",
-        "ability:lifeCardModifier",
         "ability:focusedAttack"
       ],
       "text": "Focused energy attack doing +1 life cards of damage for each card in your discard pile with \"Kamehameha\" in the title. Raise your anger 1 level.",
@@ -12713,6 +12720,10 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 1
+            },
+            {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
@@ -12721,7 +12732,6 @@
           "source": "parsed",
           "needsReview": [
             "energyLifeCards",
-            "lifeCardModifier",
             "focusedAttack"
           ]
         }
@@ -13232,9 +13242,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +3 power stages of damage. If you have 6 or more Drills in play, this is a focused attack and does an additional +7 life cards of damage. If successful, shuffle all Drills in your discard pile back into your Life Deck. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
@@ -13255,13 +13263,15 @@
               "ifSuccessful": true
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 7,
+              "ifSuccessful": true
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -13301,8 +13311,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy attack. If the personality performing this attack has 'Saiyan' in the title, this attack does an additional +4 life cards of damage and is a focused attack.",
       "textVerified": true,
@@ -13317,12 +13326,15 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 4
             }
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -13339,9 +13351,7 @@
     "rules": {
       "type": "Energy Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Endurance 3. Physical attack doing +4 power stages of damage. If your Main Personality is at level 2 or above, this attack does an addition +4 life cards of damage and is a focused attack. If successful, search your Life Deck for a Drill and place it into play.",
       "textVerified": true,
       "lackey": {
@@ -13360,12 +13370,14 @@
               "kind": "damageStages",
               "stages": 4,
               "ifSuccessful": true
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 4,
+              "ifSuccessful": true
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ],
       "endurance": 3
@@ -15030,9 +15042,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +3 power stages of damage. Empower 3. For the remainder of Combat, all Non-combat/Non-Drill cards cost +2 life cards to use.",
       "textVerified": true,
       "lackey": {
@@ -15050,12 +15060,13 @@
             {
               "kind": "damageStages",
               "stages": 3
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 2
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -15072,8 +15083,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Villains only. Energy attack doing 3 life cards of damage. This attack does an additional +1 life cards of damage for every \"Villains only\" card in your discard pile. Lower your opponent's anger 2 levels.",
       "textVerified": true,
@@ -15090,6 +15100,10 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 1
+            },
+            {
               "kind": "changeAnger",
               "target": "foe",
               "delta": -2
@@ -15100,8 +15114,7 @@
             "alignment": "Villain"
           },
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -15160,9 +15173,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing 1 life card of damage. Empower 2. This attack does an additional +1 life cards of damage for each card with \"Flight\" in the title in your discard pile. Lower your opponent's anger 2 levels.",
       "textVerified": true,
       "lackey": {
@@ -15178,15 +15189,16 @@
               "kind": "physicalAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 1
+            },
+            {
               "kind": "changeAnger",
               "target": "foe",
               "delta": -2
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -16569,8 +16581,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy attack. Empower 3. All your other energy attacks do +1 life cards of damage for the remainder of Combat. Lower your opponent's anger 2 levels.",
       "textVerified": true,
@@ -16587,6 +16598,10 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 1
+            },
+            {
               "kind": "changeAnger",
               "target": "foe",
               "delta": -2
@@ -16594,8 +16609,7 @@
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -17905,9 +17919,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Endurance 4. Physical attack doing +3 power stages of damage and +2 life cards of damage.",
       "textVerified": true,
       "lackey": {
@@ -17925,12 +17937,13 @@
             {
               "kind": "damageStages",
               "stages": 3
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 2
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ],
       "endurance": 4
@@ -18011,8 +18024,7 @@
       "coverage": "partial",
       "needsReview": [
         "type",
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy attack. If the personality performing this attack has a higher power rating than the personality defending against this attack, raise your anger 1 level and for the remainder of Combat all of your other attacks do +2 life cards of damage.",
       "textVerified": true,
@@ -18029,6 +18041,10 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 2
+            },
+            {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
@@ -18036,8 +18052,7 @@
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -18581,7 +18596,6 @@
       "coverage": "partial",
       "needsReview": [
         "ability:energyLifeCards",
-        "ability:lifeCardModifier",
         "ability:focusedAttack"
       ],
       "text": "Focused energy attack. If you declared a Tokui-Waza and your Main Personality is above level 1, you may have him lose a personality level to have this attack do an additional +7 life cards of damage. Remove from the game after use.",
@@ -18599,13 +18613,16 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 7
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
           "source": "parsed",
           "needsReview": [
             "energyLifeCards",
-            "lifeCardModifier",
             "focusedAttack"
           ]
         }
@@ -21998,9 +22015,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +1 life cards of damage. If successful, your opponent discards 2 cards from his Life Deck for each card in his hand.",
       "textVerified": true,
       "lackey": {
@@ -22016,16 +22031,18 @@
               "kind": "physicalAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 1,
+              "ifSuccessful": true
+            },
+            {
               "kind": "discardCards",
               "target": "foe",
               "count": 2,
               "ifSuccessful": true
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -24455,9 +24472,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +2 life cards of damage. If successful, draw the top card from your discard pile. Lower your opponent's anger 2 levels. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
@@ -24473,6 +24488,11 @@
               "kind": "physicalAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 2,
+              "ifSuccessful": true
+            },
+            {
               "kind": "changeAnger",
               "target": "foe",
               "delta": -2
@@ -24481,10 +24501,7 @@
               "kind": "removeFromGameAfterUse"
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -26271,9 +26288,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Saiyan Heritage only. Physical attack doing +3 life cards of damage.",
       "textVerified": true,
       "lackey": {
@@ -26287,12 +26302,13 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 3
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -28001,8 +28017,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Endurance 3. Energy attack. If you declared a Tokui-Waza, and the personality that performed this attack is at 0 power stages, this attack does +2 life cards and +2 power stages of damage.",
       "textVerified": true,
@@ -28021,12 +28036,15 @@
             {
               "kind": "damageStages",
               "stages": 2
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 2
             }
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ],
@@ -29203,9 +29221,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +2 power stages of damage and +1 life card of damage for each Cell Jr. you have in play. Limit 1 per deck.",
       "textVerified": true,
       "lackey": {
@@ -29223,12 +29239,13 @@
             {
               "kind": "damageStages",
               "stages": 2
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -30870,7 +30887,6 @@
       "type": "Physical Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:lifeCardModifier",
         "ability:focusedAttack"
       ],
       "text": "Focused physical attack doing +2 power stages of damage. If successful, all energy attacks this personality performs for the remainder of Combat do +2 life cards of damage.",
@@ -30891,11 +30907,15 @@
               "kind": "damageStages",
               "stages": 2,
               "ifSuccessful": true
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 2,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
           "needsReview": [
-            "lifeCardModifier",
             "focusedAttack"
           ]
         }
@@ -38024,9 +38044,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Endurance 3. Physical attack. This attack does +2 life cards of damage for each Dragon Ball you control.",
       "textVerified": true,
       "lackey": {
@@ -38040,12 +38058,13 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 2
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ],
       "endurance": 3
@@ -39577,7 +39596,6 @@
       "coverage": "partial",
       "needsReview": [
         "ability:energyLifeCards",
-        "ability:lifeCardModifier",
         "ability:focusedAttack"
       ],
       "text": "Focused energy attack doing 6 life cards of damage. If used by Frieza, for the remainder of Combat all your attacks from Frieza Named cards do an additional +3 life cards of damage. If successful, shuffle all Frieza Named cards in your discard pile into your Life Deck. Remove from the game after use.",
@@ -39595,13 +39613,17 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 3,
+              "ifSuccessful": true
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
           "source": "parsed",
           "needsReview": [
             "energyLifeCards",
-            "lifeCardModifier",
             "focusedAttack"
           ]
         }
@@ -40928,8 +40950,7 @@
       "type": "Physical Combat",
       "coverage": "partial",
       "needsReview": [
-        "type",
-        "ability:lifeCardModifier"
+        "type"
       ],
       "text": "Endurance 2. Physical attack doing 3 power stages of damage and +1 life cards of damage for each of your attached cards in play. Lower your opponent's anger 3 levels.",
       "textVerified": true,
@@ -40947,15 +40968,16 @@
               "powerStages": 3
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 1
+            },
+            {
               "kind": "changeAnger",
               "target": "foe",
               "delta": -3
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ],
       "endurance": 2
@@ -41827,8 +41849,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy attack doing 5 life cards of damage. Costs 1 life card to perform. The next Orange Style attack you perform this Combat does an additional +1 life cards of damage for each Drill you have in play when you perform that attack.",
       "textVerified": true,
@@ -41843,12 +41864,15 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
             }
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -42466,8 +42490,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Endurance 2. Energy attack doing 2 life cards of damage. This attack stays on the table to be used 2 more times this Combat. You may discard a card from your hand when you perform this attack to do an additional +3 life cards of damage. Remove from the game after use.",
       "textVerified": true,
@@ -42484,6 +42507,10 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 3
+            },
+            {
               "kind": "discardCards",
               "target": "user",
               "count": 1
@@ -42494,8 +42521,7 @@
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ],
@@ -43203,8 +43229,7 @@
       "coverage": "partial",
       "needsReview": [
         "type",
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Endurance 2. Energy attack doing +1 life cards of damage for each Straining Move card in your discard pile. Lower your opponent's anger 2 levels.",
       "textVerified": true,
@@ -43221,6 +43246,10 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 1
+            },
+            {
               "kind": "changeAnger",
               "target": "foe",
               "delta": -2
@@ -43228,8 +43257,7 @@
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ],
@@ -45653,8 +45681,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy attack doing 5 life cards of damage. If successful, attach this card to one of your personalities. While attached, any energy attacks the attached personality performs do +2 life cards of damage.",
       "textVerified": true,
@@ -45669,12 +45696,16 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 2,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -46110,7 +46141,6 @@
       "coverage": "partial",
       "needsReview": [
         "ability:energyLifeCards",
-        "ability:lifeCardModifier",
         "ability:focusedAttack"
       ],
       "text": "Focused energy attack. Lower your opponent's anger 1 level. Empower 3. This attack does +1 life cards of damage for each card in your discard pile with \"Kamehameha\" in the title. If successful, shuffle up to 6 cards in your discard pile with \"Kamehameha\" in the title into your Life Deck.",
@@ -46128,6 +46158,11 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 1,
+              "ifSuccessful": true
+            },
+            {
               "kind": "changeAnger",
               "target": "foe",
               "delta": -1
@@ -46136,7 +46171,6 @@
           "source": "parsed",
           "needsReview": [
             "energyLifeCards",
-            "lifeCardModifier",
             "focusedAttack"
           ]
         }
@@ -46580,7 +46614,6 @@
       "coverage": "partial",
       "needsReview": [
         "ability:energyLifeCards",
-        "ability:lifeCardModifier",
         "ability:focusedAttack"
       ],
       "text": "Heroes only. Focused energy attack doing +1 life cards of damage for each card in your discard pile with \"Heroic\" in the title. If your opponent's Main Personality is a Villain, you may discard a Non-Combat card in play.",
@@ -46596,6 +46629,10 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
             }
           ],
           "source": "parsed",
@@ -46604,7 +46641,6 @@
           },
           "needsReview": [
             "energyLifeCards",
-            "lifeCardModifier",
             "focusedAttack"
           ]
         }
@@ -47175,8 +47211,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy attack doing +2 life cards of damage for each card in your hand. Lower your opponent's anger 2 levels.",
       "textVerified": true,
@@ -47193,6 +47228,10 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 2
+            },
+            {
               "kind": "changeAnger",
               "target": "foe",
               "delta": -2
@@ -47200,8 +47239,7 @@
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -49488,8 +49526,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Endurance 2. Energy attack doing +2 life cards of damage for each Ally in play with the Bojack Unbound Subset Symbol. Raise your anger 1 level. This card stays on the table to be used 1 more time by an Ally with the Bojack Unbound Subset Symbol. Remove from the game after use.",
       "textVerified": true,
@@ -49506,6 +49543,10 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 2
+            },
+            {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
@@ -49516,8 +49557,7 @@
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ],
@@ -49704,7 +49744,6 @@
       "type": "Physical Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:lifeCardModifier",
         "ability:focusedAttack"
       ],
       "text": "Focused physical attack doing +3 power stages of damage and +3 life cards of damage. If successful, end Combat.",
@@ -49725,11 +49764,15 @@
               "kind": "damageStages",
               "stages": 3,
               "ifSuccessful": true
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 3,
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
           "needsReview": [
-            "lifeCardModifier",
             "focusedAttack"
           ]
         }
@@ -50700,6 +50743,7 @@
               "kind": "changePowerStages",
               "target": "foe",
               "delta": -3,
+              "minimumZero": true,
               "ifSuccessful": true
             }
           ],
@@ -59880,9 +59924,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +2 life cards of damage.  If Chiaotzu is anywhere in play, it does +3 life cards of damage instead.",
       "textVerified": true,
       "lackey": {
@@ -59896,12 +59938,13 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 2
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -60551,9 +60594,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +3 life cards of damage. Raise your anger 1 level. Remove from the game after use.",
       "textVerified": true,
       "lackey": {
@@ -60569,6 +60610,10 @@
               "kind": "physicalAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 3
+            },
+            {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
@@ -60577,10 +60622,7 @@
               "kind": "removeFromGameAfterUse"
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -60926,9 +60968,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +2 life cards of damage. If \"Dragonball 7\" is in play, it does +4 life cards of damage instead.",
       "textVerified": true,
       "lackey": {
@@ -60942,12 +60982,13 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 2
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -64046,8 +64087,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy Attack. This attack does +1 life card of damage for each ally that you have in play.",
       "textVerified": true,
@@ -64062,12 +64102,15 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
             }
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -64788,9 +64831,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +3 life cards of damage.",
       "textVerified": true,
       "lackey": {
@@ -64804,12 +64845,13 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 3
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -68307,6 +68349,7 @@
               "kind": "changePowerStages",
               "target": "foe",
               "delta": -3,
+              "minimumZero": true,
               "ifSuccessful": true
             }
           ],
@@ -68511,9 +68554,7 @@
     "rules": {
       "type": "Physical Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +3 life cards of damage.\nRaise your anger | UNS Zone",
       "abilities": [
         {
@@ -68523,15 +68564,16 @@
               "kind": "physicalAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 3
+            },
+            {
               "kind": "changeAnger",
               "target": "user",
               "delta": 1
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -70830,9 +70872,7 @@
     "rules": {
       "type": "Combat",
       "coverage": "partial",
-      "needsReview": [
-        "ability:lifeCardModifier"
-      ],
+      "needsReview": [],
       "text": "Physical attack doing +1 life cards of damage.\nFor the remainder of Combat, after a player receives damage from a A successful attack, he shuffles his hand into his Life Deck and then draws the same number of cards he shuffled into his Life Deck.\n\\ | Hiast : 5",
       "abilities": [
         {
@@ -70840,12 +70880,13 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
             }
           ],
-          "source": "parsed",
-          "needsReview": [
-            "lifeCardModifier"
-          ]
+          "source": "parsed"
         }
       ]
     }
@@ -72883,7 +72924,6 @@
       "coverage": "partial",
       "needsReview": [
         "ability:energyLifeCards",
-        "ability:lifeCardModifier",
         "ability:attackKindFromType"
       ],
       "text": "attack doing +1 life card for every card in your hand.\nIf you declared a Saiyan Tokui-Waza this must be the first attack that you play during Combat.\nDiscard a card.\n| TUFF Enuff Onlé",
@@ -72893,12 +72933,15 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "damageLifeCards",
+              "cards": 1
             }
           ],
           "source": "parsed",
           "needsReview": [
             "energyLifeCards",
-            "lifeCardModifier",
             "attackKindFromType"
           ]
         }
@@ -76807,8 +76850,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy attack.\nIf you declared a Tokui-Waza.\nyou may discard any of your Allies in play.\nFor each ally discarded in this way.\nthis attack does an additional +3 life cards of damage.\nYour Allies cannot use personality powers for the remainder of Combat.\nRemove from the game after use.",
       "abilities": [
@@ -76819,13 +76861,16 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 3
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]
@@ -76901,8 +76946,7 @@
       "type": "Energy Combat",
       "coverage": "partial",
       "needsReview": [
-        "ability:energyLifeCards",
-        "ability:lifeCardModifier"
+        "ability:energyLifeCards"
       ],
       "text": "Energy attack.\nIf you declared a Tokui-Waza.\nthis attack does +2 life cards of damage for each Oragon Ball in both players' removed from game piles.\nRemove from the game after use.\nTuff Enuff only: Remove up to 2 : Balls in play from the game.",
       "abilities": [
@@ -76913,13 +76957,16 @@
               "kind": "energyAttack"
             },
             {
+              "kind": "damageLifeCards",
+              "cards": 2
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
           "source": "parsed",
           "needsReview": [
-            "energyLifeCards",
-            "lifeCardModifier"
+            "energyLifeCards"
           ]
         }
       ]

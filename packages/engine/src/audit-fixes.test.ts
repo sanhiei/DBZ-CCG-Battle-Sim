@@ -16,13 +16,20 @@ const find = <K extends Effect['kind']>(effects: Effect[], k: K) =>
 
 /* ---------- "+N life cards" is a modifier, not a base ---------- */
 
-test('a signed life-card amount does not become the fixed base', () => {
+test('a signed life-card amount is a modifier on top of the PAT base', () => {
   // Goku's Right Knee Smash. Encoding +2 as the base made the engine deal
   // exactly 2 life cards and silently drop all PAT power-stage damage.
+  //
+  // It used to stop there: the amount was recognised, dropped, and the ability
+  // flagged `lifeCardModifier` to record that its damage was incomplete. It is
+  // a real effect now, so there is nothing left to flag — CRD ~L436, a modifier
+  // lands "even if the attack doesn't deal the kind of damage that is being
+  // modified", so this rides on top of the PAT stages.
   const a = parseAbility('Physical attack doing +2 life cards of damage.', 'Physical Combat')!;
   const atk = find(a.effects, 'physicalAttack')!;
   assert.equal(atk.lifeCards, undefined, 'must not override the PAT base');
-  assert.ok(a.needsReview?.includes('lifeCardModifier'), 'and must say why it is incomplete');
+  assert.equal(find(a.effects, 'damageLifeCards')?.cards, 2, 'and the +2 is carried');
+  assert.ok(!a.needsReview?.includes('lifeCardModifier'), 'no longer an incomplete parse');
 });
 
 test('an unsigned life-card amount IS the fixed base', () => {
