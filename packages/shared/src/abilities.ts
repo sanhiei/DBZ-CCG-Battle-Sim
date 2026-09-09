@@ -38,6 +38,13 @@ export type Effect =
    */
   | { kind: 'damageLifeCards'; cards: number; ifSuccessful?: boolean }
   /**
+   * A Card Capture (CRD ~L682): "Some cards allow for the capture of Dragon
+   * Balls." Distinct from the life-card capture, which is earned by dealing 5+,
+   * and from the Personality Capture Rule, which is a named Ally trading its
+   * damage for a ball.
+   */
+  | { kind: 'captureDragonBall'; ifSuccessful?: boolean }
+  /**
    * A continuous damage modifier from a card ON THE TABLE — a Drill, a
    * Location, a Battleground, a Dragon Ball you control. Battle-sequence step
    * 10 adds "any modifiers, from the attack, Drills, personality powers, etc."

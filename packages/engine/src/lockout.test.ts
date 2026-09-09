@@ -80,6 +80,25 @@ function combatState(defenderHand: CardInstance[]): GameState {
   return s;
 }
 
+/**
+ * Attack into a lockout and report whether it was stopped.
+ *
+ * A lockout stops the ATTACK, it does not bar the declaration — CRD ~L387:
+ * "If the attack is stopped, the effects are NOT stopped." Refusing at the
+ * declaration meant the card was never played, so its secondary effects never
+ * resolved and the card was never spent. The declaration succeeds now and the
+ * attack comes back already stopped.
+ */
+function attackInto(s: GameState, type: 'physical' | 'energy', seat = 0): { error?: string; spent: boolean } {
+  const uid = armAttack(s, seat);
+  const before = s.players[seat]!.zones.hand.length;
+  const error = declareAttack(s, type, uid, { actingPlayerIdx: seat }, db, []);
+  return {
+    ...(error !== undefined ? { error } : {}),
+    spent: s.players[seat]!.zones.hand.length < before,
+  };
+}
+
 test('an ATTACK card that also locks out actually locks the defender out', () => {
   // "...and stops all physical attacks for the remainder of Combat" on an
   // attack card reached applyIfSuccessful, which logged "Effect: stops a
@@ -97,11 +116,14 @@ test('an ATTACK card that also locks out actually locks the defender out', () =>
   assert.equal(declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, [], ability), undefined);
   assert.equal(resolveDefense(s, { takeDamage: true }, { actingPlayerIdx: 1 }, db, []), undefined);
 
-  // Seat 1 (the defender) is now barred from physical attacks this combat.
-  assert.match(
-    declareAttack(s, 'physical', armAttack(s, 1), { actingPlayerIdx: 1 }, db, []) ?? '',
-    /remainder of this Combat/,
-  );
+  // Seat 1 (the defender) is now barred from physical attacks this combat: the
+  // declaration is legal, the attack is stopped, and the card is spent for it.
+  const barred = attackInto(s, 'physical', 1);
+  assert.equal(barred.error, undefined);
+  assert.equal(barred.spent, true);
+  assert.match(s.log.join('\n'), /physical attacks are stopped for the remainder/i);
+
+  s.combat!.phasePlayerIdx = 1;
   assert.equal(declareAttack(s, 'energy', armAttack(s, 1), { actingPlayerIdx: 1 }, db, []), undefined, 'energy is untouched');
 });
 
@@ -114,9 +136,12 @@ test('a combat-long energy stop blocks later energy attacks', () => {
 
   // Back to the attacker's phase: energy is now barred, physical is not.
   s.combat!.phasePlayerIdx = 0;
-  const energyAgain = declareAttack(s, 'energy', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
-  assert.match(energyAgain ?? '', /energy attacks are stopped for the remainder/i);
+  const energyAgain = attackInto(s, 'energy');
+  assert.equal(energyAgain.error, undefined, 'the declaration is legal');
+  assert.match(s.log.join('\n'), /attack is stopped/i, 'but the attack is stopped');
+  assert.equal(energyAgain.spent, true, 'and the card is spent for it');
 
+  s.combat!.phasePlayerIdx = 0;
   assert.equal(declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []), undefined,
     'a physical attack is unaffected by an energy lockout');
 });
@@ -127,8 +152,15 @@ test('a combat-long "all attacks" stop blocks both kinds', () => {
   declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
   resolveDefense(s, { cardUid: card.uid }, { actingPlayerIdx: 1 }, db, []);
   s.combat!.phasePlayerIdx = 0;
-  assert.match(declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []) ?? '', /All attacks are stopped/i);
-  assert.match(declareAttack(s, 'energy', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []) ?? '', /All attacks are stopped/i);
+  const phys = attackInto(s, 'physical');
+  assert.equal(phys.error, undefined);
+  assert.equal(phys.spent, true, 'declared, stopped, and the card spent');
+  assert.match(s.log.join('\n'), /all attacks are stopped for the remainder/i);
+
+  s.combat!.phasePlayerIdx = 0;
+  const energy = attackInto(s, 'energy');
+  assert.equal(energy.error, undefined);
+  assert.equal(energy.spent, true);
 });
 
 test('an ordinary defense card creates no lockout', () => {

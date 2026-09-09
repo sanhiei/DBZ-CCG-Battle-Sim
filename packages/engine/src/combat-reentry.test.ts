@@ -203,13 +203,25 @@ test('a card whose type line could not be read is still playable', () => {
 
 /* ---------- the stop has to apply now, and the card is spent correctly ---------- */
 
-test('a stop deferred to a later phase does not stop the current attack', () => {
+test('a stop deferred to a later phase arms the NEXT attack, not this one', () => {
+  // It used to be refused at every moment, which made the card dead in hand.
+  // It does not stop the attack in front of it — that part was right — but it
+  // is a real defence: it is spent, and the stop it arms fires later.
   const later = inst('later');
   const s = combatState({ defenderHand: [later] });
+  const before = s.players[1]!.mp.stageIndex;
   declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []);
-  const err = resolveDefense(s, { cardUid: later.uid }, { actingPlayerIdx: 1 }, db, []);
-  assert.match(err ?? '', /does not stop physical attacks right now/);
-  assert.ok(s.players[1]!.zones.hand.some((c) => c.uid === later.uid), 'and is not spent for it');
+  assert.equal(resolveDefense(s, { cardUid: later.uid }, { actingPlayerIdx: 1 }, db, []), undefined);
+  assert.ok(s.players[1]!.mp.stageIndex < before, 'this attack still landed');
+  assert.equal(s.players[1]!.zones.hand.some((c) => c.uid === later.uid), false, 'and the card was spent');
+  assert.equal((s.combat?.floatingStops ?? []).length, 1, 'the next one is armed');
+
+  // The attacker's next attack is stopped, and the armed stop is spent doing it.
+  s.combat!.phasePlayerIdx = 0;
+  const stageBefore = s.players[1]!.mp.stageIndex;
+  assert.equal(declareAttack(s, 'physical', armAttack(s, 0), { actingPlayerIdx: 0 }, db, []), undefined);
+  assert.equal(s.players[1]!.mp.stageIndex, stageBefore, 'stopped, no damage');
+  assert.equal((s.combat?.floatingStops ?? []).length, 0, 'and it is used up');
 });
 
 test('"stays on the table" keeps the card available instead of discarding it', () => {

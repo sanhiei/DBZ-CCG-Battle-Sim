@@ -141,6 +141,8 @@ export interface AttackInProgress {
    * rider on the card they spent.
    */
   preventedLifeCards?: number;
+  /** Step 11's choice has already been put to the attacker for this attack. */
+  captureOffered?: boolean;
   /** Life cards actually dealt so far by this attack (drives capture). */
   lifeCardsDealt?: number;
   /** Life-card damage still owed, paused while an Endurance prompt resolves. */
@@ -205,6 +207,13 @@ export interface CombatState {
   finalUsed: number[];
   /** Sources whose "When entering Combat" effect has fired this Combat (~L264). */
   preparedUsed?: string[];
+  /**
+   * Stops that are armed now and fire on a LATER attack — "stops the next
+   * physical attack performed against you this Combat". Each one is consumed by
+   * the first matching attack, unlike a lockout, which bars every attack for
+   * the rest of the Combat Step.
+   */
+  floatingStops?: Array<{ againstPlayerIdx: number; attackType: 'physical' | 'energy' | 'any'; source: string }>;
   /**
    * Attack types a player may not perform for the REMAINDER of this combat,
    * from cards like "stops all energy attacks for the rest of this combat".

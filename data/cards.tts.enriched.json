@@ -4772,6 +4772,10 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "captureDragonBall",
+              "ifSuccessful": true
             }
           ],
           "source": "parsed"
@@ -28967,6 +28971,10 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "captureDragonBall",
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -29732,6 +29740,10 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "captureDragonBall",
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -45493,6 +45505,14 @@
               "delta": 3
             },
             {
+              "kind": "captureDragonBall",
+              "ifSuccessful": true
+            },
+            {
+              "kind": "captureDragonBall",
+              "ifSuccessful": true
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
@@ -46271,6 +46291,9 @@
               "kind": "damageStages",
               "stages": 4,
               "ifSuccessful": true
+            },
+            {
+              "kind": "captureDragonBall"
             }
           ],
           "source": "parsed"
@@ -48397,7 +48420,7 @@
     "imageUrl": "images-tts/tts-839c2c98-8.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "All PUR's gain +2. It takes only 1 life card of damage to capture a Dragon Ball instead of 5. This effect overwrites any effect that changes the life cards of damage needed to capture a Dragon Ball. You can only have 1 copy of this Drill in play at a time.",
       "textVerified": true,
@@ -48405,7 +48428,18 @@
         "number": "120",
         "rarity": "R",
         "style": "Colorless"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "captureDragonBall"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -53869,7 +53903,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-14.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "If Bulma is in play as an ally, capture an opponent's Dragon Ball. Remove from the game after use. (This card is not a Dragon Ball)",
       "errata": "This is not a Dragon Ball",
@@ -53879,7 +53913,21 @@
         "rarity": "R",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "captureDragonBall"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -54486,6 +54534,10 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "captureDragonBall",
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -54547,7 +54599,7 @@
     "imageUrl": "images-tts/tts-f1189c19-18.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Use when needed.  After you perform a successful energy attack, search your life deck for a Dragon Ball and place it into play, and then capture a Dragon Ball from your opponent. Limit 1 per deck.",
       "textOriginal": "After a successful energy attack, this card owner can pick a Dragon Ball out of his deck and capture a Dragon Ball from the damaged foe. Limit 1 per deck.",
@@ -54556,7 +54608,18 @@
         "rarity": "U",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "captureDragonBall"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -55704,7 +55767,7 @@
     "imageUrl": "images-tts/tts-fcd37d11-47.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Use after you perform a successful physical attack to capture an opponent's Dragon Ball.\nRemove from the game after use.",
       "textOriginal": "After a successful physical attack, take a foe's Dragon Ball. Discard this card after use.",
@@ -55713,7 +55776,21 @@
         "rarity": "C",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "captureDragonBall"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -56353,7 +56430,7 @@
     "imageUrl": "images-tts/tts-aa1b8542-45.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Capture a Dragon Ball your opponent controls.\nRemove from the game after use.",
       "textOriginal": "Steal a Dragon Ball of your choice. Remove this card from game after use.",
@@ -56362,7 +56439,21 @@
         "rarity": "P",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "captureDragonBall"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -61011,7 +61102,7 @@
     "imageUrl": "images-tts/tts-f1189c19-36.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [
         "pur"
       ],
@@ -61046,7 +61137,18 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "vision"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "captureDragonBall"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -63780,7 +63882,7 @@
     "imageUrl": "images-tts/tts-94ce7717-47.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -63790,7 +63892,24 @@
         "number": "117",
         "rarity": "R",
         "style": "Named"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "captureDragonBall"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed",
+          "restriction": {
+            "alignment": "Villain"
+          }
+        }
+      ]
     }
   },
   {
@@ -66080,6 +66199,10 @@
               "kind": "physicalAttack"
             },
             {
+              "kind": "captureDragonBall",
+              "ifSuccessful": true
+            },
+            {
               "kind": "removeFromGameAfterUse"
             }
           ],
@@ -66333,6 +66456,10 @@
           "effects": [
             {
               "kind": "physicalAttack"
+            },
+            {
+              "kind": "captureDragonBall",
+              "ifSuccessful": true
             },
             {
               "kind": "changeAnger",
@@ -74830,6 +74957,10 @@
           "effects": [
             {
               "kind": "energyAttack"
+            },
+            {
+              "kind": "captureDragonBall",
+              "ifSuccessful": true
             }
           ],
           "source": "parsed",
@@ -74997,7 +75128,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-18.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Use when needed. After you perform a successful energy attack, search your life deck for a Dragon Ball and place it into play, and then capture a Dragon Ball from your opponent. Limit 1 per deck.",
       "textOriginal": "After a successful energy attack, this card owner can pick a Dragon Ball out of his deck and capture a Dragon Ball from the damaged foe. Limit 1 per deck.",
@@ -75006,7 +75137,18 @@
         "rarity": "U",
         "style": "Colorless"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "captureDragonBall"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -76864,7 +77006,7 @@
     "imageUrl": "images-tts/tts-e0273976-47.jpg",
     "rules": {
       "type": "Non-Combat",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Use after you perform a successful physical attack to capture an opponent's Dragon Ball. Remove from the game after use.",
       "textOriginal": "After a successful physical attack, take a foe's Dragon Ball. Discard this card after use.",
@@ -76873,7 +77015,21 @@
         "rarity": "C",
         "style": "Named"
       },
-      "textVerified": "vision"
+      "textVerified": "vision",
+      "abilities": [
+        {
+          "trigger": "onPlay",
+          "effects": [
+            {
+              "kind": "captureDragonBall"
+            },
+            {
+              "kind": "removeFromGameAfterUse"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {
@@ -86737,7 +86893,7 @@
     "imageUrl": "images-tts/tts-5577c6fb-36.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "metadata",
+      "coverage": "partial",
       "needsReview": [],
       "text": "Power: Once per game, after a successful energy attack, you may capture a Dragon Ball from your opponent and end combat.",
       "textVerified": "vision",
@@ -86762,7 +86918,18 @@
         "canBeAlly": true,
         "level": 3,
         "ladderVerified": "hand"
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "personalityPower",
+          "effects": [
+            {
+              "kind": "captureDragonBall"
+            }
+          ],
+          "source": "parsed"
+        }
+      ]
     }
   },
   {

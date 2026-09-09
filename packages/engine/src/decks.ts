@@ -172,6 +172,19 @@ export function validateDeck(deck: DeckList, db: CardDb, opts: DeckValidationOpt
     errors.push(`unknown card id(s): ${unknown.slice(0, 5).join(', ')}${unknown.length > 5 ? '…' : ''}`);
   }
 
+  // --- "Sensei Deck only" cards may not start in the Life Deck ---
+  //
+  // ~L106: they "must start the game in your Sensei Deck. If you are found to
+  // have Sensei Deck only cards in your Life Deck ... you will receive a game
+  // loss." 31 cards say it, and nothing checked, so they sat in Life Decks and
+  // were drawn like anything else.
+  const senseiOnly = deck.life
+    .map((entry) => db.get(entry.cardId))
+    .filter((c): c is EngineCard => !!c && /sensei\s+deck\s+only/i.test(c.rules?.text ?? ''));
+  for (const card of senseiOnly) {
+    errors.push(`${card.name} is a "Sensei Deck only" card and cannot start in the Life Deck`);
+  }
+
   // --- Dragon Balls must all come from one set ---
   const ballSets = new Set(
     [...counts.keys()]

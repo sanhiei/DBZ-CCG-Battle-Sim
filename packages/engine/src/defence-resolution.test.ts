@@ -202,8 +202,9 @@ test('a real "stops all for the remainder of Combat" still locks out', () => {
   passPhase(s, { actingPlayerIdx: 1 }, []);
   const again = inst('atk');
   s.players[0]!.zones.hand.push(again);
-  assert.match(
-    declareAttack(s, 'energy', again.uid, { actingPlayerIdx: 0 }, db, []) ?? '',
-    /stopped for the remainder/,
-  );
+  // The declaration is legal — a lockout stops the ATTACK (~L387), it does not
+  // bar the card from being played — and the attack comes back stopped.
+  assert.equal(declareAttack(s, 'energy', again.uid, { actingPlayerIdx: 0 }, db, []), undefined);
+  assert.match(s.log.join('\n'), /attack is stopped/i);
+  assert.equal(s.players[0]!.zones.hand.some((c) => c.uid === again.uid), false, 'and the card is spent');
 });

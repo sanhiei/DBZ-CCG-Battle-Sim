@@ -61,6 +61,10 @@ function answerFor(prompt) {
       return { use: false };
     case 'capture':
       return { uid: null };
+    case 'personalityCapture': {
+      const opts = Array.isArray(prompt.options) ? prompt.options : [];
+      return { uid: opts.length ? opts[0].uid : null };
+    }
     case 'redirect':
       return { toUid: null };
     case 'controlOfCombat': {

@@ -202,8 +202,13 @@ function finishSuccessfulAttack(
     // cards there carry the window from a rider that has nothing to do with
     // their stop.
     for (const e of atk.ifSuccessfulEffects ?? []) {
-      if (e.kind === 'stopAttack' && e.window === 'thisCombat') {
+      if (e.kind !== 'stopAttack') continue;
+      if (e.window === 'thisCombat') {
         addLockout(state, c, atk.defenderPlayerIdx, e.attackType ?? 'any');
+      } else if (e.window === 'nextPhase' || e.window === 'firstSuccessful') {
+        // "If successful, stops the next attack your opponent performs against
+        // you this Combat" — one attack, not the rest of the Combat Step.
+        armFloatingStop(state, c, atk.defenderPlayerIdx, e.attackType ?? 'any', 'a floating effect');
       }
     }
   }
@@ -249,6 +254,45 @@ function lockoutAgainst(
     (l) => l.playerIdx === playerIdx && (l.attackType === 'any' || l.attackType === kind),
   );
   return hit?.attackType;
+}
+
+/**
+ * Arm a stop that fires on a LATER attack (window 'nextPhase' /
+ * 'firstSuccessful').
+ *
+ * These were filtered out of the "does this card stop the attack in front of
+ * me" test — correctly, they do not — and then nothing else looked at them, so
+ * a card whose only stop was deferred was refused at every moment and was dead
+ * in hand. Twenty cards print one, most of them as the second half of "stops a
+ * physical attack AND stops a physical attack during your opponent's next
+ * Attacker Attacks phase".
+ */
+function armFloatingStop(
+  state: GameState,
+  c: NonNullable<GameState['combat']>,
+  againstPlayerIdx: number,
+  attackType: 'physical' | 'energy' | 'any',
+  source: string,
+): void {
+  c.floatingStops = [...(c.floatingStops ?? []), { againstPlayerIdx, attackType, source }];
+  const what = attackType === 'any' ? 'attack' : `${attackType} attack`;
+  state.log.push(`${state.players[againstPlayerIdx]?.name}'s next ${what} will be stopped.`);
+}
+
+/** Take the armed stop that answers this attack, if there is one. */
+function takeFloatingStop(
+  c: NonNullable<GameState['combat']>,
+  attackerIdx: number,
+  attackType: AttackType,
+): string | undefined {
+  const list = c.floatingStops ?? [];
+  const at = list.findIndex(
+    (f) => f.againstPlayerIdx === attackerIdx && (f.attackType === 'any' || f.attackType === attackType),
+  );
+  if (at === -1) return undefined;
+  const [used] = list.splice(at, 1);
+  c.floatingStops = list;
+  return used?.source ?? 'a floating effect';
 }
 
 /**
@@ -342,8 +386,14 @@ export function declareAttack(
   if (c.currentAttack) return 'an attack is already in progress';
   if (ctx.actingPlayerIdx !== c.phasePlayerIdx) return 'not your Attack Phase';
   if (c.finalUsed.includes(ctx.actingPlayerIdx)) return 'you must pass after a Final Physical Attack';
+  // A lockout stops the ATTACK, it does not bar the declaration. CRD ~L387:
+  // "If the attack is stopped, the effects are NOT stopped. Secondary effects
+  // occur regardless of if an attack is stopped or not." Refusing at the
+  // declaration meant the card was never played, so its secondary effects never
+  // resolved, "if this attack is stopped" riders could never fire, the card was
+  // never spent — and cards printed as exceptions to a lockout were unplayable.
+  // The attack is built, paid for, resolved as stopped, and the card spent.
   const locked = lockoutAgainst(c, ctx.actingPlayerIdx, attackType);
-  if (locked) return `${locked === 'any' ? 'All attacks' : `${locked} attacks`} are stopped for the remainder of this Combat`;
   // An attack comes FROM something. CRD ~L286-291 lists everything an Attack
   // Phase may be spent on, and every attacking option names a source: play a
   // card from hand that can attack, use a card already in play that can, use a
@@ -405,6 +455,21 @@ export function declareAttack(
   c.currentAttack = attack;
   events.push({ type: 'attackDeclared', attackType: kind });
 
+  // A stop armed earlier fires here, and is spent doing it.
+  const floating = locked ? undefined : takeFloatingStop(c, attackerIdx, kind);
+  if (locked || floating) {
+    attack.stopped = true;
+    state.log.push(
+      locked
+        ? `${state.players[attackerIdx]!.name}'s attack is stopped — ${locked === 'any' ? 'all attacks' : `${locked} attacks`} are stopped for the remainder of this Combat.`
+        : `${state.players[attackerIdx]!.name}'s attack is stopped by ${floating}.`,
+    );
+    discardAttackCards(state, attack, db);
+    events.push({ type: 'attackResolved', successful: false, powerStages: 0, lifeCards: 0 });
+    nextAttackPhase(state, events);
+    return undefined;
+  }
+
   // Step 4 comes before the defence: "If an Ally can take over Combat for the
   // Main Personality, the Defender must announce which personality is in
   // Control of Combat until this attack is resolved" (CRD ~L325). Only ask
@@ -443,7 +508,6 @@ export function finalPhysicalAttack(
     return 'you have already performed a Final Physical Attack this Combat';
   }
   const locked = lockoutAgainst(c, ctx.actingPlayerIdx, 'physical');
-  if (locked) return `${locked === 'any' ? 'All attacks' : `${locked} attacks`} are stopped for the remainder of this Combat`;
 
   const attackerIdx = c.phasePlayerIdx;
   const player = state.players[attackerIdx]!;
@@ -476,6 +540,16 @@ export function finalPhysicalAttack(
     `${player.name} performs a Final Physical Attack — they must pass for the rest of Combat and cannot defend.`,
   );
   events.push({ type: 'attackDeclared', attackType: 'physical' });
+
+  if (locked) {
+    // The cost is paid and the once-per-Combat use is spent either way: a
+    // lockout stops the attack, it does not undo the desperation move.
+    attack.stopped = true;
+    state.log.push(`The Final Physical Attack is stopped — attacks are stopped for the remainder of this Combat.`);
+    events.push({ type: 'attackResolved', successful: false, powerStages: 0, lifeCards: 0 });
+    nextAttackPhase(state, events);
+    return undefined;
+  }
 
   if (openControlWindow(state, attack, db)) return undefined;
   openDefenceWindow(state, attack, db, events);
@@ -889,13 +963,15 @@ export function resolveDefense(
       // nothing else, is not a defence.
       const attackOnly = abilities.length > 0 && abilities.every((a) => a.trigger === 'attack');
       if (attackOnly) return `${cardName} is an attack, not a defence`;
-      if (prevents === 0 && stops.length > 0) {
+      const deferred = stops.filter((e) => e.window === 'nextPhase' || e.window === 'firstSuccessful');
+      if (prevents === 0 && deferred.length === 0 && stops.length > 0) {
         // It stops attacks — just not this one, and not now.
         return `${cardName} does not stop ${atk.attackType} attacks right now`;
       }
-      if (prevents === 0 && abilities.length > 0) {
-        // Read, defensive, and it neither stops nor prevents this attack.
-        // Resolving it as a stop invented a rule the card does not have.
+      if (prevents === 0 && deferred.length === 0 && abilities.length > 0) {
+        // Read, defensive, and it neither stops nor prevents this attack, and
+        // arms nothing for later. Resolving it as a stop invented a rule the
+        // card does not have.
         return `${cardName} does not stop or prevent this attack`;
       }
     }
@@ -907,7 +983,18 @@ export function resolveDefense(
       (e) => e.kind !== 'stopAttack' && e.kind !== 'preventLifeCards' && e.kind !== 'removeFromGameAfterUse',
     );
 
-    if (!stopsThis && prevents > 0) {
+    // A deferred stop is armed whether or not the card also stops this attack:
+    // "Stops a physical attack AND stops a physical attack during your
+    // opponent's next Attacker Attacks phase" is both halves of one card.
+    for (const e of stops) {
+      if (e.window === 'nextPhase' || e.window === 'firstSuccessful') {
+        armFloatingStop(state, c, atk.attackerPlayerIdx, e.attackType ?? 'any', cardName);
+      }
+    }
+
+    const defersOnly = !stopsThis && stops.some((e) => e.window === 'nextPhase' || e.window === 'firstSuccessful');
+
+    if (!stopsThis && (prevents > 0 || defersOnly)) {
       // PREVENTION IS NOT A STOP. `preventLifeCards` was parsed onto 20 cards,
       // typed in the shared Effect union, and read by nothing — so a card that
       // prevents N life cards fell through and cancelled the whole attack
@@ -915,8 +1002,10 @@ export function resolveDefense(
       // attacker of a success they earned: "an attack is considered successful
       // even if it deals no damage" (~L340 step 8), and the success is what
       // carries the Dragon Ball capture and every "if successful" rider.
-      atk.preventedLifeCards = (atk.preventedLifeCards ?? 0) + prevents;
-      state.log.push(`${cardName} prevents ${prevents} life card(s) of damage.`);
+      if (prevents > 0) {
+        atk.preventedLifeCards = (atk.preventedLifeCards ?? 0) + prevents;
+        state.log.push(`${cardName} prevents ${prevents} life card(s) of damage.`);
+      }
       if (riders.length > 0) applyOnPlay(state, atk.defenderPlayerIdx, atk.attackerPlayerIdx, riders, db, events);
       // Only the DEFENCE card is spent here; the attack goes on, so the
       // attacker's card is spent with the rest of the attack at step 8.
@@ -1121,6 +1210,73 @@ function statedLifeCards(atk: NonNullable<NonNullable<GameState['combat']>['curr
   return atk.baseDamage === undefined ? ENERGY_LIFE_CARDS : 0;
 }
 
+/**
+ * A 7th ball does not win on the spot: the capturer holds it until the start of
+ * their next turn (see deferDragonVictory). Shared by both capture routes so
+ * they cannot drift apart on what counts as a set.
+ */
+function claimDragonVictoryIfComplete(state: GameState, playerIdx: number, db: CardDb): void {
+  const held = state.players[playerIdx]?.dragonBalls ?? [];
+  const bySet = new Map<string, Set<string>>();
+  for (const ball of held) {
+    const card = db.get(ball.cardId);
+    if (!card) continue;
+    const set = card.saga || 'unknown';
+    const seen = bySet.get(set) ?? new Set<string>();
+    seen.add(String(card.number ?? card.name));
+    bySet.set(set, seen);
+  }
+  for (const seen of bySet.values()) {
+    if (seen.size >= DRAGON_BALL_SET_SIZE) {
+      deferDragonVictory(state, playerIdx);
+      return;
+    }
+  }
+}
+
+/**
+ * The Personality Capture Rule (CRD ~L688, battle-sequence step 11).
+ *
+ * "When some Allies perform attacks that do life cards of damage, they can
+ * choose to capture an opponent's Dragon Ball that is in play rather than deal
+ * any life cards of damage." Eleven Allies are named by the rule and no others
+ * qualify. It was not implemented at all — step 11 did not exist, so an Ally
+ * built for it could never do the one thing it was built for.
+ *
+ * The choice is instead-of, not as-well-as: taking the ball deals no life cards.
+ */
+const CAPTURE_ALLIES = new Set([
+  'bulma',
+  'chi-chi',
+  'frieza',
+  'garlic jr.',
+  'guldo',
+  'krillin',
+  'master roshi',
+  'saibaimen',
+  'videl',
+  'tien',
+  'yamcha',
+]);
+
+/** Whether step 11's choice is available to this attack. */
+function personalityCaptureOffer(
+  state: GameState,
+  atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>,
+  lifeCards: number,
+  db: CardDb,
+): Array<{ uid: string; name: string }> | undefined {
+  if (lifeCards < 1) return undefined;
+  const attacker = findPersonality(state, atk.attackerControllerUid);
+  // "the attacker must be an Ally" — the MP never qualifies, however named.
+  if (!attacker?.isAlly) return undefined;
+  const named = attacker.personalityName.trim().toLowerCase();
+  if (!CAPTURE_ALLIES.has(named)) return undefined;
+  const balls = capturableBalls(state, atk.defenderPlayerIdx);
+  if (balls.length === 0) return undefined;
+  return balls.map((ball) => ({ uid: ball.uid, name: db.get(ball.cardId)?.name ?? 'Dragon Ball' }));
+}
+
 function dealLifeCardsAndFinish(
   state: GameState,
   atk: NonNullable<NonNullable<GameState['combat']>['currentAttack']>,
@@ -1128,8 +1284,62 @@ function dealLifeCardsAndFinish(
   db: CardDb,
   events: GameEvent[],
 ): void {
+  // Step 11 comes before the damage: a named Ally chooses the ball OR the life
+  // cards, never both.
+  const offer = personalityCaptureOffer(state, atk, n, db);
+  if (offer && !atk.captureOffered) {
+    atk.captureOffered = true;
+    atk.pendingLifeCardDamage = n;
+    atk.resolutionStep = 11;
+    state.pendingPrompt = newPrompt(
+      atk.attackerPlayerIdx,
+      'personalityCapture',
+      `Capture a Dragon Ball instead of dealing ${n} life card(s) of damage?`,
+      { optional: true, options: offer },
+    );
+    return;
+  }
   atk.pendingLifeCardDamage = n;
   resolveLifeCardDamage(state, atk, db, events);
+}
+
+/**
+ * Answer step 11. Naming a ball takes it and deals NO life cards; declining
+ * deals the damage as normal.
+ */
+export function resolvePersonalityCapture(
+  state: GameState,
+  ballUid: string | null,
+  ctx: CombatCtx,
+  db: CardDb,
+  events: GameEvent[],
+): string | undefined {
+  const atk = state.combat?.currentAttack;
+  const prompt = state.pendingPrompt;
+  if (!atk || prompt?.type !== 'personalityCapture') return 'no Personality Capture choice pending';
+  if (ctx.actingPlayerIdx !== atk.attackerPlayerIdx) return 'only the attacker may capture';
+  delete state.pendingPrompt;
+
+  if (ballUid) {
+    if (!captureBall(state, atk.defenderPlayerIdx, atk.attackerPlayerIdx, ballUid)) {
+      return 'that Dragon Ball is not available to capture';
+    }
+    const attacker = findPersonality(state, atk.attackerControllerUid);
+    state.log.push(
+      `${attacker?.personalityName ?? 'The Ally'} captures a Dragon Ball instead of dealing life cards.`,
+    );
+    events.push({ type: 'dragonBallCaptured', ballUid, byPlayerIdx: atk.attackerPlayerIdx });
+    // "rather than deal any life cards of damage" — the damage does not happen.
+    atk.pendingLifeCardDamage = 0;
+    claimDragonVictoryIfComplete(state, atk.attackerPlayerIdx, db);
+    finishSuccessfulAttack(state, atk, db, events);
+    events.push({ type: 'attackResolved', successful: true, powerStages: atk.powerStagesDealt ?? 0, lifeCards: 0 });
+    nextAttackPhase(state, events);
+    return undefined;
+  }
+
+  resolveLifeCardDamage(state, atk, db, events);
+  return undefined;
 }
 
 /**

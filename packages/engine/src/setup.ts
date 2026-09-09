@@ -105,7 +105,16 @@ function buildPlayer(idx: number, name: string, deck: DeckList, db: CardDb, rng:
   }
   if (deck.senseiId) {
     player.senseiCardId = deck.senseiId;
+    // The Sensei card itself "starts the game on the table" (~L88) and is
+    // public; it lives in this zone alongside the Sensei Deck proper.
     zones.sensei.push(instance(deck.senseiId, false));
+  }
+  // The Sensei DECK was dropped at setup — every card a player put in it simply
+  // never entered the game, so the 31 cards that say "Sensei Deck only" were
+  // unplayable rather than merely misplaced. They do not count toward Life Deck
+  // size (~L94), which is why they are built here and not in buildLifeDeck.
+  for (const { cardId, qty } of deck.senseiDeck ?? []) {
+    for (let i = 0; i < qty; i++) zones.sensei.push(instance(cardId, true));
   }
   return player;
 }

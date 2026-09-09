@@ -13,7 +13,8 @@
 import type { Ability, AttackType, Effect, EffectTarget, GameEvent, GameState } from '@dbz/shared';
 import type { CardDb } from './loader.js';
 import { currentRatings, draw, setAnger, syncRating } from './turn.js';
-import { discardForEffect } from './damage.js';
+import { capturableBalls, discardForEffect } from './damage.js';
+import { newPrompt } from './prompt.js';
 
 /* ============================ Execution ============================ */
 
@@ -269,6 +270,25 @@ export function applyOnPlay(
       case 'removeFromGameAfterUse':
         removeFromGame = true;
         break;
+      case 'captureDragonBall': {
+        // A Card Capture (~L682). Unimplemented until now: no Effect carried
+        // it, so a card whose whole point is taking a ball did nothing.
+        const balls = capturableBalls(state, foeIdx);
+        if (balls.length === 0) {
+          state.log.push('No Dragon Ball in play to capture.');
+          break;
+        }
+        state.pendingPrompt = newPrompt(
+          userIdx,
+          'capture',
+          "Capture one of your opponent's Dragon Balls.",
+          {
+            optional: true,
+            options: balls.map((b) => ({ uid: b.uid, name: db.get(b.cardId)?.name ?? 'Dragon Ball' })),
+          },
+        );
+        break;
+      }
       default:
         // Say so rather than silently doing nothing: a card that looks
         // resolved but was not is worse than one the player knows to resolve.
@@ -319,6 +339,7 @@ const ifSucc = (t: string) => /if[\s:.\-|\\]{0,6}suc/.test(t);
  * effect, and happens either way.
  */
 const GATEABLE = new Set<Effect['kind']>([
+  'captureDragonBall',
   'changeAnger',
   'changePowerStages',
   'movePowerStage',
@@ -696,6 +717,23 @@ function pushConstantModifiers(effects: Effect[], t: string): void {
   }
 }
 
+/**
+ * "Capture an opponent's Dragon Ball" as a card effect (~L682).
+ *
+ * Card Captures were unimplemented: no Effect carried them, so a card whose
+ * whole point is taking a ball did nothing when it resolved.
+ */
+function pushCapture(effects: Effect[], t: string): void {
+  for (const s of sentences(t)) {
+    if (!/captur\w*[^.]{0,40}dragon\s*ball/.test(s)) continue;
+    // "cannot be captured" / "if your opponent captures" are not an instruction
+    // to capture one.
+    if (/cannot|can\s*not|unless|whenever|if\s+your\s+opponent/.test(s)) continue;
+    effects.push({ kind: 'captureDragonBall' });
+    return;
+  }
+}
+
 function pushDraw(effects: Effect[], t: string): void {
   const m = t.match(/draw\s+([0-9b]+|a)\s*cards?\b/);
   if (m) effects.push({ kind: 'drawCards', count: m[1] === 'a' ? 1 : toNum(m[1]) });
@@ -910,6 +948,7 @@ export function parsePersonalityPowers(rawText: string, type = 'Personality'): A
     pushStun(riders, lower);
     pushRejuvenate(riders, lower);
     pushDiscardCards(riders, lower);
+    pushCapture(riders, lower);
     if (riders.length > 0) out.push({ trigger: 'personalityPower', effects: riders, source: 'parsed' });
   }
   return out;
@@ -1007,6 +1046,7 @@ export function parseAbility(rawText: string, type: string): Ability | null {
       pushStun(riders, s);
       pushRejuvenate(riders, s);
       pushDiscardCards(riders, s);
+      pushCapture(riders, s);
 
       const declaresAttack = /\b(physical|energy)\s+attack\b/.test(s);
       const deferred = ifSucc(s) || declaresAttack;
@@ -1079,6 +1119,7 @@ export function parseAbility(rawText: string, type: string): Ability | null {
     pushStun(effects, body);
     pushRejuvenate(effects, body);
     pushDiscardCards(effects, body);
+    pushCapture(effects, body);
     if (effects.length === 0) return null;
     if (removesAfterUse(body)) effects.push({ kind: 'removeFromGameAfterUse' });
     const ability: Ability = { trigger: 'onPlay', effects, source: 'parsed' };
