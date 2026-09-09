@@ -133,10 +133,6 @@
           "qty": 3
         },
         {
-          "cardId": "tts-bf3b8d7f-57",
-          "qty": 3
-        },
-        {
           "cardId": "tts-514f40cb-16",
           "qty": 3
         },
@@ -145,7 +141,13 @@
           "qty": 1
         }
       ],
-      "resolvedCount": 67
+      "senseiDeck": [
+        {
+          "cardId": "tts-bf3b8d7f-57",
+          "qty": 3
+        }
+      ],
+      "resolvedCount": 64
     },
     {
       "id": "orange-drills",
@@ -345,10 +347,6 @@
           "qty": 3
         },
         {
-          "cardId": "tts-193cbccb-19",
-          "qty": 3
-        },
-        {
           "cardId": "tts-94ce7717-5",
           "qty": 3
         },
@@ -413,7 +411,13 @@
           "qty": 1
         }
       ],
-      "resolvedCount": 70
+      "senseiDeck": [
+        {
+          "cardId": "tts-193cbccb-19",
+          "qty": 3
+        }
+      ],
+      "resolvedCount": 67
     },
     {
       "id": "black-control",
@@ -479,10 +483,6 @@
           "qty": 3
         },
         {
-          "cardId": "tts-c29a516a-25",
-          "qty": 2
-        },
-        {
           "cardId": "tts-930d6a1e-7",
           "qty": 3
         },
@@ -531,7 +531,13 @@
           "qty": 2
         }
       ],
-      "resolvedCount": 66
+      "senseiDeck": [
+        {
+          "cardId": "tts-c29a516a-25",
+          "qty": 2
+        }
+      ],
+      "resolvedCount": 64
     }
   ]
 }

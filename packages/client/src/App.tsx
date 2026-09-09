@@ -43,6 +43,19 @@ export function App() {
   }, [name]);
 
   const joined = game.roomCode !== null;
+  /** Which ready-made deck a CPU opponent should play; '' means "first legal". */
+  const [cpuDeck, setCpuDeck] = useState('');
+  const [presets, setPresets] = useState<Array<{ id: string; name: string }>>([]);
+  useEffect(() => {
+    let live = true;
+    fetch('/api/presets')
+      .then((r) => r.json())
+      .then((d) => live && setPresets(Array.isArray(d?.decks) ? d.decks : []))
+      .catch(() => undefined);
+    return () => {
+      live = false;
+    };
+  }, []);
   const mySeat = game.lobby?.seats.find((s) => s.idx === game.seat);
   const canJoin = game.conn === 'open' && name.trim().length > 0 && code.trim().length > 0;
 
@@ -138,6 +151,24 @@ export function App() {
               Copy
             </button>
           </p>
+          {/* Only while a seat is actually free — offering it to a full room
+              just produces an error the moment it is clicked. LobbyView lists
+              OCCUPIED seats only, so a free one shows up as a short list, not
+              as a null entry. A room holds two (SEAT_COUNT). */}
+          {(game.lobby?.seats.length ?? 0) < 2 && (
+            <p className="lobby__cpu">
+              <label htmlFor="cpudeck">CPU opponent plays</label>{' '}
+              <select id="cpudeck" value={cpuDeck} onChange={(e) => setCpuDeck(e.target.value)}>
+                <option value="">first legal deck</option>
+                {presets.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.name}
+                  </option>
+                ))}
+              </select>{' '}
+              <button onClick={() => game.addBot(cpuDeck || undefined)}>Seat CPU opponent</button>
+            </p>
+          )}
             <ul className="lobby__seats">
               {(game.lobby?.seats ?? []).map((s) => (
                 <li key={s.idx} className={s.ready ? 'ready' : ''}>

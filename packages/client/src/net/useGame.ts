@@ -39,6 +39,8 @@ export interface GameSession {
   pendingCount: number;
   join(roomCode: string, playerName: string, spectate?: boolean): void;
   send(action: Action): void;
+  /** Seat a CPU opponent in the free seat, optionally with a named preset deck. */
+  addBot(deckId?: string): void;
 }
 
 const TOKEN_KEY = (room: string) => `dbz.token.${room.toUpperCase()}`;
@@ -195,6 +197,17 @@ export function useGame(): GameSession {
   }, []);
 
   /**
+   * Ask the server to seat a CPU opponent. Not an engine Action, so it does not
+   * go through the optimistic-prediction queue — the bot's arrival shows up as
+   * an ordinary lobby broadcast.
+   */
+  const addBot = useCallback((deckId?: string) => {
+    const ws = socket.current;
+    if (!ws || ws.readyState !== ws.OPEN) return;
+    ws.send(JSON.stringify({ kind: 'addBot', ...(deckId ? { deckId } : {}) } satisfies ClientMessage));
+  }, []);
+
+  /**
    * Render state = authority + un-retired predictions. Recomputed rather than
    * mutated so a rejected prediction disappears with no rollback bookkeeping.
    * A prediction that the local reducer rejects is skipped, not applied — the
@@ -223,5 +236,6 @@ export function useGame(): GameSession {
     pendingCount,
     join,
     send,
+    addBot,
   };
 }

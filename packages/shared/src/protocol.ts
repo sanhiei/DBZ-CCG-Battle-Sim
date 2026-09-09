@@ -95,6 +95,12 @@ export interface LobbyView {
 export type ClientMessage =
   | { kind: 'join'; roomCode: string; playerName: string; token?: string; spectate?: boolean }
   | { kind: 'action'; action: ActionWithMeta }
+  /**
+   * Seat a CPU opponent in the free seat, for solo testing. `deckId` names one
+   * of the ready-made decks from /api/presets; without it the CPU takes the
+   * first legal one.
+   */
+  | { kind: 'addBot'; deckId?: string }
   | { kind: 'ping' };
 
 export type ServerMessage =

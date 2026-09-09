@@ -132,11 +132,20 @@ for (const d of presets.decks) {
   if (ballLines.length && !ballSet) misses.push(`${d.id}: no single set holds all ${ballLines.length} Dragon Balls`);
 
   const life = [];
+  const senseiDeck = [];
   for (const [qty, n] of d.life) {
     const fromSet = ballSet?.get(key(n));
     const c = fromSet ?? pick(n);
-    if (c) life.push({ cardId: c.id, qty });
-    else misses.push(`${d.id}: ${qty}x "${n}"`);
+    if (!c) {
+      misses.push(`${d.id}: ${qty}x "${n}"`);
+      continue;
+    }
+    // A "Sensei Deck only" card MUST start in the Sensei Deck (CRD ~L106) —
+    // starting one in the Life Deck is a game loss, and the engine rejects the
+    // whole deck for it. A decklist that names one is asking for the card, not
+    // for the illegal placement, so it is routed rather than dropped.
+    if (/sensei\s+deck\s+only/i.test(c.rules?.text ?? '')) senseiDeck.push({ cardId: c.id, qty });
+    else life.push({ cardId: c.id, qty });
   }
 
   const count = mpLevels.length + (mastery ? 1 : 0) + life.reduce((s, l) => s + l.qty, 0);
@@ -147,9 +156,11 @@ for (const d of presets.decks) {
     mpLevels,
     ...(mastery ? { masteryId: mastery.id } : {}),
     life,
+    ...(senseiDeck.length ? { senseiDeck } : {}),
     resolvedCount: count,
   });
-  console.log(`${d.name.padEnd(24)} ${String(count).padStart(3)} cards  (${life.length}/${d.life.length} lines, ${mpLevels.length}/${d.mpLevels.length} MP levels)`);
+  const sensei = senseiDeck.length ? `, ${senseiDeck.reduce((s, l) => s + l.qty, 0)} to Sensei Deck` : '';
+  console.log(`${d.name.padEnd(24)} ${String(count).padStart(3)} cards  (${life.length}/${d.life.length} lines, ${mpLevels.length}/${d.mpLevels.length} MP levels${sensei})`);
 }
 
 if (substitutions.length) {

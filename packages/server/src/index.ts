@@ -11,11 +11,12 @@ import { basename, join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { WebSocketServer, type WebSocket } from 'ws';
-import type { ClientMessage, ServerMessage } from '@dbz/shared';
+import type { ClientMessage, DeckList, ServerMessage } from '@dbz/shared';
 import { findDataDir, loadCatalog, type Catalog } from './catalog.js';
-import { getPatTable } from '@dbz/engine';
+import { getPatTable, validateDeck, type CardDb } from '@dbz/engine';
 import { loadPatTable } from './pat.js';
 import { Hub } from './hub.js';
+import { addBot } from './bot.js';
 import type { Room, RoomClient } from './room.js';
 
 /** Decks are the largest legitimate payload; anything past this is abuse. */
@@ -49,6 +50,7 @@ export interface StartOptions {
 
 export async function startServer(opts: StartOptions = {}): Promise<ServerHandle> {
   const catalog = opts.catalog ?? loadCatalog();
+  catalogRef = catalog;
 
   // Must happen before any combat resolves, or physical attacks use invented numbers.
   const pat = loadPatTable();
@@ -117,6 +119,39 @@ function send(ws: WebSocket, msg: ServerMessage): void {
   if (ws.readyState === ws.OPEN) ws.send(JSON.stringify(msg));
 }
 
+/**
+ * The catalog the CPU opponent plays from. Set once at startup; the bot needs a
+ * CardDb to know what its own cards do, and reloading 2,764 cards per request
+ * would be absurd.
+ */
+let catalogRef: Catalog | null = null;
+
+/**
+ * A ready-made deck for a CPU opponent: the one named, else the first that is
+ * actually legal.
+ *
+ * Legality is checked here rather than trusted, because a rules change can make
+ * a stored deck illegal long after it was written — three of the four presets
+ * became illegal the day the "Sensei Deck only" rule landed, and the first
+ * symptom was a CPU that sat in its seat with no deck and no explanation.
+ */
+function presetDeckFor(deckId: string | undefined, db: CardDb): DeckList | null {
+  const path = join(findDataDir(), 'preset-decks.resolved.json');
+  if (!existsSync(path)) return null;
+  try {
+    const parsed = JSON.parse(readFileSync(path, 'utf8')) as { decks?: DeckList[] } | DeckList[];
+    const decks = Array.isArray(parsed) ? parsed : parsed.decks ?? [];
+    const legal = decks.filter((d) => validateDeck(d, db, {}).length === 0);
+    if (deckId) {
+      const named = legal.find((d) => (d as DeckList & { id?: string }).id === deckId);
+      if (named) return named;
+    }
+    return legal[0] ?? null;
+  } catch {
+    return null;
+  }
+}
+
 function handleMessage(ws: WebSocket, conn: Connection, hub: Hub, raw: string): void {
   let msg: ClientMessage;
   try {
@@ -143,6 +178,23 @@ function handleMessage(ws: WebSocket, conn: Connection, hub: Hub, raw: string): 
       conn.room = room;
       send(ws, { kind: 'session', roomCode: room.code, token, playerIdx: seatIdx, spectate: seatIdx === null });
       room.broadcast();
+      return;
+    }
+
+    case 'addBot': {
+      if (!conn.room) return send(ws, { kind: 'error', message: 'join a room first' });
+      const db = catalogRef?.db;
+      if (!db) return send(ws, { kind: 'error', message: 'catalog not loaded' });
+      const deck = presetDeckFor(msg.deckId, db);
+      if (!deck) {
+        return send(ws, {
+          kind: 'error',
+          message: 'no legal preset deck for a CPU opponent — run: node scripts/resolve-presets.mjs --write',
+        });
+      }
+      const result = addBot(conn.room, db, deck, `CPU (${deck.name})`);
+      if ('error' in result) return send(ws, { kind: 'error', message: result.error });
+      conn.room.broadcast();
       return;
     }
 
