@@ -195,6 +195,12 @@ function handleHttp(req: IncomingMessage, res: ServerResponse, catalog: Catalog,
   if (url.pathname.startsWith('/cards/')) {
     return serveCardImage(url.pathname.slice('/cards/'.length), res);
   }
+  if (url.pathname.startsWith('/playmat/')) {
+    return serveLocalArt('playmats', url.pathname.slice('/playmat/'.length), res);
+  }
+  if (url.pathname.startsWith('/pat-image/')) {
+    return serveLocalArt('pat-images', url.pathname.slice('/pat-image/'.length), res);
+  }
   if (serveClient(url.pathname, res)) return;
   res.writeHead(404, { 'content-type': 'text/plain' }).end('not found');
 }
@@ -289,6 +295,44 @@ function serveCardImage(rawName: string, res: ServerResponse): void {
       : safe.toLowerCase().endsWith('.png')
         ? 'image/png'
         : 'image/jpeg',
+    'cache-control': 'public, max-age=86400',
+  });
+  createReadStream(file).pipe(res);
+}
+
+/**
+ * Serve a piece of local table art — the playmat, the Physical Attack Table
+ * card — from a named directory under data/.
+ *
+ * These are franchise images and gitignored for the same reason the card faces
+ * are: they live on the machine running the game, not in the repository. The
+ * host serves them the way any site serves its images. Missing is not an
+ * error — the UI falls back to something it can draw itself, so a fresh clone
+ * with no art still plays.
+ *
+ * The name is reduced to a bare basename and stripped to a safe charset, so a
+ * crafted path cannot escape the directory.
+ */
+function serveLocalArt(dirName: string, rawName: string, res: ServerResponse): void {
+  const safe = basename(decodeURIComponent(rawName)).replace(/[^A-Za-z0-9._-]/g, '');
+  if (!safe) {
+    res.writeHead(400).end();
+    return;
+  }
+  const dir = join(findDataDir(), dirName);
+  // The name may arrive without an extension ("default"), so try the ones we
+  // are willing to serve rather than making the caller know which it is.
+  const candidates = /\.(jpg|jpeg|png|webp)$/i.test(safe)
+    ? [join(dir, safe)]
+    : ['webp', 'png', 'jpg', 'jpeg'].map((ext) => join(dir, `${safe}.${ext}`));
+  const file = candidates.find((f) => existsSync(f));
+  if (!file) {
+    res.writeHead(404).end();
+    return;
+  }
+  const ext = file.slice(file.lastIndexOf('.') + 1).toLowerCase();
+  res.writeHead(200, {
+    'content-type': ext === 'png' ? 'image/png' : ext === 'webp' ? 'image/webp' : 'image/jpeg',
     'cache-control': 'public, max-age=86400',
   });
   createReadStream(file).pipe(res);

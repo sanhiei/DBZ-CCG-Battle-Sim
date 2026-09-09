@@ -26,7 +26,7 @@ import { Field, type DropIntent } from './Field.tsx';
 import { PromptPanel, type PromptChoice } from './PromptPanel.tsx';
 import { ManualPanel } from './ManualPanel.tsx';
 import { CardDetail } from './CardDetail.tsx';
-import { PlaymatPicker, usePlaymat } from './Playmat.tsx';
+import { PlaymatPicker, usePlaymat, useSharedMat } from './Playmat.tsx';
 import { PatTableView } from './PatTableView.tsx';
 import { getPatTable } from '@dbz/engine';
 
@@ -102,6 +102,7 @@ export function Board({
   const [dragging, setDragging] = useState<string | null>(null);
   const [patOpen, setPatOpen] = useState(false);
   const playmat = usePlaymat();
+  const sharedMat = useSharedMat();
 
   // Spectators have no seat but still need both sides laid out.
   const bottomIdx = seat ?? 1;
@@ -194,7 +195,7 @@ export function Board({
             own={false}
             active={state.activePlayerIdx === foe.idx}
             db={db}
-            mat={null}
+            mat={sharedMat}
             dropIntent={intentFor(false)}
             onDropCard={dropCard}
             onInspectPersonality={openPersonalityCard}
@@ -284,7 +285,7 @@ export function Board({
               PAT
             </button>
             <PlaymatPicker
-              mat={playmat.mat}
+              mat={playmat.mat ?? sharedMat}
               error={playmat.error}
               onPick={playmat.set}
               onClear={playmat.clear}
@@ -309,7 +310,7 @@ export function Board({
             own
             active={myTurn}
             db={db}
-            mat={playmat.mat}
+            mat={playmat.mat ?? sharedMat}
             dropIntent={intentFor(true)}
             onDropCard={dropCard}
             onInspectPersonality={openPersonalityCard}

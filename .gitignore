@@ -31,3 +31,10 @@ data/verify-batches/
 
 # Scratch files written by audit subagents.
 .audit-tmp/
+
+# Table playmat art — franchise artwork, same reason as the card faces.
+data/playmats/*
+!data/playmats/README.md
+# Physical Attack Table card scans — franchise artwork, same reason.
+data/pat-images/*
+!data/pat-images/README.md

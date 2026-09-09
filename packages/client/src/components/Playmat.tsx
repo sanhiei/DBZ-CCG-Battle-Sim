@@ -11,6 +11,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 const KEY = 'dbz.playmat';
+/**
+ * The table's shared mat, served by the host from data/playmats/. It is
+ * franchise artwork and gitignored for the same reason the card faces are, so
+ * a clone without it simply gets the plain surface instead.
+ */
+export const SHARED_MAT = '/playmat/default';
 /** Data URLs are ~33% bigger than the file; localStorage caps out around 5MB. */
 const MAX_BYTES = 3 * 1024 * 1024;
 
@@ -69,6 +75,26 @@ export function usePlaymat(): {
   }, []);
 
   return { mat, error, set, clear };
+}
+
+
+/**
+ * Whether the host actually has a shared mat. Asking first means a missing file
+ * shows the plain table rather than a broken-image background.
+ */
+export function useSharedMat(): string | null {
+  const [url, setUrl] = useState<string | null>(null);
+  useEffect(() => {
+    let alive = true;
+    const img = new Image();
+    img.onload = () => alive && setUrl(SHARED_MAT);
+    img.onerror = () => alive && setUrl(null);
+    img.src = SHARED_MAT;
+    return () => {
+      alive = false;
+    };
+  }, []);
+  return url;
 }
 
 export function PlaymatPicker({
