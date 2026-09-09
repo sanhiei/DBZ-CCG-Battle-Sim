@@ -855,7 +855,9 @@ export function parseWhenEnteringCombat(rawText: string): Ability | null {
   // Just the sentence the trigger opens; the rest of the card is not part of it.
   const rest = t.slice(at);
   const sentence = rest.split(/(?<=\.)\s/)[0] ?? rest;
-  if (/\bmay\b/.test(sentence)) return null;
+  // "you may" is a decision, not a skip: it is offered to the player instead of
+  // being applied for them, and instead of being dropped as it used to be.
+  const optional = /\bmay\b/.test(sentence);
 
   const effects: Effect[] = [];
   pushAnger(effects, sentence);
@@ -867,6 +869,7 @@ export function parseWhenEnteringCombat(rawText: string): Ability | null {
   if (effects.length === 0) return null;
 
   const ability: Ability = { trigger: 'whenEnteringCombat', effects, source: 'parsed' };
+  if (optional) ability.optional = true;
   // Several cards fire only for one side: "When entering Combat as the
   // defender, ...".
   if (/as\s+the\s+defender/.test(sentence)) ability.role = 'defender';

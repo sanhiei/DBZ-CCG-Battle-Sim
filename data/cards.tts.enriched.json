@@ -10393,6 +10393,18 @@
             }
           ],
           "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed",
+          "optional": true
         }
       ]
     }
@@ -11846,7 +11858,7 @@
     "imageUrl": "images-tts/tts-6a69cdcc-2.jpg",
     "rules": {
       "type": "Personality",
-      "coverage": "unknown",
+      "coverage": "partial",
       "needsReview": [
         "type"
       ],
@@ -11873,7 +11885,21 @@
         "canBeAlly": true,
         "ladderVerified": "vision",
         "level": 2
-      }
+      },
+      "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed",
+          "optional": true
+        }
+      ]
     }
   },
   {
@@ -13216,6 +13242,18 @@
         "level": 1
       },
       "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 6
+            }
+          ],
+          "source": "parsed",
+          "optional": true
+        },
         {
           "trigger": "constant",
           "effects": [
@@ -40322,6 +40360,18 @@
           "source": "parsed"
         },
         {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changeAnger",
+              "target": "user",
+              "delta": 2
+            }
+          ],
+          "source": "parsed",
+          "optional": true
+        },
+        {
           "trigger": "personalityPower",
           "effects": [
             {
@@ -53348,6 +53398,19 @@
             }
           ],
           "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
+            }
+          ],
+          "source": "parsed",
+          "optional": true,
+          "role": "defender"
         }
       ]
     }
@@ -58686,6 +58749,18 @@
             }
           ],
           "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed",
+          "optional": true,
+          "role": "defender"
         }
       ]
     }
@@ -58802,6 +58877,18 @@
             }
           ],
           "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed",
+          "optional": true,
+          "role": "attacker"
         }
       ]
     }
@@ -72170,6 +72257,19 @@
             }
           ],
           "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "changePowerStages",
+              "target": "user",
+              "delta": 3
+            }
+          ],
+          "source": "parsed",
+          "optional": true,
+          "role": "defender"
         }
       ]
     }
@@ -82663,6 +82763,18 @@
             }
           ],
           "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed",
+          "optional": true,
+          "role": "defender"
         }
       ]
     }
@@ -82794,6 +82906,18 @@
             }
           ],
           "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed",
+          "optional": true,
+          "role": "attacker"
         }
       ]
     }
@@ -85783,6 +85907,18 @@
             }
           ],
           "source": "parsed"
+        },
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "drawCards",
+              "count": 1
+            }
+          ],
+          "source": "parsed",
+          "optional": true,
+          "role": "defender"
         }
       ]
     }
@@ -87261,6 +87397,18 @@
         "ladderVerified": "vision"
       },
       "abilities": [
+        {
+          "trigger": "whenEnteringCombat",
+          "effects": [
+            {
+              "kind": "discardCards",
+              "target": "user",
+              "count": 1
+            }
+          ],
+          "source": "parsed",
+          "optional": true
+        },
         {
           "trigger": "personalityPower",
           "effects": [

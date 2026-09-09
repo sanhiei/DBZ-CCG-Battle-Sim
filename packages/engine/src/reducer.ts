@@ -18,6 +18,7 @@ import {
   resolveCapture,
   resolveEndurance,
   resolvePersonalityCapture,
+  resolvePrepareOptional,
   resolveControlOfCombat,
   resolveDefense,
   takeControlOfCombat,
@@ -342,6 +343,9 @@ export function reduce(prev: GameState, action: Action, db: CardDb, actingPlayer
         // null / no choice keeps nothing, which the CRD allows outright.
         const uid = typeof choice === 'string' ? choice : (choice as { uid?: string | null })?.uid ?? null;
         err = resolveDiscard(state, uid, ctx, db);
+      } else if (type === 'prepareOptional') {
+        const use = (choice as unknown) === true || (typeof choice === 'object' && choice !== null && (choice as { use?: boolean }).use === true);
+        err = resolvePrepareOptional(state, use, ctx, db, events);
       } else if (type === 'personalityCapture') {
         const uid = typeof choice === 'string' ? choice : (choice as { uid?: string | null })?.uid ?? null;
         err = resolvePersonalityCapture(state, uid, ctx, db, events);

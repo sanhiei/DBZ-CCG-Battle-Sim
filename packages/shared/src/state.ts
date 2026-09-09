@@ -205,8 +205,13 @@ export interface CombatState {
   consecutivePasses: number;
   /** Player idxs who have used their Final Physical Attack this combat. */
   finalUsed: number[];
-  /** Sources whose "When entering Combat" effect has fired this Combat (~L264). */
-  preparedUsed?: string[];
+  /**
+   * Prepare Phase work not yet done. It is a queue rather than a loop because
+   * an optional effect stops to ask, and the defender's draw waits behind it.
+   */
+  prepareQueue?: Array<{ playerIdx: number; uid: string; cardId: string }>;
+  /** The defender's Prepare Phase draw has happened. */
+  prepareDrawn?: boolean;
   /**
    * Stops that are armed now and fire on a LATER attack — "stops the next
    * physical attack performed against you this Combat". Each one is consumed by

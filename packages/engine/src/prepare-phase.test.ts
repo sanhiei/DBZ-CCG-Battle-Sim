@@ -5,17 +5,21 @@
  * declared in the shared union, emitted by no parser branch and consumed by
  * nothing, so 149 cards printing "When entering Combat" did nothing all game.
  *
- * What lands here is the mandatory subset whose effects the engine models: 21
- * abilities. The other 128 either say "you may" — an optional effect fired
- * automatically is not a smaller bug than one that never fires, it just takes
- * the decision away — or ask for deck searching, which has no model yet.
+ * An optional effect ("you may", on 48 of them) is OFFERED rather than applied:
+ * firing it for the player is not a smaller bug than never firing it, it just
+ * takes the decision away. That is why the phase is a resumable queue — it
+ * pauses on each choice, and the defender's draw waits at the back.
+ *
+ * What is still left out is the text the engine has no model for at all: deck
+ * searching, "look at the top 2 cards", revealing a hand. Claiming those would
+ * mean inventing behaviour.
  */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { CardInstance, GameState } from '@dbz/shared';
 import { CardDb, type EngineCard } from './loader.js';
 import { parseWhenEnteringCombat } from './abilities.js';
-import { beginCombat } from './combat.js';
+import { beginCombat, resolvePrepareOptional } from './combat.js';
 
 const LADDER = [0, 100, 200, 300, 400, 500];
 
@@ -99,9 +103,10 @@ function state(attackerInPlay: string[], defenderInPlay: string[]): GameState {
 
 /* ------------------------------------------------------------ the parser */
 
-test('a mandatory trigger parses; an optional one does not', () => {
-  assert.ok(parseWhenEnteringCombat('When entering Combat, draw a card.'));
-  assert.equal(parseWhenEnteringCombat('When entering Combat, you may draw a card.'), null);
+test('an optional trigger parses, and says it is optional', () => {
+  // It used to be dropped on the floor, which made the card do nothing at all.
+  assert.equal(parseWhenEnteringCombat('When entering Combat, draw a card.')?.optional, undefined);
+  assert.equal(parseWhenEnteringCombat('When entering Combat, you may draw a card.')?.optional, true);
 });
 
 test('a role restriction is read off the text', () => {
@@ -145,24 +150,60 @@ test('a defender-only effect does not fire for the attacker', () => {
   assert.equal(asDefender.players[1]!.mp.anger, 1, 'but yes for the defender');
 });
 
-test('an optional effect is left alone', () => {
+test('an optional effect stops and asks', () => {
   const s = state(['optional'], []);
   const before = s.players[0]!.zones.hand.length;
   beginCombat(s, db, []);
-  assert.equal(s.players[0]!.zones.hand.length, before, 'nobody chose to use it');
+  assert.equal(s.pendingPrompt?.type, 'prepareOptional');
+  assert.equal(s.pendingPrompt?.playerIdx, 0, "asked of the card's owner");
+  assert.equal(s.players[0]!.zones.hand.length, before, 'nothing has happened yet');
+  assert.equal(s.players[1]!.zones.hand.length, 0, 'and the draw waits behind it');
 });
 
-test('each source fires once per Combat', () => {
+test('answering yes applies it and finishes the phase', () => {
+  const s = state(['optional'], []);
+  const before = s.players[0]!.zones.hand.length;
+  beginCombat(s, db, []);
+  assert.equal(resolvePrepareOptional(s, true, { actingPlayerIdx: 0 }, db, []), undefined);
+  assert.equal(s.players[0]!.zones.hand.length, before + 1, 'they took the card');
+  assert.equal(s.players[1]!.zones.hand.length, 3, 'and the phase completed');
+  assert.equal(s.pendingPrompt, undefined);
+});
+
+test('answering no skips it and still finishes the phase', () => {
+  const s = state(['optional'], []);
+  const before = s.players[0]!.zones.hand.length;
+  beginCombat(s, db, []);
+  assert.equal(resolvePrepareOptional(s, false, { actingPlayerIdx: 0 }, db, []), undefined);
+  assert.equal(s.players[0]!.zones.hand.length, before, 'declined');
+  assert.equal(s.players[1]!.zones.hand.length, 3, 'the phase still completed');
+});
+
+test("only the card's owner may answer", () => {
+  const s = state(['optional'], []);
+  beginCombat(s, db, []);
+  assert.match(resolvePrepareOptional(s, true, { actingPlayerIdx: 1 }, db, []) ?? '', /not your effect/);
+});
+
+test('two optional effects are asked one at a time', () => {
+  const s = state(['optional', 'optional'], []);
+  beginCombat(s, db, []);
+  assert.equal(s.pendingPrompt?.type, 'prepareOptional');
+  resolvePrepareOptional(s, true, { actingPlayerIdx: 0 }, db, []);
+  assert.equal(s.pendingPrompt?.type, 'prepareOptional', 'the second is asked next');
+  resolvePrepareOptional(s, true, { actingPlayerIdx: 0 }, db, []);
+  assert.equal(s.pendingPrompt, undefined);
+  assert.equal(s.players[1]!.zones.hand.length, 3, 'and only then does the defender draw');
+});
+
+test('each source is queued once, and the queue empties', () => {
   // "The Defender may do this multiple times during the Prepare Phase, but each
-  // effect may only be used once" (~L264).
-  const s = state(['draws'], []);
+  // effect may only be used once" (~L264) — one entry per source, and it is
+  // taken off the queue as it fires.
+  const s = state(['draws'], ['draws']);
   beginCombat(s, db, []);
-  const after = s.players[0]!.zones.hand.length;
-  // Re-running the phase on the same combat state must not pay out again.
-  beginCombat(s, db, []);
-  assert.ok(s.players[0]!.zones.hand.length >= after, 'sanity');
-  const uidUsed = s.combat!.preparedUsed ?? [];
-  assert.equal(new Set(uidUsed).size, uidUsed.length, 'no source recorded twice');
+  assert.equal((s.combat?.prepareQueue ?? []).length, 0, 'everything resolved');
+  assert.equal(s.combat?.prepareDrawn, true, 'and the draw happened last');
 });
 
 test('two copies of the same Drill each fire', () => {

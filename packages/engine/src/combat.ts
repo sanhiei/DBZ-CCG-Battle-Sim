@@ -71,50 +71,121 @@ function other(state: GameState, idx: number): number {
 
 /** Enter the Combat Step: run the Prepare Phase and open the first Attack Phase. */
 /**
- * One player's half of the Prepare Phase: fire the "When entering Combat"
- * effects on the cards they have on the table, and on the personality in
- * Control of Combat.
+ * Everything the Prepare Phase has left to do, in CRD order (~L258-266): the
+ * attacker's effects, then the defender's, then the defender's 3 cards.
  *
- * "Each effect may only be used once" (~L264), so each source is marked as it
- * fires. Cards in the attacker's HAND are deliberately not fired: the CRD does
- * list them (~L258), but almost all of them read "Use when entering Combat",
- * which is a card being played and spent, and firing that for the player
- * without asking would spend their hand for them.
+ * It is a queue because an OPTIONAL effect has to stop and ask. 48 of the cards
+ * printing "When entering Combat" say "you may", and firing those for the
+ * player is not a smaller bug than never firing them — it takes the decision
+ * away. So the phase pauses on each one and resumes when it is answered, which
+ * means the defender's draw has to wait at the back of the queue rather than
+ * happening up front.
  */
-function runPrepareEffects(
-  state: GameState,
-  playerIdx: number,
-  role: 'attacker' | 'defender',
-  db: CardDb,
-  events: GameEvent[],
-): void {
-  const player = state.players[playerIdx];
+type PrepareQueue = NonNullable<NonNullable<GameState['combat']>['prepareQueue']>;
+
+function buildPrepareQueue(state: GameState, db: CardDb): PrepareQueue {
   const c = state.combat;
-  if (!player || !c) return;
-  const foeIdx = other(state, playerIdx);
+  if (!c) return [];
+  const queue: PrepareQueue = [];
 
-  const controller = controllerOf(player);
-  const controllerCardId = controller.levelCardIds[controller.currentLevel - 1];
-  const sources: Array<{ uid: string; cardId: string }> = [
-    ...player.zones.inPlay.map((card) => ({ uid: card.uid, cardId: card.cardId })),
-    ...player.dragonBalls.map((card) => ({ uid: card.uid, cardId: card.cardId })),
-    ...(controllerCardId ? [{ uid: controller.uid, cardId: controllerCardId }] : []),
-  ];
-
-  for (const source of sources) {
-    if ((c.preparedUsed ?? []).includes(source.uid)) continue;
-    const abilities = db.get(source.cardId)?.rules?.abilities ?? [];
-    for (const ability of abilities) {
-      if (ability.trigger !== 'whenEnteringCombat') continue;
-      if (ability.role && ability.role !== role) continue;
-      c.preparedUsed = [...(c.preparedUsed ?? []), source.uid];
-      state.log.push(
-        `${player.name}: ${db.get(source.cardId)?.name ?? 'a card'} triggers on entering Combat.`,
+  for (const [playerIdx, role] of [
+    [c.attackerPlayerIdx, 'attacker'],
+    [c.defenderPlayerIdx, 'defender'],
+  ] as const) {
+    const player = state.players[playerIdx];
+    if (!player) continue;
+    const controller = controllerOf(player);
+    const controllerCardId = controller.levelCardIds[controller.currentLevel - 1];
+    const sources: Array<{ uid: string; cardId: string }> = [
+      ...player.zones.inPlay.map((card) => ({ uid: card.uid, cardId: card.cardId })),
+      ...player.dragonBalls.map((card) => ({ uid: card.uid, cardId: card.cardId })),
+      ...(controllerCardId ? [{ uid: controller.uid, cardId: controllerCardId }] : []),
+    ];
+    for (const source of sources) {
+      const ability = (db.get(source.cardId)?.rules?.abilities ?? []).find(
+        (a) => a.trigger === 'whenEnteringCombat' && (!a.role || a.role === role),
       );
-      applyOnPlay(state, playerIdx, foeIdx, ability.effects, db, events);
-      break; // one effect per source, once
+      if (!ability) continue;
+      queue.push({ playerIdx, uid: source.uid, cardId: source.cardId });
     }
   }
+  return queue;
+}
+
+/**
+ * Work the queue until it needs an answer or runs out. Re-entered after each
+ * optional effect is answered.
+ */
+export function advancePrepare(state: GameState, db: CardDb, events: GameEvent[]): void {
+  const c = state.combat;
+  if (!c) return;
+
+  while ((c.prepareQueue ?? []).length > 0) {
+    const next = c.prepareQueue![0]!;
+    const player = state.players[next.playerIdx];
+    const ability = (db.get(next.cardId)?.rules?.abilities ?? []).find(
+      (a) => a.trigger === 'whenEnteringCombat',
+    );
+    if (!player || !ability) {
+      c.prepareQueue!.shift();
+      continue;
+    }
+
+    if (ability.optional) {
+      state.pendingPrompt = newPrompt(
+        next.playerIdx,
+        'prepareOptional',
+        `${db.get(next.cardId)?.name ?? 'A card'}: use its "When entering Combat" effect?`,
+        { optional: true },
+      );
+      return; // resumed by resolvePrepareOptional
+    }
+
+    c.prepareQueue!.shift();
+    state.log.push(
+      `${player.name}: ${db.get(next.cardId)?.name ?? 'a card'} triggers on entering Combat.`,
+    );
+    applyOnPlay(state, next.playerIdx, other(state, next.playerIdx), ability.effects, db, events);
+  }
+
+  // Queue empty: the defender's 3 cards, which come last (~L266).
+  if (!c.prepareDrawn) {
+    c.prepareDrawn = true;
+    draw(state, c.defenderPlayerIdx, PREPARE_DRAW);
+    state.log.push(`Combat begins — ${state.players[c.defenderPlayerIdx]!.name} draws ${PREPARE_DRAW}.`);
+  }
+}
+
+/** Answer one optional "When entering Combat" effect, then carry on. */
+export function resolvePrepareOptional(
+  state: GameState,
+  use: boolean,
+  ctx: CombatCtx,
+  db: CardDb,
+  events: GameEvent[],
+): string | undefined {
+  const c = state.combat;
+  const prompt = state.pendingPrompt;
+  if (!c || prompt?.type !== 'prepareOptional') return 'no Prepare Phase choice pending';
+  if (ctx.actingPlayerIdx !== prompt.playerIdx) return 'that is not your effect to use';
+  const next = (c.prepareQueue ?? [])[0];
+  if (!next) return 'no Prepare Phase choice pending';
+
+  delete state.pendingPrompt;
+  c.prepareQueue!.shift();
+  if (use) {
+    const ability = (db.get(next.cardId)?.rules?.abilities ?? []).find(
+      (a) => a.trigger === 'whenEnteringCombat',
+    );
+    if (ability) {
+      state.log.push(
+        `${state.players[next.playerIdx]?.name}: ${db.get(next.cardId)?.name ?? 'a card'} triggers on entering Combat.`,
+      );
+      applyOnPlay(state, next.playerIdx, other(state, next.playerIdx), ability.effects, db, events);
+    }
+  }
+  advancePrepare(state, db, events);
+  return undefined;
 }
 
 export function beginCombat(state: GameState, db: CardDb, events: GameEvent[]): void {
@@ -127,16 +198,8 @@ export function beginCombat(state: GameState, db: CardDb, events: GameEvent[]): 
     consecutivePasses: 0,
     finalUsed: [],
   };
-
-  // The Prepare Phase in the CRD's order (~L258-266): the attacker's half
-  // first, then the defender's — their effects, and THEN their 3 cards. Only
-  // the draw existed, so 149 cards printing "When entering Combat" did nothing
-  // all game and the phrase named a trigger the engine never fired.
-  runPrepareEffects(state, attacker, 'attacker', db, events);
-  runPrepareEffects(state, defender, 'defender', db, events);
-  draw(state, defender, PREPARE_DRAW);
-
-  state.log.push(`Combat begins — ${state.players[defender]!.name} draws ${PREPARE_DRAW}.`);
+  state.combat.prepareQueue = buildPrepareQueue(state, db);
+  advancePrepare(state, db, events);
 }
 
 /**

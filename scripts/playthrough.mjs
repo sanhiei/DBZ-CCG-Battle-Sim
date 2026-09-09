@@ -55,6 +55,8 @@ function answerFor(prompt) {
     }
     case 'rejuvenate':
       return { take: true };
+    case 'prepareOptional':
+      return { use: true };
     case 'defend':
       return { takeDamage: true };
     case 'endurance':

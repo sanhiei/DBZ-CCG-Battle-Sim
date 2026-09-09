@@ -146,6 +146,15 @@ export function PromptPanel({ prompt, seat, canDefendWith, onAnswer }: PromptPan
           </>
         )}
 
+        {prompt.type === 'prepareOptional' && (
+          <>
+            <button onClick={() => onAnswer({ use: true })}>Use it</button>
+            <button className="ghost" onClick={() => onAnswer({ use: false })}>
+              Skip it
+            </button>
+          </>
+        )}
+
         {prompt.type === 'rejuvenate' && (
           <>
             <button onClick={() => onAnswer({ take: true })}>Take the card back</button>
@@ -155,7 +164,7 @@ export function PromptPanel({ prompt, seat, canDefendWith, onAnswer }: PromptPan
           </>
         )}
 
-        {!['defend', 'redirect', 'capture', 'endurance', 'controlOfCombat', 'declareCombat', 'discard', 'rejuvenate', 'personalityCapture'].includes(prompt.type) && (
+        {!['defend', 'redirect', 'capture', 'endurance', 'controlOfCombat', 'declareCombat', 'discard', 'rejuvenate', 'personalityCapture', 'prepareOptional'].includes(prompt.type) && (
           <span className="muted">
             No UI for prompt type “{prompt.type}” yet — resolve it manually.
           </span>

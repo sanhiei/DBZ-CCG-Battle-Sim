@@ -133,6 +133,12 @@ export interface Ability {
    * the attacker an effect the card does not give them.
    */
   role?: 'attacker' | 'defender';
+  /**
+   * The card says "you may". Firing an optional effect automatically is not a
+   * smaller bug than never firing it — it takes the decision away — so these
+   * are offered rather than applied.
+   */
+  optional?: boolean;
   effects: Effect[];
   /** 'parsed' = auto-derived (verify); 'authored' = hand-verified. */
   source?: 'parsed' | 'authored';
