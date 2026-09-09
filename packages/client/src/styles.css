@@ -1093,11 +1093,6 @@ select {
   cursor: pointer;
   transition: transform 120ms ease, border-color 120ms ease;
 }
-.handcard img {
-  display: block;
-  width: 100%;
-  border-radius: 3px;
-}
 .handcard:hover {
   transform: translateY(-6px);
   border-color: var(--accent);
@@ -1120,13 +1115,7 @@ select {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.handcard--old-usable {
-.handcard--usable {
-  opacity: 1;
-  cursor: pointer;
-  border-color: var(--accent);
-}
-.handcard--usable:hover {
+.handcard--playable:hover {
   transform: translateY(-6px);
 }
 .handcard img {
@@ -1150,7 +1139,7 @@ select {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.hand--defend .handcard--usable {
+.hand--defend .handcard--playable {
   border-color: var(--ok);
 }
 
@@ -1288,26 +1277,41 @@ button.danger {
   font-size: 11px;
 }
 
-.detail {
+/* A real modal, centred, with a backdrop that dismisses it. This was a panel
+   pinned to the bottom-right corner showing a 120px thumbnail, which meant
+   "open the card" did not actually let you read the card. */
+.detail__scrim {
   position: fixed;
-  right: 16px;
-  bottom: 16px;
-  width: 420px;
-  max-width: calc(100vw - 32px);
+  inset: 0;
+  z-index: 60;
   display: flex;
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(6, 8, 12, 0.72);
+}
+.detail {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  width: min(720px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
   background: var(--panel);
   border: 1px solid var(--accent);
-  border-radius: 10px;
-  padding: 12px;
-  z-index: 40;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
 }
+/* Big enough to read the power box off directly. It caps on height too, so a
+   short window scales the art down instead of scrolling past it. */
 .detail img {
-  width: 120px;
+  flex: 0 0 auto;
+  width: min(300px, 40vh);
   aspect-ratio: 800 / 1100;
-  object-fit: cover;
-  border-radius: 5px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #000;
 }
 .detail__body {
   flex: 1;
@@ -1357,15 +1361,7 @@ button.danger {
   line-height: 1;
   padding: 2px 6px;
 }
-.handcard--inspect {
-  opacity: 0.9;
-  cursor: pointer;
-}
-.handcard--inspect:hover {
-  transform: translateY(-4px);
-  border-color: var(--ink-dim);
-}
-.hand--play .handcard--usable {
+.hand--play .handcard--playable {
   border-color: var(--ok);
 }
 

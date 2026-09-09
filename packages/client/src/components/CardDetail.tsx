@@ -1,11 +1,16 @@
 /**
- * Card detail popover.
+ * Card detail dialog.
  *
- * Manual resolution only works if the player can read the card, so any card in
- * hand opens this. The coverage badge is the important part: it tells the
- * player whether the engine will resolve this card for them or whether they
- * need to apply it by hand in Manual mode.
+ * Manual resolution only works if the player can read the card, so this is the
+ * one place the art is shown at a size you can actually read text off. The
+ * coverage badge is the important part: it tells the player whether the engine
+ * resolves this card for them, or whether they apply it by hand in Manual mode.
+ *
+ * It is a real modal — backdrop, click-outside, Escape — rather than a panel
+ * wedged into a corner. It was the latter, at a 120px thumbnail, which meant
+ * "open the card" did not actually let you read the card.
  */
+import { useEffect } from 'react';
 import type { EngineCard } from '@dbz/engine';
 
 export interface CardDetailProps {
@@ -23,44 +28,64 @@ const COVERAGE_BLURB: Record<string, string> = {
 };
 
 export function CardDetail({ card, actions, onClose }: CardDetailProps) {
+  // Escape closes it. A dialog you can only dismiss by hitting a small × is the
+  // kind of thing that makes a board feel awkward to use.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
   if (!card) return null;
   const coverage = card.rules?.coverage ?? 'unknown';
 
   return (
-    <div className="detail" role="dialog" aria-label={card.name}>
-      <button className="detail__close" onClick={onClose} aria-label="Close">
-        ×
-      </button>
-      <img
-        src={`/cards/${card.id}.jpg`}
-        alt={card.name}
-        onError={(e) => ((e.target as HTMLImageElement).style.display = 'none')}
-      />
-      <div className="detail__body">
-        <h3>{card.name}</h3>
-        <div className="detail__tags">
-          <span className={`cov cov--${coverage}`}>{coverage}</span>
-          {card.rules?.type && <span className="muted">{card.rules.type}</span>}
-          {card.style && <span className="muted">{card.style} Style</span>}
-          <span className="muted">{card.saga}</span>
-          {card.rules?.endurance !== undefined && <span className="muted">Endurance {card.rules.endurance}</span>}
-        </div>
-        {card.rules?.text && <p className="detail__text">{card.rules.text}</p>}
-        {card.rules?.errata && (
-          <p className="detail__errata">
-            <strong>Ruling:</strong> {card.rules.errata}
-          </p>
-        )}
-        <p className="detail__coverage muted">{COVERAGE_BLURB[coverage]}</p>
-        {actions.length > 0 && (
-          <div className="detail__actions">
-            {actions.map((a) => (
-              <button key={a.label} onClick={a.run}>
-                {a.label}
-              </button>
-            ))}
+    <div className="detail__scrim" onClick={onClose}>
+      {/* The dialog swallows its own clicks so only the backdrop dismisses. */}
+      <div
+        className="detail"
+        role="dialog"
+        aria-label={card.name}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="detail__close" onClick={onClose} aria-label="Close">
+          ×
+        </button>
+        <img
+          src={`/cards/${card.id}.jpg`}
+          alt={card.name}
+          onError={(e) => ((e.target as HTMLImageElement).style.display = 'none')}
+        />
+        <div className="detail__body">
+          <h3>{card.name}</h3>
+          <div className="detail__tags">
+            <span className={`cov cov--${coverage}`}>{coverage}</span>
+            {card.rules?.type && <span className="muted">{card.rules.type}</span>}
+            {card.style && <span className="muted">{card.style} Style</span>}
+            <span className="muted">{card.saga}</span>
+            {card.rules?.endurance !== undefined && (
+              <span className="muted">Endurance {card.rules.endurance}</span>
+            )}
           </div>
-        )}
+          {card.rules?.text && <p className="detail__text">{card.rules.text}</p>}
+          {card.rules?.errata && (
+            <p className="detail__errata">
+              <strong>Ruling:</strong> {card.rules.errata}
+            </p>
+          )}
+          <p className="detail__coverage muted">{COVERAGE_BLURB[coverage]}</p>
+          {actions.length > 0 && (
+            <div className="detail__actions">
+              {actions.map((a) => (
+                <button key={a.label} onClick={a.run}>
+                  {a.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
