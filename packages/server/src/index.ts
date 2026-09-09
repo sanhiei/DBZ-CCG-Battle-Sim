@@ -6,7 +6,7 @@
  *   GET /api/cards        the card catalog, for the client's browser/deck builder
  */
 import { createServer, type IncomingMessage, type Server as HttpServer, type ServerResponse } from 'node:http';
-import { createReadStream, existsSync, readFileSync } from 'node:fs';
+import { createReadStream, existsSync, readFileSync, statSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
@@ -331,9 +331,14 @@ function serveLocalArt(dirName: string, rawName: string, res: ServerResponse): v
     return;
   }
   const ext = file.slice(file.lastIndexOf('.') + 1).toLowerCase();
+  // Short cache, unlike the card faces. There are 2,764 of those and they never
+  // change, so a day is right for them; there are two of these and swapping one
+  // is a thing people actually do mid-session. A day meant the old art stayed
+  // on screen until a hard refresh — observed, not theorised.
   res.writeHead(200, {
     'content-type': ext === 'png' ? 'image/png' : ext === 'webp' ? 'image/webp' : 'image/jpeg',
-    'cache-control': 'public, max-age=86400',
+    'cache-control': 'public, max-age=60, must-revalidate',
+    'last-modified': statSync(file).mtime.toUTCString(),
   });
   createReadStream(file).pipe(res);
 }
