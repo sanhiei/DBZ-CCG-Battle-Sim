@@ -1,11 +1,14 @@
 /**
  * The local player's hand.
  *
- * A card's click meaning depends on what the game is waiting for, so the hand
- * takes an explicit `mode` rather than guessing: it is the board that knows
- * whether we are declaring an attack, answering a defend prompt, or idle.
- * Cards that cannot be used in the current mode are dimmed and unclickable,
- * which keeps illegal actions from ever reaching the server.
+ * Two different gestures, because they mean two different things:
+ *
+ *   click  - read the card. Always available, never commits anything.
+ *   drag   - play it. Dropping it on a field is what spends the card.
+ *
+ * Clicking used to do both, which meant the only way to look at a card was to
+ * play it, and a misclick was a spent card. Cards that cannot be used in the
+ * current mode are still readable — they are just not draggable.
  */
 import type { CardInstance } from '@dbz/shared';
 import type { CardDb } from '@dbz/engine';
@@ -16,7 +19,10 @@ export interface HandProps {
   cards: CardInstance[];
   db: CardDb | null;
   mode: HandMode;
-  onUse(cardUid: string): void;
+  /** Open the card to read it. */
+  onInspect(cardUid: string): void;
+  /** A drag started/ended, so the board can light up the drop target. */
+  onDragChange(cardUid: string | null): void;
 }
 
 /** Card types that can be used as an attack from hand. */
@@ -24,9 +30,9 @@ const ATTACK_TYPES = new Set(['Physical Combat', 'Energy Combat', 'Combat']);
 /** Card types that can answer a defend prompt. */
 const DEFEND_TYPES = new Set(['Physical Combat', 'Energy Combat', 'Combat']);
 /** Card types that enter play during the Non-Combat Step (CRD ~L627). */
-const PLAY_TYPES = new Set(['Non-Combat', 'Drill', 'Location', 'Battleground']);
+const PLAY_TYPES = new Set(['Non-Combat', 'Drill', 'Location', 'Battleground', 'Dragon Ball']);
 
-export function Hand({ cards, db, mode, onUse }: HandProps) {
+export function Hand({ cards, db, mode, onInspect, onDragChange }: HandProps) {
   if (cards.length === 0) {
     return (
       <div className="hand hand--empty">
@@ -35,20 +41,15 @@ export function Hand({ cards, db, mode, onUse }: HandProps) {
     );
   }
 
-  /**
-   * Whether a click DOES something in the current mode. Idle is always true:
-   * the click opens the card for reading, which is how an unautomated card gets
-   * resolved by hand.
-   */
-  const usable = (cardId: string): boolean => {
-    if (mode === 'idle') return true;
+  /** Whether dragging this card anywhere would do something. */
+  const playable = (cardId: string): boolean => {
+    if (mode === 'idle') return false;
     const type = db?.type(cardId) ?? 'Unknown';
     // Unknown-typed cards stay usable: coverage is partial by design, and the
     // server is the authority on legality anyway.
     if (type === 'Unknown') return true;
     if (mode === 'play') return PLAY_TYPES.has(type);
-    // A Final Physical Attack is paid for with ANY card in hand (CRD ~L409),
-    // not with a card that could have attacked on its own.
+    // A Final Physical Attack is paid for with ANY card in hand (CRD ~L409).
     if (mode === 'final') return true;
     return mode === 'attack' ? ATTACK_TYPES.has(type) : DEFEND_TYPES.has(type);
   };
@@ -58,15 +59,21 @@ export function Hand({ cards, db, mode, onUse }: HandProps) {
       {cards.map((c) => {
         const card = db?.get(c.cardId);
         const hidden = !c.cardId; // redacted (should not happen for our own hand)
-        const can = !hidden && usable(c.cardId);
+        const can = !hidden && playable(c.cardId);
         return (
-          <button
+          <div
             key={c.uid}
-            type="button"
-            className={`handcard ${can ? (mode === 'idle' ? 'handcard--inspect' : 'handcard--usable') : ''}`}
-            disabled={!can}
-            title={mode === 'idle' ? `${card?.name ?? 'Card'} — click to read` : (card?.rules?.text ?? card?.name ?? 'Card')}
-            onClick={() => can && onUse(c.uid)}
+            className={`handcard ${can ? 'handcard--playable' : ''}`}
+            draggable={can}
+            onDragStart={(e) => {
+              if (!can) return;
+              e.dataTransfer.setData('text/plain', c.uid);
+              e.dataTransfer.effectAllowed = 'move';
+              onDragChange(c.uid);
+            }}
+            onDragEnd={() => onDragChange(null)}
+            onClick={() => !hidden && onInspect(c.uid)}
+            title={card?.name ? `${card.name} — click to read${can ? ', drag to play' : ''}` : 'Card'}
           >
             {hidden ? (
               <span className="handcard__back" />
@@ -75,11 +82,12 @@ export function Hand({ cards, db, mode, onUse }: HandProps) {
                 src={`/cards/${c.cardId}.jpg`}
                 alt={card?.name ?? c.cardId}
                 loading="lazy"
+                draggable={false}
                 onError={(e) => ((e.target as HTMLImageElement).style.visibility = 'hidden')}
               />
             )}
             <span className="handcard__name">{card?.name ?? '—'}</span>
-          </button>
+          </div>
         );
       })}
     </div>
